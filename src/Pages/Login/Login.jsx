@@ -69,7 +69,7 @@ function Login() {
           p="auto"
         >
           <VStack>
-            <Image src="login.jpg" alt="login" width="48%" />
+            <Image src="/public/login.jpg" alt="login" width="48%" />
           </VStack>
           <Flex
             w="50%"
