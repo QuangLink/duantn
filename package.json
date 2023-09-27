@@ -1,7 +1,7 @@
 {
   "name": "reliance_digital",
   "version": "0.1.0",
-  "homepage": "https://quanglink.github.io/duantn/",
+  "homepage": "https://quanglink.github.io/",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
@@ -30,8 +30,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "deploy": "gh-pages -d build",
-    "redeploy": "npm run build",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
