@@ -22,11 +22,12 @@ const Heading = ({ heading }) => {
             }
             
           }
-          _hover={{ backgroundColor:"red",
-            color: "red",
-             textColor:"red", }}
+          _hover={{
+            letterSpacing: 0.5,
+            color: "blue",
+             textColor:"blue", }}
 
-             hover={{color:"red"}}
+             
             
           >
             VIEW ALL 
