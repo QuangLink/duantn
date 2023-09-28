@@ -5,10 +5,11 @@ import Heading from "./Heading";
 
 const ItemCard2 = ({ type, heading, src }) => {
   return (
-    <Box justifyContent="left" w="95%" m="auto" mt="6" cursor="pointer">
+    <Box justifyContent="center" w="75%"  m="auto" mt="6" cursor="pointer">
       <Heading heading={heading} />
-      <Flex mt="7">
-        <Box
+      <Flex mt="6" 
+      >
+        {/* <Box
           boxSize="sm"
           w={{
             xs: "none",
@@ -36,9 +37,9 @@ const ItemCard2 = ({ type, heading, src }) => {
             }}
           />
         </Box>
-        <Spacer />
+        <Spacer /> */}
         <Box
-          w={{ sm: "100%", md: "100%", lg: "100%", xl: "75%", base: "100%" }}
+          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%" }}
         >
           <Slider type={type} />
         </Box>
