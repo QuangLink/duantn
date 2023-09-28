@@ -1,7 +1,7 @@
 {
   "name": "reliance_digital",
   "version": "0.1.0",
-  "homepage": "https://quanglink.github.io/",
+  "homepage": "https://quanglink.github.io/duantn/",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
