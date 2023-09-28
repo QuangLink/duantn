@@ -12,21 +12,21 @@ import uuid from "react-uuid";
 const ItemCard8 = ({ type, heading }) => {
   return (
     <Box
-      justifyContent="left"
+      justifyContent="center"
       m="auto"
       mt="6"
       backgroundColor="#f7f7f7"
       cursor="pointer"
     >
-      <Center>
+      {/* <Center>
         <Text fontSize="2xl" fontWeight="bold" mt="5">
           {heading}
         </Text>
       </Center>
       <br />
       <br />
-      <br />
-      <Box mt="1">
+      <br /> */}
+      {/* <Box mt="1">
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
@@ -49,8 +49,8 @@ const ItemCard8 = ({ type, heading }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 5,
-              spaceBetween: 30,
+              slidesPerView: 4,
+              spaceBetween: 10,
             },
           }}
         >
@@ -81,7 +81,7 @@ const ItemCard8 = ({ type, heading }) => {
             ))}
           </Grid>
         </Swiper>
-      </Box>
+      </Box> */}
       <br />
       <Center>
         <Btn />

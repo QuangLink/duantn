@@ -11,13 +11,13 @@ import uuid from "react-uuid";
 
 const ItemCard5 = ({ type, heading }) => {
   return (
-    <Box justifyContent="left" w="95%" m="auto" mt="6" cursor="pointer">
-      <Heading heading={heading} />
-      <Box mt="1">
+    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center">
+      <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%" />
+      <Box mt="1" >
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
-          autoplay={{ delay: 4000 }}
+          autoplay={{ delay: 2000 }}
           breakpoints={{
             0: {
               slidesPerView: 1,
@@ -36,7 +36,7 @@ const ItemCard5 = ({ type, heading }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 30,
             },
           }}

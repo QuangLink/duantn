@@ -6,6 +6,8 @@ import ItemCard5 from "./ItemCard5";
 import ItemCard6 from "./ItemCard6";
 import ItemCard7 from "./ItemCard7";
 import ItemCard8 from "./ItemCard8";
+
+
 import {
   ItemDetails1,
   ItemDetails2,
@@ -26,13 +28,15 @@ import {
   ItemDetails17,
   ItemDetails18,
 } from "./CardDetails";
-import { Box } from "@chakra-ui/react";
+import { Box,
+    
+ } from "@chakra-ui/react";
 
 const Home = () => {
   return (
     <Box>
       <ItemCard1 type={ItemDetails1} />
-      <ItemCard1 type={ItemDetails2} />
+      {/* <ItemCard1 type={ItemDetails2} /> */}
       <ItemCard5 type={ItemDetails8} heading="TRENDING LAPTOPS | " />
       <br />
       <hr />
@@ -106,6 +110,8 @@ const Home = () => {
         src="https://i.imgur.com/EGk9huk.png"
       />
       <ItemCard8 type={ItemDetails18} heading="EXPLORE OUR RANGE OF PRODUCTS" />
+      
+      
     </Box>
   );
 };
