@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Box, Grid, GridItem, Heading , Center } from "@chakra-ui/react";
+import {Box, Grid, GridItem, Heading , Center, Flex,Text, Button,Input } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
+import { Form } from "react-router-dom";
 
 
 const getData = async (typeOfProduct) => {
@@ -71,31 +72,84 @@ const Products = ({ typeOfProduct }) => {
 
   return (
     <Box p="5">
-      <Heading p="5" marginBottom={5}>
+      <Heading p="6" marginBottom={7}>
         {category[typeOfProduct]}
       </Heading>
+      <hr></hr>
+      <Box 
+      width="100%"
+      height="76px"
+      margin="0 0 3% 0%"
+      display="flex"
+      justifyContent="space-between">
+      
+       <Flex>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Bộ lọc
+          </Button>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Hãng 
+          </Button>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Giá
+          </Button>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Nhu cầu
+          </Button>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Mơi nhất
+          </Button>
+          <Button
+          padding="20px 50px " 
+          margin="1%"
+          >
+            Yêu thích
+          </Button>
+
+       </Flex>
+       <Flex>
+          Sắp xếp theo
+       </Flex>
+      </Box>  
       {loading ? (
           <Box h={20}>
-        <Center>
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            // width="150"
-            height={20}
-            visible={true}
-            />
-        </Center>
+          <Center>
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              // width="150"
+              height={50}
+              visible={true}
+              />
+          </Center>
           </Box>
       )
       : (
         <Grid
+        width="75%"
+        m="auto"
+        marginLeft="14%"
           templateColumns={[
             "repeat(1, 1fr)",
             "repeat(2,1fr)",
             "repeat(3,1fr)",
             "repeat(4,1fr)",
-            "repeat(5,1fr)",
           ]}
           gap={3}
         >
@@ -104,10 +158,11 @@ const Products = ({ typeOfProduct }) => {
             return (
               <GridItem
                 key={elem.name + i}
-                w="100%"
+                w="90%"
+                h="100 %"
                 bg="white.500"
                 boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-                padding="25px 25px 0px 25px"
+                padding="5%"
                 _hover={{
                   boxShadow:
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
@@ -123,5 +178,6 @@ const Products = ({ typeOfProduct }) => {
     </Box>
   );
 };
+
 
 export default Products;
