@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 
 const ItemCard6 = ({ type, heading }) => {
   return (
-    <Box mb="2" cursor="pointer">
+    <Box mb="2" cursor="pointer" w="75%" m="center" ml="12.5%">
       <Center>
         <Text fontSize="xl" color="#003380" fontWeight="700" p="4">
           {heading}
@@ -19,21 +19,22 @@ const ItemCard6 = ({ type, heading }) => {
           "2xl": "repeat(4,1fr)",
         }}
         gap={6}
-        w="98%"
-        m="auto"
+        w="100%"
+        m="center"
       >
         {type.map((i) => (
           <Flex
+            height="100px"
             key={uuid()}
-            border="1px"
-            borderColor="gray.200"
+            border="2px"
+            borderColor="gray.500"
             flexDirection="column"
-            backgroundColor="#f7f7f7"
+            backgroundColor="#71717a"
             borderRadius="md"
             p="1"
           >
             <Center>
-              <Image boxSize="40px" src={`${i.img}`} alt={i.name} />
+              <Image boxSize="40px" width="70px" src={`${i.img}`} alt={i.name} />
             </Center>
             <Center>
               <Text color="#003380" fontSize="sm" fontWeight="700">
