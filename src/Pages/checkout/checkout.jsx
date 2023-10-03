@@ -7,13 +7,26 @@ const Checkout = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const address=useRef({})
     const toast = useToast()
-    const {firstName,lastName,mobile,pincode,flat,setflat,state,setstate,street,setstreet,city,setcity,}=useContext(AppContext)
+    const {firstName,setfirstName,lastName,setlastName,mobile,setMobile,flat,setflat,state,setstate,street,setstreet,city,setcity,}=useContext(AppContext)
     const handleAddress=()=>{
+      setfirstName(address.current.firstName.value);
+      setlastName(address.current.lastName.value);
       setflat(address.current.flat.value);
       setstate(address.current.state.value);
       setstreet(address.current.street.value);
       setcity(address.current.city.value);
+      setMobile(address.current.mobile.value);
     }
+    const clearAddress = () => {
+      setfirstName('');
+      setlastName('');
+      setflat('');
+      setstate('');
+      setstreet('');
+      setcity('');
+      setMobile('');
+    };
+    
     const navigate=useNavigate()
     return (
       <div style={{backgroundColor:"#f1eeee" }}>
@@ -23,50 +36,55 @@ const Checkout = () => {
       <h2>
         <AccordionButton>
           <Box flex='1' textAlign='left'>
-            <Text fontSize='3xl'>Shipping address</Text>
+            <Text fontSize='3xl'>Địa chỉ giao hàng</Text>
           </Box>
             
           <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        {(flat==="")&&<Box>No address found</Box>}
+        {(flat==="")&&<Box>Không tìm thấy địa chỉ nào</Box>}
         {(flat!=="")&&<Box>
-          {/* <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic" >Name: </Text><Text > {firstName} {lastName}</Text></Flex> */}
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Flat: </Text><Text > {flat}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Street: </Text><Text > {street}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">City: </Text><Text > {city}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">State: </Text><Text > {state}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic" >Tên: </Text><Text > {firstName} {lastName}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Địa chỉ: </Text><Text > {flat}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Đường: </Text><Text > {street}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Thành phố: </Text><Text > {city}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Tỉnh: </Text><Text > {state}</Text></Flex>
+          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Sđt: </Text><Text > {mobile}</Text></Flex>
           
           
         </Box>}
-        {(flat!=="")&&<Button onClick={()=>navigate("/payments")} colorScheme='blue' variant='outline'>Proceed to payments</Button>}
-        {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Add a new shipping address</Button>}
+        {(flat!=="")&&<Button onClick={()=>navigate("/payments")} colorScheme='blue' variant='outline'>Chọn phương thức thanh toán</Button>}
+        {(flat !== "") && (
+          <Button onClick={clearAddress} colorScheme="red" variant="outline">
+            Xóa thông tin
+          </Button>
+        )}
+        
+        
+        {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Nhập địa chỉ giao hàng mới</Button>}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Địa chỉ giao hàng</ModalHeader>
             <ModalCloseButton />
             <ModalBody >
               <Flex flexDirection="column" gap="1rem">
-                <Input placeholder='Pincode*' ref={(e)=>address.current["pin"]=e} />
-                <Flex gap="1rem">
-                {/* <Input placeholder='Enter First Name*' ref={(e)=>address.current["name"]=e} />
-                <Input placeholder='Enter Last Name*' ref={(e)=>address.current["last"]=e} /> */}
+                <Input placeholder='Họ*' ref={(e)=>address.current["firstName"]=e} />
 
+                <Input placeholder='Tên*' ref={(e)=>address.current["lastName"]=e} />
+             
+                <Input placeholder='Địa chỉ cụ thể (Tòa nhà)*' ref={(e)=>address.current["flat"]=e}/>
+                
+                <Input placeholder='Đường*' ref={(e)=>address.current["street"]=e}/>
+              
+                <Input placeholder='Thành phố*' ref={(e)=>address.current["city"]=e}/>
+           
+                <Input placeholder='Tỉnh*' ref={(e)=>address.current["state"]=e}/>
+            
+                <Input placeholder='Số điện thoại*' ref={(e)=>address.current["mobile"]=e}/>
                 </Flex>
-                <Input placeholder='Enter Flat / Building Name*' ref={(e)=>address.current["flat"]=e}/>
-                <Input placeholder='Enter  Colony / Street*' ref={(e)=>address.current["street"]=e}/>
-                <Input placeholder='Enter Landmark' ref={(e)=>address.current["landmark"]=e}/>
-                <Flex gap="1rem">
-                <Input placeholder='Enter City*' ref={(e)=>address.current["city"]=e}/>
-                <Input placeholder='Enter State*' ref={(e)=>address.current["state"]=e}/>
-                </Flex>
-                <Flex gap="1rem">
-                {/* <Input placeholder='Enter mobile number*' ref={(e)=>address.current["mobile"]=e} value={mobile}/>
-                <Input placeholder='Enter landline number*' ref={(e)=>address.current["land"]=e}/> */}
-                </Flex>
-                </Flex>
+                
             </ModalBody>
   
             <ModalFooter>
@@ -77,8 +95,8 @@ const Checkout = () => {
                 handleAddress();
             if(flat!==""&&state!==""&&city!==""&&street!=="")
             {          toast({
-            title: 'Address successfully added.',
-            description: "We'll use this for further communication.",
+            title: 'Địa chỉ được thêm thành công.',
+            description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
             status: 'success',
             duration: 9000,
             isClosable: true,

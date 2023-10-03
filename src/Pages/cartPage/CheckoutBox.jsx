@@ -117,8 +117,8 @@ const CheckoutBox = ({
               </Text>
 
               <Flex justifyContent="space-between">
-                <Text>Price ({items} Items)</Text>
-                <Text>{totalPrice} VND</Text>
+                <Text>Giá ({items} Sản phẩm)</Text>
+                <Text >{totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} </Text>
               </Flex>
 
               <Flex justifyContent="space-between">
@@ -131,7 +131,7 @@ const CheckoutBox = ({
               <Flex justifyContent="space-between">
                 <Text>Giảm giá</Text>
 
-                <Text>{discount}</Text>
+                <Text>{discount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Text>
               </Flex>
 
               <Divider />
@@ -142,7 +142,7 @@ const CheckoutBox = ({
                 marginBottom={"20px"}
               >
                 <Text>Tổng hóa đơn</Text>
-                <Text>{paybalPrice} VND</Text>
+                <Text>{paybalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Text>
               </Flex>
               <Divider />
             </Box>

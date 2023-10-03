@@ -89,39 +89,39 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
   var tomorrow = new Date();
   tomorrow.setTime(tomorrow.getTime() + 1000 * 3600 * 24);
   var dayName = new Array(
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    "Chủ Nhật",
+    "Thứ Hai",
+    "Thứ Ba",
+    "Thứ Tư",
+    "Thứ Năm",
+    "Thứ Sáu",
+    "Thứ Bảy"
   );
   var monName = new Array(
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "Tháng 1",
+    "Tháng 2",
+    "Tháng 3",
+    "Tháng 4",
+    "Tháng 5",
+    "Tháng 6",
+    "Tháng 7",
+    "Tháng 8",
+    "Tháng 9",
+    "Tháng 10",
+    "Tháng 11",
+    "Tháng 12"
   );
   var now = new Date();
   var dtString =
     dayName[now.getDay()] +
-    ", " +
-    monName[now.getMonth()] +
-    " " +
+    " - " +
     now.getDate();
   var change =
-    months[tomorrow.getMonth()] +
-    " " +
+  dayName[tomorrow.getDay()] +
+    " - "  +
     tomorrow.getDate() +
+    ", " +
+    monName[now.getMonth()] +
     ", " +
     tomorrow.getFullYear();
   return (
@@ -208,7 +208,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
           <Flex>
             <FcPlus />
             <Heading fontSize="12px" color={"red"}>
-              RECOMMENDED SERVICES/WARRANTY
+            Dịch vụ/Gói bảo hành thiết bị điện tử được khuyến nghị mua cho sản phẩm điện tử
             </Heading>
           </Flex>
         </Flex>
@@ -234,7 +234,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
             lineHeight={"1.5"}
           >
             {" "}
-            Free Shipping
+            Giao hàng miễn phí
           </Heading>
           <Flex justifyContent="flex-end">
             <TbTruckDelivery size={20} />
@@ -243,12 +243,10 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
               color={"rgb(0, 51, 128)"}
               lineHeight={"20px"}
             >
-              Standard Delivery: {dtString} - {change}
+              Giao hàng nhanh: {dtString} / {change}
             </Heading>
           </Flex>
           <Heading fontSize="12px" color={"rgb(102, 102, 102)"}>
-            *Delivery assurance is subject to our delivery locations staying
-            open as per govt. regulations
           </Heading>
         </Flex>
       </Flex>
@@ -289,7 +287,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
                 });
             }}
           >
-            Remove
+            Xóa
           </Button>
         </Box>
         <Box width={"49%"}>
@@ -299,7 +297,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
             _hover={"backgroundColor:white"}
             onClick={() => handleWish(singleData)}
           >
-            Move to Wishlist
+           Thêm vào yêu thích
           </Button>
         </Box>
       </Flex>
