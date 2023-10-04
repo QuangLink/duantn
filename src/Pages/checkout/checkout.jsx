@@ -2,7 +2,11 @@ import {useDisclosure, Accordion, AccordionButton, AccordionIcon, AccordionItem,
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-
+const flexContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
 const Checkout = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const address=useRef({})
@@ -29,40 +33,56 @@ const Checkout = () => {
     
     const navigate=useNavigate()
     return (
-      <div style={{backgroundColor:"#f1eeee" }}>
+      <div style={{backgroundColor:"#f1eeee", textAlign: "center" }}>
       <Box width="90%" margin="auto" backgroundColor="white" boxShadow='base'>
       <Accordion defaultIndex={[0]} allowMultiple>
     <AccordionItem>
       <h2>
         <AccordionButton>
-          <Box flex='1' textAlign='left'>
+          <Box flex='1' textAlign='center'>
             <Text fontSize='3xl'>Địa chỉ giao hàng</Text>
           </Box>
             
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>
+  
+      <AccordionPanel pb={4} style={{margin: '20px 150px', border: '2px solid #ccc', padding: '20px', borderRadius: '20px'}}>
+
         {(flat==="")&&<Box>Không tìm thấy địa chỉ nào</Box>}
-        {(flat!=="")&&<Box>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic" >Tên: </Text><Text > {firstName} {lastName}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Địa chỉ: </Text><Text > {flat}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Đường: </Text><Text > {street}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Thành phố: </Text><Text > {city}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Tỉnh: </Text><Text > {state}</Text></Flex>
-          <Flex width="300px" justifyContent="space-between"><Text fontWeight="bold" fontStyle="italic">Sđt: </Text><Text > {mobile}</Text></Flex>
-          
-          
-        </Box>}
-        {(flat!=="")&&<Button onClick={()=>navigate("/payments")} colorScheme='blue' variant='outline'>Chọn phương thức thanh toán</Button>}
         {(flat !== "") && (
-          <Button onClick={clearAddress} colorScheme="red" variant="outline">
-            Xóa thông tin
-          </Button>
+          <Box style={{display: 'flex',flexDirection: 'column',alignItems: 'center'}}>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Tên:</Text>
+              <Text>{firstName} {lastName}</Text>
+            </Flex>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Địa chỉ:</Text>
+              <Text>{flat}</Text>
+            </Flex>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Đường:</Text>
+              <Text>{street}</Text>
+            </Flex>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Thành phố:</Text>
+              <Text>{city}</Text>
+            </Flex>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Tỉnh:</Text>
+              <Text>{state}</Text>
+            </Flex>
+            <Flex width="300px" justifyContent="space-between">
+              <Text fontWeight="bold" fontStyle="italic">Số điện thoại:</Text>
+              <Text>{mobile}</Text>
+            </Flex>
+          </Box>
         )}
         
+   
         
-        {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Nhập địa chỉ giao hàng mới</Button>}
+        
+      
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -110,6 +130,20 @@ const Checkout = () => {
           </ModalContent>
         </Modal>
       </AccordionPanel>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', margin: '20px' }}>
+        {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Nhập địa chỉ giao hàng mới</Button>}
+        {(flat !== "") && (
+          <Button onClick={() => navigate("/payments")} colorScheme='blue' variant='outline'>
+            Chọn phương thức thanh toán
+          </Button>
+        )}
+        {(flat !== "") && (
+          <Button onClick={clearAddress} colorScheme="red" variant="outline">
+            Xóa thông tin
+          </Button>
+        )}
+        </div>
+      
     </AccordionItem>
   </Accordion>
   </Box>

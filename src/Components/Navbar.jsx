@@ -27,11 +27,14 @@ import React from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
 import { ImLocation2 } from "react-icons/im";
-import { BiNetworkChart } from "react-icons/bi";
-import { BsFillCartFill } from "react-icons/bs";
+import { BiNetworkChart, BiSearch } from "react-icons/bi";
+import { BsFillCartFill, BsPhone, BsSmartwatch } from "react-icons/bs";
 import { MdConnectWithoutContact } from "react-icons/md";
-import { FaTruck } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai"
+import { CiHeadphones } from "react-icons/ci";
+import { FaTruck, FaComputer } from "react-icons/fa";
+
+import { GiHamburgerMenu, GiWatch } from "react-icons/gi";
 import { GrLogin, GrReturn, GrServices } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -63,7 +66,7 @@ function Navbar() {
   if (isLargerThan1100) {
     return (
       <Box>
-        <Flex
+        {/* <Flex
           w="100%"
           px="30px"
           justifyContent={"space-around"}
@@ -150,7 +153,7 @@ function Navbar() {
               </Heading>
             </Flex>
           </Link>
-        </Flex>
+        </Flex> */}
 
         <Flex
           w="100%"
@@ -169,8 +172,8 @@ function Navbar() {
           </Link>
           <Flex
             bg="white"
-            borderRadius={"20px"}
-            w="500px"
+            borderRadius={"10px"}
+            w="350px"
             p="5px"
             m="auto"
             textAlign={"center"}
@@ -178,11 +181,11 @@ function Navbar() {
             <Input
               border={"none"}
               fontSize={"18px"}
-              borderRadius="full"
+              borderRadius={"5px"}
               fontWeight="bold"
-              placeholder="Find Your Favorite Product"
+              placeholder="Search"
             />
-            <FcSearch fontSize={"42px"} />
+            <BiSearch fontSize={"42px"} />
           </Flex>
           <Flex cursor={"pointer"}>
             <ImLocation2 color="white" fontSize="20px" />
@@ -190,9 +193,9 @@ function Navbar() {
               cursor={"pointer"}
               fontSize={"17px"}
               color="white"
-              _hover={{ bg: "red", textDecoration: "underline" }}
+              _hover={{ bg: "red", textDecoration: "underlie" }}
             >
-              Deliver to Mumbai 400059
+              73/14 Tân Sơn Nhì, Tân Sơn Nhì, Tân Bình, TP HCM
             </Heading>
           </Flex>
           <Link to="/cart">
@@ -204,7 +207,7 @@ function Navbar() {
                 color="white"
                 _hover={{ bg: "red", textDecoration: "underline" }}
               >
-                Cart
+                Giỏ hàng
               </Heading>
             </Flex>
           </Link>
@@ -253,441 +256,64 @@ function Navbar() {
           alignItems={"center"}
           m="auto"
           bg="blue"
-          px="3%"
+          px="20%"
         >
+          <Menu >
+            <Link to="mobilesandtablets" >
+              <MenuButton
+
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                <BsPhone />  Điện Thoại
+              </MenuButton>
+            </Link>
+          </Menu>
           <Menu>
-            <MenuButton
-              px={4}
-              py={2}
-              color="white"
-              transition="all 0.2s"
-              _hover={{ bg: "red.600", color: "white" }}
-              _expanded={{ bg: "green.600" }}
-              _focus={{ boxShadow: "outline" }}
-            >
-              Mobiles & Tablets <ChevronDownIcon />
-            </MenuButton>
             <Link to="mobilesandtablets">
-              <MenuList bg="#013380">
-                <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(3,1fr)"}
-                  gap="25px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  w="95%"
-                  color="white"
-                >
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Smartphones
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Headphones & Headsets
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      AI Learning Robots
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Wearable Technology
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Top Selling Smartwatches
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Apple Price Drop
-                    </Text>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Tablets & eReaders
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Every Day use Tablets below 15000
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Premium Tablets, Above 15001
-                    </Text>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Power Banks
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Accessories
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Mobile Accessories
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Tablet Accessories
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Car Mobile Holders
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Memory Cards
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Cables & Cords
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Chargers & Adapters
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      eSlates
-                    </Heading>
-                  </Box>
-                </Grid>
-              </MenuList>
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                <AiOutlineLaptop /> Laptop
+              </MenuButton>
+            </Link>
+          </Menu>
+          <Menu>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                <AiOutlineTablet />  Tablet
+              </MenuButton>
             </Link>
           </Menu>
 
+          {/* Phụ kiện */}
           <Menu>
             <MenuButton
+
               px={4}
               py={2}
               color="white"
               transition="all 0.2s"
               _hover={{ bg: "red.600", color: "white" }}
-              _expanded={{ bg: "green.600" }}
               _focus={{ boxShadow: "outline" }}
             >
-              Televisions <ChevronDownIcon />
-            </MenuButton>
-            <MenuList bg="#013380">
-              <Link to="televisions">
-                <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(3,1fr)"}
-                  gap="10px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="white"
-                >
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Reconnect Disney | Marvel Audio Collection
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Virtual Reality Headsets
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Stabilizers & Surge Protectors
-                    </Heading>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Televisions
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Smart TVs
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      43 Inch TVs
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      55 Inch TVs
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Android TVs
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      32 Inch TVs
-                    </Text>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Gaming
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Gaming Accessories
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Gaming Consoles
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Gaming Titles
-                    </Text>
-                  </Box>
-
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Projectors
-                    </Heading>
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Streaming Devices
-                    </Heading>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
-          </Menu>
-
-          <Menu>
-            <MenuButton
-              px={4}
-              py={2}
-              color="white"
-              transition="all 0.2s"
-              _hover={{ bg: "red.600", color: "white" }}
-              _expanded={{ bg: "green.600" }}
-              _focus={{ boxShadow: "outline" }}
-            >
-              Audio <ChevronDownIcon />
+              <CiHeadphones />  Phụ kiện <ChevronDownIcon />
             </MenuButton>
             <MenuList bg="#013380">
               <Link to="headphones">
@@ -710,7 +336,7 @@ function Navbar() {
                       my="8px"
                       fontSize={"15px"}
                     >
-                      Headphones & Headsets
+                      Phụ kiện di động
                     </Heading>
                     <Text
                       _hover={{
@@ -719,7 +345,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      True Wireless
+                      Sạc dự phòng
                     </Text>
                     <Text
                       _hover={{
@@ -728,7 +354,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Bluetooth Neckbands
+                      Cáp, sạc
                     </Text>
                     <Text
                       _hover={{
@@ -737,7 +363,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Wired Earphones
+                      Bàn phím , bút tablet
                     </Text>
                     <Text
                       _hover={{
@@ -746,7 +372,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      On Ear Headphones
+                      Miếng dán
                     </Text>
                     <Text
                       _hover={{
@@ -755,7 +381,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Noise Cancelling Headphones
+                      Túi đựng AriPods
                     </Text>
                   </Box>
                   <Box>
@@ -768,7 +394,7 @@ function Navbar() {
                       my="8px"
                       fontSize={"15px"}
                     >
-                      Bluetooth & Wifi Speakers
+                      Phụ kiện laptop
                     </Heading>
                     <Text
                       _hover={{
@@ -777,7 +403,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Bluetooth Speakers
+                      Chuột, bàn phím
                     </Text>
                     <Text
                       _hover={{
@@ -786,7 +412,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Smart Speakers
+                      Thiết bị mạng
                     </Text>
                   </Box>
                   <Box>
@@ -799,7 +425,7 @@ function Navbar() {
                       my="8px"
                       fontSize={"15px"}
                     >
-                      TV Speakers & Soundbars
+                      Thiieets bị âm thanh
                     </Heading>
                     <Text
                       _hover={{
@@ -808,7 +434,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Soundbars
+                      Tai nghe
                     </Text>
                     <Text
                       _hover={{
@@ -817,7 +443,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Home Theatre Systems
+                      Loa
                     </Text>
                     <Text
                       _hover={{
@@ -826,17 +452,9 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Party speakers
+                      Micro
                     </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
 
-                        cursor: "pointer",
-                      }}
-                    >
-                      Multimedia
-                    </Text>
                   </Box>
                   <Box>
                     <Heading
@@ -848,7 +466,7 @@ function Navbar() {
                       my="8px"
                       fontSize={"15px"}
                     >
-                      Musical Instruments
+                      Thiết bị lưu trữ
                     </Heading>
                     <Text
                       _hover={{
@@ -857,7 +475,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Guitars and Ukuleles
+                      Ổ cứng di động
                     </Text>
                     <Text
                       _hover={{
@@ -866,7 +484,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Microphones
+                      Thẻ nhớ
                     </Text>
                     <Text
                       _hover={{
@@ -875,7 +493,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Musical Keyboards
+                      USB
                     </Text>
                   </Box>
                 </Grid>
@@ -884,281 +502,49 @@ function Navbar() {
           </Menu>
 
           <Menu>
-            <MenuButton
-              px={4}
-              py={2}
-              color="white"
-              transition="all 0.2s"
-              _hover={{ bg: "red.600", color: "white" }}
-              _expanded={{ bg: "green.600" }}
-              _focus={{ boxShadow: "outline" }}
-            >
-              Home Appliances <ChevronDownIcon />
-            </MenuButton>
-            <MenuList bg="#013380">
-              <Link to="homeappliances">
-                <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(3,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="white"
-                >
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Air Conditioners
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Split Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Window Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Smart Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Energy Efficient Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      1 ton Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      1.5 ton Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      5 star Air Conditioners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Air Coolers
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Air Purifiers
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Washing Machines
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Fully Automatic Front Load
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Fully Automatic Top Load
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Semi-Automatic Top Load
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Refrigerators
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Single Door
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Double Door
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Side by Side Refrigerators
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Convertible
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"15px"}
-                    >
-                      Vacuum Cleaners
-                    </Heading>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Robotic Vacuum Cleaners
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Dishwashers
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Geysers
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                    >
-                      Room Heaters
-                    </Text>
-                    <Text
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      fans
-                    </Text>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                <BsSmartwatch /> Smartwatch
+              </MenuButton>
+            </Link>
           </Menu>
 
           <Menu>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                <GiWatch /> Đồng hồ
+              </MenuButton>
+            </Link>
+          </Menu>
+          <Menu>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ bg: "red.600", color: "white" }}
+                _focus={{ boxShadow: "outline" }}
+              >
+                Máy củ giá rẻ
+              </MenuButton>
+            </Link>
+          </Menu>
+          {/* <Menu>
             <MenuButton
               px={4}
               py={2}
@@ -2468,7 +1854,7 @@ function Navbar() {
                 </Grid>
               </Link>
             </MenuList>
-          </Menu>
+          </Menu> */}
         </Flex>
       </Box>
     );
