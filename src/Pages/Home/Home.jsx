@@ -37,76 +37,76 @@ const Home = () => {
     <Box>
       <ItemCard1 type={ItemDetails1} />
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="TRENDING LAPTOPS | " />
+      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT | " />
       <br />
       <hr />
       <ItemCard2
         type={ItemDetails3}
         linked={"/personalcare"}
-        heading="PRICE DROP ON APPLE SMARTWATCHES | "
+        heading="ĐỒNG HỒ THÔNG MINH APPLE | "
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />
-      <ItemCard4 type={ItemDetails4} heading="ENTERTAINMENT FEST" />
+      <ItemCard4 type={ItemDetails4} heading="SẢN PHẨM CỦA CHÚNG TÔI" />
       <ItemCard5
         type={ItemDetails5}
-        heading="BIGGEST PRICE DROP ON  MICROWAVE OVEN | "
+        heading="LÒ VI SÓNG GIÁ CỰC SỐC | "
       />
       <br />
       <hr />
-      <ItemCard4 type={ItemDetails6} heading="GREAT DEALS ON ELECTRONICS" />
+      <ItemCard4 type={ItemDetails6} heading="SẢN PHẨM ƯU ĐÃI SỐC" />
       <ItemCard1 type={ItemDetails7} />
       <ItemCard6
         type={ItemDetails9}
-        heading="THE RELIANCE DIGITAL BRAND PROMISE"
+        heading="DỊCH VỤ CỦA CHÚNG TÔI"
       />
       <br />
       <hr />
       <ItemCard2
         type={ItemDetails10}
-        heading="UP TO 80% OFF ON PERSONAL CARE APPLIANCES | "
+        heading="GIẢM GIÁ LÊN ĐẾN 80% DỤNG CỤ CẠO RÂU | "
         src="https://i.imgur.com/FPm2ngR.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails11}
-        heading="TRENDING IN TELEVISIONS | "
+        heading="HÃNG HÀNG TIVI NỔI BẬT | "
         src="https://i.imgur.com/fL1O6va.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails12}
-        heading="SMARTWATCHES STARTING FROM RS.999 | "
+        heading="ĐỒNG HỒ THÔNG MINH | "
         src="https://i.imgur.com/OGeXueA.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails13}
-        heading="UP TO 70% OFF ON EVERYDAY APPLIANCES | "
+        heading="ĐIỀU HÒA / LÀM MÁT | "
         src="https://i.imgur.com/ntyAjRL.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails14}
-        heading="IT ACCESSORIES STARTING FROM RS. 109 | "
+        heading="PHỤ KIỆN ĐIỆN TỬ | "
         src="https://i.imgur.com/tpj1BEM.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails15}
-        heading="APPLE IPHONE 14 & 14 PLUS | "
+        heading=" SẢN PHẨM APPLE NỔI BẬT | "
         src="https://i.imgur.com/tkLHMZ8.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails16}
-        heading="BEST SELLING AUDIO ACCESSORIES | "
+        heading="PHỤ KIỆN ÂM THANH GIẢM GIÁ | "
         src="https://i.imgur.com/7J25A1o.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails17}
-        heading="UP TO 75% ON CAMERA ACCESSORIES | "
+        heading="GIẢM GIÁ LÊN ĐẾN 75% PHỤ KIỆN CAMERA | "
         src="https://i.imgur.com/EGk9huk.png"
       />
       <ItemCard8 type={ItemDetails18} heading="EXPLORE OUR RANGE OF PRODUCTS" />
