@@ -127,6 +127,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
   return (
     <Flex
       key={id}
+      className=""
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"90%"}
