@@ -66,7 +66,7 @@ const ItemCard8 = ({ type, heading }) => {
                           alt={i.caption}
                           boxSize="170px"
                         />
-                      </Square>
+                      </Square>hhhkcbb
                       <br />
                       <br />
                       <Center>
