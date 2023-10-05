@@ -1,10 +1,14 @@
-import {Center, Box, Button, Flex, Grid, GridItem, Heading, Image, Input, ListItem, Text, UnorderedList, useToast } from '@chakra-ui/react';
+import { Center, Box, Button, Flex, Grid, GridItem, Heading, Image, Input, ListItem, Text, UnorderedList, useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
+import ItemCard4 from "../Home/ItemCard4";
+import {
+  ItemDetails6
+} from "../Home/CardDetails";
 
 
 
@@ -35,7 +39,7 @@ const postSingleData = async (data) => {
     );
   }
 };
- export const postSingleDataWish = async (data) => {
+export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
       `https://rus-digital-televisions.onrender.com/whishlist`,
@@ -81,7 +85,7 @@ const SingleProduct = (props) => {
     }
     // console.log("newData is :-", newData);
     // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleData(newData).then((res) =>{
+    postSingleData(newData).then((res) => {
       // console.log("in the handlePost function and viewing the data after the post request", res)
       toast({
         title: "Added Item Successfully",
@@ -147,10 +151,29 @@ const SingleProduct = (props) => {
             visible={true}
           />
         </Center>
-      ): (
-        <Box marginTop={12}>
+
+      ) : (
+
+        //Box tổng
+        <Box marginTop={10}>
+          <Box
+            width="90%"
+            m="0 0 0 7%"
+            p=" 1% 8% "
+            justifyContent="center"
+            alignitem="center"
+          >
+            <Text color="gray.500" marginBottom={5}>
+              Article ID: {singleData.id}
+            </Text>
+            <Heading size="md" marginBottom={5}>
+              {singleData.name}
+            </Heading>
+            <hr />
+          </Box>
+
           <Grid
-            h={["1300px", "1100px", "600px"]}
+            h={["1300px", "1100px", "900px"]}
             templateRows={[
               "repeat(8, 1fr)",
               "repeat(8, 1fr)",
@@ -163,74 +186,54 @@ const SingleProduct = (props) => {
             ]}
           >
             <GridItem
-              rowSpan={[1, 2, 4]}
-              colSpan={[4, 6, 4]}
-              display="flex"
+              rowSpan={[1, 2, 7]}
+              colSpan={[5, 6, 5]}
+              // display="flex"
+              m="0 0 0 18%"
+              p=" 2% 8% "
               justifyContent="center"
               alignitem="center"
               style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                border: "none",
+                // boxShadow:
+                //   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
             >
               <Image
+                textAlign="center"
+                width="85%"
+                justifyContent="center"
                 src={singleData.img}
                 alt={singleData.name}
                 _hover={{ cursor: "crosshair" }}
+
               />
-            </GridItem>
-
-            <GridItem
-              colSpan={[4, 6, 6]}
-              rowSpan={1}
-              p={5}
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-              }}
-            >
-              <Text color="gray.500" marginBottom={5}>
-                Article ID: {singleData.id}
-              </Text>
-              <Heading size="md" marginBottom={5}>
-                {singleData.name}
-              </Heading>
-            </GridItem>
-
-            <GridItem
-              colSpan={[4, 3, 3]}
-              rowSpan={7}
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-              }}
-              p={5}
-            >
+              <hr />
+              {/* Chi tieet  */}
               <Heading size="sm" marginBottom={3}>
-                Gain more with offers (4)
+                Thông số kĩ thuật
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  Wall mount bracket is on chargeable basis.{" "}
+                  Loại tivi: {singleData.name}{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 <ListItem>
-                  Buy RCP warranty and save up to 55%.{" "}
+                  Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 <ListItem>
-                  Shop for Rs.20,000 & above and get instant discount Up To
-                  Rs.5000,Use coupon codes "YES1000" for above 20,000 ,"YES2500"
-                  for above 50,000, "YES5000" for above 1,00,000..{" "}
-                  <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem>
-                <ListItem>
-                  Get Cashback upto Rs. 1,000 on Mobikwik Wallet.{" "}
+                  Công nghệ hình ảnh:Active HDRChế độ game HGiG
+                  Chế độ hình ảnh phù hợp nội dung
+                  Dải màu rộng Nano Color
+                  Giảm độ trễ chơi game Auto Low Latency Mode (ALLM)HDR Dynamic Tone MappingHDR10
+                  ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
+                  Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
-                Save more with EMI/Cashback (1){" "}
+                Thông tin sản phẩm (1){" "}
                 <span
                   style={{
                     fontWeight: "bold",
@@ -243,53 +246,41 @@ const SingleProduct = (props) => {
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  EMIs (Credit Cards) from ₹792.16/month |{" "}
+                  {singleData.name} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
+                  Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
+                  <br />
+
+                  Màn hình {singleData.name} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
                 </ListItem>
               </UnorderedList>
-              <Heading size="sm" marginBottom={3}>
-                Warranty
-              </Heading>
-              <UnorderedList color="gray.600" fontSize="sm" marginBottom={5}>
-                <ListItem>
-                  <span style={{ fontWeight: "bold" }}>Warranty:</span> 1 Year
-                  manufacturer warranty
-                </ListItem>
-              </UnorderedList>
-              <Heading size="sm" marginBottom={3}>
-                Additional Services & Warranties (3){" "}
-                <span
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "14px",
-                    color: "#2871c4",
-                  }}
-                >
-                  View All
-                </span>
-              </Heading>
+
             </GridItem>
             <GridItem
-              colSpan={[4, 3, 3]}
+              colSpan={[4, 3, 4]}
               rowSpan={7}
-              p={5}
+              p={7}
+              mt="5%"
               style={{
                 boxShadow:
-                  "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                  "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
               }}
             >
+              <Heading size="md" marginBottom={5}>
+                {singleData.name}
+              </Heading>
               <Heading size="lg" marginBottom={5} color="blue.700">
-                ₹{singleData.price}
+                {singleData.price}₫
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
-                MRP:{" "}
+                Giá gốc:{" "}
                 <span style={{ textDecoration: "line-through" }}>
                   {singleData.mrp}
-                </span>{" "}
-                <span style={{ fontSize: "12px" }}>
-                  (Inclusive of all taxes)
+                </span>{" "}₫
+                <span style={{ fontSize: "12px", padding: "20px" }}>
+                  (Bao gồm tất cả các loại thuế)
                 </span>
               </Text>
 
@@ -299,7 +290,7 @@ const SingleProduct = (props) => {
                 style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
-                You Save: {singleData.discount}
+                Phần trăm thuế: {singleData.discount}
               </Text>
 
               <Text
@@ -307,8 +298,8 @@ const SingleProduct = (props) => {
                 style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
-                EMIs (Credit Cards) from ₹792.16/month |{" "}
-                <span style={{ color: "#2871c4" }}>View Plans</span>
+                Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
+                <span style={{ color: "#2871c4" }}>Xem thêm</span>
               </Text>
 
               <Text
@@ -316,13 +307,12 @@ const SingleProduct = (props) => {
                 style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
-                FREE Shipping!
+                Miễn phí vận chuyển!
               </Text>
-
               <Input
                 w="70%"
                 borderRadius="none"
-                placeholder="Enter / Detect PIN Code"
+                placeholder="Enter / Mã giảm giá"
                 p={2}
                 marginBottom={3}
               ></Input>
@@ -332,30 +322,74 @@ const SingleProduct = (props) => {
                   w="49%"
                   color="white"
                   bg="red"
-                  borderRadius="sm"
+                  borderRadius="10px"
                   fontSize="lg"
                   p={6}
                   _hover={{ bg: "blue.800" }}
                   onClick={() => handlePost(singleData)}
                 >
-                  ADD TO CART
+                  Thêm vào giỏ hàng
                 </Button>
                 <Button
                   w="49%"
                   color="white"
                   bg="orangered"
-                  borderRadius="sm"
+                  borderRadius="10px"
                   fontSize="lg"
                   p={6}
                   _hover={{ backgroundColor: "orangered" }}
                   onClick={() => handleWish(singleData)}
                 >
-                  Add to Wishlist
+                  Mua ngay
                 </Button>
               </Flex>
+              <Box
+                m="5% 0%"
+                border="solid #f7e9f7 2px"
+                borderRadius="5px"
+              >
+                <Heading
+                  display="inline-block"
+                  position="relative"
+                  padding="0 2.5rem 0"
+                  margin="0 auto"
+                  fontSize="1.3rem"
+                >
+                  Các khuyến mãi khác
+                </Heading>
+                <Text
+                  margin="2%"
+                >
+                  .<span style={{ padding: "5%" }}>
+                    Giảm giá khi mua trong giờ phát sóng live tream
+                  </span>{" "}
+                  <br />
+                  .<span style={{ padding: "5%" }}>
+                    Dùng thử 30 ngày, đổi máy không cần lý do
+                  </span>{" "}
+                  <br />
+                  .<span style={{ padding: "5%" }}>
+                    Bảo hành thân máy 12 tháng
+                  </span>{" "}
+                  <br />
+                  .<span style={{ padding: "5%" }}>
+                    Giảm 200k - 300k cho Học Sinh/ Sinh Viên/ Giáo Viên
+                  </span>{" "}
+                  <br />
+                  .<span style={{ padding: "5%" }}>
+                    Giao hàng toàn quốc (miễn phí nội thành HCM)
+                  </span>{" "}
+                  <br />
+                  .<span style={{ padding: "5%" }}>
+                    Mã giảm 100.000đ áp dụng đơn hàng từ 500.000đ
+                  </span>{" "}
+                </Text>
+              </Box>
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
+          <ItemCard4 type={ItemDetails6} heading="Các sản phẩm khác" />
+
         </Box>
       )}
     </>

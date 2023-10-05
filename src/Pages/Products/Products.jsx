@@ -106,12 +106,6 @@ const Products = ({ typeOfProduct }) => {
           padding="20px 50px " 
           margin="1%"
           >
-            Nhu cầu
-          </Button>
-          <Button
-          padding="20px 50px " 
-          margin="1%"
-          >
             Mơi nhất
           </Button>
           <Button
