@@ -55,7 +55,7 @@ export const ItemDetails3 = [
     caption: "Slide 1",
     mrp: "85,405.00",
     price: "89,900.00",
-    discount: "5%(₹4,495)",
+    discount: "(5%) 4,495",
     linked: "personalcare",
   },
   {
@@ -401,26 +401,26 @@ export const ItemDetails9 = [
   {
     img: "https://www.reliancedigital.in/medias/Insta-Delivery-Brand-Promise-Icon.png?context=bWFzdGVyfGltYWdlc3wxNTM3fGltYWdlL3BuZ3xpbWFnZXMvaGI2L2gwNS85NDQ3MTcwMzQyOTQyLnBuZ3w2Yzc1ZmY1ZjYwOWIyNWU0ZTgwMjFlYmRkMTU5ZTgzMGI4ZDNmZTE2NjVjYmRlMmUwMmRiODI2OTExNWM5ZTdk",
     caption: "Slide 1",
-    title: "INSTA DELIVERY",
-    desc: "LESS THAN 3 HRS.",
+    title: "Ship hàng toàn quốc",
+    desc: "Freeship nội thành TP.HCM",
   },
   {
     img: "https://www.reliancedigital.in/medias/Best-Finance-Options-2.png?context=bWFzdGVyfGltYWdlc3wxMjM4fGltYWdlL3BuZ3xpbWFnZXMvaDJmL2gxOS85NDQ3MTcwNDA4NDc4LnBuZ3xlMDBiNjY4YWI5YzMzYjZkZDhlZTMyMDhjYjE2YzI2OTY2NWJhYjk2M2VkNzdjZDg3NTNlMGEyMTA1ZjFlODZh",
     caption: "Slide 2",
-    title: "BEST FINANCE OPTIONS",
-    desc: "WIDE RANGE",
+    title: "Dùng thử sản phẩm 30 ngày",
+    desc: "Bản hành 365 ngày",
   },
   {
     img: "https://www.reliancedigital.in/medias/service-img.png?context=bWFzdGVyfGltYWdlc3w5MTB8aW1hZ2UvcG5nfGltYWdlcy9oMDYvaGEzLzkwOTA3OTc5OTQwMTQucG5nfGJjZmJhNzM1ODdkYTQ5ODI3YzNiMzQ1ZTdlM2JjNjUwMTBjM2E3YWFjNmUxZjdmMmEyOGRjZDMxOGI4ZWE0MWY",
     caption: "Slide 3",
-    title: "SERVICE GUARANTEE",
-    desc: "HASSLE FREE",
+    title: "Hỗ trợ trả góp 0 đồng",
+    desc: "Linh hoạt nhiều hình thức thanh toán",
   },
   {
     img: "https://www.reliancedigital.in/medias/unmatched-network-img.png?context=bWFzdGVyfGltYWdlc3w3NDV8aW1hZ2UvcG5nfGltYWdlcy9oODIvaDJhLzkwOTA3OTgwNTk1NTAucG5nfDFmMThjYzdiYTNiOTgxYjA5YzdlZTFiMmQyODI5MGY2NTM4ZTcxOWZkZTA1ZjAzY2Q1ZTk5YjQ1NTMxMWViYzU",
     caption: "Slide 4",
-    title: "UNMATCHED NETWORK",
-    desc: "700 CITIES, 2000 STORES",
+    title: "Thu cũ - Đổi mới",
+    desc: "Hỗ trợ thu lại máy cũ, bù tiền lấy mới",
   },
 ];
 
