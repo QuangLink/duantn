@@ -2,11 +2,7 @@ import {useDisclosure, Accordion, AccordionButton, AccordionIcon, AccordionItem,
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-const flexContainerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
+
 const Checkout = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const address=useRef({})
@@ -79,10 +75,6 @@ const Checkout = () => {
           </Box>
         )}
         
-   
-        
-        
-      
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -133,13 +125,18 @@ const Checkout = () => {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', margin: '20px' }}>
         {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Nhập địa chỉ giao hàng mới</Button>}
         {(flat !== "") && (
+          <Button onClick={onOpen} colorScheme='blue' variant='outline'>
+            Sửa địa chỉ
+          </Button>
+        )}
+        {(flat !== "") && (
           <Button onClick={() => navigate("/payments")} colorScheme='blue' variant='outline'>
             Chọn phương thức thanh toán
           </Button>
         )}
         {(flat !== "") && (
           <Button onClick={clearAddress} colorScheme="red" variant="outline">
-            Xóa thông tin
+            Xóa
           </Button>
         )}
         </div>
