@@ -106,7 +106,7 @@ const Slider = ({ type }) => {
                     
                   >
                     <Text fontSize="10px" fontWeight="500">
-                      OFFERS AVAILABLE
+                      GIẢM GIÁ SỐC 
                     </Text>
                   </Box>
                 </Box>

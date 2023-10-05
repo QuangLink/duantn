@@ -12,7 +12,7 @@ import uuid from "react-uuid";
 const ItemCard5 = ({ type, heading }) => {
   return (
     <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center">
-      <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%" />
+      <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/>
       <Box mt="1" >
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -104,7 +104,7 @@ const ItemCard5 = ({ type, heading }) => {
                         
                       >
                         <Text fontSize="10px" fontWeight="500">
-                          ƯU ĐÃI CÓ SẴN
+                          GIẢM GIÁ SỐC
                         </Text>
                       </Box>
                     </Box>
