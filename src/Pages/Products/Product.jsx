@@ -9,7 +9,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { BsSuitHeart } from "react-icons/bs";
+import { BsSuitHeart,BsFillBookmarkStarFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -77,29 +77,42 @@ const Product = (props) => {
 
   return (
     <>
+    
       <Link to={`/${typeOfProduct}/${id}`}>
         <Box>
-          <Image src={img} alt={name} p="5" h="200" _hover={{ p: "0" }} />
+          <Box>
+            <Text 
+              fontFamily="revert"
+              fontWeight="medium"
+              fontSize="4xs"
+            >
+              Đánh giá
+              <BsFillBookmarkStarFill/>
+            </Text>
+          </Box>
+          <Image src={img} alt={name}  justifyItems="center" pl="2%" h="200" _hover={{ p: "" }} />
           <Box
-            h="10"
+            h="150"
             w="100%"
-            color="blue.700"
+            textAlign="center"
+            fontFamily=" sans-serif"
+            color="black.700"
             lineHeight="120%"
             marginBottom="3"
             textOverflow="ellipsis"
             overflow="hidden"
-            _hover={{ color: "red" }}
+            _hover={{ color: "blue" }}
           >
             {name}
           </Box>
           <Flex
-            w="75%"
+            w="100%"
             justifyContent="space-between"
             alignItems="center"
             marginBottom="2"
           >
             <Heading as="h3" size="xs" color="blue.700">
-              ₹{price}
+              {price}₫
             </Heading>
             <Text
               fontSize="sm"
@@ -107,31 +120,32 @@ const Product = (props) => {
               color="blackAlpha.600"
               textDecoration="line-through"
             >
-              ₹{mrp}
+              {mrp}₫
             </Text>
           </Flex>
+          
           <Badge
             borderRadius="full"
             px="2"
             border="1px solid green"
-            color="green"
+            color="red"
             fontSize="xs"
             marginBottom="10"
           >
-            OFFERS AVAILABLE
+            ƯU ĐÃI
           </Badge>
         </Box >
       </Link>
       <Button
-        w="125%"
-        marginLeft="-6"
+        w="100%"
+        marginLeft="0"
         borderRadius="0"
         borderTop="1px solid rgb(202, 201, 201)"
         color="gray"
         bg="white"
         onClick={() => handleWish(data)}
       >
-        <BsSuitHeart /> Wishlist
+        <BsSuitHeart /> Yêu Thích
       </Button>
     </>
   );
