@@ -133,13 +133,18 @@ const Checkout = () => {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', margin: '20px' }}>
         {(flat==="")&&<Button onClick={onOpen} colorScheme='blue' variant='outline'>Nhập địa chỉ giao hàng mới</Button>}
         {(flat !== "") && (
+          <Button onClick={onOpen} colorScheme='blue' variant='outline'>
+            Sửa địa chỉ
+          </Button>
+        )}
+        {(flat !== "") && (
           <Button onClick={() => navigate("/payments")} colorScheme='blue' variant='outline'>
             Chọn phương thức thanh toán
           </Button>
         )}
         {(flat !== "") && (
           <Button onClick={clearAddress} colorScheme="red" variant="outline">
-            Xóa thông tin
+            Xóa
           </Button>
         )}
         </div>
