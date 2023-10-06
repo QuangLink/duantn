@@ -118,7 +118,7 @@ const Products = ({ typeOfProduct }) => {
           backgroundColor="#FFFFFF"
           margin="1%"
           >
-            Mơi nhất
+            Mới nhất
           </Button>
           <Button
           border="solid 1px"

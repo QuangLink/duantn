@@ -171,7 +171,7 @@ function Navbar() {
           px="20%"
         >
           <Menu >
-            <Link to="accessories" >
+            <Link to="mobilesandtablets" >
               <MenuButton
 
                 px={4}
