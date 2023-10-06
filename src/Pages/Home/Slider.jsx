@@ -52,7 +52,7 @@ const Slider = ({ type }) => {
                   boxSize={{ base: "160px" }}
                 />
               </Square>
-              <Box p="2" mt="4" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
+              <Box p="2" mt="4"boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
                 <Text
                   color="#275293"
                   noOfLines={2}
@@ -63,7 +63,7 @@ const Slider = ({ type }) => {
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5">
+                <Box mt="2.5" m="20px 0 30px 0" >
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
@@ -71,13 +71,13 @@ const Slider = ({ type }) => {
                       </Text>
                     </Square>
                     <Square>
-                      <Text fontWeight="600" fontSize="18px" ml="1">
+                      <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
                         {i.price} <sup>đ</sup>
                       </Text>
                     </Square>
                   </Flex>
                   <Flex>
-                    <Text color="gray.600" fontSize="14px">
+                    <Text color="gray.600" fontSize="14px"  >
                       Giá gốc:{" "} <sup>đ</sup>
                     </Text>
                     {"  "}
@@ -85,7 +85,7 @@ const Slider = ({ type }) => {
                       {i.mrp} <sup>đ</sup>
                     </Text>
                   </Flex>
-                  <Flex>
+                  {/* <Flex>
                     <Text color="gray.600" fontSize="14px">
                       Giảm giá:{" "} 
                     </Text>
@@ -93,16 +93,16 @@ const Slider = ({ type }) => {
                     <Text color="gray.600" fontSize="14px" ml="1">
                       {i.discount} <sup>đ</sup>
                     </Text>
-                  </Flex>
+                  </Flex> */}
                   <Box
-                    borderRadius="xl"
-                    border="1px"
-                    borderColor="green.900"
-                    w="100px"
-                    color="green.500"
-                    bg="green.50"
-                    mt="2"
-                    textAlign="center"
+                        padding="3px"
+                        borderRadius="5px"
+                       
+                        w="40%"
+                        color="#f72424"
+                        bg="#fff0e9"
+                        mt="2"
+                        textAlign="center"
                     
                   >
                     <Text fontSize="10px" fontWeight="500">
