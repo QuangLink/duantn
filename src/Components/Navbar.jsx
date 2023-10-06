@@ -171,7 +171,7 @@ function Navbar() {
           px="20%"
         >
           <Menu >
-            <Link to="accessories" >
+            <Link to="mobilesandtablets" >
               <MenuButton
 
                 px={4}
@@ -281,7 +281,6 @@ function Navbar() {
                     <Text
                       _hover={{
                         textDecoration: "underline",
-
                         cursor: "pointer",
                       }}
                     >
@@ -433,7 +432,7 @@ function Navbar() {
           </Menu>
 
           <Menu>
-            <Link to="mobilesandtablets">
+            <Link to="accessories">
               <MenuButton
                 px={4}
                 py={2}
