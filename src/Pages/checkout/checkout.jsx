@@ -2,11 +2,6 @@ import {useDisclosure, Accordion, AccordionButton, AccordionIcon, AccordionItem,
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-const flexContainerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
 const Checkout = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const address=useRef({})
