@@ -171,7 +171,7 @@ function Navbar() {
           px="20%"
         >
           <Menu >
-            <Link to="mobilesandtablets" >
+            <Link to="accessories" >
               <MenuButton
 
                 px={4}
@@ -186,7 +186,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="mobilesandtablets">
+            <Link to="computers">
               <MenuButton
                 px={4}
                 py={2}
@@ -418,7 +418,7 @@ function Navbar() {
           </Menu>
 
           <Menu>
-            <Link to="mobilesandtablets">
+            <Link to="accessories">
               <MenuButton
                 px={4}
                 py={2}

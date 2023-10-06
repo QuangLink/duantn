@@ -7,7 +7,7 @@ const Heading = ({ heading }) => {
     <Flex gap="2" >
       <Center width="100%" backgroundColor="black" h="60px">
         <Text fontSize="2xl" display="flex" justifyContent="center" textAlign="center" width=""  textColor="#fff"> {heading} </Text>
-        <Link to="/" >
+        <Link to="/computers" >
           <Text 
            
             style={
@@ -15,7 +15,7 @@ const Heading = ({ heading }) => {
               width:"100%",
               fontSize: "20px",
               fontWeight: "500",
-              color: "#fd8002",
+              color: "#3ae6f2",
               textAlign: "right",
               marginRight:"25px",
               fontFamily:"inherit",

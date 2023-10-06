@@ -6,6 +6,8 @@ import ItemCard5 from "./ItemCard5";
 import ItemCard6 from "./ItemCard6";
 import ItemCard7 from "./ItemCard7";
 import ItemCard8 from "./ItemCard8";
+import ItemCard9 from "./ItemCard9";
+
 
 
 import {
@@ -47,15 +49,15 @@ const Home = () => {
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />
-      <ItemCard4 type={ItemDetails4} heading="SẢN PHẨM CỦA CHÚNG TÔI" />
+      {/* <ItemCard4 type={ItemDetails4} heading="SẢN PHẨM CỦA CHÚNG TÔI" /> */}
       <ItemCard5
         type={ItemDetails5}
         heading="LÒ VI SÓNG GIÁ CỰC SỐC | "
       />
       <br />
       <hr />
-      <ItemCard4 type={ItemDetails6} heading="SẢN PHẨM ƯU ĐÃI SỐC" />
-      <ItemCard1 type={ItemDetails7} />
+      {/* <ItemCard4 type={ItemDetails6} heading="SẢN PHẨM ƯU ĐÃI SỐC" /> */}
+      <ItemCard9 type={ItemDetails7} />
       <ItemCard6
         type={ItemDetails9}
         heading="DỊCH VỤ CỦA CHÚNG TÔI"
@@ -107,7 +109,7 @@ const Home = () => {
       <ItemCard7
         type={ItemDetails17}
         heading="GIẢM GIÁ LÊN ĐẾN 75% PHỤ KIỆN CAMERA | "
-        src="https://i.imgur.com/EGk9huk.png"
+        
       />
       <ItemCard8 type={ItemDetails18} heading="EXPLORE OUR RANGE OF PRODUCTS" />
       

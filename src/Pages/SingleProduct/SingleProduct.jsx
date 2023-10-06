@@ -5,9 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
-import ItemCard4 from "../Home/ItemCard4";
+import ItemCard5 from "../Home/ItemCard5";
 import {
-  ItemDetails6
+  ItemDetails8
 } from "../Home/CardDetails";
 
 
@@ -63,7 +63,7 @@ const SingleProduct = (props) => {
   const params = useParams();
   const toast = useToast();
 
-
+ 
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -74,7 +74,15 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-
+  // Chỉ lấy % giảm giá
+  const extractDiscountPercentage = (discount) => {
+    if (!discount) return null;
+  
+    const percentageMatch = discount.match(/\d+/);
+    return percentageMatch ? `${percentageMatch[0]}%` : null;
+  };
+  
+  const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -120,6 +128,9 @@ const SingleProduct = (props) => {
   // const handleDelete = async(id) => {
   //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
   // }
+
+  
+
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
@@ -173,7 +184,7 @@ const SingleProduct = (props) => {
           </Box>
 
           <Grid
-            h={["1300px", "1100px", "900px"]}
+            h={["1500px", "1100px", "900px"]}
             templateRows={[
               "repeat(8, 1fr)",
               "repeat(8, 1fr)",
@@ -187,16 +198,13 @@ const SingleProduct = (props) => {
           >
             <GridItem
               rowSpan={[1, 2, 7]}
-              colSpan={[5, 6, 5]}
-              // display="flex"
+              colSpan={[6, 6, 5]}
               m="0 0 0 18%"
               p=" 2% 8% "
               justifyContent="center"
               alignitem="center"
               style={{
                 border: "none",
-                // boxShadow:
-                //   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
             >
               <Image
@@ -260,7 +268,7 @@ const SingleProduct = (props) => {
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
-              rowSpan={7}
+              rowSpan={[9,7 ]}
               p={7}
               mt="5%"
               style={{
@@ -271,7 +279,7 @@ const SingleProduct = (props) => {
               <Heading size="md" marginBottom={5}>
                 {singleData.name}
               </Heading>
-              <Heading size="lg" marginBottom={5} color="blue.700">
+              <Heading size="lg" marginBottom={5} color="red">
                 {singleData.price}₫
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
@@ -286,11 +294,11 @@ const SingleProduct = (props) => {
 
               <Text
                 fontSize="sm"
-                color="green.600"
-                style={{ fontWeight: "bold" }}
+                color="#eb5757"
+                style={{ fontWeight: "bold"}}
                 marginBottom={3}
               >
-                Phần trăm thuế: {singleData.discount}
+                Giảm tới: {discountPercentage}
               </Text>
 
               <Text
@@ -388,8 +396,13 @@ const SingleProduct = (props) => {
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
-          <ItemCard4 type={ItemDetails6} heading="Các sản phẩm khác" />
-
+              <Box
+              m="5%"
+              >
+                <hr 
+                />
+               <ItemCard5 type={ItemDetails8}   />
+              </Box>
         </Box>
       )}
     </>
