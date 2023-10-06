@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/duantn/static/css/main.81148aab.css",
-    "main.js": "/duantn/static/js/main.d2e931b5.js",
+    "main.js": "/duantn/static/js/main.d96c5fca.js",
     "static/js/787.28e19238.chunk.js": "/duantn/static/js/787.28e19238.chunk.js",
     "static/media/bghaeder2.png": "/duantn/static/media/bghaeder2.e9ca1726417887debcaf.png",
     "static/media/logo.jpg": "/duantn/static/media/logo.199a0876db983d662383.jpg",
     "index.html": "/duantn/index.html",
     "main.81148aab.css.map": "/duantn/static/css/main.81148aab.css.map",
-    "main.d2e931b5.js.map": "/duantn/static/js/main.d2e931b5.js.map",
+    "main.d96c5fca.js.map": "/duantn/static/js/main.d96c5fca.js.map",
     "787.28e19238.chunk.js.map": "/duantn/static/js/787.28e19238.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.81148aab.css",
-    "static/js/main.d2e931b5.js"
+    "static/js/main.d96c5fca.js"
   ]
 }
