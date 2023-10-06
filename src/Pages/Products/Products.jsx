@@ -27,15 +27,15 @@ const Products = ({ typeOfProduct }) => {
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
 
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
+    mobilesandtablets: "Điện thoại và máy tính bảng",
+    televisions: "TV",
+    headphones: "Tai nghe",
+    homeappliances: "Đồ dùng gia đình",
+    computers: "Máy tính",
+    cameras: "Máy ảnh",
+    kitchen: "Đồ dùng bếp",
+    personalcare: "Đồ dùng cá nhân",
+    accessories: "Phụ kiện",
     whishlist:"whishlist"
   };
 
