@@ -63,7 +63,7 @@ const SingleProduct = (props) => {
   const params = useParams();
   const toast = useToast();
 
-
+ 
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -74,7 +74,15 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-
+  // Chỉ lấy % giảm giá
+  const extractDiscountPercentage = (discount) => {
+    if (!discount) return null;
+  
+    const percentageMatch = discount.match(/\d+/);
+    return percentageMatch ? `${percentageMatch[0]}%` : null;
+  };
+  
+  const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -120,6 +128,9 @@ const SingleProduct = (props) => {
   // const handleDelete = async(id) => {
   //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
   // }
+
+  
+
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
@@ -287,7 +298,7 @@ const SingleProduct = (props) => {
                 style={{ fontWeight: "bold"}}
                 marginBottom={3}
               >
-                Giảm tới: {singleData.discount}
+                Giảm tới: {discountPercentage}
               </Text>
 
               <Text

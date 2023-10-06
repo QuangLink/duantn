@@ -2,6 +2,7 @@ import {useDisclosure, Accordion, AccordionButton, AccordionIcon, AccordionItem,
 import React, { useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+
 const Checkout = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const address=useRef({})
