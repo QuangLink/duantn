@@ -35,8 +35,8 @@ return (
       <Text fontSize='3xl'>Payment Options</Text>
       <br/>
       <Flex flexDirection="column" gap="1rem" alignItems="center">
-      <Button colorScheme='teal' variant='outline' width="40%" onClick={handleclick}>Cash on delivery</Button>
-      <Button colorScheme='teal' variant='outline' width="40%" onClick={onOpen}>Pay by card</Button>
+      <Button colorScheme='teal' variant='outline' width="40%" onClick={handleclick}>Giao hàng thu tiền</Button>
+      <Button colorScheme='teal' variant='outline' width="40%" onClick={onOpen}>Thanh toán bằng thẻ</Button>
       <br/>
       </Flex>
       
