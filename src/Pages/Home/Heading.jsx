@@ -6,8 +6,8 @@ const Heading = ({ heading }) => {
   return (
     <Flex gap="2" >
       <Center width="100%" backgroundColor="black" h="60px">
-        <Text fontSize="2xl" display="flex" justifyContent="center" textAlign="center" width=""  textColor="white"> {heading} </Text>
-        <Link to="/" >
+        <Text fontSize="2xl" display="flex" justifyContent="center" textAlign="center" width=""  textColor="#fff"> {heading} </Text>
+        <Link to="/computers" >
           <Text 
            
             style={
@@ -15,22 +15,23 @@ const Heading = ({ heading }) => {
               width:"100%",
               fontSize: "20px",
               fontWeight: "500",
-              color: "#eed92d",
+              color: "#3ae6f2",
               textAlign: "right",
               marginRight:"25px",
+              fontFamily:"inherit",
               
             }
             
           }
           _hover={{
             letterSpacing: 0.5,
-            color: "blue",
-             textColor:"blue", }}
+            color: "#c31212",
+             textColor:"#c31212", }}
 
              
             
           >
-            VIEW ALL 
+            XEM TẤT CẢ
           </Text >
         </Link>
       </Center>

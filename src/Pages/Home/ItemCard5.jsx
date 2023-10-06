@@ -11,13 +11,13 @@ import uuid from "react-uuid";
 
 const ItemCard5 = ({ type, heading }) => {
   return (
-    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center">
-      <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%" />
-      <Box mt="1" >
+    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" >
+      <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/>
+      <Box mt="1"  >
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
-          autoplay={{ delay: 2000 }}
+          autoplay={{ delay: 3000 }}
           breakpoints={{
             0: {
               slidesPerView: 1,
@@ -42,15 +42,15 @@ const ItemCard5 = ({ type, heading }) => {
           }}
         >
           {type.map((i) => (
-            <Box key={uuid()}>
-              <SwiperSlide>
+            <Box key={uuid()}  >
+              <SwiperSlide >
                 <Link to={i.linked}>
                   <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                     <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                   </Square>
-                  <Box p="2" mt="4">
+                  <Box p="2" mt="4" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto" >
                     <Text
-                      color="#275293"
+                      color="#424245"
                       noOfLines={2}
                       textAlign="left"
                       fontSize="15px"
@@ -58,49 +58,54 @@ const ItemCard5 = ({ type, heading }) => {
                     >
                       {i.name}
                     </Text>
-                    <Box mt="2.5">
+                    <Box mt="2.5" m="20px 0 30px 0">
                       <Flex>
                         <Square>
-                          <Text color="gray.600" fontSize="14px">
-                            Deal Price:{" "}
+                          <Text color="gray.600" fontSize="15px">
+                            Giá mới:{" "}
                           </Text>
                         </Square>
                         <Square>
-                          <Text fontWeight="600" fontSize="18px" ml="1">
-                            ₹{i.price}
+                          <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
+                            {i.price}  <sup>đ</sup>
                           </Text>
                         </Square>
                       </Flex>
                       <Flex>
                         <Text color="gray.600" fontSize="14px">
-                          MRP:{" "}
+                          Giá gốc:{" "}
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                          ₹{i.mrp}
+                           {i.mrp} <sup>đ</sup>
                         </Text>
                       </Flex>
-                      <Flex>
+                      {/* <Flex>
                         <Text color="gray.600" fontSize="14px">
-                          You Save:{" "}
+                          Giảm giá:{" "} 
                         </Text>
                         {"  "}
                         <Text color="gray.600" fontSize="14px" ml="1">
-                          {i.discount}
+                          {i.discount} <sup>đ</sup>
                         </Text>
-                      </Flex>
+                      </Flex> */}
+                     
+                     
+                     
                       <Box
-                        borderRadius="xl"
-                        border="1px"
-                        borderColor="green.900"
+                      padding="3px"
+                        borderRadius="5px"
+                       
                         w="40%"
-                        color="green.500"
-                        bg="green.50"
+                        color="#f72424"
+                        bg="#fff0e9"
                         mt="2"
                         textAlign="center"
+                        
                       >
                         <Text fontSize="10px" fontWeight="500">
-                          OFFERS AVAILABLE
+                          GIẢM GIÁ SỐC
+                          
                         </Text>
                       </Box>
                     </Box>

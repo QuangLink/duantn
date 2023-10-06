@@ -9,7 +9,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { BsSuitHeart } from "react-icons/bs";
+import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -31,13 +31,14 @@ const postSingleDataWish = async (data) => {
     );
   }
 };
+// const singleData = useSelector((store) => store.singleProduct.data);
 
 
 
 
 const Product = (props) => {
   const { data, typeOfProduct } = props;
-  const { id, name, img, price, mrp } = data;
+  const { id, name, img, price, mrp,discount } = data;
   console.log("this is data from the outside hanldewish",data);
 
   var navigate = useNavigate();
@@ -77,61 +78,85 @@ const Product = (props) => {
 
   return (
     <>
+    
       <Link to={`/${typeOfProduct}/${id}`}>
         <Box>
-          <Image src={img} alt={name} p="5" h="200" _hover={{ p: "0" }} />
+          {/* <Box>
+            <Text 
+            w={20}
+             borderRadius="full"
+             px="5"
+             border="1px solid green"
+             color="green"
+             fontSize="1rem"
+             marginBottom="10"
+            >
+              {id}%
+            </Text>
+          </Box> */}
+          <Image src={img} alt={name}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
           <Box
-            h="10"
+            h="150"
             w="100%"
-            color="blue.700"
+            textAlign="center"
+            fontFamily=" sans-serif"
+            color="black.700"
             lineHeight="120%"
             marginBottom="3"
             textOverflow="ellipsis"
             overflow="hidden"
-            _hover={{ color: "red" }}
+            _hover={{ color: "blue" }}
           >
             {name}
           </Box>
-          <Flex
-            w="75%"
-            justifyContent="space-between"
-            alignItems="center"
+          <Box
+            w="100%"
+            // justifyContent="space-between"
+            // alignItems="center"
             marginBottom="2"
+            marginLeft={5}
           >
-            <Heading as="h3" size="xs" color="blue.700">
-              ₹{price}
+            <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+              Giá mới: {price}₫
             </Heading>
             <Text
-              fontSize="sm"
+            mt={2}
+              size="1.1rem"
+              // fontSize="1.2rem"
               fontWeight="bold"
               color="blackAlpha.600"
               textDecoration="line-through"
             >
-              ₹{mrp}
+             Giá gốc : {mrp}₫
             </Text>
-          </Flex>
+          </Box>
+          
           <Badge
-            borderRadius="full"
+            borderRadius="5px"
+            width="auto"
             px="2"
-            border="1px solid green"
-            color="green"
+            
+            // border="1px solid green"
+            backgroundColor="#fff0e9"
+            color="#eb5757"
             fontSize="xs"
             marginBottom="10"
+            marginLeft={5}
           >
-            OFFERS AVAILABLE
+            Giá ưu đãi
           </Badge>
         </Box >
       </Link>
       <Button
-        w="125%"
-        marginLeft="-6"
+        w="100%"
+        marginLeft="0"
         borderRadius="0"
         borderTop="1px solid rgb(202, 201, 201)"
         color="gray"
         bg="white"
         onClick={() => handleWish(data)}
       >
-        <BsSuitHeart /> Wishlist
+        <BsSuitHeart /> Yêu Thích
       </Button>
     </>
   );

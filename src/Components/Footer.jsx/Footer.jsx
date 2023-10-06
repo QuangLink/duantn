@@ -9,9 +9,9 @@ import {
 } from "./FooterDetail";
 const Footer = () => {
   return (
-    <Box backgroundColor="#003380" color="white" justifyContent="center">
+    <Box bg="#656565" color="white" justifyContent="center">
       <Grid
-         templateColumns={{
+        templateColumns={{
           base: "repeat(1,1fr)",
           md: "repeat(2,1fr)",
           lg: "repeat(3,1fr)",
@@ -31,8 +31,8 @@ const Footer = () => {
         <FooterCard1 type={Policies} heading="POLICIES" />
         <br />
       </Grid>
-      <FooterCard2 />
-      <FooterCard4 />
+      {/* <FooterCard2 /> */}
+      {/* <FooterCard4 /> */}
     </Box>
   );
 };

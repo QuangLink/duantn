@@ -1,12 +1,18 @@
 export const ItemDetails1 = [
   {
-    img: "https://www.reliancedigital.in/medias/Year-End-Sale-5000-Instant-Discount-Carousel-Banner-05-12-2022.jpg?context=bWFzdGVyfGltYWdlc3wxNDcwODh8aW1hZ2UvanBlZ3xpbWFnZXMvaDkzL2hiNS85OTI4MTY1NTg5MDIyLmpwZ3w4NDk3ZDFhZTM1YzUxYTg3MDFiMWZkZjhmMGE0ZWI2ZWZmYjU0MWNmOGJkMTAzZTYwMTdlNjI5MGNjYzZiOTIx",
+    img1: "https://i.pinimg.com/564x/e4/ac/1c/e4ac1c62cd247e2df4d9d554fca44021.jpg",
+    img2: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/09/banner/IP15-720-220-720x220-5.png",
+
     caption: "Slide 1",
   },
   {
-    img: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
+    
+    img1: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/Mua-kem-720-220-720x220-1.png",
+    img2: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
+
     caption: "Slide 2",
   },
+  
 ];
 
 export const ItemDetails2 = [
@@ -55,7 +61,7 @@ export const ItemDetails3 = [
     caption: "Slide 1",
     mrp: "85,405.00",
     price: "89,900.00",
-    discount: "5%(₹4,495)",
+    discount: "(5%) 4,495",
     linked: "personalcare",
   },
   {
@@ -401,26 +407,26 @@ export const ItemDetails9 = [
   {
     img: "https://www.reliancedigital.in/medias/Insta-Delivery-Brand-Promise-Icon.png?context=bWFzdGVyfGltYWdlc3wxNTM3fGltYWdlL3BuZ3xpbWFnZXMvaGI2L2gwNS85NDQ3MTcwMzQyOTQyLnBuZ3w2Yzc1ZmY1ZjYwOWIyNWU0ZTgwMjFlYmRkMTU5ZTgzMGI4ZDNmZTE2NjVjYmRlMmUwMmRiODI2OTExNWM5ZTdk",
     caption: "Slide 1",
-    title: "INSTA DELIVERY",
-    desc: "LESS THAN 3 HRS.",
+    title: "Ship hàng toàn quốc",
+    desc: "Freeship nội thành TP.HCM",
   },
   {
     img: "https://www.reliancedigital.in/medias/Best-Finance-Options-2.png?context=bWFzdGVyfGltYWdlc3wxMjM4fGltYWdlL3BuZ3xpbWFnZXMvaDJmL2gxOS85NDQ3MTcwNDA4NDc4LnBuZ3xlMDBiNjY4YWI5YzMzYjZkZDhlZTMyMDhjYjE2YzI2OTY2NWJhYjk2M2VkNzdjZDg3NTNlMGEyMTA1ZjFlODZh",
     caption: "Slide 2",
-    title: "BEST FINANCE OPTIONS",
-    desc: "WIDE RANGE",
+    title: "Dùng thử sản phẩm 30 ngày",
+    desc: "Bảo hành 365 ngày",
   },
   {
     img: "https://www.reliancedigital.in/medias/service-img.png?context=bWFzdGVyfGltYWdlc3w5MTB8aW1hZ2UvcG5nfGltYWdlcy9oMDYvaGEzLzkwOTA3OTc5OTQwMTQucG5nfGJjZmJhNzM1ODdkYTQ5ODI3YzNiMzQ1ZTdlM2JjNjUwMTBjM2E3YWFjNmUxZjdmMmEyOGRjZDMxOGI4ZWE0MWY",
     caption: "Slide 3",
-    title: "SERVICE GUARANTEE",
-    desc: "HASSLE FREE",
+    title: "Hỗ trợ trả góp 0 đồng",
+    desc: "Linh hoạt nhiều hình thức thanh toán",
   },
   {
     img: "https://www.reliancedigital.in/medias/unmatched-network-img.png?context=bWFzdGVyfGltYWdlc3w3NDV8aW1hZ2UvcG5nfGltYWdlcy9oODIvaDJhLzkwOTA3OTgwNTk1NTAucG5nfDFmMThjYzdiYTNiOTgxYjA5YzdlZTFiMmQyODI5MGY2NTM4ZTcxOWZkZTA1ZjAzY2Q1ZTk5YjQ1NTMxMWViYzU",
     caption: "Slide 4",
-    title: "UNMATCHED NETWORK",
-    desc: "700 CITIES, 2000 STORES",
+    title: "Thu cũ - Đổi mới",
+    desc: "Hỗ trợ thu lại máy cũ, bù tiền lấy mới",
   },
 ];
 
@@ -976,7 +982,7 @@ export const ItemDetails16 = [
 
 export const ItemDetails17 = [
   {
-    name: "Nikon D3500 DSLR Camera with AF-P 18-55 mm + AF-P 70-300 mm VR Kit",
+    name: "Nikon D3500 DSLR Camera with AF-P 18-55 mm + AF-P 70-300 mm VRn GFWKKWGFNNW Kit",
     img: "https://www.reliancedigital.in/medias/Nikon-D3500-DSLR-Camera-491431009-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w4MjUzfGltYWdlL2pwZWd8aW1hZ2VzL2gxNS9oMDEvOTA3MDM1NjI2NzAzOC5qcGd8NGFmZDk5NDM1MjA0NDFkY2Q0M2FmYzY0ZTlmYmUxZTU1MjJiZWE4ZDNkNTI5Mzg4M2NkOWNjZjdhY2MwZDFkZA",
     price: "48,990.00",
     mrp: "53,950.00",
@@ -985,7 +991,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon COOLPIX P1000 Prosumer Camera 16 MP, Black",
+    name: "Nikon COOLPIX P1000 Prosumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-P1000-Prosumer-Camera-491430998-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNTE5OHxpbWFnZS9qcGVnfGltYWdlcy9oYmMvaDVkLzkwNTM4NDQ1MzczNzQuanBnfGE0ZThhNWI3YzE1ZGEzNzcwNjlkZWQzNjYxMmZhMjEwMjhlYjkzYWU0Njg4YjhmYzU4NGI3N2ZkODRiNGQwMjA",
     price: "64,990.00",
     mrp: "69,950.00",
@@ -994,7 +1000,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon Z 50 mm Prime Lens",
+    name: "Nikon Z 50 mm Prime LensProsumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-Z7-Camera-Lenses-491431045-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyOTg0M3xpbWFnZS9qcGVnfGltYWdlcy9oY2YvaGEyLzkwNjk4NjgyODU5ODIuanBnfGM0ZGQ3OGZmZTE4NDdjODI0NTYyN2Q3MzNmMTc2ZDI3MGYzMDllYzIwZGUwMjA2YzFjNjU5ODY1OWY3NDRiMGU",
     price: "47,990.00",
     mrp: "50,950.00",
@@ -1003,7 +1009,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon Z 35 mm Prime Lens",
+    name: "Nikon Z 35 mm Prime Lens Prosumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-Z7-Camera-Lenses-491431044-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyOTc1OHxpbWFnZS9qcGVnfGltYWdlcy9oNjMvaDc2LzkwNjk4NzAyNTIwNjIuanBnfDNjOGI2YzNiM2JkMTIyNmU4MDIxZTc2MzAyNzQ1NmFjYWFmMjhkMTlkMmFiNDQ1MjBiZGJlNzhhN2I4OWZjYTA",
     price: "62,990.00",
     mrp: "66,950.00",
@@ -1030,7 +1036,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon JAA830DA 70-200 mm Camera Lens",
+    name: "Nikon JAA830DA 70-200 mm Camera Lens BEATYFULL Prosumer Camera 16 MP, Black",
     img: "https://www.reliancedigital.in/medias/Nikon-LENS-70-200mm-f2.8E-FL-ED-VR-491336345-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyNDEwN3xpbWFnZS9qcGVnfGltYWdlcy9oYzUvaDAwLzkwNjA1MzE5OTQ2NTQuanBnfGZkMmYzNTM0N2Q2NmNmZGIzNjI3NDliZmE3YmU2MDMzZGI1MTc4Y2MxYjQ1NjFkNjBlODY3YmUzM2YwYmMyNzQ",
     price: "1,62,990.00",
     mrp: "1,69,950.00",
