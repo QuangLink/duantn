@@ -13,7 +13,7 @@ import {
 
 
 
-
+const exchangeRate = 300000
 const getSingleData = async (type, id) => {
   let response = await axios.get(
     `https://rus-digital-api.vercel.app/${type}/${id}`
@@ -280,12 +280,12 @@ const SingleProduct = (props) => {
                 {singleData.name}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-                {singleData.price}₫
+              {singleData.price ? `${(parseFloat(singleData.price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
                 Giá gốc:{" "}
                 <span style={{ textDecoration: "line-through" }}>
-                  {singleData.mrp}
+                {singleData.mrp ? `${(parseFloat(singleData.mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
                 </span>{" "}₫
                 <span style={{ fontSize: "12px", padding: "20px" }}>
                   (Bao gồm tất cả các loại thuế)
