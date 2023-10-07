@@ -9,11 +9,11 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { BsSuitHeart,BsFillBookmarkStarFill } from "react-icons/bs";
+import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
+const exchangeRate = 300000
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
@@ -31,13 +31,14 @@ const postSingleDataWish = async (data) => {
     );
   }
 };
+// const singleData = useSelector((store) => store.singleProduct.data);
 
 
 
 
 const Product = (props) => {
   const { data, typeOfProduct } = props;
-  const { id, name, img, price, mrp } = data;
+  const { id, name, img, price, mrp,discount } = data;
   console.log("this is data from the outside hanldewish",data);
 
   var navigate = useNavigate();
@@ -80,17 +81,20 @@ const Product = (props) => {
     
       <Link to={`/${typeOfProduct}/${id}`}>
         <Box>
-          <Box>
+          {/* <Box>
             <Text 
-              fontFamily="revert"
-              fontWeight="medium"
-              fontSize="4xs"
+            w={20}
+             borderRadius="full"
+             px="5"
+             border="1px solid green"
+             color="green"
+             fontSize="1rem"
+             marginBottom="10"
             >
-              Đánh giá
-              <BsFillBookmarkStarFill/>
+              {id}%
             </Text>
-          </Box>
-          <Image src={img} alt={name}  justifyItems="center" pl="2%" h="200" _hover={{ p: "" }} />
+          </Box> */}
+          <Image src={img} alt={name}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
           <Box
             h="150"
             w="100%"
@@ -105,34 +109,41 @@ const Product = (props) => {
           >
             {name}
           </Box>
-          <Flex
+          <Box
             w="100%"
-            justifyContent="space-between"
-            alignItems="center"
+            // justifyContent="space-between"
+            // alignItems="center"
             marginBottom="2"
+            marginLeft={5}
           >
-            <Heading as="h3" size="xs" color="blue.700">
-              {price}₫
+            <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+              Giá mới: {price ? `${(parseFloat(price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
             </Heading>
             <Text
-              fontSize="sm"
+            mt={2}
+              size="1.1rem"
+              // fontSize="1.2rem"
               fontWeight="bold"
               color="blackAlpha.600"
               textDecoration="line-through"
             >
-              {mrp}₫
+             Giá gốc : {mrp ? `${(parseFloat(mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
             </Text>
-          </Flex>
+          </Box>
           
           <Badge
-            borderRadius="full"
+            borderRadius="5px"
+            width="auto"
             px="2"
-            border="1px solid green"
-            color="red"
+            
+            // border="1px solid green"
+            backgroundColor="#fff0e9"
+            color="#eb5757"
             fontSize="xs"
             marginBottom="10"
+            marginLeft={5}
           >
-            ƯU ĐÃI
+            Giá ưu đãi
           </Badge>
         </Box >
       </Link>

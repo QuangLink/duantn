@@ -27,15 +27,15 @@ const Products = ({ typeOfProduct }) => {
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
 
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
+    mobilesandtablets: "Điện thoại và máy tính bảng",
+    televisions: "TV",
+    headphones: "Tai nghe",
+    homeappliances: "Đồ dùng gia đình",
+    computers: "Máy tính",
+    cameras: "Máy ảnh",
+    kitchen: "Đồ dùng bếp",
+    personalcare: "Đồ dùng cá nhân",
+    accessories: "Phụ kiện",
     whishlist:"whishlist"
   };
 
@@ -85,39 +85,74 @@ const Products = ({ typeOfProduct }) => {
       
        <Flex>
           <Button
-          padding="20px 50px " 
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
           margin="1%"
           >
             Bộ lọc
           </Button>
           <Button
-          padding="20px 50px " 
+          border="solid 1px"
+          height ="50%"
+          fontSize="0.7rem"
+          backgroundColor="#FFFFFF"
           margin="1%"
           >
             Hãng 
           </Button>
           <Button
-          padding="20px 50px " 
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
           margin="1%"
           >
             Giá
           </Button>
           <Button
-          padding="20px 50px " 
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
           margin="1%"
           >
-            Mơi nhất
+            Mới nhất
           </Button>
           <Button
-          padding="20px 50px " 
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
           margin="1%"
           >
             Yêu thích
           </Button>
 
        </Flex>
-       <Flex>
-          Sắp xếp theo
+       <Flex
+        width= "13%"
+       >
+          <Text
+          // border="solid 1px"
+          fontSize="1rem"
+          backgroundColor="#FFFFFF"
+          >
+            Sắp xếp
+          </Text>
+           <Box
+           fontSize="1rem"
+           ml="3%"
+           height ="100%"
+           backgroundColor="#FFFFFF">
+           <div>
+                <select >
+                    <option value="Từ thấp đến cao">Từ thấp đến cao</option>
+                    <option value="Từ cao đến thâp">Từ cao đến thâp</option>
+                </select>
+          </div>
+           </Box>
        </Flex>
       </Box>  
       {loading ? (
@@ -152,7 +187,7 @@ const Products = ({ typeOfProduct }) => {
             return (
               <GridItem
                 key={elem.name + i}
-                w="90%"
+                w="97%"
                 h="100 %"
                 bg="white.500"
                 boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
