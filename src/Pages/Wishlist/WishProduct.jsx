@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-
+const exchangeRate = 300000
 const WishProduct = (props) => {
   const toast = useToast();
   const { data,handleDelete } = props;
@@ -29,8 +29,8 @@ const WishProduct = (props) => {
 
         if (flag) {
           toast({
-            title: "Product Already Present.",
-            description: `${name} already present in Cart`,
+            title: "Sản phẩm đang trong giỏ hàng",
+            description: `${name} hiện đã trong giỏ hàng`,
             status: "success",
             duration: 9000,
             isClosable: true,
@@ -48,8 +48,8 @@ const WishProduct = (props) => {
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
           toast({
-            title: "Product Added in Cart.",
-            description: `${name} successfuly added in Cart`,
+            title: "Đơn hàng đã được thêm vào giỏ hàng",
+            description: `${name} thêm vào giỏ hàng thành công`,
             status: "success",
             duration: 9000,
             isClosable: true,
@@ -80,8 +80,8 @@ const WishProduct = (props) => {
         alignItems="center"
         marginBottom="2"
       >
-        <Heading as="h3" size="xs" color="blue.700">
-          ₹{price}
+        <Heading as="h3" size="xs" color="red">
+        {price ? `${(parseFloat(price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
         </Heading>
         <Text
           fontSize="sm"
@@ -89,8 +89,8 @@ const WishProduct = (props) => {
           color="blackAlpha.600"
           textDecoration="line-through"
         >
-          ₹{mrp}
-        </Text>
+        {mrp ? `${(parseFloat(mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
+      </Text>
       </Flex>
       <Badge
         borderRadius="full"
@@ -100,7 +100,7 @@ const WishProduct = (props) => {
         fontSize="xs"
         marginBottom="10"
       >
-        OFFERS AVAILABLE
+        Giảm giá còn khả dụng
       </Badge>
       <Flex>
         <Button
@@ -113,7 +113,7 @@ const WishProduct = (props) => {
           _hover={{ color: "red", fontWeight: "bold" }}
           onClick={()=>handleDelete(id,name)}
         >
-          Delete
+          Xóa
         </Button>
         <Button
           w="125%"
@@ -125,7 +125,7 @@ const WishProduct = (props) => {
           _hover={{ color: "red", fontWeight: "bold" }}
           onClick={handleAdd}
         >
-          Add TO CART
+          Thêm vào giỏ
         </Button>
       </Flex>
     </Box>
