@@ -7,6 +7,7 @@ import ItemCard6 from "./ItemCard6";
 import ItemCard7 from "./ItemCard7";
 import ItemCard8 from "./ItemCard8";
 import ItemCard9 from "./ItemCard9";
+import CateFeature from "./CateFeature";
 
 
 
@@ -29,6 +30,8 @@ import {
   ItemDetails16,
   ItemDetails17,
   ItemDetails18,
+  CateFeatures,
+
 } from "./CardDetails";
 import { Box,
     
@@ -37,6 +40,9 @@ import { Box,
 const Home = () => {
   return (
     <Box>
+       <CateFeature type={CateFeatures}  />
+      <br />
+      <hr />
       <ItemCard1 type={ItemDetails1} />
       {/* <ItemCard1 type={ItemDetails2} /> */}
       <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT | " />
