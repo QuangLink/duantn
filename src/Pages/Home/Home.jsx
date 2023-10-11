@@ -8,6 +8,7 @@ import ItemCard7 from "./ItemCard7";
 import ItemCard8 from "./ItemCard8";
 import ItemCard9 from "./ItemCard9";
 import CateFeature from "./CateFeature";
+import BannerLeft from "./BannerLeft";
 
 
 
@@ -31,19 +32,26 @@ import {
   ItemDetails17,
   ItemDetails18,
   CateFeatures,
+  BannersLeft,
 
 } from "./CardDetails";
+
+
 import { Box,
     
  } from "@chakra-ui/react";
+import Banners from "./BannerLeft";
 
 const Home = () => {
   return (
     <Box>
-       <CateFeature type={CateFeatures}  />
+       
+      <ItemCard1 type={ItemDetails1} />
+      <br/>
+      <hr/>
+      <CateFeature type={CateFeatures}  />
       <br />
       <hr />
-      <ItemCard1 type={ItemDetails1} />
       {/* <ItemCard1 type={ItemDetails2} /> */}
       <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT | " />
       <br />
@@ -76,9 +84,13 @@ const Home = () => {
         src="https://i.imgur.com/FPm2ngR.png"
       />
       <hr />
+      <BannerLeft type={BannersLeft}  />
+      <br />
+      <hr />
+
       <ItemCard7
         type={ItemDetails11}
-        heading="HÃNG HÀNG TIVI NỔI BẬT | "
+        heading="MẶT HÀNG TIVI TỐT NHẤT HIỆN NAY | "
         src="https://i.imgur.com/fL1O6va.png"
       />
       <hr />
