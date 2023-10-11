@@ -78,7 +78,7 @@ const Slider = ({ type }) => {
                   </Flex>
                   <Flex>
                     <Text color="gray.600" fontSize="14px"  >
-                      Giá gốc:{" "} <sup>đ</sup>
+                      Giá gốc:{" "} 
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
