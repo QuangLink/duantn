@@ -1,7 +1,5 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square, Heading } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Box, Text, Image, Square, Heading } from "@chakra-ui/react";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
