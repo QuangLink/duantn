@@ -31,7 +31,7 @@ const Heading = ({ heading }) => {
              
             
           >
-            XEM TẤT CẢ
+            XEM TẤT CẢ 
           </Text >
         </Link>
       </Center>
