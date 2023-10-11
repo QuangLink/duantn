@@ -1,3 +1,103 @@
+export const CateFeatures = [
+  
+    {
+      "id": 1,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 2,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 3,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 4,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 5,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 6,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 7,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 8,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 9,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 10,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 11,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 12,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 13,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 14,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 15,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 16,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 17,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 18,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+   
+    
+  
+];
+
+
+
+
 export const ItemDetails1 = [
   {
     img1: "https://i.pinimg.com/564x/e4/ac/1c/e4ac1c62cd247e2df4d9d554fca44021.jpg",
