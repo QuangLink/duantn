@@ -45,6 +45,8 @@ const Slider = ({ type }) => {
         <Box key={uuid()} >
           <SwiperSlide>
             <Link to={i.linked}>
+              
+              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
               <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                 <Image
                   src={`${i.img}`}
@@ -52,7 +54,6 @@ const Slider = ({ type }) => {
                   boxSize={{ base: "160px" }}
                 />
               </Square>
-              <Box p="2" mt="4"boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
                 <Text
                   color="#275293"
                   noOfLines={2}
