@@ -8,6 +8,7 @@ import "swiper/css/autoplay";
 import Heading from "./Heading";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
+import './stylehome.css';
 
 const ItemCard5 = ({ type, heading }) => {
   return (
@@ -43,12 +44,15 @@ const ItemCard5 = ({ type, heading }) => {
         >
           {type.map((i) => (
             <Box key={uuid()}  >
-              <SwiperSlide >
+              <SwiperSlide  >
                 <Link to={i.linked}>
-                  <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                  
+                  <Box className="list" p="2" mt="4"  borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
+                  <Box className="img">
+                  <Square m="auto" _hover={{ transform: "scale(1.1)"  }}>
                     <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                   </Square>
-                  <Box p="2" mt="4" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto" >
+                    
                     <Text
                       color="#424245"
                       noOfLines={2}
@@ -80,15 +84,7 @@ const ItemCard5 = ({ type, heading }) => {
                            {i.mrp} <sup>đ</sup>
                         </Text>
                       </Flex>
-                      {/* <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giảm giá:{" "} 
-                        </Text>
-                        {"  "}
-                        <Text color="gray.600" fontSize="14px" ml="1">
-                          {i.discount} <sup>đ</sup>
-                        </Text>
-                      </Flex> */}
+                     
                      
                      
                      
@@ -109,6 +105,7 @@ const ItemCard5 = ({ type, heading }) => {
                         </Text>
                       </Box>
                     </Box>
+                  </Box>
                   </Box>
                 </Link>
               </SwiperSlide>
