@@ -53,20 +53,20 @@ const Home = () => {
       <br />
       <hr />
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT | " />
+      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT  " />
       <br />
       <hr />
       <ItemCard2
         type={ItemDetails3}
         linked={"/personalcare"}
-        heading="ĐỒNG HỒ THÔNG MINH APPLE | "
+        heading="ĐỒNG HỒ THÔNG MINH APPLE  "
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />
       {/* <ItemCard4 type={ItemDetails4} heading="SẢN PHẨM CỦA CHÚNG TÔI" /> */}
       <ItemCard5
         type={ItemDetails5}
-        heading="LÒ VI SÓNG GIÁ CỰC SỐC | "
+        heading="LÒ VI SÓNG GIÁ CỰC SỐC  "
       />
       <br />
       <hr />
@@ -80,7 +80,7 @@ const Home = () => {
       <hr />
       <ItemCard2
         type={ItemDetails10}
-        heading="GIẢM GIÁ LÊN ĐẾN 80% DỤNG CỤ CẠO RÂU | "
+        heading="GIẢM GIÁ LÊN ĐẾN 80% DỤNG CỤ CẠO RÂU "
         src="https://i.imgur.com/FPm2ngR.png"
       />
       <hr />
@@ -90,37 +90,37 @@ const Home = () => {
 
       <ItemCard7
         type={ItemDetails11}
-        heading="MẶT HÀNG TIVI TỐT NHẤT HIỆN NAY | "
+        heading="MẶT HÀNG TIVI TỐT NHẤT HIỆN NAY  "
         src="https://i.imgur.com/fL1O6va.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails12}
-        heading="ĐỒNG HỒ THÔNG MINH | "
+        heading="ĐỒNG HỒ THÔNG MINH  "
         src="https://i.imgur.com/OGeXueA.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails13}
-        heading="ĐIỀU HÒA / LÀM MÁT | "
+        heading="ĐIỀU HÒA / LÀM MÁT  "
         src="https://i.imgur.com/ntyAjRL.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails14}
-        heading="PHỤ KIỆN ĐIỆN TỬ | "
+        heading="PHỤ KIỆN ĐIỆN TỬ  "
         src="https://i.imgur.com/tpj1BEM.png"
       />
       <hr />
       <ItemCard7
         type={ItemDetails15}
-        heading=" SẢN PHẨM APPLE NỔI BẬT | "
+        heading=" SẢN PHẨM APPLE NỔI BẬT  "
         src="https://i.imgur.com/tkLHMZ8.png"
       />
       <hr />
       <ItemCard2
         type={ItemDetails16}
-        heading="PHỤ KIỆN ÂM THANH GIẢM GIÁ | "
+        heading="PHỤ KIỆN ÂM THANH GIẢM GIÁ  "
         src="https://i.imgur.com/7J25A1o.png"
       />
       <hr />
