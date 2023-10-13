@@ -388,6 +388,7 @@ const SingleProduct = (props) => {
               <Box
               m="5%"
               >
+                <br />
                 <hr 
                 />
                <ItemCard5 type={ItemDetails8}   />

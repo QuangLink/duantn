@@ -18,18 +18,13 @@ const Heading = ({ heading }) => {
               color: "#3ae6f2",
               textAlign: "right",
               marginRight:"25px",
-              fontFamily:"inherit",
-              
-            }
-            
+              fontFamily:"inherit",     
+            }   
           }
           _hover={{
             letterSpacing: 0.5,
             color: "#c31212",
-             textColor:"#c31212", }}
-
-             
-            
+             textColor:"#c31212", }} 
           >
             XEM TẤT CẢ
           </Text >
