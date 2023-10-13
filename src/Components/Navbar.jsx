@@ -8,6 +8,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+
   Grid,
   Heading,
   Image,
@@ -24,6 +25,9 @@ import {
   useToast,
   Alert,
 } from "@chakra-ui/react";
+
+import { Card, MenuHandler } from "@material-tailwind/react";
+
 import React from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
@@ -46,6 +50,7 @@ function Navbar() {
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
   const { name } = useSelector((store) => store.AuthManager);
@@ -67,18 +72,22 @@ function Navbar() {
   if (isLargerThan1100) {
     return (
       <Box>
+
         <Flex
           w="100%"
+          h='90px'
           justifyContent="space-around"
           alignItems={"center"}
           m="auto"
-          bgImage={require('./Images/bghaeder2.png')}
+          backgroundColor='#4a90e2'
+          // bgImage={require('./Images/bghaeder2.png')}
           p="10px"
-          px="3%"
+          px="13%"
           gap="30px"
         >
           <Link to="/">
-            <Box>
+            <Box
+            >
               <Image src={require('./Images/logo.jpg')} alt="logo" w="150px" h="100px" />
             </Box>
           </Link>
@@ -98,17 +107,6 @@ function Navbar() {
               placeholder="Search"
             />
             <BiSearch fontSize={"42px"} />
-          </Flex>
-          <Flex cursor={"pointer"}>
-            <ImLocation2 color="white" fontSize="20px" />
-            <Heading
-              cursor={"pointer"}
-              fontSize={"17px"}
-              color="white"
-              _hover={{ textDecoration: "underlie" }}
-            >
-              73/14 Tân Sơn Nhì, Tân Sơn Nhì, Tân Bình, TP HCM
-            </Heading>
           </Flex>
           <Link to="/cart">
             <Flex cursor={"pointer"}>
@@ -163,13 +161,298 @@ function Navbar() {
 
         <Flex
           w="100%"
+          h="50px"
           textAlign={"center"}
           justifyContent="space-between"
           alignItems={"center"}
           m="auto"
-          bg="#636363"
-          px="20%"
+          bg="#4a90e2"
+          px="13%"
         >
+
+
+          <Menu>
+            <MenuButton
+
+              px={5}
+              py={2}
+
+              color="white"
+              transition="all 0.2s"
+              _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
+              _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
+            >
+              Phụ kiện <ChevronDownIcon />
+            </MenuButton>
+
+            <MenuList bg="#FFFFFF">
+              <Link to="headphones">
+                <Grid
+                  p="15px"
+                  gridTemplateColumns={"repeat(6,1fr)"}
+                  gap="20px"
+                  justifyContent="space-around"
+                  alignContent={"center"}
+                  textAlign="center"
+                  color="#55555"
+                >
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+                      }}
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      LapTop
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Sạc dự phòng
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Cáp, sạc
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Bàn phím , bút tablet
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Miếng dán
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Túi đựng AriPods
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Phụ kiện laptop
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Chuột, bàn phím
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thiết bị mạng
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị âm thanh
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Tai nghe
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Loa
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Micro
+                    </Text>
+
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
+                </Grid>
+              </Link>
+            </MenuList>
+          </Menu>
           <Menu >
             <Link to="accessories" >
               <MenuButton
@@ -183,6 +466,7 @@ function Navbar() {
               >
                 Điện Thoại
               </MenuButton>
+
             </Link>
           </Menu>
           <Menu>
@@ -218,8 +502,9 @@ function Navbar() {
           <Menu>
             <MenuButton
 
-              px={4}
+              px={5}
               py={2}
+
               color="white"
               transition="all 0.2s"
               _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
@@ -231,7 +516,7 @@ function Navbar() {
               <Link to="headphones">
                 <Grid
                   p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
+                  gridTemplateColumns={"repeat(7,1fr)"}
                   gap="20px"
                   justifyContent="space-around"
                   alignContent={"center"}
@@ -412,11 +697,92 @@ function Navbar() {
                       USB
                     </Text>
                   </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                      textDecoration="underline"
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
                 </Grid>
               </Link>
             </MenuList>
           </Menu>
-
           <Menu>
             <Link to="accessories">
               <MenuButton
@@ -430,7 +796,7 @@ function Navbar() {
                 Smartwatch
               </MenuButton>
             </Link>
-          </Menu>
+          </Menu >
 
           <Menu>
             <Link to="mobilesandtablets">
@@ -460,8 +826,8 @@ function Navbar() {
               </MenuButton>
             </Link>
           </Menu>
-        </Flex>
-      </Box>
+        </Flex >
+      </Box >
     );
   } else if (isLargerThan750px) {
     return (
