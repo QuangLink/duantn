@@ -1,65 +1,55 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, InputGroup, InputRightElement, Link, Stack, Text, useColorModeValue, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from 'axios';  // Import Axios
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");  // Corrected typo in function name
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [mobile, setMobile] = useState("");
   const toast = useToast();
   const Navigate = useNavigate();
+
   const HandleSubmit = () => {
-     if(email.includes("@")&&email.includes(".com")){
+    if (!username || !mobile || !email || !password) {
+      toast({
+        title: "Hãy điền đầy đủ thông tin",
+        description: "Hãy kiểm tra lại",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+      return;  // Stop execution if any field is empty
+    }
+  
+    if (email.includes("@") && email.includes(".com")) {
       const payload = {
-        name,
-        phone,
+        username,
+        mobile,
         email,
         password,
       };
-      fetch("https://cheerful-lime-firefly.cyclic.app/users/register", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
+  
+      // Sử dụng Axios để gửi yêu cầu POST
+      axios.post("http://localhost:9000/users/register", payload)
         .then((res) => {
-          console.log(res);
-          if (res.message === "Email already register") {
+          console.log(res.data);
+          if (res.data.message === "Username already exists.") {
             toast({
-              title: "Account already register",
-              description: "Please Login ",
-              status: "success",
+              title: "Username đã tồn tại",
+              description: "Vui lòng chọn một tên người dùng khác",
+              status: "error",
               duration: 2000,
               isClosable: true,
             });
-            setTimeout(() => {
-              Navigate("/login");
-            }, 2200);
           } else {
             toast({
-              title: "Account has been created",
-              description: "Welcome to RUS Digital",
+              title: "Tạo tài khoản thành công",
+              description: "Chào mừng đến với JaguarStore",
               status: "success",
               duration: 2000,
               isClosable: true,
@@ -72,23 +62,25 @@ function Signup() {
         .catch((err) => {
           console.log("err :>> ", err);
           toast({
-            title: "Signup  Failed",
-            description: "Please Enter All Data",
+            title: "Username đã tồn tại",
+            description: "Vui lòng đăng nhập",
             status: "error",
             duration: 2000,
             isClosable: true,
           });
         });
-     }else{
+    } else {
       toast({
-        title: "Invalid Email",
-        description: "Please Type correct email format",
+        title: "Email không hợp lệ",
+        description: "Vui lòng nhập đúng định dạng email",
         status: "error",
         duration: 1000,
         isClosable: true,
       });
-     }
+    }
   };
+  
+
   return (
     <>
       <Flex
@@ -118,8 +110,8 @@ function Signup() {
                 <Input
                   type="text"
                   placeholder="Enter Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </FormControl>
               <FormControl id="tel" isRequired>
@@ -127,8 +119,8 @@ function Signup() {
                 <Input
                   type="tel"
                   placeholder="Enter Your Phone Number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
                 />
               </FormControl>
               <FormControl id="email" isRequired>

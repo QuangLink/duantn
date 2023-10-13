@@ -1005,7 +1005,6 @@ export const AppContextProvider = ({ children }) => {
   const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
   const [search, setsearch] = useState("");
-  const [pincode, setPincode] = useState("");
   const [car, setCar] = useState(0);
   const [total, settotal] = useState(0);
 

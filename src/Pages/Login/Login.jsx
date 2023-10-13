@@ -20,7 +20,7 @@ import React, {  useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {  NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Redux/Auth/auth.action";
-
+import axios from "axios";
 function Login() {
   const [loginCreds, setLoginCreds] = useState({});
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ function Login() {
     setLoginCreds({
       ...loginCreds,
       [name]: value,
+
     });
   }
   
@@ -42,22 +43,19 @@ function Login() {
 
   };
 
-  useEffect(()=>{
-      if(isAuth){
-        navigate("/")
-        toast({
-          title: 'Login Sucsess',
-
-          description: "We've login to your account for you.",
-
-
-          status: 'success',
-          duration: 8000,
-          isClosable: true,
-        })
-      }
-  },[isAuth])
-
+  useEffect(() => {
+    if (isAuth) {
+      const username = localStorage.getItem('username');
+      navigate("/");
+      toast({
+        title: "Login Success",
+        description: `Welcome ${username}`, // Hiển thị thông tin từ loginCreds
+        status: "success",
+        duration: 8000,
+        isClosable: true,
+      });
+    }
+  }, [isAuth,]);  // Thêm loginCreds.name vào dependencies để theo dõi sự thay đổi của nó
   return (
     <>
       <Box w="100%">

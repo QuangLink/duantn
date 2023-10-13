@@ -52,6 +52,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+  const username = localStorage.getItem('username');
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -145,7 +146,7 @@ function Navbar() {
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
               >
-                Hi {name}
+                Hi {username}
               </MenuButton>
               <MenuList>
                 <MenuItem>My Profile</MenuItem>
