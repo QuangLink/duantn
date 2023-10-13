@@ -8,10 +8,13 @@ import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import Payments from "../Pages/payment/Payments";
+import AddressForm from "../Pages/checkout/addresstest";
+import ProductList from "../Pages/checkout/list";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
+
 
 const AllRoutes = () => {
   return (
@@ -97,6 +100,8 @@ const AllRoutes = () => {
           element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
         ></Route>
         <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}></Route>
+        <Route path="/test" element={<PrivateRoute><AddressForm /></PrivateRoute>}></Route>
+        <Route path="/list" element={<PrivateRoute><ProductList /></PrivateRoute>}></Route>
         <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
         <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
         <Route path="/signup" element={<Signup />}></Route>

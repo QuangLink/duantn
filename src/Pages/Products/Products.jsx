@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Box, Grid, GridItem, Heading , Center } from "@chakra-ui/react";
+import {Box, Grid, GridItem, Heading , Center, Flex,Text, Button,Input } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
+import { Form } from "react-router-dom";
 
 
 const getData = async (typeOfProduct) => {
@@ -26,15 +27,15 @@ const Products = ({ typeOfProduct }) => {
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
 
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
+    mobilesandtablets: "Điện thoại và máy tính bảng",
+    televisions: "TV",
+    headphones: "Tai nghe",
+    homeappliances: "Đồ dùng gia đình",
+    computers: "Máy tính",
+    cameras: "Máy ảnh",
+    kitchen: "Đồ dùng bếp",
+    personalcare: "Đồ dùng cá nhân",
+    accessories: "Phụ kiện",
     whishlist:"whishlist"
   };
 
@@ -71,31 +72,113 @@ const Products = ({ typeOfProduct }) => {
 
   return (
     <Box p="5">
-      <Heading p="5" marginBottom={5}>
+      <Heading p="6" marginBottom={7}>
         {category[typeOfProduct]}
       </Heading>
+      <hr></hr>
+      <Box 
+      width="100%"
+      height="76px"
+      margin="0 0 3% 0%"
+      display="flex"
+      justifyContent="space-between">
+      
+       <Flex>
+          <Button
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
+          margin="1%"
+          >
+            Bộ lọc
+          </Button>
+          <Button
+          border="solid 1px"
+          height ="50%"
+          fontSize="0.7rem"
+          backgroundColor="#FFFFFF"
+          margin="1%"
+          >
+            Hãng 
+          </Button>
+          <Button
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
+          margin="1%"
+          >
+            Giá
+          </Button>
+          <Button
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
+          margin="1%"
+          >
+            Mới nhất
+          </Button>
+          <Button
+          border="solid 1px"
+          fontSize="0.7rem"
+          height ="50%"
+          backgroundColor="#FFFFFF"
+          margin="1%"
+          >
+            Yêu thích
+          </Button>
+
+       </Flex>
+       <Flex
+        width= "13%"
+       >
+          <Text
+          // border="solid 1px"
+          fontSize="1rem"
+          backgroundColor="#FFFFFF"
+          >
+            Sắp xếp
+          </Text>
+           <Box
+           fontSize="1rem"
+           ml="3%"
+           height ="100%"
+           backgroundColor="#FFFFFF">
+           <div>
+                <select >
+                    <option value="Từ thấp đến cao">Từ thấp đến cao</option>
+                    <option value="Từ cao đến thâp">Từ cao đến thâp</option>
+                </select>
+          </div>
+           </Box>
+       </Flex>
+      </Box>  
       {loading ? (
           <Box h={20}>
-        <Center>
-          <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            // width="150"
-            height={20}
-            visible={true}
-            />
-        </Center>
+          <Center>
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              // width="150"
+              height={50}
+              visible={true}
+              />
+          </Center>
           </Box>
       )
       : (
         <Grid
+        width="75%"
+        m="auto"
+        marginLeft="14%"
           templateColumns={[
             "repeat(1, 1fr)",
             "repeat(2,1fr)",
             "repeat(3,1fr)",
             "repeat(4,1fr)",
-            "repeat(5,1fr)",
           ]}
           gap={3}
         >
@@ -104,10 +187,11 @@ const Products = ({ typeOfProduct }) => {
             return (
               <GridItem
                 key={elem.name + i}
-                w="100%"
+                w="97%"
+                h="100 %"
                 bg="white.500"
                 boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-                padding="25px 25px 0px 25px"
+                padding="5%"
                 _hover={{
                   boxShadow:
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
@@ -123,5 +207,6 @@ const Products = ({ typeOfProduct }) => {
     </Box>
   );
 };
+
 
 export default Products;

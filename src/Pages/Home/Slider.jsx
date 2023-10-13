@@ -42,9 +42,11 @@ const Slider = ({ type }) => {
       }}
     >
       {type.map((i) => (
-        <Box key={uuid()}>
+        <Box key={uuid()} >
           <SwiperSlide>
             <Link to={i.linked}>
+              
+              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
               <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                 <Image
                   src={`${i.img}`}
@@ -52,7 +54,6 @@ const Slider = ({ type }) => {
                   boxSize={{ base: "160px" }}
                 />
               </Square>
-              <Box p="2" mt="4">
                 <Text
                   color="#275293"
                   noOfLines={2}
@@ -63,49 +64,50 @@ const Slider = ({ type }) => {
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5">
+                <Box mt="2.5" m="20px 0 30px 0" >
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
-                        Deal Price:{" "}
+                        Giá mới :{" "}
                       </Text>
                     </Square>
                     <Square>
-                      <Text fontWeight="600" fontSize="18px" ml="1">
-                        ₹{i.price}
+                      <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
+                        {i.price} <sup>đ</sup>
                       </Text>
                     </Square>
                   </Flex>
                   <Flex>
-                    <Text color="gray.600" fontSize="14px">
-                      MRP:{" "}
+                    <Text color="gray.600" fontSize="14px"  >
+                      Giá gốc:{" "} 
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      ₹{i.mrp}
+                      {i.mrp} <sup>đ</sup>
                     </Text>
                   </Flex>
-                  <Flex>
+                  {/* <Flex>
                     <Text color="gray.600" fontSize="14px">
-                      You Save:{" "}
+                      Giảm giá:{" "} 
                     </Text>
                     {"  "}
                     <Text color="gray.600" fontSize="14px" ml="1">
-                      {i.discount}
+                      {i.discount} <sup>đ</sup>
                     </Text>
-                  </Flex>
+                  </Flex> */}
                   <Box
-                    borderRadius="xl"
-                    border="1px"
-                    borderColor="green.900"
-                    w="100px"
-                    color="green.500"
-                    bg="green.50"
-                    mt="2"
-                    textAlign="center"
+                        padding="3px"
+                        borderRadius="5px"
+                       
+                        w="40%"
+                        color="#f72424"
+                        bg="#fff0e9"
+                        mt="2"
+                        textAlign="center"
+                    
                   >
                     <Text fontSize="10px" fontWeight="500">
-                      OFFERS AVAILABLE
+                      GIẢM GIÁ SỐC 
                     </Text>
                   </Box>
                 </Box>
