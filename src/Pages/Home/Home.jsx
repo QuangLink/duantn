@@ -11,6 +11,7 @@ import CateFeature from "./CateFeature";
 import BannerLeft from "./BannerLeft";
 import BannerCenter from "./BannerCenter";
 import TimeDeal from "./TimeDeal";
+import PrDeal from "./PrDeal";
 
 
 
@@ -37,6 +38,7 @@ import {
   BannersLeft,
   BannersCenter,
   TimeDeals,
+  PrDeals,
 
 } from "./CardDetails";
 
@@ -62,13 +64,16 @@ const Home = () => {
       <hr />
       
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT | " />
+      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT " />
+      <br />
+      <hr />
+      <PrDeal type={PrDeals}  />
       <br />
       <hr />
       <ItemCard2
         type={ItemDetails3}
         linked={"/personalcare"}
-        heading="ĐỒNG HỒ THÔNG MINH APPLE | "
+        heading="ĐỒNG HỒ THÔNG MINH APPLE  "
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />

@@ -12,7 +12,7 @@ import './stylehome.css';
 
 const TimeDeal = ({ type, heading }) => {
   return (
-    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" backgroundColor="gray"  borderRadius="15px">
+    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" backgroundColor="#FF7C0E"  borderRadius="15px">
      
      
       <Heading textAlign="center" display="flex" justifyContent="space-around" w="95%"  m="15p% 10% 10% 10%">
@@ -21,7 +21,7 @@ const TimeDeal = ({ type, heading }) => {
                         
                         <Text>
                         
-                        <Text fontSize="30px" color="yellow.400"> GIỜ VÀNG DEAL SỐC</Text>
+                        <Text fontSize="30px" color="red"> GIỜ VÀNG DEAL SỐC</Text>
                         <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" >  Kết thúc trong 00: 00 :00 </i> </Text>
                         </Text>
                       
@@ -148,6 +148,7 @@ const TimeDeal = ({ type, heading }) => {
                     </Box>
                   </Box>
                   </Box>
+                  
                   <Box className="list" p="2" mt="4" mb="5" ml="1" mr="1" backgroundColor="white" borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
                   <Box className="img" >
                   <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
