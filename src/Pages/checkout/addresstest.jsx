@@ -4,8 +4,8 @@ import axios from 'axios';
 const AddressForm = () => {
   const initialProductState = {
     prodName: '',
-    prodBrand: '',
-    prodView: 0,
+    prodcatID: '',
+    prodType: '',
     prodImg: '',
     prodPrice: 0,
     prodDesc: '',
@@ -23,11 +23,11 @@ const AddressForm = () => {
     event.preventDefault();
     try {
       await axios.post('http://localhost:9000/products/', product);
-      alert('Product added successfully');
+      
       setProduct(initialProductState); // Clear the form after successful submission
     } catch (error) {
       console.error('Error adding product:', error);
-      alert('Failed to add product. Please try again.');
+    
     }
   };
 
@@ -47,23 +47,23 @@ const AddressForm = () => {
           />
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="prodBrand" style={{ marginRight: '10px' }}>Product Brand:</label>
+          <label htmlFor="prodcatID" style={{ marginRight: '10px' }}>Product prodcatID:</label>
           <input
             type="text"
-            id="prodBrand"
-            name="prodBrand"
-            value={product.prodBrand}
+            id="prodcatID"
+            name="prodcatID"
+            value={product.prodcatID}
             onChange={handleInputChange}
             style={{ border: '1px solid black', padding: '5px' }}
           />
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="prodView" style={{ marginRight: '10px' }}>Product Views:</label>
+          <label htmlFor="prodType" style={{ marginRight: '10px' }}>Product prodType:</label>
           <input
-            type="number"
-            id="prodView"
-            name="prodView"
-            value={product.prodView}
+            type="text"
+            id="prodType"
+            name="prodType"
+            value={product.prodType}
             onChange={handleInputChange}
             style={{ border: '1px solid black', padding: '5px' }}
           />

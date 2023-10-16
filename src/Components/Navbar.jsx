@@ -48,11 +48,11 @@ function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
-  const { name } = useSelector((store) => store.AuthManager);
+  const { username } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const username = localStorage.getItem('username');
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -64,7 +64,6 @@ function Navbar() {
       isClosable: true,
     });
   };
-  console.log(name);
   if (isLargerThan1100) {
     return (
       <Box>
@@ -531,7 +530,7 @@ function Navbar() {
               as={Button}
               rightIcon={<ChevronDownIcon />}
             >
-              Hi {name}
+              Hi {username}
             </MenuButton>
             <MenuList>
               <MenuItem>My Profile</MenuItem>
@@ -720,7 +719,7 @@ function Navbar() {
                         color="black"
                         mt="35px"
                       >
-                        Hi {name}
+                        Hi {username}
                       </Heading>
                     </Link>
                   ) : (

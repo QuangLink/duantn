@@ -42,7 +42,7 @@ const Checkout = () => {
      
     };
 
-    const apiUrl = 'http://localhost:9000/address/';
+    const apiUrl = 'http://localhost:9000/users/address';
 
     axios.post(apiUrl, newAddress)
       .then(response => {
