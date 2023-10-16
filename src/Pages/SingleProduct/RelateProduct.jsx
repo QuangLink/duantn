@@ -9,20 +9,18 @@ import Heading from "../Home/Heading";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
-const HotProduct = ({ type, heading }) => {
+const RelateProduct = ({ type, heading }) => {
   return (
     <Box justifyContent="center" w="80%" m="auto" mt="6" cursor="pointer" textAlign="center"
-      backgroundColor="blackAlpha.50" borderRadius="10px" >
+      backgroundColor="blackAlpha.50">
       <Box >
         <a href="">
 
           <Text
-
             fontSize="2.1rem" color="whiteAlpha.900" fontWeight="black"
             width="100%" backgroundColor="blue.300" h="60px"
             p={2}
-          >Deal Sốc Giảm tới 8.000.000 VNĐ </Text>
-
+          >Các sản phẩm liên quan </Text>
         </a>
       </Box>
       {/* <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/> */}
@@ -58,7 +56,7 @@ const HotProduct = ({ type, heading }) => {
             <Box key={uuid()}  >
               <SwiperSlide>
                 <Link to="/computers/">
-                  <Box p="5" m="2" height="350px" backgroundColor="white" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
+                  <Box p="5" m="2" height="400px" backgroundColor="white" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
                     <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
@@ -102,22 +100,21 @@ const HotProduct = ({ type, heading }) => {
                         <Text color="gray.600" fontSize="14px" ml="1">
                           {i.discount} <sup>đ</sup>
                         </Text>
-                        <Badge
-                          borderRadius="5px"
-                          width="auto"
-                          px="2"
-
-                          // border="1px solid green"
-                          backgroundColor="#fff0e9"
-                          color="#eb5757"
-                          fontSize="xs"
-                          marginBottom="10"
-                          marginLeft={5}
-                        >
-                          Giá ưu đãi
-                        </Badge>
                       </Flex>
                     </Box>
+                    {/* <Badge
+                      borderRadius="5px"
+                      width="auto"
+                      px="2"
+                      // border="1px solid green"
+                      backgroundColor="#fff0e9"
+                      color="#eb5757"
+                      fontSize="xs"
+                      marginBottom="10"
+                      marginLeft={5}
+                    >
+                      Giá ưu đãi
+                    </Badge> */}
                   </Box>
                 </Link>
               </SwiperSlide>
@@ -130,4 +127,4 @@ const HotProduct = ({ type, heading }) => {
   );
 };
 
-export default HotProduct;
+export default RelateProduct;

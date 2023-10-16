@@ -1,3 +1,84 @@
+export const BannersLeft = [
+  {
+    "id": 1,
+    "name": "Máy tính",
+    "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+  },
+];
+
+
+
+export const CateFeatures = [
+  
+    {
+      "id": 1,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 2,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 3,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 4,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 5,
+      "name": "Màn hình máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png"
+    },
+    {
+      "id": 6,
+      "name": "Phụ kiện di động",
+      "imgcatehot": "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png"
+    },
+    {
+      "id": 7,
+      "name": "Phụ kiện Gaming",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png"
+    },
+    {
+      "id": 8,
+      "name": "Thiết bị âm thanh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png"
+    },
+    {
+      "id": 9,
+      "name": "Điều hòa",
+      "imgcatehot": "https://tse4.mm.bing.net/th?id=OIP.7BSmCxRZXYWjuGgMj_vDWQHaHa&pid=Api&P=0&h=220"
+    },
+    {
+      "id": 10,
+      "name": "Thiết bị làm mát",
+      "imgcatehot": "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220"
+    },
+    {
+      "id": 11,
+      "name": "Dụng cụ cá nhân",
+      "imgcatehot": "https://www.reliancedigital.in/medias/WAHL-Mini-T-Pro-Trimmers-492910963-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w1Mjg3OHxpbWFnZS9qcGVnfGltYWdlcy9oMzQvaGNhLzk4MjkwMjQxMDQ0NzguanBnfDIwM2FlYWE3YjVjMjY1YTE4MmI1MTlmMGI1NWZmYmU3NzAzZjRkMTE5MThmMjI3YjNjMGQyMzBjZGQ1MDk1NWM"
+    },
+    {
+      "id": 12,
+      "name": "Thiết bị ghi hình",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-camera-128x129.png"
+    },
+    
+   
+    
+  
+];
+
+
+
+
 export const ItemDetails1 = [
   {
     img1: "https://i.pinimg.com/564x/e4/ac/1c/e4ac1c62cd247e2df4d9d554fca44021.jpg",
