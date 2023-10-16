@@ -12,6 +12,7 @@ import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
+import ProductList from "../Pages/Home/test";
 
 const AllRoutes = () => {
   return (
@@ -103,6 +104,8 @@ const AllRoutes = () => {
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
+
+      <Route path="/test" element={<ProductList />}></Route>
       </Routes>
     </div>
   );

@@ -5,10 +5,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
-import ItemCard5 from "../Home/ItemCard5";
+import RelateProduct from "./RelateProduct";
 import {
   ItemDetails8
 } from "../Home/CardDetails";
+import ComProduct from './ComProduct';
+
+
 
 
 
@@ -206,6 +209,44 @@ const SingleProduct = (props) => {
 
               />
               <hr />
+              <Box
+                display="flex"
+                m={5}
+              >
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+              </Box>
               {/* Chi tieet  */}
               <Heading size="sm" marginBottom={3}>
                 Thông số kĩ thuật
@@ -219,7 +260,7 @@ const SingleProduct = (props) => {
                   Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   Công nghệ hình ảnh:Active HDRChế độ game HGiG
                   Chế độ hình ảnh phù hợp nội dung
                   Dải màu rộng Nano Color
@@ -227,7 +268,7 @@ const SingleProduct = (props) => {
                   ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
                   Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem>
+                </ListItem> */}
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
                 Thông tin sản phẩm (1){" "}
@@ -257,7 +298,7 @@ const SingleProduct = (props) => {
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
-              rowSpan={[9,7 ]}
+              rowSpan={[9, 7]}
               p={7}
               mt="5%"
               style={{
@@ -284,7 +325,7 @@ const SingleProduct = (props) => {
               <Text
                 fontSize="sm"
                 color="#eb5757"
-                style={{ fontWeight: "bold"}}
+                style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
                 Giảm tới: {singleData.discount}
@@ -385,13 +426,15 @@ const SingleProduct = (props) => {
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
-              <Box
-              m="5%"
-              >
-                <hr 
-                />
-               <ItemCard5 type={ItemDetails8}   />
-              </Box>
+          <Box
+            m="5%"
+          >
+            <br />
+            <hr
+            />
+            <RelateProduct type={ItemDetails8} />
+            <ComProduct />
+          </Box>
         </Box>
       )}
     </>

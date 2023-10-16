@@ -13,30 +13,26 @@ const Slider = ({ type }) => {
     <Swiper
       modules={[Navigation, Autoplay]}
       navigation
-      autoplay={{ delay: 4000 }}
+      autoplay={{ delay: 3000 }}
       breakpoints={{
         0: {
           slidesPerView: 1,
           spaceBetween: 10,
         },
-        200: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
         480: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        660: {
           slidesPerView: 2,
           spaceBetween: 10,
         },
-        749: {
+        768: {
           slidesPerView: 3,
-          spaceBetween: 10,
+          spaceBetween: 15,
         },
-        1240: {
+        1024: {
           slidesPerView: 4,
+          spaceBetween: 15,
+        },
+        1280: {
+          slidesPerView: 5,
           spaceBetween: 10,
         },
       }}
@@ -45,6 +41,8 @@ const Slider = ({ type }) => {
         <Box key={uuid()} >
           <SwiperSlide>
             <Link to={i.linked}>
+              
+              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
               <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                 <Image
                   src={`${i.img}`}
@@ -52,7 +50,6 @@ const Slider = ({ type }) => {
                   boxSize={{ base: "160px" }}
                 />
               </Square>
-              <Box p="2" mt="4"boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
                 <Text
                   color="#275293"
                   noOfLines={2}
@@ -78,7 +75,7 @@ const Slider = ({ type }) => {
                   </Flex>
                   <Flex>
                     <Text color="gray.600" fontSize="14px"  >
-                      Giá gốc:{" "} <sup>đ</sup>
+                      Giá gốc:{" "} 
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
