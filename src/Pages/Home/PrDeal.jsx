@@ -26,7 +26,7 @@ const PrDeal = ({ type }) => {
 
 <Heading textAlign="center" display="flex" justifyContent="center" w="100%"  m="15p% 10% 10% 10%">
                       <Box mt="0" >
-                      <i > <img width="120px" src="https://o.remove.bg/downloads/c4ee67e1-1d40-462a-a551-7de46e8310be/es%C3%A2fghrtn7af70332cb-removebg-preview.png"/></i>
+                      <i > <img width="120px" src={require('../../Components/Images/HDSale.png')}/></i>
                       </Box>
                       <Box mt="8"  >
                      
@@ -156,7 +156,7 @@ const PrDeal = ({ type }) => {
                         </Text>
                       </Box>
                       <Box mb="-5"    borderRadius="15px">
-                      <Image src="https://o.remove.bg/downloads/73bf4235-e575-4bde-a8ad-0d4622176ca1/2a5418df31c50c3cd8e68fde2e226cd2-removebg-preview.png" w="100%" 
+                      <Image src={require('../../Components/Images/PrSaleimg.png')} w="100%" 
                          borderRadius="15px"
                           />
                          
