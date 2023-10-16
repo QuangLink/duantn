@@ -1,12 +1,259 @@
+
+
+export const PrDeals = [
+ 
+  
+  {
+    name: "LG 32 litres Convection Microwave Oven, MC3286BRUM",
+    img: "https://www.reliancedigital.in/medias/581108139-Package-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NDI0OHxpbWFnZS9qcGVnfGltYWdlcy9oZjQvaDJmLzg5NjM4NDQ4OTg4NDYuanBnfDljZDk0MDcwYmFhNzQ1NjhlOTFiNzk3NjUyYmI3MzExZTU4NzA0MzYxMGRiMzg2ZmExN2RjMGZmMWJiMGIwM2Q",
+    mrp: "23,999.00",
+    price: "17,140.00",
+    discount: "29%(₹6,859)",
+    id: 1,
+    linked: "kitchen",
+    
+    
+    
+  },
+  {
+    name: "LG 28 litres Convection Microwave Oven, MC2846BV",
+    img: "https://www.reliancedigital.in/medias/LG-MC2846BV-Microwave-Ovens-581107300-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODIzM3xpbWFnZS9qcGVnfGltYWdlcy9oOTkvaDFiLzk4MDU4NTQxNDY1OTAuanBnfDVlYWMxYTY5Nzk2OTkyYTcxZGEwOTVmY2FiYmQ0YmFmYTYwOGFmZTM0OGRjYjdjZTJlMGMxY2Q3MWY2ZGVjODc",
+    mrp: "16,999.00",
+    price: "15,990.00",
+    discount: "6%(₹1,009)",
+    id: 2,
+    linked: "kitchen",
+    
+  },
+  {
+    name: "IFB 30 litres Rotisserie Convection Microwave Oven, 30BRC2",
+    img: "https://www.reliancedigital.in/medias/IFB-30BRC2-Microwave-Ovens-491391947-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODQ1OHxpbWFnZS9qcGVnfGltYWdlcy9oOTMvaGU4LzkwMTg4Nzk0NzU3NDIuanBnfDgxZGIxNGNlNGNkMDJkZDljMmU0ZTE5NGYxYmMzMDU1NzU0OTdlODg0Njc0NzdjMmY5YWJhNDZiNzQ5ZDAxMjQ",
+    mrp: "20,390.00",
+    price: "15,990.00",
+    discount: "22%(₹4,400)",
+    id: 3,
+    linked: "kitchen",
+    
+  },
+  {
+    name: "LG 20 litres Solo Microwave Oven, MS2043DB",
+    img: "https://www.reliancedigital.in/medias/LG-MS2043DB-Microwave-Oven-491166959-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzg4N3xpbWFnZS9qcGVnfGltYWdlcy9oMGIvaGYxLzkxOTY2NjQ5Nzk0ODYuanBnfDQyODU2MDc2MTZlODBjZjYyY2VlMjFlOTZlNjVjN2IyMzJmOTkxY2VhZTcwZTIxZDBhODU0YmNlNzIyZTQ5ZjM",
+    mrp: "7,899.00",
+    price: "6,499.00",
+    discount: "18%(₹1,400)",
+    id: 4,
+    linked: "kitchen",
+  },
+  {
+    name: "Samsung 23 Litre Solo Microwave Oven with Indian Auto cook Menu, (MS23A3513AK/TL, Black)",
+    img: "https://www.reliancedigital.in/medias/Samsung-MS23A3513AK-TL-Solo-Grill-492573240-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzAyOXxpbWFnZS9qcGVnfGltYWdlcy9oZjIvaDY3Lzk4NDU0NjcxNTI0MTQuanBnfGUyMDczNjE2MTMzZDFlNWMyMmVjNzgxZmMzMTRhZmYzNDc1YmJmMzVmZDk0ZGYxMzI1ZTlhMTBmNTkxYzFkMzQ",
+    mrp: "7,500.00",
+    price: "6,600.00",
+    discount: "12%(₹900)",
+    id: 5,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 28 litres Convection Microwave Oven, MJ2886BWUM",
+    img: "https://www.reliancedigital.in/medias/LG-MJ2886BWUM-Microwave-Ovens-491392151-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0ODQ0N3xpbWFnZS9qcGVnfGltYWdlcy9oODUvaDRkLzg5Nzk4MTkzMzE2MTQuanBnfDQ5NjNkNTc2ODRjN2M0MzZhZTUzYTAyZjQ5MzljYjczNjEwNTQ4ODI2NjllMzQ4MTVjM2FkOWRhN2QxMmYwOWQ",
+    mrp: "24,299.00",
+    price: "19,490.00",
+    discount: "20%(₹4,809)",
+    id: 6,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 21 litres Convection Microwave Oven, MC2146BG",
+    img: "https://www.reliancedigital.in/medias/LG-MC2146BG-Microwave-Ovens-491604223-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w1ODc4fGltYWdlL2pwZWd8aW1hZ2VzL2hlOS9oZDYvOTIyMDg4ODAwMjU5MC5qcGd8ZGI2OWEwYmFjNTM3MjQ2ZGI5ZmM5MTNiNDAxM2FlZWUzMzQ1NGQ3YmY4MzY3MWI1YTYyYmM5ZmM1ZmFkZmQyZA",
+    mrp: "13,999.00",
+    price: "11,590.00",
+    discount: "17%(₹2,409)",
+    id: 7,
+    linked: "kitchen",
+  },
+  {
+    name: "Samsung 23 Litre Grill Microwave Oven with Grill Fry, Browning Plus (MG23A3515AK/TL, Black)",
+    img: "https://www.reliancedigital.in/medias/Samsung-MG23A3515AK-TL-Solo-Grill-492573239-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzA0NHxpbWFnZS9qcGVnfGltYWdlcy9oNTAvaDQwLzk4NDU0NjYxNjkzNzQuanBnfDgwZTgyN2Y2YTEwNjAzZDE2NmUwM2ZkNmIxNGQyMzlhNWRmYzk2NTk1MzU1ZTE1NzZiYmNmMjA4ZDg2OWNmYTQ",
+    mrp: "11,600.00",
+    price: "8,500.00",
+    discount: "27%(₹3,100)",
+    id: 8,
+    linked: "kitchen",
+  },
+  
+
+]
+
+
+export const TimeDeals = [
+  {
+    name: "LG 32 litres Convection Microwave Oven, MC3286BRUM",
+    img: "https://www.reliancedigital.in/medias/581108139-Package-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NDI0OHxpbWFnZS9qcGVnfGltYWdlcy9oZjQvaDJmLzg5NjM4NDQ4OTg4NDYuanBnfDljZDk0MDcwYmFhNzQ1NjhlOTFiNzk3NjUyYmI3MzExZTU4NzA0MzYxMGRiMzg2ZmExN2RjMGZmMWJiMGIwM2Q",
+    mrp: "23,999.00",
+    price: "17,140.00",
+    discount: "29%(₹6,859)",
+    id: 1,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 28 litres Convection Microwave Oven, MC2846BV",
+    img: "https://www.reliancedigital.in/medias/LG-MC2846BV-Microwave-Ovens-581107300-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODIzM3xpbWFnZS9qcGVnfGltYWdlcy9oOTkvaDFiLzk4MDU4NTQxNDY1OTAuanBnfDVlYWMxYTY5Nzk2OTkyYTcxZGEwOTVmY2FiYmQ0YmFmYTYwOGFmZTM0OGRjYjdjZTJlMGMxY2Q3MWY2ZGVjODc",
+    mrp: "16,999.00",
+    price: "15,990.00",
+    discount: "6%(₹1,009)",
+    id: 2,
+    linked: "kitchen",
+  },
+  {
+    name: "IFB 30 litres Rotisserie Convection Microwave Oven, 30BRC2",
+    img: "https://www.reliancedigital.in/medias/IFB-30BRC2-Microwave-Ovens-491391947-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODQ1OHxpbWFnZS9qcGVnfGltYWdlcy9oOTMvaGU4LzkwMTg4Nzk0NzU3NDIuanBnfDgxZGIxNGNlNGNkMDJkZDljMmU0ZTE5NGYxYmMzMDU1NzU0OTdlODg0Njc0NzdjMmY5YWJhNDZiNzQ5ZDAxMjQ",
+    mrp: "20,390.00",
+    price: "15,990.00",
+    discount: "22%(₹4,400)",
+    id: 3,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 20 litres Solo Microwave Oven, MS2043DB",
+    img: "https://www.reliancedigital.in/medias/LG-MS2043DB-Microwave-Oven-491166959-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzg4N3xpbWFnZS9qcGVnfGltYWdlcy9oMGIvaGYxLzkxOTY2NjQ5Nzk0ODYuanBnfDQyODU2MDc2MTZlODBjZjYyY2VlMjFlOTZlNjVjN2IyMzJmOTkxY2VhZTcwZTIxZDBhODU0YmNlNzIyZTQ5ZjM",
+    mrp: "7,899.00",
+    price: "6,499.00",
+    discount: "18%(₹1,400)",
+    id: 4,
+    linked: "kitchen",
+  },
+  {
+    name: "Samsung 23 Litre Solo Microwave Oven with Indian Auto cook Menu, (MS23A3513AK/TL, Black)",
+    img: "https://www.reliancedigital.in/medias/Samsung-MS23A3513AK-TL-Solo-Grill-492573240-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzAyOXxpbWFnZS9qcGVnfGltYWdlcy9oZjIvaDY3Lzk4NDU0NjcxNTI0MTQuanBnfGUyMDczNjE2MTMzZDFlNWMyMmVjNzgxZmMzMTRhZmYzNDc1YmJmMzVmZDk0ZGYxMzI1ZTlhMTBmNTkxYzFkMzQ",
+    mrp: "7,500.00",
+    price: "6,600.00",
+    discount: "12%(₹900)",
+    id: 5,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 28 litres Convection Microwave Oven, MJ2886BWUM",
+    img: "https://www.reliancedigital.in/medias/LG-MJ2886BWUM-Microwave-Ovens-491392151-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0ODQ0N3xpbWFnZS9qcGVnfGltYWdlcy9oODUvaDRkLzg5Nzk4MTkzMzE2MTQuanBnfDQ5NjNkNTc2ODRjN2M0MzZhZTUzYTAyZjQ5MzljYjczNjEwNTQ4ODI2NjllMzQ4MTVjM2FkOWRhN2QxMmYwOWQ",
+    mrp: "24,299.00",
+    price: "19,490.00",
+    discount: "20%(₹4,809)",
+    id: 6,
+    linked: "kitchen",
+  },
+  {
+    name: "LG 21 litres Convection Microwave Oven, MC2146BG",
+    img: "https://www.reliancedigital.in/medias/LG-MC2146BG-Microwave-Ovens-491604223-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w1ODc4fGltYWdlL2pwZWd8aW1hZ2VzL2hlOS9oZDYvOTIyMDg4ODAwMjU5MC5qcGd8ZGI2OWEwYmFjNTM3MjQ2ZGI5ZmM5MTNiNDAxM2FlZWUzMzQ1NGQ3YmY4MzY3MWI1YTYyYmM5ZmM1ZmFkZmQyZA",
+    mrp: "13,999.00",
+    price: "11,590.00",
+    discount: "17%(₹2,409)",
+    id: 7,
+    linked: "kitchen",
+  },
+  {
+    name: "Samsung 23 Litre Grill Microwave Oven with Grill Fry, Browning Plus (MG23A3515AK/TL, Black)",
+    img: "https://www.reliancedigital.in/medias/Samsung-MG23A3515AK-TL-Solo-Grill-492573239-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzA0NHxpbWFnZS9qcGVnfGltYWdlcy9oNTAvaDQwLzk4NDU0NjYxNjkzNzQuanBnfDgwZTgyN2Y2YTEwNjAzZDE2NmUwM2ZkNmIxNGQyMzlhNWRmYzk2NTk1MzU1ZTE1NzZiYmNmMjA4ZDg2OWNmYTQ",
+    mrp: "11,600.00",
+    price: "8,500.00",
+    discount: "27%(₹3,100)",
+    id: 8,
+    linked: "kitchen",
+  },
+]
+export const BannersCenter = [
+  {
+    "id": 1,
+    "name": "Máy tính",
+    "imgbnct": "https://i.pinimg.com/564x/a5/6c/93/a56c930c91e49eebd953ff0d51a9bec6.jpg"
+  },
+];
+
+export const BannersLeft = [
+  {
+    "id": 1,
+    "name": "Máy tính",
+    "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+  },
+];
+
+
+
+
+export const CateFeatures = [
+  
+    {
+      "id": 1,
+      "name": "Máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    },
+    {
+      "id": 2,
+      "name": "Tablet",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
+    },
+    {
+      "id": 3,
+      "name": "Đồng hồ thông minh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
+    },
+    {
+      "id": 4,
+      "name": "Điện thoại độc quyền",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
+    },
+    {
+      "id": 5,
+      "name": "Màn hình máy tính",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png"
+    },
+    {
+      "id": 6,
+      "name": "Phụ kiện di động",
+      "imgcatehot": "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png"
+    },
+    {
+      "id": 7,
+      "name": "Phụ kiện Gaming",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png"
+    },
+    {
+      "id": 8,
+      "name": "Thiết bị âm thanh",
+      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png"
+    },
+    {
+      "id": 9,
+      "name": "Điều hòa",
+      "imgcatehot": "https://tse4.mm.bing.net/th?id=OIP.7BSmCxRZXYWjuGgMj_vDWQHaHa&pid=Api&P=0&h=220"
+    },
+    {
+      "id": 10,
+      "name": "Thiết bị làm mát",
+      "imgcatehot": "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220"
+    },
+    
+   
+    
+  
+];
+
+
+
+
 export const ItemDetails1 = [
   {
-    img: "https://www.reliancedigital.in/medias/Year-End-Sale-5000-Instant-Discount-Carousel-Banner-05-12-2022.jpg?context=bWFzdGVyfGltYWdlc3wxNDcwODh8aW1hZ2UvanBlZ3xpbWFnZXMvaDkzL2hiNS85OTI4MTY1NTg5MDIyLmpwZ3w4NDk3ZDFhZTM1YzUxYTg3MDFiMWZkZjhmMGE0ZWI2ZWZmYjU0MWNmOGJkMTAzZTYwMTdlNjI5MGNjYzZiOTIx",
+    img1: "https://i.pinimg.com/564x/e4/ac/1c/e4ac1c62cd247e2df4d9d554fca44021.jpg",
+    img2: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/09/banner/IP15-720-220-720x220-5.png",
+
     caption: "Slide 1",
   },
   {
-    img: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
+    
+    img2: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/Mua-kem-720-220-720x220-1.png",
+    img1: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
+
     caption: "Slide 2",
   },
+  
 ];
 
 export const ItemDetails2 = [
@@ -976,7 +1223,7 @@ export const ItemDetails16 = [
 
 export const ItemDetails17 = [
   {
-    name: "Nikon D3500 DSLR Camera with AF-P 18-55 mm + AF-P 70-300 mm VR Kit",
+    name: "Nikon D3500 DSLR Camera with AF-P 18-55 mm + AF-P 70-300 mm VRn GFWKKWGFNNW Kit",
     img: "https://www.reliancedigital.in/medias/Nikon-D3500-DSLR-Camera-491431009-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w4MjUzfGltYWdlL2pwZWd8aW1hZ2VzL2gxNS9oMDEvOTA3MDM1NjI2NzAzOC5qcGd8NGFmZDk5NDM1MjA0NDFkY2Q0M2FmYzY0ZTlmYmUxZTU1MjJiZWE4ZDNkNTI5Mzg4M2NkOWNjZjdhY2MwZDFkZA",
     price: "48,990.00",
     mrp: "53,950.00",
@@ -985,7 +1232,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon COOLPIX P1000 Prosumer Camera 16 MP, Black",
+    name: "Nikon COOLPIX P1000 Prosumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-P1000-Prosumer-Camera-491430998-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNTE5OHxpbWFnZS9qcGVnfGltYWdlcy9oYmMvaDVkLzkwNTM4NDQ1MzczNzQuanBnfGE0ZThhNWI3YzE1ZGEzNzcwNjlkZWQzNjYxMmZhMjEwMjhlYjkzYWU0Njg4YjhmYzU4NGI3N2ZkODRiNGQwMjA",
     price: "64,990.00",
     mrp: "69,950.00",
@@ -994,7 +1241,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon Z 50 mm Prime Lens",
+    name: "Nikon Z 50 mm Prime LensProsumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-Z7-Camera-Lenses-491431045-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyOTg0M3xpbWFnZS9qcGVnfGltYWdlcy9oY2YvaGEyLzkwNjk4NjgyODU5ODIuanBnfGM0ZGQ3OGZmZTE4NDdjODI0NTYyN2Q3MzNmMTc2ZDI3MGYzMDllYzIwZGUwMjA2YzFjNjU5ODY1OWY3NDRiMGU",
     price: "47,990.00",
     mrp: "50,950.00",
@@ -1003,7 +1250,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon Z 35 mm Prime Lens",
+    name: "Nikon Z 35 mm Prime Lens Prosumer Camera 16 MP, Black Over THINGKbbsdg",
     img: "https://www.reliancedigital.in/medias/Nikon-Z7-Camera-Lenses-491431044-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyOTc1OHxpbWFnZS9qcGVnfGltYWdlcy9oNjMvaDc2LzkwNjk4NzAyNTIwNjIuanBnfDNjOGI2YzNiM2JkMTIyNmU4MDIxZTc2MzAyNzQ1NmFjYWFmMjhkMTlkMmFiNDQ1MjBiZGJlNzhhN2I4OWZjYTA",
     price: "62,990.00",
     mrp: "66,950.00",
@@ -1030,7 +1277,7 @@ export const ItemDetails17 = [
     linked: "cameras",
   },
   {
-    name: "Nikon JAA830DA 70-200 mm Camera Lens",
+    name: "Nikon JAA830DA 70-200 mm Camera Lens BEATYFULL Prosumer Camera 16 MP, Black",
     img: "https://www.reliancedigital.in/medias/Nikon-LENS-70-200mm-f2.8E-FL-ED-VR-491336345-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyNDEwN3xpbWFnZS9qcGVnfGltYWdlcy9oYzUvaDAwLzkwNjA1MzE5OTQ2NTQuanBnfGZkMmYzNTM0N2Q2NmNmZGIzNjI3NDliZmE3YmU2MDMzZGI1MTc4Y2MxYjQ1NjFkNjBlODY3YmUzM2YwYmMyNzQ",
     price: "1,62,990.00",
     mrp: "1,69,950.00",

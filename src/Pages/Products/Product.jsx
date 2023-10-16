@@ -9,7 +9,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { BsSuitHeart, } from "react-icons/bs";
+import { BsSuitHeart, BsFillBookmarkStarFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -38,19 +38,19 @@ const postSingleDataWish = async (data) => {
 
 const Product = (props) => {
   const { data, typeOfProduct } = props;
-  const { id, name, img, price, mrp,discount } = data;
-  console.log("this is data from the outside hanldewish",data);
+  const { id, name, img, price, mrp, discount } = data;
+  console.log("this is data from the outside hanldewish", data);
 
   var navigate = useNavigate();
   const toast = useToast();
 
-  
 
 
 
-  
+
+
   const handleWish = (data) => {
-    console.log("this is data from hadleWhish",data);
+    console.log("this is data from hadleWhish", data);
     let newData = {};
     for (let i in data) {
       if (i === "id") {
@@ -60,7 +60,7 @@ const Product = (props) => {
     }
     // console.log("newData is :-", newData);
     // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleDataWish(newData).then((res) =>{
+    postSingleDataWish(newData).then((res) => {
       // console.log("in the handlePost function and viewing the data after the post request", res)
       toast({
         title: "Added Item Successfully to WishList",
@@ -78,23 +78,20 @@ const Product = (props) => {
 
   return (
     <>
-    
+
       <Link to={`/${typeOfProduct}/${id}`}>
         <Box>
-          {/* <Box>
-            <Text 
-            w={20}
-             borderRadius="full"
-             px="5"
-             border="1px solid green"
-             color="green"
-             fontSize="1rem"
-             marginBottom="10"
+          <Box>
+            <Text
+              fontFamily="revert"
+              fontWeight="medium"
+              fontSize="4xs"
             >
-              {id}%
+              Đánh giá
+              <BsFillBookmarkStarFill />
             </Text>
-          </Box> */}
-          <Image src={img} alt={name}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
+          </Box>
+          <Image src={img} alt={name} justifyItems="center" pl="2%" h="200" _hover={{ p: "" }} />
           <Box
             h="150"
             w="100%"
@@ -109,41 +106,39 @@ const Product = (props) => {
           >
             {name}
           </Box>
-          <Box
+          <Flex
             w="100%"
-            // justifyContent="space-between"
-            // alignItems="center"
+            justifyContent="space-between"
+            alignItems="center"
             marginBottom="2"
             marginLeft={5}
           >
-            <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
-              Giá mới: {price}₫
+            <Heading as="h3" size="xs" color="blue.700">
+              {price}₫
             </Heading>
             <Text
-            mt={2}
+              mt={2}
               size="1.1rem"
               // fontSize="1.2rem"
               fontWeight="bold"
               color="blackAlpha.600"
               textDecoration="line-through"
             >
-             Giá gốc : {mrp}₫
+              {mrp}₫
             </Text>
-          </Box>
-          
+          </Flex>
+
           <Badge
             borderRadius="5px"
             width="auto"
             px="2"
-            
-            // border="1px solid green"
-            backgroundColor="#fff0e9"
-            color="#eb5757"
+            border="1px solid green"
+            color="red"
             fontSize="xs"
             marginBottom="10"
             marginLeft={5}
           >
-            Giá ưu đãi
+            ƯU ĐÃI
           </Badge>
         </Box >
       </Link>

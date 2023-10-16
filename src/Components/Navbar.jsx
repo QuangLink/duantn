@@ -29,7 +29,7 @@ import { Icon } from '@chakra-ui/react'
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
 import { ImLocation2 } from "react-icons/im";
@@ -50,6 +50,7 @@ function Navbar() {
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
+  const [input, setInput] = useState("")
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
@@ -58,6 +59,26 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+
+  const fetchData = (value) => {
+    fetch("http://localhost:9000/products/search")
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log('check data', json);
+        const results = json.filter((search) => {
+          return search && search.prodType && search.prodType.toLowerCase().includes(input);
+        })
+        console.log(results);
+      })
+  }
+
+  const handleChange = (event) => {
+    setInput(event.target.value);
+    fetchData(event.target.value);
+
+  }
+
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -69,7 +90,7 @@ function Navbar() {
       isClosable: true,
     });
   };
-  console.log(name);
+  // console.log(name);
   if (isLargerThan1100) {
     return (
       <Box>
@@ -105,6 +126,9 @@ function Navbar() {
               fontSize={"18px"}
               borderRadius={"5px"}
               placeholder="Bạn tìm gì..."
+              value={input}
+              onChange={handleChange}
+
             />
             <BiSearch fontSize={"42px"} />
           </Flex>
@@ -844,22 +868,6 @@ function Navbar() {
               </MenuButton>
             </Link>
           </Menu>
-
-
-          <Menu>
-            <MenuButton
-
-              px={5}
-              py={2}
-
-              color="white"
-              transition="all 0.2s"
-              _hover={{ color: "white" }}
-              _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-            >
-              Phụ kiện <ChevronDownIcon />
-            </MenuButton>
-          </Menu>
           <Menu >
             <Link to="accessories">
 
@@ -876,7 +884,6 @@ function Navbar() {
               </MenuButton>
             </Link>
           </Menu >
-
           <Menu>
             <Link to="mobilesandtablets">
               <MenuButton
@@ -915,7 +922,7 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        bgImage={require('./Images/bghaeder2.png')}
+        backgroundColor='#4a90e2'
         p="20px"
         px="2%"
         gap="10px"
@@ -937,35 +944,40 @@ function Navbar() {
             border={"none"}
             fontSize={"18px"}
             borderRadius={"5px"}
-            fontWeight="bold"
-            placeholder="Search"
+            placeholder="Bạn tìm gì..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
         <Link to="/cart">
-          <Flex cursor={"pointer"}>
-            <BsFillCartFill color="white" fontSize="20px" />
+          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+            bg: "#0077ff"
+          }} >
             <Heading
+              m='3'
               cursor={"pointer"}
-              fontSize={"17px"}
+              fontSize={"16px"}
               color="white"
-              _hover={{ bg: "red", textDecoration: "underline" }}
             >
-              Cart
+              Giỏ hàng
             </Heading>
           </Flex>
         </Link>
         {!isAuth ? (
-          <Flex cursor={"pointer"}>
-            <GrLogin color="white" fontSize="20px" />
+          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+            bg: "#0077ff"
+          }}>
             <Link to="login">
               <Heading
+                m={3}
                 cursor={"pointer"}
                 fontSize={"17px"}
                 color="white"
                 _hover={{ bg: "red", textDecoration: "underline" }}
               >
-                Login
+                Đăng nhập
               </Heading>
             </Link>
           </Flex>
@@ -1002,7 +1014,7 @@ function Navbar() {
 
           >
             <DrawerOverlay />
-            <DrawerContent bg="#656565">
+            <DrawerContent bg="#FFFFFF" color="#55555">
               <DrawerCloseButton />
               <DrawerHeader fontSize={"22px"} fontWeight="bold">
                 Menu
@@ -1020,15 +1032,15 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Điện thoại
                       <Heading
                         cursor={"pointer"}
                         fontSize={"17px"}
-                        color="white"
-                        _hover={{ color: "white" }}
+                        color="#55555"
+                        _hover={{ color: "#55555" }}
                       />
                     </Heading>
                   </Link>
@@ -1036,8 +1048,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Laptop
                     </Heading>
@@ -1046,8 +1058,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Tablet
                     </Heading>
@@ -1056,8 +1068,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Phụ kiện
                     </Heading>
@@ -1066,8 +1078,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Smartwatch
                     </Heading>
@@ -1076,8 +1088,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Đồng hồ
                     </Heading>
@@ -1086,8 +1098,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Mua máy cũ giá rẻ
                     </Heading>
@@ -1106,7 +1118,7 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        bgImage={require('./Images/bghaeder2.png')}
+        backgroundColor='#4a90e2'
         p="20px"
         px="2%"
         gap="10px"
@@ -1128,8 +1140,9 @@ function Navbar() {
             border={"none"}
             fontSize={"18px"}
             borderRadius={"5px"}
-            fontWeight="bold"
-            placeholder="Search"
+            placeholder="Bạn tìm gì..."
+
+
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
@@ -1144,7 +1157,7 @@ function Navbar() {
             finalFocusRef={btnRef}
           >
             <DrawerOverlay />
-            <DrawerContent bg="#656565">
+            <DrawerContent bg="#FFFFFF" color="#55555">
               <DrawerCloseButton />
 
               <DrawerBody>
@@ -1160,9 +1173,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="black"
+                        color="#55555"
                         mt="35px"
                       >
                         Hi {name}
@@ -1173,9 +1186,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                         mt="35px"
                       >
                         Profile
@@ -1188,9 +1201,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                       >
                         Login
                       </Heading>
@@ -1200,9 +1213,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                         onClick={handleLogout}
                       >
                         Logout
@@ -1214,9 +1227,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"24px"}
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
                       fontWeight="bold"
-                      color="white"
+                      color="#55555"
                     >
                       Cart
                     </Heading>
@@ -1232,8 +1244,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Điện thoại
                     </Heading>
@@ -1242,8 +1253,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Laptop
                     </Heading>
@@ -1252,8 +1262,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Tablet
                     </Heading>
@@ -1262,8 +1271,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Phụ kiện
                     </Heading>
@@ -1272,8 +1280,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Smartwatch
                     </Heading>
@@ -1282,8 +1289,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Đồng hồ
                     </Heading>
@@ -1292,8 +1298,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Máy cũ giá rẻ
                     </Heading>
