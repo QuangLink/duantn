@@ -12,6 +12,7 @@ import './stylehome.css';
 
 const PrDeal = ({ type }) => {
   return (
+
     <Box justifyContent="center" w="75%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
                         {/* <Heading textAlign="center" display="flex"  justifyContent="space-around" w="95%" back mt="6"  m="15p% 10% 10% 10%">
                             <Box mt="6" display="flex" >
@@ -49,14 +50,7 @@ const PrDeal = ({ type }) => {
 
                     </Box>
     </Swiper>
-           
-
-      
-
-
-     
-
-
+ 
 
       <Box mt="1"  >
         <Swiper
@@ -87,7 +81,7 @@ const PrDeal = ({ type }) => {
           }}
         >
           {type.map((i) => (
-           
+
 
             <Box key={uuid()}  >
                  
@@ -189,8 +183,6 @@ const PrDeal = ({ type }) => {
 
 
       </Box>
-
-
 
     </Box>
   );

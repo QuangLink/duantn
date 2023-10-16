@@ -12,7 +12,7 @@ const BannerCenter = ({ type }) => {
       <Box width="100%" justifyContent="center">
         
           
-            
+           
           {type.map((i) => (
             <Box key={uuid()}   h="350px" display="flex" justifyContent="space-around" backgroundColor="gray.400" borderRadius="15px"
            >

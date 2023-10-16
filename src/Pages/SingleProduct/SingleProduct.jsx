@@ -5,10 +5,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
-import ItemCard4 from "../Home/ItemCard4";
+import RelateProduct from "./RelateProduct";
 import {
-  ItemDetails6
+  ItemDetails8
 } from "../Home/CardDetails";
+import ComProduct from './ComProduct';
+
+
 
 
 
@@ -173,7 +176,7 @@ const SingleProduct = (props) => {
           </Box>
 
           <Grid
-            h={["1300px", "1100px", "900px"]}
+            h={["1500px", "1100px", "900px"]}
             templateRows={[
               "repeat(8, 1fr)",
               "repeat(8, 1fr)",
@@ -187,16 +190,13 @@ const SingleProduct = (props) => {
           >
             <GridItem
               rowSpan={[1, 2, 7]}
-              colSpan={[5, 6, 5]}
-              // display="flex"
+              colSpan={[6, 6, 5]}
               m="0 0 0 18%"
               p=" 2% 8% "
               justifyContent="center"
               alignitem="center"
               style={{
                 border: "none",
-                // boxShadow:
-                //   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
             >
               <Image
@@ -209,6 +209,44 @@ const SingleProduct = (props) => {
 
               />
               <hr />
+              <Box
+                display="flex"
+                m={5}
+              >
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.img}
+                  alt={singleData.name}
+                  _hover={{ cursor: "crosshair" }}
+                />
+              </Box>
               {/* Chi tieet  */}
               <Heading size="sm" marginBottom={3}>
                 Thông số kĩ thuật
@@ -222,7 +260,7 @@ const SingleProduct = (props) => {
                   Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   Công nghệ hình ảnh:Active HDRChế độ game HGiG
                   Chế độ hình ảnh phù hợp nội dung
                   Dải màu rộng Nano Color
@@ -230,7 +268,7 @@ const SingleProduct = (props) => {
                   ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
                   Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem>
+                </ListItem> */}
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
                 Thông tin sản phẩm (1){" "}
@@ -260,7 +298,7 @@ const SingleProduct = (props) => {
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
-              rowSpan={7}
+              rowSpan={[9, 7]}
               p={7}
               mt="5%"
               style={{
@@ -271,7 +309,7 @@ const SingleProduct = (props) => {
               <Heading size="md" marginBottom={5}>
                 {singleData.name}
               </Heading>
-              <Heading size="lg" marginBottom={5} color="blue.700">
+              <Heading size="lg" marginBottom={5} color="red">
                 {singleData.price}₫
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
@@ -286,11 +324,11 @@ const SingleProduct = (props) => {
 
               <Text
                 fontSize="sm"
-                color="green.600"
+                color="#eb5757"
                 style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
-                Phần trăm thuế: {singleData.discount}
+                Giảm tới: {singleData.discount}
               </Text>
 
               <Text
@@ -388,8 +426,15 @@ const SingleProduct = (props) => {
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
-          <ItemCard4 type={ItemDetails6} heading="Các sản phẩm khác" />
-
+          <Box
+            m="5%"
+          >
+            <br />
+            <hr
+            />
+            <RelateProduct type={ItemDetails8} />
+            <ComProduct />
+          </Box>
         </Box>
       )}
     </>
