@@ -31,7 +31,8 @@ export function Login() {
                Để sử dụng các chức năng khác, vui lòng đăng nhập
               </p>
               <button
-                className="ghost"
+              className="action-btn ghost"
+            
                 id="signIn"
                 onClick={() => handleOnClick("signIn")}
               >
@@ -42,7 +43,7 @@ export function Login() {
               <h1>Bạn chưa có tài khoản ?</h1>
               <p>Hãy đăng ký tài khoản để sử dụng mọi chức năng</p>
               <button
-                className="ghost "
+              className="action-btn ghost"
                 id="signUp"
                 onClick={() => handleOnClick("signUp")}
               >

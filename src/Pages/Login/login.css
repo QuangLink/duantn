@@ -54,7 +54,8 @@
   margin: 15px 0;
 }
 
-.AppForm button {
+
+.AppForm .action-btn {
   border-radius: 20px;
   border: 1px solid #3978d7;
   background-color: #3978d7;
@@ -67,15 +68,15 @@
   transition: transform 80ms ease-in;
 }
 
-.AppForm button:active {
+.AppForm .action-btn:active {
   transform: scale(0.95);
 }
 
-button:focus {
+.action-btn:focus {
   outline: none;
 }
 
-.AppForm button.ghost {
+.AppForm .action-btn.ghost {
   background-color: transparent;
   border-color: #ffffff;
 }

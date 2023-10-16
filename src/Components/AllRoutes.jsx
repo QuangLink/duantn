@@ -12,9 +12,9 @@ import AddressForm from "../Pages/checkout/addresstest";
 import ProductList from "../Pages/checkout/list";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
-import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import AdminRoute from "./PrivateRoute/AdminRoutes";
+
 
 
 
@@ -97,6 +97,7 @@ const AllRoutes = () => {
         ></Route>
         <Route path="/cart" element={<PrivateRoute><MainCartPage /></PrivateRoute>}></Route>
         <Route path="/login" element={<Login />}></Route>
+      
         <Route
           path="/whishlist"
           element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
@@ -106,7 +107,7 @@ const AllRoutes = () => {
         <Route path="/list" element={<PrivateRoute><ProductList /></PrivateRoute>}></Route>
         <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
         <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
+      
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
