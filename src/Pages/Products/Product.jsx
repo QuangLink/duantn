@@ -13,7 +13,7 @@ import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
+const exchangeRate = 300000
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
@@ -111,7 +111,7 @@ const Product = (props) => {
             marginLeft={5}
           >
             <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
-              Giá mới: {price}₫
+              Giá mới: {price ? `${(parseFloat(price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
             </Heading>
             <Text
             mt={2}
@@ -121,7 +121,7 @@ const Product = (props) => {
               color="blackAlpha.600"
               textDecoration="line-through"
             >
-             Giá gốc : {mrp}₫
+             Giá gốc : {mrp ? `${(parseFloat(mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
             </Text>
           </Box>
           

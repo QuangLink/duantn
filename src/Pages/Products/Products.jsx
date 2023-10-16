@@ -33,16 +33,18 @@ const Products = ({ typeOfProduct }) => {
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
 
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
-    whishlist: "whishlist"
+
+    mobilesandtablets: "Điện thoại và máy tính bảng",
+    televisions: "TV",
+    headphones: "Tai nghe",
+    homeappliances: "Đồ dùng gia đình",
+    computers: "Máy tính",
+    cameras: "Máy ảnh",
+    kitchen: "Đồ dùng bếp",
+    personalcare: "Đồ dùng cá nhân",
+    accessories: "Phụ kiện",
+    whishlist:"whishlist"
+
   };
 
   useEffect(() => {
@@ -78,9 +80,7 @@ const Products = ({ typeOfProduct }) => {
 
   return (
     <Box p="5">
-      {/* <Heading p="6" marginBottom={7}>
-        {category[typeOfProduct]}
-      </Heading>
+
       <hr></hr> */}
       <Box
       >
@@ -459,6 +459,7 @@ const Products = ({ typeOfProduct }) => {
               </Link>
             </MenuList>
           </Menu>
+
           <Button
             border="1px solid #e0e0e0;"
             fontSize="0.7rem"

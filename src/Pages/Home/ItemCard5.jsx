@@ -9,6 +9,7 @@ import Heading from "./Heading";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import './stylehome.css';
+
 import axios from 'axios';
 
 //thêm vào back end
@@ -136,7 +137,6 @@ import axios from 'axios';
 
 
 
-
 const ItemCard5 = ({ type, heading }) => {
   return (
     <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" >
@@ -173,7 +173,7 @@ const ItemCard5 = ({ type, heading }) => {
             <Box key={uuid()}  >
               <SwiperSlide  >
                 <Link to={i.linked}>
-                  
+
                   <Box className="list" p="2" mt="4"  borderRadius="15px   "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
                   <Box className="img">
                   <Square m="auto" _hover={{ transform: "scale(1.1)"  }}>
@@ -234,11 +234,6 @@ const ItemCard5 = ({ type, heading }) => {
                     </Box>
                   </Box>
 
-
-
-                  
-                  
-                  
                   </Box>
                 </Link>
               </SwiperSlide>

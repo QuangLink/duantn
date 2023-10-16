@@ -16,7 +16,7 @@ import ComProduct from './ComProduct';
 
 
 
-
+const exchangeRate = 300000
 const getSingleData = async (type, id) => {
   let response = await axios.get(
     `https://rus-digital-api.vercel.app/${type}/${id}`
@@ -66,7 +66,7 @@ const SingleProduct = (props) => {
   const params = useParams();
   const toast = useToast();
 
-
+ 
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -77,7 +77,15 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-
+  // Chỉ lấy % giảm giá
+  const extractDiscountPercentage = (discount) => {
+    if (!discount) return null;
+  
+    const percentageMatch = discount.match(/\d+/);
+    return percentageMatch ? `${percentageMatch[0]}%` : null;
+  };
+  
+  const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -123,6 +131,9 @@ const SingleProduct = (props) => {
   // const handleDelete = async(id) => {
   //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
   // }
+
+  
+
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
@@ -310,12 +321,12 @@ const SingleProduct = (props) => {
                 {singleData.name}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-                {singleData.price}₫
+              {singleData.price ? `${(parseFloat(singleData.price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
                 Giá gốc:{" "}
                 <span style={{ textDecoration: "line-through" }}>
-                  {singleData.mrp}
+                {singleData.mrp ? `${(parseFloat(singleData.mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
                 </span>{" "}₫
                 <span style={{ fontSize: "12px", padding: "20px" }}>
                   (Bao gồm tất cả các loại thuế)
@@ -328,7 +339,7 @@ const SingleProduct = (props) => {
                 style={{ fontWeight: "bold" }}
                 marginBottom={3}
               >
-                Giảm tới: {singleData.discount}
+                Giảm tới: {discountPercentage}
               </Text>
 
               <Text

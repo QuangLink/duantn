@@ -167,6 +167,7 @@ export const BannersCenter = [
   },
 ];
 
+
 export const BannersLeft = [
   {
     "id": 1,
@@ -230,7 +231,8 @@ export const CateFeatures = [
       "name": "Thiết bị làm mát",
       "imgcatehot": "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220"
     },
-    
+
+
    
     
   
