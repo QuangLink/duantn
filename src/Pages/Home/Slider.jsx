@@ -13,30 +13,26 @@ const Slider = ({ type }) => {
     <Swiper
       modules={[Navigation, Autoplay]}
       navigation
-      autoplay={{ delay: 4000 }}
+      autoplay={{ delay: 3000 }}
       breakpoints={{
         0: {
           slidesPerView: 1,
           spaceBetween: 10,
         },
-        200: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
         480: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        660: {
           slidesPerView: 2,
           spaceBetween: 10,
         },
-        749: {
+        768: {
           slidesPerView: 3,
-          spaceBetween: 10,
+          spaceBetween: 15,
         },
-        1240: {
+        1024: {
           slidesPerView: 4,
+          spaceBetween: 15,
+        },
+        1280: {
+          slidesPerView: 5,
           spaceBetween: 10,
         },
       }}

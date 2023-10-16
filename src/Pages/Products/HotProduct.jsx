@@ -12,16 +12,14 @@ import uuid from "react-uuid";
 const HotProduct = ({ type, heading }) => {
   return (
     <Box justifyContent="center" w="80%" m="auto" mt="6" cursor="pointer" textAlign="center"
-      backgroundColor="blackAlpha.50" borderRadius="10px" >
+      backgroundColor="#CCF1F9" borderRadius="5px" >
       <Box >
         <a href="">
-
           <Text
-
             fontSize="2.1rem" color="whiteAlpha.900" fontWeight="black"
-            width="100%" backgroundColor="blue.300" h="60px"
+            width="100%" backgroundImage={`https://tse4.mm.bing.net/th?id=OIP._aitshqx8BfKQfOgRl-1ZgEyDM&pid=Api&P=0&h=180`} h="60px"
             p={2}
-          >Deal Sốc Giảm tới 8.000.000 VNĐ </Text>
+          >Các sản phẩm hot nhật tuần qua </Text>
 
         </a>
       </Box>
@@ -106,7 +104,6 @@ const HotProduct = ({ type, heading }) => {
                           borderRadius="5px"
                           width="auto"
                           px="2"
-
                           // border="1px solid green"
                           backgroundColor="#fff0e9"
                           color="#eb5757"

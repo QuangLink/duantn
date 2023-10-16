@@ -7,9 +7,12 @@ import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
+
 import {
   ItemDetails8,
+  ItemDetails1,
 } from "../Home/CardDetails";
+import SlideProuct from "./SlideProduct";
 
 const getData = async (typeOfProduct) => {
   let response = await axios.get(
@@ -75,12 +78,16 @@ const Products = ({ typeOfProduct }) => {
 
   return (
     <Box p="5">
-      <Heading p="6" marginBottom={7}>
+      {/* <Heading p="6" marginBottom={7}>
         {category[typeOfProduct]}
       </Heading>
-      <hr></hr>
+      <hr></hr> */}
       <Box
-        mb="5%">
+      >
+      <SlideProuct type={ItemDetails1} />
+      </Box>
+      <Box
+        mb="2%">
         <HotProduct type={ItemDetails8} />
       </Box>
       <Box
@@ -531,7 +538,7 @@ const Products = ({ typeOfProduct }) => {
               "repeat(3,1fr)",
               "repeat(4,1fr)",
             ]}
-            gap={3}
+            gap={2}
           >
             {productsList.map((elem, i) => {
               // console.log("in the products page in the map method and elem is :- ", elem);
