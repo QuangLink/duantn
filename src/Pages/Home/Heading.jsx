@@ -6,8 +6,10 @@ const Heading = ({ heading }) => {
   return (
     <Flex gap="2" >
       <Center width="100%" backgroundColor="" h="60px" display="flex" justifyContent="space-between">
-        <Box borderBottom="4px solid black" >
-        <Text fontSize="2xl"  width="" fontWeight="700" textColor="black" 
+
+        <Box  >
+        <Text fontSize="2xl" width="" fontWeight="700" textColor="black" 
+
          className="headingHome"
       
         

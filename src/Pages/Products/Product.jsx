@@ -43,12 +43,6 @@ const Product = (props) => {
 
   var navigate = useNavigate();
   const toast = useToast();
-
-  
-
-
-
-  
   const handleWish = (data) => {
     console.log("this is data from hadleWhish",data);
     let newData = {};
