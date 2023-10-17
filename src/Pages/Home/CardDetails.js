@@ -3,8 +3,9 @@ import axios from 'axios';
 const apiUrlBase = 'http://localhost:9000/category/';
 
 const categoryUrls = {
-  default: apiUrlBase,
+  allproduct: apiUrlBase,
   deals: apiUrlBase + 'deals',
+  sales: apiUrlBase + 'sales',
   apple: {
     phone: apiUrlBase + 'apple/phone',
     tablet: apiUrlBase + 'apple/tablet',
@@ -32,8 +33,9 @@ const fetchDataForCategory = async (category) => {
     return [];
   }
 };
-
+export let PrAll = [];
 export let PrDeals = [];
+export let PrSales = [];
 export let PrApplePhone = [];
 export let PrAppleTablet = [];
 export let PrSamsung = [];
@@ -44,7 +46,9 @@ export let PrLenovo = [];
 export let PrAcer = [];
 
 const fetchDataForAllCategories = async () => {
+  PrAll = await fetchDataForCategory('allproduct');
   PrDeals = await fetchDataForCategory('deals');
+  PrSales = await fetchDataForCategory('sales');
   PrApplePhone = await fetchDataForCategory('apple.phone');
   PrAppleTablet = await fetchDataForCategory('apple.tablet');
   PrSamsung = await fetchDataForCategory('samsung');
@@ -271,53 +275,7 @@ export const ItemDetails2 = [
   },
 ];
 
-export const ItemDetails3 = [
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Blue and Gray Trail Loop - M/L",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177945-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NTIwNXxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaDA1Lzk4OTE5NjUwNDI3MTguanBnfGQ5YzE2NGM4OGU1MWM3ZDM3NDc2ODQyNDQzNzljMWU1NmM1NmFhZTQ0YzY3MDUxODlhYmVhMTA1MGQ0YjgzZjA",
-    caption: "Slide 1",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "(5%) 4,495",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch SE GPS + Cellular - 40 mm Silver Aluminium Case with White 2nd Generation Sport Band",
-    img: "https://www.reliancedigital.in/medias/Apple-SE-Sports-Fitness-Watches-493177926-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzNDk1OXxpbWFnZS9qcGVnfGltYWdlcy9oMmEvaDJkLzk4OTE5OTE5NzgwMTQuanBnfDdjNDY1NzJlNjlkNjg0MmZiZDQ2MTBjNzM0ZmY1NTZhYjExYTZlYTk2MmVlNDRmYzU4Yjc5MTNhZDkyOTZkNjc",
-    caption: "Slide 2",
-    mrp: "33,155.00",
-    price: "34,900.00",
-    discount: "5%(₹1,745)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Orange Alpine Loop - Medium",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177937-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NjAyN3xpbWFnZS9qcGVnfGltYWdlcy9oZjcvaGE0Lzk4OTE5NDUwNTQyMzguanBnfDUzMWY2ZWFjYTBiMzAzZDA3MjFlOGRiOTlhZjQyYjMzNzFjNmZjYTQyMzNmYWYwNzUzYjdjODlkZmU2Y2UxZDU",
-    caption: "Slide 3",
-    mrp: "36,005.00",
-    price: "37,900.00",
-    discount: "5%(₹1,895)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch SE GPS + Cellular - 44 mm Silver Aluminium Case with White 2nd Generation Sport Band",
-    img: "https://www.reliancedigital.in/medias/Apple-SE-Sports-Fitness-Watches-493177923-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzNTU2NnxpbWFnZS9qcGVnfGltYWdlcy9oMzgvaDI5Lzk4OTE5ODM3ODYwMTQuanBnfGQ4YzkwMmIwZjlmNjdmOGQzNmIxOGEyZGNjNTk5ZThlYjY2NTFmNTQzYWY5ZTJkNDE3MTk4YmUwZTcxY2ZiMzg",
-    caption: "Slide 4",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "5%(₹4,495)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Blue and Gray Trail Loop - M/L",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177945-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NTIwNXxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaDA1Lzk4OTE5NjUwNDI3MTguanBnfGQ5YzE2NGM4OGU1MWM3ZDM3NDc2ODQyNDQzNzljMWU1NmM1NmFhZTQ0YzY3MDUxODlhYmVhMTA1MGQ0YjgzZjA",
-    caption: "Slide 1",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "5%(₹4,495)",
-    linked: "personalcare",
-  },
-];
+
 
 export const ItemDetails4 = [
   {

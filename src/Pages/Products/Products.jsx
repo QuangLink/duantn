@@ -11,6 +11,7 @@ import HotProduct from "./HotProduct";
 import {
   ItemDetails8,
   ItemDetails1,
+  PrSales,
 } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 
@@ -84,11 +85,11 @@ const Products = ({ typeOfProduct }) => {
       <hr></hr> */}
       <Box
       >
-      <SlideProuct type={ItemDetails1} />
+      <SlideProuct type={PrSales} />
       </Box>
       <Box
         mb="2%">
-        <HotProduct type={ItemDetails8} />
+        <HotProduct type={PrSales} />
       </Box>
       <Box
         width="80%"

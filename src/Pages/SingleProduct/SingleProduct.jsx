@@ -7,7 +7,7 @@ import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import {
-  ItemDetails8
+  ItemDetails8, PrSales
 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
 
@@ -437,7 +437,7 @@ const SingleProduct = (props) => {
             <br />
             <hr
             />
-            <RelateProduct type={ItemDetails8} />
+            <RelateProduct type={PrSales} />
             <ComProduct />
           </Box>
         </Box>
