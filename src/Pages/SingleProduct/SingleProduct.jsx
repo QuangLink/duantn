@@ -7,19 +7,9 @@ import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import {
-  ItemDetails8, PrSales
+  ItemDetails8
 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
-
-const exchangeRate = 300000
-const getSingleData = async (type, id) => {
-  let response = await axios.get(
-    `http://localhost:9000/products/${id}`
-  );
-  // console.log("in the singleproduct page in the getsingleData function and response.data is :-",response.data);
-  return response.data;
-};
-
 const postSingleData = async (data) => {
   try {
     let response = await axios.post(
@@ -72,15 +62,6 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  // Chỉ lấy % giảm giá
-  const extractDiscountPercentage = (discount) => {
-    if (!discount) return null;
-  
-    const percentageMatch = discount.match(/\d+/);
-    return percentageMatch ? `${percentageMatch[0]}%` : null;
-  };
-  
-  const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -106,7 +87,6 @@ const SingleProduct = (props) => {
     }
     );
   };
-
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -315,26 +295,28 @@ const SingleProduct = (props) => {
                 {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-              {singleData.prodPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-              </Heading>
-              <Text fontSize="lg" marginBottom={3}>
-                Giá gốc:{" "}
-                <span style={{ textDecoration: "line-through" }}>
-                {singleData.prodSale.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                </span>
-                <span style={{ fontSize: "12px", padding: "20px" }}>
-                  (Bao gồm tất cả các loại thuế)
-                </span>
-              </Text>
+              {singleData.prodPrice}
+            </Heading>
+              {singleData.prodSale !== 0 && (
+                <>
+                  <Text fontSize="lg" marginBottom={3}>
+                    Giá gốc:  {singleData.prodPriceSale} đ
 
-              <Text
-                fontSize="sm"
-                color="#eb5757"
-                style={{ fontWeight: "bold" }}
-                marginBottom={3}
-              >
-                Giảm tới: {discountPercentage}
-              </Text>
+                    <span style={{ textDecoration: "line-through" }}></span>
+                    <span style={{ fontSize: "12px", padding: "20px" }}>
+                      (Bao gồm tất cả các loại thuế)
+                    </span>
+                  </Text>
+                  <Text
+                    fontSize="sm"
+                    color="#eb5757"
+                    style={{ fontWeight: "bold" }}
+                    marginBottom={3}
+                  >
+                    Giảm tới: {singleData.prodSale}%
+                  </Text>
+                </>
+              )}
 
               <Text
                 fontSize="sm"
@@ -437,7 +419,7 @@ const SingleProduct = (props) => {
             <br />
             <hr
             />
-            <RelateProduct type={PrSales} />
+            <RelateProduct type={ItemDetails8} />
             <ComProduct />
           </Box>
         </Box>

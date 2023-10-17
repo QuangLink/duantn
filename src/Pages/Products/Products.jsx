@@ -9,9 +9,7 @@ import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
 
 import {
-  ItemDetails8,
-  ItemDetails1,
-  PrSales,
+  PrHp
 } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 
@@ -85,11 +83,11 @@ const Products = ({ typeOfProduct }) => {
       <hr></hr> */}
       <Box
       >
-      <SlideProuct type={PrSales} />
+      <SlideProuct type={PrHp} />
       </Box>
       <Box
         mb="2%">
-        <HotProduct type={PrSales} />
+        <HotProduct type={PrHp} />
       </Box>
       <Box
         width="80%"
