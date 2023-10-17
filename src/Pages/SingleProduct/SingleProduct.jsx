@@ -11,15 +11,10 @@ import {
 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
 
-
-
-
-
-
 const exchangeRate = 300000
 const getSingleData = async (type, id) => {
   let response = await axios.get(
-    `https://rus-digital-api.vercel.app/${type}/${id}`
+    `http://localhost:9000/products/${id}`
   );
   // console.log("in the singleproduct page in the getsingleData function and response.data is :-",response.data);
   return response.data;
@@ -28,7 +23,7 @@ const getSingleData = async (type, id) => {
 const postSingleData = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/cart`,
+      `http://localhost:9000/cart/`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -45,7 +40,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,
+      `http://localhost:9000/whishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -178,10 +173,10 @@ const SingleProduct = (props) => {
             alignitem="center"
           >
             <Text color="gray.500" marginBottom={5}>
-              Article ID: {singleData.id}
+              Article ID: {singleData.prodID}
             </Text>
             <Heading size="md" marginBottom={5}>
-              {singleData.name}
+              {singleData.prodName}
             </Heading>
             <hr />
           </Box>
@@ -214,8 +209,7 @@ const SingleProduct = (props) => {
                 textAlign="center"
                 width="85%"
                 justifyContent="center"
-                src={singleData.img}
-                alt={singleData.name}
+                src={singleData.prodImg}
                 _hover={{ cursor: "crosshair" }}
 
               />
@@ -231,8 +225,8 @@ const SingleProduct = (props) => {
                   border="1px solid #e0e0e0;"
                   textAlign="center"
                   width="25%"
-                  src={singleData.img}
-                  alt={singleData.name}
+                  src={singleData.prodImg}
+                
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -242,8 +236,8 @@ const SingleProduct = (props) => {
                   border="1px solid #e0e0e0;"
                   textAlign="center"
                   width="25%"
-                  src={singleData.img}
-                  alt={singleData.name}
+                  src={singleData.prodImg}
+           
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -253,8 +247,8 @@ const SingleProduct = (props) => {
                   border="1px solid #e0e0e0;"
                   textAlign="center"
                   width="25%"
-                  src={singleData.img}
-                  alt={singleData.name}
+                  src={singleData.prodImg}
+        
                   _hover={{ cursor: "crosshair" }}
                 />
               </Box>
@@ -264,7 +258,7 @@ const SingleProduct = (props) => {
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  Loại tivi: {singleData.name}{" "}
+                  Tên: {singleData.prodName}{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 <ListItem>
@@ -295,11 +289,11 @@ const SingleProduct = (props) => {
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  {singleData.name} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
+                  {singleData.prodName} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
                   Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
                   <br />
 
-                  Màn hình {singleData.name} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
+                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
@@ -318,16 +312,16 @@ const SingleProduct = (props) => {
               }}
             >
               <Heading size="md" marginBottom={5}>
-                {singleData.name}
+                {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-              {singleData.price ? `${(parseFloat(singleData.price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
+              {singleData.prodPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
                 Giá gốc:{" "}
                 <span style={{ textDecoration: "line-through" }}>
-                {singleData.mrp ? `${(parseFloat(singleData.mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
-                </span>{" "}₫
+                {singleData.prodSale.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                </span>
                 <span style={{ fontSize: "12px", padding: "20px" }}>
                   (Bao gồm tất cả các loại thuế)
                 </span>
