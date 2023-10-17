@@ -1,35 +1,62 @@
-
-
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:9000/category/apple';
+const apiUrlBase = 'http://localhost:9000/category/';
 
-axios.get(apiUrl)
-  .then(response => {
-    // Lấy dữ liệu từ phản hồi
-    const productData = response.data;
+const categoryUrls = {
+  default: apiUrlBase,
+  deals: apiUrlBase + 'deals',
+  apple: {
+    phone: apiUrlBase + 'apple/phone',
+    tablet: apiUrlBase + 'apple/tablet',
+  },
+  samsung: apiUrlBase + 'samsung',
+  xiaomi: apiUrlBase + 'xiaomi',
+  hp: apiUrlBase + 'hp',
+  asus: apiUrlBase + 'asus',
+  lenovo: apiUrlBase + 'lenovo',
+  acer: apiUrlBase + 'acer',
+};
 
-    // Thay thế dữ liệu trong mảng PrDeals
-    PrDeals = productData.map(product => {
-      return {
-        name: product.prodName,
-        img: product.prodImg,
-        price: product.prodPrice,
-        id: product.prodID,
-        linked: product.catName.toLowerCase(),
-      };
-    });
+const fetchDataForCategory = async (category) => {
+  try {
+    const response = await axios.get(categoryUrls[category]);
+    return response.data.map(product => ({
+      name: product.prodName,
+      img: product.prodImg,
+      price: product.prodPrice,
+      id: product.prodID,
+      linked: product.catName.toLowerCase(),
+    }));
+  } catch (error) {
+    console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+    return [];
+  }
+};
 
-    // Xem mảng PrDeals sau khi thay thế
-    console.log('Updated PrDeals:', PrDeals);
-  })
-  .catch(error => {
-    console.error('Lỗi API:', error);
-    console.log(PrDeals);
-  });
-
-// Export mảng PrDeals
 export let PrDeals = [];
+export let PrApplePhone = [];
+export let PrAppleTablet = [];
+export let PrSamsung = [];
+export let PrXiaomi = [];
+export let PrHp = [];
+export let PrAsus = [];
+export let PrLenovo = [];
+export let PrAcer = [];
+
+const fetchDataForAllCategories = async () => {
+  PrDeals = await fetchDataForCategory('deals');
+  PrApplePhone = await fetchDataForCategory('apple.phone');
+  PrAppleTablet = await fetchDataForCategory('apple.tablet');
+  PrSamsung = await fetchDataForCategory('samsung');
+  PrXiaomi = await fetchDataForCategory('xiaomi');
+  PrHp = await fetchDataForCategory('hp');
+  PrAsus = await fetchDataForCategory('Asus');
+  PrLenovo = await fetchDataForCategory('Lenovo');
+  PrAcer = await fetchDataForCategory('Acer');
+};
+
+fetchDataForAllCategories();
+
 
 
 export const TimeDeals = [
