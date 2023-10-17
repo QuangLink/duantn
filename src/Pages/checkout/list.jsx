@@ -10,7 +10,7 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:9000/products/');
+      const response = await axios.get('http://localhost:9000/category/');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -30,12 +30,12 @@ const ProductList = () => {
 
   const renderProducts = () => {
     return products.map((product) => (
-        <tr key={product.prodID}>
+        <tr>
         <td style={{ border: '1px solid black', padding: '8px' }}>{product.prodName}</td>
         <td style={{ border: '1px solid black', padding: '8px' }}>{product.prodBrand}</td>
         <td style={{ border: '1px solid black', padding: '8px' }}>{product.prodView}</td>
         <td style={{ border: '1px solid black', padding: '8px' }}>
-        {product.prodImg && (
+         {product.prodImg && (
             <img
               src={product.prodImg}
               alt="Product"

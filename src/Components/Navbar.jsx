@@ -8,6 +8,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+
   Grid,
   Heading,
   Image,
@@ -24,14 +25,18 @@ import {
   useToast,
   Alert,
 } from "@chakra-ui/react";
-import React from "react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Icon } from '@chakra-ui/react'
+
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import React, { useState } from "react";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
 import { ImLocation2 } from "react-icons/im";
 import { BiNetworkChart, BiSearch } from "react-icons/bi";
 import { BsFillCartFill, BsPhone, BsSmartwatch } from "react-icons/bs";
 import { MdConnectWithoutContact } from "react-icons/md";
-import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai"
+import { AiOutlineLaptop, AiOutlineTablet, AiOutlineMenu } from "react-icons/ai"
 import { CiHeadphones } from "react-icons/ci";
 import { FaTruck, FaComputer } from "react-icons/fa";
 
@@ -45,14 +50,35 @@ function Navbar() {
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
+  const [input, setInput] = useState("")
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
   const { name } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const username = localStorage.getItem('username');
+
+  const fetchData = (value) => {
+    fetch("http://localhost:9000/products/search")
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log('check data', json);
+        const results = json.filter((search) => {
+          return search && search.prodName && search.prodName.toLowerCase().includes(input);
+        })
+        console.log(results);
+      })
+  }
+
+  const handleChange = (event) => {
+    setInput(event.target.value);
+    fetchData(event.target.value);
+
+  }
+
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -64,61 +90,106 @@ function Navbar() {
       isClosable: true,
     });
   };
-  console.log(name);
+  // console.log(name);
   if (isLargerThan1100) {
     return (
       <Box>
+
         <Flex
           w="100%"
+          h='90px'
           justifyContent="space-around"
           alignItems={"center"}
           m="auto"
-          bgImage={require('./Images/bghaeder2.png')}
+          backgroundColor='#4a90e2'
+          // bgImage={require('./Images/bghaeder2.png')}
           p="10px"
-          px="3%"
+          px="13%"
           gap="30px"
         >
           <Link to="/">
-            <Box>
+            <Box
+            >
               <Image src={require('./Images/logo.jpg')} alt="logo" w="150px" h="100px" />
             </Box>
           </Link>
-          <Flex
-            bg="white"
-            borderRadius={"10px"}
-            w="450px"
-            p="5px"
-            m="auto"
-            textAlign={"center"}
-          >
-            <Input
-              border={"none"}
-              fontSize={"18px"}
-              borderRadius={"5px"}
-              fontWeight="bold"
-              placeholder="Search"
-            />
-            <BiSearch fontSize={"42px"} />
-          </Flex>
-          <Flex cursor={"pointer"}>
-            <ImLocation2 color="white" fontSize="20px" />
-            <Heading
-              cursor={"pointer"}
-              fontSize={"17px"}
-              color="white"
-              _hover={{ textDecoration: "underlie" }}
+          <Box>
+            <Flex
+              bg="white"
+              borderRadius={"10px"}
+              w="300px"
+              p="5px"
+              m="auto"
+              textAlign={"center"}
             >
-              73/14 Tân Sơn Nhì, Tân Sơn Nhì, Tân Bình, TP HCM
-            </Heading>
-          </Flex>
+              <Input
+                border={"none"}
+                fontSize={"18px"}
+                borderRadius={"5px"}
+                placeholder="Bạn tìm gì..."
+                value={input}
+                onChange={handleChange}
+
+              />
+              <BiSearch fontSize={"42px"} />
+
+            </Flex>
+            <Box w={100}
+              backgroundColor="#FFFFFF"
+              display="flex"
+              flexDirection={'column'}
+              boxShadow="0x 0x 8px #ddd"
+              borderRadius={10}
+              maxHeight={300}
+              overflowY={'scroll'}
+            >
+              {/* {results.map((results, id) => {
+                return <Text key={id}>{results.prodName}</Text>
+              })} */}
+
+            </Box>
+          </Box>
+
+
           <Link to="/cart">
-            <Flex cursor={"pointer"}>
-              <BsFillCartFill color="white" fontSize="20px" />
+            <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10}
+              _hover={{
+                bg: "#0077ff"
+              }}
+            >
               <Heading
+                m="3"
                 cursor={"pointer"}
-                fontSize={"17px"}
+                fontSize={"16px"}
                 color="white"
-                _hover={{ textDecoration: "underline" }}
+              >
+                Khuyến mãi
+              </Heading>
+            </Flex>
+          </Link>
+          <Link to="/cart">
+            <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+              bg: "#0077ff"
+            }}>
+              <Heading
+                m="3"
+                cursor={"pointer"}
+                fontSize={"16px"}
+                color="white"
+              >
+                Chăm Sóc khách hàng
+              </Heading>
+            </Flex>
+          </Link>
+          <Link to="/cart">
+            <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+              bg: "#0077ff"
+            }} >
+              <Heading
+                m='3'
+                cursor={"pointer"}
+                fontSize={"16px"}
+                color="white"
               >
                 Giỏ hàng
               </Heading>
@@ -126,16 +197,18 @@ function Navbar() {
           </Link>
 
           {!isAuth ? (
-            <Flex cursor={"pointer"}>
-              <GrLogin color="white" fontSize="20px" />
+            <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+              bg: "#0077ff"
+            }}>
               <Link to="login">
                 <Heading
+                  m="3"
                   cursor={"pointer"}
-                  fontSize={"17px"}
+                  fontSize={"16px"}
                   color="white"
-                  _hover={{ textDecoration: "underline" }}
+
                 >
-                  Login
+                  Đăng nhập
                 </Heading>
               </Link>
             </Flex>
@@ -146,7 +219,7 @@ function Navbar() {
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
               >
-                Hi {username}
+                Hi {name}
               </MenuButton>
               <MenuList>
                 <MenuItem>My Profile</MenuItem>
@@ -161,84 +234,101 @@ function Navbar() {
             </Menu>
           )}
         </Flex>
-
         <Flex
           w="100%"
+          h="40px"
           textAlign={"center"}
           justifyContent="space-between"
           alignItems={"center"}
           m="auto"
-          bg="#636363"
-          px="20%"
+          bg="#4a90e2"
+          px="13%"
         >
-          <Menu >
-            <Link to="mobilesandtablets" >
-              <MenuButton
 
-                px={4}
-                py={2}
-                color="white"
-                transition="all 0.1s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                Điện Thoại
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="computers">
-              <MenuButton
-                px={4}
-                py={2}
-                color="white"
-                transition="all 0.2s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                Laptop
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="mobilesandtablets">
-              <MenuButton
-                px={4}
-                py={2}
-                color="white"
-                transition="all 0.2s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                Tablet
-              </MenuButton>
-            </Link>
-          </Menu>
 
-          {/* Phụ kiện */}
           <Menu>
             <MenuButton
 
               px={4}
               py={2}
+
               color="white"
-              transition="all 0.2s"
-              _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
+              // transition="all 0.2s"
+              _hover={{ color: "white" }}
               _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
+              alignContent={"center"}
             >
-              Phụ kiện <ChevronDownIcon />
+              <HamburgerIcon w={50} h={7} paddingBottom={1} />Tất cả danh mục<ChevronDownIcon />
             </MenuButton>
-            <MenuList bg="#636363">
+
+            <MenuList bg="#FFFFFF">
               <Link to="headphones">
                 <Grid
                   p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
+                  gridTemplateColumns={"repeat(6,1fr)"}
                   gap="20px"
                   justifyContent="space-around"
                   alignContent={"center"}
                   textAlign="center"
-                  color="white"
+                  color="#55555"
                 >
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+                      }}
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      LapTop
+
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Asus
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Lenovo
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Acer
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Hp
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      MacBook
+                    </Text>
+                  </Box>
                   <Box>
                     <Heading
                       _hover={{
@@ -246,7 +336,275 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-                      textDecoration="underline"
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Điện thoại
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Apple
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Samsung
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Xiaomi
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Oppo
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Tablet
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      IPad
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Samsung
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Xiaomi
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Nokia
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Lenovo
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Readme
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị lưu trữ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Ổ cứng di động
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thẻ nhớ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      USB
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Đồng hồ
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Đồng hồ nam
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Đồng hồ nữ
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Đồng hồ Casio
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Đồng hồ Orient
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Đồng hồ Citizen
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Smartwatch
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Apple Watch
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Samsung
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      BiFit
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Xiaomi
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -282,6 +640,7 @@ function Navbar() {
                     <Text
                       _hover={{
                         textDecoration: "underline",
+
                         cursor: "pointer",
                       }}
                     >
@@ -304,7 +663,7 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-                      textDecoration="underline"
+
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -336,11 +695,11 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-                      textDecoration="underline"
+
                       my="8px"
                       fontSize={"18px"}
                     >
-                      Thiết bị âm thanh
+                      Phụ kiện điện thoại
                     </Heading>
                     <Text
                       _hover={{
@@ -358,7 +717,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Loa
+                      Pin dự phòng
                     </Text>
                     <Text
                       _hover={{
@@ -367,23 +726,8 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Micro
+                      Cáp sạc
                     </Text>
-
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      textDecoration="underline"
-                      my="8px"
-                      fontSize={"18px"}
-                    >
-                      Thiết bị lưu trữ
-                    </Heading>
                     <Text
                       _hover={{
                         textDecoration: "underline",
@@ -391,7 +735,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      Ổ cứng di động
+                      Loa nghe nhạc
                     </Text>
                     <Text
                       _hover={{
@@ -402,6 +746,21 @@ function Navbar() {
                     >
                       Thẻ nhớ
                     </Text>
+
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Phụ kiện điện máy
+                    </Heading>
                     <Text
                       _hover={{
                         textDecoration: "underline",
@@ -409,40 +768,108 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     >
-                      USB
+                      Cáp HDMI, Cáp tivi
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Khung treo tivi
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Điều kiển tivi
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+
+                      my="8px"
+                      fontSize={"18px"}
+                    >
+                      Thiết bị Mạng
+                    </Heading>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thiết bị mạng Asus
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thiết bị mạng Xiaomi
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thiết bị mạng TotoLink
+                    </Text>
+                    <Text
+                      _hover={{
+                        textDecoration: "underline",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      Thiết bị mạng TP-LINK
                     </Text>
                   </Box>
                 </Grid>
               </Link>
             </MenuList>
           </Menu>
-
-          <Menu>
-            <Link to="accessories">
+          <Menu >
+            <Link to="accessories" >
               <MenuButton
+
                 px={4}
                 py={2}
                 color="white"
-                transition="all 0.2s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
+                transition="all 0.1s"
+                _hover={{ color: "white" }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
-                Smartwatch
+                <Icon as={BsPhone} />  Điện Thoại
               </MenuButton>
+
             </Link>
           </Menu>
-
           <Menu>
-            <Link to="accessories">
+            <Link to="computers">
               <MenuButton
                 px={4}
                 py={2}
                 color="white"
                 transition="all 0.2s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
+                _hover={{ color: "white" }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
-                Đồng hồ
+                <Icon boxSize={5} h={5} as={AiOutlineLaptop} />  Laptop
               </MenuButton>
             </Link>
           </Menu>
@@ -453,15 +880,59 @@ function Navbar() {
                 py={2}
                 color="white"
                 transition="all 0.2s"
-                _hover={{ bg: "#4f4f4f", color: "white", fontSize: 20 }}
+                _hover={{ color: "white" }}
+                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
+              >
+                <Icon as={AiOutlineTablet} /> Tablet
+              </MenuButton>
+            </Link>
+          </Menu>
+          <Menu >
+            <Link to="accessories">
+
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ color: "white" }}
+                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
+                display="flex"
+              >
+                <Icon as={BsSmartwatch} />  Smartwatch
+              </MenuButton>
+            </Link>
+          </Menu >
+          <Menu>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ color: "white" }}
+                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
+              >
+                <Icon as={BsSmartwatch} />  Đồng hồ
+              </MenuButton>
+            </Link>
+          </Menu>
+          <Menu>
+            <Link to="mobilesandtablets">
+              <MenuButton
+                px={4}
+                py={2}
+                color="white"
+                transition="all 0.2s"
+                _hover={{ color: "white" }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
                 Máy cũ giá rẻ
               </MenuButton>
             </Link>
           </Menu>
-        </Flex>
-      </Box>
+        </Flex >
+      </Box >
     );
   } else if (isLargerThan750px) {
     return (
@@ -470,7 +941,7 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        bgImage={require('./Images/bghaeder2.png')}
+        backgroundColor='#4a90e2'
         p="20px"
         px="2%"
         gap="10px"
@@ -492,35 +963,40 @@ function Navbar() {
             border={"none"}
             fontSize={"18px"}
             borderRadius={"5px"}
-            fontWeight="bold"
-            placeholder="Search"
+            placeholder="Bạn tìm gì..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
         <Link to="/cart">
-          <Flex cursor={"pointer"}>
-            <BsFillCartFill color="white" fontSize="20px" />
+          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+            bg: "#0077ff"
+          }} >
             <Heading
+              m='3'
               cursor={"pointer"}
-              fontSize={"17px"}
+              fontSize={"16px"}
               color="white"
-              _hover={{ bg: "red", textDecoration: "underline" }}
             >
-              Cart
+              Giỏ hàng
             </Heading>
           </Flex>
         </Link>
         {!isAuth ? (
-          <Flex cursor={"pointer"}>
-            <GrLogin color="white" fontSize="20px" />
+          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
+            bg: "#0077ff"
+          }}>
             <Link to="login">
               <Heading
+                m={3}
                 cursor={"pointer"}
                 fontSize={"17px"}
                 color="white"
                 _hover={{ bg: "red", textDecoration: "underline" }}
               >
-                Login
+                Đăng nhập
               </Heading>
             </Link>
           </Flex>
@@ -557,7 +1033,7 @@ function Navbar() {
 
           >
             <DrawerOverlay />
-            <DrawerContent bg="#656565">
+            <DrawerContent bg="#FFFFFF" color="#55555">
               <DrawerCloseButton />
               <DrawerHeader fontSize={"22px"} fontWeight="bold">
                 Menu
@@ -575,15 +1051,15 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Điện thoại
                       <Heading
                         cursor={"pointer"}
                         fontSize={"17px"}
-                        color="white"
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+                        color="#55555"
+                        _hover={{ color: "#55555" }}
                       />
                     </Heading>
                   </Link>
@@ -591,8 +1067,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Laptop
                     </Heading>
@@ -601,8 +1077,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Tablet
                     </Heading>
@@ -611,8 +1087,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Phụ kiện
                     </Heading>
@@ -621,8 +1097,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Smartwatch
                     </Heading>
@@ -631,8 +1107,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Đồng hồ
                     </Heading>
@@ -641,8 +1117,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
+                      _hover={{ color: "#55555" }}
                     >
                       Mua máy cũ giá rẻ
                     </Heading>
@@ -661,7 +1137,7 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        bgImage={require('./Images/bghaeder2.png')}
+        backgroundColor='#4a90e2'
         p="20px"
         px="2%"
         gap="10px"
@@ -683,8 +1159,9 @@ function Navbar() {
             border={"none"}
             fontSize={"18px"}
             borderRadius={"5px"}
-            fontWeight="bold"
-            placeholder="Search"
+            placeholder="Bạn tìm gì..."
+
+
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
@@ -699,7 +1176,7 @@ function Navbar() {
             finalFocusRef={btnRef}
           >
             <DrawerOverlay />
-            <DrawerContent bg="#656565">
+            <DrawerContent bg="#FFFFFF" color="#55555">
               <DrawerCloseButton />
 
               <DrawerBody>
@@ -715,9 +1192,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="black"
+                        color="#55555"
                         mt="35px"
                       >
                         Hi {name}
@@ -728,9 +1205,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                         mt="35px"
                       >
                         Profile
@@ -743,9 +1220,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                       >
                         Login
                       </Heading>
@@ -755,9 +1232,9 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-                        _hover={{ bg: "#4f4f4f", color: "white" }}
+
                         fontWeight="bold"
-                        color="white"
+                        color="#55555"
                         onClick={handleLogout}
                       >
                         Logout
@@ -769,9 +1246,8 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"24px"}
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
                       fontWeight="bold"
-                      color="white"
+                      color="#55555"
                     >
                       Cart
                     </Heading>
@@ -787,8 +1263,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Điện thoại
                     </Heading>
@@ -797,8 +1272,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Laptop
                     </Heading>
@@ -807,8 +1281,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Tablet
                     </Heading>
@@ -817,8 +1290,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Phụ kiện
                     </Heading>
@@ -827,8 +1299,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Smartwatch
                     </Heading>
@@ -837,8 +1308,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Đồng hồ
                     </Heading>
@@ -847,8 +1317,7 @@ function Navbar() {
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
-                      color="white"
-                      _hover={{ bg: "#4f4f4f", color: "white" }}
+                      color="#55555"
                     >
                       Máy cũ giá rẻ
                     </Heading>
