@@ -38,7 +38,7 @@ import {
   ItemDetails18,
   CateFeatures,
   BannersLeft,
-
+  PrXiaomi,
   BannersCenter,
   TimeDeals,
   PrDeals,
@@ -74,7 +74,7 @@ const Home = () => {
       <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrDeals}  />
+      <PrDeal type={PrXiaomi}  />
 
       <br />
       <hr />

@@ -9,10 +9,8 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import './stylehome.css';
-
 const PrDeal = ({ type }) => {
   return (
-
     <Box justifyContent="center" w="75%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
                         {/* <Heading textAlign="center" display="flex"  justifyContent="space-around" w="95%" back mt="6"  m="15p% 10% 10% 10%">
                             <Box mt="6" display="flex" >
@@ -24,14 +22,11 @@ const PrDeal = ({ type }) => {
                                             
                             </Box>
                         </Heading> */}
-
 <Heading textAlign="center" display="flex" justifyContent="center" w="100%"  m="15p% 10% 10% 10%">
                       <Box mt="0" >
                       <i > <img width="120px" src={require('../../Components/Images/HDSale.png')}/></i>
                       </Box>
-                      <Box mt="8"  >
-                     
-                        
+                      <Box mt="8"  >                 
                         <Text fontSize="40px" color="#efefef" w="100%">  TUẦN LỄ GIẢM GIÁ SẬP SÀN</Text>
                        
                         </Box>
@@ -50,8 +45,6 @@ const PrDeal = ({ type }) => {
 
                     </Box>
     </Swiper>
- 
-
       <Box mt="1"  >
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -79,16 +72,9 @@ const PrDeal = ({ type }) => {
               spaceBetween: 10,
             },
           }}
-        >
+      >
           {type.map((i) => (
-
-
-            <Box key={uuid()}  >
-                 
-
-
-                
-              
+            <Box key={uuid()}  >         
               <SwiperSlide  >
                 <Link to={i.linked}>
                   
@@ -128,55 +114,30 @@ const PrDeal = ({ type }) => {
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
                            {i.mrp} <sup>đ</sup>
                         </Text>
-                      </Flex>
-                     
-                     
-                     
-                     
+                      </Flex>                
                       <Box
                       padding="3px"
                         borderRadius="5px"
-                       
                         w="40%"
                         color="#f72424"
                         bg="#fff0e9"
                         mt="2"
-                        textAlign="center"
-                        
+                        textAlign="center"                       
                       >
                         <Text fontSize="10px" fontWeight="500">
-                          GIẢM GIÁ SỐC
-                          
+                          GIẢM GIÁ SỐC                        
                         </Text>
                       </Box>
                       <Box mb="-5"    borderRadius="15px">
                       <Image src={require('../../Components/Images/PrSaleimg.png')} w="100%" 
                          borderRadius="15px"
                           />
-                         
-                          
-                          
-                          
-                       
-
-                        </Box>
-                       
+                   </Box>                   
                     </Box>
                   </Box>
-                  </Box>
-
-                  
-                </Link>
-             
-             
-             
-             
-             
+                  </Box>              
+                </Link>          
               </SwiperSlide>
-            
-            
-            
-            
             </Box>
           ))}
         </Swiper>
