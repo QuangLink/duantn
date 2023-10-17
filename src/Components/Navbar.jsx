@@ -67,7 +67,7 @@ function Navbar() {
   const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
-  const { name } = useSelector((store) => store.AuthManager);
+  const { username } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -193,7 +193,7 @@ function Navbar() {
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
               >
-                Hi {name}
+                Hi {username}
               </MenuButton>
               <MenuList>
                 <MenuItem>My Profile</MenuItem>
@@ -854,7 +854,7 @@ function Navbar() {
             </MenuList>
           </Menu>
           <Menu >
-            <Link to="accessories" >
+            <Link to="phone" >
               <MenuButton
 
                 px={4}
@@ -870,7 +870,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="computers">
+            <Link to="laptop">
               <MenuButton
                 px={4}
                 py={2}
@@ -884,7 +884,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="mobilesandtablets">
+            <Link to="tablet">
               <MenuButton
                 px={4}
                 py={2}
@@ -1017,7 +1017,7 @@ function Navbar() {
               as={Button}
               rightIcon={<ChevronDownIcon />}
             >
-              Hi {name}
+              Hi {username}
             </MenuButton>
             <MenuList>
               <MenuItem>My Profile</MenuItem>
@@ -1073,7 +1073,7 @@ function Navbar() {
                       />
                     </Heading>
                   </Link>
-                  <Link to="homeappliances">
+                  <Link to="phone">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1083,7 +1083,7 @@ function Navbar() {
                       Laptop
                     </Heading>
                   </Link>
-                  <Link to="homeappliances">
+                  <Link to="laptop">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1093,7 +1093,7 @@ function Navbar() {
                       Tablet
                     </Heading>
                   </Link>
-                  <Link to="computers">
+                  <Link to="tablet">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1207,7 +1207,7 @@ function Navbar() {
                         color="#55555"
                         mt="35px"
                       >
-                        Hi {name}
+                        Hi {username}
                       </Heading>
                     </Link>
                   ) : (

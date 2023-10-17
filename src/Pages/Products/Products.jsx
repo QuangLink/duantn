@@ -13,9 +13,9 @@ import {
 } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 
-const getData = async (typeOfProduct) => {
+const getData = async (typeOfProduct,brandOfProduct) => {
   let response = await axios.get(
-    `http://localhost:9000/category/${typeOfProduct}`
+    `http://localhost:9000/category/${typeOfProduct}/${brandOfProduct}`
   );
   return response.data;
 };
@@ -30,17 +30,18 @@ const Products = ({ typeOfProduct }) => {
 
   const dispatch = useDispatch();
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
-
   const category = {
+    laptop: "LAPTOP",
+    tablet: "TABLET",
+    phone: "Phone",
     apple: "APPLE",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
+    xiaomi: "XIAOMI",
+    samsung: "SAMSUNG",
+    oppo: "OPPO",
+    hp: "HP",
+    asus: "ASUS",
+    lenovo: "LENOVO",
+    acer: "ACER",
     whishlist: "whishlist"
   };
 
@@ -544,7 +545,7 @@ const Products = ({ typeOfProduct }) => {
               return (
 
                 <GridItem
-                  key={elem.name + i}
+                  key={elem.prodName + i}
                   w="97%"
                   h="100 %"
                   bg="white.500"
