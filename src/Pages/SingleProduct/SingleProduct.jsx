@@ -295,7 +295,7 @@ const SingleProduct = (props) => {
                 {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-              {singleData.prodPrice}
+              {singleData.prodPrice} đ
             </Heading>
               {singleData.prodSale !== 0 && (
                 <>

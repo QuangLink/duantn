@@ -81,17 +81,17 @@ const Home = () => {
       <hr />
       
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT " />
+      <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrHp}  />
+      <PrDeal type={PrApplePhone}  />
 
       <br />
       <hr />
       <ItemCard2
-        type={PrXiaomi}
+        type={PrApplePhone}
         linked={"/personalcare"}
-        heading="ĐỒNG HỒ THÔNG MINH APPLE  "
+        heading="Iphone "
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />

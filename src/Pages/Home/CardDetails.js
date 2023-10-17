@@ -5,11 +5,9 @@ const apiUrlBase = 'http://localhost:9000/category/';
 const categoryUrls = {
   allproduct: apiUrlBase,
   deals: apiUrlBase + 'deals',
-  sales: apiUrlBase + 'sales',
-  apple: {
-    phone: apiUrlBase + 'apple/phone',
-    tablet: apiUrlBase + 'apple/tablet',
-  },
+  sale: apiUrlBase + 'sale',
+    applephone: apiUrlBase + 'apple/phone',
+    appletablet: apiUrlBase + 'apple/tablet',
   samsung: apiUrlBase + 'samsung',
   xiaomi: apiUrlBase + 'xiaomi',
   hp: apiUrlBase + 'hp',
@@ -26,6 +24,8 @@ const fetchDataForCategory = async (category) => {
       img: product.prodImg,
       price: product.prodPrice,
       id: product.prodID,
+      sale:product.prodSale,
+      original:product.prodPriceSale,
       linked: product.catName.toLowerCase(),
     }));
   } catch (error) {
@@ -48,9 +48,9 @@ export let PrAcer = [];
 const fetchDataForAllCategories = async () => {
   PrAll = await fetchDataForCategory('allproduct');
   PrDeals = await fetchDataForCategory('deals');
-  PrSales = await fetchDataForCategory('sales');
-  PrApplePhone = await fetchDataForCategory('apple.phone');
-  PrAppleTablet = await fetchDataForCategory('apple.tablet');
+  PrSales = await fetchDataForCategory('sale');
+  PrApplePhone = await fetchDataForCategory('applephone');
+  PrAppleTablet = await fetchDataForCategory('appletablet');
   PrSamsung = await fetchDataForCategory('samsung');
   PrXiaomi = await fetchDataForCategory('xiaomi');
   PrHp = await fetchDataForCategory('hp');

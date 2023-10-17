@@ -15,7 +15,7 @@ import SlideProuct from "./SlideProduct";
 
 const getData = async (typeOfProduct) => {
   let response = await axios.get(
-    `https://rus-digital-api.vercel.app/${typeOfProduct}`
+    `http://localhost:9000/category/${typeOfProduct}`
   );
   return response.data;
 };
@@ -32,7 +32,7 @@ const Products = ({ typeOfProduct }) => {
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
 
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
+    apple: "APPLE",
     televisions: "TELEVISIONS",
     headphones: "HEADPHONES",
     homeappliances: "HOME-APPLIANCES",
