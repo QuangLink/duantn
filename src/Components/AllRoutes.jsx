@@ -14,7 +14,6 @@ import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 
-import ProductList from "../Pages/Home/test";
 
 const AllRoutes = () => {
   return (
@@ -101,7 +100,6 @@ const AllRoutes = () => {
           element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
         ></Route>
         <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}></Route>
-        <Route path="/test" element={<AdminRoute><AddressForm /></AdminRoute>}></Route>
         <Route path="/list" element={<PrivateRoute><ProductList /></PrivateRoute>}></Route>
         <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
         <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
