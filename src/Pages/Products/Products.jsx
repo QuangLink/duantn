@@ -119,7 +119,7 @@ const Products = ({ typeOfProduct }) => {
               <Link to="#">
                 <Grid
                   p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
+                  gridTemplateColumns={"repeat(3,1fr)"}
                   gap="20px"
                   justifyContent="space-around"
                   alignContent={"center"}

@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   Flex,
   Heading,
   Image,
@@ -88,7 +89,9 @@ const Product = (props) => {
               {id}%
             </Text>
           </Box> */}
-          <Image src={img} alt={name}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
+          <Center>
+          <Image src={img} alt={name}  justifyItems="center" _hover={{ p: "" }} />
+          </Center>
           <Box
             h="150"
             w="100%"

@@ -61,7 +61,7 @@ const SingleProduct = (props) => {
   const params = useParams();
   const toast = useToast();
 
- 
+
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -75,11 +75,11 @@ const SingleProduct = (props) => {
   // Chỉ lấy % giảm giá
   const extractDiscountPercentage = (discount) => {
     if (!discount) return null;
-  
+
     const percentageMatch = discount.match(/\d+/);
     return percentageMatch ? `${percentageMatch[0]}%` : null;
   };
-  
+
   const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
@@ -127,7 +127,7 @@ const SingleProduct = (props) => {
   //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
   // }
 
-  
+
 
 
   useEffect(() => {
@@ -160,9 +160,7 @@ const SingleProduct = (props) => {
             visible={true}
           />
         </Center>
-
       ) : (
-
         //Box tổng
         <Box marginTop={10}>
           <Box
@@ -226,7 +224,7 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-                
+
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -237,7 +235,7 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-           
+
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -248,7 +246,7 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-        
+
                   _hover={{ cursor: "crosshair" }}
                 />
               </Box>
@@ -292,14 +290,12 @@ const SingleProduct = (props) => {
                   {singleData.prodName} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
                   Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
                   <br />
-
                   Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
                 </ListItem>
               </UnorderedList>
-
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
@@ -315,12 +311,12 @@ const SingleProduct = (props) => {
                 {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-              {singleData.prodPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                {singleData.prodPrice}
               </Heading>
               <Text fontSize="lg" marginBottom={3}>
                 Giá gốc:{" "}
                 <span style={{ textDecoration: "line-through" }}>
-                {singleData.prodSale.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                  {singleData.prodSale}
                 </span>
                 <span style={{ fontSize: "12px", padding: "20px" }}>
                   (Bao gồm tất cả các loại thuế)
@@ -359,7 +355,6 @@ const SingleProduct = (props) => {
                 p={2}
                 marginBottom={3}
               ></Input>
-
               <Flex w="full" justifyContent="space-between">
                 <Button
                   w="49%"

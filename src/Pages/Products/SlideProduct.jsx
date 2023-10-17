@@ -9,13 +9,12 @@ const SlideProuct = ({ type }) => {
         <Box cursor="pointer">
             <Box
                 bg="#6FE4FF"
-                width="80%"
                 display="flex"
                 w="80%" m="auto" mt="6"
                 padding="10px"
                 borderRadius="5px"
             >
-                <Box width="69%" mr="1%">
+                <Box width="65%" mr="1%">
                     <Slide >
                         {type.map((i) => (
                             <Box key={uuid()} h="220px"
