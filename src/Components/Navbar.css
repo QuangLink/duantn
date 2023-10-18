@@ -1,0 +1,19 @@
+
+  .header-bar.focused {
+    display: none; 
+  }
+  .input-bar.focused {
+    width: 744px;
+  }
+
+  .prodPriceSale{
+    font-weight: 400;
+text-decoration: line-through;
+margin-left: 15px;
+
+  }
+  .prodPrice{
+    font-weight: 400;
+    color: #555;
+    color: red;
+  }

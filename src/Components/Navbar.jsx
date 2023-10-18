@@ -24,6 +24,8 @@ import {
   Button,
   useToast,
   Alert,
+  background,
+  textDecoration,
 } from "@chakra-ui/react";
 import { Icon } from '@chakra-ui/react'
 
@@ -47,7 +49,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/Auth/auth.action";
 
 
-
+import './Navbar.css';
+import axios from 'axios';
 
 
 
@@ -71,23 +74,41 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+  const [isFocused, setIsFocused] = useState(false);
+  const [results, setResults] = useState([]);
 
+  const handleInputFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsFocused(false);
+  };
   const fetchData = (value) => {
     fetch("http://localhost:9000/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
-        const results = json.filter((search) => {
-          return search && search.prodName && search.prodName.toLowerCase().includes(input);
-        })
-        console.log(results);
+        const filteredResults = json.filter((search) => {
+          return search && search.prodName && search.prodName.toLowerCase().includes(input.toLowerCase());
+        });
+        setResults(filteredResults);
+        console.log(filteredResults);
       })
-  }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleChange = (event) => {
-    setInput(event.target.value);
-    fetchData(event.target.value);
+    const inputValue = event.target.value;
 
+    setInput(inputValue);
+    if (inputValue === '') {
+      setResults([]);
+    } else {
+      fetchData(inputValue);
+    }
   }
 
 
@@ -139,6 +160,11 @@ function Navbar() {
               p="5px"
               m="auto"
               textAlign={"center"}
+              className={`input-bar ${isFocused ? 'focused' : ''}`}
+            // className={isFocused ? 'input-focused' : ''}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
+
             >
               <Input
                 border={"none"}
@@ -149,24 +175,61 @@ function Navbar() {
                 value={input}
                 onChange={handleChange}
 
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+
               />
               <BiSearch color="#555" fontSize={"28px"} />
 
+
+
             </Flex>
-            <Box w={100}
-              backgroundColor="#FFFFFF"
-              display="flex"
-              flexDirection={'column'}
-              boxShadow="0x 0x 8px #ddd"
-              borderRadius={10}
-              maxHeight={300}
-              overflowY={'scroll'}
+
+            <Box
+              bg={'#fff'}
+              width="744px"
+              height="auto"
+              position={'absolute'}
+
+              marginTop={5}
+              borderRadius={15}
+
+
             >
-              {/* {results.map((results, id) => {
-                return <Text key={id}>{results.prodName}</Text>
-              })} */}
+              {results.slice(0, 5).map((results, id) => {
+                return (
+                  // <Box key={id} >
+                  //   <Image src={results.prodImg} alt="Phone" w={50} h={50} />
+                  //   <Text display='inline-block'>{results.prodName}</Text>
+                  // </Box>
+                  <Link to={`/proudtc/${results.prodID}`} >
+                    <Flex key={id} direction="row" align="flex-start" justify="center" borderRadius={15} _hover={{ bg: '#9ecdf2' }}>
+                      <Box mb={6} margin={5} marginRight={10}>
+                        <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                      </Box>
+                      <Box mb={6}>
+                        <Text fontSize="xl" fontWeight="600">
+                          {results.prodName}
+                        </Text>
+                        <Text fontSize="lg" color="gray.500">
+                          <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                          <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                        </Text>
+
+                      </Box>
+
+                    </Flex>
+                  </Link>
+
+                )
+
+
+              })}
+
 
             </Box>
+
+
           </Box>
 
           {!isAuth ? (
@@ -180,6 +243,10 @@ function Navbar() {
                   cursor={"pointer"}
                   fontSize={"14px"}
                   color="#fff"
+                  className={`header-bar ${isFocused ? 'focused' : ''}`}
+                // className={isFocused ? 'header-focused' : ''}
+                // onFocus={() => setIsFocused(true)}
+                // onBlur={() => setIsFocused(false)}
 
                 >
                   Đăng nhập
@@ -218,6 +285,10 @@ function Navbar() {
                 fontSize={"14px"}
                 color="#fff"
                 flexDirection={'row'}
+                className={`header-bar ${isFocused ? 'focused' : ''}`}
+              // className={isFocused ? 'header-focused' : ''}
+              // onFocus={() => setIsFocused(true)}
+              // onBlur={() => setIsFocused(false)}
               >
                 Giỏ hàng
               </Heading>
@@ -228,6 +299,10 @@ function Navbar() {
               _hover={{
                 bg: "#0077ff"
               }}
+              className={`header-bar ${isFocused ? 'focused' : ''}`}
+            // className={isFocused ? 'header-focused' : ''}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
             >
               <Heading
                 fontWeight={400}
@@ -243,7 +318,12 @@ function Navbar() {
           <Link to="/cart">
             <Flex cursor={"pointer"} _hover={{
               bg: "#0077ff"
-            }}>
+            }}
+              className={`header-bar ${isFocused ? 'focused' : ''}`}
+            // className={isFocused ? 'header-focused' : ''}
+            // onFocus={() => setIsFocused(true)}
+            // onBlur={() => setIsFocused(false)}
+            >
               <Heading
                 fontWeight={400}
                 m="2"
@@ -256,9 +336,12 @@ function Navbar() {
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"} bg={'#fff'} textAlign={'center'} borderRadius={5} _hover={{
+            <Flex cursor={"pointer"} bg={'#fff'} textAlign={'center'} borderRadius={15} _hover={{
               bg: "#fff"
-            }} > <Icon as={BsTelephone} w={4} h={4} color={'red'} margin={2} />
+            }}
+              className={`header-bar ${isFocused ? 'focused' : ''}`}
+            >
+              {/* <Icon as={BsTelephone} w={4} h={4} color={'red'} margin={2} /> */}
               <Heading
                 fontWeight={700}
                 m='2'
