@@ -10,16 +10,8 @@ import {
   ItemDetails8
 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
-
-const exchangeRate = 300000
-const getSingleData = async (type, id) => {
-  let response = await axios.get(
-    `http://localhost:9000/products/${id}`
-  );
-  // console.log("in the singleproduct page in the getsingleData function and response.data is :-",response.data);
-  return response.data;
-};
-
+import ProductReviewForm from './ProductReview';
+import ProductTable from './ProductTable';
 const postSingleData = async (data) => {
   try {
     let response = await axios.post(
@@ -72,15 +64,6 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  // Chỉ lấy % giảm giá
-  const extractDiscountPercentage = (discount) => {
-    if (!discount) return null;
-
-    const percentageMatch = discount.match(/\d+/);
-    return percentageMatch ? `${percentageMatch[0]}%` : null;
-  };
-
-  const discountPercentage = extractDiscountPercentage(singleData.discount);
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -106,7 +89,6 @@ const SingleProduct = (props) => {
     }
     );
   };
-
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -290,12 +272,14 @@ const SingleProduct = (props) => {
                   {singleData.prodName} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
                   Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
                   <br />
-                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
+                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách,
+                   phòng ngủ, phòng họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
                 </ListItem>
               </UnorderedList>
+              <ProductReviewForm/>
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
@@ -311,26 +295,28 @@ const SingleProduct = (props) => {
                 {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-                {singleData.prodPrice}
-              </Heading>
-              <Text fontSize="lg" marginBottom={3}>
-                Giá gốc:{" "}
-                <span style={{ textDecoration: "line-through" }}>
-                  {singleData.prodSale}
-                </span>
-                <span style={{ fontSize: "12px", padding: "20px" }}>
-                  (Bao gồm tất cả các loại thuế)
-                </span>
-              </Text>
+              {singleData.prodPrice} đ
+            </Heading>
+              {singleData.prodSale !== 0 && (
+                <>
+                  <Text fontSize="lg" marginBottom={3}>
+                    Giá gốc:  {singleData.prodPriceSale} đ
 
-              <Text
-                fontSize="sm"
-                color="#eb5757"
-                style={{ fontWeight: "bold" }}
-                marginBottom={3}
-              >
-                Giảm tới: {discountPercentage}
-              </Text>
+                    <span style={{ textDecoration: "line-through" }}></span>
+                    <span style={{ fontSize: "12px", padding: "20px" }}>
+                      (Bao gồm tất cả các loại thuế)
+                    </span>
+                  </Text>
+                  <Text
+                    fontSize="sm"
+                    color="#eb5757"
+                    style={{ fontWeight: "bold" }}
+                    marginBottom={3}
+                  >
+                    Giảm tới: {singleData.prodSale}%
+                  </Text>
+                </>
+              )}
 
               <Text
                 fontSize="sm"
@@ -425,6 +411,9 @@ const SingleProduct = (props) => {
               </Box>
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
+            <Box>
+              {/* <ProductTable/> */}
+            </Box>
           </Grid>
           <Box
             m="5%"

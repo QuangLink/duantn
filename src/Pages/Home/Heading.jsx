@@ -15,98 +15,20 @@ const Heading = ({ heading }) => {
         
         > {heading} </Text>
         </Box>
-      <Box display="flex" justifyItems="space-around">
-      <Link to="/computers" >
-          <Text 
-           
-           
-                
-                margin="10px"
-               
-                width="100%"
-                fontSize="̀50px"
-                fontWeight="500px"
-                color="#116d93"
-            
-              
-              fontFamily="inherit"
-           
-          
-          _hover={{
-            letterSpacing: 0.5,
-            color: "#c31212",
-             textColor:"#c31212", }}
-
-             
-            
-          >
-          Lượt mua
-          </Text >
-        </Link>
+      <Box display="flex" justifyItems="space-around" >
+   
         <Link to="/computers" >
           <Text 
            
            margin="10px"
-               
-                width="100%"
-                fontSize="̀50px"
-                fontWeight="500px"
-                color="#116d93"
-            
-              
-              fontFamily="inherit"
-           
-          
-          _hover={{
-            letterSpacing: 0.5,
-            color: "#c31212",
-             textColor:"#c31212", }}
-
-
-             
-            
-          >
-            Yêu thích
-          </Text >
-        </Link>
-        <Link to="/computers" >
-          <Text 
-           
-           margin="10px"
-               
+           border="2px solid gray" 
+           borderRadius="10px" 
            width="100%"
-           fontSize="̀50px"
-           fontWeight="500px"
-           color="#116d93"
-       
+           fontSize="15px"
          
-         fontFamily="inherit"
-      
-     
-     _hover={{
-       letterSpacing: 0.5,
-       color: "#c31212",
-        textColor:"#c31212", }}
-
-
-             
-            
-          >
-           Giảm giá
-          </Text >
-        </Link>
-        <Link to="/computers" >
-          <Text 
-           
-           margin="10px"
-               
-           width="100%"
-           fontSize="̀50px"
-           fontWeight="500px"
            color="#116d93"
-       
-         
-         fontFamily="inherit"
+          fontFamily="initial"
+
       
      
      _hover={{

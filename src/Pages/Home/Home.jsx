@@ -33,10 +33,22 @@ import {
   ItemDetails18,
   CateFeatures,
   BannersLeft,
-  PrXiaomi,
+
   BannersCenter,
   TimeDeals,
+  PrAll,
   PrDeals,
+  PrSales,
+  PrApplePhone,
+  PrAppleTablet,
+  PrSamsung,
+  PrAsus,
+  PrLenovo,
+  PrAcer,
+  PrHp,
+  PrXiaomi
+
+
 } from "./CardDetails";
 
 
@@ -63,17 +75,17 @@ const Home = () => {
       <hr />
       
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT " />
+      <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrXiaomi}  />
+      <PrDeal type={PrApplePhone}  />
 
       <br />
       <hr />
       <ItemCard2
-        type={ItemDetails3}
+        type={PrApplePhone}
         linked={"/personalcare"}
-        heading="ĐỒNG HỒ THÔNG MINH APPLE  "
+        heading="Iphone "
         src="https://i.imgur.com/8pxYJUB.png"
       />
       <hr />

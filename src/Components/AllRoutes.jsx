@@ -9,7 +9,6 @@ import Wishlist from "../Pages/Wishlist/Wishlist";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import Payments from "../Pages/payment/Payments";
 import AddressForm from "../Pages/checkout/addresstest";
-import ProductList from "../Pages/checkout/list";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
@@ -21,77 +20,93 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route
-          path="/mobilesandtablets"
-          element={<Products typeOfProduct="mobilesandtablets" />}
+          path="/laptop"
+          element={<Products typeOfProduct="laptop" />}
         ></Route>
         <Route
-          path="/mobilesandtablets/:id"
-          element={<SingleProduct typeOfProduct="mobilesandtablets" />}
+          path="/laptop/:id"
+          element={<SingleProduct typeOfProduct="laptop" />}
         ></Route>
         <Route
-          path="/televisions"
-          element={<Products typeOfProduct="televisions" />}
+          path="/phone"
+          element={<Products typeOfProduct="phone" />}
         ></Route>
         <Route
-          path="/televisions/:id"
-          element={<SingleProduct typeOfProduct="televisions" />}
+          path="/phone/:id"
+          element={<SingleProduct typeOfProduct="phone" />}
         ></Route>
         <Route
-          path="/kitchen"
-          element={<Products typeOfProduct="kitchen" />}
+          path="/tablet"
+          element={<Products typeOfProduct="tablet" />}
         ></Route>
         <Route
-          path="/kitchen/:id"
-          element={<SingleProduct typeOfProduct="kitchen" />}
+          path="/tablet/:id"
+          element={<SingleProduct typeOfProduct="tablet" />}
         ></Route>
         <Route
-          path="/headphones"
-          element={<Products typeOfProduct="headphones" />}
+          path="/iphone"
+          element={<Products typeOfProduct="iphone" />}
         ></Route>
         <Route
-          path="/headphones/:id"
-          element={<SingleProduct typeOfProduct="headphones" />}
+          path="/iphone/:id"
+          element={<SingleProduct typeOfProduct="iphone" />}
         ></Route>
         <Route
-          path="/homeappliances"
-          element={<Products typeOfProduct="homeappliances" />}
+          path="/xiaomi"
+          element={<Products typeOfProduct="xiaomi" />}
         ></Route>
         <Route
-          path="/homeappliances/:id"
-          element={<SingleProduct typeOfProduct="homeappliances" />}
+          path="/xiaomi/:id"
+          element={<SingleProduct typeOfProduct="xiaomi" />}
         ></Route>
         <Route
-          path="/computers"
-          element={<Products typeOfProduct="computers" />}
+          path="/samsung"
+          element={<Products typeOfProduct="samsung" />}
         ></Route>
         <Route
-          path="/computers/:id"
-          element={<SingleProduct typeOfProduct="computers" />}
+          path="/samsung/:id"
+          element={<SingleProduct typeOfProduct="samsung" />}
         ></Route>
         <Route
-          path="/cameras"
-          element={<Products typeOfProduct="cameras" />}
+          path="/oppo"
+          element={<Products typeOfProduct="oppo" />}
         ></Route>
         <Route
-          path="/cameras/:id"
-          element={<SingleProduct typeOfProduct="cameras" />}
+          path="/oppo/:id"
+          element={<SingleProduct typeOfProduct="oppo" />}
         ></Route>
         <Route
-          path="/personalcare"
-          element={<Products typeOfProduct="personalcare" />}
+          path="/hp"
+          element={<Products typeOfProduct="hp" />}
         ></Route>
         <Route
-          path="/personalcare/:id"
-          element={<SingleProduct typeOfProduct="personalcare" />}
+          path="/hp/:id"
+          element={<SingleProduct typeOfProduct="hp" />}
         ></Route>
         <Route
-          path="/accessories"
-          element={<Products typeOfProduct="accessories" />}
+          path="/asus"
+          element={<Products typeOfProduct="asus" />}
         ></Route>
         <Route
-          path="/accessories/:id"
-          element={<SingleProduct typeOfProduct="accessories" />}
+          path="/asus/:id"
+          element={<SingleProduct typeOfProduct="asus" />}
         ></Route>
+        <Route
+        path="/lenovo"
+        element={<Products typeOfProduct="asus" />}
+      ></Route>
+      <Route
+        path="/lenovo/:id"
+        element={<SingleProduct typeOfProduct="lenovo" />}
+      ></Route>
+      <Route
+      path="/acer"
+      element={<Products typeOfProduct="acer" />}
+    ></Route>
+    <Route
+      path="/acer/:id"
+      element={<SingleProduct typeOfProduct="acer" />}
+    ></Route>
         <Route path="/cart" element={<PrivateRoute><MainCartPage /></PrivateRoute>}></Route>
         <Route path="/login" element={<Login />}></Route>
       
@@ -100,7 +115,6 @@ const AllRoutes = () => {
           element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
         ></Route>
         <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}></Route>
-        <Route path="/list" element={<PrivateRoute><ProductList /></PrivateRoute>}></Route>
         <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
         <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
       
@@ -108,7 +122,7 @@ const AllRoutes = () => {
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
 
-      <Route path="/test" element={<ProductList />}></Route>
+
       </Routes>
     </div>
   );

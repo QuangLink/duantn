@@ -34,7 +34,7 @@ import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
 import { ImLocation2 } from "react-icons/im";
 import { BiNetworkChart, BiSearch } from "react-icons/bi";
-import { BsFillCartFill, BsPhone, BsSmartwatch, BsCart2, BsFillPersonFill } from "react-icons/bs";
+import { BsFillCartFill, BsPhone, BsSmartwatch, BsCart2, BsFillPersonFill, BsTelephone } from "react-icons/bs";
 import { MdConnectWithoutContact } from "react-icons/md";
 import { AiOutlineLaptop, AiOutlineTablet, AiOutlineMenu } from "react-icons/ai"
 import { CiHeadphones } from "react-icons/ci";
@@ -67,7 +67,7 @@ function Navbar() {
   const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
-  const { name } = useSelector((store) => store.AuthManager);
+  const { username } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -114,8 +114,8 @@ function Navbar() {
         </Flex>
         <Flex
           w="100%"
-          h='90px'
-          justifyContent="space-around"
+          h='60px'
+          justifyContent="center"
           alignItems={"center"}
           m="auto"
           backgroundColor='#4a90e2'
@@ -134,7 +134,7 @@ function Navbar() {
             <Flex
               bg="white"
               borderRadius={"5px"}
-              w="350px"
+              w="250px"
               h={10}
               p="5px"
               m="auto"
@@ -168,16 +168,17 @@ function Navbar() {
 
             </Box>
           </Box>
+
           {!isAuth ? (
-            <Flex cursor={"pointer"} border={'1px solid rgba(168,208,255,.38)'} borderRadius={5} _hover={{
+            <Flex cursor={"pointer"} borderRadius={5} _hover={{
               bg: "#0077ff"
-            }}><Icon w={5} h={5} color={'#fff'} margin={2} as={BsFillPersonFill} />
+            }}><Icon w={4} h={4} color={'#fff'} margin={2} as={BsFillPersonFill} />
               <Link to="login">
                 <Heading
                   fontWeight={400}
                   m="2"
                   cursor={"pointer"}
-                  fontSize={"16px"}
+                  fontSize={"14px"}
                   color="#fff"
 
                 >
@@ -192,7 +193,7 @@ function Navbar() {
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
               >
-                Hi {name}
+                Hi {username}
               </MenuButton>
               <MenuList>
                 <MenuItem>My Profile</MenuItem>
@@ -207,14 +208,14 @@ function Navbar() {
             </Menu>
           )}
           <Link to="/cart">
-            <Flex cursor={"pointer"} border={'1px solid rgba(168,208,255,.38)'} textAlign={'center'} borderRadius={5} _hover={{
+            <Flex cursor={"pointer"} textAlign={'center'} borderRadius={5} _hover={{
               bg: "#0077ff"
-            }} > <Icon as={BsCart2} w={5} h={5} color={'#fff'} margin={2} />
+            }} > <Icon as={BsCart2} w={4} h={4} color={'#fff'} margin={2} />
               <Heading
                 fontWeight={400}
                 m='2'
                 cursor={"pointer"}
-                fontSize={"16px"}
+                fontSize={"14px"}
                 color="#fff"
                 flexDirection={'row'}
               >
@@ -223,7 +224,7 @@ function Navbar() {
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"} borderRight={'1px solid rgba(168,208,255,.38)'}
+            <Flex cursor={"pointer"}
               _hover={{
                 bg: "#0077ff"
               }}
@@ -232,7 +233,7 @@ function Navbar() {
                 fontWeight={400}
                 m="2"
                 cursor={"pointer"}
-                fontSize={"16px"}
+                fontSize={"14px"}
                 color="#fff"
               >
                 Khuyến mãi
@@ -240,29 +241,44 @@ function Navbar() {
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"} borderLeft={'1px solid rgba(168,208,255,.38)'} _hover={{
+            <Flex cursor={"pointer"} _hover={{
               bg: "#0077ff"
             }}>
               <Heading
                 fontWeight={400}
                 m="2"
                 cursor={"pointer"}
-                fontSize={"16px"}
+                fontSize={"14px"}
                 color="#fff"
               >
                 Chăm Sóc khách hàng
               </Heading>
             </Flex>
           </Link>
-
-
+          <Link to="/cart">
+            <Flex cursor={"pointer"} bg={'#fff'} textAlign={'center'} borderRadius={15} _hover={{
+              bg: "#fff"
+            }} >
+              {/* <Icon as={BsTelephone} w={4} h={4} color={'red'} margin={2} /> */}
+              <Heading
+                fontWeight={700}
+                m='2'
+                cursor={"pointer"}
+                fontSize={"14px"}
+                color="red"
+                flexDirection={'row'}
+              >
+                0362956071
+              </Heading>
+            </Flex>
+          </Link>
 
         </Flex>
         <Flex
           w="95%"
           h="40px"
           textAlign={"center"}
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems={"center"}
           m="auto"
           bg="#4a90e2"
@@ -836,7 +852,7 @@ function Navbar() {
             </MenuList>
           </Menu>
           <Menu >
-            <Link to="accessories" >
+            <Link to="phone" >
               <MenuButton
 
                 px={4}
@@ -852,7 +868,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="computers">
+            <Link to="laptop">
               <MenuButton
                 px={4}
                 py={2}
@@ -866,7 +882,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="mobilesandtablets">
+            <Link to="tablet">
               <MenuButton
                 px={4}
                 py={2}
@@ -999,7 +1015,7 @@ function Navbar() {
               as={Button}
               rightIcon={<ChevronDownIcon />}
             >
-              Hi {name}
+              Hi {username}
             </MenuButton>
             <MenuList>
               <MenuItem>My Profile</MenuItem>
@@ -1055,7 +1071,7 @@ function Navbar() {
                       />
                     </Heading>
                   </Link>
-                  <Link to="homeappliances">
+                  <Link to="phone">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1065,7 +1081,7 @@ function Navbar() {
                       Laptop
                     </Heading>
                   </Link>
-                  <Link to="homeappliances">
+                  <Link to="laptop">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1075,7 +1091,7 @@ function Navbar() {
                       Tablet
                     </Heading>
                   </Link>
-                  <Link to="computers">
+                  <Link to="tablet">
                     <Heading
                       cursor={"pointer"}
                       fontSize={"17px"}
@@ -1189,7 +1205,7 @@ function Navbar() {
                         color="#55555"
                         mt="35px"
                       >
-                        Hi {name}
+                        Hi {username}
                       </Heading>
                     </Link>
                   ) : (

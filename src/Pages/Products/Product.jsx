@@ -13,12 +13,10 @@ import {
 import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,
+      `https://rus-digital-televisions.onrender.com/whishlist`,    
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -34,12 +32,9 @@ const postSingleDataWish = async (data) => {
 };
 // const singleData = useSelector((store) => store.singleProduct.data);
 
-
-
-
 const Product = (props) => {
   const { data, typeOfProduct } = props;
-  const { id, name, img, price, mrp,discount } = data;
+  const { prodID, prodName, prodImg, prodPrice, prodPriceSale,prodSale } = data;
   console.log("this is data from the outside hanldewish",data);
 
   var navigate = useNavigate();
@@ -48,7 +43,7 @@ const Product = (props) => {
     console.log("this is data from hadleWhish",data);
     let newData = {};
     for (let i in data) {
-      if (i === "id") {
+      if (i === "prodID") {
         continue;
       }
       newData[i] = data[i];
@@ -74,64 +69,113 @@ const Product = (props) => {
   return (
     <>
     
-      <Link to={`/${typeOfProduct}/${id}`}>
+      <Link to={`${prodID}`}>
         <Box>
-          <Box>
-          <Image src={`https://vectorified.com/images/password-eye-icon-37.jpg`} alt={name}  justifyContent="end" width="40px" />
-          </Box>
-          <Center>
-          <Image src={img} alt={name}  justifyItems="center" _hover={{ p: "" }} />
-          </Center>
-          <Box
-            h="150"
-            w="100%"
-            textAlign="center"
-            fontFamily=" sans-serif"
-            color="black.700"
-            lineHeight="120%"
-            marginBottom="3"
-            textOverflow="ellipsis"
-            overflow="hidden"
-            _hover={{ color: "blue" }}
-          >
-            {name}
-          </Box>
-          <Box
-            w="100%"
-            // justifyContent="space-between"
-            // alignItems="center"
-            marginBottom="2"
-            marginLeft={5}
-          >
-            <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
-              Giá mới: {price}₫
-            </Heading>
-            <Text
-            mt={2}
-              size="1.1rem"
-              // fontSize="1.2rem"
-              fontWeight="bold"
-              color="blackAlpha.600"
-              textDecoration="line-through"
+          {/* <Box>
+            <Text 
+            w={20}
+             borderRadius="full"
+             px="5"
+             border="1px solid green"
+             color="green"
+             fontSize="1rem"
+             marginBottom="10"
             >
-             Giá gốc : {mrp}₫
+              {id}%
             </Text>
-          </Box>
-          
-          <Badge
-            borderRadius="5px"
-            width="auto"
-            px="2"
-            
-            // border="1px solid green"
-            backgroundColor="#fff0e9"
-            color="#eb5757"
-            fontSize="xs"
-            marginBottom="10"
-            marginLeft={5}
-          >
-            Giá ưu đãi
-          </Badge>
+          </Box> */}
+          <Image src={prodImg} alt={prodName}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
+          {
+            prodSale !== 0 && (
+              <>
+                <Box
+                  h="150"
+                  w="100%"
+                  textAlign="center"
+                  fontFamily="sans-serif"
+                  color="black.700"
+                  lineHeight="120%"
+                  marginBottom="3"
+                  textOverflow="ellipsis"
+                  overflow="hidden"
+                  _hover={{ color: "blue" }}
+                >
+                  {prodName}
+                </Box>
+                <Box
+                  w="100%"
+                  marginBottom="2"
+                  marginLeft={5}
+                >
+                  <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+                    Giá mới: {prodPrice}₫
+                  </Heading>
+                  <Text
+                    mt={2}
+                    size="1.1rem"
+                    fontWeight="bold"
+                    color="blackAlpha.600"
+                    textDecoration="line-through"
+                  >
+                    Giá gốc: {prodPriceSale}₫
+                  </Text>
+                </Box>
+                <Badge
+                  borderRadius="5px"
+                  width="auto"
+                  px="2"
+                  backgroundColor="#fff0e9"
+                  color="#eb5757"
+                  fontSize="xs"
+                  marginBottom="10"
+                  marginLeft={5}
+                >
+                  Giá ưu đãi
+                </Badge>
+              </>
+            )
+          }
+          {
+            prodSale == 0 && (
+              <>
+                <Box
+                  h="150"
+                  w="100%"
+                  textAlign="center"
+                  fontFamily="sans-serif"
+                  color="black.700"
+                  lineHeight="120%"
+                  marginBottom="3"
+                  textOverflow="ellipsis"
+                  overflow="hidden"
+                  _hover={{ color: "blue" }}
+                >
+                  {prodName}
+                </Box>
+                <Box
+                  w="100%"
+                  marginBottom="2"
+                  marginLeft={5}
+                >
+                  <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+                    Giá: {prodPrice}₫
+                  </Heading>
+                </Box>
+                <Badge
+                  borderRadius="5px"
+                  width="auto"
+                  px="2"
+                  backgroundColor="#fff0e9"
+                  color="#eb5757"
+                  fontSize="xs"
+                  marginBottom="10"
+                  marginLeft={5}
+                >
+                 Giá tốt
+                </Badge>
+              </>
+            )
+          }
         </Box >
       </Link>
       <Button
@@ -141,8 +185,7 @@ const Product = (props) => {
         borderTop="1px solid rgb(202, 201, 201)"
         color="gray"
         bg="white"
-        onClick={() => handleWish(data)}
-      >
+        onClick={() => handleWish(data)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </>
