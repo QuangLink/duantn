@@ -180,12 +180,12 @@ const SingleProduct = (props) => {
           </Box>
 
           <Grid
-            h={["1500px", "1100px", "900px"]}
-            templateRows={[
-              "repeat(8, 1fr)",
-              "repeat(8, 1fr)",
-              "repeat(8, 1fr)",
-            ]}
+            h={["1500px", "1100px", "auto"]}
+            // templateRows={[
+            //   "repeat(8, 1fr)",
+            //   "repeat(8, 1fr)",
+            //   "repeat(10, 1fr)",
+            // ]}
             templateColumns={[
               "repeat(4, 1fr)",
               "repeat(6, 1fr)",

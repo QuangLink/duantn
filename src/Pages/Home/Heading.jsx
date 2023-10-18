@@ -112,11 +112,7 @@ const Heading = ({ heading }) => {
      _hover={{
        letterSpacing: 0.5,
        color: "#c31212",
-        textColor:"#c31212", }}
-
-
-             
-            
+        textColor:"#c31212", }}   
           >
             Xem tất cả
           </Text >

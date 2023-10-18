@@ -9,14 +9,9 @@ import ItemCard8 from "./ItemCard8";
 import ItemCard9 from "./ItemCard9";
 import CateFeature from "./CateFeature";
 import BannerLeft from "./BannerLeft";
-
 import BannerCenter from "./BannerCenter";
 import TimeDeal from "./TimeDeal";
 import PrDeal from "./PrDeal";
-
-
-
-
 import {
   ItemDetails1,
   ItemDetails2,
@@ -42,8 +37,6 @@ import {
   BannersCenter,
   TimeDeals,
   PrDeals,
-
-
 } from "./CardDetails";
 
 
@@ -55,7 +48,6 @@ import Banners from "./BannerLeft";
 const Home = () => {
   return (
     <Box>
-
         <BannerCenter type={BannersCenter} />
       <br/>
 

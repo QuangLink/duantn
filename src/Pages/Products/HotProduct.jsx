@@ -19,7 +19,7 @@ const HotProduct = ({ type, heading }) => {
             fontSize="2.1rem" color="whiteAlpha.900" fontWeight="black"
             width="100%" backgroundImage={`https://tse4.mm.bing.net/th?id=OIP._aitshqx8BfKQfOgRl-1ZgEyDM&pid=Api&P=0&h=180`} h="60px"
             p={2}
-          >Các sản phẩm hot nhật tuần qua </Text>
+          >Các sản phẩm hot nhất tuần qua </Text>
 
         </a>
       </Box>

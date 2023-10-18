@@ -20,7 +20,6 @@ const getData = async (typeOfProduct) => {
   );
   return response.data;
 };
-
 const Products = ({ typeOfProduct }) => {
   // const [productArr, setProductArr] = useState([]);
   const productsList = useSelector((store) => store.product.data);
@@ -110,6 +109,7 @@ const Products = ({ typeOfProduct }) => {
               border="1px solid #e0e0e0;"
               height="50%"
               fontSize="0.7rem"
+              fontFamily=""
               backgroundColor="#FFFFFF"
               margin="2%"
             >

@@ -76,19 +76,9 @@ const Product = (props) => {
     
       <Link to={`/${typeOfProduct}/${id}`}>
         <Box>
-          {/* <Box>
-            <Text 
-            w={20}
-             borderRadius="full"
-             px="5"
-             border="1px solid green"
-             color="green"
-             fontSize="1rem"
-             marginBottom="10"
-            >
-              {id}%
-            </Text>
-          </Box> */}
+          <Box>
+          <Image src={`https://vectorified.com/images/password-eye-icon-37.jpg`} alt={name}  justifyContent="end" width="40px" />
+          </Box>
           <Center>
           <Image src={img} alt={name}  justifyItems="center" _hover={{ p: "" }} />
           </Center>
