@@ -20,7 +20,7 @@ const SlideProuct = ({ type }) => {
                         {type.map((i) => (
                             <Box key={uuid()} h="220px"
                             >
-                                <Image src={`${i.img1}`} alt={i.caption} w="100%" height="250px"
+                                <Image src={`${i.img}`} alt={i.caption} w="100%" height="250px"
                                 />
                             </Box>
                         ))}

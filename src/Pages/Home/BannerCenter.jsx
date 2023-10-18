@@ -9,7 +9,7 @@ const BannerCenter = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Center>
-      <Box width="100%" justifyContent="center">
+      <Box width="70%" justifyContent="center">
         
           
            

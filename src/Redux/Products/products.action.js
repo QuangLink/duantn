@@ -2,11 +2,11 @@ import axios from "axios";
 import { GET_PRODUCTS_ERROR, GET_PRODUCTS_LOADING, GET_PRODUCTS_SUCCESS} from "./products.type";
 
 // Product actions here
-export const getProducts = (typeOfProduct) => async(dispatch) => {
+export const getProducts = (typeOfProduct,brandOfProduct) => async(dispatch) => {
         // console.log("in the logi func");
         dispatch({type :GET_PRODUCTS_LOADING });
         try {
-            let responce = await axios.get(`https://rus-digital-televisions.onrender.com/${typeOfProduct}`);
+            let responce = await axios.get(`http://localhost:9000/category/${typeOfProduct}`);
             console.log("in the logi func try",responce.data);
             dispatch({type:GET_PRODUCTS_SUCCESS,payload : responce.data});
         } catch (error) {

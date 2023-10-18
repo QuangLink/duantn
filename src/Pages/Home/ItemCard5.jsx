@@ -14,9 +14,12 @@ import axios from 'axios';
 
 
 const ItemCard5 = ({ type, heading }) => {
+  
   return (
-    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" >
+    
+    <Box justifyContent="center" w="70%" m="auto" mt="6" cursor="pointer" textAlign="center" >
       <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/>
+     
       <Box mt="1"  >
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -79,13 +82,17 @@ const ItemCard5 = ({ type, heading }) => {
                         </Square>
                       </Flex>
                       <Flex>
+                     
                         <Text color="gray.600" fontSize="14px">
                           Giá gốc:{" "}
                         </Text>
                         {"  "}
+                        {i.original !== 0 && (
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.mrp} <sup>đ</sup>
+                          
+                           {i.original} <sup>đ</sup>
                         </Text>
+                      )}
                       </Flex>
                      
                      

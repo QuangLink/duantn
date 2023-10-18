@@ -8,7 +8,7 @@ const ItemCard1 = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Center>
-      <Box width="70%" mt="-20" justifyContent="center">
+      <Box width="70%"  justifyContent="center">
         <Slide >
           
             

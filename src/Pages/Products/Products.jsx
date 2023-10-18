@@ -9,14 +9,15 @@ import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
 
 import {
-  ItemDetails8,
-  ItemDetails1,
+  PrApplePhone,
+  PrXiaomi,
+  PrHp,
 } from "../Home/CardDetails";
-import SlideProuct from "./SlideProduct";
+import SlideProduct from "./SlideProduct";
 
-const getData = async (typeOfProduct) => {
+const getData = async (typeOfProduct,brandOfProduct) => {
   let response = await axios.get(
-    `https://rus-digital-api.vercel.app/${typeOfProduct}`
+    `http://localhost:9000/category/`
   );
   return response.data;
 };
@@ -31,17 +32,18 @@ const Products = ({ typeOfProduct }) => {
 
   const dispatch = useDispatch();
   //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
-
   const category = {
-    mobilesandtablets: "MOBILES AND TABLETS",
-    televisions: "TELEVISIONS",
-    headphones: "HEADPHONES",
-    homeappliances: "HOME-APPLIANCES",
-    computers: "COMPUTERS",
-    cameras: "CAMERAS",
-    kitchen: "KITCHEN-APPLIANCES",
-    personalcare: "PERSONAL-CARE",
-    accessories: "ACCESSORIES",
+    laptop: "LAPTOP",
+    tablet: "TABLET",
+    phone: "Phone",
+    apple: "APPLE",
+    xiaomi: "XIAOMI",
+    samsung: "SAMSUNG",
+    oppo: "OPPO",
+    hp: "HP",
+    asus: "ASUS",
+    lenovo: "LENOVO",
+    acer: "ACER",
     whishlist: "whishlist"
   };
 
@@ -84,11 +86,11 @@ const Products = ({ typeOfProduct }) => {
       <hr></hr> */}
       <Box
       >
-      <SlideProuct type={ItemDetails1} />
+      <SlideProduct type={PrApplePhone} />
       </Box>
       <Box
         mb="2%">
-        <HotProduct type={ItemDetails8} />
+        <HotProduct type={PrApplePhone} />
       </Box>
       <Box
         width="80%"
@@ -545,7 +547,7 @@ const Products = ({ typeOfProduct }) => {
               return (
 
                 <GridItem
-                  key={elem.name + i}
+                  key={elem.prodName + i}
                   w="97%"
                   h="100 %"
                   bg="white.500"

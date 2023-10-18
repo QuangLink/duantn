@@ -46,7 +46,7 @@ const TimeDeal = ({ type, heading }) => {
   };
   return (
     
-    <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" backgroundColor="#FF7C0E"  borderRadius="15px">
+    <Box justifyContent="center" w="70%" m="auto" mt="6" cursor="pointer" textAlign="center" backgroundColor="#FF7C0E"  borderRadius="15px">
      
      
       <Heading textAlign="center" display="flex" justifyContent="space-around" w="95%"  m="15p% 10% 10% 10%">
@@ -113,7 +113,7 @@ const TimeDeal = ({ type, heading }) => {
                   <Box className="list" p="2"  mt="4" ml="1" mr="1" backgroundColor="white" borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
                   <Box className="img" >
                   <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                    <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
+                    <Image src={`${i.img}`} boxSize="160px" />
                   </Square>
                     
                     <Text
@@ -144,7 +144,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.mrp} <sup>đ</sup>
+                           {i.original} <sup>đ</sup>
                         </Text>
                       </Flex>
                      
@@ -217,7 +217,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.mrp} <sup>đ</sup>
+                           {i.original} <sup>đ</sup>
                         </Text>
                       </Flex>
                      

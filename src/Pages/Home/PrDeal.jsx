@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square, Heading, } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Square, Heading, Center } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,17 +11,8 @@ import uuid from "react-uuid";
 import './stylehome.css';
 const PrDeal = ({ type }) => {
   return (
-    <Box justifyContent="center" w="75%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
-                        {/* <Heading textAlign="center" display="flex"  justifyContent="space-around" w="95%" back mt="6"  m="15p% 10% 10% 10%">
-                            <Box mt="6" display="flex" >
-                                             <i>
-                                            <Image width="30%"  src="https://o.remove.bg/downloads/c4ee67e1-1d40-462a-a551-7de46e8310be/es%C3%A2fghrtn7af70332cb-removebg-preview.png"/> 
-                                            </i>
-                                            
-                                            <Text fontSize="33px" color="#efefef" w="70%">  TUẦN LỄ GIẢM GIÁ SẬP SÀN</Text>
-                                            
-                            </Box>
-                        </Heading> */}
+    <Box justifyContent="center" w="70%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
+                        
 <Heading textAlign="center" display="flex" justifyContent="center" w="100%"  m="15p% 10% 10% 10%">
                       <Box mt="0" >
                       <i > <img width="120px" src={require('../../Components/Images/HDSale.png')}/></i>
@@ -83,20 +74,22 @@ const PrDeal = ({ type }) => {
                   <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                     <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                   </Square>
-                    
-                    <Text
+                  <Text
                       color="#424245"
                       noOfLines={2}
-                      textAlign="left"
+                      textAlign="center"
                       fontSize="15px"
                       _hover={{ color: "red" }}
                     >
                       {i.name}
                     </Text>
-                    <Box mt="2.5" m="20px 0 30px 0">
-                      <Flex>
+                    <Center m="0 auto">     
+                      
+                    
+                    <Box mt="2.5" textAlign="center" >     
+                      <Flex textAlign="center">
                         <Square>
-                          <Text color="gray.600" fontSize="15px">
+                          <Text color="gray.600" fontSize="15px" textAlign="center">
                             Giá mới:{" "}
                           </Text>
                         </Square>
@@ -112,29 +105,32 @@ const PrDeal = ({ type }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.mrp} <sup>đ</sup>
+                           {i.original} <sup>đ</sup>
                         </Text>
                       </Flex>                
                       <Box
                       padding="3px"
                         borderRadius="5px"
-                        w="40%"
+                        w="50%"
                         color="#f72424"
                         bg="#fff0e9"
                         mt="2"
                         textAlign="center"                       
                       >
-                        <Text fontSize="10px" fontWeight="500">
+                        <Text fontSize="10px" fontWeight="500" >
                           GIẢM GIÁ SỐC                        
                         </Text>
                       </Box>
-                      <Box mb="-5"    borderRadius="15px">
+                      <Box   borderRadius="15px">
                       <Image src={require('../../Components/Images/PrSaleimg.png')} w="100%" 
                          borderRadius="15px"
                           />
                    </Box>                   
-                    </Box>
-                  </Box>
+                    </Box>    
+                    </Center>    
+                 
+                 
+                  </Box>     
                   </Box>              
                 </Link>          
               </SwiperSlide>
