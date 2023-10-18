@@ -17,6 +17,8 @@ import PrDeal from "./PrDeal";
 
 
 
+
+
 import {
   ItemDetails1,
   ItemDetails2,
@@ -39,9 +41,12 @@ import {
   CateFeatures,
   BannersLeft,
   PrXiaomi,
+  PrIphone,
   BannersCenter,
   TimeDeals,
   PrDeals,
+  PrApplePhone,
+  PrHp,
 
 
 } from "./CardDetails";
@@ -71,10 +76,12 @@ const Home = () => {
       <hr />
       
       {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={ItemDetails8} heading="MÁY TÍNH NỔI BẬT " />
+      <ItemCard5 type={PrHp} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrXiaomi}  />
+      <PrDeal type={PrHp}  />
+
+n
 
       <br />
       <hr />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Image, Heading } from "@chakra-ui/react";
+import { Box, Text, Image, Heading, GridItem, Grid } from "@chakra-ui/react";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
@@ -20,7 +20,7 @@ const CateFeature = ({ type, }) => {
                    
                              <Link to="/computers">
                                     <Box m="auto" _hover={{ transform: "scale(1.1)" }} w="200px"  display="block">
-                                    <Image src={`${i.imgcatehot}`}  w="60px" h="60px"     m="auto"  />
+                                    {/* <Image src={`${i.imgcatehot}`}  w="60px" h="60px"     m="auto"  />
                                     <Text
                                     
                                     textAlign="center"
@@ -32,7 +32,35 @@ const CateFeature = ({ type, }) => {
                                     _hover={{ color: "red" }}
                                     >
                                     {i.name}
-                                    </Text>
+                                    </Text> */}
+                                     <Grid
+                      h={["auto", "0", "auto"]}
+              templateRows={[
+              "repeat(2, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(2, 1fr)",
+            ]}
+            templateColumns={[
+              "repeat(4, 1fr)",
+              "repeat(6, 1fr)",
+              "repeat(6, 1fr)",
+            ]}
+          >
+            <GridItem
+              rowSpan={[1, 2, 2]}
+              colSpan={[6, 6, 5]}
+              m="0 0 0 18%"
+              p=" 2% 8% "
+              justifyContent="center"
+              alignitem="center"
+              style={{
+                border: "none",
+              }}
+            >
+              <Image src={`${i.imgcatehot}`}  w="60px" h="60px"     m="auto"  />
+               <Text> {i.name}</Text> 
+            </GridItem>
+            </Grid>
                                     </Box>
                      </Link>
                     </Box>
