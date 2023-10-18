@@ -6,7 +6,7 @@ const categoryUrls = {
   allproduct: apiUrlBase,
   deals: apiUrlBase + 'deals',
   sale: apiUrlBase + 'sale',
-    applephone: apiUrlBase + 'apple',
+    applephone: apiUrlBase + 'apple/phone',
     appletablet: apiUrlBase + 'apple/tablet',
   samsung: apiUrlBase + 'samsung',
   xiaomi: apiUrlBase + 'xiaomi',
@@ -36,7 +36,7 @@ const fetchDataForCategory = async (category) => {
 };
 export let PrAll = [];
 export let PrDeals = [];
-export let PrSale = [];
+export let PrSales = [];
 export let PrApplePhone = [];
 export let PrAppleTablet = [];
 export let PrSamsung = [];
@@ -50,7 +50,7 @@ export let PrAsusLaptop =[];
 const fetchDataForAllCategories = async () => {
   PrAll = await fetchDataForCategory('allproduct');
   PrDeals = await fetchDataForCategory('deals');
-  PrSale = await fetchDataForCategory('sale');
+  PrSales = await fetchDataForCategory('sale');
   PrApplePhone = await fetchDataForCategory('applephone');
   PrAppleTablet = await fetchDataForCategory('appletablet');
   PrSamsung = await fetchDataForCategory('samsung');

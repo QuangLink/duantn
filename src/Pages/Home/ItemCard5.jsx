@@ -89,7 +89,6 @@ const ItemCard5 = ({ type, heading }) => {
                         {"  "}
                         {i.original !== 0 && (
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                          
                            {i.original} <sup>đ</sup>
                         </Text>
                       )}

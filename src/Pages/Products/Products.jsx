@@ -9,15 +9,13 @@ import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
 
 import {
-  PrApplePhone,
-  PrXiaomi,
-  PrHp,
+  PrHp
 } from "../Home/CardDetails";
 import SlideProduct from "./SlideProduct";
 
 const getData = async (typeOfProduct,brandOfProduct) => {
   let response = await axios.get(
-    `http://localhost:9000/category/`
+    `http://localhost:9000/category/${typeOfProduct}/${brandOfProduct}`
   );
   return response.data;
 };
@@ -86,11 +84,11 @@ const Products = ({ typeOfProduct }) => {
       <hr></hr> */}
       <Box
       >
-      <SlideProduct type={PrApplePhone} />
+      <SlideProduct type={PrHp} />
       </Box>
       <Box
         mb="2%">
-        <HotProduct type={PrApplePhone} />
+        <HotProduct type={PrHp} />
       </Box>
       <Box
         width="80%"

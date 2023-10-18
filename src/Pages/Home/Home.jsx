@@ -34,7 +34,7 @@ import {
   TimeDeals,
   PrAll,
   PrDeals,
-  PrSale,
+  PrSales,
   PrApplePhone,
   PrAppleTablet,
   PrSamsung,
@@ -42,8 +42,7 @@ import {
   PrLenovo,
   PrAcer,
   PrHp,
-  PrXiaomi,
-  PrAsusLaptop,
+  PrXiaomi
 
 
 } from "./CardDetails";
@@ -71,8 +70,8 @@ const Home = () => {
       <br />
       <hr />
       
-   
-      <ItemCard5 type={PrAsusLaptop} heading="MÁY TÍNH NỔI BẬT " />
+      {/* <ItemCard1 type={ItemDetails2} /> */}
+      <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
       <PrDeal type={PrApplePhone}  />
