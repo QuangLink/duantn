@@ -9,30 +9,49 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
-const CartItem = ({ name, img, price, id, DeleteRequest }) => {
+const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
   const singleData = {
+    cartID,
+    quantity,
     name,
     img,
     price,
   };
   const toast = useToast();
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(quantity);
+
   const dispatch = useDispatch();
   var navigate = useNavigate();
-
   const handleInc = () => {
     setCount(count + 1);
-    let number = parseFloat(price.replace(/,/g, ""));
-    console.log(number);
+    let number = parseInt(price);
     dispatch({ type: "priceIncrease", payload: number });
+  
+    axios
+      .put(`http://localhost:9000/cart/plus/${cartID}`, { quantity: count + 1 })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  
   const handleDec = () => {
     if (count > 1) {
-      let number = parseFloat(price.replace(/,/g, ""));
-      console.log(number);
+      let number = parseInt(price);
       setCount(count - 1);
       dispatch({ type: "priceDecrease", payload: number });
+      
+    axios
+    .put(`http://localhost:9000/cart/minus/${cartID}`, { quantity: count + 1 })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
     }
   };
 
@@ -126,7 +145,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
     tomorrow.getFullYear();
   return (
     <Flex
-      key={id}
+      key={cartID}
       className=""
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
@@ -163,16 +182,17 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
           gap="2"
         >
           <Box>
-            <Image src={img} alt={name} width="200px" />
+            <Image src={img} alt={name} width="150px" />
+        
           </Box>
-          <Box display={"flex"} gap="2">
+          <Box display={"flex"} gap="5">
             <Button onClick={handleDec}>-</Button>
             <Button
               backgroundColor={"white"}
               disabled={true}
               fontWeight={"bold"}
             >
-              {count}
+            {count}
             </Button>
             <Button onClick={handleInc}>+</Button>
           </Box>
@@ -260,7 +280,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
         background="transparent"
         textAlign={"center"}
       >
-        <Box width={"49%"} borderRight="1px solid rgb(224, 224, 225)">
+        <Box width={"50%"} borderRight="1px solid rgb(224, 224, 225)">
           <Button
             backgroundColor={"white"}
             color=" rgb(23, 116, 239)"
@@ -291,7 +311,7 @@ const CartItem = ({ name, img, price, id, DeleteRequest }) => {
             Xóa
           </Button>
         </Box>
-        <Box width={"49%"}>
+        <Box width={"50%"}>
           <Button
             backgroundColor={"white"}
             color=" rgb(23, 116, 239)"

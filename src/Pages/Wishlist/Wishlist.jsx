@@ -17,7 +17,7 @@ import { getProducts } from "../../Redux/Products/products.action";
 import WishProduct from "./WishProduct";
 const getData = async (typeOfProduct) => {
   let response = await axios.get(
-    `https://rus-digital-televisions.onrender.com/${typeOfProduct}`
+    `http://localhost:9000/category/${typeOfProduct}`
   );
   return response.data;
 };
@@ -30,7 +30,7 @@ function Wishlist({ typeOfProduct }) {
   const navigate = useNavigate();
   const toast = useToast();
   const handleDelete=(id,name)=>{
-    axios.delete(`https://rus-digital-televisions.onrender.com/whishlist/${id}`)
+    axios.delete(`http://localhost:9000/cart/${id}`)
     .then((res)=>console.log(res))
     .catch((err)=>console.log(err))
     toast({

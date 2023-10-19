@@ -8,7 +8,6 @@ import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import Payments from "../Pages/payment/Payments";
-import AddressForm from "../Pages/checkout/addresstest";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";

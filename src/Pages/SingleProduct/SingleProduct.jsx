@@ -63,28 +63,8 @@ const SingleProduct = (props) => {
 
   const dispatch = useDispatch();
   const handlePost = (data) => {
-    let newData = {};
-    for (let i in data) {
-      if (i === "id") {
-        continue;
-      }
-      newData[i] = data[i];
-    }
-    // console.log("newData is :-", newData);
-    // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleData(newData).then((res) => {
-      // console.log("in the handlePost function and viewing the data after the post request", res)
-      toast({
-        title: "Added Item Successfully",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      })
-      setTimeout(() => {
-        navigate("/cart")
-      }, 1000);
-    }
+    postSingleData(data).then((res) =>
+      navigate("/cart")
     );
   };
   const handleWish = (data) => {
@@ -103,11 +83,6 @@ const SingleProduct = (props) => {
     );
   };
 
-  // const handleDelete = async(id) => {
-  //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
-  // }
-
-  
 
 
   useEffect(() => {
@@ -351,9 +326,9 @@ const SingleProduct = (props) => {
                   fontSize="lg"
                   p={6}
                   _hover={{ bg: "blue.800" }}
-                  onClick={() => handlePost(singleData)}
+                  onClick={() => handlePost(singleData.prodID)}
                 >
-                  Thêm vào giỏ hàng
+                Mua ngay
                 </Button>
                 <Button
                   w="49%"
@@ -365,7 +340,7 @@ const SingleProduct = (props) => {
                   _hover={{ backgroundColor: "orangered" }}
                   onClick={() => handleWish(singleData)}
                 >
-                  Mua ngay
+                 Thêm vào yêu thích
                 </Button>
               </Flex>
               <Box

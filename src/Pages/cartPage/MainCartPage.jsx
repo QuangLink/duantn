@@ -9,12 +9,14 @@ import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
+import Checkout from "../checkout/checkout";
 export const GetData = async () => {
   try {
     let response = await axios.get(
-      `https://rus-digital-televisions.onrender.com/cart`
+      `http://localhost:9000/cart`
+    
     );
-
+     
     return await response.data;
   } catch (err) {
     return err;
@@ -25,13 +27,14 @@ const MainCartPage = () => {
   const dispatch = useDispatch();
   const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
+
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
-  const DeleteRequest = async (id) => {
+  const DeleteRequest = async (prodID) => {
     try {
       let response = await axios.delete(
-        `https://rus-digital-televisions.onrender.com/cart/${id}`
+        `http://localhost:9000/cart/${prodID}`
       );
       setChange(!change);
     } catch (err) {
@@ -68,7 +71,9 @@ const MainCartPage = () => {
   }, [change]);
 
   return (
+  
     <div>
+   
       <Flex
         border={"0px solid red"}
         margin="auto"
@@ -108,21 +113,24 @@ const MainCartPage = () => {
               />
             </Center>
           )}
-          {data &&
-            data.map(({ name, img, price, id }) => {
-              return (
-                <>
-                  <CartItem
-                    key={id}
-                    name={name}
-                    img={img}
-                    price={price}
-                    id={id}
-                    DeleteRequest={DeleteRequest}
-                  />
-                </>
-              );
-            })}
+          
+           
+          {data.map((product) => (
+            <CartItem
+              cartID={product.cartID}
+              key={product.prodID}
+              name={product.prodName}
+              img={product.prodImg}
+              price={product.prodPrice}
+              id={product.prodID}
+              quantity={product.quantity}
+              
+              DeleteRequest={DeleteRequest}
+            />
+          ))}
+          
+          
+          
         </Flex>
         <Flex
           border={"0px solid green"}
@@ -145,6 +153,9 @@ const MainCartPage = () => {
           />
         </Flex>
       </Flex>
+      <div>
+      <Checkout />
+      </div>
     </div>
   );
 };
