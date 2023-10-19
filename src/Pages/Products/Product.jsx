@@ -13,6 +13,8 @@ import {
 import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
@@ -70,26 +72,16 @@ const Product = (props) => {
     <>
     
       <Link to={`${prodID}`}>
-        <Box>
-          {/* <Box>
-            <Text 
-            w={20}
-             borderRadius="full"
-             px="5"
-             border="1px solid green"
-             color="green"
-             fontSize="1rem"
-             marginBottom="10"
-            >
-              {id}%
-            </Text>
-          </Box> */}
+        <Box height="500px">
+          <Box padding="10px">
+          <FontAwesomeIcon icon={faEye} /> Xem
+          </Box>
           <Image src={prodImg} alt={prodName}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
           {
             prodSale !== 0 && (
               <>
                 <Box
-                  h="150"
+                  h="100px"
                   w="100%"
                   textAlign="center"
                   fontFamily="sans-serif"
@@ -98,7 +90,7 @@ const Product = (props) => {
                   marginBottom="3"
                   textOverflow="ellipsis"
                   overflow="hidden"
-                  _hover={{ color: "blue" }}
+                  _hover={{ color: "blue"}}
                 >
                   {prodName}
                 </Box>
@@ -139,7 +131,7 @@ const Product = (props) => {
             prodSale == 0 && (
               <>
                 <Box
-                  h="150"
+                  h="100px"
                   w="100%"
                   textAlign="center"
                   fontFamily="sans-serif"

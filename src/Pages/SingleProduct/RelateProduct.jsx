@@ -102,19 +102,6 @@ const RelateProduct = ({ type, heading }) => {
                         </Text>
                       </Flex>
                     </Box>
-                    {/* <Badge
-                      borderRadius="5px"
-                      width="auto"
-                      px="2"
-                      // border="1px solid green"
-                      backgroundColor="#fff0e9"
-                      color="#eb5757"
-                      fontSize="xs"
-                      marginBottom="10"
-                      marginLeft={5}
-                    >
-                      Giá ưu đãi
-                    </Badge> */}
                   </Box>
                 </Link>
               </SwiperSlide>

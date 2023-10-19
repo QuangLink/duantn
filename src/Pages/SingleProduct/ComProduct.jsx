@@ -92,22 +92,6 @@ const ComProduct = () => {
                 <br />
             </Box>
         </Box>
-        // <div>
-        //     <h2>Comment Section</h2>
-        //     <form onSubmit={handleCommentSubmit}>
-        //         <textarea
-        //             value={newComment}
-        //             onChange={handleCommentChange}
-        //             placeholder="Write a comment..."
-        //         ></textarea>
-        //         <button type="submit">Submit</button>
-        //     </form>
-        //     <div>
-        //         {comments.map((comment, index) => (
-        //             <p key={index}>{comment}</p>
-        //         ))}
-        //     </div>
-        // </div>
     );
 };
 

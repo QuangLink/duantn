@@ -1,42 +1,48 @@
 import React from 'react';
 
-const ProductTable = ({ products }) => {
+const ProductTable = () => {
+  const phone = {
+    brand: 'Samsung',
+    model: 'Galaxy S21',
+    color: 'Phantom Black',
+    storage: '128GB',
+    ram: '8GB',
+    price: '$999',
+  };
+
   return (
-    <table>
+    <table style={{ fontFamily: 'Arial', borderCollapse: 'collapse', width: '100%',  }}>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Tên sản phẩm</th>
-          <th>Giá</th>
-          <th>Số lượng</th>
+          <th style={{ padding: '10px', textAlign: 'left' }}>Thông tin cấu hình điện thoại</th>
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
-          <tr key={product.id}>
-            {/* <td>{product.id}</td>
-            <td>{product.name}</td>
-            <td>{product.price}</td>
-            <td>{product.quantity}</td> */}
-          </tr>
-        ))}
+        <tr style={{ backgroundColor: '#f5f5f5' }}>
+          <td style={{ padding: '10px', }}><strong>Thương hiệu:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.brand}</td>
+        </tr>
+        <tr >
+          <td style={{ padding: '10px', }}><strong>Model:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.model}</td>
+        </tr>
+        <tr style={{ backgroundColor: '#f5f5f5' }}>
+          <td style={{ padding: '10px', }}><strong>Màu sắc:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.color}</td>
+        </tr>
+        <tr>
+          <td style={{ padding: '10px', }}><strong>Bộ nhớ trong:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.storage}</td>
+        </tr>
+        <tr style={{ backgroundColor: '#f5f5f5' }}>
+          <td style={{ padding: '10px', }}><strong>RAM:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.ram}</td>
+        </tr>
+        <tr>
+          <td style={{ padding: '10px', }}><strong>Giá:</strong></td>
+          <td style={{ padding: '10px', }}>{phone.price}</td>
+        </tr>
       </tbody>
-      <style>
-        {`
-          table {
-            width: 100%;
-            border-collapse: collapse;
-          }
-          th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-          }
-          th {
-            background-color: #f2f2f2;
-          }
-        `}
-      </style>
     </table>
   );
 };
