@@ -245,7 +245,7 @@ const SingleProduct = (props) => {
                   Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
-                {/* <ListItem>
+                <ListItem>
                   Công nghệ hình ảnh:Active HDRChế độ game HGiG
                   Chế độ hình ảnh phù hợp nội dung
                   Dải màu rộng Nano Color
@@ -253,7 +253,7 @@ const SingleProduct = (props) => {
                   ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
                   Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem> */}
+                </ListItem>
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
                 Thông tin sản phẩm (1){" "}
