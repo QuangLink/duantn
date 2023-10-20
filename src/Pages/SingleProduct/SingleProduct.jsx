@@ -6,15 +6,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
-import {
-  ItemDetails8
-} from "../Home/CardDetails";
+import { ItemDetails8 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
+
 const postSingleData = async (data) => {
   try {
+    // Lấy userID từ sessionStorage
+    const userID = sessionStorage.getItem('userID');
+
+    // Tạo dữ liệu gửi đi kết hợp với userID
+    const postData = {
+      ...data,
+      userID,
+    };
+
     let response = await axios.post(
       `http://localhost:9000/cart/`,
-      data,
+      postData,
       {
         headers: { "Content-Type": "application/json" },
       }
@@ -22,15 +30,17 @@ const postSingleData = async (data) => {
     return response.data;
   } catch (error) {
     console.log(
-      "in the postSingleData function and error is :- ",
+      "Trong hàm postSingleData xảy ra lỗi: ",
       error.response.data
     );
   }
 };
+
+
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `http://localhost:9000/whishlist`,
+      `http://localhost:9000/wishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -39,7 +49,7 @@ export const postSingleDataWish = async (data) => {
     return response.data;
   } catch (error) {
     console.log(
-      "in the postSingleData function and error is :- ",
+      "Trong hàm postSingleDataWish xảy ra lỗi: ",
       error.response.data
     );
   }
@@ -47,26 +57,22 @@ export const postSingleDataWish = async (data) => {
 
 const SingleProduct = (props) => {
   const { typeOfProduct } = props;
-
   const params = useParams();
   const toast = useToast();
-
- 
-  // const [singleData, setSingleData] = useState({});
-
-  var navigate = useNavigate();
+  const navigate = useNavigate();
 
   const singleData = useSelector((store) => store.singleProduct.data);
-  // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (data) => {
-    postSingleData(data).then((res) =>
+
+  const handlePost = (prodID) => {
+    postSingleData({ prodID }).then((res) =>
       navigate("/cart")
     );
   };
+
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -75,20 +81,14 @@ const SingleProduct = (props) => {
       }
       newData[i] = data[i];
     }
-    // console.log("newData is :-", newData);
-    // console.log("in the handlePost function and viewing the data before the post request", data);
     postSingleDataWish(newData).then((res) =>
-      // console.log("in the handlePost function and viewing the data after the post request", res)
-      navigate("/whishlist")
+      navigate("/wishlist")
     );
   };
-
-
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
   }, [typeOfProduct, params.id]);
-
   if (error) {
     return (
       <Heading
