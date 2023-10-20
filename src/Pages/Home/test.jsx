@@ -11,7 +11,7 @@ import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
 
 //   const fetchProducts = async () => {
 //     try {
-//       const response = await axios.get('http://localhost:9000/products');
+//       const response = await axios.get('https://duantn-backend.onrender.com/products');
 //       setProducts(response.data);
 //     } catch (error) {
 //       console.error('Error fetching products:', error);

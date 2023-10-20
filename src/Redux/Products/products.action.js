@@ -6,7 +6,7 @@ export const getProducts = (typeOfProduct,brandOfProduct) => async(dispatch) => 
         // console.log("in the logi func");
         dispatch({type :GET_PRODUCTS_LOADING });
         try {
-            let responce = await axios.get(`http://localhost:9000/category/${typeOfProduct}`);
+            let responce = await axios.get(`https://duantn-backend.onrender.com/category/${typeOfProduct}`);
             console.log("in the logi func try",responce.data);
             dispatch({type:GET_PRODUCTS_SUCCESS,payload : responce.data});
         } catch (error) {

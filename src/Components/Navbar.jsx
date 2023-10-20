@@ -73,7 +73,7 @@ function Navbar() {
   const toast = useToast();
 
   const fetchData = (value) => {
-    fetch("http://localhost:9000/products/search")
+    fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
@@ -1197,7 +1197,7 @@ function Navbar() {
                   m="auto"
                   p="auto"
                 >
-                  {isAuth ? (
+                  {!isAuth ? (
                     <Link to="profile">
                       <Heading
                         cursor={"pointer"}

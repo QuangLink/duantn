@@ -21,11 +21,8 @@ const postSingleData = async (data) => {
     };
 
     let response = await axios.post(
-      `http://localhost:9000/cart/`,
+      `https://duantn-backend.onrender.com/cart/`,
       postData,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
     );
     return response.data;
   } catch (error) {
@@ -40,7 +37,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `http://localhost:9000/wishlist`,
+      `https://duantn-backend.onrender.com/wishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },

@@ -10,7 +10,7 @@ export const getData = () => async (dispatch) => {
   try {
     //gửi token đang lưu trong session lên server để xác thực
     const token = sessionStorage.getItem("token");
-    const res = await axios.get("http://localhost:9000/cart/", {
+    const res = await axios.get("https://duantn-backend.onrender.com/cart/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

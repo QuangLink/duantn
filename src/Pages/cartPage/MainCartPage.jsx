@@ -13,8 +13,7 @@ import Checkout from "../checkout/checkout";
 export const GetData = async () => {
   try {
     let response = await axios.get(
-      `http://localhost:9000/cart`
-    
+      `https://duantn-backend.onrender.com/cart`
     );
      
     return await response.data;
@@ -34,7 +33,7 @@ const MainCartPage = () => {
   const DeleteRequest = async (prodID) => {
     try {
       let response = await axios.delete(
-        `http://localhost:9000/cart/${prodID}`
+        `https://duantn-backend.onrender.com/cart/${prodID}`
       );
       setChange(!change);
     } catch (err) {

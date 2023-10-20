@@ -43,7 +43,7 @@ const Checkout = () => {
      
     };
 
-    const apiUrl = 'http://localhost:9000/users/address';
+    const apiUrl = 'https://duantn-backend.onrender.com/users/address';
   
 
     axios.put(apiUrl, newAddress)
@@ -66,7 +66,7 @@ const Checkout = () => {
   const [addressData, setAddressData] = useState({});
 
         useEffect(() => {
-        axios.get(`http://localhost:9000/users/address/${username}`)
+        axios.get(`https://duantn-backend.onrender.com/users/address/${username}`)
           .then(response => {
             console.log('Server response:', response.data);
              setAddressData(response.data);

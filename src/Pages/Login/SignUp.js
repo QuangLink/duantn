@@ -51,7 +51,7 @@ function SignUpForm() {
           password,
         };
 
-        const response = await axios.post("http://localhost:9000/users/register", payload);
+        const response = await axios.post("https://duantn-backend.onrender.com/users/register", payload);
         if (response.length > 0) {
           const isDuplicateUsername = response.includes('Username');
         
