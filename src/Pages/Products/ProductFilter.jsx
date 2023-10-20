@@ -274,8 +274,7 @@ const ProductFilter = ({ typeOfProduct }) => {
                   justifyContent="space-around"
                   alignContent={"center"}
                   textAlign="center"
-                  color="black"
-                >
+                  color="black">
                   <Box>
                     <Text
                       _hover={{

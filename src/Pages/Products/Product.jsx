@@ -1,4 +1,5 @@
 import React from "react";
+import { FaStar } from 'react-icons/fa';
 import {
   Badge,
   Box,
@@ -10,6 +11,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import RatingBar from './RatingBar';
 import { BsSuitHeart, } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,7 +20,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,    
+      `https://rus-digital-televisions.onrender.com/whishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -32,17 +34,18 @@ const postSingleDataWish = async (data) => {
     );
   }
 };
+
 // const singleData = useSelector((store) => store.singleProduct.data);
 
-const Product = (props) => {
+const Product = (props ,rating) => {
   const { data, typeOfProduct } = props;
-  const { prodID, prodName, prodImg, prodPrice, prodPriceSale,prodSale } = data;
-  console.log("this is data from the outside hanldewish",data);
+  const { prodID, prodName, prodImg, prodPrice, prodPriceSale, prodSale } = data;
+  console.log("this is data from the outside hanldewish", data);
 
   var navigate = useNavigate();
   const toast = useToast();
   const handleWish = (data) => {
-    console.log("this is data from hadleWhish",data);
+    console.log("this is data from hadleWhish", data);
     let newData = {};
     for (let i in data) {
       if (i === "prodID") {
@@ -52,7 +55,7 @@ const Product = (props) => {
     }
     // console.log("newData is :-", newData);
     // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleDataWish(newData).then((res) =>{
+    postSingleDataWish(newData).then((res) => {
       // console.log("in the handlePost function and viewing the data after the post request", res)
       toast({
         title: "Added Item Successfully to WishList",
@@ -70,17 +73,18 @@ const Product = (props) => {
 
   return (
     <>
-    
+
       <Link to={`${prodID}`}>
         <Box height="500px">
           <Box padding="10px">
-          <FontAwesomeIcon icon={faEye} /> Xem
+            <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
-          <Image src={prodImg} alt={prodName}  justifyItems="center" pl="12%" h="200" _hover={{ p: "" }} />
+          <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{  }} />
           {
             prodSale !== 0 && (
               <>
                 <Box
+                  mt="5px"
                   h="100px"
                   w="100%"
                   textAlign="center"
@@ -90,7 +94,7 @@ const Product = (props) => {
                   marginBottom="3"
                   textOverflow="ellipsis"
                   overflow="hidden"
-                  _hover={{ color: "blue"}}
+                  _hover={{ color: "blue" }}
                 >
                   {prodName}
                 </Box>
@@ -111,6 +115,7 @@ const Product = (props) => {
                   >
                     Giá gốc: {prodPriceSale}₫
                   </Text>
+                  <RatingBar rating={rating} />
                 </Box>
                 <Badge
                   borderRadius="5px"
@@ -131,6 +136,7 @@ const Product = (props) => {
             prodSale == 0 && (
               <>
                 <Box
+                  mt="5px"
                   h="100px"
                   w="100%"
                   textAlign="center"
@@ -152,6 +158,7 @@ const Product = (props) => {
                   <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
                     Giá: {prodPrice}₫
                   </Heading>
+                  <RatingBar rating={rating} />
                 </Box>
                 <Badge
                   borderRadius="5px"
@@ -163,8 +170,9 @@ const Product = (props) => {
                   marginBottom="10"
                   marginLeft={5}
                 >
-                 Giá tốt
+                  Giá tốt
                 </Badge>
+
               </>
             )
           }

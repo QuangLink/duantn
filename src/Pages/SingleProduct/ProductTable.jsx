@@ -1,4 +1,43 @@
 import React from 'react';
+import axios from 'axios';
+
+
+const postSingleData = async (data) => {
+  try {
+    let response = await axios.post(
+      `http://localhost:9000/cart/`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(
+      "in the postSingleData function and error is :- ",
+      error.response.data
+    );
+  }
+};
+export const postSingleDataWish = async (data) => {
+  try {
+    let response = await axios.post(
+      `http://localhost:9000/whishlist`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(
+      "in the postSingleData function and error is :- ",
+      error.response.data
+    );
+  }
+};
+
+
 
 const ProductTable = () => {
   const phone = {

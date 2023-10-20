@@ -279,16 +279,70 @@ const SingleProduct = (props) => {
                   </span>
                 </ListItem>
               </UnorderedList>
+              {/* <Grid
+                p="15px"
+                gridTemplateColumns={"repeat(2,1fr)"}
+                gap="20px"
+                justifyContent="space-around"
+                alignContent={"center"}
+                textAlign="center"
+                color="black">
+                <Box>
+                  <Box>
+                    <div>
+                      <i className="icondetail-doimoi"></i>
+                    </div>
+                    <p>
+                      Hư gì đổi nấy <b>12 tháng</b>  tại 3353 siêu thị toàn quốc (miễn phí tháng đầu) <a href="https://www.thegioididong.com/chinh-sach-bao-hanh-san-pham"></a>
+                      <a href="javascript:void(0)" onclick="showPopupPolicy()" title="Chính sách đổi trả">
+                        Xem chi tiết
+                      </a>
+                    </p>
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+
+                  >
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    _hover={{
+                      // textDecoration: "underline",
+
+                      cursor: "pointer",
+                    }}
+                    p={2}
+                    border="1px solid #e0e0e0"
+                  >
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    _hover={{
+                      // textDecoration: "underline",
+
+                      cursor: "pointer",
+                    }}
+                    p={2}
+                    border="1px solid #e0e0e0"
+                  >
+                  </Box>
+                </Box>
+
+              </Grid> */}
               <ProductReviewForm />
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
               rowSpan={[9, 7]}
             >
-              <Box 
+              <Box
                 p={7}
                 mt="5%"
-                 style={{
+                borderRadius="10px"
+                style={{
                   boxShadow:
                     "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
                 }}
@@ -414,7 +468,7 @@ const SingleProduct = (props) => {
               <Box
                 mt={5}
               >
-              <ProductTable/>
+                <ProductTable />
               </Box>
             </GridItem>
           </Grid>
