@@ -32,7 +32,7 @@ const Slider = ({ type }) => {
           spaceBetween: 15,
         },
         1280: {
-          slidesPerView: 5,
+          slidesPerView: 4,
           spaceBetween: 10,
         },
       }}
@@ -51,6 +51,7 @@ const Slider = ({ type }) => {
                 />
               </Square>
                 <Text
+                mt="2"
                   color="#275293"
                   noOfLines={2}
                   textAlign="left"
@@ -92,14 +93,7 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px"
-                        borderRadius="5px"
-                       
-                        w="40%"
-                        color="#f72424"
-                        bg="#fff0e9"
-                        mt="2"
-                        textAlign="center"
+                        padding="3px" borderRadius="5px" w="50%" color="#EC4C0A" bg="#FEB373" mt="2" textAlign="center"
                     
                   >
                     <Text fontSize="10px" fontWeight="500">

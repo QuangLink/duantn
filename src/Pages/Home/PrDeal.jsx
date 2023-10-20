@@ -59,7 +59,7 @@ const PrDeal = ({ type }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 10,
             },
           }}
@@ -75,6 +75,7 @@ const PrDeal = ({ type }) => {
                     <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                   </Square>
                   <Text
+                  mt="2"
                       color="#424245"
                       noOfLines={2}
                       textAlign="center"
@@ -109,13 +110,7 @@ const PrDeal = ({ type }) => {
                         </Text>
                       </Flex>                
                       <Box
-                      padding="3px"
-                        borderRadius="5px"
-                        w="50%"
-                        color="#f72424"
-                        bg="#fff0e9"
-                        mt="2"
-                        textAlign="center"                       
+                      padding="3px" borderRadius="5px" w="50%" color="#EC4C0A" bg="#FEB373" mt="2" textAlign="center"                    
                       >
                         <Text fontSize="10px" fontWeight="500" >
                           GIẢM GIÁ SỐC                        

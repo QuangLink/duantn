@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text, Image, Square, Heading, Center, } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Square, Heading, Center,Button } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -57,7 +57,7 @@ const TimeDeal = ({ type, heading }) => {
                         
                         <Text fontSize="30px" color="red"> GIỜ VÀNG DEAL SỐC</Text>
                         <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" >  Kết thúc trong {thoiGianConLai.gio.toString().padStart(2, '0')}:{thoiGianConLai.phut.toString().padStart(2, '0')}:{thoiGianConLai.giay.toString().padStart(2, '0')} </i> </Text>
-                        </Text>
+                        </Text> 
                       
                       
                       </Box>
@@ -81,7 +81,7 @@ const TimeDeal = ({ type, heading }) => {
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 4000 }}
           breakpoints={{
             0: {
               slidesPerView: 1,
@@ -100,8 +100,8 @@ const TimeDeal = ({ type, heading }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 5,
-              spaceBetween: 10,
+              slidesPerView: 4,
+              spaceBetween: 15,
             },
           }}
         >
@@ -112,14 +112,15 @@ const TimeDeal = ({ type, heading }) => {
                   
                   <Box className="list" p="2"  mt="4" ml="1" mr="1" backgroundColor="white" borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
                   <Box className="img" >
-                  <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                  <Square m="auto" _hover={{ transform: "scale(1.1)" }} >
                     <Image src={`${i.img}`} boxSize="160px" />
                   </Square>
                     
                     <Text
+                    mt="2"
                       color="#424245"
                       noOfLines={2}
-                      textAlign="left"
+                      textAlign="center"
                       fontSize="15px"
                       _hover={{ color: "red" }}
                     >
@@ -155,10 +156,11 @@ const TimeDeal = ({ type, heading }) => {
                       padding="3px"
                         borderRadius="5px"
                        
-                        w="40%"
-                        color="#f72424"
-                        bg="#fff0e9"
+                        w="50%"
+                        color="#EC4C0A"
+                        bg="#FEB373"
                         mt="2"
+                        
                         textAlign="center"
                         
                       >
@@ -190,9 +192,10 @@ const TimeDeal = ({ type, heading }) => {
                   </Square>
                     
                     <Text
+                    mt="2"
                       color="#424245"
                       noOfLines={2}
-                      textAlign="left"
+                      textAlign="center"
                       fontSize="15px"
                       _hover={{ color: "red" }}
                     >
@@ -226,13 +229,14 @@ const TimeDeal = ({ type, heading }) => {
                      
                       <Box
                       padding="3px"
-                        borderRadius="5px"
-                       
-                        w="40%"
-                        color="#f72424"
-                        bg="#fff0e9"
-                        mt="2"
-                        textAlign="center"
+                      borderRadius="5px"
+                     
+                      w="50%"
+                      color="#EC4C0A"
+                      bg="#FEB373"
+                      mt="2"
+                      
+                      textAlign="center"
                         
                       >
                         <Text fontSize="10px" fontWeight="500">
@@ -278,12 +282,15 @@ const TimeDeal = ({ type, heading }) => {
         
 
 
-      </Box>
-      <Center m="2" >
-                <Box w="auto" h="50px" fontSize="20px" border="2px" borderRadius="10px" m="3" padding="5px 4px 5px 4px">
-                Xem tất cả
-              </Box>
-                </Center>
+       </Box>
+                  
+                  <Center m="2">
+             
+             <Box mb="5">
+             <Button class="glow-on-hover" type="button">Xem tất cả... </Button>
+             </Box>
+        
+           </Center>
              
 
 

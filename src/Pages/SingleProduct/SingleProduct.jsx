@@ -7,7 +7,8 @@ import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import {
- HrHp,
+ PrHp,
+ 
 } from "../Home/CardDetails";
 import ComProduct from './ComProduct';
 const postSingleData = async (data) => {
@@ -412,7 +413,7 @@ const SingleProduct = (props) => {
             <br />
             <hr
             />
-            <RelateProduct type={HrHp} />
+            <RelateProduct type={PrHp} />
             <ComProduct />
           </Box>
         </Box>

@@ -6,7 +6,7 @@ const categoryUrls = {
   allproduct: apiUrlBase,
   deals: apiUrlBase + 'deals',
   sale: apiUrlBase + 'sale',
-    applephone: apiUrlBase + 'apple/phone',
+    applephone: apiUrlBase + 'apple',
     appletablet: apiUrlBase + 'apple/tablet',
   samsung: apiUrlBase + 'samsung',
   xiaomi: apiUrlBase + 'xiaomi',

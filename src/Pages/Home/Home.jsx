@@ -1,11 +1,10 @@
 import React from "react";
 import ItemCard1 from "./ItemCard1";
 import ItemCard2 from "./ItemCard2";
-import ItemCard4 from "./ItemCard4";
 import ItemCard5 from "./ItemCard5";
 import ItemCard6 from "./ItemCard6";
 import ItemCard7 from "./ItemCard7";
-import ItemCard8 from "./ItemCard8";
+
 import ItemCard9 from "./ItemCard9";
 import CateFeature from "./CateFeature";
 import BannerLeft from "./BannerLeft";
@@ -66,7 +65,7 @@ const Home = () => {
       <br />
       <hr />
 
-      <TimeDeal type={PrAcer}  />
+      <TimeDeal type={PrHp}  />
       <br />
       <hr />
       
