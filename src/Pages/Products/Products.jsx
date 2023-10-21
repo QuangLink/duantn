@@ -91,6 +91,7 @@ const Products = ({ typeOfProduct }) => {
         <HotProduct type={PrHp} />
       </Box>
       <ProductFilter/>
+
       {loading ? (
         <Box h={20}>
           <Center>

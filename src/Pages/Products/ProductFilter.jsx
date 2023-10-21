@@ -7,6 +7,7 @@ import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
+import './Productbox.css'
 
 import {
   PrHp
@@ -37,67 +38,28 @@ const ProductFilter = ({ typeOfProduct }) => {
         >
           <Menu>
             <MenuButton
-              fontWeight="bold.500"
-              width="80px"
-              borderRadius="5px"
-              border="1px solid #e0e0e0;"
-              height="50%"
-              fontSize="0.7rem"
-              backgroundColor="#FFFFFF"
-              margin="2%"
-            >
+              className="menu-button">
               Giá
             </MenuButton>
             <MenuList bg="white">
               <Link to="#">
                 <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="black"
-                >
+                 className="grid-container">
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Dưới 2 triệu
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Từ 2 - 4 triệu
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Từ 4 - 6 triệu
                     </Text>
                   </Box>
@@ -107,144 +69,61 @@ const ProductFilter = ({ typeOfProduct }) => {
           </Menu>
           <Menu>
             <MenuButton
-              fontWeight="bold.500"
-              width="80px"
-              borderRadius="5px"
-              border="1px solid #e0e0e0;"
-              height="50%"
-              fontSize="0.7rem"
-              backgroundColor="#FFFFFF"
-              margin="2%"
-            >
+              className="menu-button">
               Hãng
             </MenuButton>
             <MenuList bg="white">
               <Link to="#">
                 <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="black"
-                >
+                  className="grid-container">
                   <Box>
                     <Box
-                      _hover={{
-                        // textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      fontSize={"12px"}
-                      p={2}
-                      border="1px solid #e0e0e0"
-                    >
+                     className="text-btn">
                     </Box>
                   </Box>
                   <Box>
                     <Box
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                     </Box>
                   </Box>
                   <Box>
                     <Box
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      border="1px solid #e0e0e0"
-                    >
+                     className="text-btn">
                     </Box>
                   </Box>
                   <Box>
                     <Box
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                     </Box>
                   </Box>
-
                 </Grid>
               </Link>
             </MenuList>
           </Menu>
           <Menu>
             <MenuButton
-              fontWeight="bold.500"
-              width="80px"
-              borderRadius="5px"
-              border="1px solid #e0e0e0;"
-              height="50%"
-              fontSize="0.7rem"
-              backgroundColor="#FFFFFF"
-              margin="2%"
-            >
+              className="menu-button">
               Loại
             </MenuButton>
             <MenuList bg="white">
               <Link to="#">
                 <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="black"
-                >
+                  className="grid-container">
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Laptop văn phòng
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Laptop Gaming
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Cấu hình cao
                     </Text>
                   </Box>
@@ -254,65 +133,28 @@ const ProductFilter = ({ typeOfProduct }) => {
           </Menu>
           <Menu>
             <MenuButton
-              fontWeight="bold.500"
-              width="80px"
-              borderRadius="5px"
-              border="1px solid #e0e0e0;"
-              height="50%"
-              fontSize="0.7rem"
-              backgroundColor="#FFFFFF"
-              margin="2%"
-            >
+              className="menu-button">
               Nhu cầu
             </MenuButton>
             <MenuList bg="white">
               <Link to="#">
                 <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="black">
+                className="grid-container">
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Học tập
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Chơi game
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       Làm việc
                     </Text>
                   </Box>
@@ -322,65 +164,28 @@ const ProductFilter = ({ typeOfProduct }) => {
           </Menu>
           <Menu>
             <MenuButton
-              fontWeight="bold.500"
-              width="80px"
-              borderRadius="5px"
-              border="1px solid #e0e0e0;"
-              height="50%"
-              fontSize="0.7rem"
-              backgroundColor="#FFFFFF"
-              margin="2%"
-            >
+              className="menu-button">
               Ram
             </MenuButton>
             <MenuList bg="white">
               <Link to="#">
                 <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(4,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="black"
-                >
+                  className="grid-container">
                   <Box>
                     <Text
-                      _hover={{
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       4G
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       8G
                     </Text>
                   </Box>
                   <Box>
                     <Text
-                      _hover={{
-                        // textDecoration: "underline",
-
-                        cursor: "pointer",
-                      }}
-                      p={2}
-                      fontSize={"12px"}
-                      border="1px solid #e0e0e0"
-                    >
+                      className="text-btn">
                       16G
                     </Text>
                   </Box>
@@ -393,22 +198,13 @@ const ProductFilter = ({ typeOfProduct }) => {
             fontSize="0.7rem"
             height="50%"
             backgroundColor="#FFFFFF"
-            margin="2%"
-          >
+            margin="2%">
             Yêu thích
           </Button>
-
-
         </Flex>
         <Flex
           width="13%"
         >
-          <Text
-            // border="solid 1px"
-            fontSize="1rem"
-            backgroundColor="#FFFFFF"
-          >
-          </Text>
           <Box>
             <Menu>
               <MenuButton
@@ -418,24 +214,14 @@ const ProductFilter = ({ typeOfProduct }) => {
                 height="30px"
                 fontSize="0.7rem"
                 backgroundColor="#FFFFFF"
-                boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px"
-              >
+                boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px">
                 Sắp xếp theo
               </MenuButton>
-              <MenuList
-              >
-                <MenuItem
-                >Giảm giá
-                </MenuItem>
-                <MenuItem>
-                  Xem nhiều nhất
-                </MenuItem>
-                <MenuItem
-                >Từ thấp đến cao</MenuItem>
-                <MenuItem
-                >Từ cao đến thấp
-                </MenuItem>
-
+              <MenuList>
+                <MenuItem>Giảm giá</MenuItem>
+                <MenuItem>Xem nhiều nhất</MenuItem>
+                <MenuItem>Từ thấp đến cao</MenuItem>
+                <MenuItem>Từ cao đến thấp</MenuItem>
               </MenuList>
             </Menu>
           </Box>

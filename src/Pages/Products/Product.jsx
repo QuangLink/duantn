@@ -37,7 +37,7 @@ const postSingleDataWish = async (data) => {
 
 // const singleData = useSelector((store) => store.singleProduct.data);
 
-const Product = (props ,rating) => {
+const Product = (props, rating) => {
   const { data, typeOfProduct } = props;
   const { prodID, prodName, prodImg, prodPrice, prodPriceSale, prodSale } = data;
   console.log("this is data from the outside hanldewish", data);
@@ -79,12 +79,12 @@ const Product = (props ,rating) => {
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
-          <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{  }} />
+          <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{ transform: "scale(1.1)" }} />
           {
             prodSale !== 0 && (
               <>
                 <Box
-                  mt="5px"
+                  mt="10px"
                   h="100px"
                   w="100%"
                   textAlign="center"
@@ -103,6 +103,7 @@ const Product = (props ,rating) => {
                   marginBottom="2"
                   marginLeft={5}
                 >
+                  <RatingBar rating={rating} />
                   <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
                     Giá mới: {prodPrice}₫
                   </Heading>
@@ -115,7 +116,6 @@ const Product = (props ,rating) => {
                   >
                     Giá gốc: {prodPriceSale}₫
                   </Text>
-                  <RatingBar rating={rating} />
                 </Box>
                 <Badge
                   borderRadius="5px"
@@ -153,12 +153,12 @@ const Product = (props ,rating) => {
                 <Box
                   w="100%"
                   marginBottom="2"
-                  marginLeft={5}
-                >
+                  marginLeft={5}>
+                  <RatingBar rating={rating} />
                   <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
                     Giá: {prodPrice}₫
                   </Heading>
-                  <RatingBar rating={rating} />
+
                 </Box>
                 <Badge
                   borderRadius="5px"
