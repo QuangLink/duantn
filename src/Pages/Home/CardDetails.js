@@ -1,88 +1,66 @@
+import axios from 'axios';
 
+const apiUrlBase = 'http://localhost:9000/category/';
 
-export const PrDeals = [
- 
-  
-  {
-    name: "LG 32 litres Convection Microwave Oven, MC3286BRUM",
-    img: "https://www.reliancedigital.in/medias/581108139-Package-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NDI0OHxpbWFnZS9qcGVnfGltYWdlcy9oZjQvaDJmLzg5NjM4NDQ4OTg4NDYuanBnfDljZDk0MDcwYmFhNzQ1NjhlOTFiNzk3NjUyYmI3MzExZTU4NzA0MzYxMGRiMzg2ZmExN2RjMGZmMWJiMGIwM2Q",
-    mrp: "23,999.00",
-    price: "17,140.00",
-    discount: "29%(₹6,859)",
-    id: 1,
-    linked: "kitchen",
-    
-    
-    
-  },
-  {
-    name: "LG 28 litres Convection Microwave Oven, MC2846BV",
-    img: "https://www.reliancedigital.in/medias/LG-MC2846BV-Microwave-Ovens-581107300-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODIzM3xpbWFnZS9qcGVnfGltYWdlcy9oOTkvaDFiLzk4MDU4NTQxNDY1OTAuanBnfDVlYWMxYTY5Nzk2OTkyYTcxZGEwOTVmY2FiYmQ0YmFmYTYwOGFmZTM0OGRjYjdjZTJlMGMxY2Q3MWY2ZGVjODc",
-    mrp: "16,999.00",
-    price: "15,990.00",
-    discount: "6%(₹1,009)",
-    id: 2,
-    linked: "kitchen",
-    
-  },
-  {
-    name: "IFB 30 litres Rotisserie Convection Microwave Oven, 30BRC2",
-    img: "https://www.reliancedigital.in/medias/IFB-30BRC2-Microwave-Ovens-491391947-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzODQ1OHxpbWFnZS9qcGVnfGltYWdlcy9oOTMvaGU4LzkwMTg4Nzk0NzU3NDIuanBnfDgxZGIxNGNlNGNkMDJkZDljMmU0ZTE5NGYxYmMzMDU1NzU0OTdlODg0Njc0NzdjMmY5YWJhNDZiNzQ5ZDAxMjQ",
-    mrp: "20,390.00",
-    price: "15,990.00",
-    discount: "22%(₹4,400)",
-    id: 3,
-    linked: "kitchen",
-    
-  },
-  {
-    name: "LG 20 litres Solo Microwave Oven, MS2043DB",
-    img: "https://www.reliancedigital.in/medias/LG-MS2043DB-Microwave-Oven-491166959-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxMzg4N3xpbWFnZS9qcGVnfGltYWdlcy9oMGIvaGYxLzkxOTY2NjQ5Nzk0ODYuanBnfDQyODU2MDc2MTZlODBjZjYyY2VlMjFlOTZlNjVjN2IyMzJmOTkxY2VhZTcwZTIxZDBhODU0YmNlNzIyZTQ5ZjM",
-    mrp: "7,899.00",
-    price: "6,499.00",
-    discount: "18%(₹1,400)",
-    id: 4,
-    linked: "kitchen",
-  },
-  {
-    name: "Samsung 23 Litre Solo Microwave Oven with Indian Auto cook Menu, (MS23A3513AK/TL, Black)",
-    img: "https://www.reliancedigital.in/medias/Samsung-MS23A3513AK-TL-Solo-Grill-492573240-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzAyOXxpbWFnZS9qcGVnfGltYWdlcy9oZjIvaDY3Lzk4NDU0NjcxNTI0MTQuanBnfGUyMDczNjE2MTMzZDFlNWMyMmVjNzgxZmMzMTRhZmYzNDc1YmJmMzVmZDk0ZGYxMzI1ZTlhMTBmNTkxYzFkMzQ",
-    mrp: "7,500.00",
-    price: "6,600.00",
-    discount: "12%(₹900)",
-    id: 5,
-    linked: "kitchen",
-  },
-  {
-    name: "LG 28 litres Convection Microwave Oven, MJ2886BWUM",
-    img: "https://www.reliancedigital.in/medias/LG-MJ2886BWUM-Microwave-Ovens-491392151-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0ODQ0N3xpbWFnZS9qcGVnfGltYWdlcy9oODUvaDRkLzg5Nzk4MTkzMzE2MTQuanBnfDQ5NjNkNTc2ODRjN2M0MzZhZTUzYTAyZjQ5MzljYjczNjEwNTQ4ODI2NjllMzQ4MTVjM2FkOWRhN2QxMmYwOWQ",
-    mrp: "24,299.00",
-    price: "19,490.00",
-    discount: "20%(₹4,809)",
-    id: 6,
-    linked: "kitchen",
-  },
-  {
-    name: "LG 21 litres Convection Microwave Oven, MC2146BG",
-    img: "https://www.reliancedigital.in/medias/LG-MC2146BG-Microwave-Ovens-491604223-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w1ODc4fGltYWdlL2pwZWd8aW1hZ2VzL2hlOS9oZDYvOTIyMDg4ODAwMjU5MC5qcGd8ZGI2OWEwYmFjNTM3MjQ2ZGI5ZmM5MTNiNDAxM2FlZWUzMzQ1NGQ3YmY4MzY3MWI1YTYyYmM5ZmM1ZmFkZmQyZA",
-    mrp: "13,999.00",
-    price: "11,590.00",
-    discount: "17%(₹2,409)",
-    id: 7,
-    linked: "kitchen",
-  },
-  {
-    name: "Samsung 23 Litre Grill Microwave Oven with Grill Fry, Browning Plus (MG23A3515AK/TL, Black)",
-    img: "https://www.reliancedigital.in/medias/Samsung-MG23A3515AK-TL-Solo-Grill-492573239-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wxNzA0NHxpbWFnZS9qcGVnfGltYWdlcy9oNTAvaDQwLzk4NDU0NjYxNjkzNzQuanBnfDgwZTgyN2Y2YTEwNjAzZDE2NmUwM2ZkNmIxNGQyMzlhNWRmYzk2NTk1MzU1ZTE1NzZiYmNmMjA4ZDg2OWNmYTQ",
-    mrp: "11,600.00",
-    price: "8,500.00",
-    discount: "27%(₹3,100)",
-    id: 8,
-    linked: "kitchen",
-  },
-  
+const categoryUrls = {
+  allproduct: apiUrlBase,
+  deals: apiUrlBase + 'deals',
+  sale: apiUrlBase + 'sale',
+    applephone: apiUrlBase + 'apple/phone',
+    appletablet: apiUrlBase + 'apple/tablet',
+  samsung: apiUrlBase + 'samsung',
+  xiaomi: apiUrlBase + 'xiaomi',
+  hp: apiUrlBase + 'hp',
+  asus: apiUrlBase + 'asus',
+  lenovo: apiUrlBase + 'lenovo',
+  acer: apiUrlBase + 'acer',
+};
 
-]
+const fetchDataForCategory = async (category) => {
+  try {
+    const response = await axios.get(categoryUrls[category]);
+    return response.data.map(product => ({
+      name: product.prodName,
+      img: product.prodImg,
+      price: product.prodPrice,
+      id: product.prodID,
+      sale:product.prodSale,
+      original:product.prodPriceSale,
+      linked: product.catName.toLowerCase(),
+    }));
+  } catch (error) {
+    console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+    return [];
+  }
+};
+export let PrAll = [];
+export let PrDeals = [];
+export let PrSales = [];
+export let PrApplePhone = [];
+export let PrAppleTablet = [];
+export let PrSamsung = [];
+export let PrXiaomi = [];
+export let PrHp = [];
+export let PrAsus = [];
+export let PrLenovo = [];
+export let PrAcer = [];
+
+const fetchDataForAllCategories = async () => {
+  PrAll = await fetchDataForCategory('allproduct');
+  PrDeals = await fetchDataForCategory('deals');
+  PrSales = await fetchDataForCategory('sale');
+  PrApplePhone = await fetchDataForCategory('applephone');
+  PrAppleTablet = await fetchDataForCategory('appletablet');
+  PrSamsung = await fetchDataForCategory('samsung');
+  PrXiaomi = await fetchDataForCategory('xiaomi');
+  PrHp = await fetchDataForCategory('hp');
+  PrAsus = await fetchDataForCategory('Asus');
+  PrLenovo = await fetchDataForCategory('Lenovo');
+  PrAcer = await fetchDataForCategory('Acer');
+};
+
+fetchDataForAllCategories();
+
 
 
 export const TimeDeals = [
@@ -167,6 +145,7 @@ export const BannersCenter = [
   },
 ];
 
+
 export const BannersLeft = [
   {
     "id": 1,
@@ -230,7 +209,8 @@ export const CateFeatures = [
       "name": "Thiết bị làm mát",
       "imgcatehot": "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220"
     },
-    
+
+
    
     
   
@@ -295,53 +275,7 @@ export const ItemDetails2 = [
   },
 ];
 
-export const ItemDetails3 = [
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Blue and Gray Trail Loop - M/L",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177945-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NTIwNXxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaDA1Lzk4OTE5NjUwNDI3MTguanBnfGQ5YzE2NGM4OGU1MWM3ZDM3NDc2ODQyNDQzNzljMWU1NmM1NmFhZTQ0YzY3MDUxODlhYmVhMTA1MGQ0YjgzZjA",
-    caption: "Slide 1",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "(5%) 4,495",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch SE GPS + Cellular - 40 mm Silver Aluminium Case with White 2nd Generation Sport Band",
-    img: "https://www.reliancedigital.in/medias/Apple-SE-Sports-Fitness-Watches-493177926-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzNDk1OXxpbWFnZS9qcGVnfGltYWdlcy9oMmEvaDJkLzk4OTE5OTE5NzgwMTQuanBnfDdjNDY1NzJlNjlkNjg0MmZiZDQ2MTBjNzM0ZmY1NTZhYjExYTZlYTk2MmVlNDRmYzU4Yjc5MTNhZDkyOTZkNjc",
-    caption: "Slide 2",
-    mrp: "33,155.00",
-    price: "34,900.00",
-    discount: "5%(₹1,745)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Orange Alpine Loop - Medium",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177937-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NjAyN3xpbWFnZS9qcGVnfGltYWdlcy9oZjcvaGE0Lzk4OTE5NDUwNTQyMzguanBnfDUzMWY2ZWFjYTBiMzAzZDA3MjFlOGRiOTlhZjQyYjMzNzFjNmZjYTQyMzNmYWYwNzUzYjdjODlkZmU2Y2UxZDU",
-    caption: "Slide 3",
-    mrp: "36,005.00",
-    price: "37,900.00",
-    discount: "5%(₹1,895)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch SE GPS + Cellular - 44 mm Silver Aluminium Case with White 2nd Generation Sport Band",
-    img: "https://www.reliancedigital.in/medias/Apple-SE-Sports-Fitness-Watches-493177923-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wzNTU2NnxpbWFnZS9qcGVnfGltYWdlcy9oMzgvaDI5Lzk4OTE5ODM3ODYwMTQuanBnfGQ4YzkwMmIwZjlmNjdmOGQzNmIxOGEyZGNjNTk5ZThlYjY2NTFmNTQzYWY5ZTJkNDE3MTk4YmUwZTcxY2ZiMzg",
-    caption: "Slide 4",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "5%(₹4,495)",
-    linked: "personalcare",
-  },
-  {
-    name: "Apple Watch Ultra GPS + Cellular - 49 mm Titanium Case with Blue and Gray Trail Loop - M/L",
-    img: "https://www.reliancedigital.in/medias/Apple-Ultra-Sports-Fitness-Watches-493177945-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NTIwNXxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaDA1Lzk4OTE5NjUwNDI3MTguanBnfGQ5YzE2NGM4OGU1MWM3ZDM3NDc2ODQyNDQzNzljMWU1NmM1NmFhZTQ0YzY3MDUxODlhYmVhMTA1MGQ0YjgzZjA",
-    caption: "Slide 1",
-    mrp: "85,405.00",
-    price: "89,900.00",
-    discount: "5%(₹4,495)",
-    linked: "personalcare",
-  },
-];
+
 
 export const ItemDetails4 = [
   {

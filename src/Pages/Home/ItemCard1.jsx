@@ -15,6 +15,7 @@ const ItemCard1 = ({ type }) => {
 
 
             {type.map((i) => (
+
               <Box key={uuid()} h="220px" display="flex" justifyContent="space-around"
               >
                 <Image src={`${i.img1}`} alt={i.caption} w="49%"
@@ -22,6 +23,7 @@ const ItemCard1 = ({ type }) => {
                 />
                 <Image src={`${i.img2}`} alt={i.caption} w="49%"
                   borderRadius="15px"
+
                 />
               </Box>
             ))}

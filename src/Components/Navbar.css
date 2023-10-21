@@ -17,3 +17,17 @@ margin-left: 15px;
     color: #555;
     color: red;
   }
+
+.hoverText:hover{
+  text-decoration: underline;
+  cursor: "pointer";
+}
+.flex-container{
+       width: 100%;
+        justify-content:"center";
+        align-items: center;
+        margin: auto;
+        background-color: '#4a90e2';
+        padding: 5px;
+        gap:"10px";
+}

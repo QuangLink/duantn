@@ -10,7 +10,9 @@ const CateFeature = ({ type, }) => {
   return (
     <Box >
         <Heading fontSize="3xl" display="flex" justifyContent="center" textAlign="center"   textColor="black" mt="2%">Danh mục nổi bật</Heading>
+
     <Box justifyContent="center" w="70%" m="auto" mt="6" cursor="pointer" textAlign="center" display="flex" flexWrap="wrap" textSizeAdjust="auto"  >
+
       
       {type.map((i) => (
             <Box key={uuid()} >

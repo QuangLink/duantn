@@ -5,27 +5,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
 import { RotatingLines } from "react-loader-spinner";
-import ItemCard4 from "../Home/ItemCard4";
+import RelateProduct from "./RelateProduct";
 import {
-  ItemDetails6
+  ItemDetails8
 } from "../Home/CardDetails";
-
-
-
-
-
-const getSingleData = async (type, id) => {
-  let response = await axios.get(
-    `https://rus-digital-api.vercel.app/${type}/${id}`
-  );
-  // console.log("in the singleproduct page in the getsingleData function and response.data is :-",response.data);
-  return response.data;
-};
-
+import ComProduct from './ComProduct';
 const postSingleData = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/cart`,
+      `http://localhost:9000/cart/`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -42,7 +30,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,
+      `http://localhost:9000/whishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -63,7 +51,7 @@ const SingleProduct = (props) => {
   const params = useParams();
   const toast = useToast();
 
-
+ 
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -74,7 +62,6 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-
   const handlePost = (data) => {
     let newData = {};
     for (let i in data) {
@@ -100,7 +87,6 @@ const SingleProduct = (props) => {
     }
     );
   };
-
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -120,6 +106,9 @@ const SingleProduct = (props) => {
   // const handleDelete = async(id) => {
   //     let response = await axios.delete(`https://rus-digital-televisions.onrender.com/cart/${id}`).then((res) => console.log(res));
   // }
+
+  
+
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
@@ -164,16 +153,16 @@ const SingleProduct = (props) => {
             alignitem="center"
           >
             <Text color="gray.500" marginBottom={5}>
-              Article ID: {singleData.id}
+              Article ID: {singleData.prodID}
             </Text>
             <Heading size="md" marginBottom={5}>
-              {singleData.name}
+              {singleData.prodName}
             </Heading>
             <hr />
           </Box>
 
           <Grid
-            h={["1300px", "1100px", "900px"]}
+            h={["1500px", "1100px", "900px"]}
             templateRows={[
               "repeat(8, 1fr)",
               "repeat(8, 1fr)",
@@ -187,42 +176,76 @@ const SingleProduct = (props) => {
           >
             <GridItem
               rowSpan={[1, 2, 7]}
-              colSpan={[5, 6, 5]}
-              // display="flex"
+              colSpan={[6, 6, 5]}
               m="0 0 0 18%"
               p=" 2% 8% "
               justifyContent="center"
               alignitem="center"
               style={{
                 border: "none",
-                // boxShadow:
-                //   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
             >
               <Image
                 textAlign="center"
                 width="85%"
                 justifyContent="center"
-                src={singleData.img}
-                alt={singleData.name}
+                src={singleData.prodImg}
                 _hover={{ cursor: "crosshair" }}
 
               />
               <hr />
+              <Box
+                display="flex"
+                m={5}
+              >
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.prodImg}
+                
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.prodImg}
+           
+                  _hover={{ cursor: "crosshair" }}
+                />
+                <Image
+                  m={2}
+                  p={2}
+                  borderRadius={"5px"}
+                  border="1px solid #e0e0e0;"
+                  textAlign="center"
+                  width="25%"
+                  src={singleData.prodImg}
+        
+                  _hover={{ cursor: "crosshair" }}
+                />
+              </Box>
               {/* Chi tieet  */}
               <Heading size="sm" marginBottom={3}>
                 Thông số kĩ thuật
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  Loại tivi: {singleData.name}{" "}
+                  Tên: {singleData.prodName}{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 <ListItem>
                   Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   Công nghệ hình ảnh:Active HDRChế độ game HGiG
                   Chế độ hình ảnh phù hợp nội dung
                   Dải màu rộng Nano Color
@@ -230,7 +253,7 @@ const SingleProduct = (props) => {
                   ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
                   Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem>
+                </ListItem> */}
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
                 Thông tin sản phẩm (1){" "}
@@ -246,11 +269,11 @@ const SingleProduct = (props) => {
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  {singleData.name} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
+                  {singleData.prodName} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
                   Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
                   <br />
 
-                  Màn hình {singleData.name} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
+                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
@@ -260,7 +283,7 @@ const SingleProduct = (props) => {
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
-              rowSpan={7}
+              rowSpan={[9, 7]}
               p={7}
               mt="5%"
               style={{
@@ -269,29 +292,31 @@ const SingleProduct = (props) => {
               }}
             >
               <Heading size="md" marginBottom={5}>
-                {singleData.name}
+                {singleData.prodName}
               </Heading>
-              <Heading size="lg" marginBottom={5} color="blue.700">
-                {singleData.price}₫
-              </Heading>
-              <Text fontSize="lg" marginBottom={3}>
-                Giá gốc:{" "}
-                <span style={{ textDecoration: "line-through" }}>
-                  {singleData.mrp}
-                </span>{" "}₫
-                <span style={{ fontSize: "12px", padding: "20px" }}>
-                  (Bao gồm tất cả các loại thuế)
-                </span>
-              </Text>
+              <Heading size="lg" marginBottom={5} color="red">
+              {singleData.prodPrice} đ
+            </Heading>
+              {singleData.prodSale !== 0 && (
+                <>
+                  <Text fontSize="lg" marginBottom={3}>
+                    Giá gốc:  {singleData.prodPriceSale} đ
 
-              <Text
-                fontSize="sm"
-                color="green.600"
-                style={{ fontWeight: "bold" }}
-                marginBottom={3}
-              >
-                Phần trăm thuế: {singleData.discount}
-              </Text>
+                    <span style={{ textDecoration: "line-through" }}></span>
+                    <span style={{ fontSize: "12px", padding: "20px" }}>
+                      (Bao gồm tất cả các loại thuế)
+                    </span>
+                  </Text>
+                  <Text
+                    fontSize="sm"
+                    color="#eb5757"
+                    style={{ fontWeight: "bold" }}
+                    marginBottom={3}
+                  >
+                    Giảm tới: {singleData.prodSale}%
+                  </Text>
+                </>
+              )}
 
               <Text
                 fontSize="sm"
@@ -388,8 +413,15 @@ const SingleProduct = (props) => {
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
-          <ItemCard4 type={ItemDetails6} heading="Các sản phẩm khác" />
-
+          <Box
+            m="5%"
+          >
+            <br />
+            <hr
+            />
+            <RelateProduct type={ItemDetails8} />
+            <ComProduct />
+          </Box>
         </Box>
       )}
     </>

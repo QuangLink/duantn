@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Flex, Text, Image, Square, Heading, } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Text, Image, Square, Heading, Center, } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,8 +10,42 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import './stylehome.css';
 
+
+
+
 const TimeDeal = ({ type, heading }) => {
+  const [thoiGianConLai, setThoiGianConLai] = useState({ gio: 0, phut: 0, giay: 0 });
+
+  useEffect(() => {
+    const thoiGianKetThuc = new Date();
+    thoiGianKetThuc.setHours(23);
+    thoiGianKetThuc.setMinutes(59);
+    thoiGianKetThuc.setSeconds(59);
+
+    const interval = setInterval(() => {
+      const thoiGianHienTai = new Date();
+      const thoiGianConLai = tinhThoiGianConLai(thoiGianHienTai, thoiGianKetThuc);
+
+      if (thoiGianConLai.gio >= 0 && thoiGianConLai.phut >= 0 && thoiGianConLai.giay >= 0) {
+        setThoiGianConLai(thoiGianConLai);
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+  const tinhThoiGianConLai = (thoiGianHienTai, thoiGianKetThuc) => {
+    const thoiGianConLai = Math.floor((thoiGianKetThuc - thoiGianHienTai) / 1000); // Đổi sang giây
+
+    const gio = Math.floor(thoiGianConLai / 3600);
+    const phut = Math.floor((thoiGianConLai % 3600) / 60);
+    const giay = thoiGianConLai % 60;
+
+    return { gio, phut, giay };
+  };
   return (
+    
     <Box justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer" textAlign="center" backgroundColor="#FF7C0E"  borderRadius="15px">
      
      
@@ -22,18 +56,18 @@ const TimeDeal = ({ type, heading }) => {
                         <Text>
                         
                         <Text fontSize="30px" color="red"> GIỜ VÀNG DEAL SỐC</Text>
-                        <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" >  Kết thúc trong 00: 00 :00 </i> </Text>
+                        <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" >  Kết thúc trong {thoiGianConLai.gio.toString().padStart(2, '0')}:{thoiGianConLai.phut.toString().padStart(2, '0')}:{thoiGianConLai.giay.toString().padStart(2, '0')} </i> </Text>
                         </Text>
                       
                       
                       </Box>
                       <Box mt="8"  >
                       <Text fontSize="20px" >Đang diễn ra</Text>
-                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"   borderBottom="3px solid #E6CB47" borderBottomRadius="12px"><i fontSize="10px" > 00: 00 / 00:00 </i> </Text>
+                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"   borderBottom="3px solid #E6CB47" borderBottomRadius="12px"><i fontSize="10px" > 08: 00 / 23:59 </i> </Text>
                       </Box>
                       <Box mt="8">
                       <Text fontSize="20px" >Ngày mai</Text>
-                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" > 00: 00 / 00:00 </i> </Text>
+                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" > 08: 00 / 23:59 </i> </Text>
                       </Box>
 
       </Heading>
@@ -223,13 +257,17 @@ const TimeDeal = ({ type, heading }) => {
                     </Box>
                   </Box>
                   </Box>
+                  
                 </Link>
+                
              
              
              
              
              
               </SwiperSlide>
+              
+                
             
             
             
@@ -237,13 +275,23 @@ const TimeDeal = ({ type, heading }) => {
             </Box>
           ))}
         </Swiper>
+        
 
 
       </Box>
+      <Center m="2" >
+                <Box w="auto" h="50px" fontSize="20px" border="2px" borderRadius="10px" m="3" padding="5px 4px 5px 4px">
+                Xem tất cả
+              </Box>
+                </Center>
+             
 
 
 
     </Box>
+    
+
+
   );
 };
 
