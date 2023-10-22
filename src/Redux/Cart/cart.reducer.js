@@ -53,7 +53,7 @@ const CartReducer = (state = initialData, { type, payload }) => {
       return {
         ...state,
         paybalPrice: finalprice,
-        coupon: 500,
+        coupon: 500000,
       };
     }
     case "priceIncrease": {

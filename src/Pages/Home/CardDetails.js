@@ -3,11 +3,11 @@ import axios from "axios";
 const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
-  allproduct: apiUrlBase,
-  deals: apiUrlBase + "deals",
+
+
   sale: apiUrlBase + "sale",
-  applephone: apiUrlBase + "apple/phone",
-  appletablet: apiUrlBase + "apple/tablet",
+  applephone: apiUrlBase + "apple",
+  appletablet: apiUrlBase + "apple",
   samsung: apiUrlBase + "samsung",
   xiaomi: apiUrlBase + "xiaomi",
   hp: apiUrlBase + "hp",
@@ -26,16 +26,14 @@ const fetchDataForCategory = async (category) => {
       id: product.prodID,
       sale: product.prodSale,
       original: product.prodPriceSale,
-      linked: product.catName.toLowerCase(),
     }));
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
     return [];
   }
 };
-export let PrAll = [];
-export let PrDeals = [];
-export let PrSales = [];
+
+export let PrSale = [];
 export let PrApplePhone = [];
 export let PrAppleTablet = [];
 export let PrSamsung = [];
@@ -46,17 +44,16 @@ export let PrLenovo = [];
 export let PrAcer = [];
 
 const fetchDataForAllCategories = async () => {
-  PrAll = await fetchDataForCategory("allproduct");
-  PrDeals = await fetchDataForCategory("deals");
-  PrSales = await fetchDataForCategory("sale");
+
+  PrSale = await fetchDataForCategory("sale");
   PrApplePhone = await fetchDataForCategory("applephone");
   PrAppleTablet = await fetchDataForCategory("appletablet");
   PrSamsung = await fetchDataForCategory("samsung");
   PrXiaomi = await fetchDataForCategory("xiaomi");
   PrHp = await fetchDataForCategory("hp");
-  PrAsus = await fetchDataForCategory("Asus");
-  PrLenovo = await fetchDataForCategory("Lenovo");
-  PrAcer = await fetchDataForCategory("Acer");
+  PrAsus = await fetchDataForCategory("asus");
+  PrLenovo = await fetchDataForCategory("lenovo");
+  PrAcer = await fetchDataForCategory("acer");
 };
 
 fetchDataForAllCategories();

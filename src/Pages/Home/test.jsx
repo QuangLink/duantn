@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
 
 // const ProductList = () => {
@@ -11,12 +11,13 @@ import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
 
 //   const fetchProducts = async () => {
 //     try {
-//       const response = await axios.get('https://duantn-backend.onrender.com/products');
+//       const response = await axios.get('http://localhost:9000/products');
 //       setProducts(response.data);
 //     } catch (error) {
 //       console.error('Error fetching products:', error);
 //     }
 //   };
+
 
 //   const renderProducts = () => {
 //     return products.map((product) => (
@@ -34,8 +35,14 @@ import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
 //     <div>
 //     {renderProducts()}
 //     </div>
-
+   
 //   );
 // };
+
+
+
+
+
+
 
 // export default ProductList;
