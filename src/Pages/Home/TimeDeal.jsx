@@ -135,7 +135,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price}  <sup>đ</sup>
+                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  <sup>đ</sup>
                           </Text>
                         </Square>
                       </Flex>
@@ -145,7 +145,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original} <sup>đ</sup>
+                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
                         </Text>
                       </Flex>
                      
@@ -193,11 +193,14 @@ const TimeDeal = ({ type, heading }) => {
                     
                     <Text
                     mt="2"
-                      color="#424245"
-                      noOfLines={2}
-                      textAlign="center"
-                      fontSize="15px"
-                      _hover={{ color: "red" }}
+                  
+                    fontFamily="serif"
+                    color="#424245"
+                    noOfLines={2}
+                    textAlign="center"
+                    fontSize="25px"
+                    _hover={{ color: "red" }}
+                    fontWeight="700"
                     >
                       {i.name}
                     </Text>
@@ -210,7 +213,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price}  <sup>đ</sup>
+                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  <sup>đ</sup>
                           </Text>
                         </Square>
                       </Flex>
@@ -220,7 +223,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original} <sup>đ</sup>
+                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
                         </Text>
                       </Flex>
                      

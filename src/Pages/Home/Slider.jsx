@@ -52,16 +52,18 @@ const Slider = ({ type }) => {
               </Square>
                 <Text
                 mt="2"
-                  color="#275293"
+                fontFamily="serif"
+                  color="gray.800"
                   noOfLines={2}
-                  textAlign="left"
-                  fontSize="15px"
+                  textAlign="center"
+                  fontSize="25px"
                   w={{ xs: "80%", sm: "80%", base: "100px" }}
                   _hover={{ color: "red" }}
+                  fontWeight="700"
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5" m="20px 0 30px 0" >
+                <Box mt="2.5" m="20px 0 30px 0"  >
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
@@ -70,7 +72,7 @@ const Slider = ({ type }) => {
                     </Square>
                     <Square>
                       <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
-                        {i.price} <sup>đ</sup>
+                        {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
                       </Text>
                     </Square>
                   </Flex>
@@ -80,7 +82,7 @@ const Slider = ({ type }) => {
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      {i.original} <sup>đ</sup>
+                      {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
                     </Text>
                   </Flex>
                   {/* <Flex>

@@ -23,17 +23,10 @@ const PrDeal = ({ type }) => {
                         </Box>
       </Heading>
       <Swiper>
-                   <Box    h="200px" display="flex" justifyContent="space-between" m="1">
-                      <Image src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg" w="49%" m="1"
+                   <Box    h="200px" m="1">
+                      <Image src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg" w="99%" h="200px" m="1"
                    borderRadius="15px"
                           />
-                      <Image src="https://i.pinimg.com/564x/d5/bf/c1/d5bfc1b3fd6c5ff7d62af85ef6e14604.jpg" w="49%" m="1"
-                        borderRadius="15px"
-                         />
-                      <Image src="https://i.pinimg.com/564x/94/99/ef/9499ef4235609a75d4a99f4b55213afa.jpg"  w="49%" m ="1"
-                   borderRadius="15px"
-                  />
-
                     </Box>
     </Swiper>
       <Box mt="1"  >
@@ -76,11 +69,14 @@ const PrDeal = ({ type }) => {
                   </Square>
                   <Text
                   mt="2"
+                  
+                      fontFamily="serif"
                       color="#424245"
                       noOfLines={2}
                       textAlign="center"
-                      fontSize="15px"
+                      fontSize="25px"
                       _hover={{ color: "red" }}
+                      fontWeight="700"
                     >
                       {i.name}
                     </Text>
@@ -96,7 +92,7 @@ const PrDeal = ({ type }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price}  <sup>đ</sup>
+                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                           </Text>
                         </Square>
                       </Flex>
@@ -106,7 +102,7 @@ const PrDeal = ({ type }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original} <sup>đ</sup>
+                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
                         </Text>
                       </Flex>                
                       <Box
