@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/duantn/static/css/main.22988e0f.css",
-    "main.js": "/duantn/static/js/main.2807e111.js",
+    "main.js": "/duantn/static/js/main.a65ce470.js",
     "static/js/787.28e19238.chunk.js": "/duantn/static/js/787.28e19238.chunk.js",
     "static/media/PrSaleimg.png": "/duantn/static/media/PrSaleimg.e7e8e9aa49afa691abd4.png",
     "static/media/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png": "/duantn/static/media/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.62662982384c3e9bdf91.png",
@@ -14,11 +14,11 @@
     "static/media/dien-thoai-doc-quyen-128x128.webp": "/duantn/static/media/dien-thoai-doc-quyen-128x128.3f06778bcfc02503dbf3.webp",
     "index.html": "/duantn/index.html",
     "main.22988e0f.css.map": "/duantn/static/css/main.22988e0f.css.map",
-    "main.2807e111.js.map": "/duantn/static/js/main.2807e111.js.map",
+    "main.a65ce470.js.map": "/duantn/static/js/main.a65ce470.js.map",
     "787.28e19238.chunk.js.map": "/duantn/static/js/787.28e19238.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.22988e0f.css",
-    "static/js/main.2807e111.js"
+    "static/js/main.a65ce470.js"
   ]
 }
