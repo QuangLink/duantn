@@ -1,8 +1,4 @@
-import {
-  CartError,
-  CartLoading,
-  CartSuccess,
-} from "./cart.types";
+import { CartError, CartLoading, CartSuccess } from "./cart.types";
 
 import axios from "axios";
 export const getData = () => async (dispatch) => {
@@ -18,7 +14,5 @@ export const getData = () => async (dispatch) => {
     dispatch({ type: CartSuccess, payload: res.data });
   } catch (err) {
     dispatch({ type: CartError, error: "Có lỗi khi tải dữ liệu từ API." });
-
   }
 };
-

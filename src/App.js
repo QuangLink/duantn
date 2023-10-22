@@ -12,8 +12,8 @@ class App extends React.Component {
 
   callAPI() {
     fetch("https://duantn-backend.onrender.com/products")
-      .then(res => res.text())
-      .then(res => this.setState({ apiResponse: res }));
+      .then((res) => res.text())
+      .then((res) => this.setState({ apiResponse: res }));
   }
 
   componentWillMount() {
@@ -23,10 +23,10 @@ class App extends React.Component {
   render() {
     const footerStyle = {
       position: "relative",
-      marginTop:"150px",
+      marginTop: "150px",
       bottom: 0,
       left: 0,
-      width: "100%"
+      width: "100%",
     };
 
     return (

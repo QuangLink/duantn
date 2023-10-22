@@ -12,10 +12,8 @@ import { getData } from "../../Redux/Cart/cart.action";
 import Checkout from "../checkout/checkout";
 export const GetData = async () => {
   try {
-    let response = await axios.get(
-      `https://duantn-backend.onrender.com/cart`
-    );
-     
+    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
+
     return await response.data;
   } catch (err) {
     return err;
@@ -33,7 +31,7 @@ const MainCartPage = () => {
   const DeleteRequest = async (prodID) => {
     try {
       let response = await axios.delete(
-        `https://duantn-backend.onrender.com/cart/${prodID}`
+        `https://duantn-backend.onrender.com/cart/${prodID}`,
       );
       setChange(!change);
     } catch (err) {
@@ -70,9 +68,7 @@ const MainCartPage = () => {
   }, [change]);
 
   return (
-  
     <div>
-   
       <Flex
         border={"0px solid red"}
         margin="auto"
@@ -112,8 +108,7 @@ const MainCartPage = () => {
               />
             </Center>
           )}
-          
-           
+
           {data.map((product) => (
             <CartItem
               cartID={product.cartID}
@@ -123,13 +118,9 @@ const MainCartPage = () => {
               price={product.prodPrice}
               id={product.prodID}
               quantity={product.quantity}
-              
               DeleteRequest={DeleteRequest}
             />
           ))}
-          
-          
-          
         </Flex>
         <Flex
           border={"0px solid green"}
@@ -153,7 +144,7 @@ const MainCartPage = () => {
         </Flex>
       </Flex>
       <div>
-      <Checkout />
+        <Checkout />
       </div>
     </div>
   );

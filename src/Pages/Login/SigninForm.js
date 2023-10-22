@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useToast,
-} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Redux/Auth/auth.action";
 
 function SignInForm() {
-  
   const [loginCreds, setLoginCreds] = useState({});
   const dispatch = useDispatch();
   const toast = useToast();
@@ -16,11 +13,11 @@ function SignInForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginCreds(prevLoginCreds => ({
+    setLoginCreds((prevLoginCreds) => ({
       ...prevLoginCreds,
       [name]: value,
     }));
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,8 +36,6 @@ function SignInForm() {
       });
     }
   }, [isAuth, username, navigate, toast]);
-
- 
 
   return (
     <div className="form-container sign-in-container">
@@ -62,7 +57,6 @@ function SignInForm() {
           type="email"
           placeholder="Email"
           name="email"
-       
           onChange={handleChange}
         />
         <input
@@ -72,12 +66,10 @@ function SignInForm() {
           onChange={handleChange}
         />
         <a href="#">Quên mật khẩu ?</a>
-        <button  className="action-btn">Đăng nhập</button>
+        <button className="action-btn">Đăng nhập</button>
       </form>
     </div>
-   
   );
-
 }
 
 export default SignInForm;

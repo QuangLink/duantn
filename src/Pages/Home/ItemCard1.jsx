@@ -8,26 +8,31 @@ const ItemCard1 = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Center>
-      <Box width="70%" mt="-20" justifyContent="center">
-        <Slide >
-          
-            
-          {type.map((i) => (
-
-            <Box key={uuid()}   h="220px" display="flex" justifyContent="space-around"
-           >
-              <Image src={`${i.img1}`} alt={i.caption} w="49%"
-              borderRadius="15px"
-              />
-              <Image src={`${i.img2}`} alt={i.caption} w="49%"
-              borderRadius="15px"
-
-              />
-            </Box>
-          ))}
-       
-        </Slide>
-      </Box>
+        <Box width="70%" mt="-20" justifyContent="center">
+          <Slide>
+            {type.map((i) => (
+              <Box
+                key={uuid()}
+                h="220px"
+                display="flex"
+                justifyContent="space-around"
+              >
+                <Image
+                  src={`${i.img1}`}
+                  alt={i.caption}
+                  w="49%"
+                  borderRadius="15px"
+                />
+                <Image
+                  src={`${i.img2}`}
+                  alt={i.caption}
+                  w="49%"
+                  borderRadius="15px"
+                />
+              </Box>
+            ))}
+          </Slide>
+        </Box>
       </Center>
     </Box>
   );

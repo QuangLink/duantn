@@ -17,7 +17,7 @@ import {
 import React, { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from 'axios';  // Import Axios
+import axios from "axios"; // Import Axios
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,8 +29,7 @@ function SignUpForm() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    
-    e.preventDefault(); 
+    e.preventDefault();
     if (!username || !email || !password) {
       toast({
         title: "Hãy điền đầy đủ thông tin",
@@ -51,10 +50,13 @@ function SignUpForm() {
           password,
         };
 
-        const response = await axios.post("https://duantn-backend.onrender.com/users/register", payload);
+        const response = await axios.post(
+          "https://duantn-backend.onrender.com/users/register",
+          payload,
+        );
         if (response.length > 0) {
-          const isDuplicateUsername = response.includes('Username');
-        
+          const isDuplicateUsername = response.includes("Username");
+
           if (isDuplicateUsername) {
             toast({
               title: "Tên người dùng đã tồn tại",
@@ -64,12 +66,10 @@ function SignUpForm() {
               isClosable: true,
             });
 
-    return;
-  }
+            return;
+          }
         } else {
-
           toast({
-            
             title: "Tạo tài khoản thành công",
             description: "Chào mừng đến với JaguarStore",
             status: "success",
@@ -77,7 +77,7 @@ function SignUpForm() {
             isClosable: true,
           });
           setTimeout(() => {
-          navigate('/login');
+            navigate("/login");
           }, 2200);
         }
       } catch (error) {
@@ -130,28 +130,27 @@ function SignUpForm() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <InputGroup>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter Your Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <InputRightElement h={"full"}>
-                    <Button
-                      variant={"ghost"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-        <button className="action-btn" onClick={handleSubmit}>Đăng ký</button>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <InputRightElement h={"full"}>
+            <Button
+              variant={"ghost"}
+              onClick={() => setShowPassword((showPassword) => !showPassword)}
+            >
+              {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+        <button className="action-btn" onClick={handleSubmit}>
+          Đăng ký
+        </button>
       </form>
     </div>
   );
-  
 }
 
 export default SignUpForm;

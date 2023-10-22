@@ -9,7 +9,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
-const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
+const CartItem = ({
+  quantity,
+  cartID,
+  name,
+  img,
+  price,
+  id,
+  DeleteRequest,
+}) => {
   const singleData = {
     cartID,
     quantity,
@@ -27,9 +35,11 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
     setCount(count + 1);
     let number = parseInt(price);
     dispatch({ type: "priceIncrease", payload: number });
-  
+
     axios
-      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, { quantity: count + 1 })
+      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
+        quantity: count + 1,
+      })
       .then((res) => {
         console.log(res.data);
       })
@@ -37,21 +47,23 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
         console.log(err);
       });
   };
-  
+
   const handleDec = () => {
     if (count > 1) {
       let number = parseInt(price);
       setCount(count - 1);
       dispatch({ type: "priceDecrease", payload: number });
-      
-    axios
-    .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, { quantity: count + 1 })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+      axios
+        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
+          quantity: count + 1,
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -114,7 +126,7 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
     "Thứ Tư",
     "Thứ Năm",
     "Thứ Sáu",
-    "Thứ Bảy"
+    "Thứ Bảy",
   );
   var monName = new Array(
     "Tháng 1",
@@ -128,16 +140,13 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
     "Tháng 9",
     "Tháng 10",
     "Tháng 11",
-    "Tháng 12"
+    "Tháng 12",
   );
   var now = new Date();
-  var dtString =
-    dayName[now.getDay()] +
-    " - " +
-    now.getDate();
+  var dtString = dayName[now.getDay()] + " - " + now.getDate();
   var change =
-  dayName[tomorrow.getDay()] +
-    " - "  +
+    dayName[tomorrow.getDay()] +
+    " - " +
     tomorrow.getDate() +
     ", " +
     monName[now.getMonth()] +
@@ -183,7 +192,6 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
         >
           <Box>
             <Image src={img} alt={name} width="150px" />
-        
           </Box>
           <Box display={"flex"} gap="5">
             <Button onClick={handleDec}>-</Button>
@@ -192,7 +200,7 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
               disabled={true}
               fontWeight={"bold"}
             >
-            {count}
+              {count}
             </Button>
             <Button onClick={handleInc}>+</Button>
           </Box>
@@ -229,7 +237,8 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
           <Flex>
             <FcPlus />
             <Heading fontSize="12px" color={"red"}>
-            Dịch vụ/Gói bảo hành thiết bị điện tử được khuyến nghị mua cho sản phẩm điện tử
+              Dịch vụ/Gói bảo hành thiết bị điện tử được khuyến nghị mua cho sản
+              phẩm điện tử
             </Heading>
           </Flex>
         </Flex>
@@ -267,8 +276,7 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
               Giao hàng nhanh: {dtString} / {change}
             </Heading>
           </Flex>
-          <Heading fontSize="12px" color={"rgb(102, 102, 102)"}>
-          </Heading>
+          <Heading fontSize="12px" color={"rgb(102, 102, 102)"}></Heading>
         </Flex>
       </Flex>
       <Flex
@@ -318,7 +326,7 @@ const CartItem = ({quantity, cartID, name, img, price, id, DeleteRequest }) => {
             _hover={"backgroundColor:white"}
             onClick={() => handleWish(singleData)}
           >
-           Thêm vào yêu thích
+            Thêm vào yêu thích
           </Button>
         </Box>
       </Flex>
