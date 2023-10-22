@@ -187,7 +187,8 @@ const SingleProduct = (props) => {
             >
               <Image
                 textAlign="center"
-                width="85%"
+                width="600px"
+                height="600px"
                 justifyContent="center"
                 src={singleData.prodImg}
                 _hover={{ cursor: "crosshair" }}

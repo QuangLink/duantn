@@ -20,7 +20,6 @@ const getData = async (typeOfProduct, brandOfProduct) => {
   );
   return response.data;
 };
-
 const ProductFilter = ({ typeOfProduct }) => {
   return (
     <Box p="5">
@@ -31,8 +30,7 @@ const ProductFilter = ({ typeOfProduct }) => {
         display="flex"
         justifyContent="space-between"
         borderRadius="3px"
-        boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px"
-      >
+        boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px">
         <Flex
           p={2}
         >
@@ -203,8 +201,7 @@ const ProductFilter = ({ typeOfProduct }) => {
           </Button>
         </Flex>
         <Flex
-          width="13%"
-        >
+          width="13%">
           <Box>
             <Menu>
               <MenuButton

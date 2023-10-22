@@ -158,7 +158,6 @@ const Product = (props, rating) => {
                   <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
                     Giá: {prodPrice}₫
                   </Heading>
-
                 </Box>
                 <Badge
                   borderRadius="5px"
@@ -168,11 +167,9 @@ const Product = (props, rating) => {
                   color="#eb5757"
                   fontSize="xs"
                   marginBottom="10"
-                  marginLeft={5}
-                >
+                  marginLeft={5}>
                   Giá tốt
                 </Badge>
-
               </>
             )
           }

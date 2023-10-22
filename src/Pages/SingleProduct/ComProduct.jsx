@@ -22,11 +22,9 @@ const ComProduct = () => {
             justifyContent="center" w="75%" m="auto" mt="6" cursor="pointer"
             backgroundColor="blackAlpha.50"
             borderRadius="10px"
-            height="auto"
-        >
+            height="auto">
             <Box
-                onSubmit={handleCommentSubmit}
-            >
+                onSubmit={handleCommentSubmit}>
                 <Heading
                     mt={5}
                     ml={5}

@@ -12,7 +12,7 @@ import uuid from "react-uuid";
 const HotProduct = ({ type, heading }) => {
   return (
     <Box justifyContent="center" w="80%" m="auto" mt="6" cursor="pointer" textAlign="center"
-      backgroundColor="#CCF1F9" borderRadius="5px" >
+      backgroundColor="#CCF1F9" borderRadius="5px">
       <Box >
         <a href="">
           <Text
