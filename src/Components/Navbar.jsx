@@ -8,7 +8,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-
   Grid,
   Heading,
   Image,
@@ -25,18 +24,29 @@ import {
   useToast,
   Alert,
 } from "@chakra-ui/react";
-import { Icon } from '@chakra-ui/react'
+import { Icon } from "@chakra-ui/react";
 
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import React, { useState } from "react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FcSearch } from "react-icons/fc";
 import { ImLocation2 } from "react-icons/im";
 import { BiNetworkChart, BiSearch } from "react-icons/bi";
-import { BsFillCartFill, BsPhone, BsSmartwatch, BsCart2, BsFillPersonFill, BsTelephone } from "react-icons/bs";
+import {
+  BsFillCartFill,
+  BsPhone,
+  BsSmartwatch,
+  BsCart2,
+  BsFillPersonFill,
+  BsTelephone,
+} from "react-icons/bs";
 import { MdConnectWithoutContact } from "react-icons/md";
-import { AiOutlineLaptop, AiOutlineTablet, AiOutlineMenu } from "react-icons/ai"
+import {
+  AiOutlineLaptop,
+  AiOutlineTablet,
+  AiOutlineMenu,
+} from "react-icons/ai";
 import { CiHeadphones } from "react-icons/ci";
 import { FaTruck, FaComputer } from "react-icons/fa";
 
@@ -46,23 +56,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/Auth/auth.action";
 
-
-
-
-
-
-
-
-
-
-
-
-
 function Navbar() {
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [openMenu, setOpenMenu] = React.useState(false);
   const btnRef = React.useRef();
@@ -73,23 +71,25 @@ function Navbar() {
   const toast = useToast();
 
   const fetchData = (value) => {
-    fetch("http://localhost:9000/products/search")
+    fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
         const results = json.filter((search) => {
-          return search && search.prodName && search.prodName.toLowerCase().includes(input);
-        })
+          return (
+            search &&
+            search.prodName &&
+            search.prodName.toLowerCase().includes(input)
+          );
+        });
         console.log(results);
-      })
-  }
+      });
+  };
 
   const handleChange = (event) => {
     setInput(event.target.value);
     fetchData(event.target.value);
-
-  }
-
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -105,29 +105,39 @@ function Navbar() {
   // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box backgroundColor='#4a90e2' >
-        <Flex w="100%" alignItems={"center"} m="auto" justifyContent="space-around">
+      <Box backgroundColor="#4a90e2">
+        <Flex
+          w="100%"
+          alignItems={"center"}
+          m="auto"
+          justifyContent="space-around"
+        >
           <Box>
-            <Image src={(require('../Components/Images/1200-44-1200x44-5.webp'))} />
+            <Image
+              src={require("../Components/Images/1200-44-1200x44-5.webp")}
+            />
           </Box>
-
         </Flex>
         <Flex
           w="100%"
-          h='60px'
+          h="60px"
           justifyContent="center"
           alignItems={"center"}
           m="auto"
-          backgroundColor='#4a90e2'
+          backgroundColor="#4a90e2"
           // bgImage={require('./Images/bghaeder2.png')}
           p="5px"
           px="15%"
           gap="10px"
         >
           <Link to="/">
-            <Box
-            >
-              <Image src={require('./Images/logo.jpg')} alt="logo" w="130px" h="70px" />
+            <Box>
+              <Image
+                src={require("./Images/logo.jpg")}
+                alt="logo"
+                w="130px"
+                h="70px"
+              />
             </Box>
           </Link>
           <Box>
@@ -148,31 +158,40 @@ function Navbar() {
                 h={7}
                 value={input}
                 onChange={handleChange}
-
               />
               <BiSearch color="#555" fontSize={"28px"} />
-
             </Flex>
-            <Box w={100}
+            <Box
+              w={100}
               backgroundColor="#FFFFFF"
               display="flex"
-              flexDirection={'column'}
+              flexDirection={"column"}
               boxShadow="0x 0x 8px #ddd"
               borderRadius={10}
               maxHeight={300}
-              overflowY={'scroll'}
+              overflowY={"scroll"}
             >
               {/* {results.map((results, id) => {
                 return <Text key={id}>{results.prodName}</Text>
               })} */}
-
             </Box>
           </Box>
 
           {!isAuth ? (
-            <Flex cursor={"pointer"} borderRadius={5} _hover={{
-              bg: "#0077ff"
-            }}><Icon w={4} h={4} color={'#fff'} margin={2} as={BsFillPersonFill} />
+            <Flex
+              cursor={"pointer"}
+              borderRadius={5}
+              _hover={{
+                bg: "#0077ff",
+              }}
+            >
+              <Icon
+                w={4}
+                h={4}
+                color={"#fff"}
+                margin={2}
+                as={BsFillPersonFill}
+              />
               <Link to="login">
                 <Heading
                   fontWeight={400}
@@ -180,7 +199,6 @@ function Navbar() {
                   cursor={"pointer"}
                   fontSize={"14px"}
                   color="#fff"
-
                 >
                   Đăng nhập
                 </Heading>
@@ -208,25 +226,33 @@ function Navbar() {
             </Menu>
           )}
           <Link to="/cart">
-            <Flex cursor={"pointer"} textAlign={'center'} borderRadius={5} _hover={{
-              bg: "#0077ff"
-            }} > <Icon as={BsCart2} w={4} h={4} color={'#fff'} margin={2} />
+            <Flex
+              cursor={"pointer"}
+              textAlign={"center"}
+              borderRadius={5}
+              _hover={{
+                bg: "#0077ff",
+              }}
+            >
+              {" "}
+              <Icon as={BsCart2} w={4} h={4} color={"#fff"} margin={2} />
               <Heading
                 fontWeight={400}
-                m='2'
+                m="2"
                 cursor={"pointer"}
                 fontSize={"14px"}
                 color="#fff"
-                flexDirection={'row'}
+                flexDirection={"row"}
               >
                 Giỏ hàng
               </Heading>
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"}
+            <Flex
+              cursor={"pointer"}
               _hover={{
-                bg: "#0077ff"
+                bg: "#0077ff",
               }}
             >
               <Heading
@@ -241,9 +267,12 @@ function Navbar() {
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"} _hover={{
-              bg: "#0077ff"
-            }}>
+            <Flex
+              cursor={"pointer"}
+              _hover={{
+                bg: "#0077ff",
+              }}
+            >
               <Heading
                 fontWeight={400}
                 m="2"
@@ -256,25 +285,28 @@ function Navbar() {
             </Flex>
           </Link>
           <Link to="/cart">
-            <Flex cursor={"pointer"} bg={'#fff'} textAlign={'center'} borderRadius={15} _hover={{
-              bg: "#fff"
-            }} >
+            <Flex
+              cursor={"pointer"}
+              bg={"#fff"}
+              textAlign={"center"}
+              borderRadius={15}
+              _hover={{
+                bg: "#fff",
+              }}
+            >
               {/* <Icon as={BsTelephone} w={4} h={4} color={'red'} margin={2} /> */}
               <Heading
                 fontWeight={700}
-                m='2'
+                m="2"
                 cursor={"pointer"}
                 fontSize={"14px"}
                 color="red"
-                flexDirection={'row'}
+                flexDirection={"row"}
               >
                 0362956071
               </Heading>
             </Flex>
           </Link>
-
-
-
         </Flex>
         <Flex
           w="95%"
@@ -286,21 +318,19 @@ function Navbar() {
           bg="#4a90e2"
           px="15%"
         >
-
-
           <Menu>
             <MenuButton
-
               px={4}
               py={2}
-
               color="#fff"
               // transition="all 0.2s"
               _hover={{ color: "white", fontSize: 18 }}
               _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               alignContent={"center"}
             >
-              <HamburgerIcon w={50} h={7} paddingBottom={1} />Tất cả danh mục<ChevronDownIcon />
+              <HamburgerIcon w={50} h={7} paddingBottom={1} />
+              Tất cả danh mục
+              <ChevronDownIcon />
             </MenuButton>
 
             <MenuList bg="#FFF">
@@ -316,16 +346,18 @@ function Navbar() {
                 >
                   <Box>
                     <Heading
-
                       _hover={{
                         textDecoration: "underline",
                       }}
                       my="8px"
                       fontSize={"18px"}
                     >
-                      <Image w={20} marginLeft={10} src={(require('../Components/Images/Laptop-129x129.webp'))} />
+                      <Image
+                        w={20}
+                        marginLeft={10}
+                        src={require("../Components/Images/Laptop-129x129.webp")}
+                      />
                       <Text> LapTop</Text>
-
                     </Heading>
                     <Text
                       _hover={{
@@ -380,11 +412,14 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
-                      <Image w={20} marginLeft={10} src={(require('../Components/Images/dien-thoai-doc-quyen-128x128.webp'))} />
+                      <Image
+                        w={20}
+                        marginLeft={10}
+                        src={require("../Components/Images/dien-thoai-doc-quyen-128x128.webp")}
+                      />
                       <Text>Điện thoại</Text>
                     </Heading>
                     <Text
@@ -431,11 +466,14 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
-                      <Image w={20} marginLeft={10} src={(require('../Components/Images/Tablet-128x129.webp'))} />
+                      <Image
+                        w={20}
+                        marginLeft={10}
+                        src={require("../Components/Images/Tablet-128x129.webp")}
+                      />
                       <Text> Tablet</Text>
                     </Heading>
                     <Text
@@ -499,13 +537,16 @@ function Navbar() {
                         textDecoration: "underline",
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
-                      <Image w={20} marginLeft={10} src={(require('../Components/Images/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png'))} />
+                      <Image
+                        w={20}
+                        marginLeft={10}
+                        src={require("../Components/Images/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png")}
+                      />
 
-                      <Text>   Phụ kiện di động</Text>
+                      <Text> Phụ kiện di động</Text>
                     </Heading>
                     <Text
                       _hover={{
@@ -560,13 +601,16 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
-                    ><Image w={20} marginLeft={10} src={(require('../Components/Images/icon-moi-128x129.webp'))} />
+                    >
+                      <Image
+                        w={20}
+                        marginLeft={10}
+                        src={require("../Components/Images/icon-moi-128x129.webp")}
+                      />
 
                       <Text>Đồng hồ </Text>
-
                     </Heading>
                     <Text
                       _hover={{
@@ -621,7 +665,6 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -663,7 +706,6 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -714,7 +756,6 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -746,7 +787,6 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -797,7 +837,6 @@ function Navbar() {
                     >
                       Thẻ nhớ
                     </Text>
-
                   </Box>
                   <Box>
                     <Heading
@@ -806,7 +845,6 @@ function Navbar() {
 
                         cursor: "pointer",
                       }}
-
                       my="8px"
                       fontSize={"18px"}
                     >
@@ -853,10 +891,9 @@ function Navbar() {
               </Link>
             </MenuList>
           </Menu>
-          <Menu >
-            <Link to="phone" >
+          <Menu>
+            <Link to="phone">
               <MenuButton
-
                 px={4}
                 py={2}
                 color="#fff"
@@ -864,9 +901,8 @@ function Navbar() {
                 _hover={{ color: "white", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
-                <Icon as={BsPhone} />  Điện Thoại
+                <Icon as={BsPhone} /> Điện Thoại
               </MenuButton>
-
             </Link>
           </Menu>
           <Menu>
@@ -879,7 +915,7 @@ function Navbar() {
                 _hover={{ color: "white", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
-                <Icon boxSize={5} h={5} as={AiOutlineLaptop} />  Laptop
+                <Icon boxSize={5} h={5} as={AiOutlineLaptop} /> Laptop
               </MenuButton>
             </Link>
           </Menu>
@@ -897,9 +933,8 @@ function Navbar() {
               </MenuButton>
             </Link>
           </Menu>
-          <Menu >
+          <Menu>
             <Link to="accessories">
-
               <MenuButton
                 px={4}
                 py={2}
@@ -909,10 +944,10 @@ function Navbar() {
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
                 display="flex"
               >
-                <Icon as={BsSmartwatch} />  Smartwatch
+                <Icon as={BsSmartwatch} /> Smartwatch
               </MenuButton>
             </Link>
-          </Menu >
+          </Menu>
           <Menu>
             <Link to="mobilesandtablets">
               <MenuButton
@@ -923,7 +958,7 @@ function Navbar() {
                 _hover={{ color: "white", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
               >
-                <Icon as={BsSmartwatch} />  Đồng hồ
+                <Icon as={BsSmartwatch} /> Đồng hồ
               </MenuButton>
             </Link>
           </Menu>
@@ -941,8 +976,8 @@ function Navbar() {
               </MenuButton>
             </Link>
           </Menu>
-        </Flex >
-      </Box >
+        </Flex>
+      </Box>
     );
   } else if (isLargerThan750px) {
     return (
@@ -951,14 +986,19 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        backgroundColor='#4a90e2'
+        backgroundColor="#4a90e2"
         p="20px"
         px="2%"
         gap="10px"
       >
         <Link to="/">
           <Box>
-            <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
+            <Image
+              src={require("./Images/logo.jpg")}
+              alt="logo"
+              w="120px"
+              h="70px"
+            />
           </Box>
         </Link>
         <Flex
@@ -976,28 +1016,32 @@ function Navbar() {
             placeholder="Bạn tìm gì..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
         <Link to="/cart">
-          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
-            bg: "#0077ff"
-          }} >
-            <Heading
-              m='3'
-              cursor={"pointer"}
-              fontSize={"16px"}
-              color="white"
-            >
+          <Flex
+            cursor={"pointer"}
+            border={"1px solid #FFFFFF"}
+            borderRadius={10}
+            _hover={{
+              bg: "#0077ff",
+            }}
+          >
+            <Heading m="3" cursor={"pointer"} fontSize={"16px"} color="white">
               Giỏ hàng
             </Heading>
           </Flex>
         </Link>
         {!isAuth ? (
-          <Flex cursor={"pointer"} border={'1px solid #FFFFFF'} borderRadius={10} _hover={{
-            bg: "#0077ff"
-          }}>
+          <Flex
+            cursor={"pointer"}
+            border={"1px solid #FFFFFF"}
+            borderRadius={10}
+            _hover={{
+              bg: "#0077ff",
+            }}
+          >
             <Link to="login">
               <Heading
                 m={3}
@@ -1040,7 +1084,6 @@ function Navbar() {
             placement="right"
             onClose={onClose}
             finalFocusRef={btnRef}
-
           >
             <DrawerOverlay />
             <DrawerContent bg="#FFFFFF" color="#55555">
@@ -1147,14 +1190,19 @@ function Navbar() {
         justifyContent="space-around"
         alignItems={"center"}
         m="auto"
-        backgroundColor='#4a90e2'
+        backgroundColor="#4a90e2"
         p="20px"
         px="2%"
         gap="10px"
       >
         <Link to="/">
           <Box>
-            <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
+            <Image
+              src={require("./Images/logo.jpg")}
+              alt="logo"
+              w="120px"
+              h="70px"
+            />
           </Box>
         </Link>
         <Flex
@@ -1170,8 +1218,6 @@ function Navbar() {
             fontSize={"18px"}
             borderRadius={"5px"}
             placeholder="Bạn tìm gì..."
-
-
           />
           <BiSearch fontSize={"42px"} />
         </Flex>
@@ -1197,12 +1243,11 @@ function Navbar() {
                   m="auto"
                   p="auto"
                 >
-                  {isAuth ? (
+                  {!isAuth ? (
                     <Link to="profile">
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-
                         fontWeight="bold"
                         color="#55555"
                         mt="35px"
@@ -1215,7 +1260,6 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-
                         fontWeight="bold"
                         color="#55555"
                         mt="35px"
@@ -1230,7 +1274,6 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-
                         fontWeight="bold"
                         color="#55555"
                       >
@@ -1242,7 +1285,6 @@ function Navbar() {
                       <Heading
                         cursor={"pointer"}
                         fontSize={"24px"}
-
                         fontWeight="bold"
                         color="#55555"
                         onClick={handleLogout}
@@ -1263,7 +1305,11 @@ function Navbar() {
                     </Heading>
                   </Link>
 
-                  <DrawerHeader color="black" fontSize={"22px"} fontWeight="bold">
+                  <DrawerHeader
+                    color="black"
+                    fontSize={"22px"}
+                    fontWeight="bold"
+                  >
                     <Divider color={"black"} />
                     Product Category
                     <Divider color={"black"} />
@@ -1274,7 +1320,6 @@ function Navbar() {
                       cursor={"pointer"}
                       fontSize={"17px"}
                       color="#55555"
-
                     >
                       Điện thoại
                     </Heading>

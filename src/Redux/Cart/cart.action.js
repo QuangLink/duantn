@@ -1,17 +1,18 @@
-import {
-  CartError,
-  CartLoading,
-  CartSuccess,
-} from "./cart.types";
+import { CartError, CartLoading, CartSuccess } from "./cart.types";
 
 import axios from "axios";
 export const getData = () => async (dispatch) => {
   dispatch({ type: CartLoading });
   try {
-    await axios
-      .get("https://rus-digital-televisions.onrender.com/cart")
-      .then((res) => dispatch({ type: CartSuccess, payload: res.data }));
+    //gửi token đang lưu trong session lên server để xác thực
+    const token = sessionStorage.getItem("token");
+    const res = await axios.get("https://duantn-backend.onrender.com/cart/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({ type: CartSuccess, payload: res.data });
   } catch (err) {
-    dispatch({ type: CartError });
+    dispatch({ type: CartError, error: "Có lỗi khi tải dữ liệu từ API." });
   }
 };

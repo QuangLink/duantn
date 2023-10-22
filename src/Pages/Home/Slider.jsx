@@ -38,18 +38,22 @@ const Slider = ({ type }) => {
       }}
     >
       {type.map((i) => (
-        <Box key={uuid()} >
+        <Box key={uuid()}>
           <SwiperSlide>
             <Link to={i.linked}>
-              
-              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
-              <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                <Image
-                  src={`${i.img}`}
-                  alt={i.name}
-                  boxSize={{ base: "160px" }}
-                />
-              </Square>
+              <Box
+                p="2"
+                mt="4"
+                borderRadius="15px"
+                boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+              >
+                <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                  <Image
+                    src={`${i.img}`}
+                    alt={i.name}
+                    boxSize={{ base: "160px" }}
+                  />
+                </Square>
                 <Text
                   color="#275293"
                   noOfLines={2}
@@ -60,7 +64,7 @@ const Slider = ({ type }) => {
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5" m="20px 0 30px 0" >
+                <Box mt="2.5" m="20px 0 30px 0">
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
@@ -68,14 +72,20 @@ const Slider = ({ type }) => {
                       </Text>
                     </Square>
                     <Square>
-                      <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
+                      <Text
+                        fontWeight="600"
+                        fontSize="18px"
+                        ml="1"
+                        color="red"
+                        _hover={{ color: "red" }}
+                      >
                         {i.price} <sup>đ</sup>
                       </Text>
                     </Square>
                   </Flex>
                   <Flex>
-                    <Text color="gray.600" fontSize="14px"  >
-                      Giá gốc:{" "} 
+                    <Text color="gray.600" fontSize="14px">
+                      Giá gốc:{" "}
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
@@ -92,18 +102,16 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px"
-                        borderRadius="5px"
-                       
-                        w="40%"
-                        color="#f72424"
-                        bg="#fff0e9"
-                        mt="2"
-                        textAlign="center"
-                    
+                    padding="3px"
+                    borderRadius="5px"
+                    w="40%"
+                    color="#f72424"
+                    bg="#fff0e9"
+                    mt="2"
+                    textAlign="center"
                   >
                     <Text fontSize="10px" fontWeight="500">
-                      GIẢM GIÁ SỐC 
+                      GIẢM GIÁ SỐC
                     </Text>
                   </Box>
                 </Box>

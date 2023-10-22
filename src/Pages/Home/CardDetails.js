@@ -1,35 +1,35 @@
-import axios from 'axios';
+import axios from "axios";
 
-const apiUrlBase = 'http://localhost:9000/category/';
+const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   allproduct: apiUrlBase,
-  deals: apiUrlBase + 'deals',
-  sale: apiUrlBase + 'sale',
-    applephone: apiUrlBase + 'apple/phone',
-    appletablet: apiUrlBase + 'apple/tablet',
-  samsung: apiUrlBase + 'samsung',
-  xiaomi: apiUrlBase + 'xiaomi',
-  hp: apiUrlBase + 'hp',
-  asus: apiUrlBase + 'asus',
-  lenovo: apiUrlBase + 'lenovo',
-  acer: apiUrlBase + 'acer',
+  deals: apiUrlBase + "deals",
+  sale: apiUrlBase + "sale",
+  applephone: apiUrlBase + "apple/phone",
+  appletablet: apiUrlBase + "apple/tablet",
+  samsung: apiUrlBase + "samsung",
+  xiaomi: apiUrlBase + "xiaomi",
+  hp: apiUrlBase + "hp",
+  asus: apiUrlBase + "asus",
+  lenovo: apiUrlBase + "lenovo",
+  acer: apiUrlBase + "acer",
 };
 
 const fetchDataForCategory = async (category) => {
   try {
     const response = await axios.get(categoryUrls[category]);
-    return response.data.map(product => ({
+    return response.data.map((product) => ({
       name: product.prodName,
       img: product.prodImg,
       price: product.prodPrice,
       id: product.prodID,
-      sale:product.prodSale,
-      original:product.prodPriceSale,
+      sale: product.prodSale,
+      original: product.prodPriceSale,
       linked: product.catName.toLowerCase(),
     }));
   } catch (error) {
-    console.error('Lỗi khi lấy dữ liệu sản phẩm:', error);
+    console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
     return [];
   }
 };
@@ -46,22 +46,20 @@ export let PrLenovo = [];
 export let PrAcer = [];
 
 const fetchDataForAllCategories = async () => {
-  PrAll = await fetchDataForCategory('allproduct');
-  PrDeals = await fetchDataForCategory('deals');
-  PrSales = await fetchDataForCategory('sale');
-  PrApplePhone = await fetchDataForCategory('applephone');
-  PrAppleTablet = await fetchDataForCategory('appletablet');
-  PrSamsung = await fetchDataForCategory('samsung');
-  PrXiaomi = await fetchDataForCategory('xiaomi');
-  PrHp = await fetchDataForCategory('hp');
-  PrAsus = await fetchDataForCategory('Asus');
-  PrLenovo = await fetchDataForCategory('Lenovo');
-  PrAcer = await fetchDataForCategory('Acer');
+  PrAll = await fetchDataForCategory("allproduct");
+  PrDeals = await fetchDataForCategory("deals");
+  PrSales = await fetchDataForCategory("sale");
+  PrApplePhone = await fetchDataForCategory("applephone");
+  PrAppleTablet = await fetchDataForCategory("appletablet");
+  PrSamsung = await fetchDataForCategory("samsung");
+  PrXiaomi = await fetchDataForCategory("xiaomi");
+  PrHp = await fetchDataForCategory("hp");
+  PrAsus = await fetchDataForCategory("Asus");
+  PrLenovo = await fetchDataForCategory("Lenovo");
+  PrAcer = await fetchDataForCategory("Acer");
 };
 
 fetchDataForAllCategories();
-
-
 
 export const TimeDeals = [
   {
@@ -136,88 +134,87 @@ export const TimeDeals = [
     id: 8,
     linked: "kitchen",
   },
-]
+];
 export const BannersCenter = [
   {
-    "id": 1,
-    "name": "Máy tính",
-    "imgbnct": "https://i.pinimg.com/564x/a5/6c/93/a56c930c91e49eebd953ff0d51a9bec6.jpg"
+    id: 1,
+    name: "Máy tính",
+    imgbnct:
+      "https://i.pinimg.com/564x/a5/6c/93/a56c930c91e49eebd953ff0d51a9bec6.jpg",
   },
 ];
-
 
 export const BannersLeft = [
   {
-    "id": 1,
-    "name": "Máy tính",
-    "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
+    id: 1,
+    name: "Máy tính",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png",
   },
 ];
 
-
-
-
 export const CateFeatures = [
-  
-    {
-      "id": 1,
-      "name": "Máy tính",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png"
-    },
-    {
-      "id": 2,
-      "name": "Tablet",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png"
-    },
-    {
-      "id": 3,
-      "name": "Đồng hồ thông minh",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png"
-    },
-    {
-      "id": 4,
-      "name": "Điện thoại độc quyền",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png"
-    },
-    {
-      "id": 5,
-      "name": "Màn hình máy tính",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png"
-    },
-    {
-      "id": 6,
-      "name": "Phụ kiện di động",
-      "imgcatehot": "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png"
-    },
-    {
-      "id": 7,
-      "name": "Phụ kiện Gaming",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png"
-    },
-    {
-      "id": 8,
-      "name": "Thiết bị âm thanh",
-      "imgcatehot": "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png"
-    },
-    {
-      "id": 9,
-      "name": "Điều hòa",
-      "imgcatehot": "https://tse4.mm.bing.net/th?id=OIP.7BSmCxRZXYWjuGgMj_vDWQHaHa&pid=Api&P=0&h=220"
-    },
-    {
-      "id": 10,
-      "name": "Thiết bị làm mát",
-      "imgcatehot": "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220"
-    },
-
-
-   
-    
-  
+  {
+    id: 1,
+    name: "Máy tính",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png",
+  },
+  {
+    id: 2,
+    name: "Tablet",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png",
+  },
+  {
+    id: 3,
+    name: "Đồng hồ thông minh",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png",
+  },
+  {
+    id: 4,
+    name: "Điện thoại độc quyền",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png",
+  },
+  {
+    id: 5,
+    name: "Màn hình máy tính",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png",
+  },
+  {
+    id: 6,
+    name: "Phụ kiện di động",
+    imgcatehot:
+      "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png",
+  },
+  {
+    id: 7,
+    name: "Phụ kiện Gaming",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png",
+  },
+  {
+    id: 8,
+    name: "Thiết bị âm thanh",
+    imgcatehot:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
+  },
+  {
+    id: 9,
+    name: "Điều hòa",
+    imgcatehot:
+      "https://tse4.mm.bing.net/th?id=OIP.7BSmCxRZXYWjuGgMj_vDWQHaHa&pid=Api&P=0&h=220",
+  },
+  {
+    id: 10,
+    name: "Thiết bị làm mát",
+    imgcatehot:
+      "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220",
+  },
 ];
-
-
-
 
 export const ItemDetails1 = [
   {
@@ -227,13 +224,11 @@ export const ItemDetails1 = [
     caption: "Slide 1",
   },
   {
-    
     img2: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/Mua-kem-720-220-720x220-1.png",
     img1: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
 
     caption: "Slide 2",
   },
-  
 ];
 
 export const ItemDetails2 = [
@@ -274,8 +269,6 @@ export const ItemDetails2 = [
     caption: "Slide 9",
   },
 ];
-
-
 
 export const ItemDetails4 = [
   {

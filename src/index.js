@@ -12,18 +12,17 @@ import { PageContextProvider } from "./Pages/context/PageContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
-    <Provider store={store}>
-        <PageContextProvider>
-    <AppContextProvider>
-      <BrowserRouter>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
-      </BrowserRouter>
-    </AppContextProvider>
+  <Provider store={store}>
+    <PageContextProvider>
+      <AppContextProvider>
+        <BrowserRouter>
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
+        </BrowserRouter>
+      </AppContextProvider>
     </PageContextProvider>
-  </Provider>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 const CheckoutBox = ({
@@ -64,7 +64,6 @@ const CheckoutBox = ({
         padding={"16px"}
       >
         <Flex>
-         
           <Button
             width={"100%"}
             color="white"
@@ -74,7 +73,6 @@ const CheckoutBox = ({
           >
             THANH TOÁN
           </Button>
-       
         </Flex>
         <Flex
           flexDirection={"column"}
@@ -113,12 +111,17 @@ const CheckoutBox = ({
           <Flex flexDirection={"column"} gap="10px">
             <Box width="90%" margin="auto" marginTop={"20px"}>
               <Text fontWeight="bold" textAlign="left">
-               THÔNG TIN GIÁ
+                THÔNG TIN GIÁ
               </Text>
 
               <Flex justifyContent="space-between">
                 <Text>Giá ({items} Sản phẩm)</Text>
-                <Text >{totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} </Text>
+                <Text>
+                  {totalPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}{" "}
+                </Text>
               </Flex>
 
               <Flex justifyContent="space-between">
@@ -131,7 +134,12 @@ const CheckoutBox = ({
               <Flex justifyContent="space-between">
                 <Text>Giảm giá</Text>
 
-                <Text>{discount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Text>
+                <Text>
+                  {discount.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </Text>
               </Flex>
 
               <Divider />
@@ -142,7 +150,12 @@ const CheckoutBox = ({
                 marginBottom={"20px"}
               >
                 <Text>Tổng hóa đơn</Text>
-                <Text>{paybalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</Text>
+                <Text>
+                  {paybalPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </Text>
               </Flex>
               <Divider />
             </Box>

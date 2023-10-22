@@ -173,8 +173,8 @@
 
 .AppForm .overlay {
   background: #70b1ea;
-  background: -webkit-linear-gradient(to right, #70b1ea, #3063c5);
-  background: linear-gradient(to right, #70b1ea, #3063c5);
+  background: -webkit-linear-gradient(to right, #70b1ea, #4a90e2);
+  background: linear-gradient(to right, #70b1ea, #4a90e2);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

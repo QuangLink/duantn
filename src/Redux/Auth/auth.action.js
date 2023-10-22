@@ -9,20 +9,28 @@ import {
 export const login = (creds) => async (dispatch) => {
   dispatch({ type: LOGIN_LOADING });
   try {
-    let res = await axios.post('http://localhost:9000/users/login', creds);
+    let res = await axios.post(
+      "https://duantn-backend.onrender.com/users/login",
+      creds,
+    );
     const token = res.data.token; // Lấy token từ phản hồi
-    const username = JSON.parse(atob(token.split('.')[1])).username;
-    const admin = JSON.parse(atob(token.split('.')[1])).admin;
-
+    const username = res.data.payload.username;
+    const admin = res.data.payload.admin;
+    //lấy userID từ header token
+    const userID = res.data.payload.userID;
     // Lưu token vào sessionStorage và gửi dữ liệu vào payload
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('username', username);
-    sessionStorage.setItem('admin', admin);
-    
-    // Dispatch action để lưu token vào Redux store với payload chứa dữ liệu
-    dispatch({ type: LOGIN_SUCCESS, payload: { token, username, admin } });
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("admin", admin);
+    sessionStorage.setItem("userID", userID);
 
-    console.log('Login successful:', res.data);
+    // Dispatch action để lưu token vào Redux store với payload chứa dữ liệu
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: { token, username, admin, userID },
+    });
+
+    console.log("Login successful:", res.data);
     return token; // Trả về token
   } catch (e) {
     dispatch({ type: LOGIN_ERROR, payload: e.message });
@@ -33,8 +41,9 @@ export const login = (creds) => async (dispatch) => {
 
 export const logout = () => {
   // Remove the token from Local Storage
-  sessionStorage.removeItem('token'); 
-  sessionStorage.removeItem('username');
-  sessionStorage.removeItem('admin');
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("username");
+  sessionStorage.removeItem("admin");
+  sessionStorage.removeItem("userID");
   return { type: LOGOUT };
 };

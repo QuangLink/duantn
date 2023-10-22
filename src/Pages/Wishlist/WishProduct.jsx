@@ -10,11 +10,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-const exchangeRate = 300000
+const exchangeRate = 300000;
 const WishProduct = (props) => {
   const toast = useToast();
-  const { data,handleDelete } = props;
-  const {id, name, img, price, mrp } = data;
+  const { data, handleDelete } = props;
+  const { id, name, img, price, mrp } = data;
 
   const handleAdd = () => {
     let flag = false;
@@ -81,7 +81,14 @@ const WishProduct = (props) => {
         marginBottom="2"
       >
         <Heading as="h3" size="xs" color="red">
-        {price ? `${(parseFloat(price.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
+          {price
+            ? `${(
+                parseFloat(price.replace("₹", "")) * exchangeRate
+              ).toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}`
+            : ""}
         </Heading>
         <Text
           fontSize="sm"
@@ -89,8 +96,15 @@ const WishProduct = (props) => {
           color="blackAlpha.600"
           textDecoration="line-through"
         >
-        {mrp ? `${(parseFloat(mrp.replace("₹", "")) * exchangeRate).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}` : ''}
-      </Text>
+          {mrp
+            ? `${(
+                parseFloat(mrp.replace("₹", "")) * exchangeRate
+              ).toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}`
+            : ""}
+        </Text>
       </Flex>
       <Badge
         borderRadius="full"
@@ -111,7 +125,7 @@ const WishProduct = (props) => {
           color="gray"
           bg="white"
           _hover={{ color: "red", fontWeight: "bold" }}
-          onClick={()=>handleDelete(id,name)}
+          onClick={() => handleDelete(id, name)}
         >
           Xóa
         </Button>

@@ -5,7 +5,6 @@ import SignInForm from "./SigninForm";
 import SignUpForm from "./SignUp";
 
 export function Login() {
-
   const [type, setType] = useState("signIn");
 
   const handleOnClick = (text) => {
@@ -14,12 +13,11 @@ export function Login() {
       return;
     }
   };
-  
+
   const containerClass =
     "container " + (type === "signUp" ? "right-panel-active" : "");
   return (
     <div className="AppForm">
-
       <div className={containerClass} id="container">
         <SignUpForm />
         <SignInForm />
@@ -27,12 +25,9 @@ export function Login() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Đã có tài khoản ?</h1>
-              <p>
-               Để sử dụng các chức năng khác, vui lòng đăng nhập
-              </p>
+              <p>Để sử dụng các chức năng khác, vui lòng đăng nhập</p>
               <button
-              className="action-btn ghost"
-            
+                className="action-btn ghost"
                 id="signIn"
                 onClick={() => handleOnClick("signIn")}
               >
@@ -43,7 +38,7 @@ export function Login() {
               <h1>Bạn chưa có tài khoản ?</h1>
               <p>Hãy đăng ký tài khoản để sử dụng mọi chức năng</p>
               <button
-              className="action-btn ghost"
+                className="action-btn ghost"
                 id="signUp"
                 onClick={() => handleOnClick("signUp")}
               >
@@ -56,6 +51,5 @@ export function Login() {
     </div>
   );
 }
-
 
 export default Login;

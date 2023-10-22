@@ -14,9 +14,6 @@ import BannerCenter from "./BannerCenter";
 import TimeDeal from "./TimeDeal";
 import PrDeal from "./PrDeal";
 
-
-
-
 import {
   ItemDetails1,
   ItemDetails2,
@@ -38,7 +35,6 @@ import {
   ItemDetails18,
   CateFeatures,
   BannersLeft,
-
   BannersCenter,
   TimeDeals,
   PrAll,
@@ -51,40 +47,34 @@ import {
   PrLenovo,
   PrAcer,
   PrHp,
-  PrXiaomi
-
-
+  PrXiaomi,
 } from "./CardDetails";
 
-
-import { Box,
-    
- } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Banners from "./BannerLeft";
 
 const Home = () => {
   return (
     <Box>
-
-        <BannerCenter type={BannersCenter} />
-      <br/>
+      <BannerCenter type={BannersCenter} />
+      <br />
 
       <ItemCard1 type={ItemDetails1} />
-      <br/>
-      <hr/>
-      <CateFeature type={CateFeatures}  />
+      <br />
+      <hr />
+      <CateFeature type={CateFeatures} />
       <br />
       <hr />
 
-      <TimeDeal type={TimeDeals}  />
+      <TimeDeal type={TimeDeals} />
       <br />
       <hr />
-      
+
       {/* <ItemCard1 type={ItemDetails2} /> */}
       <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrApplePhone}  />
+      <PrDeal type={PrApplePhone} />
 
       <br />
       <hr />
@@ -96,18 +86,12 @@ const Home = () => {
       />
       <hr />
       {/* <ItemCard4 type={ItemDetails4} heading="SẢN PHẨM CỦA CHÚNG TÔI" /> */}
-      <ItemCard5
-        type={ItemDetails5}
-        heading="LÒ VI SÓNG GIÁ CỰC SỐC  "
-      />
+      <ItemCard5 type={ItemDetails5} heading="LÒ VI SÓNG GIÁ CỰC SỐC  " />
       <br />
       <hr />
       {/* <ItemCard4 type={ItemDetails6} heading="SẢN PHẨM ƯU ĐÃI SỐC" /> */}
       <ItemCard9 type={ItemDetails7} />
-      <ItemCard6
-        type={ItemDetails9}
-        heading="DỊCH VỤ CỦA CHÚNG TÔI"
-      />
+      <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
       <br />
       <hr />
       <ItemCard2
@@ -116,7 +100,7 @@ const Home = () => {
         src="https://i.imgur.com/FPm2ngR.png"
       />
       <hr />
-      <BannerLeft type={BannersLeft}  />
+      <BannerLeft type={BannersLeft} />
       <br />
       <hr />
 
@@ -159,11 +143,8 @@ const Home = () => {
       <ItemCard7
         type={ItemDetails17}
         heading="GIẢM GIÁ LÊN ĐẾN 75% PHỤ KIỆN CAMERA | "
-        
       />
       <ItemCard8 type={ItemDetails18} heading="EXPLORE OUR RANGE OF PRODUCTS" />
-      
-      
     </Box>
   );
 };
