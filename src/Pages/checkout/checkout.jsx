@@ -25,6 +25,7 @@ import {
 import axios from "axios";
 
 const Checkout = () => {
+  const username = sessionStorage.getItem("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
   const toast = useToast();
@@ -57,15 +58,27 @@ const Checkout = () => {
   };
 
   const clearAddress = () => {
-    firstname("");
-    lastname("");
-    flat("");
-    state("");
-    street("");
-    city("");
-    mobile("");
+   //function get username call to this router using axios to delete user: router.delete('/address/:username'
+    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    axios
+      .delete(apiUrl)
+      .then((response) => {
+        console.log("Server response:", response.data);
+        toast({
+          title: "Địa chỉ được xóa thành công.",
+          description: "Hãy thêm địa chỉ giao hàng mới.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting address:", error);
+      });
+
   };
-  const username = sessionStorage.getItem("username");
+ 
   const handleAddressSubmit = () => {
     const newAddress = {
       username: username,
@@ -75,6 +88,7 @@ const Checkout = () => {
       state: address.current.setstate.value,
       street: address.current.setstreet.value,
       city: address.current.setcity.value,
+      mobile: address.current.setmobile.value,
     };
 
     const apiUrl = "https://duantn-backend.onrender.com/users/address";
@@ -91,6 +105,7 @@ const Checkout = () => {
           duration: 9000,
           isClosable: true,
         });
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error adding address:", error);
@@ -130,55 +145,43 @@ const Checkout = () => {
                 margin: "20px 150px",
                 border: "2px solid #ccc",
                 padding: "20px",
-                borderRadius: "20px",
+                borderRadius: "5px",
               }}
             >
-              {addressData.flat === "" && <Box>Không tìm thấy địa chỉ nào</Box>}
-              {addressData.flat !== "" && (
+              {addressData.firstname === "" && <Box>Không tìm thấy địa chỉ nào</Box>}
+              {addressData.firstname !== "" && (
                 <Box
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    backgroundColor: "#f1eeee",
+                    padding: "20px",
+                    borderRadius: "5px",
+                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
                   }}
                 >
-                  <Flex width="300px" justifyContent="space-between">
+                  <Flex
+                    width="100%"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    marginBottom="20px"
+                  >
                     <Text fontWeight="bold" fontStyle="italic">
-                      Tên:
+                      Tên: {addressData.firstname} {addressData.lastname}
                     </Text>
-                    <Text>
-                      {addressData.firstname} {addressData.lastname}
-                    </Text>
+                    <Text fontStyle="italic">Sđt: {addressData.mobile}</Text>
                   </Flex>
-                  <Flex width="300px" justifyContent="space-between">
-                    <Text fontWeight="bold" fontStyle="italic">
-                      Địa chỉ:
+                  <Flex
+                    width="100%"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    marginBottom="20px"
+                  >
+                    <Text fontStyle="italic">
+                      Địa chỉ: {addressData.flat}, {addressData.street}, {addressData.city},{" "}
+                      {addressData.state}
                     </Text>
-                    <Text>{addressData.flat}</Text>
-                  </Flex>
-                  <Flex width="300px" justifyContent="space-between">
-                    <Text fontWeight="bold" fontStyle="italic">
-                      Đường:
-                    </Text>
-                    <Text>{addressData.street}</Text>
-                  </Flex>
-                  <Flex width="300px" justifyContent="space-between">
-                    <Text fontWeight="bold" fontStyle="italic">
-                      Thành phố:
-                    </Text>
-                    <Text>{addressData.city}</Text>
-                  </Flex>
-                  <Flex width="300px" justifyContent="space-between">
-                    <Text fontWeight="bold" fontStyle="italic">
-                      Tỉnh:
-                    </Text>
-                    <Text>{addressData.state}</Text>
-                  </Flex>
-                  <Flex width="300px" justifyContent="space-between">
-                    <Text fontWeight="bold" fontStyle="italic">
-                      Số điện thoại:
-                    </Text>
-                    <Text>{addressData.mobile}</Text>
                   </Flex>
                 </Box>
               )}
@@ -245,17 +248,17 @@ const Checkout = () => {
                 margin: "20px",
               }}
             >
-              {addressData.flat === "" && (
+              {addressData.firstname === "" && (
                 <Button onClick={onOpen} colorScheme="blue" variant="outline">
                   Nhập địa chỉ giao hàng mới
                 </Button>
               )}
-              {addressData.flat !== "" && (
+              {addressData.firstname !== "" && (
                 <Button onClick={onOpen} colorScheme="blue" variant="outline">
                   Sửa địa chỉ
                 </Button>
               )}
-              {addressData.flat !== "" && (
+              {addressData.firstname !== "" && (
                 <Button
                   onClick={() => navigate("/payments")}
                   colorScheme="blue"
@@ -264,7 +267,7 @@ const Checkout = () => {
                   Chọn phương thức thanh toán
                 </Button>
               )}
-              {addressData.flat !== "" && (
+              {addressData.firstname !== "" && (
                 <Button
                   onClick={clearAddress}
                   colorScheme="red"

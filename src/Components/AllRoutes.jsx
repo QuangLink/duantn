@@ -11,7 +11,7 @@ import Payments from "../Pages/payment/Payments";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
-
+import ProductList from "../testlist";
 const AllRoutes = () => {
   return (
     <div>
@@ -135,7 +135,14 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-
+        <Route
+        path="/test"
+        element={
+ 
+            <ProductList />
+      
+        }
+      ></Route>
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}

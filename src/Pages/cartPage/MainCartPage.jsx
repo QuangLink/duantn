@@ -9,7 +9,6 @@ import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
-import Checkout from "../checkout/checkout";
 export const GetData = async () => {
   try {
     let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
@@ -69,6 +68,34 @@ const MainCartPage = () => {
 
   return (
     <div>
+    <div style={{ 
+      backgroundColor: "#4a90e2", 
+      textEmphasisColor: "white",
+      textAlign: "center", 
+      width: "100%", 
+      padding: "10px",
+      boxSizing: "border-box",
+      // marginTop: "20px",
+      marginBottom: "20px",
+      animation: "blink 3s infinite",
+    }}>
+    Hãy áp dụng mã giảm giá : MASAI40
+    </div>
+    <style>
+      {`
+        @keyframes blink {
+          0% {
+            color: black;
+          }
+          50% {
+            color: white;
+          }
+          100% {
+            color: yellow;
+          }
+        }
+      `}
+    </style>
       <Flex
         border={"0px solid red"}
         margin="auto"
@@ -143,9 +170,7 @@ const MainCartPage = () => {
           />
         </Flex>
       </Flex>
-      <div>
-        <Checkout />
-      </div>
+         
     </div>
   );
 };

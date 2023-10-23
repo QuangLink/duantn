@@ -81,7 +81,7 @@ const CheckoutBox = ({
           borderRadius="4px"
           padding={"16px"}
         >
-          <Box>Hãy áp dụng mã giảm giá : MASAI40</Box>
+
           <Flex>
             <Box marginTop={"20px"} width={"100%"}>
               <InputGroup size="md">
