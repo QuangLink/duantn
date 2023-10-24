@@ -26,7 +26,6 @@ const fetchDataForCategory = async (category) => {
       id: product.prodID,
       sale: product.prodSale,
       original: product.prodPriceSale,
-      linked: product.catName.toLowerCase(),
     }));
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);

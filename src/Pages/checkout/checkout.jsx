@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import Cookies from 'js-cookie';
 import {
   useDisclosure,
   Accordion,
@@ -25,7 +26,7 @@ import {
 import axios from "axios";
 
 const Checkout = () => {
-  const username = sessionStorage.getItem("username");
+  const username = Cookies.get('username');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
   const toast = useToast();
