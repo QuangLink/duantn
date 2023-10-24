@@ -19,23 +19,10 @@ const CartReducer = (state = initialData, { type, payload }) => {
       };
     }
     case CartSuccess: {
-      let finallyTotalArray = payload.map((elem) => {
-        let newArray = elem.price.split(".");
-        newArray.pop();
-        let finalArray = newArray[0].split(",");
-
-        let finalPrice = "";
-        for (let i = 0; i < finalArray.length; i++) {
-          finalPrice += finalArray[i];
-        }
-
-        finalPrice = Number(finalPrice);
-        return finalPrice;
-      });
-      console.log("this is finaly total Array", finallyTotalArray);
-
-      let finallyTotal = finallyTotalArray.reduce((acc, elem) => {
-        return elem + acc;
+      // Tính toán giá trị tổng cộng của sản phẩm trong giỏ hàng
+      const totalPrice = payload.reduce((acc, item) => {
+        const productPrice = item.prodPrice * item.quantity;
+        return acc + productPrice;
       }, 0);
 
       return {
@@ -44,8 +31,8 @@ const CartReducer = (state = initialData, { type, payload }) => {
         data: payload,
         error: false,
         dataLength: payload.length,
-        totalPrice: finallyTotal,
-        paybalPrice: finallyTotal,
+        totalPrice,
+        paybalPrice: totalPrice,
       };
     }
     case CartError: {
@@ -66,21 +53,21 @@ const CartReducer = (state = initialData, { type, payload }) => {
       return {
         ...state,
         paybalPrice: finalprice,
-        coupon: 500,
+        coupon: 500000,
       };
     }
     case "priceIncrease": {
       return {
         ...state,
-        totalPrice: state.paybalPrice + payload,
-        paybalPrice: state.paybalPrice + payload,
+        totalPrice: state.totalPrice + payload,
+        paybalPrice: state.totalPrice + payload,
       };
     }
     case "priceDecrease": {
       return {
         ...state,
-        totalPrice: state.paybalPrice - payload,
-        paybalPrice: state.paybalPrice - payload,
+        totalPrice: state.totalPrice - payload,
+        paybalPrice: state.totalPrice - payload,
       };
     }
 

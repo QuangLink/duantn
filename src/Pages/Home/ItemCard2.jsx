@@ -5,7 +5,7 @@ import Heading from "./Heading";
 
 const ItemCard2 = ({ type, heading, src }) => {
   return (
-    <Box justifyContent="center" w="75%"  m="auto" mt="6" cursor="pointer" >
+    <Box justifyContent="center" w="70%"  m="auto" mt="6" cursor="pointer" >
       <Heading heading={heading} m="10 10 10 10"/>
       <Flex mt="6" 
       >

@@ -17,22 +17,23 @@ import { getProducts } from "../../Redux/Products/products.action";
 import WishProduct from "./WishProduct";
 const getData = async (typeOfProduct) => {
   let response = await axios.get(
-    `https://rus-digital-televisions.onrender.com/${typeOfProduct}`
+    `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
   );
   return response.data;
 };
 function Wishlist({ typeOfProduct }) {
-  const { name,email } = useSelector((store) => store.AuthManager);
+  const { name, email } = useSelector((store) => store.AuthManager);
   const productsList = useSelector((store) => store.product.data);
   const loading = useSelector((store) => store.product.loading);
   const error = useSelector((store) => store.product.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const handleDelete=(id,name)=>{
-    axios.delete(`https://rus-digital-televisions.onrender.com/whishlist/${id}`)
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+  const handleDelete = (id, name) => {
+    axios
+      .delete(`https://duantn-backend.onrender.com/cart/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     toast({
       title: "Product Deleted.",
       description: `${name} Delete from wishlist`,
@@ -40,12 +41,12 @@ function Wishlist({ typeOfProduct }) {
       duration: 9000,
       isClosable: true,
     });
-    navigate("/whishlist")
-  }
+    navigate("/whishlist");
+  };
   useEffect(() => {
     // getData(typeOfProduct).then((res) => setProductArr(res));
     dispatch(getProducts(typeOfProduct));
-  }, [typeOfProduct,dispatch]);
+  }, [typeOfProduct, dispatch]);
 
   if (error) {
     return (
@@ -132,7 +133,11 @@ function Wishlist({ typeOfProduct }) {
                         cursor: "pointer",
                       }}
                     >
-                      <WishProduct data={elem} handleDelete={handleDelete} typeOfProduct={typeOfProduct} />
+                      <WishProduct
+                        data={elem}
+                        handleDelete={handleDelete}
+                        typeOfProduct={typeOfProduct}
+                      />
                     </GridItem>
                   );
                 })}

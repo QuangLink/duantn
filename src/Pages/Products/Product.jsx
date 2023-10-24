@@ -11,10 +11,10 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import RatingBar from './RatingBar';
-import { BsSuitHeart, } from "react-icons/bs";
+import { BsSuitHeart } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import RatingBar from './RatingBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 const postSingleDataWish = async (data) => {
@@ -24,13 +24,13 @@ const postSingleDataWish = async (data) => {
       data,
       {
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     console.log(
       "in the postSingleData function and error is :- ",
-      error.response.data
+      error.response.data,
     );
   }
 };
@@ -39,7 +39,8 @@ const postSingleDataWish = async (data) => {
 
 const Product = (props, rating) => {
   const { data, typeOfProduct } = props;
-  const { prodID, prodName, prodImg, prodPrice, prodPriceSale, prodSale } = data;
+  const { prodID, prodName, prodImg, prodPrice, prodPriceSale, prodSale } =
+    data;
   console.log("this is data from the outside hanldewish", data);
 
   var navigate = useNavigate();
@@ -63,117 +64,118 @@ const Product = (props, rating) => {
         duration: 3000,
         isClosable: true,
         position: "bottom",
-      })
+      });
       setTimeout(() => {
         navigate("/whishlist");
       }, 1000);
-    }
-    );
+    });
   };
 
   return (
     <>
+    <Link to={`${prodID}`}>
+    <Box height="500px">
+      <Box padding="10px">
+        <FontAwesomeIcon icon={faEye} /> Xem
+      </Box>
+      <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{ transform: "scale(1.1)" }} />
+      {
+        prodSale !== 0 && (
+          <>
+            <Box
+              mt="10px"
+              h="100px"
+              w="100%"
+              textAlign="center"
+              fontFamily="sans-serif"
+              color="black.700"
+              lineHeight="120%"
+              marginBottom="3"
+              textOverflow="ellipsis"
+              overflow="hidden"
+              _hover={{ color: "blue" }}
+            >
+              {prodName}
+            </Box>
+            <Box
+              w="100%"
+              marginBottom="2"
+              marginLeft={5}
+            >
+              <RatingBar rating={rating} />
+              <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+                Giá mới: {prodPrice}₫
+              </Heading>
+              <Text
+                mt={2}
+                size="1.1rem"
+                fontWeight="bold"
+                color="blackAlpha.600"
+                textDecoration="line-through"
+              >
+                Giá gốc: {prodPriceSale}₫
+              </Text>
+            </Box>
+            <Badge
+              borderRadius="5px"
+              width="auto"
+              px="2"
+              backgroundColor="#fff0e9"
+              color="#eb5757"
+              fontSize="xs"
+              marginBottom="10"
+              marginLeft={5}
+            >
+              Giá ưu đãi
+            </Badge>
+          </>
+        )
+      }
+      {
+        prodSale == 0 && (
+          <>
+            <Box
+              mt="5px"
+              h="100px"
+              w="100%"
+              textAlign="center"
+              fontFamily="sans-serif"
+              color="black.700"
+              lineHeight="120%"
+              marginBottom="3"
+              textOverflow="ellipsis"
+              overflow="hidden"
+              _hover={{ color: "blue" }}
+            >
+              {prodName}
+            </Box>
+            <Box
+              w="100%"
+              marginBottom="2"
+              marginLeft={5}>
+              <RatingBar rating={rating} />
+              <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
+                Giá: {prodPrice}₫
+              </Heading>
 
-      <Link to={`${prodID}`}>
-        <Box height="500px">
-          <Box padding="10px">
-            <FontAwesomeIcon icon={faEye} /> Xem
-          </Box>
-          <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{ transform: "scale(1.1)" }} />
-          {
-            prodSale !== 0 && (
-              <>
-                <Box
-                  mt="10px"
-                  h="100px"
-                  w="100%"
-                  textAlign="center"
-                  fontFamily="sans-serif"
-                  color="black.700"
-                  lineHeight="120%"
-                  marginBottom="3"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                  _hover={{ color: "blue" }}
-                >
-                  {prodName}
-                </Box>
-                <Box
-                  w="100%"
-                  marginBottom="2"
-                  marginLeft={5}
-                >
-                  <RatingBar rating={rating} />
-                  <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
-                    Giá mới: {prodPrice}₫
-                  </Heading>
-                  <Text
-                    mt={2}
-                    size="1.1rem"
-                    fontWeight="bold"
-                    color="blackAlpha.600"
-                    textDecoration="line-through"
-                  >
-                    Giá gốc: {prodPriceSale}₫
-                  </Text>
-                </Box>
-                <Badge
-                  borderRadius="5px"
-                  width="auto"
-                  px="2"
-                  backgroundColor="#fff0e9"
-                  color="#eb5757"
-                  fontSize="xs"
-                  marginBottom="10"
-                  marginLeft={5}
-                >
-                  Giá ưu đãi
-                </Badge>
-              </>
-            )
-          }
-          {
-            prodSale == 0 && (
-              <>
-                <Box
-                  mt="5px"
-                  h="100px"
-                  w="100%"
-                  textAlign="center"
-                  fontFamily="sans-serif"
-                  color="black.700"
-                  lineHeight="120%"
-                  marginBottom="3"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                  _hover={{ color: "blue" }}
-                >
-                  {prodName}
-                </Box>
-                <Box
-                  w="100%"
-                  marginBottom="2"
-                  marginLeft={5}>
-                  <RatingBar rating={rating} />
-                  <Heading as="h3" fontSize="1.1rem" color="red" fontWeight="black">
-                    Giá: {prodPrice}₫
-                  </Heading>
-                </Box>
-                <Badge
-                  borderRadius="5px"
-                  width="auto"
-                  px="2"
-                  backgroundColor="#fff0e9"
-                  color="#eb5757"
-                  fontSize="xs"
-                  marginBottom="10"
-                  marginLeft={5}>
-                  Giá tốt
-                </Badge>
-              </>
-            )
-          }
-        </Box >
+            </Box>
+            <Badge
+              borderRadius="5px"
+              width="auto"
+              px="2"
+              backgroundColor="#fff0e9"
+              color="#eb5757"
+              fontSize="xs"
+              marginBottom="10"
+              marginLeft={5}
+            >
+              Giá tốt
+            </Badge>
+
+          </>
+        )
+      }
+    </Box >
       </Link>
       <Button
         w="100%"

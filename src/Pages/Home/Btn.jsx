@@ -1,10 +1,11 @@
 import React from "react";
-import { Text, Button } from "@chakra-ui/react";
+import { Text, Button, Center } from "@chakra-ui/react";
 
 const Btn = () => {
   return (
-    <Button
-      background="#003380"
+    <Center>
+      <Button
+      background="#68cdf8"
       color="whiteAlpha.900"
       borderRadius="3xl"
       border="1px"
@@ -19,9 +20,10 @@ const Btn = () => {
       }}
     >
       <Text fontSize="xl" fontWeight="200">
-        View All
+         Xem tất cả
       </Text>
     </Button>
+    </Center>
   );
 };
 

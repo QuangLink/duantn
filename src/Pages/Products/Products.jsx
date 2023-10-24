@@ -1,22 +1,38 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Box, Grid, GridItem, Heading, Center, Flex, Text, Button, Input, Menu, MenuButton, MenuList, MenuItem, border, Image, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Center,
+  Flex,
+  Text,
+  Button,
+  Input,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  border,
+  Image,
+  Link,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
 
-import {
-  PrHp
-} from "../Home/CardDetails";
+import { PrHp } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
 
-const getData = async (typeOfProduct,brandOfProduct) => {
+
+const getData = async (typeOfProduct, brandOfProduct) => {
   let response = await axios.get(
-    `http://localhost:9000/category/${typeOfProduct}/${brandOfProduct}`
+    `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
   );
   return response.data;
 };
@@ -42,7 +58,7 @@ const Products = ({ typeOfProduct }) => {
     asus: "ASUS",
     lenovo: "LENOVO",
     acer: "ACER",
-    whishlist: "whishlist"
+    whishlist: "whishlist",
   };
 
   useEffect(() => {
@@ -82,12 +98,10 @@ const Products = ({ typeOfProduct }) => {
         {category[typeOfProduct]}
       </Heading>
       <hr></hr> */}
-      <Box
-      >
-      <SlideProuct type={PrHp} />
+      <Box>
+        <SlideProuct type={PrHp} />
       </Box>
-      <Box
-        mb="2%">
+      <Box mb="2%">
         <HotProduct type={PrHp} />
       </Box>
       <ProductFilter/>
@@ -105,45 +119,42 @@ const Products = ({ typeOfProduct }) => {
             />
           </Center>
         </Box>
-      )
-        : (
-          <Grid
-            width="80%"
-            m="auto"
-            marginLeft="10%"
-            templateColumns={[
-              "repeat(1, 1fr)",
-              "repeat(2,1fr)",
-              "repeat(3,1fr)",
-              "repeat(4,1fr)",
-            ]}
-            gap={2}
-          >
-            {productsList.map((elem, i) => {
-              // console.log("in the products page in the map method and elem is :- ", elem);
-              return (
-
-                <GridItem
-                  key={elem.prodName + i}
-                  w="97%"
-                  h="100 %"
-                  bg="white.500"
-                  boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-
-                  padding="5%"
-                  _hover={{
-                    boxShadow:
-                      "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
-                    cursor: "pointer",
-                  }}>
-                  <Product data={elem} typeOfProduct={typeOfProduct} />
-                </GridItem>
-              );
-            })}
-          </Grid>
-        )}
+      ) : (
+        <Grid
+          width="80%"
+          m="auto"
+          marginLeft="10%"
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(2,1fr)",
+            "repeat(3,1fr)",
+            "repeat(4,1fr)",
+          ]}
+          gap={2}
+        >
+          {productsList.map((elem, i) => {
+            // console.log("in the products page in the map method and elem is :- ", elem);
+            return (
+              <GridItem
+                key={elem.prodName + i}
+                w="97%"
+                h="100 %"
+                bg="white.500"
+                boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
+                padding="5%"
+                _hover={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                  cursor: "pointer",
+                }}
+              >
+                <Product data={elem} typeOfProduct={typeOfProduct} />
+              </GridItem>
+            );
+          })}
+        </Grid>
+      )}
     </Box>
-
   );
 };
 

@@ -32,7 +32,7 @@ const Slider = ({ type }) => {
           spaceBetween: 15,
         },
         1280: {
-          slidesPerView: 5,
+          slidesPerView: 4,
           spaceBetween: 10,
         },
       }}
@@ -51,16 +51,19 @@ const Slider = ({ type }) => {
                 />
               </Square>
                 <Text
-                  color="#275293"
+                mt="2"
+                fontFamily="serif"
+                  color="gray.800"
                   noOfLines={2}
-                  textAlign="left"
-                  fontSize="15px"
+                  textAlign="center"
+                  fontSize="25px"
                   w={{ xs: "80%", sm: "80%", base: "100px" }}
                   _hover={{ color: "red" }}
+                  fontWeight="700"
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5" m="20px 0 30px 0" >
+                <Box mt="2.5" m="20px 0 30px 0"  >
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
@@ -79,7 +82,7 @@ const Slider = ({ type }) => {
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      {i.mrp} <sup>đ</sup>
+                      {i.original} <sup>đ</sup>
                     </Text>
                   </Flex>
                   {/* <Flex>
@@ -92,14 +95,7 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px"
-                        borderRadius="5px"
-                       
-                        w="40%"
-                        color="#f72424"
-                        bg="#fff0e9"
-                        mt="2"
-                        textAlign="center"
+                        padding="3px" borderRadius="5px" w="50%" color="#EC4C0A" bg="#FEB373" mt="2" textAlign="center"
                     
                   >
                     <Text fontSize="10px" fontWeight="500">
