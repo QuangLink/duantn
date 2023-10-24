@@ -16,7 +16,7 @@ const init = {
 };
 
 // Load the initial state from the cookie (if it exists)
-const initialStateFromCookie = Cookies.get('authState');
+const initialStateFromCookie = Cookies.get('authState'); 
 
 export const Authreducer = (state = initialStateFromCookie ? JSON.parse(initialStateFromCookie) : init, { type, payload }) => {
   switch (type) {

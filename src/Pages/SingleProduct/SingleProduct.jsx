@@ -28,10 +28,14 @@ import Cookies from 'js-cookie';
 const postSingleData = async (data) => {
   try {
     // Lấy userID từ sessionStorage
-  const userID = Cookies.get('userID');
-    // Tạo dữ liệu gửi đi kết hợp với userID
+    const userID = Cookies.get('userID');
+    
+    // Ensure data.prodID is a valid value, not [object Object]
+    const prodID = data.prodID;
+
+    // Tạo dữ liệu gửi đi kết hợp với userID và prodID
     const postData = {
-      ...data,
+      prodID,
       userID,
     };
 
@@ -44,7 +48,6 @@ const postSingleData = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
-
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
@@ -81,7 +84,7 @@ const SingleProduct = (props) => {
   const dispatch = useDispatch();
   const handlePost = (prodID) => {
     postSingleData({ prodID }).then((res) => navigate("/cart"));
-  };
+  };  
 
   const handleWish = (data) => {
     let newData = {};
@@ -382,7 +385,7 @@ const SingleProduct = (props) => {
                     fontSize="lg"
                     p={6}
                     _hover={{ bg: "blue.800" }}
-                    onClick={() => handlePost(singleData)}
+                    onClick={() => handlePost(singleData.prodID)}
                   >
                     Thêm vào giỏ hàng
                   </Button>
@@ -394,7 +397,7 @@ const SingleProduct = (props) => {
                     fontSize="lg"
                     p={6}
                     _hover={{ backgroundColor: "orangered" }}
-                    onClick={() => handleWish(singleData)}
+                    onClick={() => handleWish(singleData.prodID)}
                   >
                     Mua ngay
                   </Button>
