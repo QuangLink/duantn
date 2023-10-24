@@ -14,6 +14,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const CheckoutBox = ({
   items,
@@ -28,6 +30,7 @@ const CheckoutBox = ({
   const toast = useToast();
 
   const handleCheckout = () => {
+    const userID = Cookies.get("userID");
     if (items === 0) {
       toast({
         title: "Please login and add items to cart",
@@ -50,6 +53,11 @@ const CheckoutBox = ({
         position: "top",
       });
       setTimeout(() => {
+        axios
+        .post("https://duantn-backend.onrender.com/order/", { userID })
+        .then((response) => {
+          console.log(response);
+        })
         navigate("/checkout");
       }, 1500);
     }
