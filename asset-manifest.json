@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/duantn/static/css/main.dc1970bf.css",
-    "main.js": "/duantn/static/js/main.608cf9b3.js",
+    "main.js": "/duantn/static/js/main.0363de16.js",
     "static/js/787.28e19238.chunk.js": "/duantn/static/js/787.28e19238.chunk.js",
     "static/media/fa-solid-900.ttf": "/duantn/static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
     "static/media/PrSaleimg.png": "/duantn/static/media/PrSaleimg.e7e8e9aa49afa691abd4.png",
@@ -22,11 +22,11 @@
     "static/media/dien-thoai-doc-quyen-128x128.webp": "/duantn/static/media/dien-thoai-doc-quyen-128x128.3f06778bcfc02503dbf3.webp",
     "index.html": "/duantn/index.html",
     "main.dc1970bf.css.map": "/duantn/static/css/main.dc1970bf.css.map",
-    "main.608cf9b3.js.map": "/duantn/static/js/main.608cf9b3.js.map",
+    "main.0363de16.js.map": "/duantn/static/js/main.0363de16.js.map",
     "787.28e19238.chunk.js.map": "/duantn/static/js/787.28e19238.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dc1970bf.css",
-    "static/js/main.608cf9b3.js"
+    "static/js/main.0363de16.js"
   ]
 }
