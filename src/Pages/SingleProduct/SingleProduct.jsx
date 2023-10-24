@@ -24,12 +24,11 @@ import ComProduct from "./ComProduct";
 import ProductReviewForm from "./ProductReview";
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
-
+import Cookies from 'js-cookie';
 const postSingleData = async (data) => {
   try {
     // Lấy userID từ sessionStorage
-    const userID = sessionStorage.getItem("userID");
-
+  const userID = Cookies.get('userID');
     // Tạo dữ liệu gửi đi kết hợp với userID
     const postData = {
       ...data,

@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function AdminRoute({ children }) {
-  const adminAuth = parseInt(sessionStorage.getItem("admin"), 10); // Chuyển đổi thành số
+  const adminAuth = parseInt(Cookies.get('admin'), 10); // Lấy giá trị từ cookie
   const { isAuth } = useSelector((store) => store.AuthManager);
 
   // Kiểm tra điều kiện cho việc chuyển hướng
