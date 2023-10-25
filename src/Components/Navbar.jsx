@@ -48,6 +48,8 @@ function Navbar() {
   const toast = useToast();
   const [isFocused, setIsFocused] = useState(false);
   const [results, setResults] = useState([]);
+  const [isSearchVisible, setIsSearchVisible] = useState(true);
+
 
   const handleInputFocus = () => {
     setIsFocused(true);
@@ -70,9 +72,13 @@ function Navbar() {
         console.error(error);
       });
   };
+  const handleProductClick = () => {
+    setInput("");
+    setIsSearchVisible(false);
+  };
   const handleChange = (event) => {
     const inputValue = event.target.value;
-
+    setIsSearchVisible(true);
     setInput(inputValue);
     if (inputValue === '') {
       setResults([]);
@@ -109,21 +115,21 @@ function Navbar() {
               className={`input-bar ${isFocused ? 'focused' : ''}`}
             >
               <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
+                ref={btnRef}
+                onClick={onOpen}
                 onChange={handleChange}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
               />
               <BiSearch color="#555" fontSize={"28px"} />
             </Flex>
-            <Box bg={'#fff'} width="744px" height="auto" position={'absolute'} marginTop={5} borderRadius={15} >
+            {isSearchVisible && <Box bg={'#fff'} width="744px" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
+              isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+            >
               {results.slice(0, 5).map((results, id) => {
                 return (
-                  // <Box key={id} >
-                  //   <Image src={results.prodImg} alt="Phone" w={50} h={50} />
-                  //   <Text display='inline-block'>{results.prodName}</Text>
-                  // </Box>
-                  <Link to={`/proudtc/${results.prodID}`} >
-                    <Flex key={id} direction="row" align="flex-start" justify="center" borderRadius={15} _hover={{ bg: '#9ecdf2' }}>
+                  <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
+                    <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
                       <Box mb={6} margin={5} marginRight={10}>
                         <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
                       </Box>
@@ -135,17 +141,12 @@ function Navbar() {
                           <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
                           <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
                         </Text>
-
                       </Box>
-
                     </Flex>
                   </Link>
-
                 )
-
-
               })}
-            </Box>
+            </Box>}
           </Box>
           {!isAuth ? (
             <Flex cursor={"pointer"} borderRadius={5} _hover={{ bg: "#0077ff" }}>
@@ -394,18 +395,44 @@ function Navbar() {
     );
   } else if (isLargerThan750px) {
     return (
-      <Flex className="flex-container" px='15%' bg='#4a90e2' >
+      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="center" >
         <Link to="/">
           <Box>
             <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
           </Box>
         </Link>
-        <Flex bg="white" borderRadius={"10px"} w="300px" p="5px" m="auto" textAlign={"center"} >
-          <Input border={"none"} fontSize={"18px"} borderRadius={"5px"} placeholder="Bạn tìm gì..." value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <BiSearch fontSize={"42px"} />
-        </Flex>
+        <Box>
+          <Flex bg="white" borderRadius={"5px"} w="250px" h={10} p="5px" m="auto" textAlign={"center"}>
+            <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
+              onChange={handleChange}
+            />
+            <BiSearch color="#555" fontSize={"28px"} />
+          </Flex>
+          {isSearchVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+          >
+            {results.slice(0, 5).map((results, id) => {
+              return (
+                <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
+                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
+                    <Box mb={6} margin={5} marginRight={10}>
+                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                    </Box>
+                    <Box mb={6}>
+                      <Text fontSize="xl" fontWeight="600">
+                        {results.prodName}
+                      </Text>
+                      <Text fontSize="lg" color="gray.500">
+                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Link>
+              )
+            })}
+          </Box>}
+        </Box>
         <Link to="/cart">
           <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }} >
             <Heading m='3' cursor={"pointer"} fontSize={"16px"} color="white" >
@@ -492,16 +519,44 @@ function Navbar() {
     );
   } else if (islesserThan740px) {
     return (
-      <Flex className="flex-container" px='15%' bg='#4a90e2'>
+      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="center">
         <Link to="/">
           <Box>
             <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
           </Box>
         </Link>
-        <Flex bg="white" borderRadius={"10px"} w="300px" p="5px" m="auto" textAlign={"center"}  >
-          <Input border={"none"} fontSize={"18px"} borderRadius={"5px"} placeholder="Bạn tìm gì..." />
-          <BiSearch fontSize={"42px"} />
-        </Flex>
+        <Box>
+          <Flex bg="white" borderRadius={"5px"} w="200px" h={10} p="5px" m="auto" textAlign={"center"}>
+            <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
+              onChange={handleChange}
+            />
+            <BiSearch color="#555" fontSize={"28px"} />
+          </Flex>
+          {isSearchVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+          >
+            {results.slice(0, 5).map((results, id) => {
+              return (
+                <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
+                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
+                    <Box mb={6} margin={5} marginRight={10}>
+                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                    </Box>
+                    <Box mb={6}>
+                      <Text fontSize="l" fontWeight="600">
+                        {results.prodName}
+                      </Text>
+                      <Text fontSize="l" color="gray.500">
+                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Link>
+              )
+            })}
+          </Box>}
+        </Box>
         <Box mx="20px">
           <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}>
             <GiHamburgerMenu fontSize={"55px"} />
