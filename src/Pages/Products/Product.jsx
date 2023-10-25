@@ -78,7 +78,9 @@ const Product = (props, rating) => {
       <Box padding="10px">
         <FontAwesomeIcon icon={faEye} /> Xem
       </Box>
-      <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" _hover={{ transform: "scale(1.1)" }} />
+      <Image src={prodImg} alt={prodName} justifyItems="center" pl="12%" h="200" 
+      transition="transform 0.3s ease-in-out"
+      _hover={{ transform: "translateY(-10px)" }} />
       {
         prodSale !== 0 && (
           <>
@@ -86,9 +88,11 @@ const Product = (props, rating) => {
               mt="10px"
               h="100px"
               w="100%"
+              fontSize="1.2rem"
               textAlign="center"
-              fontFamily="sans-serif"
-              color="black.700"
+              fontWeight="bold"
+              fontFamily="Source Sans Pro"
+              color="#333"
               lineHeight="120%"
               marginBottom="3"
               textOverflow="ellipsis"
@@ -111,8 +115,7 @@ const Product = (props, rating) => {
                 size="1.1rem"
                 fontWeight="bold"
                 color="blackAlpha.600"
-                textDecoration="line-through"
-              >
+                textDecoration="line-through">
                 Giá gốc: {prodPriceSale}₫
               </Text>
             </Box>
@@ -135,17 +138,19 @@ const Product = (props, rating) => {
         prodSale == 0 && (
           <>
             <Box
-              mt="5px"
-              h="100px"
-              w="100%"
-              textAlign="center"
-              fontFamily="sans-serif"
-              color="black.700"
-              lineHeight="120%"
-              marginBottom="3"
-              textOverflow="ellipsis"
-              overflow="hidden"
-              _hover={{ color: "blue" }}
+             mt="10px"
+             h="100px"
+             w="100%"
+             fontSize="1.2rem"
+             textAlign="center"
+             fontWeight="bold"
+             fontFamily="Source Sans Pro"
+             color="#333"
+             lineHeight="120%"
+             marginBottom="3"
+             textOverflow="ellipsis"
+             overflow="hidden"
+             _hover={{ color: "blue" }}
             >
               {prodName}
             </Box>
