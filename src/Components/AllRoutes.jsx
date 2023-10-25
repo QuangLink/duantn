@@ -8,11 +8,9 @@ import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import Payments from "../Pages/payment/Payments";
-import AddressForm from "../Pages/checkout/addresstest";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
-
 
 const AllRoutes = () => {
   return (
@@ -67,62 +65,80 @@ const AllRoutes = () => {
           path="/samsung/:id"
           element={<SingleProduct typeOfProduct="samsung" />}
         ></Route>
-        <Route
-          path="/oppo"
-          element={<Products typeOfProduct="oppo" />}
-        ></Route>
+        <Route path="/oppo" element={<Products typeOfProduct="oppo" />}></Route>
         <Route
           path="/oppo/:id"
           element={<SingleProduct typeOfProduct="oppo" />}
         ></Route>
-        <Route
-          path="/hp"
-          element={<Products typeOfProduct="hp" />}
-        ></Route>
+        <Route path="/hp" element={<Products typeOfProduct="hp" />}></Route>
         <Route
           path="/hp/:id"
           element={<SingleProduct typeOfProduct="hp" />}
         ></Route>
-        <Route
-          path="/asus"
-          element={<Products typeOfProduct="asus" />}
-        ></Route>
+        <Route path="/asus" element={<Products typeOfProduct="asus" />}></Route>
         <Route
           path="/asus/:id"
           element={<SingleProduct typeOfProduct="asus" />}
         ></Route>
         <Route
-        path="/lenovo"
-        element={<Products typeOfProduct="asus" />}
-      ></Route>
-      <Route
-        path="/lenovo/:id"
-        element={<SingleProduct typeOfProduct="lenovo" />}
-      ></Route>
-      <Route
-      path="/acer"
-      element={<Products typeOfProduct="acer" />}
-    ></Route>
-    <Route
-      path="/acer/:id"
-      element={<SingleProduct typeOfProduct="acer" />}
-    ></Route>
-        <Route path="/cart" element={<PrivateRoute><MainCartPage /></PrivateRoute>}></Route>
+          path="/lenovo"
+          element={<Products typeOfProduct="asus" />}
+        ></Route>
+        <Route
+          path="/lenovo/:id"
+          element={<SingleProduct typeOfProduct="lenovo" />}
+        ></Route>
+        <Route path="/acer" element={<Products typeOfProduct="acer" />}></Route>
+        <Route
+          path="/acer/:id"
+          element={<SingleProduct typeOfProduct="acer" />}
+        ></Route>
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <MainCartPage />
+            </PrivateRoute>
+          }
+        ></Route>
         <Route path="/login" element={<Login />}></Route>
-      
+
         <Route
           path="/whishlist"
-          element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <Wishlist typeOfProduct={"whishlist"} />
+            </PrivateRoute>
+          }
         ></Route>
-        <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}></Route>
-        <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
-        <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
-      
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/payments"
+          element={
+            <PrivateRoute>
+              <Payments />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/lastpage"
+          element={
+            <PrivateRoute>
+              <LastPage />
+            </PrivateRoute>
+          }
+        ></Route>
+
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
-
-
       </Routes>
     </div>
   );

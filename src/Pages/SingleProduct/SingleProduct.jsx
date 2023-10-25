@@ -1,9 +1,23 @@
-import { Center, Box, Button, Flex, Grid, GridItem, Heading, Image, Input, ListItem, Text, UnorderedList, useToast } from '@chakra-ui/react';
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSingleProduct } from '../../Redux/SingleProduct/SingleProduct.action';
+import {
+  Center,
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Image,
+  Input,
+  ListItem,
+  Text,
+  UnorderedList,
+  useToast,
+} from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import {
@@ -13,81 +27,59 @@ import {
 import ComProduct from './ComProduct';
 const postSingleData = async (data) => {
   try {
+    // Lấy userID từ sessionStorage
+    const userID = sessionStorage.getItem("userID");
+
+    // Tạo dữ liệu gửi đi kết hợp với userID
+    const postData = {
+      ...data,
+      userID,
+    };
+
     let response = await axios.post(
-      `http://localhost:9000/cart/`,
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
+      `https://duantn-backend.onrender.com/cart/`,
+      postData,
     );
     return response.data;
   } catch (error) {
-    console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data
-    );
+    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
+
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `http://localhost:9000/whishlist`,
+      `https://duantn-backend.onrender.com/wishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
     return response.data;
   } catch (error) {
     console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data
+      "Trong hàm postSingleDataWish xảy ra lỗi: ",
+      error.response.data,
     );
   }
 };
 
 const SingleProduct = (props) => {
   const { typeOfProduct } = props;
-
   const params = useParams();
   const toast = useToast();
-
- 
-  // const [singleData, setSingleData] = useState({});
-
-  var navigate = useNavigate();
+  const navigate = useNavigate();
 
   const singleData = useSelector((store) => store.singleProduct.data);
-  // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (data) => {
-    let newData = {};
-    for (let i in data) {
-      if (i === "id") {
-        continue;
-      }
-      newData[i] = data[i];
-    }
-    // console.log("newData is :-", newData);
-    // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleData(newData).then((res) => {
-      // console.log("in the handlePost function and viewing the data after the post request", res)
-      toast({
-        title: "Added Item Successfully",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      })
-      setTimeout(() => {
-        navigate("/cart")
-      }, 1000);
-    }
-    );
+
+  const handlePost = (prodID) => {
+    postSingleData({ prodID }).then((res) => navigate("/cart"));
   };
+
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -107,7 +99,6 @@ const SingleProduct = (props) => {
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
   }, [typeOfProduct, params.id]);
-
   if (error) {
     return (
       <Heading
@@ -134,9 +125,7 @@ const SingleProduct = (props) => {
             visible={true}
           />
         </Center>
-
       ) : (
-
         //Box tổng
         <Box marginTop={10}>
           <Box
@@ -185,13 +174,9 @@ const SingleProduct = (props) => {
                 justifyContent="center"
                 src={singleData.prodImg}
                 _hover={{ cursor: "crosshair" }}
-
               />
               <hr />
-              <Box
-                display="flex"
-                m={5}
-              >
+              <Box display="flex" m={5}>
                 <Image
                   m={2}
                   p={2}
@@ -200,7 +185,6 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-                
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -211,7 +195,6 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-           
                   _hover={{ cursor: "crosshair" }}
                 />
                 <Image
@@ -222,7 +205,6 @@ const SingleProduct = (props) => {
                   textAlign="center"
                   width="25%"
                   src={singleData.prodImg}
-        
                   _hover={{ cursor: "crosshair" }}
                 />
               </Box>
@@ -236,7 +218,9 @@ const SingleProduct = (props) => {
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 <ListItem>
-                  Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
+                  Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play
+                  (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV
+                  360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
                 {/* <ListItem>
@@ -263,17 +247,18 @@ const SingleProduct = (props) => {
               </Heading>
               <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
                 <ListItem>
-                  {singleData.prodName} có thiết kế Airslim không viền 3 cạnh sang trọng và tinh tế.
-                  Mang lại tổng thể cho không gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
+                  {singleData.prodName} có thiết kế Airslim không viền 3 cạnh
+                  sang trọng và tinh tế. Mang lại tổng thể cho không gian trưng
+                  bày thêm điểm nhấn vô cùng ấn tượng.
                   <br />
-
-                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp trưng bày các không gian như: Phòng khách, phòng ngủ, phòng họp,...{" "}
+                  Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp
+                  trưng bày các không gian như: Phòng khách, phòng ngủ, phòng
+                  họp,...{" "}
                   <span style={{ color: "#2871c4" }}>
                     View all Standard Credit Cards EMI options
                   </span>
                 </ListItem>
               </UnorderedList>
-
             </GridItem>
             <GridItem
               colSpan={[4, 3, 4]}
@@ -289,13 +274,12 @@ const SingleProduct = (props) => {
                 {singleData.prodName}
               </Heading>
               <Heading size="lg" marginBottom={5} color="red">
-              {singleData.prodPrice} đ
-            </Heading>
+                {singleData.prodPrice} đ
+              </Heading>
               {singleData.prodSale !== 0 && (
                 <>
                   <Text fontSize="lg" marginBottom={3}>
-                    Giá gốc:  {singleData.prodPriceSale} đ
-
+                    Giá gốc: {singleData.prodPriceSale} đ
                     <span style={{ textDecoration: "line-through" }}></span>
                     <span style={{ fontSize: "12px", padding: "20px" }}>
                       (Bao gồm tất cả các loại thuế)
@@ -345,9 +329,9 @@ const SingleProduct = (props) => {
                   fontSize="lg"
                   p={6}
                   _hover={{ bg: "blue.800" }}
-                  onClick={() => handlePost(singleData)}
+                  onClick={() => handlePost(singleData.prodID)}
                 >
-                  Thêm vào giỏ hàng
+                  Mua ngay
                 </Button>
                 <Button
                   w="49%"
@@ -359,14 +343,10 @@ const SingleProduct = (props) => {
                   _hover={{ backgroundColor: "orangered" }}
                   onClick={() => handleWish(singleData)}
                 >
-                  Mua ngay
+                  Thêm vào yêu thích
                 </Button>
               </Flex>
-              <Box
-                m="5% 0%"
-                border="solid #f7e9f7 2px"
-                borderRadius="5px"
-              >
+              <Box m="5% 0%" border="solid #f7e9f7 2px" borderRadius="5px">
                 <Heading
                   display="inline-block"
                   position="relative"
@@ -376,30 +356,29 @@ const SingleProduct = (props) => {
                 >
                   Các khuyến mãi khác
                 </Heading>
-                <Text
-                  margin="2%"
-                >
-                  .<span style={{ padding: "5%" }}>
+                <Text margin="2%">
+                  .
+                  <span style={{ padding: "5%" }}>
                     Giảm giá khi mua trong giờ phát sóng live tream
                   </span>{" "}
-                  <br />
-                  .<span style={{ padding: "5%" }}>
+                  <br />.
+                  <span style={{ padding: "5%" }}>
                     Dùng thử 30 ngày, đổi máy không cần lý do
                   </span>{" "}
-                  <br />
-                  .<span style={{ padding: "5%" }}>
+                  <br />.
+                  <span style={{ padding: "5%" }}>
                     Bảo hành thân máy 12 tháng
                   </span>{" "}
-                  <br />
-                  .<span style={{ padding: "5%" }}>
+                  <br />.
+                  <span style={{ padding: "5%" }}>
                     Giảm 200k - 300k cho Học Sinh/ Sinh Viên/ Giáo Viên
                   </span>{" "}
-                  <br />
-                  .<span style={{ padding: "5%" }}>
+                  <br />.
+                  <span style={{ padding: "5%" }}>
                     Giao hàng toàn quốc (miễn phí nội thành HCM)
                   </span>{" "}
-                  <br />
-                  .<span style={{ padding: "5%" }}>
+                  <br />.
+                  <span style={{ padding: "5%" }}>
                     Mã giảm 100.000đ áp dụng đơn hàng từ 500.000đ
                   </span>{" "}
                 </Text>
@@ -407,9 +386,7 @@ const SingleProduct = (props) => {
             </GridItem>
             {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
-          <Box
-            m="5%"
-          >
+          <Box m="5%">
             <br />
             <hr
             />

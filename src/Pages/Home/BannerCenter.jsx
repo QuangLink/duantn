@@ -4,7 +4,6 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import uuid from "react-uuid";
 
-
 const BannerCenter = ({ type }) => {
   return (
     <Box cursor="pointer">
@@ -14,19 +13,22 @@ const BannerCenter = ({ type }) => {
           
            
           {type.map((i) => (
-            <Box key={uuid()}   h="350px" display="flex" justifyContent="space-around" backgroundColor="gray.400" borderRadius="15px"
-           >
-              <Image src={`${i.imgbnct}`} width="100%"
-              borderBottomRadius="15px"
-               
-
+            <Box
+              key={uuid()}
+              h="350px"
+              display="flex"
+              justifyContent="space-around"
+              backgroundColor="gray.400"
+              borderRadius="15px"
+            >
+              <Image
+                src={`${i.imgbnct}`}
+                width="100%"
+                borderBottomRadius="15px"
               />
-             
             </Box>
           ))}
-       
-    
-      </Box>
+        </Box>
       </Center>
     </Box>
   );

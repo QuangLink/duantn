@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text, Center, Box, Button} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import './stylehome.css';
+import "./stylehome.css";
 const Heading = ({ heading }) => {
   return (
     <Flex gap="2" >

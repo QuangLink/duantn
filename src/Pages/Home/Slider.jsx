@@ -38,18 +38,22 @@ const Slider = ({ type }) => {
       }}
     >
       {type.map((i) => (
-        <Box key={uuid()} >
+        <Box key={uuid()}>
           <SwiperSlide>
             <Link to={i.linked}>
-              
-              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
-              <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                <Image
-                  src={`${i.img}`}
-                  alt={i.name}
-                  boxSize={{ base: "160px" }}
-                />
-              </Square>
+              <Box
+                p="2"
+                mt="4"
+                borderRadius="15px"
+                boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+              >
+                <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                  <Image
+                    src={`${i.img}`}
+                    alt={i.name}
+                    boxSize={{ base: "160px" }}
+                  />
+                </Square>
                 <Text
                 mt="2"
                 fontFamily="serif"
@@ -77,8 +81,8 @@ const Slider = ({ type }) => {
                     </Square>
                   </Flex>
                   <Flex>
-                    <Text color="gray.600" fontSize="14px"  >
-                      Giá gốc:{" "} 
+                    <Text color="gray.600" fontSize="14px">
+                      Giá gốc:{" "}
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
@@ -99,7 +103,7 @@ const Slider = ({ type }) => {
                     
                   >
                     <Text fontSize="10px" fontWeight="500">
-                      GIẢM GIÁ SỐC 
+                      GIẢM GIÁ SỐC
                     </Text>
                   </Box>
                 </Box>

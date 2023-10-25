@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square, Button, background, Badge, } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Square,
+  Button,
+  background,
+  Badge,
+} from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,20 +20,32 @@ import uuid from "react-uuid";
 
 const RelateProduct = ({ type, heading }) => {
   return (
-    <Box justifyContent="center" w="80%" m="auto" mt="6" cursor="pointer" textAlign="center"
-      backgroundColor="blackAlpha.50">
-      <Box >
+    <Box
+      justifyContent="center"
+      w="80%"
+      m="auto"
+      mt="6"
+      cursor="pointer"
+      textAlign="center"
+      backgroundColor="blackAlpha.50"
+    >
+      <Box>
         <a href="">
-
           <Text
-            fontSize="2.1rem" color="whiteAlpha.900" fontWeight="black"
-            width="100%" backgroundColor="blue.300" h="60px"
+            fontSize="2.1rem"
+            color="whiteAlpha.900"
+            fontWeight="black"
+            width="100%"
+            backgroundColor="blue.300"
+            h="60px"
             p={2}
-          >Các sản phẩm liên quan </Text>
+          >
+            Các sản phẩm liên quan{" "}
+          </Text>
         </a>
       </Box>
       {/* <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/> */}
-      <Box mt="1" >
+      <Box mt="1">
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
@@ -53,10 +74,16 @@ const RelateProduct = ({ type, heading }) => {
           }}
         >
           {type.map((i) => (
-            <Box key={uuid()}  >
+            <Box key={uuid()}>
               <SwiperSlide>
                 <Link to="/computers/">
-                  <Box p="5" m="2" height="400px" backgroundColor="white" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
+                  <Box
+                    p="5"
+                    m="2"
+                    height="400px"
+                    backgroundColor="white"
+                    boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+                  >
                     <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
@@ -79,7 +106,7 @@ const RelateProduct = ({ type, heading }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="600" fontSize="18px" ml="1">
-                            {i.price}  <sup>đ</sup>
+                            {i.price} <sup>đ</sup>
                           </Text>
                         </Square>
                       </Flex>
@@ -122,7 +149,6 @@ const RelateProduct = ({ type, heading }) => {
           ))}
         </Swiper>
       </Box>
-
     </Box>
   );
 };

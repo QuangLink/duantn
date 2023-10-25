@@ -61,13 +61,13 @@ const TimeDeal = ({ type, heading }) => {
                       
                       
                       </Box>
-                      <Box mt="8"  >
+                      <Box mt="8" className="time" >
                       <Text fontSize="20px" >Đang diễn ra</Text>
-                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"   borderBottom="3px solid #E6CB47" borderBottomRadius="12px"><i fontSize="10px" > 08: 00 / 23:59 </i> </Text>
+                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"   borderBottom="3px solid #E6CB47" borderBottomRadius="12px"><i fontSize="10px" > 08:00/23:59 </i> </Text>
                       </Box>
-                      <Box mt="8">
+                      <Box mt="8" className="time">
                       <Text fontSize="20px" >Ngày mai</Text>
-                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" > 08: 00 / 23:59 </i> </Text>
+                      <Text fontFamily="-moz-initial" fontSize="2xl" color="blackAlpha.800" mt="2"><i fontSize="10px" > 08: 00/23:59 </i> </Text>
                       </Box>
 
       </Heading>
@@ -117,12 +117,15 @@ const TimeDeal = ({ type, heading }) => {
                   </Square>
                     
                     <Text
-                    mt="2"
-                      color="#424245"
-                      noOfLines={2}
-                      textAlign="center"
-                      fontSize="15px"
-                      _hover={{ color: "red" }}
+                     mt="2"
+                  
+                     fontFamily="serif"
+                     color="#424245"
+                     noOfLines={2}
+                     textAlign="center"
+                     fontSize="25px"
+                     _hover={{ color: "red" }}
+                     fontWeight="700"
                     >
                       {i.name}
                     </Text>

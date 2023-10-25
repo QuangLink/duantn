@@ -3,12 +3,14 @@ import { Box, Image, Center, Flex } from "@chakra-ui/react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import uuid from "react-uuid";
+import './stylehome.css';
 
 const ItemCard1 = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Center>
-      <Box width="70%"  justifyContent="center">
+      <Box width="70%"  justifyContent="center" className="bannercenter"
+      >
         <Slide >
           
             

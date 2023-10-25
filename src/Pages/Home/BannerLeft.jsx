@@ -6,14 +6,8 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
-const Banners = ({ type, }) => {
-    return (
-        <Box>
-            
-        </Box>
+const Banners = ({ type }) => {
+  return <Box></Box>;
+};
 
-
-        );
-    };
-    
-    export default Banners;
+export default Banners;

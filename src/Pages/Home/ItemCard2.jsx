@@ -18,31 +18,16 @@ const ItemCard2 = ({ type, heading, src }) => {
           //   lg: "none",
           //   xl: "40%",
           //   base: "none",
-          //   test 
+          //   test
           // }}
           cursor="pointer"
           pr="4"
-          
         >
-          <Image
-            src={src}
-            boxSize="340px"
-            border="1px"
-            borderColor="gray.200"
-            w={{
-              xs: "80%",
-              sm: "80%",
-              md: "80%",
-              lg: "400px",
-              xl: "400px",
-              base: "none",
-            }}
-          />
+         
         </Box>
         <Spacer />
         <Box
-          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%"  }}
-          
+          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%" }}
         >
           <Slider type={type} />
         </Box>

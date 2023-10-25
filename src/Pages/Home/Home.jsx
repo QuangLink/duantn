@@ -16,9 +16,6 @@ import Btn from "./Btn";
 
 
 
-
-
-
 import {
   ItemDetails1,
  
@@ -41,39 +38,33 @@ import {
   PrLenovo,
   PrAcer,
   PrHp,
-  PrXiaomi
-
-
+  PrXiaomi,
 } from "./CardDetails";
 
-
-import { Box,
-    
- } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Banners from "./BannerLeft";
 const Home = () => {
   return (
     <Box>
-
-        <BannerCenter type={BannersCenter} />
-      <br/>
+      <BannerCenter type={BannersCenter} />
+      <br />
 
       <ItemCard1 type={ItemDetails1} />
-      <br/>
-      <hr/>
-      <CateFeature type={CateFeatures}  />
+      <br />
+      <hr />
+      <CateFeature type={CateFeatures} />
       <br />
       <hr />
 
       <TimeDeal type={PrHp}  />
       <br />
       <hr />
-      
+
       {/* <ItemCard1 type={ItemDetails2} /> */}
       <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
       <br />
       <hr />
-      <PrDeal type={PrApplePhone}  />
+      <PrDeal type={PrApplePhone} />
 
       <br />
       <hr />
@@ -81,15 +72,12 @@ const Home = () => {
         type={PrApplePhone}
         linked={"/personalcare"}
         heading="Iphone "
-        src="https://i.imgur.com/8pxYJUB.png"
+       
       />
       <hr />
    
       <ItemCard9 type={ItemDetails7} />
-      <ItemCard6
-        type={ItemDetails9}
-        heading="DỊCH VỤ CỦA CHÚNG TÔI"
-      />
+      <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
       <br />
       <hr />
       <ItemCard7

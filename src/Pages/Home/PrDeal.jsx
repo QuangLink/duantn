@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
-import './stylehome.css';
+import "./stylehome.css";
 const PrDeal = ({ type }) => {
   return (
     <Box justifyContent="center" w="70%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
@@ -56,10 +56,10 @@ const PrDeal = ({ type }) => {
               spaceBetween: 10,
             },
           }}
-      >
+        >
           {type.map((i) => (
-            <Box key={uuid()}  >         
-              <SwiperSlide  >
+            <Box key={uuid()}>
+              <SwiperSlide>
                 <Link to={i.linked}>
                   
                   <Box className="list" p="2"  mt="4" ml="1" mr="1" mb ="5" backgroundColor="white"  borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
@@ -128,10 +128,7 @@ const PrDeal = ({ type }) => {
             </Box>
           ))}
         </Swiper>
-
-
       </Box>
-
     </Box>
   );
 };

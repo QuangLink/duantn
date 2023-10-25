@@ -1,7 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Box, Grid, GridItem, Heading, Center, Flex, Text, Button, Input, Menu, MenuButton, MenuList, MenuItem, border, Image, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Center,
+  Flex,
+  Text,
+  Button,
+  Input,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  border,
+  Image,
+  Link,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
@@ -13,9 +30,9 @@ import {
 } from "../Home/CardDetails";
 import SlideProduct from "./SlideProduct";
 
-const getData = async (typeOfProduct,brandOfProduct) => {
+const getData = async (typeOfProduct, brandOfProduct) => {
   let response = await axios.get(
-    `http://localhost:9000/category/${typeOfProduct}/${brandOfProduct}`
+    `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
   );
   return response.data;
 };
@@ -42,7 +59,7 @@ const Products = ({ typeOfProduct }) => {
     asus: "ASUS",
     lenovo: "LENOVO",
     acer: "ACER",
-    whishlist: "whishlist"
+    whishlist: "whishlist",
   };
 
   useEffect(() => {
@@ -86,8 +103,7 @@ const Products = ({ typeOfProduct }) => {
       >
       <SlideProduct type={PrHp} />
       </Box>
-      <Box
-        mb="2%">
+      <Box mb="2%">
         <HotProduct type={PrHp} />
       </Box>
       <Box
@@ -99,9 +115,7 @@ const Products = ({ typeOfProduct }) => {
         borderRadius="3px"
         boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px"
       >
-        <Flex
-          p={2}
-        >
+        <Flex p={2}>
           <Menu>
             <MenuButton
               fontWeight="bold.500"
@@ -205,8 +219,7 @@ const Products = ({ typeOfProduct }) => {
                       fontSize={"12px"}
                       p={2}
                       border="1px solid #e0e0e0"
-                    >
-                    </Box>
+                    ></Box>
                   </Box>
                   <Box>
                     <Box
@@ -217,8 +230,7 @@ const Products = ({ typeOfProduct }) => {
                       }}
                       p={2}
                       border="1px solid #e0e0e0"
-                    >
-                    </Box>
+                    ></Box>
                   </Box>
                   <Box>
                     <Box
@@ -229,8 +241,7 @@ const Products = ({ typeOfProduct }) => {
                       }}
                       p={2}
                       border="1px solid #e0e0e0"
-                    >
-                    </Box>
+                    ></Box>
                   </Box>
                   <Box>
                     <Box
@@ -241,10 +252,8 @@ const Products = ({ typeOfProduct }) => {
                       }}
                       p={2}
                       border="1px solid #e0e0e0"
-                    >
-                    </Box>
+                    ></Box>
                   </Box>
-
                 </Grid>
               </Link>
             </MenuList>
@@ -438,7 +447,7 @@ const Products = ({ typeOfProduct }) => {
                       fontSize={"12px"}
                       border="1px solid #e0e0e0"
                     >
-                     8G
+                      8G
                     </Text>
                   </Box>
                   <Box>
@@ -468,18 +477,13 @@ const Products = ({ typeOfProduct }) => {
           >
             Yêu thích
           </Button>
-
-
         </Flex>
-        <Flex
-          width="13%"
-        >
+        <Flex width="13%">
           <Text
             // border="solid 1px"
             fontSize="1rem"
             backgroundColor="#FFFFFF"
-          >
-          </Text>
+          ></Text>
           <Box>
             <Menu>
               <MenuButton
@@ -493,20 +497,11 @@ const Products = ({ typeOfProduct }) => {
               >
                 Sắp xếp theo
               </MenuButton>
-              <MenuList
-              >
-                <MenuItem
-                >Giảm giá
-                </MenuItem>
-                <MenuItem>
-                  Xem nhiều nhất
-                </MenuItem>
-                <MenuItem
-                >Từ thấp đến cao</MenuItem>
-                <MenuItem
-                >Từ cao đến thấp
-                </MenuItem>
-
+              <MenuList>
+                <MenuItem>Giảm giá</MenuItem>
+                <MenuItem>Xem nhiều nhất</MenuItem>
+                <MenuItem>Từ thấp đến cao</MenuItem>
+                <MenuItem>Từ cao đến thấp</MenuItem>
               </MenuList>
             </Menu>
           </Box>
@@ -526,46 +521,42 @@ const Products = ({ typeOfProduct }) => {
             />
           </Center>
         </Box>
-      )
-        : (
-          <Grid
-            width="80%"
-            m="auto"
-            marginLeft="10%"
-            templateColumns={[
-              "repeat(1, 1fr)",
-              "repeat(2,1fr)",
-              "repeat(3,1fr)",
-              "repeat(4,1fr)",
-            ]}
-            gap={2}
-          >
-            {productsList.map((elem, i) => {
-              // console.log("in the products page in the map method and elem is :- ", elem);
-              return (
-
-                <GridItem
-                  key={elem.prodName + i}
-                  w="97%"
-                  h="100 %"
-                  bg="white.500"
-                  boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-
-                  padding="5%"
-                  _hover={{
-                    boxShadow:
-                      "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Product data={elem} typeOfProduct={typeOfProduct} />
-                </GridItem>
-              );
-            })}
-          </Grid>
-        )}
+      ) : (
+        <Grid
+          width="80%"
+          m="auto"
+          marginLeft="10%"
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(2,1fr)",
+            "repeat(3,1fr)",
+            "repeat(4,1fr)",
+          ]}
+          gap={2}
+        >
+          {productsList.map((elem, i) => {
+            // console.log("in the products page in the map method and elem is :- ", elem);
+            return (
+              <GridItem
+                key={elem.prodName + i}
+                w="97%"
+                h="100 %"
+                bg="white.500"
+                boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
+                padding="5%"
+                _hover={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                  cursor: "pointer",
+                }}
+              >
+                <Product data={elem} typeOfProduct={typeOfProduct} />
+              </GridItem>
+            );
+          })}
+        </Grid>
+      )}
     </Box>
-
   );
 };
 
