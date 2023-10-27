@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.4e6408eb.css",
-    "main.js": "./static/js/main.76ddb464.js",
+    "main.js": "./static/js/main.1514e576.js",
     "static/js/787.acf89295.chunk.js": "./static/js/787.acf89295.chunk.js",
     "static/media/fa-solid-900.ttf": "./static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
     "static/media/PrSaleimg.png": "./static/media/PrSaleimg.e7e8e9aa49afa691abd4.png",
@@ -22,11 +22,11 @@
     "static/media/dien-thoai-doc-quyen-128x128.webp": "./static/media/dien-thoai-doc-quyen-128x128.3f06778bcfc02503dbf3.webp",
     "index.html": "./index.html",
     "main.4e6408eb.css.map": "./static/css/main.4e6408eb.css.map",
-    "main.76ddb464.js.map": "./static/js/main.76ddb464.js.map",
+    "main.1514e576.js.map": "./static/js/main.1514e576.js.map",
     "787.acf89295.chunk.js.map": "./static/js/787.acf89295.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4e6408eb.css",
-    "static/js/main.76ddb464.js"
+    "static/js/main.1514e576.js"
   ]
 }
