@@ -25,6 +25,7 @@ import ProductReviewForm from "./ProductReview";
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
 import Cookies from 'js-cookie';
+//add singleData to cart
 const postSingleData = async (data) => {
   try {
     // Lấy userID từ sessionStorage
@@ -48,6 +49,8 @@ const postSingleData = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
+
+
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
