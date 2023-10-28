@@ -23,7 +23,7 @@ const PrDeal = ({ type }) => {
                         </Box>
       </Heading>
       <Swiper>
-                   <Box    h="200px" m="1">
+                   <Box    h="200px" m="1" className="bannerPr">
                       <Image src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg" w="99%" h="200px" m="1"
                    borderRadius="15px"
                           />
@@ -44,7 +44,7 @@ const PrDeal = ({ type }) => {
               spaceBetween: 10,
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 15,
             },
             1024: {
@@ -69,7 +69,7 @@ const PrDeal = ({ type }) => {
                   </Square>
                   <Text
                   mt="2"
-                  
+                  h="70px"
                       fontFamily="serif"
                       color="#424245"
                       noOfLines={2}
@@ -102,7 +102,7 @@ const PrDeal = ({ type }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
+                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                         </Text>
                       </Flex>                
                       <Box

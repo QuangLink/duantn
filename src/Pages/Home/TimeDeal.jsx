@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Text, Image, Square, Heading, Center,Button } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, slidesPerView } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
@@ -72,11 +72,6 @@ const TimeDeal = ({ type, heading }) => {
 
       </Heading>
 
-
-     
-
-
-
       <Box mt="1" bachgroundColor="white" >
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -85,23 +80,23 @@ const TimeDeal = ({ type, heading }) => {
           breakpoints={{
             0: {
               slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 10,
+              spaceBetween: 5,
             },
             768: {
-              slidesPerView: 3,
-              spaceBetween: 15,
+              slidesPerView: 2,
+              spaceBetween: 5,
             },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 15,
+              slidesPerView: 3,
+              spaceBetween: 5,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 15,
+              spaceBetween: 5,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 5,
             },
           }}
         >
@@ -118,7 +113,7 @@ const TimeDeal = ({ type, heading }) => {
                     
                     <Text
                      mt="2"
-                  
+                     height="70px"
                      fontFamily="serif"
                      color="#424245"
                      noOfLines={2}
@@ -138,7 +133,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  <sup>đ</sup>
+                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  
                           </Text>
                         </Square>
                       </Flex>
@@ -148,7 +143,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
+                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                         </Text>
                       </Flex>
                      
@@ -156,18 +151,18 @@ const TimeDeal = ({ type, heading }) => {
                      
                      
                       <Box
-                      padding="3px"
-                        borderRadius="5px"
+                      padding="5px"
+                        borderRadius="7px"
                        
-                        w="50%"
-                        color="#EC4C0A"
-                        bg="#FEB373"
-                        mt="2"
+                        w="60%"
+                       
+                        bg="#FF7C03"
+                        mt="3"
                         
-                        textAlign="center"
+                       
                         
                       >
-                        <Text fontSize="10px" fontWeight="500">
+                        <Text fontSize="15px" fontWeight="700" color="#eab05f"> 
                           GIẢM GIÁ SỐC
                           
                         </Text>
@@ -196,7 +191,7 @@ const TimeDeal = ({ type, heading }) => {
                     
                     <Text
                     mt="2"
-                  
+                   h="70px"
                     fontFamily="serif"
                     color="#424245"
                     noOfLines={2}
@@ -216,7 +211,7 @@ const TimeDeal = ({ type, heading }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  <sup>đ</sup>
+                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}  
                           </Text>
                         </Square>
                       </Flex>

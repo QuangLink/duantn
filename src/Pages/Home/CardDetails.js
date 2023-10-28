@@ -3,18 +3,17 @@ import axios from "axios";
 const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
-  allproduct: apiUrlBase,
-  deals: apiUrlBase + 'deals',
-  sale: apiUrlBase + 'sale',
-    applephone: apiUrlBase + 'apple',
-    appletablet: apiUrlBase + 'apple/tablet',
-  samsung: apiUrlBase + 'samsung',
-  xiaomi: apiUrlBase + 'xiaomi',
-  hp: apiUrlBase + 'hp',
-  asus: apiUrlBase + 'asus',
-  lenovo: apiUrlBase + 'lenovo',
-  acer: apiUrlBase + 'acer',
-  asuslaptop: apiUrlBase +"asus/laptop",
+
+
+  sale: apiUrlBase + "sale",
+  applephone: apiUrlBase + "apple",
+  appletablet: apiUrlBase + "apple",
+  samsung: apiUrlBase + "samsung",
+  xiaomi: apiUrlBase + "xiaomi",
+  hp: apiUrlBase + "hp",
+  asus: apiUrlBase + "asus",
+  lenovo: apiUrlBase + "lenovo",
+  acer: apiUrlBase + "acer",
 };
 
 const fetchDataForCategory = async (category) => {
@@ -27,16 +26,14 @@ const fetchDataForCategory = async (category) => {
       id: product.prodID,
       sale: product.prodSale,
       original: product.prodPriceSale,
-      linked: product.catName.toLowerCase(),
     }));
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
     return [];
   }
 };
-export let PrAll = [];
-export let PrDeals = [];
-export let PrSales = [];
+
+export let PrSale = [];
 export let PrApplePhone = [];
 export let PrAppleTablet = [];
 export let PrSamsung = [];
@@ -45,24 +42,22 @@ export let PrHp = [];
 export let PrAsus = [];
 export let PrLenovo = [];
 export let PrAcer = [];
-export let PrAsusLaptop =[];
 
 const fetchDataForAllCategories = async () => {
-  PrAll = await fetchDataForCategory('allproduct');
-  PrDeals = await fetchDataForCategory('deals');
-  PrSales = await fetchDataForCategory('sale');
-  PrApplePhone = await fetchDataForCategory('applephone');
-  PrAppleTablet = await fetchDataForCategory('appletablet');
-  PrSamsung = await fetchDataForCategory('samsung');
-  PrXiaomi = await fetchDataForCategory('xiaomi');
-  PrHp = await fetchDataForCategory('hp');
-  PrAsus = await fetchDataForCategory('asus');
-  PrLenovo = await fetchDataForCategory('Lenovo');
-  PrAcer = await fetchDataForCategory('acer');
-  PrAsusLaptop = await fetchDataForCategory('asuslaptop')
+
+  PrSale = await fetchDataForCategory("sale");
+  PrApplePhone = await fetchDataForCategory("applephone");
+  PrAppleTablet = await fetchDataForCategory("appletablet");
+  PrSamsung = await fetchDataForCategory("samsung");
+  PrXiaomi = await fetchDataForCategory("xiaomi");
+  PrHp = await fetchDataForCategory("hp");
+  PrAsus = await fetchDataForCategory("asus");
+  PrLenovo = await fetchDataForCategory("lenovo");
+  PrAcer = await fetchDataForCategory("acer");
 };
 
 fetchDataForAllCategories();
+
 
 
 
@@ -72,7 +67,8 @@ export const BannersCenter = [
     id: 1,
     name: "Máy tính",
     imgbnct:
-      "https://i.pinimg.com/564x/a5/6c/93/a56c930c91e49eebd953ff0d51a9bec6.jpg",
+      "https://simplepage.vn/blog/wp-content/uploads/3-6.png",
+      videoUrl:"https://youtu.be/BMHg1Eq6ZF8?t=6",
   },
 ];
 
@@ -134,18 +130,7 @@ export const CateFeatures = [
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
   },
-  {
-    id: 9,
-    name: "Điều hòa",
-    imgcatehot:
-      "https://tse4.mm.bing.net/th?id=OIP.7BSmCxRZXYWjuGgMj_vDWQHaHa&pid=Api&P=0&h=220",
-  },
-  {
-    id: 10,
-    name: "Thiết bị làm mát",
-    imgcatehot:
-      "https://tse2.mm.bing.net/th?id=OIP.xFEN277jlGRs4XzhB_E5jAHaE8&pid=Api&P=0&h=220",
-  },
+  
 ];
 
 export const ItemDetails1 = [
@@ -157,7 +142,7 @@ export const ItemDetails1 = [
   },
   {
     img2: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/10/banner/Mua-kem-720-220-720x220-1.png",
-    img1: "https://www.reliancedigital.in/medias/MIdnight-Sale-Carousel-07-12-2022.jpg?context=bWFzdGVyfGltYWdlc3w5OTA2OXxpbWFnZS9qcGVnfGltYWdlcy9oNzYvaGM5Lzk5MjgzODQ4Mzk3MTAuanBnfGUxZTBiNDNlOGU2ZWUzMzg2YjU3MWMwYmJiNTBhZjM5ODdkMzhjYjNiYWZhYzllYWJmNzE0MGY4MTFmMjY3MDU",
+    img1: "https://images.fpt.shop/unsafe/fit-in/1200x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/10/19/638333306153639836_F-C1_1200x300.png",
 
     caption: "Slide 2",
   },

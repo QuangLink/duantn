@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Square,  Badge,
+
+
+  Heading,
+
+
+  useToast, } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
+
 
 const Slider = ({ type }) => {
   return (
@@ -24,7 +31,7 @@ const Slider = ({ type }) => {
           spaceBetween: 10,
         },
         768: {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 15,
         },
         1024: {
@@ -56,6 +63,7 @@ const Slider = ({ type }) => {
                 </Square>
                 <Text
                 mt="2"
+                h="70px"
                 fontFamily="serif"
                   color="gray.800"
                   noOfLines={2}
@@ -76,7 +84,7 @@ const Slider = ({ type }) => {
                     </Square>
                     <Square>
                       <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
-                        {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
+                        {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                       </Text>
                     </Square>
                   </Flex>
@@ -86,7 +94,7 @@ const Slider = ({ type }) => {
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} <sup>đ</sup>
+                      {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                     </Text>
                   </Flex>
                   {/* <Flex>
@@ -99,10 +107,10 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px" borderRadius="5px" w="50%" color="#EC4C0A" bg="#FEB373" mt="2" textAlign="center"
+                        padding="3px" borderRadius="5px" w="50%"  bg="#FF7C0E" mt="2" textAlign="center"
                     
                   >
-                    <Text fontSize="10px" fontWeight="500">
+                    <Text fontSize="10px" fontWeight="500" color="#eab05f">
                       GIẢM GIÁ SỐC
                     </Text>
                   </Box>

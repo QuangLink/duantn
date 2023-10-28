@@ -7,8 +7,23 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
 const CateFeature = ({ type }) => {
+  const rows = [];
+  for (let i = 0; i < 2; i++) {
+    const row = [];
+    for (let j = i * 4; j < i * 4 + 4 && j < type.length; j++) {
+      row.push(
+        <td key={j} style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <img src={type[j].imgcatehot} alt={type[j].name} style={{ width: "60px", height: "60px", marginBottom: "10px" }} />
+            <p style={{ marginTop: "0", wordWrap: "break-word" }}>{type[j].name}</p>
+          </div>
+        </td>
+      );
+    }
+    rows.push(<tr key={i}>{row}</tr>);
+  }
   return (
-    <Box>
+    <Box className="cateFuture">
       <Heading
         fontSize="3xl"
         display="flex"
@@ -31,31 +46,11 @@ const CateFeature = ({ type }) => {
         flexWrap="wrap"
         textSizeAdjust="auto"
       >
-        {type.map((i) => (
-          <Box key={uuid()}>
-            <Link to="/computers">
-              <Box
-                m="auto"
-                _hover={{ transform: "scale(1.1)" }}
-                w="200px"
-                display="block"
-              >
-                <Image src={`${i.imgcatehot}`} w="60px" h="60px" m="auto" />
-                <Text
-                  textAlign="center"
-                  padding="0 5px"
-                  color="#424245"
-                  noOfLines={2}
-                  marginBottom="10%"
-                  fontSize="15px"
-                  _hover={{ color: "red" }}
-                >
-                  {i.name}
-                </Text>
-              </Box>
-            </Link>
-          </Box>
-        ))}
+        <table>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
       </Box>
     </Box>
   );
