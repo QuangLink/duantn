@@ -1,39 +1,39 @@
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Divider,
+  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   Grid,
   Heading,
+  Icon,
   Image,
   Input,
   Menu,
   MenuButton,
+  MenuItem,
   MenuList,
   Text,
+  VStack,
   useDisclosure,
   useMediaQuery,
-  VStack,
-  MenuItem,
-  Button,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
-import { Icon } from '@chakra-ui/react'
-import React, { useState } from "react";
-import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
+import React, { useEffect, useState } from "react";
+import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
-import { BsPhone, BsSmartwatch, BsCart2, BsFillPersonFill } from "react-icons/bs";
-import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai"
+import { BsCart2, BsFillPersonFill, BsPhone, BsSmartwatch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/Auth/auth.action";
 import './Navbar.css';
+import useScrollListener from "./useScroll";
+
 function Navbar() {
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
@@ -49,6 +49,76 @@ function Navbar() {
   const [isFocused, setIsFocused] = useState(false);
   const [results, setResults] = useState([]);
   const [isSearchVisible, setIsSearchVisible] = useState(true);
+  const [isBoxVisible, setIsBoxVisible] = useState(true);
+  const [isMenuFixed, setIsMenuFixed] = useState(true);
+  const [direction, setDirection] = useState('')
+  const [apiResponse, setapiResponse] = useState("");
+  const scroll = useScrollListener()
+  const navbar = {
+    active: {
+      visibility: "visible",
+      transition: "all 0.5s",
+      position: 'fixed', top: '0px', width: '100%'
+    },
+    hidden: {
+      visibility: "hidden",
+      transition: "all 0.5s",
+      transform: "translateY(-100%)"
+    }
+  }
+  useEffect(() => {
+    console.log("scroll.lastY scroll.y - scroll.lastY", scroll.y, scroll.lastY, scroll.y - scroll.lastY)
+    if (scroll.y > 100 && (scroll.y - scroll.lastY) > 0) {
+      console.log("down down down")
+      setDirection('down')
+    }
+    else {
+      console.log("up up up")
+      setDirection('up')
+    }
+
+  },
+    [scroll.y, scroll.lastY]);
+
+  useEffect(() => {
+    callAPI()
+  }, [])
+
+  const callAPI = () => {
+    fetch("http://localhost:9000")
+
+      .then(res => {
+        setapiResponse(res)
+      });
+  }
+
+
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 100) {
+        setIsBoxVisible(false);
+      } else {
+        setIsBoxVisible(true);
+      }
+      if (scrollY > 100) {
+        setIsMenuFixed(true);
+      } else {
+        setIsMenuFixed(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
 
   const handleInputFocus = () => {
@@ -97,11 +167,127 @@ function Navbar() {
       isClosable: true,
     });
   };
+
+
+
+
+  const Closesearch = () => {
+    if (input === '') {
+      return (
+        <Box></Box>
+      )
+    } else {
+      return (
+        <>
+          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="744px" height="auto" position={'absolute'} marginTop={5} borderRadius={15}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+
+          >
+            <Box overflowY={"scroll"} h={450}>
+              {results.slice(0, 10).map((results, id) => {
+                return (
+                  <Link to={`/${results.prodType}/${results.prodID}`} onClick={handleProductClick} >
+                    <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justifyContent={'flex-start'} _hover={{ bg: '#9ecdf2' }} >
+                      <Box mb={6} margin={5} paddingLeft={20} marginRight={10}>
+                        <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                      </Box>
+                      <Box mb={6}>
+                        <Text fontSize="xl" fontWeight="600">
+                          {results.prodName}
+                        </Text>
+                        <Text fontSize="lg" color="gray.500">
+                          <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                          <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                        </Text>
+                      </Box>
+                    </Flex>
+                  </Link>
+                )
+              })}
+            </Box>
+          </Box>}
+        </>
+      )
+    }
+  }
+  const Closesearch1 = () => {
+    if (input === '') {
+      return (
+        <Box></Box>
+      )
+    } else {
+      return (
+        <>
+          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15} overflowY={"scroll"} h={400}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+          >
+            {results.slice(0, 5).map((results, id) => {
+              return (
+                <Link to={`/${results.prodType}/${results.prodID}`} onClick={handleProductClick} >
+                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
+                    <Box mb={6} margin={5} marginRight={10}>
+                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                    </Box>
+                    <Box mb={6}>
+                      <Text fontSize="xl" fontWeight="600">
+                        {results.prodName}
+                      </Text>
+                      <Text fontSize="lg" color="gray.500">
+                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Link>
+              )
+            })}
+          </Box>}
+        </>
+      )
+    }
+  }
+  const Closesearch2 = () => {
+    if (input === '') {
+      return (
+        <Box></Box>
+      )
+    } else {
+      return (
+        <>
+          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15} overflowY={"scroll"} h={400}
+          >
+            {results.slice(0, 5).map((results, id) => {
+              return (
+                <Link to={`/${results.prodType}/${results.prodID}`} onClick={handleProductClick} >
+                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justifyContent={'flex-start'} _hover={{ bg: '#9ecdf2' }}>
+                    <Box mb={6} margin={5} marginRight={10}>
+                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
+                    </Box>
+                    <Box mb={6}>
+                      <Text fontSize="l" fontWeight="600">
+                        {results.prodName}
+                      </Text>
+                      <Text fontSize="l" color="gray.500">
+                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
+                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Link>
+              )
+            })}
+          </Box>}
+        </>
+      )
+    }
+  }
+
   // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box backgroundColor='#4a90e2' >
-        <Flex w="100%" alignItems={"center"} m="auto" justifyContent="space-around">
+
+      <Box backgroundColor='#4a90e2' position={'relative'} zIndex={2}>
+        <Flex w="100%" alignItems="center" m="auto" justifyContent="space-around">
           <Box><Image src={(require('../Components/Images/1200-44-1200x44-5.webp'))} /></Box>
         </Flex>
         <Flex className="flex-container" px="15%">
@@ -123,63 +309,42 @@ function Navbar() {
               />
               <BiSearch color="#555" fontSize={"28px"} />
             </Flex>
-            {isSearchVisible && <Box bg={'#fff'} width="744px" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
-              isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
-            >
-              {results.slice(0, 5).map((results, id) => {
-                return (
-                  <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
-                    <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
-                      <Box mb={6} margin={5} marginRight={10}>
-                        <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
-                      </Box>
-                      <Box mb={6}>
-                        <Text fontSize="xl" fontWeight="600">
-                          {results.prodName}
-                        </Text>
-                        <Text fontSize="lg" color="gray.500">
-                          <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
-                          <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Link>
-                )
-              })}
-            </Box>}
+            <Closesearch />
           </Box>
-          {!isAuth ? (
-            <Flex cursor={"pointer"} borderRadius={5} _hover={{ bg: "#0077ff" }}>
-              <Icon w={4} h={4} color={'#fff'} margin={2} as={BsFillPersonFill} />
-              <Link to="login">
-                <Heading fontWeight={400} m="2" cursor={"pointer"} fontSize={"14px"} color="#fff"
-                  className={`header-bar ${isFocused ? 'focused' : ''}`}
-                >
-                  Đăng nhập
-                </Heading>
-              </Link>
-            </Flex>
-          ) : (
-            <Menu>
-              <MenuButton
-                color="black"
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-              >
-                Hi {username}
-              </MenuButton>
-              <MenuList>
-                <MenuItem>My Profile</MenuItem>
-                <MenuItem>My Order</MenuItem>
-                <MenuItem>My Address</MenuItem>
-                <Link to="whishlist">
-                  {" "}
-                  <MenuItem>My Wishlist</MenuItem>
+          {
+            !isAuth ? (
+              <Flex cursor={"pointer"} borderRadius={5} _hover={{ bg: "#0077ff" }}>
+                <Icon w={4} h={4} color={'#fff'} margin={2} as={BsFillPersonFill} />
+                <Link to="login">
+                  <Heading fontWeight={400} m="2" cursor={"pointer"} fontSize={"14px"} color="#fff"
+                    className={`header-bar ${isFocused ? 'focused' : ''}`}
+                  >
+                    Đăng nhập
+                  </Heading>
                 </Link>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
-          )}
+              </Flex>
+            ) : (
+              <Menu>
+                <MenuButton
+                  color="black"
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  Hi {username}
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>My Profile</MenuItem>
+                  <MenuItem>My Order</MenuItem>
+                  <MenuItem>My Address</MenuItem>
+                  <Link to="whishlist">
+                    {" "}
+                    <MenuItem>My Wishlist</MenuItem>
+                  </Link>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            )
+          }
           <Link to="/cart">
             <Flex cursor={"pointer"} textAlign={'center'} borderRadius={5} _hover={{
               bg: "#0077ff"
@@ -214,8 +379,8 @@ function Navbar() {
               </Heading>
             </Flex>
           </Link>
-        </Flex>
-        <Flex w="95%" h="40px" textAlign={"center"} justifyContent="center" alignItems={"center"} m="auto" bg="#4a90e2" px="15%" >
+        </Flex >
+        <Flex w="100%" h="40px" textAlign={"center"} justifyContent="center" alignItems={"center"} m="auto" bg="#4a90e2" px="15%" style={{ position: isMenuFixed ? 'fixed' : 'static', top: '0px', width: '100%' }} >
           <Menu>
             <MenuButton px={4} py={2} color="#fff" alignContent={"center"}
               _hover={{ color: "white", fontSize: 18 }}
@@ -395,87 +560,81 @@ function Navbar() {
     );
   } else if (isLargerThan750px) {
     return (
-      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="center" >
+      <Flex
+        zIndex={2}
+        className="flex-container"
+        px='10%' bg='#4a90e2'
+        justifyContent="space-between"
+        style={direction === 'up' ? navbar.active : navbar.hidden}
+      >
         <Link to="/">
           <Box>
             <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
-          </Box>
-        </Link>
+          </Box >
+        </Link >
         <Box>
-          <Flex bg="white" borderRadius={"5px"} w="250px" h={10} p="5px" m="auto" textAlign={"center"}>
+          <Flex bg="white" borderRadius={"5px"} w="250px" h={10} p="5px" m="auto" textAlign={"center"}
+            className={`input-bar-talest ${isFocused ? 'focused' : ''}`}
+          >
             <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
               onChange={handleChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
             />
             <BiSearch color="#555" fontSize={"28px"} />
           </Flex>
-          {isSearchVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
-            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
-          >
-            {results.slice(0, 5).map((results, id) => {
-              return (
-                <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
-                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
-                    <Box mb={6} margin={5} marginRight={10}>
-                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
-                    </Box>
-                    <Box mb={6}>
-                      <Text fontSize="xl" fontWeight="600">
-                        {results.prodName}
-                      </Text>
-                      <Text fontSize="lg" color="gray.500">
-                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
-                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
-                      </Text>
-                    </Box>
-                  </Flex>
-                </Link>
-              )
-            })}
-          </Box>}
+          <Closesearch1 />
         </Box>
         <Link to="/cart">
-          <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }} >
+          <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }}
+            className={`header-bar ${isFocused ? 'focused' : ''}`}
+          >
             <Heading m='3' cursor={"pointer"} fontSize={"16px"} color="white" >
               <Icon as={BsCart2} w={6} h={6} color={'#fff'} margin={2} />
             </Heading>
           </Flex>
         </Link>
-        {!isAuth ? (
-          <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }}>
-            <Link to="login">
-              <Heading m={3} cursor={"pointer"} fontSize={"17px"} color="white" _hover={{ textDecoration: "underline" }} >
-                <Icon w={6} h={6} color={'#fff'} margin={2} as={BsFillPersonFill} />
-              </Heading>
-            </Link>
-          </Flex>
-        ) : (
-          <Menu>
-            <MenuButton color="black" as={Button} rightIcon={<ChevronDownIcon />} >
-              Hi {username}
-            </MenuButton>
-            <MenuList>
-              <MenuItem>My Profile</MenuItem>
-              <MenuItem>My Order</MenuItem>
-              <MenuItem>My Address</MenuItem>
-              <Link to="whishlist">
-                {" "}
-                <MenuItem>My Wishlist</MenuItem>
+        {
+          !isAuth ? (
+            <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }}
+              className={`header-bar ${isFocused ? 'focused' : ''}`}
+            >
+              <Link to="login">
+                <Heading m={3} cursor={"pointer"} fontSize={"17px"} color="white" _hover={{ textDecoration: "underline" }} >
+                  <Icon w={6} h={6} color={'#fff'} margin={2} as={BsFillPersonFill} />
+                </Heading>
               </Link>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
-        )}
+            </Flex>
+          ) : (
+            <Menu
+              className={`header-bar ${isFocused ? 'focused' : ''}`}
+            >
+              <MenuButton color="black" as={Button} rightIcon={<ChevronDownIcon />} >
+                Hi {username}
+              </MenuButton>
+              <MenuList>
+                <MenuItem>My Profile</MenuItem>
+                <MenuItem>My Order</MenuItem>
+                <MenuItem>My Address</MenuItem>
+                <Link to="whishlist">
+                  {" "}
+                  <MenuItem>My Wishlist</MenuItem>
+                </Link>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          )
+        }
         <Box mx="20px">
           <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}>
             <GiHamburgerMenu fontSize={"55px"} />
           </Box>
           <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}        >
             <DrawerOverlay />
-            <DrawerContent bg="#FFFFFF" color="#55555">
+            <DrawerContent bg="#FFFFFF" color="#55555" w={100}>
               <DrawerCloseButton />
-              <DrawerHeader fontSize={"22px"} fontWeight="bold">  Menu </DrawerHeader>
               <DrawerBody>
-                <VStack justifyContent={"space-around"} alignContent="center" gap="25px" m="auto" p="auto"  >
+                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="25px" m="auto" p="auto" paddingLeft={10} paddingTop={10}  >
                   <Link to="mobilesandtablets">
                     <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }} >
                       Điện thoại
@@ -515,47 +674,28 @@ function Navbar() {
             </DrawerContent>
           </Drawer>
         </Box>
-      </Flex>
+      </Flex >
     );
   } else if (islesserThan740px) {
     return (
-      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="center">
+      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="flex-start"
+        zIndex={2}
+        style={direction === 'up' ? navbar.active : navbar.hidden}
+      >
         <Link to="/">
           <Box>
             <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
           </Box>
         </Link>
-        <Box>
-          <Flex bg="white" borderRadius={"5px"} w="200px" h={10} p="5px" m="auto" textAlign={"center"}>
+        <Box >
+          <Flex bg="white" borderRadius={"5px"} w="270px" h={10} p="5px" m="auto" textAlign={"center"} >
             <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
               onChange={handleChange}
+
             />
             <BiSearch color="#555" fontSize={"28px"} />
           </Flex>
-          {isSearchVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15}
-            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
-          >
-            {results.slice(0, 5).map((results, id) => {
-              return (
-                <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
-                  <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justify="center" _hover={{ bg: '#9ecdf2' }}>
-                    <Box mb={6} margin={5} marginRight={10}>
-                      <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
-                    </Box>
-                    <Box mb={6}>
-                      <Text fontSize="l" fontWeight="600">
-                        {results.prodName}
-                      </Text>
-                      <Text fontSize="l" color="gray.500">
-                        <span className="prodPrice">{results.prodPrice} <sup>đ</sup></span>
-                        <span className="prodPriceSale" >{results.prodPriceSale}<sup>đ</sup> </span>
-                      </Text>
-                    </Box>
-                  </Flex>
-                </Link>
-              )
-            })}
-          </Box>}
+          <Closesearch2 />
         </Box>
         <Box mx="20px">
           <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}>
@@ -563,25 +703,25 @@ function Navbar() {
           </Box>
           <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef} >
             <DrawerOverlay />
-            <DrawerContent bg="#FFFFFF" color="#55555">
+            <DrawerContent bg="#FFFFFF" color="#55555" justifyContent={'flex-end'}>
               <DrawerCloseButton />
               <DrawerBody>
-                <VStack justifyContent={"space-around"} alignContent="center" gap="25px" m="auto" p="auto"    >
+                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="25px" m="auto" p="auto" paddingLeft={10} paddingTop={10}   >
                   {isAuth ? (
                     <Link to="profile">
-                      <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555" mt="35px" >
+                      <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
                         Hi {username}
                       </Heading>
                     </Link>
                   ) : (
                     <Link to="profile">
-                      <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555" mt="35px" >
-                        Profile
+                      <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
+                        Đăng nhập
                       </Heading>
                     </Link>
                   )}
 
-                  {!isAuth ? (
+                  {/* {!isAuth ? (
                     <Link to="/login">
                       <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555"  >
                         Login
@@ -595,19 +735,19 @@ function Navbar() {
                         Logout
                       </Heading>
                     </Link>
-                  )}
+                  )} */}
 
                   <Link to="/cart">
-                    <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555"  >
-                      Cart
+                    <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555"  >
+                      Giỏ hàng
                     </Heading>
                   </Link>
-
+                  {/* 
                   <DrawerHeader color="black" fontSize={"22px"} fontWeight="bold">
                     <Divider color={"black"} />
                     Product Category
                     <Divider color={"black"} />
-                  </DrawerHeader>
+                  </DrawerHeader> */}
 
                   <Link to="mobilesandtablets">
                     <Heading cursor={"pointer"} fontSize={"17px"} color="#55555"   >
@@ -652,6 +792,8 @@ function Navbar() {
       </Flex>
     );
   }
+
+
 }
 
 export default Navbar;

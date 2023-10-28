@@ -5,7 +5,9 @@
   .input-bar.focused {
     width: 744px;
   }
-
+  .input-bar-talest.focused {
+    width: 388px;
+  }
   .prodPriceSale{
     font-weight: 400;
 text-decoration: line-through;
@@ -24,10 +26,23 @@ margin-left: 15px;
 }
 .flex-container{
        width: 100%;
-        justify-content:"center";
+        justify-content:center;
         align-items: center;
         margin: auto;
-        background-color: '#4a90e2';
+        background-color: #4a90e2;
         padding: 5px;
-        gap:"10px";
+        gap:10px;
 }
+#flex-container{
+  width: 100%;
+   justify-content:center;
+   align-items: center;
+   margin: auto;
+   background-color: #4a90e2;
+   padding: 5px;
+   gap:10px;
+}
+nav.nav-bar--hidden {
+  transform: translateY(-100%);
+}
+

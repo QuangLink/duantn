@@ -65,7 +65,7 @@ import Banners from "./BannerLeft";
 
 const Home = () => {
         return (
-                <Box>
+                <Box >
 
                         <BannerCenter type={BannersCenter} />
                         <br />
@@ -81,7 +81,7 @@ const Home = () => {
                         <br />
                         <hr />
 
-                        {/* <ItemCard1 type={ItemDetails2} /> */}
+                        <ItemCard1 type={ItemDetails2} />
                         <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
                         <br />
                         <hr />

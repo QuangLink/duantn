@@ -92,24 +92,24 @@ const AllRoutes = () => {
           element={<SingleProduct typeOfProduct="asus" />}
         ></Route>
         <Route
-        path="/lenovo"
-        element={<Products typeOfProduct="asus" />}
-      ></Route>
-      <Route
-        path="/lenovo/:id"
-        element={<SingleProduct typeOfProduct="lenovo" />}
-      ></Route>
-      <Route
-      path="/acer"
-      element={<Products typeOfProduct="acer" />}
-    ></Route>
-    <Route
-      path="/acer/:id"
-      element={<SingleProduct typeOfProduct="acer" />}
-    ></Route>
+          path="/lenovo"
+          element={<Products typeOfProduct="asus" />}
+        ></Route>
+        <Route
+          path="/lenovo/:id"
+          element={<SingleProduct typeOfProduct="lenovo" />}
+        ></Route>
+        <Route
+          path="/acer"
+          element={<Products typeOfProduct="acer" />}
+        ></Route>
+        <Route
+          path="/acer/:id"
+          element={<SingleProduct typeOfProduct="acer" />}
+        ></Route>
         <Route path="/cart" element={<PrivateRoute><MainCartPage /></PrivateRoute>}></Route>
         <Route path="/login" element={<Login />}></Route>
-      
+
         <Route
           path="/whishlist"
           element={<PrivateRoute><Wishlist typeOfProduct={"whishlist"} /></PrivateRoute>}
@@ -117,7 +117,7 @@ const AllRoutes = () => {
         <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}></Route>
         <Route path="/payments" element={<PrivateRoute><Payments /></PrivateRoute>}></Route>
         <Route path="/lastpage" element={<PrivateRoute><LastPage /></PrivateRoute>}></Route>
-      
+
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
