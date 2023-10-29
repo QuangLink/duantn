@@ -18,13 +18,13 @@ import {
   border,
   Image,
   Link,
+  flexbox,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
-
 import { PrHp } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
@@ -80,18 +80,6 @@ const Products = ({ typeOfProduct }) => {
     );
   }
 
-  // loading ? (
-  //   <Heading
-  //     size="3xl"
-  //     textAlign="center"
-  //     color="blue.400"
-  //     marginTop={10}
-  //     marginBottom="200px"
-  //   >
-  //     Loading...
-  //   </Heading>
-  // )
-
   return (
     <Box p="5">
       {/* <Heading p="6" marginBottom={7}>
@@ -125,20 +113,21 @@ const Products = ({ typeOfProduct }) => {
           m="auto"
           marginLeft="10%"
           templateColumns={[
-            "repeat(1, 1fr)",
-            "repeat(2,1fr)",
+            "repeat(2, 1fr)",
+            "repeat(2,1fr)",  
             "repeat(3,1fr)",
             "repeat(4,1fr)",
           ]}
           gap={2}
-        >
+          css={{ "@media (max-width: 768px)": { marginLeft:"0",width:"100%",templateColumns:"none"} }}
+          >
           {productsList.map((elem, i) => {
             // console.log("in the products page in the map method and elem is :- ", elem);
             return (
               <GridItem
                 key={elem.prodName + i}
                 w="97%"
-                h="100 %"
+                h="100%"
                 bg="white.500"
                 boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
                 padding="5%"
@@ -147,7 +136,7 @@ const Products = ({ typeOfProduct }) => {
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
                   cursor: "pointer",
                 }}
-              >
+                >
                 <Product data={elem} typeOfProduct={typeOfProduct} />
               </GridItem>
             );

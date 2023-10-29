@@ -1,17 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 import Product from "./Product";
 import {
   Box,
   Link,
-  Divider,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
   Grid,
   Heading,
@@ -21,33 +13,30 @@ import {
   MenuButton,
   MenuList,
   Text,
-  useDisclosure,
-  useMediaQuery,
-  VStack,
   MenuItem,
   Button,
-  useToast,
 } from "@chakra-ui/react";
 import './Productbox.css'
 
 
 const ProductFilter = ({ typeOfProduct }) => {
-  const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
-  const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
-  if (isLargerThan1100) {
-    return (
-      <Box>
-        <Box
-          width="80%"
-          height="76px"
-          margin="0 0 3% 10%"
-          display="flex"
-          justifyContent="space-between"
-          borderRadius="3px"
-          boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px">
+
+  return (
+    <div className="filter_1">
+      <Box
+        width="80%"
+        height="76px"
+        margin="0 0 3% 10%"
+        display="flex"
+        justifyContent="space-between"
+        borderRadius="3px"
+        boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px"
+        css={{ "@media (max-width: 768px)": { margin:"2% 0%",width:"100%",justifyContent:"space-evenly" },
+              "@media (max-width: 426px)": { display:"none"}}
+            }
+        >  
           <Flex
-            p={2}
-          >
+            p={2}> 
             <Menu>
               <MenuButton
                 className="menu-button">
@@ -174,7 +163,9 @@ const ProductFilter = ({ typeOfProduct }) => {
                 </Link>
               </MenuList>
             </Menu>
-            <Menu>
+            <Menu
+            css={{ "@media (max-width: 768px)": { display:"none" } }}
+            >
               <MenuButton
                 className="menu-button">
                 Ram
@@ -206,72 +197,40 @@ const ProductFilter = ({ typeOfProduct }) => {
               </MenuList>
             </Menu>
             <Button
-              border="1px solid #e0e0e0;"
-              fontSize="0.7rem"
-              height="50%"
-              backgroundColor="#FFFFFF"
-              margin="2%">
+               border="1px solid #e0e0e0;"fontSize="0.7rem"
+               height="50%"
+               backgroundColor="#FFFFFF"
+               margin="2%"
+              css={{ "@media (max-width: 768px)": { display:"none" } }}>
               Yêu thích
             </Button>
           </Flex>
-          <Flex
-            width="13%">
-            <Box>
-              <Menu>
-                <MenuButton
-                  m={5}
-                  fontWeight="bold.800"
-                  width="120px"
-                  height="30px"
-                  fontSize="0.7rem"
-                  backgroundColor="#FFFFFF"
-                  boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px">
-                  Sắp xếp theo
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Giảm giá</MenuItem>
-                  <MenuItem>Xem nhiều nhất</MenuItem>
-                  <MenuItem>Từ thấp đến cao</MenuItem>
-                  <MenuItem>Từ cao đến thấp</MenuItem>
-                </MenuList>
-              </Menu>
-            </Box>
-          </Flex>
-        </Box>
+        <Flex
+          width="13%">
+          <Box>
+            <Menu>
+              <MenuButton
+                margin="15% 0%"
+                fontWeight="bold.800"
+                width="120px"
+                height="30px"
+                fontSize="0.7rem"
+                backgroundColor="#FFFFFF"
+                boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px">
+                Sắp xếp theo
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Giảm giá</MenuItem>
+                <MenuItem>Xem nhiều nhất</MenuItem>
+                <MenuItem>Từ thấp đến cao</MenuItem>
+                <MenuItem>Từ cao đến thấp</MenuItem>
+              </MenuList>
+            </Menu>
+          </Box>
+        </Flex>
       </Box>
-    );
-  } else if (islesserThan740px) {
-    return (
-      <Box>
-        <Box
-          width="80%"
-          height="76px"
-          margin="0 0 3% 10%"
-          display="flex"
-          justifyContent="space-between"
-          borderRadius="3px"
-          boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px">
-             <Menu>
-                <MenuButton
-                  m={5}
-                  fontWeight="bold.800"
-                  width="120px"
-                  height="30px"
-                  fontSize="0.7rem"
-                  backgroundColor="#FFFFFF"
-                  boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px">
-                  Sắp xếp theo
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Giảm giá</MenuItem>
-                  <MenuItem>Xem nhiều nhất</MenuItem>
-                  <MenuItem>Từ thấp đến cao</MenuItem>
-                  <MenuItem>Từ cao đến thấp</MenuItem>
-                </MenuList>
-              </Menu>
-        </Box>
-      </Box>
-    );
-  }
+    </div>
+  );
+
 };
 export default ProductFilter;

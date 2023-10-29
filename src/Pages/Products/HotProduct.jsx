@@ -29,6 +29,7 @@ const HotProduct = ({ type, heading }) => {
       textAlign="center"
       backgroundColor="#CCF1F9"
       borderRadius="5px"
+      css={{ "@media (max-width: 768px)": { display:"none" } }}
     >
       <Box>
         <a href="">
@@ -56,21 +57,21 @@ const HotProduct = ({ type, heading }) => {
               slidesPerView: 1,
               spaceBetween: 10,
             },
-            480: {
+            768: {
               slidesPerView: 2,
               spaceBetween: 10,
             },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 15,
-            },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 15,
+              slidesPerView: 3,
+              spaceBetween: 20,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 5,
+              spaceBetween: 15,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 15,
             },
           }}
         >

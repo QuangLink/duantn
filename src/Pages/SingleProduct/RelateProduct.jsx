@@ -22,7 +22,8 @@ const RelateProduct = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w="80%"
+      w={["100%","100%","80%"]}
+      display={["none", "block" ,"block"]}
       m="auto"
       mt="6"
       cursor="pointer"
@@ -56,10 +57,10 @@ const RelateProduct = ({ type, heading }) => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 10,
             },
-            768: {
+            7: {
               slidesPerView: 3,
               spaceBetween: 15,
             },
@@ -79,7 +80,7 @@ const RelateProduct = ({ type, heading }) => {
                 <Link to="/computers/">
                   <Box
                     p="5"
-                    m="2"
+                    m={["0%","0%","2%"]}
                     height="400px"
                     backgroundColor="white"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
