@@ -158,7 +158,7 @@ function Navbar() {
   };
   const handleChange = (event) => {
     const inputValue = event.target.value;
-
+    setIsSearchVisible(true);
     setInput(inputValue);
     if (inputValue === "") {
       setResults([]);
@@ -180,7 +180,7 @@ function Navbar() {
   };
 
   const Closesearch = () => {
-    if (input === "") {
+    if (results.length === 0) {
       return <Box></Box>;
     } else {
       return (
@@ -252,7 +252,7 @@ function Navbar() {
     }
   };
   const Closesearch1 = () => {
-    if (input === "") {
+    if (results.length === 0) {
       return <Box></Box>;
     } else {
       return (
@@ -319,7 +319,7 @@ function Navbar() {
     }
   };
   const Closesearch2 = () => {
-    if (input === "") {
+    if (results.length === 0) {
       return <Box></Box>;
     } else {
       return (
@@ -1145,7 +1145,7 @@ function Navbar() {
                     </Box>
                   ) : (
                     <Box borderBottom={"1px solid #555"}>
-                      <Link to="profile">
+                      <Link to="login">
                         <Heading
                           w={"200px"}
                           marginBottom={5}
