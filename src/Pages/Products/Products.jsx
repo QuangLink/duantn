@@ -18,6 +18,7 @@ import {
   border,
   Image,
   Link,
+  
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
@@ -26,7 +27,7 @@ import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
 
 import { PrHp } from "../Home/CardDetails";
-import SlideProuct from "./SlideProduct";
+import SlideProduct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
 
 
@@ -101,7 +102,7 @@ const Products = ({ typeOfProduct }) => {
       <hr></hr> */}
       <Box
       >
-      <SlideProducts type={PrHp} />
+      <SlideProduct type={PrHp} />
       </Box>
       <Box mb="2%">
         <HotProduct type={PrHp} />
