@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 import {
   LOGIN_ERROR,
@@ -24,7 +24,6 @@ export const login = (creds) => async (dispatch) => {
     Cookies.set("username", username);
     Cookies.set("admin", admin);
     Cookies.set("userID", userID);
-
 
     // Dispatch action để lưu token vào Redux store với payload chứa dữ liệu
     dispatch({

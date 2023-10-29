@@ -3,8 +3,6 @@ import axios from "axios";
 const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
-
-
   sale: apiUrlBase + "sale",
   applephone: apiUrlBase + "apple",
   appletablet: apiUrlBase + "apple",
@@ -44,7 +42,6 @@ export let PrLenovo = [];
 export let PrAcer = [];
 
 const fetchDataForAllCategories = async () => {
-
   PrSale = await fetchDataForCategory("sale");
   PrApplePhone = await fetchDataForCategory("applephone");
   PrAppleTablet = await fetchDataForCategory("appletablet");
@@ -58,17 +55,12 @@ const fetchDataForAllCategories = async () => {
 
 fetchDataForAllCategories();
 
-
-
-
-
 export const BannersCenter = [
   {
     id: 1,
     name: "Máy tính",
-    imgbnct:
-      "https://simplepage.vn/blog/wp-content/uploads/3-6.png",
-      videoUrl:"https://youtu.be/BMHg1Eq6ZF8?t=6",
+    imgbnct: "https://simplepage.vn/blog/wp-content/uploads/3-6.png",
+    videoUrl: "https://youtu.be/BMHg1Eq6ZF8?t=6",
   },
 ];
 
@@ -130,7 +122,6 @@ export const CateFeatures = [
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
   },
-  
 ];
 
 export const ItemDetails1 = [
@@ -148,13 +139,6 @@ export const ItemDetails1 = [
   },
 ];
 
-
-
-
-
-
-
-
 export const ItemDetails7 = [
   {
     img: "https://www.reliancedigital.in/medias/airpods-pro-2nd-gen-Buy-now-NPI-Banner-01-11-2022.jpg?context=bWFzdGVyfGltYWdlc3wxMDM4NjB8aW1hZ2UvanBlZ3xpbWFnZXMvaDQ2L2g2Ny85OTIyNDU2MTkxMDA2LmpwZ3w0MGQxZjFhYjQ0ZjU1NTQzZjJiOGJmYzZhMDg5NTY5M2Y3NzIxZDkzOTQ2Yjg4YmNmOWZlMzc4OWM0YjlkMjA2",
@@ -169,8 +153,6 @@ export const ItemDetails7 = [
     caption: "Slide 3",
   },
 ];
-
-
 
 export const ItemDetails9 = [
   {
@@ -198,8 +180,3 @@ export const ItemDetails9 = [
     desc: "Hỗ trợ thu lại máy cũ, bù tiền lấy mới",
   },
 ];
-
-
-
-
-

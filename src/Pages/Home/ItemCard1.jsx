@@ -3,7 +3,7 @@ import { Box, Image, Center, Flex } from "@chakra-ui/react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import uuid from "react-uuid";
-import './stylehome.css';
+import "./stylehome.css";
 
 const ItemCard1 = ({ type }) => {
   return (
@@ -12,11 +12,7 @@ const ItemCard1 = ({ type }) => {
         <Box width="70%" justifyContent="center" className="bannercenter">
           <Slide>
             {type.map((i) => (
-              <Flex
-                key={uuid()}
-                h="220px"
-                justifyContent="space-between"
-              >
+              <Flex key={uuid()} h="220px" justifyContent="space-between">
                 <Box flex="1">
                   <Image
                     src={`${i.img1}`}
@@ -25,13 +21,12 @@ const ItemCard1 = ({ type }) => {
                     p="1"
                     borderRadius="15px"
                   />
-               
-               
+
                   <Image
                     src={`${i.img2}`}
                     alt={i.caption}
                     className="BannerPhai"
-                   p="1"
+                    p="1"
                     borderRadius="15px"
                   />
                 </Box>

@@ -13,11 +13,23 @@ const CateFeature = ({ type }) => {
     for (let j = i * 4; j < i * 4 + 4 && j < type.length; j++) {
       row.push(
         <td key={j} style={{ textAlign: "center" }}>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <img src={type[j].imgcatehot} alt={type[j].name} style={{ width: "60px", height: "60px", marginBottom: "10px" }} />
-            <p style={{ marginTop: "0", wordWrap: "break-word" }}>{type[j].name}</p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={type[j].imgcatehot}
+              alt={type[j].name}
+              style={{ width: "60px", height: "60px", marginBottom: "10px" }}
+            />
+            <p style={{ marginTop: "0", wordWrap: "break-word" }}>
+              {type[j].name}
+            </p>
           </div>
-        </td>
+        </td>,
       );
     }
     rows.push(<tr key={i}>{row}</tr>);
@@ -47,9 +59,7 @@ const CateFeature = ({ type }) => {
         textSizeAdjust="auto"
       >
         <table>
-          <tbody>
-            {rows}
-          </tbody>
+          <tbody>{rows}</tbody>
         </table>
       </Box>
     </Box>

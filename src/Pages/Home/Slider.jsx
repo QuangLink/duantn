@@ -1,11 +1,14 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square,  Badge,
-
-
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Square,
+  Badge,
   Heading,
-
-
-  useToast, } from "@chakra-ui/react";
+  useToast,
+} from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -13,7 +16,6 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
-
 
 const Slider = ({ type }) => {
   return (
@@ -62,9 +64,9 @@ const Slider = ({ type }) => {
                   />
                 </Square>
                 <Text
-                mt="2"
-                h="70px"
-                fontFamily="serif"
+                  mt="2"
+                  h="70px"
+                  fontFamily="serif"
                   color="gray.800"
                   noOfLines={2}
                   textAlign="center"
@@ -75,7 +77,7 @@ const Slider = ({ type }) => {
                 >
                   {i.name}
                 </Text>
-                <Box mt="2.5" m="20px 0 30px 0"  >
+                <Box mt="2.5" m="20px 0 30px 0">
                   <Flex>
                     <Square>
                       <Text color="gray.600" fontSize="14px">
@@ -83,8 +85,17 @@ const Slider = ({ type }) => {
                       </Text>
                     </Square>
                     <Square>
-                      <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
-                        {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
+                      <Text
+                        fontWeight="600"
+                        fontSize="18px"
+                        ml="1"
+                        color="red"
+                        _hover={{ color: "red" }}
+                      >
+                        {i.price.toLocaleString("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
                       </Text>
                     </Square>
                   </Flex>
@@ -94,7 +105,10 @@ const Slider = ({ type }) => {
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
+                      {i.original.toLocaleString("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                     </Text>
                   </Flex>
                   {/* <Flex>
@@ -107,8 +121,12 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px" borderRadius="5px" w="50%"  bg="#FF7C0E" mt="2" textAlign="center"
-                    
+                    padding="3px"
+                    borderRadius="5px"
+                    w="50%"
+                    bg="#FF7C0E"
+                    mt="2"
+                    textAlign="center"
                   >
                     <Text fontSize="10px" fontWeight="500" color="#eab05f">
                       GIẢM GIÁ SỐC

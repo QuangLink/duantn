@@ -17,9 +17,21 @@ const Heading = ({ heading }) => {
 
   return (
     <Flex gap="2">
-      <Center width="100%" backgroundColor="" h="60px" display="flex" justifyContent="space-between">
+      <Center
+        width="100%"
+        backgroundColor=""
+        h="60px"
+        display="flex"
+        justifyContent="space-between"
+      >
         <Box>
-          <Text fontSize="2xl" width="" fontWeight="700" textColor="black" className="headingHome">
+          <Text
+            fontSize="2xl"
+            width=""
+            fontWeight="700"
+            textColor="black"
+            className="headingHome"
+          >
             {heading}
           </Text>
         </Box>
@@ -40,9 +52,7 @@ const Heading = ({ heading }) => {
                   textColor: "#c31212",
                 }}
               >
-                <Text>
-                  Xem tất cả
-                </Text>
+                <Text>Xem tất cả</Text>
               </Button>
             </motion.div>
           </Link>

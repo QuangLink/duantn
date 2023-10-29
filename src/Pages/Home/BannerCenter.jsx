@@ -8,7 +8,6 @@ const BannerCenter = ({ type }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 800);
     };
@@ -27,22 +26,14 @@ const BannerCenter = ({ type }) => {
       <Center>
         <Box width="70%" justifyContent="center">
           {type.map((i) => (
-            <Box
-              className="bannerheader"
-              key={uuid()}
-              h="auto"
-              display="flex"
-             
-             
-             
-            >
+            <Box className="bannerheader" key={uuid()} h="auto" display="flex">
               {isMobile ? (
-                
                 <video controls autoPlay>
-                <source src={(require('./videoQuangcao/quangcao.mp4'))} type="video/mp4" />
-               
-               
-              </video>
+                  <source
+                    src={require("./videoQuangcao/quangcao.mp4")}
+                    type="video/mp4"
+                  />
+                </video>
               ) : (
                 <Image
                   src={`${i.imgbnct}`}

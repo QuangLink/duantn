@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import {
   useDisclosure,
   Accordion,
@@ -26,7 +26,7 @@ import {
 import axios from "axios";
 
 const Checkout = () => {
-  const username = Cookies.get('username');
+  const username = Cookies.get("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
   const toast = useToast();
@@ -59,7 +59,7 @@ const Checkout = () => {
   };
 
   const clearAddress = () => {
-   //function get username call to this router using axios to delete user: router.delete('/address/:username'
+    //function get username call to this router using axios to delete user: router.delete('/address/:username'
     const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
     axios
       .delete(apiUrl)
@@ -77,9 +77,8 @@ const Checkout = () => {
       .catch((error) => {
         console.error("Error deleting address:", error);
       });
-
   };
- 
+
   const handleAddressSubmit = () => {
     const newAddress = {
       username: username,
@@ -149,7 +148,9 @@ const Checkout = () => {
                 borderRadius: "5px",
               }}
             >
-              {addressData.firstname === "" && <Box>Không tìm thấy địa chỉ nào</Box>}
+              {addressData.firstname === "" && (
+                <Box>Không tìm thấy địa chỉ nào</Box>
+              )}
               {addressData.firstname !== "" && (
                 <Box
                   style={{
@@ -180,8 +181,8 @@ const Checkout = () => {
                     marginBottom="20px"
                   >
                     <Text fontStyle="italic">
-                      Địa chỉ: {addressData.flat}, {addressData.street}, {addressData.city},{" "}
-                      {addressData.state}
+                      Địa chỉ: {addressData.flat}, {addressData.street},{" "}
+                      {addressData.city}, {addressData.state}
                     </Text>
                   </Flex>
                 </Box>
