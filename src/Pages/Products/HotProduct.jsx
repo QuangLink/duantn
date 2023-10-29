@@ -29,6 +29,7 @@ const HotProduct = ({ type, heading }) => {
       textAlign="center"
       backgroundColor="#CCF1F9"
       borderRadius="5px"
+      css={{ "@media (max-width: 768px)": { display: "none" } }}
     >
       <Box>
         <a href="">
@@ -56,21 +57,21 @@ const HotProduct = ({ type, heading }) => {
               slidesPerView: 1,
               spaceBetween: 10,
             },
-            480: {
+            768: {
               slidesPerView: 2,
               spaceBetween: 10,
             },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 15,
-            },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 15,
+              slidesPerView: 3,
+              spaceBetween: 20,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 5,
+              spaceBetween: 15,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 15,
             },
           }}
         >
@@ -83,9 +84,14 @@ const HotProduct = ({ type, heading }) => {
                     m="2"
                     height="350px"
                     backgroundColor="white"
+                    borderRadius="10px"
+                    transition="transform 2s ease-in-out"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
-                    <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                    <Square
+                      m="auto"
+                      _hover={{ transform: "translateY(-10px)" }}
+                    >
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
                     <Text

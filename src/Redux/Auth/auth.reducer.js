@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import {
   LOGIN_ERROR,
   LOGIN_LOADING,
@@ -16,9 +16,12 @@ const init = {
 };
 
 // Load the initial state from the cookie (if it exists)
-const initialStateFromCookie = Cookies.get('authState'); 
+const initialStateFromCookie = Cookies.get("authState");
 
-export const Authreducer = (state = initialStateFromCookie ? JSON.parse(initialStateFromCookie) : init, { type, payload }) => {
+export const Authreducer = (
+  state = initialStateFromCookie ? JSON.parse(initialStateFromCookie) : init,
+  { type, payload },
+) => {
   switch (type) {
     case LOGIN_LOADING: {
       const newState = {
@@ -26,7 +29,7 @@ export const Authreducer = (state = initialStateFromCookie ? JSON.parse(initialS
         loading: true,
         error: false,
       };
-      Cookies.set('authState', JSON.stringify(newState)); // Save the updated state to the cookie
+      Cookies.set("authState", JSON.stringify(newState)); // Save the updated state to the cookie
       return newState;
     }
     case LOGIN_ERROR: {
@@ -35,7 +38,7 @@ export const Authreducer = (state = initialStateFromCookie ? JSON.parse(initialS
         loading: false,
         error: true,
       };
-      Cookies.set('authState', JSON.stringify(newState)); // Save the updated state to the cookie
+      Cookies.set("authState", JSON.stringify(newState)); // Save the updated state to the cookie
       return newState;
     }
     case LOGIN_SUCCESS: {
@@ -48,12 +51,12 @@ export const Authreducer = (state = initialStateFromCookie ? JSON.parse(initialS
         username: payload.username,
         email: payload.email,
       };
-      Cookies.set('authState', JSON.stringify(newState)); // Save the updated state to the cookie
+      Cookies.set("authState", JSON.stringify(newState)); // Save the updated state to the cookie
       return newState;
     }
     case LOGOUT: {
       // Remove the cookie when logging out
-      Cookies.remove('authState');
+      Cookies.remove("authState");
       return {
         ...init,
       };

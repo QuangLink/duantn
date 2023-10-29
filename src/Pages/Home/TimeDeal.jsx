@@ -80,7 +80,51 @@ const TimeDeal = ({ type, heading }) => {
               src="https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/homev2/lightning-ic.png"
             />
           </i>
-    </Box>
+
+          <Text>
+            <Text fontSize="30px" color="red">
+              {" "}
+              GIỜ VÀNG DEAL SỐC
+            </Text>
+            <Text
+              fontFamily="-moz-initial"
+              fontSize="2xl"
+              color="blackAlpha.800"
+              mt="2"
+            >
+              <i fontSize="10px">
+                {" "}
+                Kết thúc trong {thoiGianConLai.gio.toString().padStart(2, "0")}:
+                {thoiGianConLai.phut.toString().padStart(2, "0")}:
+                {thoiGianConLai.giay.toString().padStart(2, "0")}{" "}
+              </i>{" "}
+            </Text>
+          </Text>
+        </Box>
+        <Box mt="8" className="time">
+          <Text fontSize="20px">Đang diễn ra</Text>
+          <Text
+            fontFamily="-moz-initial"
+            fontSize="2xl"
+            color="blackAlpha.800"
+            mt="2"
+            borderBottom="3px solid #E6CB47"
+            borderBottomRadius="12px"
+          >
+            <i fontSize="10px"> 08:00/23:59 </i>{" "}
+          </Text>
+        </Box>
+        <Box mt="8" className="time">
+          <Text fontSize="20px">Ngày mai</Text>
+          <Text
+            fontFamily="-moz-initial"
+            fontSize="2xl"
+            color="blackAlpha.800"
+            mt="2"
+          >
+            <i fontSize="10px"> 08: 00/23:59 </i>{" "}
+          </Text>
+        </Box>
       </Heading>
 
       <Box mt="1" bachgroundColor="white" >
@@ -103,7 +147,11 @@ const TimeDeal = ({ type, heading }) => {
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 15,
+              spaceBetween: 5,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 5,
             },
           }}
         >
@@ -130,11 +178,14 @@ const TimeDeal = ({ type, heading }) => {
 
                       <Text
                         mt="2"
+                        height="70px"
+                        fontFamily="serif"
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="15px"
+                        fontSize="25px"
                         _hover={{ color: "red" }}
+                        fontWeight="700"
                       >
                         {i.name}
                       </Text>
@@ -153,7 +204,10 @@ const TimeDeal = ({ type, heading }) => {
                               color="red"
                               _hover={{ color: "red" }}
                             >
-                              {i.price} <sup>đ</sup>
+                              {i.price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
                             </Text>
                           </Square>
                         </Flex>
@@ -163,20 +217,25 @@ const TimeDeal = ({ type, heading }) => {
                           </Text>
                           {"  "}
                           <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original} <sup>đ</sup>
+                            {i.original.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
                           </Text>
                         </Flex>
 
                         <Box
-                          padding="3px"
-                          borderRadius="5px"
-                          w="50%"
-                          color="#EC4C0A"
-                          bg="#FEB373"
-                          mt="2"
-                          textAlign="center"
+                          padding="5px"
+                          borderRadius="7px"
+                          w="60%"
+                          bg="#FF7C03"
+                          mt="3"
                         >
-                          <Text fontSize="10px" fontWeight="500">
+                          <Text
+                            fontSize="15px"
+                            fontWeight="700"
+                            color="#eab05f"
+                          >
                             GIẢM GIÁ SỐC
                           </Text>
                         </Box>
@@ -235,6 +294,7 @@ const TimeDeal = ({ type, heading }) => {
 
                       <Text
                         mt="2"
+                        h="70px"
                         fontFamily="serif"
                         color="#424245"
                         noOfLines={2}
@@ -260,7 +320,10 @@ const TimeDeal = ({ type, heading }) => {
                               color="red"
                               _hover={{ color: "red" }}
                             >
-                              {i.price} <sup>đ</sup>
+                              {i.price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
                             </Text>
                           </Square>
                         </Flex>
@@ -270,7 +333,11 @@ const TimeDeal = ({ type, heading }) => {
                           </Text>
                           {"  "}
                           <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original} <sup>đ</sup>
+                            {i.original.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}{" "}
+                            <sup>đ</sup>
                           </Text>
                         </Flex>
 

@@ -9,7 +9,7 @@ import "./index.css";
 import { store } from "./Redux/store";
 import { AppContextProvider } from "./Pages/context/AppContext";
 import { PageContextProvider } from "./Pages/context/PageContext";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
