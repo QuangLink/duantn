@@ -18,16 +18,18 @@ const ItemCard2 = ({ type, heading, src }) => {
           //   lg: "none",
           //   xl: "40%",
           //   base: "none",
-          //   test
+          //   test 
           // }}
           cursor="pointer"
           pr="4"
+          
         >
          
         </Box>
         <Spacer />
         <Box
-          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%" }}
+          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%"  }}
+          
         >
           <Slider type={type} />
         </Box>

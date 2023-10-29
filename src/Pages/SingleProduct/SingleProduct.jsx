@@ -20,19 +20,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
-import {
- PrHp,
- 
-} from "../Home/CardDetails";
-import ComProduct from './ComProduct';
+import ComProduct from "./ComProduct";
+import ProductReviewForm from "./ProductReview";
+import ProductTable from "./ProductTable";
+import { PrApplePhone } from "../Home/CardDetails";
+import Cookies from 'js-cookie';
+//add singleData to cart
 const postSingleData = async (data) => {
   try {
     // Lấy userID từ sessionStorage
-    const userID = sessionStorage.getItem("userID");
+    const userID = Cookies.get('userID');
+    
+    // Ensure data.prodID is a valid value, not [object Object]
+    const prodID = data.prodID;
 
-    // Tạo dữ liệu gửi đi kết hợp với userID
+    // Tạo dữ liệu gửi đi kết hợp với userID và prodID
     const postData = {
-      ...data,
+      prodID,
       userID,
     };
 
@@ -45,6 +49,7 @@ const postSingleData = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
+
 
 export const postSingleDataWish = async (data) => {
   try {
@@ -66,19 +71,23 @@ export const postSingleDataWish = async (data) => {
 
 const SingleProduct = (props) => {
   const { typeOfProduct } = props;
+
   const params = useParams();
   const toast = useToast();
-  const navigate = useNavigate();
+
+  // const [singleData, setSingleData] = useState({});
+
+  var navigate = useNavigate();
 
   const singleData = useSelector((store) => store.singleProduct.data);
+  // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-
   const handlePost = (prodID) => {
     postSingleData({ prodID }).then((res) => navigate("/cart"));
-  };
+  };  
 
   const handleWish = (data) => {
     let newData = {};
@@ -99,6 +108,7 @@ const SingleProduct = (props) => {
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
   }, [typeOfProduct, params.id]);
+
   if (error) {
     return (
       <Heading
@@ -145,12 +155,12 @@ const SingleProduct = (props) => {
           </Box>
 
           <Grid
-            h={["1500px", "1100px", "900px"]}
-            templateRows={[
-              "repeat(8, 1fr)",
-              "repeat(8, 1fr)",
-              "repeat(8, 1fr)",
-            ]}
+            h={["1500px", "1100px", "auto"]}
+            // templateRows={[
+            //   "repeat(8, 1fr)",
+            //   "repeat(8, 1fr)",
+            //   "repeat(10, 1fr)",
+            // ]}
             templateColumns={[
               "repeat(4, 1fr)",
               "repeat(6, 1fr)",
@@ -170,7 +180,8 @@ const SingleProduct = (props) => {
             >
               <Image
                 textAlign="center"
-                width="85%"
+                width="600px"
+                height="600px"
                 justifyContent="center"
                 src={singleData.prodImg}
                 _hover={{ cursor: "crosshair" }}
@@ -223,15 +234,15 @@ const SingleProduct = (props) => {
                   360 VieON VTVcab ON YouTube YouTube Kids{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
                 </ListItem>
-                {/* <ListItem>
-                  Công nghệ hình ảnh:Active HDRChế độ game HGiG
-                  Chế độ hình ảnh phù hợp nội dung
-                  Dải màu rộng Nano Color
-                  Giảm độ trễ chơi game Auto Low Latency Mode (ALLM)HDR Dynamic Tone MappingHDR10
-                  ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải 4K AI Upscaling
-                  Tương thích bộ mã hóa Video decoder (VP9, AV1)Tương thích HEVC{" "}
+                <ListItem>
+                  Công nghệ hình ảnh:Active HDRChế độ game HGiG Chế độ hình ảnh
+                  phù hợp nội dung Dải màu rộng Nano Color Giảm độ trễ chơi game
+                  Auto Low Latency Mode (ALLM)HDR Dynamic Tone MappingHDR10
+                  ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải
+                  4K AI Upscaling Tương thích bộ mã hóa Video decoder (VP9,
+                  AV1)Tương thích HEVC{" "}
                   <span style={{ color: "#2871c4" }}>Read T&C</span>
-                </ListItem> */}
+                </ListItem>
               </UnorderedList>
               <Heading size="sm" marginBottom={3}>
                 Thông tin sản phẩm (1){" "}
@@ -259,138 +270,193 @@ const SingleProduct = (props) => {
                   </span>
                 </ListItem>
               </UnorderedList>
-            </GridItem>
-            <GridItem
-              colSpan={[4, 3, 4]}
-              rowSpan={[9, 7]}
-              p={7}
-              mt="5%"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
-              }}
-            >
-              <Heading size="md" marginBottom={5}>
-                {singleData.prodName}
-              </Heading>
-              <Heading size="lg" marginBottom={5} color="red">
-                {singleData.prodPrice} đ
-              </Heading>
-              {singleData.prodSale !== 0 && (
-                <>
-                  <Text fontSize="lg" marginBottom={3}>
-                    Giá gốc: {singleData.prodPriceSale} đ
-                    <span style={{ textDecoration: "line-through" }}></span>
-                    <span style={{ fontSize: "12px", padding: "20px" }}>
-                      (Bao gồm tất cả các loại thuế)
-                    </span>
-                  </Text>
-                  <Text
-                    fontSize="sm"
-                    color="#eb5757"
-                    style={{ fontWeight: "bold" }}
-                    marginBottom={3}
+              {/* <Grid
+                p="15px"
+                gridTemplateColumns={"repeat(2,1fr)"}
+                gap="20px"
+                justifyContent="space-around"
+                alignContent={"center"}
+                textAlign="center"
+                color="black">
+                <Box>
+                  <Box>
+                    <div>
+                      <i className="icondetail-doimoi"></i>
+                    </div>
+                    <p>
+                      Hư gì đổi nấy <b>12 tháng</b>  tại 3353 siêu thị toàn quốc (miễn phí tháng đầu) <a href="https://www.thegioididong.com/chinh-sach-bao-hanh-san-pham"></a>
+                      <a href="javascript:void(0)" onclick="showPopupPolicy()" title="Chính sách đổi trả">
+                        Xem chi tiết
+                      </a>
+                    </p>
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+
                   >
-                    Giảm tới: {singleData.prodSale}%
-                  </Text>
-                </>
-              )}
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    _hover={{
+                      // textDecoration: "underline",
 
-              <Text
-                fontSize="sm"
-                style={{ fontWeight: "bold" }}
-                marginBottom={3}
+                      cursor: "pointer",
+                    }}
+                    p={2}
+                    border="1px solid #e0e0e0"
+                  >
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    _hover={{
+                      // textDecoration: "underline",
+
+                      cursor: "pointer",
+                    }}
+                    p={2}
+                    border="1px solid #e0e0e0"
+                  >
+                  </Box>
+                </Box>
+
+              </Grid> */}
+              <ProductReviewForm />
+            </GridItem>
+            <GridItem colSpan={[4, 3, 4]} rowSpan={[9, 7]}>
+              <Box
+                p={7}
+                mt="5%"
+                borderRadius="10px"
+                style={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+                }}
               >
-                Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
-                <span style={{ color: "#2871c4" }}>Xem thêm</span>
-              </Text>
-
-              <Text
-                fontSize="lg"
-                style={{ fontWeight: "bold" }}
-                marginBottom={3}
-              >
-                Miễn phí vận chuyển!
-              </Text>
-              <Input
-                w="70%"
-                borderRadius="none"
-                placeholder="Enter / Mã giảm giá"
-                p={2}
-                marginBottom={3}
-              ></Input>
-
-              <Flex w="full" justifyContent="space-between">
-                <Button
-                  w="49%"
-                  color="white"
-                  bg="red"
-                  borderRadius="10px"
-                  fontSize="lg"
-                  p={6}
-                  _hover={{ bg: "blue.800" }}
-                  onClick={() => handlePost(singleData.prodID)}
-                >
-                  Mua ngay
-                </Button>
-                <Button
-                  w="49%"
-                  color="white"
-                  bg="orangered"
-                  borderRadius="10px"
-                  fontSize="lg"
-                  p={6}
-                  _hover={{ backgroundColor: "orangered" }}
-                  onClick={() => handleWish(singleData)}
-                >
-                  Thêm vào yêu thích
-                </Button>
-              </Flex>
-              <Box m="5% 0%" border="solid #f7e9f7 2px" borderRadius="5px">
-                <Heading
-                  display="inline-block"
-                  position="relative"
-                  padding="0 2.5rem 0"
-                  margin="0 auto"
-                  fontSize="1.3rem"
-                >
-                  Các khuyến mãi khác
+                <Heading size="md" marginBottom={5}>
+                  {singleData.prodName}
                 </Heading>
-                <Text margin="2%">
-                  .
-                  <span style={{ padding: "5%" }}>
-                    Giảm giá khi mua trong giờ phát sóng live tream
-                  </span>{" "}
-                  <br />.
-                  <span style={{ padding: "5%" }}>
-                    Dùng thử 30 ngày, đổi máy không cần lý do
-                  </span>{" "}
-                  <br />.
-                  <span style={{ padding: "5%" }}>
-                    Bảo hành thân máy 12 tháng
-                  </span>{" "}
-                  <br />.
-                  <span style={{ padding: "5%" }}>
-                    Giảm 200k - 300k cho Học Sinh/ Sinh Viên/ Giáo Viên
-                  </span>{" "}
-                  <br />.
-                  <span style={{ padding: "5%" }}>
-                    Giao hàng toàn quốc (miễn phí nội thành HCM)
-                  </span>{" "}
-                  <br />.
-                  <span style={{ padding: "5%" }}>
-                    Mã giảm 100.000đ áp dụng đơn hàng từ 500.000đ
-                  </span>{" "}
+                <Heading size="lg" marginBottom={5} color="red">
+                  {singleData.prodPrice} đ
+                </Heading>
+                {singleData.prodSale !== 0 && (
+                  <>
+                    <Text fontSize="lg" marginBottom={3}>
+                      Giá gốc: {singleData.prodPriceSale} đ
+                      <span style={{ textDecoration: "line-through" }}></span>
+                      <span style={{ fontSize: "12px", padding: "20px" }}>
+                        (Bao gồm tất cả các loại thuế)
+                      </span>
+                    </Text>
+                    <Text
+                      fontSize="sm"
+                      color="#eb5757"
+                      style={{ fontWeight: "bold" }}
+                      marginBottom={3}
+                    >
+                      Giảm tới: {singleData.prodSale}%
+                    </Text>
+                  </>
+                )}
+
+                <Text
+                  fontSize="sm"
+                  style={{ fontWeight: "bold" }}
+                  marginBottom={3}
+                >
+                  Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
+                  <span style={{ color: "#2871c4" }}>Xem thêm</span>
                 </Text>
+
+                <Text
+                  fontSize="lg"
+                  style={{ fontWeight: "bold" }}
+                  marginBottom={3}
+                >
+                  Miễn phí vận chuyển!
+                </Text>
+                <Input
+                  w="70%"
+                  borderRadius="none"
+                  placeholder="Enter / Mã giảm giá"
+                  p={2}
+                  marginBottom={3}
+                ></Input>
+                <Flex w="full" justifyContent="space-between">
+                  <Button
+                    w="49%"
+                    color="white"
+                    bg="red"
+                    borderRadius="10px"
+                    fontSize="lg"
+                    p={6}
+                    _hover={{ bg: "blue.800" }}
+                    onClick={() => handlePost(singleData.prodID)}
+                  >
+                    Thêm vào giỏ hàng
+                  </Button>
+                  <Button
+                    w="49%"
+                    color="white"
+                    bg="orangered"
+                    borderRadius="10px"
+                    fontSize="lg"
+                    p={6}
+                    _hover={{ backgroundColor: "orangered" }}
+                    onClick={() => handleWish(singleData.prodID)}
+                  >
+                    Mua ngay
+                  </Button>
+                </Flex>
+                <Box m="5% 0%" border="solid #f7e9f7 2px" borderRadius="5px">
+                  <Heading
+                    display="inline-block"
+                    position="relative"
+                    padding="0 2.5rem 0"
+                    margin="0 auto"
+                    fontSize="1.3rem"
+                  >
+                    Các khuyến mãi khác
+                  </Heading>
+                  <Text margin="2%">
+                    .
+                    <span style={{ padding: "5%" }}>
+                      Giảm giá khi mua trong giờ phát sóng live tream
+                    </span>{" "}
+                    <br />.
+                    <span style={{ padding: "5%" }}>
+                      Dùng thử 30 ngày, đổi máy không cần lý do
+                    </span>{" "}
+                    <br />.
+                    <span style={{ padding: "5%" }}>
+                      Bảo hành thân máy 12 tháng
+                    </span>{" "}
+                    <br />.
+                    <span style={{ padding: "5%" }}>
+                      Giảm 200k - 300k cho Học Sinh/ Sinh Viên/ Giáo Viên
+                    </span>{" "}
+                    <br />.
+                    <span style={{ padding: "5%" }}>
+                      Giao hàng toàn quốc (miễn phí nội thành HCM)
+                    </span>{" "}
+                    <br />.
+                    <span style={{ padding: "5%" }}>
+                      Mã giảm 100.000đ áp dụng đơn hàng từ 500.000đ
+                    </span>{" "}
+                  </Text>
+                </Box>
+              </Box>
+              <Box mt={5}>
+                <ProductTable />
               </Box>
             </GridItem>
-            {/* <button onClick={() => handleDelete(singleData.id)}>delete</button> */}
           </Grid>
           <Box m="5%">
             <br />
-            <hr
-            />
-            <RelateProduct type={PrHp} />
+            <hr />
+            <RelateProduct type={PrApplePhone} />
             <ComProduct />
           </Box>
         </Box>

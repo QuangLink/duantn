@@ -226,19 +226,12 @@ const CartItem = ({
           >
             {name}
           </Heading>
-          <Heading
-            fontSize="14px"
-            color={"rgb(102, 102, 102)"}
-            fontWeight="600"
-            lineHeight={"1.1"}
-          >
-            {Date.now()}
-          </Heading>
+
           <Flex>
             <FcPlus />
             <Heading fontSize="12px" color={"red"}>
-              Dịch vụ/Gói bảo hành thiết bị điện tử được khuyến nghị mua cho sản
-              phẩm điện tử
+              Dịch vụ/Gói bảo hành thiết bị điện tử được áp dụng cho sản phẩm
+              này
             </Heading>
           </Flex>
         </Flex>
@@ -256,7 +249,10 @@ const CartItem = ({
           fontWeight="500"
         >
           <Heading fontSize="18px" color={"rgb(0, 0, 0)"}>
-            {price}
+            {price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
           </Heading>
           <Heading
             fontSize="14px"

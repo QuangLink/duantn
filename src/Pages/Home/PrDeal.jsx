@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
-import "./stylehome.css";
+import './stylehome.css';
 const PrDeal = ({ type }) => {
   return (
     <Box justifyContent="center" w="70%" m="auto" mb="5" cursor="pointer" textAlign="center" backgroundColor="#1078ff"  borderRadius="15px">
@@ -23,7 +23,7 @@ const PrDeal = ({ type }) => {
                         </Box>
       </Heading>
       <Swiper>
-                   <Box    h="200px" m="1" className="bannerPr">
+                   <Box    h="200px" m="1">
                       <Image src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg" w="99%" h="200px" m="1"
                    borderRadius="15px"
                           />
@@ -56,10 +56,10 @@ const PrDeal = ({ type }) => {
               spaceBetween: 10,
             },
           }}
-        >
+      >
           {type.map((i) => (
-            <Box key={uuid()}>
-              <SwiperSlide>
+            <Box key={uuid()}  >         
+              <SwiperSlide  >
                 <Link to={i.linked}>
                   
                   <Box className="list" p="2"  mt="4" ml="1" mr="1" mb ="5" backgroundColor="white"  borderRadius="15px "boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset" w="" h="auto"  >
@@ -69,7 +69,7 @@ const PrDeal = ({ type }) => {
                   </Square>
                   <Text
                   mt="2"
-                  h="70px"
+                  
                       fontFamily="serif"
                       color="#424245"
                       noOfLines={2}
@@ -92,7 +92,7 @@ const PrDeal = ({ type }) => {
                         </Square>
                         <Square>
                           <Text fontWeight="650" fontSize="18px" ml="1" color="red"  _hover={{ color: "red" }}>
-                            {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
+                            {i.price}  <sup>đ</sup>
                           </Text>
                         </Square>
                       </Flex>
@@ -102,7 +102,7 @@ const PrDeal = ({ type }) => {
                         </Text>
                         {"  "}
                         <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                           {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
+                           {i.original} <sup>đ</sup>
                         </Text>
                       </Flex>                
                       <Box
@@ -128,7 +128,10 @@ const PrDeal = ({ type }) => {
             </Box>
           ))}
         </Swiper>
+
+
       </Box>
+
     </Box>
   );
 };

@@ -41,7 +41,7 @@ const HotProduct = ({ type, heading }) => {
             h="60px"
             p={2}
           >
-            Các sản phẩm hot nhật tuần qua{" "}
+            Các sản phẩm hot nhất tuần qua{" "}
           </Text>
         </a>
       </Box>
