@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Flex, Text, Image, Square } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Square,  Badge,
+
+
+  Heading,
+
+
+  useToast, } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
+
 
 const Slider = ({ type }) => {
   return (
@@ -24,7 +31,7 @@ const Slider = ({ type }) => {
           spaceBetween: 10,
         },
         768: {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 15,
         },
         1024: {
@@ -38,20 +45,25 @@ const Slider = ({ type }) => {
       }}
     >
       {type.map((i) => (
-        <Box key={uuid()} >
+        <Box key={uuid()}>
           <SwiperSlide>
             <Link to={i.linked}>
-              
-              <Box p="2" mt="4"  borderRadius="15px" boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
-              <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                <Image
-                  src={`${i.img}`}
-                  alt={i.name}
-                  boxSize={{ base: "160px" }}
-                />
-              </Square>
+              <Box
+                p="2"
+                mt="4"
+                borderRadius="15px"
+                boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+              >
+                <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                  <Image
+                    src={`${i.img}`}
+                    alt={i.name}
+                    boxSize={{ base: "160px" }}
+                  />
+                </Square>
                 <Text
                 mt="2"
+                h="70px"
                 fontFamily="serif"
                   color="gray.800"
                   noOfLines={2}
@@ -72,17 +84,17 @@ const Slider = ({ type }) => {
                     </Square>
                     <Square>
                       <Text fontWeight="600" fontSize="18px" ml="1" color="red" _hover={{ color: "red" }}>
-                        {i.price} <sup>đ</sup>
+                        {i.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                       </Text>
                     </Square>
                   </Flex>
                   <Flex>
-                    <Text color="gray.600" fontSize="14px"  >
-                      Giá gốc:{" "} 
+                    <Text color="gray.600" fontSize="14px">
+                      Giá gốc:{" "}
                     </Text>
                     {"  "}
                     <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                      {i.original} <sup>đ</sup>
+                      {i.original.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })} 
                     </Text>
                   </Flex>
                   {/* <Flex>
@@ -95,11 +107,11 @@ const Slider = ({ type }) => {
                     </Text>
                   </Flex> */}
                   <Box
-                        padding="3px" borderRadius="5px" w="50%" color="#EC4C0A" bg="#FEB373" mt="2" textAlign="center"
+                        padding="3px" borderRadius="5px" w="50%"  bg="#FF7C0E" mt="2" textAlign="center"
                     
                   >
-                    <Text fontSize="10px" fontWeight="500">
-                      GIẢM GIÁ SỐC 
+                    <Text fontSize="10px" fontWeight="500" color="#eab05f">
+                      GIẢM GIÁ SỐC
                     </Text>
                   </Box>
                 </Box>

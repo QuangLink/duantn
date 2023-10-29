@@ -9,7 +9,7 @@ const ItemCard7 = ({ type, heading, src }) => {
       <Heading heading={heading} />
       <Flex mt="7" m="center">
         <Box
-          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%"  }}
+          w={{ sm: "100%", md: "100%", lg: "100%", xl: "100%", base: "100%" }}
           m="center"
         >
           <Slider type={type} />

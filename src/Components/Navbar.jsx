@@ -23,10 +23,10 @@ import {
   useMediaQuery,
   useToast
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
-import { BsCart2, BsFillPersonFill, BsPhone, BsSmartwatch } from "react-icons/bs";
+import { BsCart2, BsFillPersonFill, BsPhone, BsSmartwatch, BsLaptop } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -48,12 +48,12 @@ function Navbar() {
   const toast = useToast();
   const [isFocused, setIsFocused] = useState(false);
   const [results, setResults] = useState([]);
-  const [isSearchVisible, setIsSearchVisible] = useState(true);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isBoxVisible, setIsBoxVisible] = useState(true);
   const [isMenuFixed, setIsMenuFixed] = useState(false);
   const [direction, setDirection] = useState('')
-  const [apiResponse, setapiResponse] = useState("");
   const scroll = useScrollListener()
+  const searchRef = useRef(null);
   const navbar = {
     active: {
       visibility: "visible",
@@ -66,6 +66,24 @@ function Navbar() {
       transform: "translateY(-100%)"
     }
   }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setIsSearchVisible(false);
+    }
+  };
+
+
+
+
   useEffect(() => {
     console.log("scroll.lastY scroll.y - scroll.lastY", scroll.y, scroll.lastY, scroll.y - scroll.lastY)
     if (scroll.y > 100 && (scroll.y - scroll.lastY) > 0) {
@@ -79,20 +97,6 @@ function Navbar() {
 
   },
     [scroll.y, scroll.lastY]);
-
-  useEffect(() => {
-    callAPI()
-  }, [])
-
-  const callAPI = () => {
-    fetch("https://duantn-backend.onrender.com")
-
-      .then(res => {
-        setapiResponse(res)
-      });
-  }
-
-
 
 
   useEffect(() => {
@@ -144,16 +148,18 @@ function Navbar() {
   };
   const handleProductClick = () => {
     setInput("");
-    setIsSearchVisible(false);
+    // setIsSearchVisible(false);
   };
   const handleChange = (event) => {
     const inputValue = event.target.value;
-    setIsSearchVisible(true);
+
     setInput(inputValue);
     if (inputValue === '') {
       setResults([]);
+      setIsSearchVisible(true);
     } else {
       fetchData(inputValue);
+
     }
   }
   const handleLogout = () => {
@@ -180,7 +186,7 @@ function Navbar() {
       return (
         <>
           {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="744px" height="auto" position={'absolute'} marginTop={5} borderRadius={15}
-            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef} ref={searchRef}
 
           >
             <Box overflowY={"scroll"} h={450}>
@@ -218,8 +224,8 @@ function Navbar() {
     } else {
       return (
         <>
-          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15} overflowY={"scroll"} h={400}
-            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}
+          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="90%" height="auto" position={'fixed'} marginTop={500} borderRadius={15} overflowY={"scroll"} h={400}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef} ref={searchRef}
           >
             {results.slice(0, 5).map((results, id) => {
               return (
@@ -254,11 +260,12 @@ function Navbar() {
     } else {
       return (
         <>
-          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="70%" height="auto" position={'fixed'} marginTop={5} borderRadius={15} overflowY={"scroll"} h={400}
+          {isSearchVisible && isBoxVisible && <Box bg={'#fff'} width="95%" height="auto" position={'fixed'} marginTop={500} borderRadius={15} overflowY={"scroll"} h={400}
+            isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef} ref={searchRef}
           >
             {results.slice(0, 5).map((results, id) => {
               return (
-                <Link to={`/proudtc/${results.prodID}`} onClick={handleProductClick} >
+                <Link to={`/${results.prodType}/${results.prodID}`} onClick={handleProductClick} >
                   <Flex key={id} direction="row" align="flex-start" borderBottom={'1px solid #555'} justifyContent={'flex-start'} _hover={{ bg: '#9ecdf2' }}>
                     <Box mb={6} margin={5} marginRight={10}>
                       <Image src={results.prodImg} w={70} h={50} alt="Memory Card" />
@@ -287,7 +294,7 @@ function Navbar() {
     return (
 
       <Box backgroundColor='#4a90e2' position={'relative'} zIndex={2}>
-        <Flex w="100%" alignItems="center" m="auto" justifyContent="space-around">
+        <Flex w="100%" alignItems="center" m="auto" justifyContent="center" >
           <Box><Image src={(require('../Components/Images/1200-44-1200x44-5.webp'))} /></Box>
         </Flex>
         <Flex className="flex-container" px="15%">
@@ -309,7 +316,7 @@ function Navbar() {
               />
               <BiSearch color="#555" fontSize={"28px"} />
             </Flex>
-            <Closesearch />
+            <Closesearch ref={searchRef} />
           </Box>
           {
             !isAuth ? (
@@ -563,7 +570,7 @@ function Navbar() {
       <Flex
         zIndex={2}
         className="flex-container"
-        px='10%' bg='#4a90e2'
+        px='5%' bg='#4a90e2'
         justifyContent="space-between"
         style={direction === 'up' ? navbar.active : navbar.hidden}
       >
@@ -573,7 +580,7 @@ function Navbar() {
           </Box >
         </Link >
         <Box>
-          <Flex bg="white" borderRadius={"5px"} w="250px" h={10} p="5px" m="auto" textAlign={"center"}
+          <Flex bg="white" borderRadius={"5px"} w="330px" h={10} p="5px" m="auto" textAlign={"center"}
             className={`input-bar-talest ${isFocused ? 'focused' : ''}`}
           >
             <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
@@ -583,8 +590,8 @@ function Navbar() {
             />
             <BiSearch color="#555" fontSize={"28px"} />
           </Flex>
-          <Closesearch1 />
         </Box>
+        <Closesearch1 />
         <Link to="/cart">
           <Flex cursor={"pointer"} borderRadius={10} _hover={{ bg: "#0077ff" }}
             className={`header-bar ${isFocused ? 'focused' : ''}`}
@@ -632,43 +639,58 @@ function Navbar() {
           <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}        >
             <DrawerOverlay />
             <DrawerContent bg="#FFFFFF" color="#55555" w={100}>
-              <DrawerCloseButton />
+              <DrawerCloseButton fontSize={20} margin={5} />
               <DrawerBody>
-                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="25px" m="auto" p="auto" paddingLeft={10} paddingTop={10}  >
-                  <Link to="mobilesandtablets">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }} >
-                      Điện thoại
-                      <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }} />
-                    </Heading>
-                  </Link>
-                  <Link to="phone">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }}  >
-                      Laptop
-                    </Heading>
-                  </Link>
-                  <Link to="laptop">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }} > Tablet  </Heading>
-                  </Link>
-                  <Link to="tablet">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }}  >
-                      Phụ kiện
-                    </Heading>
-                  </Link>
-                  <Link to="kitchen">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }}          >
-                      Smartwatch
-                    </Heading>
-                  </Link>
-                  <Link to="personalcare">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }}  >
-                      Đồng hồ
-                    </Heading>
-                  </Link>
-                  <Link to="accessories">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" _hover={{ color: "#55555" }}  >
-                      Mua máy cũ giá rẻ
-                    </Heading>
-                  </Link>
+                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="25px" m="auto" p="auto" paddingLeft={10} paddingTop={20}  >
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="Phone">
+                      <Heading w={'200px'} alignItems='center' marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Điện thoại
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="Laptop">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Laptop
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="Tablets">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Tablet
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="headphones">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Phụ kiện
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="computers">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Smartwatch
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="kitchen" alignItems='center'>
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Đồng hồ
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="personalcare">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Máy cũ giá rẻ
+                      </Heading>
+                    </Link>
+                  </Box>
                 </VStack>
               </DrawerBody>
             </DrawerContent>
@@ -678,112 +700,118 @@ function Navbar() {
     );
   } else if (islesserThan740px) {
     return (
-      <Flex className="flex-container" px='10%' bg='#4a90e2' justifyContent="flex-start"
+      <Flex className="flex-container" gap={0} px='0%' bg='#4a90e2' justifyContent="center"
+        h={20}
         zIndex={2}
         style={direction === 'up' ? navbar.active : navbar.hidden}
+
       >
-        <Link to="/">
-          <Box>
+        <Link to="/" className={`header-bar ${isFocused ? 'focused' : ''}`}>
+          <Box marginLeft={0}>
             <Image src={require('./Images/logo.jpg')} alt="logo" w="120px" h="70px" />
           </Box>
         </Link>
-        <Box >
-          <Flex bg="white" borderRadius={"5px"} w="270px" h={10} p="5px" m="auto" textAlign={"center"} >
+        <Box paddingLeft={2} >
+          <Flex bg="white" borderRadius={"5px"} w="auto" h={10} p="5px" m="auto"
+            textAlign={"center"}
+            className={`input-bar-mobie ${isFocused ? 'focused' : ''}`}
+          >
             <Input border={"none"} fontSize={"14px"} borderRadius={"2px"} placeholder="Bạn tìm gì..." h={7} value={input}
               onChange={handleChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
 
             />
             <BiSearch color="#555" fontSize={"28px"} />
           </Flex>
-          <Closesearch2 />
+
         </Box>
-        <Box mx="20px">
-          <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}>
-            <GiHamburgerMenu fontSize={"55px"} />
+        <Closesearch2 />
+        <Box mx="20px" className={`header-bar ${isFocused ? 'focused' : ''}`}>
+          <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}
+
+          >
+            <GiHamburgerMenu fontSize={"50px"} />
           </Box>
           <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef} >
             <DrawerOverlay />
             <DrawerContent bg="#FFFFFF" color="#55555" justifyContent={'flex-end'}>
-              <DrawerCloseButton />
+              <DrawerCloseButton fontSize={20} margin={5} />
               <DrawerBody>
-                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="25px" m="auto" p="auto" paddingLeft={10} paddingTop={10}   >
+                <VStack justifyContent={"space-around"} alignItems="flex-start" gap="5px" m="auto" p="auto" paddingLeft={10} paddingTop={10}   >
                   {isAuth ? (
-                    <Link to="profile">
-                      <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
-                        Hi {username}
-                      </Heading>
-                    </Link>
+                    <Box borderBottom={'1px solid #555'}>
+                      <Link to="profile" >
+                        <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
+                          Hi {username}
+                        </Heading>
+                      </Link>
+                    </Box>
                   ) : (
-                    <Link to="profile">
-                      <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
-                        Đăng nhập
-                      </Heading>
-                    </Link>
+                    <Box borderBottom={'1px solid #555'}>
+                      <Link to="profile">
+                        <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555" mt="35px" >
+                          Đăng nhập
+                        </Heading>
+                      </Link>
+                    </Box>
                   )}
-
-                  {/* {!isAuth ? (
-                    <Link to="/login">
-                      <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555"  >
-                        Login
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="/cart">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555"  >
+                        Giỏ hàng
                       </Heading>
                     </Link>
-                  ) : (
-                    <Link to="/login">
-                      <Heading cursor={"pointer"} fontSize={"24px"} fontWeight="bold" color="#55555"
-                        onClick={handleLogout}
-                      >
-                        Logout
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="mobilesandtablets">
+                      <Heading w={'200px'} alignItems='center' marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Điện thoại
                       </Heading>
                     </Link>
-                  )} */}
-
-                  <Link to="/cart">
-                    <Heading cursor={"pointer"} fontSize={"17px"} fontWeight="bold" color="#55555"  >
-                      Giỏ hàng
-                    </Heading>
-                  </Link>
-                  {/* 
-                  <DrawerHeader color="black" fontSize={"22px"} fontWeight="bold">
-                    <Divider color={"black"} />
-                    Product Category
-                    <Divider color={"black"} />
-                  </DrawerHeader> */}
-
-                  <Link to="mobilesandtablets">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555"   >
-                      Điện thoại
-                    </Heading>
-                  </Link>
-                  <Link to="televisions">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555"   >
-                      Laptop
-                    </Heading>
-                  </Link>
-                  <Link to="homeappliances">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555"   >
-                      Tablet
-                    </Heading>
-                  </Link>
-                  <Link to="headphones">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" >
-                      Phụ kiện
-                    </Heading>
-                  </Link>
-                  <Link to="computers">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" >
-                      Smartwatch
-                    </Heading>
-                  </Link>
-                  <Link to="kitchen">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" >
-                      Đồng hồ
-                    </Heading>
-                  </Link>
-                  <Link to="personalcare">
-                    <Heading cursor={"pointer"} fontSize={"17px"} color="#55555" >
-                      Máy cũ giá rẻ
-                    </Heading>
-                  </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="televisions">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Laptop
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="homeappliances">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555"   >
+                        Tablet
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="headphones">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Phụ kiện
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="computers">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Smartwatch
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="kitchen" alignItems='center'>
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Đồng hồ
+                      </Heading>
+                    </Link>
+                  </Box>
+                  <Box borderBottom={'1px solid #555'}>
+                    <Link to="personalcare">
+                      <Heading w={'200px'} marginBottom={5} cursor={"pointer"} fontSize={"17px"} color="#55555" >
+                        Máy cũ giá rẻ
+                      </Heading>
+                    </Link>
+                  </Box>
                 </VStack>
               </DrawerBody>
             </DrawerContent>

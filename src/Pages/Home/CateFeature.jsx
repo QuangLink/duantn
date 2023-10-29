@@ -6,61 +6,53 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
-const CateFeature = ({ type, }) => {
+const CateFeature = ({ type }) => {
+  const rows = [];
+  for (let i = 0; i < 2; i++) {
+    const row = [];
+    for (let j = i * 4; j < i * 4 + 4 && j < type.length; j++) {
+      row.push(
+        <td key={j} style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <img src={type[j].imgcatehot} alt={type[j].name} style={{ width: "60px", height: "60px", marginBottom: "10px" }} />
+            <p style={{ marginTop: "0", wordWrap: "break-word" }}>{type[j].name}</p>
+          </div>
+        </td>
+      );
+    }
+    rows.push(<tr key={i}>{row}</tr>);
+  }
   return (
-    <Box >
-        <Heading fontSize="3xl" display="flex" justifyContent="center" textAlign="center"   textColor="black" mt="2%">DANH MỤC NỔI BẬT  </Heading>
+    <Box className="cateFuture">
+      <Heading
+        fontSize="3xl"
+        display="flex"
+        justifyContent="center"
+        textAlign="center"
+        textColor="black"
+        mt="2%"
+      >
+        Danh mục nổi bật
+      </Heading>
 
-    <Box justifyContent="center" w="70%" m="auto" mt="6" cursor="pointer" textAlign="center" display="flex" flexWrap="wrap" textSizeAdjust="auto"  >
-
-      
-      {type.map((i) => (
-            <Box key={uuid()} >
-             
-                   
-                             <Link to="/computers">
-                                    <Box m="auto" _hover={{ transform: "scale(1.1)" }} w="200px"  display="block">
-                                    
-                                     <Grid
-                                      h={["auto", "0", "auto"]}
-                                        templateRows={[
-                                        "repeat(2, 1fr)",
-                                        "repeat(2, 1fr)",
-                                        "repeat(2, 1fr)",
-                                      ]}
-                                      templateColumns={[
-                                        "repeat(4, 1fr)",
-                                        "repeat(6, 1fr)",
-                                        "repeat(6, 1fr)",
-                                      ]}
-                                    >
-                                      <GridItem
-                                        rowSpan={[1, 2, 2]}
-                                        colSpan={[6, 6, 4]}
-                                        m="0 0 0 18%"
-                                        p=" 2% 8% "
-                                        justifyContent="center"
-                                        alignitem="center"
-                                        style={{
-                                          border: "none",
-                                        }}
-                                 >
-                              <Image src={`${i.imgcatehot}`}  w="60px" h="60px"     m="auto"  />
-                              <Text> {i.name}</Text> 
-            </GridItem>
-            </Grid>
-                                    </Box>
-                     </Link>
-                    </Box>
-                
-
-
-
-         
-          ))}
-
+      <Box
+        justifyContent="center"
+        w="70%"
+        m="auto"
+        mt="6"
+        cursor="pointer"
+        textAlign="center"
+        display="flex"
+        flexWrap="wrap"
+        textSizeAdjust="auto"
+      >
+        <table>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
       </Box>
-      </Box>
+    </Box>
   );
 };
 
