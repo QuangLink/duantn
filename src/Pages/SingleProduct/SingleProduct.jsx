@@ -25,6 +25,7 @@ import ComProduct from "./ComProduct";
 import ProductReviewForm from "./ProductReview";
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
+import RatingBar from "../Products/RatingBar";
 import Cookies from "js-cookie";
 //add singleData to cart
 const postSingleData = async (data) => {
@@ -141,6 +142,7 @@ const SingleProduct = (props) => {
               Article ID: {singleData.prodID}
             </Text>
             <Heading size="md" marginBottom={5}>
+       
               {singleData.prodName}
             </Heading>
             <hr />

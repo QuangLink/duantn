@@ -28,7 +28,7 @@ import HotProduct from "./HotProduct";
 import { PrHp } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
-
+import RatingBar from "./RatingBar";
 const getData = async (typeOfProduct, brandOfProduct) => {
   let response = await axios.get(
     `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
@@ -141,8 +141,9 @@ const Products = ({ typeOfProduct }) => {
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
                   cursor: "pointer",
                 }}
-                >
+                >     
                 <Product data={elem} typeOfProduct={typeOfProduct} />
+                
               </GridItem>
             );
           })}

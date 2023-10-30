@@ -82,7 +82,7 @@ const ComProduct = () => {
                     <Text
                         padding={2}
                     >
-                        <p>Sản phẩm như c</p>
+                        <p></p>
                     </Text>
                     <Flex justifyContent="end">
                         <a href="">Thích</a>

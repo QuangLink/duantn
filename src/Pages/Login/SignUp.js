@@ -50,7 +50,7 @@ function SignUpForm() {
 
         const response = await axios.post(
           "http://localhost:9000/users/register",
-          payload
+          payload,
         );
 
         if (response.data && response.data.error) {
@@ -64,16 +64,16 @@ function SignUpForm() {
         } else {
           toast({
             title: "Tạo tài khoản thành công",
-            description: "Chào mừng đến với JaguarStore, bạn đã có thể đăng nhập",
+            description:
+              "Chào mừng đến với JaguarStore, bạn đã có thể đăng nhập",
             status: "success",
             duration: 2000,
             isClosable: true,
           });
 
-          // Đặt lại form sau khi đăng ký thành công
-          setUserName(""); // Đặt lại username thành chuỗi rỗng
-          setEmail(""); // Đặt lại email thành chuỗi rỗng
-          setPassword(""); // Đặt lại password thành chuỗi rỗng
+          setUserName("");
+          setEmail("");
+          setPassword("");
 
           setTimeout(() => {
             navigate("/login");
