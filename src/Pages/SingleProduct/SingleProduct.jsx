@@ -22,7 +22,7 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import ProductReviewForm from "./ProductReview";
+
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
 import RatingBar from "../Products/RatingBar";
@@ -262,11 +262,7 @@ const SingleProduct = (props) => {
                     </ListItem>
                   </UnorderedList>
                 </Box>
-                <Box className="box-danhgia"
-                  css={{ "@media (max-width: 768px)": { display: "none" } }}
-                >
-                  <ProductReviewForm />
-                </Box>
+               
               </GridItem>
               <GridItem colSpan={[4, 3, 4]} rowSpan={[9, 7]} className="thanhtoan">
                 <Box >
@@ -342,7 +338,7 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ bg: "blue.800" }}
-                        onClick={() => handlePost(singleData)}>
+                        onClick={() => handlePost(singleData.prodID)}>
                         Thêm vào giỏ hàng
                       </Button>
                       <Button
@@ -353,7 +349,7 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ backgroundColor: "orangered" }}
-                        onClick={() => handleWish(singleData)}>
+                        onClick={() => handleWish(singleData.prodID)}>
                         Mua ngay
                       </Button>
                     </Flex>
@@ -407,7 +403,7 @@ const SingleProduct = (props) => {
             <br />
             <hr />
             <RelateProduct type={PrApplePhone} />
-            <ComProduct />
+            <ComProduct prodID={singleData.prodID} />
           </Box>
         </Box>
 

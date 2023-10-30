@@ -49,7 +49,6 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-  console.log("this is data from the outside hanldewish", data);
 
   var navigate = useNavigate();
   const toast = useToast();
