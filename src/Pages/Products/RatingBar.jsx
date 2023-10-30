@@ -1,5 +1,5 @@
-import React from 'react';
-import './Productbox.css'
+import React from "react";
+import "./Productbox.css";
 
 const RatingBar = ({ rating }) => {
   const filledStars = Math.floor(rating);

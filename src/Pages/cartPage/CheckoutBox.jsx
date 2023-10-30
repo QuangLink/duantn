@@ -54,10 +54,10 @@ const CheckoutBox = ({
       });
       setTimeout(() => {
         axios
-        .post("https://duantn-backend.onrender.com/order/", { userID })
-        .then((response) => {
-          console.log(response);
-        })
+          .post("https://duantn-backend.onrender.com/order/", { userID })
+          .then((response) => {
+            console.log(response);
+          });
         navigate("/checkout");
       }, 1500);
     }
@@ -89,7 +89,6 @@ const CheckoutBox = ({
           borderRadius="4px"
           padding={"16px"}
         >
-
           <Flex>
             <Box marginTop={"20px"} width={"100%"}>
               <InputGroup size="md">

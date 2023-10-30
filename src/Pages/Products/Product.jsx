@@ -1,5 +1,5 @@
 import React from "react";
-import { FaStar } from 'react-icons/fa';
+import { FaStar } from "react-icons/fa";
 import {
   Badge,
   Box,
@@ -14,10 +14,10 @@ import {
 import { BsSuitHeart } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import RatingBar from './RatingBar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import './product.css'
+import RatingBar from "./RatingBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import "./product.css";
 const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
@@ -79,82 +79,105 @@ const Product = (props, rating) => {
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
           <Center>
-          <Image src={prodImg} alt={prodName} w={["65%","80%","90%" ]}  
-            transition="transform 0.3s ease-in-out"
-            _hover={{ transform: "translateY(-10px)" }}
-             />
+            <Image
+              src={prodImg}
+              alt={prodName}
+              w={["65%", "80%", "90%"]}
+              transition="transform 0.3s ease-in-out"
+              _hover={{ transform: "translateY(-10px)" }}
+            />
           </Center>
-          {
-            prodSale !== 0 && (
-             <Box className="div_2"
-             css={{ "@media (max-width: 430px)": { width:"100%",textAlign:"center" } }}
-             >
-                <Box className="box_1" 
-                  fontSize={{ base: '15px', md: '20px', lg: '18px' }}
-                  h={["20px","40px","40px"]}>
-                  {prodName}
-                </Box>
-                <Box className="box_2">
-                  <RatingBar rating={rating} />
-                  <Heading as="h3"  fontSize={{ base: '10px', md: '15px', lg: '13px' }} color="red" fontWeight="black"
-                  >
-                    Giá mới: {prodPrice}₫
-                  </Heading>
-                  <Text  
-                    fontSize={{ base: '10px', md: '15px', lg: '13px' }}
-                    mt={2}
-                    fontWeight="bold"
-                    color="blackAlpha.600"
-                    textDecoration="line-through">
-                    Giá gốc: {prodPriceSale}₫
-                  </Text>
-                </Box>
-                <Badge
-                  borderRadius="5px"
-                  width="auto"
-                  px="2"
-                  backgroundColor="#fff0e9"
-                  color="#eb5757"
-                  fontSize={{ base: '10px', md: '15px', lg: '13px' }}
-                  marginBottom="10"
-                  marginLeft= {5}>
-                  Giá ưu đãi
-                </Badge>
-             </Box>
-            )}
-          {
-            prodSale == 0 && (
-              <Box className="div_2"
+          {prodSale !== 0 && (
+            <Box
+              className="div_2"
+              css={{
+                "@media (max-width: 430px)": {
+                  width: "100%",
+                  textAlign: "center",
+                },
+              }}
+            >
+              <Box
+                className="box_1"
+                fontSize={{ base: "15px", md: "20px", lg: "18px" }}
+                h={["20px", "40px", "40px"]}
               >
-                <Box className="box_1" 
-                h={["20px","40px","40px"]}
-                fontSize={{ base: '15px', md: '15px', lg: '18px' }}>
-                  {prodName}
-                </Box>
-                <Box
-                  w="100%"
-                  marginBottom="2"
-                  marginLeft={5}>
-                  <RatingBar rating={rating} />
-                  <Heading as="h3" fontSize={{ base: '10px', md: '15px', lg: '13px' }} color="red" fontWeight="black">
-                    Giá: {prodPrice}₫
-                  </Heading>
-                </Box>
-                <Badge
-                  borderRadius="5px" width="auto" px="2" backgroundColor="#fff0e9" color="#eb5757" fontSize={{ base: '10px', md: '15px', lg: '13px' }} marginBottom="10" marginLeft={5}>
-                  Giá tốt
-                </Badge>
+                {prodName}
               </Box>
-            )
-          }
-        </Box >
+              <Box className="box_2">
+                <RatingBar rating={rating} />
+                <Heading
+                  as="h3"
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  color="red"
+                  fontWeight="black"
+                >
+                  Giá mới: {prodPrice}₫
+                </Heading>
+                <Text
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  mt={2}
+                  fontWeight="bold"
+                  color="blackAlpha.600"
+                  textDecoration="line-through"
+                >
+                  Giá gốc: {prodPriceSale}₫
+                </Text>
+              </Box>
+              <Badge
+                borderRadius="5px"
+                width="auto"
+                px="2"
+                backgroundColor="#fff0e9"
+                color="#eb5757"
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                marginBottom="10"
+                marginLeft={5}
+              >
+                Giá ưu đãi
+              </Badge>
+            </Box>
+          )}
+          {prodSale == 0 && (
+            <Box className="div_2">
+              <Box
+                className="box_1"
+                h={["20px", "40px", "40px"]}
+                fontSize={{ base: "15px", md: "15px", lg: "18px" }}
+              >
+                {prodName}
+              </Box>
+              <Box w="100%" marginBottom="2" marginLeft={5}>
+                <RatingBar rating={rating} />
+                <Heading
+                  as="h3"
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  color="red"
+                  fontWeight="black"
+                >
+                  Giá: {prodPrice}₫
+                </Heading>
+              </Box>
+              <Badge
+                borderRadius="5px"
+                width="auto"
+                px="2"
+                backgroundColor="#fff0e9"
+                color="#eb5757"
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                marginBottom="10"
+                marginLeft={5}
+              >
+                Giá tốt
+              </Badge>
+            </Box>
+          )}
+        </Box>
       </Link>
-      <Button
-        onClick={() => handleWish(data)}>
+      <Button onClick={() => handleWish(data)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>
-
   );
 };
 

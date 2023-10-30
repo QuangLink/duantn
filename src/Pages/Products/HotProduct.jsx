@@ -29,7 +29,7 @@ const HotProduct = ({ type, heading }) => {
       textAlign="center"
       backgroundColor="#CCF1F9"
       borderRadius="5px"
-      css={{ "@media (max-width: 768px)": { display:"none" } }}
+      css={{ "@media (max-width: 768px)": { display: "none" } }}
     >
       <Box>
         <a href="">
@@ -86,8 +86,12 @@ const HotProduct = ({ type, heading }) => {
                     backgroundColor="white"
                     borderRadius="10px"
                     transition="transform 2s ease-in-out"
-                    boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset">
-                    <Square m="auto" _hover={{ transform: "translateY(-10px)" }}>
+                    boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+                  >
+                    <Square
+                      m="auto"
+                      _hover={{ transform: "translateY(-10px)" }}
+                    >
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
                     <Text

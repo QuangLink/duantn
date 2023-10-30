@@ -1,274 +1,142 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
+import MainCartPage from "../Pages/cartPage/MainCartPage";
+import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/SignInApp";
+import Products from "../Pages/Products/Products";
+import SingleProduct from "../Pages/SingleProduct/SingleProduct";
+import Wishlist from "../Pages/Wishlist/Wishlist";
+import SearchPage from "../Pages/SearchPage/SearchPage";
+import Payments from "../Pages/payment/Payments";
+import Checkout from "../Pages/checkout/checkout";
+import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
-const LazyHome = lazy(() => import("../Pages/Home/Home"));
-const LazyMainCartPage = lazy(() => import("../Pages/cartPage/MainCartPage"));
-const LazyLogin = lazy(() => import("../Pages/Login/SignInApp"));
-const LazyProducts = lazy(() => import("../Pages/Products/Products"));
-const LazySingleProduct = lazy(() =>
-import("../Pages/SingleProduct/SingleProduct"),
-);
-const LazyWishlist = lazy(() => import("../Pages/Wishlist/Wishlist"));
-const LazyPayments = lazy(() => import("../Pages/payment/Payments"));
-const LazyCheckout = lazy(() => import("../Pages/checkout/checkout"));
-const LazyLastPage = lazy(() => import("../Pages/cartPage/LastPage"));
-const LazyProductList = lazy(() => import("../testlist"));
-
+import ProductList from "../testlist";
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyHome />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/duantn" element={<Home />}></Route>
         <Route
           path="/laptop"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="laptop" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="laptop" />}
         ></Route>
         <Route
           path="/laptop/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="laptop" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="laptop" />}
         ></Route>
         <Route
           path="/phone"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="phone" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="phone" />}
         ></Route>
         <Route
           path="/phone/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="phone" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="phone" />}
         ></Route>
         <Route
           path="/tablet"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="tablet" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="tablet" />}
         ></Route>
         <Route
           path="/tablet/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="tablet" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="tablet" />}
         ></Route>
         <Route
           path="/iphone"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="iphone" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="iphone" />}
         ></Route>
         <Route
           path="/iphone/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="iphone" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="iphone" />}
         ></Route>
         <Route
           path="/xiaomi"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="xiaomi" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="xiaomi" />}
         ></Route>
         <Route
           path="/xiaomi/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="xiaomi" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="xiaomi" />}
         ></Route>
         <Route
           path="/samsung"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="samsung" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="samsung" />}
         ></Route>
         <Route
           path="/samsung/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="samsung" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="samsung" />}
         ></Route>
-        <Route
-          path="/oppo"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="oppo" />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/oppo" element={<Products typeOfProduct="oppo" />}></Route>
         <Route
           path="/oppo/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="oppo" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="oppo" />}
         ></Route>
-        <Route
-          path="/hp"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="hp" />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/hp" element={<Products typeOfProduct="hp" />}></Route>
         <Route
           path="/hp/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="hp" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="hp" />}
         ></Route>
-        <Route
-          path="/asus"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="asus" />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/asus" element={<Products typeOfProduct="asus" />}></Route>
         <Route
           path="/asus/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="asus" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="asus" />}
         ></Route>
         <Route
           path="/lenovo"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="asus" />
-            </Suspense>
-          }
+          element={<Products typeOfProduct="asus" />}
         ></Route>
         <Route
           path="/lenovo/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="lenovo" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="lenovo" />}
         ></Route>
-        <Route
-          path="/acer"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProducts typeOfProduct="acer" />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/acer" element={<Products typeOfProduct="acer" />}></Route>
         <Route
           path="/acer/:id"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazySingleProduct typeOfProduct="acer" />
-            </Suspense>
-          }
+          element={<SingleProduct typeOfProduct="acer" />}
         ></Route>
         <Route
           path="/cart"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <PrivateRoute>
-                <LazyMainCartPage />
-              </PrivateRoute>
-            </Suspense>
+            <PrivateRoute>
+              <MainCartPage />
+            </PrivateRoute>
           }
         ></Route>
-        <Route
-          path="/login"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyLogin />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/login" element={<Login />}></Route>
 
         <Route
           path="/whishlist"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <PrivateRoute>
-                <LazyWishlist typeOfProduct={"whishlist"} />
-              </PrivateRoute>
-            </Suspense>
+            <PrivateRoute>
+              <Wishlist typeOfProduct={"whishlist"} />
+            </PrivateRoute>
           }
         ></Route>
         <Route
           path="/checkout"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <PrivateRoute>
-                <LazyCheckout />
-              </PrivateRoute>
-            </Suspense>
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
           }
         ></Route>
         <Route
           path="/payments"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <PrivateRoute>
-                <LazyPayments />
-              </PrivateRoute>
-            </Suspense>
+            <PrivateRoute>
+              <Payments />
+            </PrivateRoute>
           }
         ></Route>
         <Route
           path="/lastpage"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <PrivateRoute>
-                <LazyLastPage />
-              </PrivateRoute>
-            </Suspense>
+            <PrivateRoute>
+              <LastPage />
+            </PrivateRoute>
           }
         ></Route>
-        <Route
-          path="/test"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <LazyProductList />
-            </Suspense>
-          }
-        ></Route>
+        <Route path="/test" element={<ProductList />}></Route>
         {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
             <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
             <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}

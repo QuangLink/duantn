@@ -68,21 +68,23 @@ const MainCartPage = () => {
 
   return (
     <div>
-    <div style={{ 
-      backgroundColor: "#4a90e2", 
-      textEmphasisColor: "white",
-      textAlign: "center", 
-      width: "100%", 
-      padding: "10px",
-      boxSizing: "border-box",
-      // marginTop: "20px",
-      marginBottom: "20px",
-      animation: "blink 3s infinite",
-    }}>
-    Hãy áp dụng mã giảm giá : MASAI40
-    </div>
-    <style>
-      {`
+      <div
+        style={{
+          backgroundColor: "#4a90e2",
+          textEmphasisColor: "white",
+          textAlign: "center",
+          width: "100%",
+          padding: "10px",
+          boxSizing: "border-box",
+          // marginTop: "20px",
+          marginBottom: "20px",
+          animation: "blink 3s infinite",
+        }}
+      >
+        Hãy áp dụng mã giảm giá : MASAI40
+      </div>
+      <style>
+        {`
         @keyframes blink {
           0% {
             color: black;
@@ -95,7 +97,7 @@ const MainCartPage = () => {
           }
         }
       `}
-    </style>
+      </style>
       <Flex
         border={"0px solid red"}
         margin="auto"
@@ -170,7 +172,6 @@ const MainCartPage = () => {
           />
         </Flex>
       </Flex>
-         
     </div>
   );
 };
