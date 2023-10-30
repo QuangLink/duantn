@@ -74,7 +74,7 @@ const Product = (props, rating) => {
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[280, 420, 450]}>
+        <Box h={[280, 360, 520]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -100,7 +100,7 @@ const Product = (props, rating) => {
               <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
-                h={["20px", "40px", "40px"]}
+                h={["20px", "40px", "60px"]}
               >
                 {prodName}
               </Box>
@@ -142,7 +142,7 @@ const Product = (props, rating) => {
             <Box className="div_2">
               <Box
                 className="box_1"
-                h={["20px", "40px", "40px"]}
+                h={["20px", "40px", "60px"]}
                 fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
                 {prodName}
