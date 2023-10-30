@@ -169,6 +169,7 @@ const SingleProduct = (props) => {
                   className="Image"
                   textAlign="center"
                   w={["65%", "400px", "600px"]}
+
                   height="auto"
                   justifyContent="center"
                   src={singleData.prodImg}
@@ -281,17 +282,20 @@ const SingleProduct = (props) => {
                       {singleData.prodName}
                     </Heading>
                     <Heading size="lg" marginBottom={5} color="red">
+
                       {/* {singleData.prodPrice.toLocaleString("vi-VN", {
                         style: "currency",
                         currency: "VND",
                       })} */}
                       {singleData.prodPrice}
 
+
                     </Heading>
                     {singleData.prodSale !== 0 && (
                       <>
                         <Text fontSize="lg" marginBottom={3}>
-                          Giá gốc: {singleData.prodPriceSale}
+
+                          Giá gốc: {singleData.prodPriceSale} đ
                           <span style={{ textDecoration: "line-through" }}></span>
                           <span style={{ fontSize: "12px", padding: "20px" }}>
                             (Bao gồm tất cả các loại thuế)
@@ -394,10 +398,12 @@ const SingleProduct = (props) => {
                       </Text>
                     </Box>
                   </Box>
+
                 </Box>
                 <Box className="box-table" mt={5}>
                   <ProductTable />
                 </Box>
+
               </GridItem>
             </Grid>
           </div>

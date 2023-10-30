@@ -24,6 +24,7 @@
     "js-cookie": "^3.0.5",
     "json": "^11.0.0",
     "mdb-react-ui-kit": "^6.3.0",
+    "mdb-ui-kit": "^6.4.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-bootstrap-sweetalert": "^5.2.0",

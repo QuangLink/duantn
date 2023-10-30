@@ -9,7 +9,6 @@ import BannerCenter from "./BannerCenter";
 import TimeDeal from "./TimeDeal";
 import PrDeal from "./PrDeal";
 import Btn from "./Btn";
-
 import {
   ItemDetails1,
   ItemDetails9,
@@ -52,9 +51,7 @@ const Home = () => {
         linked={"/personalcare"}
         heading="Iphone "
       />
-
       <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
-
       <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />
       <br />
       <hr />
@@ -62,5 +59,4 @@ const Home = () => {
     </Box>
   );
 };
-
 export default Home;
