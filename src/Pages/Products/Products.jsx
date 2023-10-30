@@ -113,7 +113,7 @@ const Products = ({ typeOfProduct }) => {
           marginLeft="10%"
           templateColumns={[
             "repeat(2, 1fr)",
-            "repeat(2,1fr)",
+            "repeat(3,1fr)",
             "repeat(3,1fr)",
             "repeat(4,1fr)",
           ]}
@@ -141,7 +141,7 @@ const Products = ({ typeOfProduct }) => {
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
                   cursor: "pointer",
                 }}
-              >
+                >
                 <Product data={elem} typeOfProduct={typeOfProduct} />
               </GridItem>
             );
