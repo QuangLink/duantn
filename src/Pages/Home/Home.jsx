@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ItemCard1 from "./ItemCard1";
 import ItemCard2 from "./ItemCard2";
 import ItemCard5 from "./ItemCard5";
@@ -15,9 +15,7 @@ import Btn from "./Btn";
 import {
   ItemDetails1,
   ItemDetails7,
-
   ItemDetails9,
-
   CateFeatures,
   BannersLeft,
   BannersCenter,
@@ -32,66 +30,68 @@ import {
   PrLenovo,
   PrAcer,
   PrHp,
-  PrXiaomi
-
-
+  PrXiaomi,
 } from "./CardDetails";
 
 
-import { Box,
-    
- } from "@chakra-ui/react";
-import Banners from "./BannerLeft";
+import { Box } from "@chakra-ui/react";
+
+// Sử dụng React.lazy() cho các thành phần bạn muốn lazy load
+const LazyItemCard1 = lazy(() => import("./ItemCard1"));
+const LazyItemCard2 = lazy(() => import("./ItemCard2"));
+const LazyItemCard5 = lazy(() => import("./ItemCard5"));
+const LazyItemCard6 = lazy(() => import("./ItemCard6"));
+const LazyItemCard7 = lazy(() => import("./ItemCard7"));
+const LazyItemCard9 = lazy(() => import("./ItemCard9"));
+const LazyCateFeature = lazy(() => import("./CateFeature"));
+const LazyBannerLeft = lazy(() => import("./BannerLeft"));
+const LazyBannerCenter = lazy(() => import("./BannerCenter"));
+const LazyTimeDeal = lazy(() => import("./TimeDeal"));
+const LazyPrDeal = lazy(() => import("./PrDeal"));
+const LazyBtn = lazy(() => import("./Btn"));
+
 const Home = () => {
   return (
     <Box>
-        <BannerCenter type={BannersCenter} />
-      <br/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyBannerCenter type={BannersCenter} />
+        <br />
 
-      <ItemCard1 type={ItemDetails1} />
-      <br/>
-      <hr/>
-      <CateFeature type={CateFeatures}  />
-      <br />
-      <hr />
+        <LazyItemCard1 type={ItemDetails1} />
+        <br />
+        <hr />
+        <LazyCateFeature type={CateFeatures} />
+        <br />
+        <hr />
 
-      <TimeDeal type={PrSale}  />
-      <br />
-      <hr />
-      
-      {/* <ItemCard1 type={ItemDetails2} /> */}
-      <ItemCard5 type={PrLenovo} heading="MÁY TÍNH NỔI BẬT " />
-      <br />
-      <hr />
-      <PrDeal type={PrSale}  />
+        <LazyTimeDeal type={PrSale} />
+        <br />
+        <hr />
 
-      <br />
-      <hr />
-      <ItemCard2
-        type={PrApplePhone}
-        linked={"/personalcare"}
-        heading="Iphone "
-        src="https://i.imgur.com/8pxYJUB.png"
-      />
-      <hr />
-   
-      <ItemCard9 type={ItemDetails7} />
-      <ItemCard6
-        type={ItemDetails9}
-        heading="DỊCH VỤ CỦA CHÚNG TÔI"
-      />
-      <br />
-      <hr />
-      <ItemCard7
-        type={PrAsus}
-        heading="SẢN PHẨM ASUS  "
-        
-      />
-       <br />
-      <hr />
-       <Btn/>
-      
-      
+        <LazyItemCard5 type={PrLenovo} heading="MÁY TÍNH NỔI BẬT " />
+        <br />
+        <hr />
+        <LazyPrDeal type={PrSale} />
+
+        <br />
+        <hr />
+        <LazyItemCard2
+          type={PrApplePhone}
+          linked={"/personalcare"}
+          heading="Iphone "
+          src="https://i.imgur.com/8pxYJUB.png"
+        />
+        <hr />
+
+        <LazyItemCard9 type={ItemDetails7} />
+        <LazyItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+        <br />
+        <hr />
+        <LazyItemCard7 type={PrAsus} heading="SẢN PHẨM ASUS  " />
+        <br />
+        <hr />
+        <LazyBtn />
+      </Suspense>
     </Box>
   );
 };

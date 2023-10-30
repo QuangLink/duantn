@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
+
 import {
   LOGIN_ERROR,
   LOGIN_LOADING,
@@ -18,11 +20,11 @@ export const login = (creds) => async (dispatch) => {
     const admin = res.data.payload.admin;
     //lấy userID từ header token
     const userID = res.data.payload.userID;
-    // Lưu token vào sessionStorage và gửi dữ liệu vào payload
-    sessionStorage.setItem("token", token);
-    sessionStorage.setItem("username", username);
-    sessionStorage.setItem("admin", admin);
-    sessionStorage.setItem("userID", userID);
+    Cookies.set("token", token);
+    Cookies.set("username", username);
+    Cookies.set("admin", admin);
+    Cookies.set("userID", userID);
+
 
     // Dispatch action để lưu token vào Redux store với payload chứa dữ liệu
     dispatch({
@@ -41,9 +43,9 @@ export const login = (creds) => async (dispatch) => {
 
 export const logout = () => {
   // Remove the token from Local Storage
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("username");
-  sessionStorage.removeItem("admin");
-  sessionStorage.removeItem("userID");
+  Cookies.remove("token");
+  Cookies.remove("username");
+  Cookies.remove("admin");
+  Cookies.remove("userID");
   return { type: LOGOUT };
 };

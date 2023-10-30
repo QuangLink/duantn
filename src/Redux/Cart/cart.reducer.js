@@ -48,7 +48,7 @@ const CartReducer = (state = initialData, { type, payload }) => {
     case "code": {
       let finalprice = 0;
       if (state.paybalPrice >= 1000 && payload === "MASAI40") {
-        finalprice = state.paybalPrice - 500;
+        finalprice = state.paybalPrice - 500000;
       }
       return {
         ...state,
