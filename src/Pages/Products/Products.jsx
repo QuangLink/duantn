@@ -113,7 +113,7 @@ const Products = ({ typeOfProduct }) => {
           marginLeft="10%"
           templateColumns={[
             "repeat(2, 1fr)",
-            "repeat(2,1fr)",
+            "repeat(3,1fr)",
             "repeat(3,1fr)",
             "repeat(4,1fr)",
           ]}
