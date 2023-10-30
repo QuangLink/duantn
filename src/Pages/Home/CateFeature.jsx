@@ -15,6 +15,7 @@ const CateFeature = ({ type }) => {
         <td key={j} style={{ textAlign: "center" }}>
           <div
             style={{
+             
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

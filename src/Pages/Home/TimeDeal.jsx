@@ -211,34 +211,41 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        <Flex>
-                          <Text color="gray.600" fontSize="14px">
-                            Giá gốc:{" "}
-                          </Text>
-                          {"  "}
-                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
-                          </Text>
-                        </Flex>
-
-                        <Box
-                          padding="5px"
-                          borderRadius="7px"
-                          w="60%"
-                          bg="#FF7C03"
-                          mt="3"
-                        >
-                          <Text
-                            fontSize="15px"
-                            fontWeight="700"
-                            color="#eab05f"
-                          >
-                            GIẢM GIÁ SỐC
-                          </Text>
-                        </Box>
+                         {i.original !== 0 && (
+                            <>
+                              <Flex>
+                                <Text color="gray.600" fontSize="14px">
+                                  Giá gốc:{" "}
+                                </Text>
+                                {"  "}
+                                <Text
+                                  as="s"
+                                  color="gray.600"
+                                  fontSize="14px"
+                                  ml="1"
+                                >
+                                  {i.original.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
+                                </Text>
+                              </Flex>
+                              <Box
+                                padding="3px"
+                                borderRadius="5px"
+                                w="50%"
+                                color="#EC4C0A"
+                                bg="#FEB373"
+                                mt="2"
+                                textAlign="center"
+                              >
+                                <Text fontSize="10px" fontWeight="500">
+                                  GIẢM GIÁ SỐC
+                                </Text>
+                              </Box>
+                            </>
+                          )}
+                       
                         <Box
                           mt="4"
                           display="flex"
@@ -259,18 +266,7 @@ const TimeDeal = ({ type, heading }) => {
                           </Box>
                         </Box>
                       </Box>
-                      <Box mt="4"  display="flex" backgroundColor="yellow" borderRadius="15px">
-                        <Text mt="-2"><img  width="22px" height="22px" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"/></Text>
-                        <Box  ml="2"  >
-                           
-                            <Text >
-                            <b>Còn 27/50 suất</b>
-                            </Text>
-
-
-                         </Box>
-
-                        </Box>
+                      
                     </Box>
                   </Box>
 
@@ -327,33 +323,42 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        <Flex>
-                          <Text color="gray.600" fontSize="14px">
-                            Giá gốc:{" "}
-                          </Text>
-                          {"  "}
-                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}{" "}
-                            <sup>đ</sup>
-                          </Text>
-                        </Flex>
+                        {i.original !== 0 && (
+                            <>
+                              <Flex>
+                                <Text color="gray.600" fontSize="14px">
+                                  Giá gốc:{" "}
+                                </Text>
+                                {"  "}
+                                <Text
+                                  as="s"
+                                  color="gray.600"
+                                  fontSize="14px"
+                                  ml="1"
+                                >
+                                  {i.original.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
+                                </Text>
+                              </Flex>
+                              <Box
+                                padding="3px"
+                                borderRadius="5px"
+                                w="50%"
+                                color="#EC4C0A"
+                                bg="#FEB373"
+                                mt="2"
+                                textAlign="center"
+                              >
+                                <Text fontSize="10px" fontWeight="500">
+                                  GIẢM GIÁ SỐC
+                                </Text>
+                              </Box>
+                            </>
+                          )}
 
-                        <Box
-                          padding="3px"
-                          borderRadius="5px"
-                          w="50%"
-                          color="#EC4C0A"
-                          bg="#FEB373"
-                          mt="2"
-                          textAlign="center"
-                        >
-                          <Text fontSize="10px" fontWeight="500">
-                            GIẢM GIÁ SỐC
-                          </Text>
-                        </Box>
+                        
 
                       <Box mt="4"  display="flex" backgroundColor="yellow" borderRadius="15px">
                         <Text mt="-2"><img  width="22px" height="22px" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"/></Text>
