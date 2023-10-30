@@ -17,14 +17,13 @@ import {
 import React, { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mobile, setMobile] = useState("");
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -41,41 +40,41 @@ function SignUpForm() {
       return;
     }
 
-    if (email.includes("@") && email.includes(".com")) {
+    if (isValidEmail(email)) {
       try {
         const payload = {
           username,
-          mobile,
           email,
           password,
         };
 
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/users/register",
-          payload,
+          "http://localhost:9000/users/register",
+          payload
         );
-        if (response.length > 0) {
-          const isDuplicateUsername = response.includes("Username");
 
-          if (isDuplicateUsername) {
-            toast({
-              title: "Tên người dùng đã tồn tại",
-              description: "Vui lòng chọn một tên người dùng khác",
-              status: "error",
-              duration: 2000,
-              isClosable: true,
-            });
-
-            return;
-          }
+        if (response.data && response.data.error) {
+          toast({
+            title: "Lỗi đăng ký",
+            description: response.data.error,
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
         } else {
           toast({
             title: "Tạo tài khoản thành công",
-            description: "Chào mừng đến với JaguarStore",
+            description: "Chào mừng đến với JaguarStore, bạn đã có thể đăng nhập",
             status: "success",
             duration: 2000,
             isClosable: true,
           });
+
+          // Đặt lại form sau khi đăng ký thành công
+          setUserName(""); // Đặt lại username thành chuỗi rỗng
+          setEmail(""); // Đặt lại email thành chuỗi rỗng
+          setPassword(""); // Đặt lại password thành chuỗi rỗng
+
           setTimeout(() => {
             navigate("/login");
           }, 2200);
@@ -83,8 +82,8 @@ function SignUpForm() {
       } catch (error) {
         console.error("Error: ", error);
         toast({
-          title: "Username hoặc Email đã tồn tại",
-          description: "Hãy đăng nhập hoặc sử dụng Email/Username khác",
+          title: "Lỗi đăng ký",
+          description: "Có lỗi xảy ra khi đăng ký tài khoản.",
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -99,6 +98,11 @@ function SignUpForm() {
         isClosable: true,
       });
     }
+  };
+
+  const isValidEmail = (email) => {
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailPattern.test(email);
   };
 
   return (
@@ -132,7 +136,7 @@ function SignUpForm() {
         <InputGroup>
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Enter Your Password"
+            placeholder="Nhập mật khẩu của bạn"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
