@@ -221,34 +221,40 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        <Flex>
-                          <Text color="gray.600" fontSize="14px">
-                            Giá gốc:{" "}
-                          </Text>
-                          {"  "}
-                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
-                          </Text>
-                        </Flex>
-
-                        <Box
-                          padding="5px"
-                          borderRadius="7px"
-                          w="60%"
-                          bg="#FF7C03"
-                          mt="3"
-                        >
-                          <Text
-                            fontSize="15px"
-                            fontWeight="700"
-                            color="#eab05f"
-                          >
-                            GIẢM GIÁ SỐC
-                          </Text>
-                        </Box>
+                        {i.original !== 0 && (
+                          <>
+                            <Flex>
+                              <Text color="gray.600" fontSize="14px">
+                                Giá gốc:{" "}
+                              </Text>
+                              {"  "}
+                              <Text
+                                as="s"
+                                color="gray.600"
+                                fontSize="14px"
+                                ml="1"
+                              >
+                                {i.original.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
+                              </Text>
+                            </Flex>
+                            <Box
+                              padding="3px"
+                              borderRadius="5px"
+                              w="50%"
+                              color="#EC4C0A"
+                              bg="#FEB373"
+                              mt="2"
+                              textAlign="center"
+                            >
+                              <Text fontSize="10px" fontWeight="500">
+                                GIẢM GIÁ SỐC
+                              </Text>
+                            </Box>
+                          </>
+                        )}
                         <Box
                           mt="4"
                           display="flex"
@@ -325,33 +331,40 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        <Flex>
-                          <Text color="gray.600" fontSize="14px">
-                            Giá gốc:{" "}
-                          </Text>
-                          {"  "}
-                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}{" "}
-                            <sup>đ</sup>
-                          </Text>
-                        </Flex>
-
-                        <Box
-                          padding="3px"
-                          borderRadius="5px"
-                          w="50%"
-                          color="#EC4C0A"
-                          bg="#FEB373"
-                          mt="2"
-                          textAlign="center"
-                        >
-                          <Text fontSize="10px" fontWeight="500">
-                            GIẢM GIÁ SỐC
-                          </Text>
-                        </Box>
+                        {i.original !== 0 && (
+                          <>
+                            <Flex>
+                              <Text color="gray.600" fontSize="14px">
+                                Giá gốc:{" "}
+                              </Text>
+                              {"  "}
+                              <Text
+                                as="s"
+                                color="gray.600"
+                                fontSize="14px"
+                                ml="1"
+                              >
+                                {i.original.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
+                              </Text>
+                            </Flex>
+                            <Box
+                              padding="3px"
+                              borderRadius="5px"
+                              w="50%"
+                              color="#EC4C0A"
+                              bg="#FEB373"
+                              mt="2"
+                              textAlign="center"
+                            >
+                              <Text fontSize="10px" fontWeight="500">
+                                GIẢM GIÁ SỐC
+                              </Text>
+                            </Box>
+                          </>
+                        )}
 
                         <Box
                           mt="4"
