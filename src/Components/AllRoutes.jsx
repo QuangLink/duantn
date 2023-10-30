@@ -17,6 +17,7 @@ const AllRoutes = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/duantn" element={<Home />}></Route>
         <Route
           path="/laptop"
           element={<Products typeOfProduct="laptop" />}

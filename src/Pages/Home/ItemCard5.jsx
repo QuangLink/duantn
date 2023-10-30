@@ -190,8 +190,6 @@ const ItemCard5 = ({ type, heading }) => {
                               </Box>
                             </>
                           )}
-                  
-                          
                         </Box>
                       </Box>
                     </Box>
