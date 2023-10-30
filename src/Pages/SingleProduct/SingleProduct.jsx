@@ -344,7 +344,7 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ bg: "blue.800" }}
-                        onClick={() => handlePost(singleData)}>
+                        onClick={() => handlePost(singleData.prodID)}>
                         Thêm vào giỏ hàng
                       </Button>
                       <Button
@@ -355,7 +355,7 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ backgroundColor: "orangered" }}
-                        onClick={() => handleWish(singleData)}>
+                        onClick={() => handleWish(singleData.prodID)}>
                         Mua ngay
                       </Button>
                     </Flex>
