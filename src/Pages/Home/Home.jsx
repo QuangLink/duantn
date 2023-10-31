@@ -1,64 +1,115 @@
-import React from "react";
-import ItemCard1 from "./ItemCard1";
-import ItemCard2 from "./ItemCard2";
-import ItemCard5 from "./ItemCard5";
-import ItemCard6 from "./ItemCard6";
-import ItemCard7 from "./ItemCard7";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import CateFeature from "./CateFeature";
 import BannerCenter from "./BannerCenter";
-import TimeDeal from "./TimeDeal";
-import PrDeal from "./PrDeal";
 import Btn from "./Btn";
-
+import { Box } from "@chakra-ui/react";
 import {
-  ItemDetails1,
-  ItemDetails9,
-  CateFeatures,
   BannersCenter,
-  TimeDeals,
-  PrAll,
-  PrDeals,
+  ItemDetails1,
   PrSale,
   PrApplePhone,
-  PrAppleTablet,
-  PrSamsung,
+  CateFeatures,
+  ItemDetails9,
+  // PrAppleTablet,
+  // PrSamsung,
+  // PrXiaomi,
+  // PrHp,
   PrAsus,
-  PrLenovo,
+  // PrLenovo,
   PrAcer,
-  PrHp,
-  PrXiaomi,
+  loadPrSale,
+  loadPrApplePhone,
+  // loadPrAppleTablet,
+  // loadPrSamsung,
+  // loadPrXiaomi,
+  // loadPrHp,
+  loadPrAsus,
+  // loadPrLenovo,
+  loadPrAcer,
 } from "./CardDetails";
 
-import { Box } from "@chakra-ui/react";
+const ItemCard1 = lazy(() => import("./ItemCard1"));
+const ItemCard2 = lazy(() => import("./ItemCard2"));
+const ItemCard5 = lazy(() => import("./ItemCard5"));
+const ItemCard6 = lazy(() => import("./ItemCard6"));
+const ItemCard7 = lazy(() => import("./ItemCard7"));
+const TimeDeal = lazy(() => import("./TimeDeal"));
+const PrDeal = lazy(() => import("./PrDeal"));
 
 const Home = () => {
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    // Load data for each product category before rendering the components.
+    Promise.all([
+      loadPrSale(),
+      loadPrApplePhone(),
+      // loadPrAppleTablet(),
+      // loadPrSamsung(),
+      // loadPrXiaomi(),
+      // loadPrHp(),
+      loadPrAsus(),
+      // loadPrLenovo(),
+      loadPrAcer(),
+    ]).then(() => {
+      // Set dataLoaded to true when all data is loaded.
+      setDataLoaded(true);
+    });
+  }, []);
+
   return (
     <Box>
-      <BannerCenter type={BannersCenter} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <BannerCenter type={BannersCenter} />
+      </Suspense>
 
-      <ItemCard1 type={ItemDetails1} />
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && <ItemCard1 type={ItemDetails1} />}
+      </Suspense>
 
       <CateFeature type={CateFeatures} />
 
-      <TimeDeal type={PrSale} />
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && <TimeDeal type={PrSale} />}
+      </Suspense>
 
-      <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && (
+          <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
+        )}
+      </Suspense>
+
       <br />
       <hr />
-      <PrDeal type={PrAsus} />
 
-      <ItemCard2
-        type={PrApplePhone}
-        linked={"/personalcare"}
-        heading="Iphone "
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && <PrDeal type={PrAsus} />}
+      </Suspense>
 
-      <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ItemCard2
+          type={PrApplePhone}
+          linked={"/personalcare"}
+          heading="Iphone "
+        />
+      </Suspense>
 
-      <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && (
+          <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+        )}
+      </Suspense>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
+      </Suspense>
+
       <br />
       <hr />
-      <Btn />
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <Btn />
+      </Suspense>
     </Box>
   );
 };
