@@ -262,7 +262,7 @@ const SingleProduct = (props) => {
                     </ListItem>
                   </UnorderedList>
                 </Box>
-               
+            
               </GridItem>
               <GridItem colSpan={[4, 3, 4]} rowSpan={[9, 7]} className="thanhtoan">
                 <Box >

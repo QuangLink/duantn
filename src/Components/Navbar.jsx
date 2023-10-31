@@ -392,9 +392,6 @@ function Navbar() {
       <Box backgroundColor="#4a90e2" position={"relative"} zIndex={2}>
         <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
           <Box>
-            <Image
-              src={require("../Components/Images/1200-44-1200x44-5.webp")}
-            />
           </Box>
         </Flex>
         <Flex className="flex-container" px="15%">

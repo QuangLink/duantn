@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   Center,
@@ -181,6 +182,7 @@ const ComProduct = ({ prodID }) => {
       </Box>
     </Box>
   );
+
 };
 
 export default ComProduct;
