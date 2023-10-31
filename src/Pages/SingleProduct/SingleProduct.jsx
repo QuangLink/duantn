@@ -22,9 +22,10 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import ProductReviewForm from "./ProductReview";
+
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
+import RatingBar from "../Products/RatingBar";
 import Cookies from "js-cookie";
 //add singleData to cart
 const postSingleData = async (data) => {
@@ -141,6 +142,7 @@ const SingleProduct = (props) => {
               Article ID: {singleData.prodID}
             </Text>
             <Heading size="md" marginBottom={5}>
+       
               {singleData.prodName}
             </Heading>
             <hr />
@@ -260,11 +262,7 @@ const SingleProduct = (props) => {
                     </ListItem>
                   </UnorderedList>
                 </Box>
-                <Box className="box-danhgia"
-                  css={{ "@media (max-width: 768px)": { display: "none" } }}
-                >
-                  <ProductReviewForm />
-                </Box>
+            
               </GridItem>
               <GridItem colSpan={[4, 3, 4]} rowSpan={[9, 7]} className="thanhtoan">
                 <Box >
@@ -405,7 +403,7 @@ const SingleProduct = (props) => {
             <br />
             <hr />
             <RelateProduct type={PrApplePhone} />
-            <ComProduct />
+            <ComProduct prodID={singleData.prodID} />
           </Box>
         </Box>
 

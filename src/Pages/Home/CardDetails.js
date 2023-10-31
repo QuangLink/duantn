@@ -41,19 +41,36 @@ export let PrAsus = [];
 export let PrLenovo = [];
 export let PrAcer = [];
 
-const fetchDataForAllCategories = async () => {
+export async function loadPrSale() {
   PrSale = await fetchDataForCategory("sale");
-  PrApplePhone = await fetchDataForCategory("applephone");
-  PrAppleTablet = await fetchDataForCategory("appletablet");
-  PrSamsung = await fetchDataForCategory("samsung");
-  PrXiaomi = await fetchDataForCategory("xiaomi");
-  PrHp = await fetchDataForCategory("hp");
-  PrAsus = await fetchDataForCategory("asus");
-  PrLenovo = await fetchDataForCategory("lenovo");
-  PrAcer = await fetchDataForCategory("acer");
-};
+}
 
-fetchDataForAllCategories();
+export async function loadPrApplePhone() {
+  PrApplePhone = await fetchDataForCategory("applephone");
+}
+
+export async function loadPrAppleTablet() {
+  PrAppleTablet = await fetchDataForCategory("appletablet");
+}
+export async function loadPrSamsung() {
+  PrSamsung = await fetchDataForCategory("samsung");
+}
+export async function loadPrXiaomi() {
+  PrXiaomi = await fetchDataForCategory("xiaomi");
+}
+export async function loadPrHp() {
+  PrHp = await fetchDataForCategory("hp");
+}
+export async function loadPrAsus() {
+  PrAsus = await fetchDataForCategory("asus");
+}
+export async function loadPrLenovo() {
+  PrLenovo = await fetchDataForCategory("lenovo");
+}
+export async function loadPrAcer() {
+  PrAcer = await fetchDataForCategory("acer");
+}
+
 
 export const BannersCenter = [
   {

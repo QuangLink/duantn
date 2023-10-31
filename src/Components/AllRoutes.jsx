@@ -6,7 +6,6 @@ import Login from "../Pages/Login/SignInApp";
 import Products from "../Pages/Products/Products";
 import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
-import SearchPage from "../Pages/SearchPage/SearchPage";
 import Payments from "../Pages/payment/Payments";
 import Checkout from "../Pages/checkout/checkout";
 import { LastPage } from "../Pages/cartPage/LastPage";

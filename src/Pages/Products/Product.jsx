@@ -40,9 +40,15 @@ const postSingleDataWish = async (data) => {
 
 const Product = (props, rating) => {
   const { data, typeOfProduct } = props;
-  const { prodID, prodName, prodImg, prodPrice, prodPriceSale, prodSale } =
-    data;
-  console.log("this is data from the outside hanldewish", data);
+  const {
+    prodID,
+    prodName,
+    prodImg,
+    prodPrice,
+    prodPriceSale,
+    prodSale,
+    prodRateAvg,
+  } = data;
 
   var navigate = useNavigate();
   const toast = useToast();
@@ -105,7 +111,7 @@ const Product = (props, rating) => {
                 {prodName}
               </Box>
               <Box className="box_2">
-                <RatingBar rating={rating} />
+              <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
@@ -148,7 +154,7 @@ const Product = (props, rating) => {
                 {prodName}
               </Box>
               <Box w="100%" marginBottom="2" marginLeft={5}>
-                <RatingBar rating={rating} />
+              <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
