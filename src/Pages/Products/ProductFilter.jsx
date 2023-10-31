@@ -19,7 +19,6 @@ import {
 import "./Productbox.css";
 
 const ProductFilter = ({ typeOfProduct }) => {
-
   return (
     <div className="filter_1">
       <Box

@@ -71,7 +71,6 @@ export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
 }
 
-
 export const BannersCenter = [
   {
     id: 1,
