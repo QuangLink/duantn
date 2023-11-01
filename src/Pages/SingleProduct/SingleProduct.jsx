@@ -137,12 +137,12 @@ const SingleProduct = (props) => {
             m="0 0 0 7%"
             p=" 1% 8% "
             justifyContent="center"
-            alignitem="center">
+            alignitem="center"
+          >
             <Text color="gray.500" marginBottom={5}>
               Article ID: {singleData.prodID}
             </Text>
             <Heading size="md" marginBottom={5}>
-       
               {singleData.prodName}
             </Heading>
             <hr />
@@ -155,7 +155,8 @@ const SingleProduct = (props) => {
                 "repeat(1, 1fr)",
                 "repeat(2, 1fr)",
                 "repeat(10,1fr)",
-              ]}>
+              ]}
+            >
               <GridItem
                 rowSpan={[1, 2, 7]}
                 colSpan={[6, 6, 5]}
@@ -176,7 +177,9 @@ const SingleProduct = (props) => {
                   src={singleData.prodImg}
                   _hover={{ cursor: "crosshair" }}
                 />
-                <Box display="flex" m={5}
+                <Box
+                  display="flex"
+                  m={5}
                   css={{ "@media (max-width: 768px)": { display: "none" } }}
                 >
                   <Image
@@ -187,7 +190,8 @@ const SingleProduct = (props) => {
                     textAlign="center"
                     width="25%"
                     src={singleData.prodImg}
-                    _hover={{ cursor: "crosshair" }} />
+                    _hover={{ cursor: "crosshair" }}
+                  />
                   <Image
                     m={2}
                     p={2}
@@ -196,7 +200,8 @@ const SingleProduct = (props) => {
                     textAlign="center"
                     width="25%"
                     src={singleData.prodImg}
-                    _hover={{ cursor: "crosshair" }} />
+                    _hover={{ cursor: "crosshair" }}
+                  />
                   <Image
                     m={2}
                     p={2}
@@ -205,33 +210,39 @@ const SingleProduct = (props) => {
                     textAlign="center"
                     width="25%"
                     src={singleData.prodImg}
-                    _hover={{ cursor: "crosshair" }} />
+                    _hover={{ cursor: "crosshair" }}
+                  />
                 </Box>
                 {/* Chi tieet  */}
-                <Box className="box-chitiet"
+                <Box
+                  className="box-chitiet"
                   css={{ "@media (max-width: 768px)": { display: "none" } }}
                 >
                   <Heading size="sm" marginBottom={3}>
                     Thông số kĩ thuật
                   </Heading>
-                  <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
+                  <UnorderedList
+                    color="gray.600"
+                    fontSize="sm"
+                    marginBottom={4}
+                  >
                     <ListItem>
                       Tên: {singleData.prodName}{" "}
                       <span style={{ color: "#2871c4" }}>Read T&C</span>
                     </ListItem>
                     <ListItem>
                       Ứng dụng phổ biến: Clip TVFPT PlayGalaxy Play
-                      (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt webTV
-                      360 VieON VTVcab ON YouTube YouTube Kids{" "}
+                      (Fim+)MyTVNetflixNhaccuatuiPOPS KidsSpotify Trình duyệt
+                      webTV 360 VieON VTVcab ON YouTube YouTube Kids{" "}
                       <span style={{ color: "#2871c4" }}>Read T&C</span>
                     </ListItem>
                     <ListItem>
-                      Công nghệ hình ảnh:Active HDRChế độ game HGiG Chế độ hình ảnh
-                      phù hợp nội dung Dải màu rộng Nano Color Giảm độ trễ chơi game
-                      Auto Low Latency Mode (ALLM)HDR Dynamic Tone MappingHDR10
-                      ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng cấp độ phân giải
-                      4K AI Upscaling Tương thích bộ mã hóa Video decoder (VP9,
-                      AV1)Tương thích HEVC{" "}
+                      Công nghệ hình ảnh:Active HDRChế độ game HGiG Chế độ hình
+                      ảnh phù hợp nội dung Dải màu rộng Nano Color Giảm độ trễ
+                      chơi game Auto Low Latency Mode (ALLM)HDR Dynamic Tone
+                      MappingHDR10 ProHLGNâng cấp hình ảnh AI Picture Pro 4KNâng
+                      cấp độ phân giải 4K AI Upscaling Tương thích bộ mã hóa
+                      Video decoder (VP9, AV1)Tương thích HEVC{" "}
                       <span style={{ color: "#2871c4" }}>Read T&C</span>
                     </ListItem>
                   </UnorderedList>
@@ -247,25 +258,32 @@ const SingleProduct = (props) => {
                       Read T&C
                     </span>
                   </Heading>
-                  <UnorderedList color="gray.600" fontSize="sm" marginBottom={4}>
+                  <UnorderedList
+                    color="gray.600"
+                    fontSize="sm"
+                    marginBottom={4}
+                  >
                     <ListItem>
-                      {singleData.prodName} có thiết kế Airslim không viền 3 cạnh
-                      sang trọng và tinh tế. Mang lại tổng thể cho không gian trưng
-                      bày thêm điểm nhấn vô cùng ấn tượng.
+                      {singleData.prodName} có thiết kế Airslim không viền 3
+                      cạnh sang trọng và tinh tế. Mang lại tổng thể cho không
+                      gian trưng bày thêm điểm nhấn vô cùng ấn tượng.
                       <br />
-                      Màn hình {singleData.prodName} cùng chân đế vững chắc phù hợp
-                      trưng bày các không gian như: Phòng khách, phòng ngủ, phòng
-                      họp,...{" "}
+                      Màn hình {singleData.prodName} cùng chân đế vững chắc phù
+                      hợp trưng bày các không gian như: Phòng khách, phòng ngủ,
+                      phòng họp,...{" "}
                       <span style={{ color: "#2871c4" }}>
                         View all Standard Credit Cards EMI options
                       </span>
                     </ListItem>
                   </UnorderedList>
                 </Box>
-            
               </GridItem>
-              <GridItem colSpan={[4, 3, 4]} rowSpan={[9, 7]} className="thanhtoan">
-                <Box >
+              <GridItem
+                colSpan={[4, 3, 4]}
+                rowSpan={[9, 7]}
+                className="thanhtoan"
+              >
+                <Box>
                   <Box
                     p={7}
                     mt="5%"
@@ -284,13 +302,14 @@ const SingleProduct = (props) => {
                         currency: "VND",
                       })} */}
                       {singleData.prodPrice}
-
                     </Heading>
                     {singleData.prodSale !== 0 && (
                       <>
                         <Text fontSize="lg" marginBottom={3}>
                           Giá gốc: {singleData.prodPriceSale}
-                          <span style={{ textDecoration: "line-through" }}></span>
+                          <span
+                            style={{ textDecoration: "line-through" }}
+                          ></span>
                           <span style={{ fontSize: "12px", padding: "20px" }}>
                             (Bao gồm tất cả các loại thuế)
                           </span>
@@ -338,7 +357,8 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ bg: "blue.800" }}
-                        onClick={() => handlePost(singleData.prodID)}>
+                        onClick={() => handlePost(singleData.prodID)}
+                      >
                         Thêm vào giỏ hàng
                       </Button>
                       <Button
@@ -349,19 +369,24 @@ const SingleProduct = (props) => {
                         fontSize="lg"
                         p={6}
                         _hover={{ backgroundColor: "orangered" }}
-                        onClick={() => handleWish(singleData.prodID)}>
+                        onClick={() => handleWish(singleData.prodID)}
+                      >
                         Mua ngay
                       </Button>
                     </Flex>
                     <Box
                       className="thanhtoan_text"
-                      m="5% 0%" border="solid #f7e9f7 2px" borderRadius="5px">
+                      m="5% 0%"
+                      border="solid #f7e9f7 2px"
+                      borderRadius="5px"
+                    >
                       <Heading
                         display="inline-block"
                         position="relative"
                         padding="0 2.5rem 0"
                         margin="0 auto"
-                        fontSize="1.3rem">
+                        fontSize="1.3rem"
+                      >
                         Các khuyến mãi khác
                       </Heading>
                       <Text margin="2%">
@@ -406,7 +431,6 @@ const SingleProduct = (props) => {
             <ComProduct prodID={singleData.prodID} />
           </Box>
         </Box>
-
       )}
     </>
   );

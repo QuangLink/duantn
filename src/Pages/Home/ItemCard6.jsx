@@ -14,7 +14,7 @@ const ItemCard6 = ({ type, heading }) => {
         templateColumns={{
           base: "repeat(1,1fr)",
           md: "repeat(2,1fr)",
-          lg: "repeat(3,1fr)",
+          lg: "repeat(2,1fr)",
           xl: "repeat(4,1fr)",
           "2xl": "repeat(4,1fr)",
         }}
@@ -24,7 +24,7 @@ const ItemCard6 = ({ type, heading }) => {
       >
         {type.map((i) => (
           <Flex
-            height="100px"
+            height="auto"
             key={uuid()}
             border="2px"
             borderColor="gray.500"
@@ -49,7 +49,7 @@ const ItemCard6 = ({ type, heading }) => {
               </Text>
             </Center>
             <Center>
-              <Text fontSize="15px" color="gray.600">
+              <Text fontSize="15px" color="gray.600" className="descDV" p="1">
                 {i.desc}
               </Text>
             </Center>

@@ -391,8 +391,7 @@ function Navbar() {
     return (
       <Box backgroundColor="#4a90e2" position={"relative"} zIndex={2}>
         <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
-          <Box>
-          </Box>
+          <Box></Box>
         </Flex>
         <Flex className="flex-container" px="15%">
           <Link to="/">

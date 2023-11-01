@@ -4,9 +4,6 @@ import AllRoutes from "./Components/AllRoutes";
 import Footer from "./Components/Footer.jsx/Footer";
 import React from "react";
 
-
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Center,
@@ -45,12 +44,12 @@ const ComProduct = ({ prodID }) => {
       try {
         const response = await axios.post(
           "https://duantn-backend.onrender.com/feedback",
-          feedbackData
+          feedbackData,
         );
 
         if (response.status === 200) {
           // Update the comments state with the new comment
-            window.location.reload();
+          window.location.reload();
         } else {
           console.error("Thêm phản hồi thất bại");
         }
@@ -64,7 +63,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/feedback/${prodID}`
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -92,7 +91,11 @@ const ComProduct = ({ prodID }) => {
     >
       <Box>
         <div
-          style={{ borderTop: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}
+          style={{
+            borderTop: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "10px",
+          }}
         >
           <h3
             style={{
@@ -129,14 +132,17 @@ const ComProduct = ({ prodID }) => {
           </div>
         </div>
         <Textarea value={newComment} onChange={handleCommentChange} />
-        <Button 
-        m="2% 3%"
-        fontSize={"10x"}
-        borderRadius={"5px"}
-        backgroundColor="blue.400"
-        color="whiteAlpha.900"
-        type="submit"
-        onClick={handleCommentSubmit}>Nhận xét</Button>
+        <Button
+          m="2% 3%"
+          fontSize={"10x"}
+          borderRadius={"5px"}
+          backgroundColor="blue.400"
+          color="whiteAlpha.900"
+          type="submit"
+          onClick={handleCommentSubmit}
+        >
+          Nhận xét
+        </Button>
 
         <ul>
           {comments.map((comment, index) => (
@@ -182,7 +188,6 @@ const ComProduct = ({ prodID }) => {
       </Box>
     </Box>
   );
-
 };
 
 export default ComProduct;

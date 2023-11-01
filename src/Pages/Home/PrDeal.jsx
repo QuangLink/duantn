@@ -20,6 +20,7 @@ import "./stylehome.css";
 const PrDeal = ({ type }) => {
   return (
     <Box
+    marginTop="2  "
       justifyContent="center"
       w="70%"
       m="auto"
@@ -36,7 +37,7 @@ const PrDeal = ({ type }) => {
         w="100%"
         m="15p% 10% 10% 10%"
       >
-        <Box mt="0">
+        <Box >
           <i>
             {" "}
             <img
@@ -152,6 +153,7 @@ const PrDeal = ({ type }) => {
                               </Text>
                             </Square>
                           </Flex>
+                          <Box h="20px" mb="3">
                           {i.original !== 0 && (
                             <>
                               <Flex>
@@ -186,6 +188,7 @@ const PrDeal = ({ type }) => {
                               </Box>
                             </>
                           )}
+                          </Box>
                           <Box borderRadius="15px">
                             <Image
                               src={require("../../Components/Images/PrSaleimg.png")}
