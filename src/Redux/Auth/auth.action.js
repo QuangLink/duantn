@@ -13,16 +13,23 @@ export const loginGoogle = (user) => async (dispatch) => {
   try {
     // Lấy thông tin username và token từ user object
     const username = user.displayName;
-    const token = user.accessToken;
-
+    const email = user.email;
+    
+    Cookies.set("username", username);
+    let res = await axios.post(
+      "https://duantn-backend.onrender.com/users/googleusers",
+      { username, email }, // Pass the username and email as an object to the post request
+    );
+    const userID = res.data.payload.userID;
+    Cookies.set("userID", userID);
     // Gọi action Redux để cập nhật trạng thái đăng nhập
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { username, token },
+      payload: { username, userID },
     });
 
-    console.log("Login with Google successful:", token);
-    return token;
+    console.log("Login with Google successful:", );
+    return ;
   } catch (e) {
     dispatch({ type: LOGIN_ERROR, payload: e.message });
     console.log("Error during Google login:", e);
