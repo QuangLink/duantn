@@ -43,13 +43,7 @@ function SignInForm() {
         <h1>Đăng nhập</h1>
         <div className="social-container">
           <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
             <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
           </a>
         </div>
         <span>hoặc sử dụng tài khoản</span>
