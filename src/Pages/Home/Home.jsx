@@ -79,8 +79,7 @@ const Home = () => {
         )}
       </Suspense>
 
-      <br />
-      <hr />
+    
 
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <PrDeal type={PrAsus} />}
@@ -104,8 +103,7 @@ const Home = () => {
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
 
-      <br />
-      <hr />
+      
 
       <Suspense fallback={<div>Loading...</div>}>
         <Btn />

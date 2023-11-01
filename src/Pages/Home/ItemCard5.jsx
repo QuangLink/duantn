@@ -59,6 +59,7 @@ const ItemCard5 = ({ type, heading }) => {
       w="70%"
       m="auto"
       mt="6"
+      mb="2"
       cursor="pointer"
       textAlign="center"
     >
@@ -156,7 +157,8 @@ const ItemCard5 = ({ type, heading }) => {
                               </Text>
                             </Square>
                           </Flex>
-                          {i.original !== 0 && (
+                         <Box h="20px">
+                         {i.original !== 0 && (
                             <>
                               <Flex>
                                 <Text color="gray.600" fontSize="14px">
@@ -190,6 +192,7 @@ const ItemCard5 = ({ type, heading }) => {
                               </Box>
                             </>
                           )}
+                         </Box>
 
                           {/* <Flex>
                     <Text color="gray.600" fontSize="14px">
