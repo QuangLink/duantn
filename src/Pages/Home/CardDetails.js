@@ -4,8 +4,8 @@ const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
-  applephone: apiUrlBase + "apple",
-  appletablet: apiUrlBase + "apple",
+  applephone: apiUrlBase + "apple/phone",
+  appletablet: apiUrlBase + "apple/tablet",
   samsung: apiUrlBase + "samsung",
   xiaomi: apiUrlBase + "xiaomi",
   hp: apiUrlBase + "hp",
