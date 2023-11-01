@@ -11,7 +11,8 @@ import {
   CateFeatures,
   ItemDetails9,
   // PrAppleTablet,
-  // PrSamsung,
+  // PrSamsungPhone,
+  // PrSamsungTablet,
   // PrXiaomi,
   // PrHp,
   PrAsus,
@@ -45,7 +46,8 @@ const Home = () => {
       loadPrSale(),
       loadPrApplePhone(),
       // loadPrAppleTablet(),
-      // loadPrSamsung(),
+      // loadPrSamsungPhone(),
+      // loadPrSamsungTablet(),
       // loadPrXiaomi(),
       // loadPrHp(),
       loadPrAsus(),
@@ -79,8 +81,7 @@ const Home = () => {
         )}
       </Suspense>
 
-      <br />
-      <hr />
+    
 
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <PrDeal type={PrAsus} />}
@@ -104,8 +105,7 @@ const Home = () => {
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
 
-      <br />
-      <hr />
+      
 
       <Suspense fallback={<div>Loading...</div>}>
         <Btn />
