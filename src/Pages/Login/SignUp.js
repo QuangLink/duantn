@@ -111,13 +111,7 @@ function SignUpForm() {
         <h1>Tạo tài khoản</h1>
         <div className="social-container">
           <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
             <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
           </a>
         </div>
         <span>Hoặc đăng ký bằng email</span>

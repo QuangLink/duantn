@@ -39,8 +39,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
 import "./Navbar.css";
 import useScrollListener from "./useScroll";
-
+import { UserAuth } from "../context/AuthContext";
 function Navbar() {
+  const {user,logOut} = UserAuth();
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
@@ -167,16 +168,28 @@ function Navbar() {
       fetchData(inputValue);
     }
   };
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-    toast({
-      title: "Logout  success.",
-      description: "We will miss you 😭",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
+  const handleLogout = async() => {
+    try {
+      await logOut();
+      dispatch(logout());
+      navigate("/login");
+      toast({
+        title: "Logout  success.",
+        description: "We will miss you 😭",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Logout failed.",
+        description: "Please try again later.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   const Closesearch = () => {
