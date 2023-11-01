@@ -38,7 +38,7 @@ const HotProduct = ({ type, heading }) => {
             color="whiteAlpha.900"
             fontWeight="black"
             width="100%"
-            backgroundImage={`https://tse4.mm.bing.net/th?id=OIP._aitshqx8BfKQfOgRl-1ZgEyDM&pid=Api&P=0&h=180`}
+            backgroundColor="blue.300"
             h="60px"
             p={2}
           >
