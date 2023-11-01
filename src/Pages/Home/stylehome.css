@@ -104,7 +104,7 @@
     
    
   }
-@media(max-width:1200px){
+@media(max-width:1204px){
   .BannerTrai{
     display: none;
   }
@@ -113,6 +113,9 @@
     width: 500px;
     height: 120px;
    ;
+  }
+  .descDV{
+    display: none;
   }
 
   

@@ -99,6 +99,7 @@ const Slider = ({ type }) => {
                       </Text>
                     </Square>
                   </Flex>
+                  <Box h="20px">
                   {i.original !== 0 && (
                     <>
                       <Flex>
@@ -128,6 +129,7 @@ const Slider = ({ type }) => {
                       </Box>
                     </>
                   )}
+                  </Box>
                 </Box>
               </Box>
             </Link>
