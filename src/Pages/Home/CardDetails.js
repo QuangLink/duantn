@@ -6,7 +6,8 @@ const categoryUrls = {
   sale: apiUrlBase + "sale",
   applephone: apiUrlBase + "apple/phone",
   appletablet: apiUrlBase + "apple/tablet",
-  samsung: apiUrlBase + "samsung",
+  samsungphone: apiUrlBase + "samsung/phone",
+  samsungtablet: apiUrlBase + "samsung/tablet",
   xiaomi: apiUrlBase + "xiaomi",
   hp: apiUrlBase + "hp",
   asus: apiUrlBase + "asus",
@@ -34,7 +35,8 @@ const fetchDataForCategory = async (category) => {
 export let PrSale = [];
 export let PrApplePhone = [];
 export let PrAppleTablet = [];
-export let PrSamsung = [];
+export let PrSamsungPhone = [];
+export let PrSamsungTablet = [];
 export let PrXiaomi = [];
 export let PrHp = [];
 export let PrAsus = [];
@@ -52,8 +54,11 @@ export async function loadPrApplePhone() {
 export async function loadPrAppleTablet() {
   PrAppleTablet = await fetchDataForCategory("appletablet");
 }
-export async function loadPrSamsung() {
-  PrSamsung = await fetchDataForCategory("samsung");
+export async function loadPrSamsungPhone() {
+  PrSamsungPhone = await fetchDataForCategory("samsungphone");
+}
+export async function loadPrSamsungTablet() {
+  PrSamsungTablet = await fetchDataForCategory("samsungtablet");
 }
 export async function loadPrXiaomi() {
   PrXiaomi = await fetchDataForCategory("xiaomi");
@@ -70,7 +75,6 @@ export async function loadPrLenovo() {
 export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
 }
-
 
 export const BannersCenter = [
   {
