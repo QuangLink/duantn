@@ -81,30 +81,27 @@ const ComProduct = ({ prodID }) => {
   return (
     <Box
       justifyContent="center"
-      w="75%"
+      w="80%"
       m="auto"
       mt="6"
       cursor="pointer"
       backgroundColor="blackAlpha.50"
       borderRadius="10px"
-      height="auto"
-    >
+      height="auto">
       <Box>
         <div
           style={{
             borderTop: "1px solid #ccc",
             borderRadius: "5px",
-            padding: "10px",
-          }}
-        >
+            padding: "20px",
+          }}>
           <h3
             style={{
               marginBottom: "10px",
               fontFamily: "Arial",
               fontSize: "18px",
               fontWeight: "bold",
-            }}
-          >
+            }}>
             Đánh giá sản phẩm:
           </h3>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -130,10 +127,11 @@ const ComProduct = ({ prodID }) => {
               );
             })}
           </div>
+          <br />
+          <Textarea backgroundColor="white" value={newComment} onChange={handleCommentChange} />
         </div>
-        <Textarea value={newComment} onChange={handleCommentChange} />
         <Button
-          m="2% 3%"
+          m="1% 1%"
           fontSize={"10x"}
           borderRadius={"5px"}
           backgroundColor="blue.400"
@@ -146,7 +144,7 @@ const ComProduct = ({ prodID }) => {
 
         <ul>
           {comments.map((comment, index) => (
-            <li key={index}>
+            <li  key={index}>
               <hr />
               <Box
                 m={5}
@@ -189,5 +187,4 @@ const ComProduct = ({ prodID }) => {
     </Box>
   );
 };
-
 export default ComProduct;
