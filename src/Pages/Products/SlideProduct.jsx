@@ -8,7 +8,7 @@ const SlideProuct = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Box
-        bg="#6FE4FF"
+        backgroundColor="blue.300"
         display="flex"
         w="80%"
         m="auto"
