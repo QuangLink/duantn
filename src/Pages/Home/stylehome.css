@@ -75,6 +75,9 @@
     top: 0;
     border-radius: 10px;
 }
+.cateName:hover{
+  color: blue;
+}
 
 @keyframes glowing {
     0% { background-position: 0 0; }
