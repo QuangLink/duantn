@@ -31,6 +31,8 @@ const ComProduct = ({ prodID }) => {
     setNewComment(e.target.value);
   };
 
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (newComment.trim() !== "" && prodID && userID && prodRate) {
@@ -48,8 +50,9 @@ const ComProduct = ({ prodID }) => {
         );
 
         if (response.status === 200) {
-          // Update the comments state with the new comment
-          window.location.reload();
+          setNewComment(""); 
+          setProdRate(""); 
+          setSubmitSuccess(true);
         } else {
           console.error("Thêm phản hồi thất bại");
         }
@@ -58,6 +61,31 @@ const ComProduct = ({ prodID }) => {
       }
     }
   };
+
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await axios.get(
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+        );
+        if (response.status === 200) {
+          const data = response.data;
+          setComments(data);
+        } else {
+          console.error("Lấy bình luận thất bại");
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy bình luận:", error);
+      }
+    }
+    fetchComments();
+  }, [prodID, submitSuccess]);
+
+  useEffect(() => {
+    if (submitSuccess) {
+      setSubmitSuccess(false);
+    }
+  }, [submitSuccess]);
 
   useEffect(() => {
     async function fetchComments() {
