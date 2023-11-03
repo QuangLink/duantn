@@ -82,7 +82,7 @@ const ItemCard5 = ({ type, heading }) => {
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             768: {
