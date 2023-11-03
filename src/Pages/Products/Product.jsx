@@ -118,7 +118,10 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá mới: {prodPrice}₫
+                  Giá mới: {prodPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
@@ -127,7 +130,10 @@ const Product = (props, rating) => {
                   color="blackAlpha.600"
                   textDecoration="line-through"
                 >
-                  Giá gốc: {prodPriceSale}₫
+                  Giá gốc: {prodPriceSale.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Text>
               </Box>
               <Badge
@@ -161,7 +167,10 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá: {prodPrice}₫
+                  Giá: {prodPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Heading>
               </Box>
               <Badge
