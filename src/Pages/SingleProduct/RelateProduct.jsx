@@ -81,12 +81,13 @@ const RelateProduct = ({ type, heading }) => {
                   <Box
                     p="5"
                     m={["0%", "0%", "2%"]}
-                    height="400px"
+                    height="350px"
                     backgroundColor="white"
+                    borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
                     <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                      <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
+                      <Image src={`${i.img}`} alt={i.name} boxSize="160px" marginBottom="10px"/>
                     </Square>
                     <Text
                       color="#424245"
@@ -98,37 +99,62 @@ const RelateProduct = ({ type, heading }) => {
                     >
                       {i.name}
                     </Text>
-                    <Box mt="2.5">
+                    <Box mt="2.5" m="20px 0 30px 0">
                       <Flex>
                         <Square>
                           <Text color="gray.600" fontSize="14px">
-                            Giá mới:{" "}
+                            Giá mới :{" "}
                           </Text>
                         </Square>
                         <Square>
-                          <Text fontWeight="600" fontSize="18px" ml="1">
-                            {i.price} <sup>đ</sup>
+                          <Text
+                            fontWeight="600"
+                            fontSize="18px"
+                            ml="1"
+                            color="red"
+                            _hover={{ color: "red" }}
+                          >
+                            {i.price.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
                           </Text>
                         </Square>
                       </Flex>
-                      <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giá gốc:{" "}
-                        </Text>
-                        {"  "}
-                        <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                          {i.mrp} <sup>đ</sup>
-                        </Text>
-                      </Flex>
-                      <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giảm giá:{" "}
-                        </Text>
-                        {"  "}
-                        <Text color="gray.600" fontSize="14px" ml="1">
-                          {i.discount} <sup>đ</sup>
-                        </Text>
-                      </Flex>
+                      {i.original !== 0 && (
+                        <>
+                          <Flex>
+                            <Text color="gray.600" fontSize="14px">
+                              Giá gốc:{" "}
+                            </Text>
+                            {"  "}
+                            <Text
+                              as="s"
+                              color="gray.600"
+                              fontSize="14px"
+                              ml="1"
+                            >
+                              {i.original.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
+                            </Text>
+                          </Flex>
+                          <Box
+                            padding="3px"
+                            borderRadius="5px"
+                            w="50%"
+                            color="#EC4C0A"
+                            bg="#FEB373"
+                            mt="2"
+                            textAlign="center"
+                          >
+                            <Text fontSize="10px" fontWeight="500">
+                              GIẢM GIÁ SỐC
+                            </Text>
+                          </Box>
+                        </>
+                      )}
                     </Box>
                   </Box>
                 </Link>

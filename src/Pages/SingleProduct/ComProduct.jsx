@@ -31,6 +31,8 @@ const ComProduct = ({ prodID }) => {
     setNewComment(e.target.value);
   };
 
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (newComment.trim() !== "" && prodID && userID && prodRate) {
@@ -48,8 +50,9 @@ const ComProduct = ({ prodID }) => {
         );
 
         if (response.status === 200) {
-          // Update the comments state with the new comment
-          window.location.reload();
+          setNewComment(""); 
+          setProdRate(""); 
+          setSubmitSuccess(true);
         } else {
           console.error("Thêm phản hồi thất bại");
         }
@@ -76,35 +79,57 @@ const ComProduct = ({ prodID }) => {
       }
     }
     fetchComments();
+  }, [prodID, submitSuccess]);
+
+  useEffect(() => {
+    if (submitSuccess) {
+      setSubmitSuccess(false);
+    }
+  }, [submitSuccess]);
+
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await axios.get(
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+        );
+        if (response.status === 200) {
+          const data = response.data;
+          setComments(data);
+        } else {
+          console.error("Lấy bình luận thất bại");
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy bình luận:", error);
+      }
+    }
+    fetchComments();
   }, [prodID]);
 
   return (
     <Box
       justifyContent="center"
-      w="75%"
+      w="80%"
       m="auto"
       mt="6"
       cursor="pointer"
       backgroundColor="blackAlpha.50"
       borderRadius="10px"
-      height="auto"
-    >
+      height="auto">
       <Box>
         <div
           style={{
             borderTop: "1px solid #ccc",
             borderRadius: "5px",
-            padding: "10px",
-          }}
-        >
+            padding: "20px",
+          }}>
           <h3
             style={{
               marginBottom: "10px",
               fontFamily: "Arial",
               fontSize: "18px",
               fontWeight: "bold",
-            }}
-          >
+            }}>
             Đánh giá sản phẩm:
           </h3>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -130,10 +155,11 @@ const ComProduct = ({ prodID }) => {
               );
             })}
           </div>
+          <br />
+          <Textarea backgroundColor="white" value={newComment} onChange={handleCommentChange} />
         </div>
-        <Textarea value={newComment} onChange={handleCommentChange} />
         <Button
-          m="2% 3%"
+          m="1% 1%"
           fontSize={"10x"}
           borderRadius={"5px"}
           backgroundColor="blue.400"
@@ -146,7 +172,7 @@ const ComProduct = ({ prodID }) => {
 
         <ul>
           {comments.map((comment, index) => (
-            <li key={index}>
+            <li  key={index}>
               <hr />
               <Box
                 m={5}
@@ -168,7 +194,7 @@ const ComProduct = ({ prodID }) => {
                   mr="10px"
                   textDecoration="underline"
                 >
-                  {comment.firstname} {comment.lastname}
+                   {comment.username}
                 </Text>
                 <Text padding={2}>
                   <p>{comment.comment}</p>
@@ -189,5 +215,4 @@ const ComProduct = ({ prodID }) => {
     </Box>
   );
 };
-
 export default ComProduct;

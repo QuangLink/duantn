@@ -25,7 +25,7 @@ import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
-import { PrHp } from "../Home/CardDetails";
+import { PrHp ,BannersCenter,PrApplePhone} from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
 import RatingBar from "./RatingBar";
@@ -86,10 +86,10 @@ const Products = ({ typeOfProduct }) => {
       </Heading>
       <hr></hr> */}
       <Box>
-        <SlideProuct type={PrHp} />
+        <SlideProuct type={BannersCenter} />
       </Box>
       <Box mb="2%">
-        <HotProduct type={PrHp} />
+        <HotProduct type={PrApplePhone} />
       </Box>
       <ProductFilter />
 

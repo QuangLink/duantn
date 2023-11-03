@@ -301,12 +301,18 @@ const SingleProduct = (props) => {
                         style: "currency",
                         currency: "VND",
                       })} */}
-                      {singleData.prodPrice}
+                      {singleData.prodPrice.toLocaleString("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                     </Heading>
                     {singleData.prodSale !== 0 && (
                       <>
                         <Text fontSize="lg" marginBottom={3}>
-                          Giá gốc: {singleData.prodPriceSale}
+                          Giá gốc: {singleData.prodPriceSale.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
                           <span
                             style={{ textDecoration: "line-through" }}
                           ></span>
