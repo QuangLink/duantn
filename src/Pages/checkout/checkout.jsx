@@ -1,6 +1,6 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, {  useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+
 import Cookies from "js-cookie";
 import {
   useDisclosure,
@@ -47,16 +47,6 @@ const Checkout = () => {
     setcity,
   } = address;
   const navigate = useNavigate();
-
-  const handleAddress = () => {
-    let lastname = address.current.setlastname.value;
-    let firstname = address.current.setfirstname.value;
-    let flat = address.current.setflat.value;
-    let state = address.current.setstate.value;
-    let street = address.current.setstreet.value;
-    let city = address.current.setcity.value;
-    let mobile = address.current.setmobile.value;
-  };
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
@@ -148,10 +138,10 @@ const Checkout = () => {
                 borderRadius: "5px",
               }}
             >
-              {addressData.firstname === "" && (
+              {addressData.firstname === null && (
                 <Box>Không tìm thấy địa chỉ nào</Box>
               )}
-              {addressData.firstname !== "" && (
+              {addressData.firstname !== null && (
                 <Box
                   style={{
                     display: "flex",
@@ -232,7 +222,7 @@ const Checkout = () => {
                     <Button
                       variant="ghost"
                       onClick={() => {
-                        handleAddress();
+               
                         handleAddressSubmit();
                       }}
                     >
@@ -250,17 +240,17 @@ const Checkout = () => {
                 margin: "20px",
               }}
             >
-              {addressData.firstname === "" && (
+              {addressData.firstname === null && (
                 <Button onClick={onOpen} colorScheme="blue" variant="outline">
                   Nhập địa chỉ giao hàng mới
                 </Button>
               )}
-              {addressData.firstname !== "" && (
+              {addressData.firstname !== null && (
                 <Button onClick={onOpen} colorScheme="blue" variant="outline">
                   Sửa địa chỉ
                 </Button>
               )}
-              {addressData.firstname !== "" && (
+              {addressData.firstname !== null && (
                 <Button
                   onClick={() => navigate("/payments")}
                   colorScheme="blue"
@@ -269,7 +259,7 @@ const Checkout = () => {
                   Chọn phương thức thanh toán
                 </Button>
               )}
-              {addressData.firstname !== "" && (
+              {addressData.firstname !== null && (
                 <Button
                   onClick={clearAddress}
                   colorScheme="red"

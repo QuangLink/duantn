@@ -104,9 +104,15 @@ const TimeDeal = ({ type, heading }) => {
             >
               <i fontSize="10px">
                 {" "}
-                Kết thúc trong {thoiGianConLai.gio.toString().padStart(2, "0")}:
-                {thoiGianConLai.phut.toString().padStart(2, "0")}:
+                Kết thúc trong <span>
+                {thoiGianConLai.gio.toString().padStart(2, "0")}
+                </span>:
+                <span>
+                {thoiGianConLai.phut.toString().padStart(2, "0")}
+                </span>:
+                <span>
                 {thoiGianConLai.giay.toString().padStart(2, "0")}{" "}
+                </span>
               </i>{" "}
             </Text>
           </Text>
@@ -132,7 +138,7 @@ const TimeDeal = ({ type, heading }) => {
             color="blackAlpha.800"
             mt="2"
           >
-            <i fontSize="10px"> 08: 00/23:59 </i>{" "}
+            <i fontSize="10px"> 08:00/23:59 </i>{" "}
           </Text>
         </Box>
       </Heading>

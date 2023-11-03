@@ -14,7 +14,9 @@ const CateFeature = ({ type }) => {
       row.push(
         <td key={j} style={{ textAlign: "center" }}>
           <div
-            style={{
+            style={{ 
+              borderRadius:"10px",
+              border:"1px solid #b0b0b0",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -25,7 +27,7 @@ const CateFeature = ({ type }) => {
               alt={type[j].name}
               style={{ width: "60px", height: "60px", marginBottom: "10px" }}
             />
-            <p style={{ marginTop: "0", wordWrap: "break-word" }}>
+            <p className="cateName" style={{ marginTop: "0", wordWrap: "break-word", padding:"5px", margin:"2px" }}  >
               {type[j].name}
             </p>
           </div>
@@ -48,6 +50,7 @@ const CateFeature = ({ type }) => {
       </Heading>
 
       <Box
+      
         justifyContent="center"
         w="70%"
         m="auto"
@@ -59,7 +62,7 @@ const CateFeature = ({ type }) => {
         textSizeAdjust="auto"
       >
         <table>
-          <tbody>{rows}</tbody>
+          <tbody >{rows}</tbody>
         </table>
       </Box>
     </Box>
