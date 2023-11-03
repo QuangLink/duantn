@@ -11,8 +11,6 @@ import {
   ListItem,
   Text,
   UnorderedList,
-  useToast,
-  border,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -25,7 +23,6 @@ import ComProduct from "./ComProduct";
 
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
-import RatingBar from "../Products/RatingBar";
 import Cookies from "js-cookie";
 //add singleData to cart
 const postSingleData = async (data) => {
@@ -74,7 +71,7 @@ const SingleProduct = (props) => {
   const { typeOfProduct } = props;
 
   const params = useParams();
-  const toast = useToast();
+
 
   // const [singleData, setSingleData] = useState({});
 
@@ -103,7 +100,7 @@ const SingleProduct = (props) => {
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
-  }, [typeOfProduct, params.id]);
+  }, [dispatch,typeOfProduct, params.id]);
   if (error) {
     return (
       <Heading
@@ -297,22 +294,21 @@ const SingleProduct = (props) => {
                       {singleData.prodName}
                     </Heading>
                     <Heading size="lg" marginBottom={5} color="red">
-                      {/* {singleData.prodPrice.toLocaleString("vi-VN", {
-                        style: "currency",
-                        currency: "VND",
-                      })} */}
-                      {singleData.prodPrice.toLocaleString("vi-VN", {
-                        style: "currency",
-                        currency: "VND",
-                      })}
+                      {singleData.prodPrice &&
+                        singleData.prodPrice.toLocaleString("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
                     </Heading>
                     {singleData.prodSale !== 0 && (
                       <>
                         <Text fontSize="lg" marginBottom={3}>
-                          Giá gốc: {singleData.prodPriceSale.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                          })}
+                          Giá gốc:{" "}
+                          {singleData.prodPriceSale &&
+                            singleData.prodPriceSale.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
                           <span
                             style={{ textDecoration: "line-through" }}
                           ></span>

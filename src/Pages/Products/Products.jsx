@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Product from "./Product";
 import {
   Box,
@@ -7,28 +7,14 @@ import {
   GridItem,
   Heading,
   Center,
-  Flex,
-  Text,
-  Button,
-  Input,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  border,
-  Image,
-  Link,
-  flexbox,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
-import { Form } from "react-router-dom";
 import HotProduct from "./HotProduct";
-import { PrHp ,BannersCenter,PrApplePhone} from "../Home/CardDetails";
+import { BannersCenter,PrApplePhone} from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
-import RatingBar from "./RatingBar";
 const getData = async (typeOfProduct, brandOfProduct) => {
   let response = await axios.get(
     `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,

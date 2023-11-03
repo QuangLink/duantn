@@ -1,11 +1,9 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
 import {
   Badge,
   Box,
   Button,
   Center,
-  Flex,
   Heading,
   Image,
   Text,
@@ -39,7 +37,7 @@ const postSingleDataWish = async (data) => {
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
-  const { data, typeOfProduct } = props;
+  const { data } = props;
   const {
     prodID,
     prodName,
@@ -150,7 +148,7 @@ const Product = (props, rating) => {
               </Badge>
             </Box>
           )}
-          {prodSale == 0 && (
+          {prodSale === 0 && (
             <Box className="div_2">
               <Box
                 className="box_1"
