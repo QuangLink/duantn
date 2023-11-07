@@ -72,7 +72,6 @@ const SingleProduct = (props) => {
 
   const params = useParams();
 
-
   // const [singleData, setSingleData] = useState({});
 
   var navigate = useNavigate();
@@ -100,7 +99,7 @@ const SingleProduct = (props) => {
 
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
-  }, [dispatch,typeOfProduct, params.id]);
+  }, [dispatch, typeOfProduct, params.id]);
   if (error) {
     return (
       <Heading

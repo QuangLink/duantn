@@ -1,18 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import Product from "./Product";
-import {
-  Box,
-  Grid,
-  GridItem,
-  Heading,
-  Center,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Heading, Center } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
 import HotProduct from "./HotProduct";
-import { BannersCenter,PrApplePhone} from "../Home/CardDetails";
+import { BannersCenter, PrApplePhone } from "../Home/CardDetails";
 import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
 const getData = async (typeOfProduct, brandOfProduct) => {

@@ -116,7 +116,8 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá mới: {prodPrice.toLocaleString("vi-VN", {
+                  Giá mới:{" "}
+                  {prodPrice.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}
@@ -128,7 +129,8 @@ const Product = (props, rating) => {
                   color="blackAlpha.600"
                   textDecoration="line-through"
                 >
-                  Giá gốc: {prodPriceSale.toLocaleString("vi-VN", {
+                  Giá gốc:{" "}
+                  {prodPriceSale.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}
@@ -165,7 +167,8 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá: {prodPrice.toLocaleString("vi-VN", {
+                  Giá:{" "}
+                  {prodPrice.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}

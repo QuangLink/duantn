@@ -1,4 +1,4 @@
-import React, {  useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Cookies from "js-cookie";
@@ -222,7 +222,6 @@ const Checkout = () => {
                     <Button
                       variant="ghost"
                       onClick={() => {
-               
                         handleAddressSubmit();
                       }}
                     >

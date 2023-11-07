@@ -20,7 +20,7 @@ import "./stylehome.css";
 const PrDeal = ({ type }) => {
   return (
     <Box
-    marginTop="2  "
+      marginTop="2  "
       justifyContent="center"
       w="70%"
       m="auto"
@@ -37,7 +37,7 @@ const PrDeal = ({ type }) => {
         w="100%"
         m="15p% 10% 10% 10%"
       >
-        <Box >
+        <Box>
           <i>
             {" "}
             <img
@@ -72,23 +72,23 @@ const PrDeal = ({ type }) => {
           breakpoints={{
             0: {
               slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 10,
+              spaceBetween: 5,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 15,
+              spaceBetween: 5,
             },
             1024: {
-              slidesPerView: 4,
-              spaceBetween: 15,
+              slidesPerView: 3,
+              spaceBetween: 5,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 10,
+              spaceBetween: 5,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 5,
             },
           }}
         >
@@ -154,40 +154,40 @@ const PrDeal = ({ type }) => {
                             </Square>
                           </Flex>
                           <Box h="20px" mb="3">
-                          {i.original !== 0 && (
-                            <>
-                              <Flex>
-                                <Text color="gray.600" fontSize="14px">
-                                  Giá gốc:{" "}
-                                </Text>
-                                {"  "}
-                                <Text
-                                  as="s"
-                                  color="gray.600"
-                                  fontSize="14px"
-                                  ml="1"
+                            {i.original !== 0 && (
+                              <>
+                                <Flex>
+                                  <Text color="gray.600" fontSize="14px">
+                                    Giá gốc:{" "}
+                                  </Text>
+                                  {"  "}
+                                  <Text
+                                    as="s"
+                                    color="gray.600"
+                                    fontSize="14px"
+                                    ml="1"
+                                  >
+                                    {i.original.toLocaleString("vi-VN", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </Text>
+                                </Flex>
+                                <Box
+                                  padding="3px"
+                                  borderRadius="5px"
+                                  w="50%"
+                                  color="#EC4C0A"
+                                  bg="#FEB373"
+                                  mt="2"
+                                  textAlign="center"
                                 >
-                                  {i.original.toLocaleString("vi-VN", {
-                                    style: "currency",
-                                    currency: "VND",
-                                  })}
-                                </Text>
-                              </Flex>
-                              <Box
-                                padding="3px"
-                                borderRadius="5px"
-                                w="50%"
-                                color="#EC4C0A"
-                                bg="#FEB373"
-                                mt="2"
-                                textAlign="center"
-                              >
-                                <Text fontSize="10px" fontWeight="500">
-                                  GIẢM GIÁ SỐC
-                                </Text>
-                              </Box>
-                            </>
-                          )}
+                                  <Text fontSize="10px" fontWeight="500">
+                                    GIẢM GIÁ SỐC
+                                  </Text>
+                                </Box>
+                              </>
+                            )}
                           </Box>
                           <Box borderRadius="15px">
                             <Image
