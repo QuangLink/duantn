@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { ChevronUpIcon } from "@chakra-ui/icons";
+
+import React, { useState, useEffect } from 'react';
+import { ChevronUpIcon } from '@chakra-ui/icons'
 
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,26 +14,31 @@ const BackToTopButton = () => {
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+
+    window.addEventListener('scroll', toggleVisibility);
 
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+      window.removeEventListener('scroll', toggleVisibility);
+
     };
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth'
+
     });
   };
 
   return (
     <button
-      className={`back-to-top-button ${isVisible ? "visible" : ""}`}
+
+      className={`back-to-top-button ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}
     >
-      <ChevronUpIcon color="black" fontSize="40px" />
+      <ChevronUpIcon color="black" fontSize="40px"/>
+
     </button>
   );
 };
