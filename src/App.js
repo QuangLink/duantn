@@ -21,11 +21,11 @@ class App extends React.Component {
     };
     return (
       <div className="App">
-      <AuthContextProvider>
-        <Navbar />
-        <AllRoutes />
-        <Footer style={footerStyle} />
-      </AuthContextProvider>
+        <AuthContextProvider>
+          <Navbar />
+          <AllRoutes />
+          <Footer style={footerStyle} />
+        </AuthContextProvider>
       </div>
     );
   }

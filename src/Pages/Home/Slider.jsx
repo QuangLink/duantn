@@ -100,35 +100,35 @@ const Slider = ({ type }) => {
                     </Square>
                   </Flex>
                   <Box h="20px">
-                  {i.original !== 0 && (
-                    <>
-                      <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giá gốc:{" "}
-                        </Text>
-                        {"  "}
-                        <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                          {i.original.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                          })}
-                        </Text>
-                      </Flex>
-                      <Box
-                        padding="3px"
-                        borderRadius="5px"
-                        w="50%"
-                        color="#EC4C0A"
-                        bg="#FEB373"
-                        mt="2"
-                        textAlign="center"
-                      >
-                        <Text fontSize="10px" fontWeight="500">
-                          GIẢM GIÁ SỐC
-                        </Text>
-                      </Box>
-                    </>
-                  )}
+                    {i.original !== 0 && (
+                      <>
+                        <Flex>
+                          <Text color="gray.600" fontSize="14px">
+                            Giá gốc:{" "}
+                          </Text>
+                          {"  "}
+                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
+                            {i.original.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                          </Text>
+                        </Flex>
+                        <Box
+                          padding="3px"
+                          borderRadius="5px"
+                          w="50%"
+                          color="#EC4C0A"
+                          bg="#FEB373"
+                          mt="2"
+                          textAlign="center"
+                        >
+                          <Text fontSize="10px" fontWeight="500">
+                            GIẢM GIÁ SỐC
+                          </Text>
+                        </Box>
+                      </>
+                    )}
                   </Box>
                 </Box>
               </Box>

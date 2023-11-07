@@ -104,15 +104,10 @@ const TimeDeal = ({ type, heading }) => {
             >
               <i fontSize="10px">
                 {" "}
-                Kết thúc trong <span>
-                {thoiGianConLai.gio.toString().padStart(2, "0")}
-                </span>:
-                <span>
-                {thoiGianConLai.phut.toString().padStart(2, "0")}
-                </span>:
-                <span>
-                {thoiGianConLai.giay.toString().padStart(2, "0")}{" "}
-                </span>
+                Kết thúc trong{" "}
+                <span>{thoiGianConLai.gio.toString().padStart(2, "0")}</span>:
+                <span>{thoiGianConLai.phut.toString().padStart(2, "0")}</span>:
+                <span>{thoiGianConLai.giay.toString().padStart(2, "0")} </span>
               </i>{" "}
             </Text>
           </Text>

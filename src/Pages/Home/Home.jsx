@@ -3,7 +3,6 @@ import CateFeature from "./CateFeature";
 import BannerCenter from "./BannerCenter";
 import Btn from "./Btn";
 import BackToTopButton from './BackToTopButton';
-
 import { Box } from "@chakra-ui/react";
 import {
   BannersCenter,
@@ -49,11 +48,11 @@ const Home = () => {
         setIsVisible(false);
       }
     };
-
     window.addEventListener('scroll', toggleVisibility);
 
     return () => {
       window.removeEventListener('scroll', toggleVisibility);
+
     };
   }, []);
 
@@ -61,6 +60,7 @@ const Home = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+
     });
   };
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -106,8 +106,6 @@ const Home = () => {
         )}
       </Suspense>
 
-    
-
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <PrDeal type={PrAsus} />}
       </Suspense>
@@ -129,8 +127,6 @@ const Home = () => {
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
-
-      
 
       <Suspense fallback={<div>Loading...</div>}>
         <Btn />

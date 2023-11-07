@@ -96,16 +96,16 @@ const HotProduct = ({ type, heading }) => {
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
                     <Box height="30px">
-                    <Text
-                      color="#424245"
-                      noOfLines={2}
-                      textAlign="center"
-                      fontSize="15px"
-                      fontWeight="bold"
-                      _hover={{ color: "#fd8002" }}
-                    >
-                      {i.name}
-                    </Text>
+                      <Text
+                        color="#424245"
+                        noOfLines={2}
+                        textAlign="center"
+                        fontSize="15px"
+                        fontWeight="bold"
+                        _hover={{ color: "#fd8002" }}
+                      >
+                        {i.name}
+                      </Text>
                     </Box>
                     <Box mt="2.5" m="20px 0 30px 0">
                       <Flex>

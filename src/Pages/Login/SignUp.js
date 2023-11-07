@@ -37,7 +37,7 @@ function SignUpForm() {
     try {
       await googleSignIn(); // Bắt đầu quá trình đăng nhập bằng Google
       // Không cần gọi dispatch(loginGoogle(user)) ở đây
-  
+
       // Đợi đến khi người dùng được xác thực và thông tin người dùng sẵn sàng
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
@@ -51,7 +51,6 @@ function SignUpForm() {
       console.log(error);
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

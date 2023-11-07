@@ -14,7 +14,7 @@ export const loginGoogle = (user) => async (dispatch) => {
     // Lấy thông tin username và token từ user object
     const username = user.displayName;
     const email = user.email;
-    
+
     Cookies.set("username", username);
     let res = await axios.post(
       "https://duantn-backend.onrender.com/users/googleusers",
@@ -28,8 +28,8 @@ export const loginGoogle = (user) => async (dispatch) => {
       payload: { username, userID },
     });
 
-    console.log("Login with Google successful:", );
-    return ;
+    console.log("Login with Google successful:");
+    return;
   } catch (e) {
     dispatch({ type: LOGIN_ERROR, payload: e.message });
     console.log("Error during Google login:", e);

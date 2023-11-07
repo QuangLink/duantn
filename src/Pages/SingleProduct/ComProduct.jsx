@@ -1,21 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Center,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Image,
-  Input,
-  ListItem,
-  Text,
-  UnorderedList,
-  useToast,
-  color,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import RatingBar from "../Products/RatingBar";
@@ -24,7 +8,7 @@ import { FaStar } from "react-icons/fa";
 const ComProduct = ({ prodID }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [userID, setUserID] = useState(Cookies.get("userID") || "");
+  const [userID] = useState(Cookies.get("userID") || "");
   const [prodRate, setProdRate] = useState("");
 
   const handleCommentChange = (e) => {
@@ -50,8 +34,8 @@ const ComProduct = ({ prodID }) => {
         );
 
         if (response.status === 200) {
-          setNewComment(""); 
-          setProdRate(""); 
+          setNewComment("");
+          setProdRate("");
           setSubmitSuccess(true);
         } else {
           console.error("Thêm phản hồi thất bại");
@@ -115,21 +99,24 @@ const ComProduct = ({ prodID }) => {
       cursor="pointer"
       backgroundColor="blackAlpha.50"
       borderRadius="10px"
-      height="auto">
+      height="auto"
+    >
       <Box>
         <div
           style={{
             borderTop: "1px solid #ccc",
             borderRadius: "5px",
             padding: "20px",
-          }}>
+          }}
+        >
           <h3
             style={{
               marginBottom: "10px",
               fontFamily: "Arial",
               fontSize: "18px",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             Đánh giá sản phẩm:
           </h3>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -156,7 +143,11 @@ const ComProduct = ({ prodID }) => {
             })}
           </div>
           <br />
-          <Textarea backgroundColor="white" value={newComment} onChange={handleCommentChange} />
+          <Textarea
+            backgroundColor="white"
+            value={newComment}
+            onChange={handleCommentChange}
+          />
         </div>
         <Button
           m="1% 1%"
@@ -172,7 +163,7 @@ const ComProduct = ({ prodID }) => {
 
         <ul>
           {comments.map((comment, index) => (
-            <li  key={index}>
+            <li key={index}>
               <hr />
               <Box
                 m={5}
@@ -194,7 +185,7 @@ const ComProduct = ({ prodID }) => {
                   mr="10px"
                   textDecoration="underline"
                 >
-                   {comment.username}
+                  {comment.username}
                 </Text>
                 <Text padding={2}>
                   <p>{comment.comment}</p>

@@ -87,7 +87,12 @@ const RelateProduct = ({ type, heading }) => {
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
                     <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                      <Image src={`${i.img}`} alt={i.name} boxSize="160px" marginBottom="10px"/>
+                      <Image
+                        src={`${i.img}`}
+                        alt={i.name}
+                        boxSize="160px"
+                        marginBottom="10px"
+                      />
                     </Square>
                     <Text
                       color="#424245"
