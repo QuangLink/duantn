@@ -92,7 +92,8 @@ const Slider = ({ type }) => {
                         color="red"
                         _hover={{ color: "red" }}
                       >
-                        {i.price.toLocaleString("vi-VN", {
+                        {i.price&&
+                          i.price.toLocaleString("vi-VN", {
                           style: "currency",
                           currency: "VND",
                         })}
@@ -108,7 +109,9 @@ const Slider = ({ type }) => {
                           </Text>
                           {"  "}
                           <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original.toLocaleString("vi-VN", {
+                            
+                          {i.original&&
+                            i.original.toLocaleString("vi-VN", {
                               style: "currency",
                               currency: "VND",
                             })}

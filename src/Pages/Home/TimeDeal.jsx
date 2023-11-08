@@ -215,7 +215,8 @@ const TimeDeal = ({ type, heading }) => {
                               color="red"
                               _hover={{ color: "red" }}
                             >
-                              {i.price.toLocaleString("vi-VN", {
+                              {i.price&&
+                                i.price.toLocaleString("vi-VN", {
                                 style: "currency",
                                 currency: "VND",
                               })}
@@ -235,7 +236,8 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original.toLocaleString("vi-VN", {
+                                {i.original&&
+                                  i.original.toLocaleString("vi-VN", {
                                   style: "currency",
                                   currency: "VND",
                                 })}
@@ -345,7 +347,8 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original.toLocaleString("vi-VN", {
+                                {i.original&&
+                                  i.original.toLocaleString("vi-VN", {
                                   style: "currency",
                                   currency: "VND",
                                 })}
