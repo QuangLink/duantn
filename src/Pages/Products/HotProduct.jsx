@@ -8,6 +8,7 @@ import {
   Button,
   background,
   Badge,
+  Center,
 } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -94,60 +95,76 @@ const HotProduct = ({ type, heading }) => {
                     >
                       <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
                     </Square>
-                    <Text
-                      color="#424245"
-                      noOfLines={2}
-                      textAlign="left"
-                      fontSize="15px"
-                      fontWeight="bold"
-                      _hover={{ color: "#fd8002" }}
-                    >
-                      {i.name}
-                    </Text>
-                    <Box mt="2.5">
+                    <Box height="30px">
+                      <Text
+                        color="#424245"
+                        noOfLines={2}
+                        textAlign="center"
+                        fontSize="15px"
+                        fontWeight="bold"
+                        _hover={{ color: "#fd8002" }}
+                      >
+                        {i.name}
+                      </Text>
+                    </Box>
+                    <Box mt="2.5" m="20px 0 30px 0">
                       <Flex>
                         <Square>
                           <Text color="gray.600" fontSize="14px">
-                            Giá mới:{" "}
+                            Giá mới :{" "}
                           </Text>
                         </Square>
                         <Square>
-                          <Text fontWeight="600" fontSize="18px" ml="1">
-                            {i.price} <sup>đ</sup>
+                          <Text
+                            fontWeight="600"
+                            fontSize="18px"
+                            ml="1"
+                            color="red"
+                            _hover={{ color: "red" }}
+                          >
+                            {i.price&&
+                              i.price.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
                           </Text>
                         </Square>
                       </Flex>
-                      <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giá gốc:{" "}
-                        </Text>
-                        {"  "}
-                        <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                          {i.mrp} <sup>đ</sup>
-                        </Text>
-                      </Flex>
-                      <Flex>
-                        <Text color="gray.600" fontSize="14px">
-                          Giảm giá:{" "}
-                        </Text>
-                        {"  "}
-                        <Text color="gray.600" fontSize="14px" ml="1">
-                          {i.discount} <sup>đ</sup>
-                        </Text>
-                        <Badge
-                          borderRadius="5px"
-                          width="auto"
-                          px="2"
-                          // border="1px solid green"
-                          backgroundColor="#fff0e9"
-                          color="#eb5757"
-                          fontSize="xs"
-                          marginBottom="10"
-                          marginLeft={5}
-                        >
-                          Giá ưu đãi
-                        </Badge>
-                      </Flex>
+                      {i.original !== 0 && (
+                        <>
+                          <Flex>
+                            <Text color="gray.600" fontSize="14px">
+                              Giá gốc:{" "}
+                            </Text>
+                            {"  "}
+                            <Text
+                              as="s"
+                              color="gray.600"
+                              fontSize="14px"
+                              ml="1"
+                            >
+                              {i.original&&
+                                i.original.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
+                            </Text>
+                          </Flex>
+                          <Box
+                            padding="3px"
+                            borderRadius="5px"
+                            w="50%"
+                            color="#EC4C0A"
+                            bg="#FEB373"
+                            mt="2"
+                            textAlign="center"
+                          >
+                            <Text fontSize="10px" fontWeight="500">
+                              GIẢM GIÁ SỐC
+                            </Text>
+                          </Box>
+                        </>
+                      )}
                     </Box>
                   </Box>
                 </Link>

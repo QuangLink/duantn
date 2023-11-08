@@ -79,23 +79,23 @@ const ItemCard5 = ({ type, heading }) => {
           breakpoints={{
             0: {
               slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 10,
+              spaceBetween: 5,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 15,
+              spaceBetween: 5,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 15,
+              spaceBetween: 5,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 10,
+              spaceBetween: 5,
+            },
+            1366: {
+              slidesPerView: 4,
+              spaceBetween: 5,
             },
           }}
         >
@@ -150,49 +150,51 @@ const ItemCard5 = ({ type, heading }) => {
                                 color="red"
                                 _hover={{ color: "red" }}
                               >
-                                {i.price.toLocaleString("vi-VN", {
+                                {i.price&&
+                                  i.price.toLocaleString("vi-VN", {
                                   style: "currency",
                                   currency: "VND",
                                 })}
                               </Text>
                             </Square>
                           </Flex>
-                         <Box h="20px">
-                         {i.original !== 0 && (
-                            <>
-                              <Flex>
-                                <Text color="gray.600" fontSize="14px">
-                                  Giá gốc:{" "}
-                                </Text>
-                                {"  "}
-                                <Text
-                                  as="s"
-                                  color="gray.600"
-                                  fontSize="14px"
-                                  ml="1"
+                          <Box h="20px">
+                            {i.original !== 0 && (
+                              <>
+                                <Flex>
+                                  <Text color="gray.600" fontSize="14px">
+                                    Giá gốc:{" "}
+                                  </Text>
+                                  {"  "}
+                                  <Text
+                                    as="s"
+                                    color="gray.600"
+                                    fontSize="14px"
+                                    ml="1"
+                                  >
+                                    {i.origina&&
+                                      i.original.toLocaleString("vi-VN", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    })}
+                                  </Text>
+                                </Flex>
+                                <Box
+                                  padding="3px"
+                                  borderRadius="5px"
+                                  w="50%"
+                                  color="#EC4C0A"
+                                  bg="#FEB373"
+                                  mt="2"
+                                  textAlign="center"
                                 >
-                                  {i.original.toLocaleString("vi-VN", {
-                                    style: "currency",
-                                    currency: "VND",
-                                  })}
-                                </Text>
-                              </Flex>
-                              <Box
-                                padding="3px"
-                                borderRadius="5px"
-                                w="50%"
-                                color="#EC4C0A"
-                                bg="#FEB373"
-                                mt="2"
-                                textAlign="center"
-                              >
-                                <Text fontSize="10px" fontWeight="500">
-                                  GIẢM GIÁ SỐC
-                                </Text>
-                              </Box>
-                            </>
-                          )}
-                         </Box>
+                                  <Text fontSize="10px" fontWeight="500">
+                                    GIẢM GIÁ SỐC
+                                  </Text>
+                                </Box>
+                              </>
+                            )}
+                          </Box>
 
                           {/* <Flex>
                     <Text color="gray.600" fontSize="14px">

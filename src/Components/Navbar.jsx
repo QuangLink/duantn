@@ -41,7 +41,7 @@ import "./Navbar.css";
 import useScrollListener from "./useScroll";
 import { UserAuth } from "../context/AuthContext";
 function Navbar() {
-  const {user,logOut} = UserAuth();
+  const { user, logOut } = UserAuth();
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
@@ -168,7 +168,7 @@ function Navbar() {
       fetchData(inputValue);
     }
   };
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       await logOut();
       dispatch(logout());

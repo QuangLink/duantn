@@ -15,6 +15,8 @@ const CateFeature = ({ type }) => {
         <td key={j} style={{ textAlign: "center" }}>
           <div
             style={{
+              borderRadius: "10px",
+              border: "1px solid #b0b0b0",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -25,7 +27,15 @@ const CateFeature = ({ type }) => {
               alt={type[j].name}
               style={{ width: "60px", height: "60px", marginBottom: "10px" }}
             />
-            <p style={{ marginTop: "0", wordWrap: "break-word" }}>
+            <p
+              className="cateName"
+              style={{
+                marginTop: "0",
+                wordWrap: "break-word",
+                padding: "5px",
+                margin: "2px",
+              }}
+            >
               {type[j].name}
             </p>
           </div>

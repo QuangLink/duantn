@@ -2,6 +2,7 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 import CateFeature from "./CateFeature";
 import BannerCenter from "./BannerCenter";
 import Btn from "./Btn";
+import BackToTopButton from './BackToTopButton';
 import { Box } from "@chakra-ui/react";
 import {
   BannersCenter,
@@ -11,8 +12,7 @@ import {
   CateFeatures,
   ItemDetails9,
   // PrAppleTablet,
-  // PrSamsungPhone,
-  // PrSamsungTablet,
+  // PrSamsung,
   // PrXiaomi,
   // PrHp,
   PrAsus,
@@ -38,6 +38,31 @@ const TimeDeal = lazy(() => import("./TimeDeal"));
 const PrDeal = lazy(() => import("./PrDeal"));
 
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+
+    });
+  };
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,8 +71,7 @@ const Home = () => {
       loadPrSale(),
       loadPrApplePhone(),
       // loadPrAppleTablet(),
-      // loadPrSamsungPhone(),
-      // loadPrSamsungTablet(),
+      // loadPrSamsung(),
       // loadPrXiaomi(),
       // loadPrHp(),
       loadPrAsus(),
@@ -61,6 +85,7 @@ const Home = () => {
 
   return (
     <Box>
+      
       <Suspense fallback={<div>Loading...</div>}>
         <BannerCenter type={BannersCenter} />
       </Suspense>
@@ -80,8 +105,6 @@ const Home = () => {
           <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
         )}
       </Suspense>
-
-    
 
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <PrDeal type={PrAsus} />}
@@ -105,12 +128,12 @@ const Home = () => {
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
 
-      
-
       <Suspense fallback={<div>Loading...</div>}>
         <Btn />
       </Suspense>
+      <BackToTopButton />
     </Box>
+    
   );
 };
 

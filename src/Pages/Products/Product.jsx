@@ -1,11 +1,9 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
 import {
   Badge,
   Box,
   Button,
   Center,
-  Flex,
   Heading,
   Image,
   Text,
@@ -39,7 +37,7 @@ const postSingleDataWish = async (data) => {
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
-  const { data, typeOfProduct } = props;
+  const { data } = props;
   const {
     prodID,
     prodName,
@@ -118,7 +116,12 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá mới: {prodPrice}₫
+                  Giá mới:{" "}
+                  {prodPrice &&
+                    prodPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
@@ -127,7 +130,12 @@ const Product = (props, rating) => {
                   color="blackAlpha.600"
                   textDecoration="line-through"
                 >
-                  Giá gốc: {prodPriceSale}₫
+                  Giá gốc:{" "}
+                  { prodPriceSale&&
+                    prodPriceSale.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Text>
               </Box>
               <Badge
@@ -144,7 +152,7 @@ const Product = (props, rating) => {
               </Badge>
             </Box>
           )}
-          {prodSale == 0 && (
+          {prodSale === 0 && (
             <Box className="div_2">
               <Box
                 className="box_1"
@@ -161,7 +169,12 @@ const Product = (props, rating) => {
                   color="red"
                   fontWeight="black"
                 >
-                  Giá: {prodPrice}₫
+                  Giá:{" "}
+                  {prodPrice&&
+                    prodPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
                 </Heading>
               </Box>
               <Badge

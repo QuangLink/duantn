@@ -1,21 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Center,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Image,
-  Input,
-  ListItem,
-  Text,
-  UnorderedList,
-  useToast,
-  color,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import RatingBar from "../Products/RatingBar";
@@ -24,12 +8,14 @@ import { FaStar } from "react-icons/fa";
 const ComProduct = ({ prodID }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [userID, setUserID] = useState(Cookies.get("userID") || "");
+  const [userID] = useState(Cookies.get("userID") || "");
   const [prodRate, setProdRate] = useState("");
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
+
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -48,8 +34,9 @@ const ComProduct = ({ prodID }) => {
         );
 
         if (response.status === 200) {
-          // Update the comments state with the new comment
-          window.location.reload();
+          setNewComment("");
+          setProdRate("");
+          setSubmitSuccess(true);
         } else {
           console.error("Thêm phản hồi thất bại");
         }
@@ -58,6 +45,31 @@ const ComProduct = ({ prodID }) => {
       }
     }
   };
+
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await axios.get(
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+        );
+        if (response.status === 200) {
+          const data = response.data;
+          setComments(data);
+        } else {
+          console.error("Lấy bình luận thất bại");
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy bình luận:", error);
+      }
+    }
+    fetchComments();
+  }, [prodID, submitSuccess]);
+
+  useEffect(() => {
+    if (submitSuccess) {
+      setSubmitSuccess(false);
+    }
+  }, [submitSuccess]);
 
   useEffect(() => {
     async function fetchComments() {
