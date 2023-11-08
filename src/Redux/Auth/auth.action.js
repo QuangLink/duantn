@@ -28,8 +28,10 @@ export const loginGoogle = (user) => async (dispatch) => {
       payload: { username, userID },
     });
 
+
     console.log("Login with Google successful:");
     return;
+
   } catch (e) {
     dispatch({ type: LOGIN_ERROR, payload: e.message });
     console.log("Error during Google login:", e);
