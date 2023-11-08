@@ -150,11 +150,11 @@ const ItemCard5 = ({ type, heading }) => {
                                 color="red"
                                 _hover={{ color: "red" }}
                               >
-                                {i.price&&
+                                {i.price &&
                                   i.price.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Square>
                           </Flex>
@@ -172,11 +172,11 @@ const ItemCard5 = ({ type, heading }) => {
                                     fontSize="14px"
                                     ml="1"
                                   >
-                                    {i.origina&&
+                                    {i.origina &&
                                       i.original.toLocaleString("vi-VN", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
                                   </Text>
                                 </Flex>
                                 <Box
