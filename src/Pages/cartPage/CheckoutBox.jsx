@@ -54,7 +54,7 @@ const CheckoutBox = ({
       });
       setTimeout(() => {
         axios
-          .post("https://duantn-backend.onrender.com/order/", { userID })
+          .post("http://localhost:9000/order/", { userID })
           .then((response) => {
             console.log(response);
           });

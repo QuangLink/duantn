@@ -12,7 +12,8 @@ export const getProducts =
     dispatch({ type: GET_PRODUCTS_LOADING });
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+        `http://localhost:9000/category/${typeOfProduct}`,
+
       );
       console.log("in the logi func try", responce.data);
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });
