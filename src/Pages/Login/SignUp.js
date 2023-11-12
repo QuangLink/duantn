@@ -74,7 +74,7 @@ function SignUpForm() {
         };
 
         const response = await axios.post(
-          "http://localhost:9000/users/register",
+          "https://duantn-backend.onrender.com/users/register",
           payload,
         );
 

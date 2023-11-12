@@ -47,7 +47,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `http://localhost:9000/users/address/${username}`;
+    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,7 +78,7 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "http://localhost:9000/users/address";
+    const apiUrl = "https://duantn-backend.onrender.com/users/address";
 
     if (addressData.firstname === null) {
       // If the address does not exist, perform a POST request
@@ -125,7 +125,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9000/users/address/${username}`)
+      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -181,7 +181,11 @@ const Checkout = () => {
     setSelectedDistrict(selectedDistrictData || {});
   };
   const renderAddressData = () => {
-    if (!addressData || !Array.isArray(addressData) || addressData.length === 0) {
+    if (
+      !addressData ||
+      !Array.isArray(addressData) ||
+      addressData.length === 0
+    ) {
       return (
         <Flex w="100%">
           <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic">
@@ -190,7 +194,7 @@ const Checkout = () => {
         </Flex>
       );
     }
-  
+
     return addressData.map((address, index) => (
       <Flex key={index} w="100%">
         <Text mt="5" fontSize="15px" fontWeight="700">
@@ -200,13 +204,12 @@ const Checkout = () => {
           (+84) {address.mobile} |
         </Text>
         <Text mt="5" fontSize="15px" ml="2">
-          Địa chỉ: {address.flat}, {address.street} - {address.state} - {address.city}
+          Địa chỉ: {address.flat}, {address.street} - {address.state} -{" "}
+          {address.city}
         </Text>
       </Flex>
     ));
   };
-  
-  
 
   return (
     <Center className="cartPage">
@@ -420,7 +423,7 @@ const Checkout = () => {
                   color="blue.400"
                   border="1px solid #3788FA"
                   borderRadius="5px"
-                 onClick={onOpen}
+                  onClick={onOpen}
                 >
                   Thay đổi
                 </Button>
@@ -435,7 +438,7 @@ const Checkout = () => {
               </Box>
             )}
           </Box>
-         {renderAddressData()}
+          {renderAddressData()}
           <Box w="100%">
             <Text fontSize="25px" fontWeight="700">
               Thông tin bổ sung:

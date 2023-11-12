@@ -50,7 +50,7 @@ const CartItem = ({
     dispatch({ type: "priceIncrease", payload: number });
 
     axios
-      .put(`http://localhost:9000/cart/plus/${cartID}`, {
+      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
         quantity: count + 1,
       })
       .then((res) => {
@@ -68,7 +68,7 @@ const CartItem = ({
       dispatch({ type: "priceDecrease", payload: number });
 
       axios
-        .put(`http://localhost:9000/cart/minus/${cartID}`, {
+        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
           quantity: count + 1,
         })
         .then((res) => {
@@ -218,7 +218,11 @@ const CartItem = ({
               currency: "VND",
             })}
           </Heading>
-          <Heading fontSize="17px" color={"gray"} textDecoration={"line-through"}>
+          <Heading
+            fontSize="17px"
+            color={"gray"}
+            textDecoration={"line-through"}
+          >
             {priceSale.toLocaleString("vi-VN", {
               style: "currency",
               currency: "VND",

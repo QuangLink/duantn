@@ -20,7 +20,7 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import {ColorFilter,StorageValueFilter} from "./Filter";
+import { ColorFilter, StorageValueFilter } from "./Filter";
 
 import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
@@ -44,7 +44,7 @@ const postSingleData = async (data) => {
     };
 
     let response = await axios.post(
-      `http://localhost:9000/cart/`,
+      `https://duantn-backend.onrender.com/cart/`,
       postData,
     );
     return response.data;
@@ -56,7 +56,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `http://localhost:9000/wishlist`,
+      `https://duantn-backend.onrender.com/wishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,6 @@ const SingleProduct = (props) => {
     color: "",
     storage_value: "",
   });
- 
 
   const applyFilters = () => {
     let filteredProducts = singleDatas;
@@ -111,10 +110,11 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (prodID,colorID,storageID) => {
-    postSingleData({ prodID,colorID,storageID }).then((res) => navigate("/cart"));
+  const handlePost = (prodID, colorID, storageID) => {
+    postSingleData({ prodID, colorID, storageID }).then((res) =>
+      navigate("/cart"),
+    );
   };
-
 
   const applyColorFilter = (selectedColor) => {
     setFilters({ ...filters, color: selectedColor });
@@ -122,9 +122,15 @@ const SingleProduct = (props) => {
   const applyStorageValueFilter = (selectedValue) => {
     setFilters({ ...filters, storage_value: selectedValue });
   };
-  const colors = singleDatas && Array.isArray(singleDatas) ? [...new Set(singleDatas.map((product) => product.color))] : [];
+  const colors =
+    singleDatas && Array.isArray(singleDatas)
+      ? [...new Set(singleDatas.map((product) => product.color))]
+      : [];
 
-  const storageValues = singleDatas && Array.isArray(singleDatas) ? [...new Set(singleDatas.map((product) => product.storage_value))] : [];
+  const storageValues =
+    singleDatas && Array.isArray(singleDatas)
+      ? [...new Set(singleDatas.map((product) => product.storage_value))]
+      : [];
   const handleWish = (data) => {
     let newData = {};
     for (let i in data) {
@@ -177,9 +183,6 @@ const SingleProduct = (props) => {
                   justifyContent="center"
                   alignitem="center"
                 >
-       
-             
-            
                   <Text color="gray.500" marginBottom={5}>
                     Article ID: {singleData.prodID}
                   </Text>
@@ -381,12 +384,19 @@ const SingleProduct = (props) => {
                               </Text>
                             </>
                           )}
-                          {singleData.color != null && (   <ColorFilter colors={colors} applyFilter={applyColorFilter} />)}
-             
-                          {singleData.storage_value != null && ( <StorageValueFilter
-                            storageValues={storageValues}
-                            applyFilter={applyStorageValueFilter}
-                          />)}           
+                          {singleData.color != null && (
+                            <ColorFilter
+                              colors={colors}
+                              applyFilter={applyColorFilter}
+                            />
+                          )}
+
+                          {singleData.storage_value != null && (
+                            <StorageValueFilter
+                              storageValues={storageValues}
+                              applyFilter={applyStorageValueFilter}
+                            />
+                          )}
                           <Text
                             fontSize="sm"
                             style={{ fontWeight: "bold" }}
@@ -419,7 +429,13 @@ const SingleProduct = (props) => {
                               fontSize="lg"
                               p={6}
                               _hover={{ bg: "blue.800" }}
-                              onClick={() => handlePost(singleData.prodID,singleData.colorID,singleData.storageID)}
+                              onClick={() =>
+                                handlePost(
+                                  singleData.prodID,
+                                  singleData.colorID,
+                                  singleData.storageID,
+                                )
+                              }
                             >
                               Thêm vào giỏ hàng
                             </Button>
