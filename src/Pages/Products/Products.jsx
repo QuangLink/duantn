@@ -11,7 +11,7 @@ import SlideProuct from "./SlideProduct";
 import ProductFilter from "./ProductFilter";
 const getData = async (typeOfProduct, brandOfProduct) => {
   let response = await axios.get(
-    `http://localhost:9000/category/${typeOfProduct}/${brandOfProduct}`,
+    `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
   );
   return response.data;
 };
