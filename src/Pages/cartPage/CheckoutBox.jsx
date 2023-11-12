@@ -9,6 +9,7 @@ import {
   Heading,
   Text,
   useToast,
+  Center,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -16,7 +17,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import axios from "axios";
-
+import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
+import { TbTruckDelivery } from "react-icons/tb";
 const CheckoutBox = ({
   items,
   totalPrice,
@@ -41,7 +43,7 @@ const CheckoutBox = ({
         position: "top",
       });
       setTimeout(() => {
-        navigate("/Login");
+        navigate("/login");
       }, 1500);
     } else {
       toast({
@@ -53,122 +55,186 @@ const CheckoutBox = ({
         position: "top",
       });
       setTimeout(() => {
-        axios
-          .post("http://localhost:9000/order/", { userID })
-          .then((response) => {
-            console.log(response);
-          });
+        // axios
+        //   .post("http://localhost:9000/order/", { userID })
+        //   .then((response) => {
+        //     console.log(response);
+        //   });
         navigate("/checkout");
       }, 1500);
     }
   };
 
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  var tomorrow = new Date();
+  tomorrow.setTime(tomorrow.getTime() + 1000 * 3600 * 24);
+  var dayName = new Array(
+    "Chủ Nhật",
+    "Thứ Hai",
+    "Thứ Ba",
+    "Thứ Tư",
+    "Thứ Năm",
+    "Thứ Sáu",
+    "Thứ Bảy",
+  );
+  var monName = new Array(
+    "Tháng 1",
+    "Tháng 2",
+    "Tháng 3",
+    "Tháng 4",
+    "Tháng 5",
+    "Tháng 6",
+    "Tháng 7",
+    "Tháng 8",
+    "Tháng 9",
+    "Tháng 10",
+    "Tháng 11",
+    "Tháng 12",
+  );
+  var now = new Date();
+  var dtString = dayName[now.getDay()] + " - " + now.getDate();
+  var change =
+    dayName[tomorrow.getDay()] +
+    " - " +
+    tomorrow.getDate() +
+    ", " +
+    monName[now.getMonth()] +
+    ", " +
+    tomorrow.getFullYear();
   return (
     <div>
-      <Flex
-        flexDirection={"column"}
-        backgroundColor="rgb(255, 255, 255)"
-        gap={"5"}
-        padding={"16px"}
-      >
-        <Flex>
-          <Button
-            width={"100%"}
-            color="white"
-            backgroundColor={"red"}
-            textAlign="center"
-            onClick={handleCheckout}
+      <Center w="750px" mt="5" display="flex" flexWrap="wrap">
+        <Flex justifyContent="flex-end">
+          <TbTruckDelivery size={20} />
+          <Heading
+            fontSize="13px"
+            color={"rgb(0, 51, 128)"}
+            lineHeight={"20px"}
           >
-            THANH TOÁN
-          </Button>
+            Giao hàng nhanh: {dtString} / {change}
+          </Heading>
         </Flex>
-        <Flex
-          flexDirection={"column"}
-          border={"1px solid rgb(224, 224, 225)"}
-          boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
-          borderRadius="4px"
-          padding={"16px"}
-        >
-          <Flex>
-            <Box marginTop={"20px"} width={"100%"}>
-              <InputGroup size="md">
-                <Input
-                  pr="4.5rem"
-                  placeholder="Mã giảm giá"
-                  onChange={(e) => setVal(e.target.value)}
-                />
-                <InputRightElement width="4rem">
-                  <Button
-                    h="2.30rem"
-                    size="sm"
-                    borderRadius={"none"}
-                    color="rgb(54,129,240)"
-                    backgroundColor="white"
-                    borderLeft={"4px solid rgb(54,129,240)"}
-                    borderRight={"1px solid rgb(224, 224, 225)"}
-                    onClick={handleApply}
-                  >
-                    Áp dụng
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </Box>
-          </Flex>
-          <Divider width={"90%"} marginTop={"20px"} />
-          <Flex flexDirection={"column"} gap="10px">
-            <Box width="90%" margin="auto" marginTop={"20px"}>
-              <Text fontWeight="bold" textAlign="left">
-                THÔNG TIN GIÁ
-              </Text>
-
-              <Flex justifyContent="space-between">
-                <Text>Giá ({items} Sản phẩm)</Text>
-                <Text>
-                  {totalPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}{" "}
-                </Text>
-              </Flex>
-
-              <Flex justifyContent="space-between">
-                <Text>Phí giao hàng</Text>
-                <Text color="green">FREE</Text>
-              </Flex>
-
-              <Divider />
-
-              <Flex justifyContent="space-between">
-                <Text>Giảm giá</Text>
-
-                <Text>
-                  {discount.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
-                </Text>
-              </Flex>
-
-              <Divider />
-
-              <Flex
-                justifyContent="space-between"
-                fontWeight="bold"
-                marginBottom={"20px"}
+        <Box marginTop={"20px"} width={"100%"}>
+          <InputGroup size="md">
+            <Input
+              pr="4.5rem"
+              placeholder="Mã giảm giá"
+              onChange={(e) => setVal(e.target.value)}
+            />
+            <InputRightElement width="4rem">
+              <Button
+                h="2.30rem"
+                size="sm"
+                borderRadius={"none"}
+                color="rgb(54,129,240)"
+                backgroundColor="white"
+                borderLeft={"4px solid rgb(54,129,240)"}
+                borderRight={"1px solid rgb(224, 224, 225)"}
+                onClick={handleApply}
               >
-                <Text>Tổng hóa đơn</Text>
-                <Text>
-                  {paybalPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
-                </Text>
-              </Flex>
-              <Divider />
-            </Box>
-          </Flex>
+                Áp dụng
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+        <Flex justifyContent="space-between" w="710px">
+          <Text
+            mt="2"
+            height="50px"
+            fontFamily="inherit"
+            color="#424245"
+            noOfLines={2}
+            fontSize="20px"
+            fontWeight="700"
+          >
+            Tạm tính ({items} sản phẩm):
+          </Text>
+
+          <Text fontWeight="700" fontSize="20px" mt="2" color="red">
+            {totalPrice.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}{" "}
+          </Text>
         </Flex>
-      </Flex>
+        <Flex justifyContent="space-between" w="710px">
+          <Text
+            mt="2"
+            height="50px"
+            fontFamily="inherit"
+            color="#424245"
+            noOfLines={2}
+            fontSize="20px"
+            fontWeight="700"
+          >
+            Giảm giá:
+          </Text>
+
+          <Text fontWeight="700" fontSize="20px" mt="2" color="green">
+            {discount.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </Text>
+        </Flex>
+        <Flex justifyContent="space-between" w="710px">
+          <Text
+            mt="2"
+            height="50px"
+            fontFamily="inherit"
+            color="#424245"
+            noOfLines={2}
+            fontSize="25px"
+            fontWeight="700"
+          >
+            Tổng tiền:
+          </Text>
+
+          <Text fontWeight="700" fontSize="25px" mt="2" color="red">
+            {paybalPrice.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </Text>
+        </Flex>
+        <Button
+          w="710px"
+          h="50px"
+          border="1px solid  #70b1ea"
+          borderRadius="10px"
+          backgroundColor="#70b1ea"
+          _hover={{ color: "#4a90e2" }}
+          onClick={handleCheckout}
+        >
+          <Text color="white">Tiến hành đặt hàng</Text>
+        </Button>
+        <Button
+          mt="2"
+          w="710px"
+          h="50px"
+          border="1px solid #4a90e2"
+          borderRadius="10px"
+          backgroundColor="white"
+          _hover={{ color: "white" }}
+        >
+          <Text color="#4a90e2">Chọn thêm sản phẩm khác</Text>
+        </Button>
+      </Center>
+
       <Flex>
         <Heading
           fontSize={"13px"}

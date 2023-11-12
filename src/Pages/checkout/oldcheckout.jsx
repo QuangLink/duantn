@@ -25,27 +25,11 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-const Checkout = () => {
+const CheckoutTest = () => {
   const username = Cookies.get("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
   const toast = useToast();
-  const {
-    firstname,
-    setfirstname,
-    lastname,
-    setlastname,
-    mobile,
-    setmobile,
-    flat,
-    setflat,
-    state,
-    setstate,
-    street,
-    setstreet,
-    city,
-    setcity,
-  } = address;
   const navigate = useNavigate();
 
   const clearAddress = () => {
@@ -84,7 +68,7 @@ const Checkout = () => {
     const apiUrl = "http://localhost:9000/users/address";
 
     axios
-      .put(apiUrl, newAddress)
+      .post(apiUrl, newAddress)
       .then((response) => {
         console.log("Server response:", response.data);
 
@@ -115,6 +99,52 @@ const Checkout = () => {
         console.error("Error getting address:", error);
       });
   }, [username]);
+  const [provinces, setProvinces] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+
+  useEffect(() => {
+    fetchData(2, setProvinces);
+  }, []);
+
+  const fetchData = (depth, setData, parentCode = null) => {
+    axios
+      .get(
+        `https://provinces.open-api.vn/api/?depth=${depth}&parent_code=${parentCode}`,
+      )
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleProvinceChange = (e) => {
+    const provinceName = e.target.value; // Giữ value là name
+    setSelectedProvince(provinceName);
+
+    if (provinceName) {
+      const selectedProvinceData = provinces.find(
+        (province) => province.name === provinceName,
+      );
+      setDistricts(selectedProvinceData.districts || []);
+    } else {
+      // Clear districts when no province is selected
+      setDistricts([]);
+    }
+    setSelectedDistrict(""); // reset selected district when province changes
+  };
+
+  const handleDistrictChange = (e) => {
+    const districtName = e.target.value;
+    const selectedDistrictData = districts.find(
+      (district) => district.name === districtName,
+    );
+
+    setSelectedDistrict(selectedDistrictData || {});
+  };
 
   return (
     <div style={{ backgroundColor: "#f1eeee", textAlign: "center" }}>
@@ -200,14 +230,40 @@ const Checkout = () => {
                         placeholder="Đường*"
                         ref={(e) => (address.current["setstreet"] = e)}
                       />
-                      <Input
-                        placeholder="Thành phố*"
+
+                      <label htmlFor="provinces">Province:</label>
+                      <select
+                        id="provinces"
+                        onChange={handleProvinceChange}
+                        value={selectedProvince || ""}
                         ref={(e) => (address.current["setcity"] = e)}
-                      />
-                      <Input
-                        placeholder="Tỉnh*"
+                      >
+                        <option value="">Select Province</option>
+                        {provinces.map((province) => (
+                          <option key={province.code} value={province.name}>
+                            {province.name} - {province.codename}
+                          </option>
+                        ))}
+                      </select>
+
+                      <label htmlFor="districts">District:</label>
+                      <select
+                        id="districts"
+                        onChange={handleDistrictChange}
+                        value={selectedDistrict.name || ""}
                         ref={(e) => (address.current["setstate"] = e)}
-                      />
+                      >
+                        <option value="">Select District</option>
+                        {districts.map((district) => (
+                          <option
+                            key={district.code}
+                            value={district.name}
+                            data-code={district.code} // Lưu trữ code trong một thuộc tính tùy chỉnh
+                          >
+                            {district.name} - {district.codename}
+                          </option>
+                        ))}
+                      </select>
                       <Input
                         type="number"
                         placeholder="Số điện thoại*"
@@ -275,4 +331,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckoutTest;

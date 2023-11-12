@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Box, Image, Button, Heading, useToast } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Image,
+  Button,
+  Heading,
+  useToast,
+  Icon,
+} from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
-import { TbTruckDelivery } from "react-icons/tb";
-import { INC, DEC } from "../../Redux/Cart/cart.types";
+
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../../Redux/store";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
@@ -15,14 +22,20 @@ const CartItem = ({
   name,
   img,
   price,
+  priceSale,
+  color,
+  storage,
   id,
   DeleteRequest,
 }) => {
   const singleData = {
     cartID,
     quantity,
+    color,
+    storage,
     name,
     img,
+    priceSale,
     price,
   };
   const toast = useToast();
@@ -102,63 +115,14 @@ const CartItem = ({
       });
   };
 
-  var months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  var tomorrow = new Date();
-  tomorrow.setTime(tomorrow.getTime() + 1000 * 3600 * 24);
-  var dayName = new Array(
-    "Chủ Nhật",
-    "Thứ Hai",
-    "Thứ Ba",
-    "Thứ Tư",
-    "Thứ Năm",
-    "Thứ Sáu",
-    "Thứ Bảy",
-  );
-  var monName = new Array(
-    "Tháng 1",
-    "Tháng 2",
-    "Tháng 3",
-    "Tháng 4",
-    "Tháng 5",
-    "Tháng 6",
-    "Tháng 7",
-    "Tháng 8",
-    "Tháng 9",
-    "Tháng 10",
-    "Tháng 11",
-    "Tháng 12",
-  );
-  var now = new Date();
-  var dtString = dayName[now.getDay()] + " - " + now.getDate();
-  var change =
-    dayName[tomorrow.getDay()] +
-    " - " +
-    tomorrow.getDate() +
-    ", " +
-    monName[now.getMonth()] +
-    ", " +
-    tomorrow.getFullYear();
   return (
     <Flex
       key={cartID}
       className=""
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
-      width={"90%"}
+      width={"100%"}
+      margin={"0px 0px 16px 0px"}
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >
@@ -224,12 +188,12 @@ const CartItem = ({
             fontWeight="600"
             lineHeight={"1.1"}
           >
-            {name}
+            {name} {color} {storage}
           </Heading>
 
           <Flex>
             <FcPlus />
-            <Heading fontSize="12px" color={"red"}>
+            <Heading fontSize="12px" color={"gray"} fontStyle="italic">
               Dịch vụ/Gói bảo hành thiết bị điện tử được áp dụng cho sản phẩm
               này
             </Heading>
@@ -248,30 +212,19 @@ const CartItem = ({
           gap={1}
           fontWeight="500"
         >
-          <Heading fontSize="18px" color={"rgb(0, 0, 0)"}>
+          <Heading fontSize="18px" color={"red"}>
             {price.toLocaleString("vi-VN", {
               style: "currency",
               currency: "VND",
             })}
           </Heading>
-          <Heading
-            fontSize="14px"
-            color={"rgb(21, 150, 124)"}
-            lineHeight={"1.5"}
-          >
-            {" "}
-            Giao hàng miễn phí
+          <Heading fontSize="17px" color={"gray"} textDecoration={"line-through"}>
+            {priceSale.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
           </Heading>
-          <Flex justifyContent="flex-end">
-            <TbTruckDelivery size={20} />
-            <Heading
-              fontSize="13px"
-              color={"rgb(0, 51, 128)"}
-              lineHeight={"20px"}
-            >
-              Giao hàng nhanh: {dtString} / {change}
-            </Heading>
-          </Flex>
+
           <Heading fontSize="12px" color={"rgb(102, 102, 102)"}></Heading>
         </Flex>
       </Flex>

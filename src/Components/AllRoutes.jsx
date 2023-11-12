@@ -7,14 +7,18 @@ import Products from "../Pages/Products/Products";
 import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import Payments from "../Pages/payment/Payments";
-import Checkout from "../Pages/checkout/checkout";
+// import Checkout from "../Pages/checkout/oldcheckout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import ProductList from "../testlist";
+import Checkout from "../Pages/cartPage/Checkout";
+
+import CheckoutTest from "../Pages/checkout/oldcheckout";
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
+        <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/duantn" element={<Home />}></Route>
         <Route

@@ -33,15 +33,18 @@ const postSingleData = async (data) => {
 
     // Ensure data.prodID is a valid value, not [object Object]
     const prodID = data.prodID;
-
+    const colorID = data.colorID;
+    const storageID = data.storageID;
     // Tạo dữ liệu gửi đi kết hợp với userID và prodID
     const postData = {
       prodID,
+      colorID,
+      storageID,
       userID,
     };
 
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
+      `http://localhost:9000/cart/`,
       postData,
     );
     return response.data;
@@ -53,7 +56,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist`,
+      `http://localhost:9000/wishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -108,8 +111,8 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (prodID) => {
-    postSingleData({ prodID }).then((res) => navigate("/cart"));
+  const handlePost = (prodID,colorID,storageID) => {
+    postSingleData({ prodID,colorID,storageID }).then((res) => navigate("/cart"));
   };
 
 
@@ -416,7 +419,7 @@ const SingleProduct = (props) => {
                               fontSize="lg"
                               p={6}
                               _hover={{ bg: "blue.800" }}
-                              onClick={() => handlePost(singleData.prodID)}
+                              onClick={() => handlePost(singleData.prodID,singleData.colorID,singleData.storageID)}
                             >
                               Thêm vào giỏ hàng
                             </Button>
