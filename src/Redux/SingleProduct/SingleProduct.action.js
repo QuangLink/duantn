@@ -12,7 +12,7 @@ export const getSingleProduct = (typeOfProduct, id) => async (dispatch) => {
   dispatch({ type: GET_SINGLE_PRODUCT_LOADING });
   try {
     let responce = await axios.get(
-      `https://duantn-backend.onrender.com/products/${id}`,
+      `https://duantn-backend\.onrender\.com/products/${id}`,
     );
     console.log("in the logi func try", responce.data);
     // console.log("in the logi func try",responce.data);

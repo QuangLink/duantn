@@ -22,7 +22,7 @@ const ProductList = () => {
   const deleteProduct = async (orderCode) => {
     try {
       await axios.delete(
-        `https://duantn-backend.onrender.com/order/${orderCode}`,
+        `https://duantn-backend\.onrender\.com/order/${orderCode}`,
       );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion

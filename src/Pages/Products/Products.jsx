@@ -1,49 +1,64 @@
+import { Box, Center, Grid, GridItem, Heading } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect } from "react";
-import Product from "./Product";
-import { Box, Grid, GridItem, Heading, Center } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../Redux/Products/products.action";
+import React, { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
-import HotProduct from "./HotProduct";
+import { useSelector } from "react-redux";
 import { BannersCenter, PrApplePhone } from "../Home/CardDetails";
-import SlideProuct from "./SlideProduct";
+import HotProduct from "./HotProduct";
+import Product from "./Product";
 import ProductFilter from "./ProductFilter";
-const getData = async (typeOfProduct, brandOfProduct) => {
-  let response = await axios.get(
-    `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
-  );
-  return response.data;
-};
-const Products = ({ typeOfProduct }) => {
-  // const [productArr, setProductArr] = useState([]);
-  const productsList = useSelector((store) => store.product.data);
-  console.log("in the products page and the products list", productsList);
+import SlideProuct from "./SlideProduct";
 
-  const loading = useSelector((store) => store.product.loading);
+const Products = ({ typeOfProduct }) => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(false);
   const error = useSelector((store) => store.product.error);
 
-  const dispatch = useDispatch();
-  //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
-  const category = {
-    laptop: "LAPTOP",
-    tablet: "TABLET",
-    phone: "Phone",
-    apple: "APPLE",
-    xiaomi: "XIAOMI",
-    samsung: "SAMSUNG",
-    oppo: "OPPO",
-    hp: "HP",
-    asus: "ASUS",
-    lenovo: "LENOVO",
-    acer: "ACER",
-    whishlist: "whishlist",
+  useEffect(() => {
+    onGetData();
+  }, [typeOfProduct]);
+
+  const onGetData = async () => {
+    setFilter("all");
+    setLoading(true);
+    try {
+      let responce = await axios.get(
+        `https://duantn-backend\.onrender\.com/category/${typeOfProduct}`,
+      );
+      console.log("in the logi func try", responce.data);
+      if (responce.data) {
+        setFilteredProducts(responce.data || []);
+        console.log(
+          "list type of list product",
+          "typeOfProduct",
+          typeOfProduct,
+          responce.data.map((el) => el.prodType),
+        );
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => {
-    // getData(typeOfProduct).then((res) => setProductArr(res));
-    dispatch(getProducts(typeOfProduct));
-  }, [typeOfProduct]);
+  const handleFilterChange = (event) => {
+    const selectedFilter = event?.target?.value;
+    setFilter(selectedFilter);
+  };
+
+  const listData = () => {
+    switch (filter) {
+      case "lowToHigh":
+        return filteredProducts.sort((a, b) => a.prodPrice - b.prodPrice);
+      case "highToLow":
+        return filteredProducts.sort((a, b) => b.prodPrice - a.prodPrice);
+      case "sale":
+        return filteredProducts.filter((product) => product.prodSale > 0);
+      default:
+        return filteredProducts;
+    }
+  };
 
   if (error) {
     return (
@@ -71,10 +86,14 @@ const Products = ({ typeOfProduct }) => {
       <Box mb="2%">
         <HotProduct type={PrApplePhone} />
       </Box>
-      <ProductFilter />
-
+      <ProductFilter
+        typeOfProduct={typeOfProduct}
+        filter={filter}
+        handleFilterChange={handleFilterChange}
+      />
       {loading ? (
         <Box h={20}>
+          <Box></Box>
           <Center>
             <RotatingLines
               strokeColor="grey"
@@ -106,8 +125,7 @@ const Products = ({ typeOfProduct }) => {
             },
           }}
         >
-          {productsList.map((elem, i) => {
-            // console.log("in the products page in the map method and elem is :- ", elem);
+          {listData().map((elem, i) => {
             return (
               <GridItem
                 key={elem.prodName + i}

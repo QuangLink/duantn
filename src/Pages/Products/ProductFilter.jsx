@@ -15,10 +15,88 @@ import {
   Text,
   MenuItem,
   Button,
+  Select
 } from "@chakra-ui/react";
-import "./Productbox.css";
+import { PrApplePhone } from "../Home/CardDetails";
 
-const ProductFilter = ({ typeOfProduct }) => {
+import "./Productbox.css";
+import { Route } from "react-router-dom";
+
+
+const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, }) => {
+  const [type, setType] = useState(typeOfProduct);
+
+  useEffect(() => {
+    setType(typeOfProduct)
+  }, [typeOfProduct])
+  console.log(type);
+
+
+
+  const CategoryProduct = () => {
+    if (type === 'phone' || type === 'apple' || type === 'xiaomi' || type === 'samsung') {
+      return (
+        <MenuList bg="white">
+          <Grid className="grid-container">
+            <Box>
+              <Link href="/applephone" >
+                <Box className="text-btn">Apple</Box>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/xiaomi" >
+                <Box className="text-btn">Xiaomi</Box>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/samsung" >
+                <Box className="text-btn">Samsung</Box>
+              </Link>
+            </Box>
+          </Grid>
+        </MenuList>
+      )
+    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+      return (
+        <MenuList bg="white">
+          <Grid className="grid-container">
+            <Box>
+              <Link href="/asus">
+                <Box className="text-btn">Asus</Box>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/acer">
+                <Box className="text-btn">Acer</Box>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/lenovo">
+                <Box className="text-btn">Lenovo</Box>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/hp">
+                <Box className="text-btn">Hp</Box>
+              </Link>
+            </Box>
+          </Grid>
+        </MenuList>
+      )
+    } else {
+      return (
+        <MenuList bg="white">
+          <Grid className="grid-container">
+            <Box>
+              <Link to="/appletablet">
+                <Box className="text-btn">Apple</Box>
+              </Link>
+            </Box>
+          </Grid>
+        </MenuList>
+      )
+    }
+  }
   return (
     <div className="filter_1">
       <Box
@@ -39,7 +117,7 @@ const ProductFilter = ({ typeOfProduct }) => {
         }}
       >
         <Flex p={2}>
-          <Menu>
+          {/* <Menu>
             <MenuButton className="menu-button">Giá</MenuButton>
             <MenuList bg="white">
               <Link to="#">
@@ -56,27 +134,28 @@ const ProductFilter = ({ typeOfProduct }) => {
                 </Grid>
               </Link>
             </MenuList>
-          </Menu>
+          </Menu> */}
           <Menu>
             <MenuButton className="menu-button">Hãng</MenuButton>
-            <MenuList bg="white">
-              <Link to="#">
-                <Grid className="grid-container">
-                  <Box>
-                    <Box className="text-btn"></Box>
-                  </Box>
-                  <Box>
-                    <Box className="text-btn"></Box>
-                  </Box>
-                  <Box>
-                    <Box className="text-btn"></Box>
-                  </Box>
-                  <Box>
-                    <Box className="text-btn"></Box>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
+            <CategoryProduct />
+            {/* <MenuList bg="white">
+              <Grid className="grid-container">
+                <Box>
+                  <Link to="/cart">
+                    <Box className="text-btn">Acer</Box>
+                  </Link>
+                </Box>
+                <Box>
+                  <Box className="text-btn">Asus</Box>
+                </Box>
+                <Box>
+                  <Box className="text-btn">Lenovo</Box>
+                </Box>
+                <Box>
+                  <Box className="text-btn">MacBook</Box>
+                </Box>
+              </Grid>
+            </MenuList>  */}
           </Menu>
           <Menu>
             <MenuButton className="menu-button">Loại</MenuButton>
@@ -144,26 +223,20 @@ const ProductFilter = ({ typeOfProduct }) => {
           </Button>
         </Flex>
         <Flex width="13%">
-          <Box>
-            <Menu>
-              <MenuButton
-                margin="15% 0%"
-                fontWeight="bold.800"
-                width="120px"
-                height="30px"
-                fontSize="0.7rem"
-                backgroundColor="#FFFFFF"
-                boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px"
-              >
-                Sắp xếp theo
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Giảm giá</MenuItem>
-                <MenuItem>Xem nhiều nhất</MenuItem>
-                <MenuItem>Từ thấp đến cao</MenuItem>
-                <MenuItem>Từ cao đến thấp</MenuItem>
-              </MenuList>
-            </Menu>
+          <Box
+            margin="10% 0%"
+            fontWeight="bold.800"
+            height="px"
+            fontSize="0.7rem"
+            backgroundColor="#FFFFFF"
+            boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px"
+          >
+            <Select value={filter} onChange={handleFilterChange} mb={4}>
+              <option value="all">Tất cả sản phẩm</option>
+              <option value="lowToHigh">Giá: Tăng dần</option>
+              <option value="highToLow">Giá: Giảm dần</option>
+              <option value="sale">Giảm giá</option>
+            </Select>
           </Box>
         </Flex>
       </Box>

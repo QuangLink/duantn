@@ -49,14 +49,24 @@ const AllRoutes = () => {
           path="/iphone"
           element={<Products typeOfProduct="iphone" />}
         ></Route>
+       
         <Route
           path="/iphone/:id"
           element={<SingleProduct typeOfProduct="iphone" />}
         ></Route>
         <Route
+        path="/applephone"
+        element={<Products typeOfProduct="apple/phone" />}
+      ></Route>
+      <Route
+      path="/applephone/:id"
+      element={<SingleProduct typeOfProduct="phone" />}
+    ></Route>
+        <Route
           path="/xiaomi"
           element={<Products typeOfProduct="xiaomi" />}
         ></Route>
+       
         <Route
           path="/xiaomi/:id"
           element={<SingleProduct typeOfProduct="xiaomi" />}

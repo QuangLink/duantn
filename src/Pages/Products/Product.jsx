@@ -37,6 +37,7 @@ const postSingleDataWish = async (data) => {
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
+
   const { data } = props;
   const {
     prodID,
@@ -47,7 +48,6 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-
   var navigate = useNavigate();
   const toast = useToast();
   const handleWish = (data) => {

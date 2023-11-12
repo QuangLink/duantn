@@ -50,7 +50,7 @@ const CartItem = ({
     dispatch({ type: "priceIncrease", payload: number });
 
     axios
-      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
+      .put(`https://duantn-backend\.onrender\.com/cart/plus/${cartID}`, {
         quantity: count + 1,
       })
       .then((res) => {
@@ -68,7 +68,7 @@ const CartItem = ({
       dispatch({ type: "priceDecrease", payload: number });
 
       axios
-        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
+        .put(`https://duantn-backend\.onrender\.com/cart/minus/${cartID}`, {
           quantity: count + 1,
         })
         .then((res) => {

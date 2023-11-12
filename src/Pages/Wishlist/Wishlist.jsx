@@ -17,7 +17,7 @@ import { getProducts } from "../../Redux/Products/products.action";
 import WishProduct from "./WishProduct";
 const getData = async (typeOfProduct) => {
   let response = await axios.get(
-    `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+    `https://duantn-backend\.onrender\.com/category/${typeOfProduct}`,
   );
   return response.data;
 };
@@ -31,7 +31,7 @@ function Wishlist({ typeOfProduct }) {
   const toast = useToast();
   const handleDelete = (id, name) => {
     axios
-      .delete(`https://duantn-backend.onrender.com/cart/${id}`)
+      .delete(`https://duantn-backend\.onrender\.com/cart/${id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     toast({

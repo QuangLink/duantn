@@ -8,7 +8,7 @@ export const getData = () => async (dispatch) => {
     const userID = Cookies.get("userID");
 
     const res = await axios.get(
-      `https://duantn-backend.onrender.com/cart/${userID}`,
+      `https://duantn-backend\.onrender\.com/cart/${userID}`,
       {},
     );
     dispatch({ type: CartSuccess, payload: res.data });
