@@ -135,7 +135,7 @@ function Navbar() {
     setIsFocused(false);
   };
   const fetchData = (value) => {
-    fetch("https://duantn-backend.onrender.com/products/search")
+    fetch("http://localhost:9000/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);

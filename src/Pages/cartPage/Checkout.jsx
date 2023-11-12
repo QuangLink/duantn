@@ -47,7 +47,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,9 +78,13 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
-    if (addressData.firstname === null) {
+    if (
+      !addressData ||
+      !Array.isArray(addressData) ||
+      addressData.length === 0
+    ) {
       // If the address does not exist, perform a POST request
       axios
         .post(apiUrl, newAddress)
@@ -125,7 +129,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -400,7 +404,9 @@ const Checkout = () => {
               />
               Địa chỉ nhận hàng
             </Text>
-            {addressData.firstname === null ? (
+            {!addressData ||
+            !Array.isArray(addressData) ||
+            addressData.length === 0 ? (
               <Button onClick={onOpen} colorScheme="blue" variant="outline">
                 Nhập địa chỉ giao hàng mới
               </Button>
