@@ -11,9 +11,7 @@ export const getSingleProduct = (typeOfProduct, id) => async (dispatch) => {
   // console.log("in the logi func");
   dispatch({ type: GET_SINGLE_PRODUCT_LOADING });
   try {
-    let responce = await axios.get(
-      `https://duantn-backend\.onrender\.com/products/${id}`,
-    );
+    let responce = await axios.get(`http://localhost:9000/products/${id}`);
     console.log("in the logi func try", responce.data);
     // console.log("in the logi func try",responce.data);
     dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: responce.data });

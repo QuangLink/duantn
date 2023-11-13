@@ -55,11 +55,11 @@ const CheckoutBox = ({
         position: "top",
       });
       setTimeout(() => {
-        // axios
-        //   .post("https://duantn-backend\.onrender\.com/order/", { userID })
-        //   .then((response) => {
-        //     console.log(response);
-        //   });
+        axios
+          .post("http://localhost:9000/orders/", { userID })
+          .then((response) => {
+            console.log(response);
+          });
         navigate("/checkout");
       }, 1500);
     }

@@ -135,7 +135,7 @@ function Navbar() {
     setIsFocused(false);
   };
   const fetchData = (value) => {
-    fetch("https://duantn-backend.onrender.com/products/search")
+    fetch("http://localhost:9000/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
@@ -481,8 +481,12 @@ function Navbar() {
                 Hi {username}
               </MenuButton>
               <MenuList>
-                <MenuItem>My Profile</MenuItem>
-                <MenuItem>My Order</MenuItem>
+                <Link to="/myprofile">
+                  <MenuItem>My Profile</MenuItem>
+                </Link>
+                <Link to="/myorder">
+                  <MenuItem>My Order</MenuItem>
+                </Link>
                 <MenuItem>My Address</MenuItem>
                 <Link to="whishlist">
                   {" "}
@@ -928,8 +932,12 @@ function Navbar() {
               Hi {username}
             </MenuButton>
             <MenuList>
-              <MenuItem>My Profile</MenuItem>
-              <MenuItem>My Order</MenuItem>
+              <Link to="/myprofile">
+                <MenuItem>My Profile</MenuItem>
+              </Link>
+              <Link to="/myorder">
+                <MenuItem>My Order</MenuItem>
+              </Link>
               <MenuItem>My Address</MenuItem>
               <Link to="whishlist">
                 {" "}

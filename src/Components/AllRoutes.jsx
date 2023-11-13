@@ -12,12 +12,15 @@ import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import ProductList from "../testlist";
 import Checkout from "../Pages/cartPage/Checkout";
-
+import MyOrder from "../Pages/Profile/MyOrder";
+import MyProfile from "../Pages/Profile/MyProfile";
 import CheckoutTest from "../Pages/checkout/oldcheckout";
+import Vnpay from "../Pages/cartPage/vnpay";
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
+        <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/duantn" element={<Home />}></Route>
@@ -49,24 +52,24 @@ const AllRoutes = () => {
           path="/iphone"
           element={<Products typeOfProduct="iphone" />}
         ></Route>
-       
+
         <Route
           path="/iphone/:id"
           element={<SingleProduct typeOfProduct="iphone" />}
         ></Route>
         <Route
-        path="/applephone"
-        element={<Products typeOfProduct="apple/phone" />}
-      ></Route>
-      <Route
-      path="/applephone/:id"
-      element={<SingleProduct typeOfProduct="phone" />}
-    ></Route>
+          path="/applephone"
+          element={<Products typeOfProduct="apple/phone" />}
+        ></Route>
+        <Route
+          path="/applephone/:id"
+          element={<SingleProduct typeOfProduct="phone" />}
+        ></Route>
         <Route
           path="/xiaomi"
           element={<Products typeOfProduct="xiaomi" />}
         ></Route>
-       
+
         <Route
           path="/xiaomi/:id"
           element={<SingleProduct typeOfProduct="xiaomi" />}
@@ -130,6 +133,22 @@ const AllRoutes = () => {
           element={
             <PrivateRoute>
               <Checkout />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/myorder"
+          element={
+            <PrivateRoute>
+              <MyOrder />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/myprofile"
+          element={
+            <PrivateRoute>
+              <MyProfile />
             </PrivateRoute>
           }
         ></Route>
