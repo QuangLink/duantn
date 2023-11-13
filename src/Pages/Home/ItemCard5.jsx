@@ -37,7 +37,10 @@ const postSingleData = async (data) => {
       userID,
     };
 
-    let response = await axios.post(`http://localhost:9000/cart/`, postData);
+    let response = await axios.post(
+      `https://duantn-backend.onrender.com/cart/`,
+      postData,
+    );
     return response.data;
   } catch (error) {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);

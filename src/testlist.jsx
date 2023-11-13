@@ -10,7 +10,9 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:9000/orders/");
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/orders/",
+      );
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -19,7 +21,9 @@ const ProductList = () => {
 
   const deleteProduct = async (orderCode) => {
     try {
-      await axios.delete(`http://localhost:9000/orders/${orderCode}`);
+      await axios.delete(
+        `https://duantn-backend.onrender.com/orders/${orderCode}`,
+      );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion
     } catch (error) {

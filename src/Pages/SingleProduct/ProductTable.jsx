@@ -3,9 +3,13 @@ import axios from "axios";
 
 const postSingleData = async (data) => {
   try {
-    let response = await axios.post(`http://localhost:9000/cart/`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    let response = await axios.post(
+      `https://duantn-backend.onrender.com/cart/`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     return response.data;
   } catch (error) {
     console.log(
@@ -16,9 +20,13 @@ const postSingleData = async (data) => {
 };
 export const postSingleDataWish = async (data) => {
   try {
-    let response = await axios.post(`http://localhost:9000/whishlist`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    let response = await axios.post(
+      `https://duantn-backend.onrender.com/whishlist`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     return response.data;
   } catch (error) {
     console.log(

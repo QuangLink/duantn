@@ -1,19 +1,19 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 const Vnpay = () => {
-  const [amount, setAmount] = React.useState('');
+  const [amount, setAmount] = React.useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:9000/order/create_payment_url',
+        "https://duantn-backend.onrender.com/order/create_payment_url",
         {
           amount,
           bankCode: event.target.bankCode.value,
           language: event.target.language.value,
-        }
+        },
       );
 
       // Nếu thành công, chuyển hướng trình duyệt đến URL mới
