@@ -50,7 +50,7 @@ const CartItem = ({
     dispatch({ type: "priceIncrease", payload: number });
 
     axios
-      .put(`http://localhost:9000/cart/plus/${cartID}`, {
+      .put(`https://duantn-backend.onrender.comcart/plus/${cartID}`, {
         quantity: count + 1,
       })
       .then((res) => {
@@ -68,7 +68,7 @@ const CartItem = ({
       dispatch({ type: "priceDecrease", payload: number });
 
       axios
-        .put(`http://localhost:9000/cart/minus/${cartID}`, {
+        .put(`https://duantn-backend.onrender.comcart/minus/${cartID}`, {
           quantity: count + 1,
         })
         .then((res) => {
@@ -213,20 +213,22 @@ const CartItem = ({
           fontWeight="500"
         >
           <Heading fontSize="18px" color={"red"}>
-            {price&&price.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {price &&
+              price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
           </Heading>
           <Heading
             fontSize="17px"
             color={"gray"}
             textDecoration={"line-through"}
           >
-            {priceSale&&priceSale.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {priceSale &&
+              priceSale.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
           </Heading>
 
           <Heading fontSize="12px" color={"rgb(102, 102, 102)"}></Heading>

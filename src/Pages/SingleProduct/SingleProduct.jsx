@@ -30,40 +30,45 @@ import Cookies from "js-cookie";
 
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
-  if(!userID){
+  if (!userID) {
     window.location.href = "/login";
-  }
-  else{
-  try {
-    // Lấy userID từ sessionStorage
-    
+  } else {
+    try {
+      // Lấy userID từ sessionStorage
 
-    // Ensure data.prodID is a valid value, not [object Object]
-    const prodID = data.prodID;
-    const colorID = data.colorID;
-    const storageID = data.storageID;
-    // Tạo dữ liệu gửi đi kết hợp với userID và prodID
-    const postData = {
-      prodID,
-      colorID,
-      storageID,
-      userID,
-    };
+      // Ensure data.prodID is a valid value, not [object Object]
+      const prodID = data.prodID;
+      const colorID = data.colorID;
+      const storageID = data.storageID;
+      // Tạo dữ liệu gửi đi kết hợp với userID và prodID
+      const postData = {
+        prodID,
+        colorID,
+        storageID,
+        userID,
+      };
 
-    let response = await axios.post(`http://localhost:9000/cart/`, postData);
-    window.location.href = "/cart";
-    return response.data;
-  } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+      let response = await axios.post(
+        `https://duantn-backend.onrender.comcart/`,
+        postData,
+      );
+      window.location.href = "/cart";
+      return response.data;
+    } catch (error) {
+      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+    }
   }
 };
-}
 
 export const postSingleDataWish = async (data) => {
   try {
-    let response = await axios.post(`http://localhost:9000/wishlist`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    let response = await axios.post(
+      `https://duantn-backend.onrender.comwishlist`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     return response.data;
   } catch (error) {
     console.log(
@@ -122,14 +127,13 @@ const SingleProduct = (props) => {
           duration: 9000,
           isClosable: true,
         });
-
       })
       .catch((error) => {
         console.error("Error handling post:", error);
         // Handle the error as needed, e.g., display an error toast
         toast({
           title: "Lỗi",
-          
+
           status: "error",
           duration: 9000,
           isClosable: true,

@@ -7,7 +7,7 @@ const Vnpay = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:9000/order/create_payment_url",
+        "https://duantn-backend.onrender.comorder/create_payment_url",
         {
           amount,
           bankCode: event.target.bankCode.value,

@@ -63,7 +63,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "http://localhost:9000/orders/create_payment_url",
+            "https://duantn-backend.onrender.comorders/create_payment_url",
             {
               userID,
               amount,
@@ -144,25 +144,41 @@ const CheckoutBox = ({
   return (
     <div>
       <Center w="750px" mt="5" display="flex" flexWrap="wrap">
-      <Box w="100%" mt="15px" mb="15px">
-        <Text fontSize="25px" fontWeight="700">
-          Chọn phương thức thanh toán:
-        </Text>
-        <Box w="100%" h="100px" display="flex" justifyContent="space-between" mt="5">
-          <Box w="49%" textAlign="center" border="1px solid red" borderRadius="15px">
-            <Box marginBottom="5" mt="2">
-              <Icon as={FcHome} w={10} h={10} color="red" />
+        <Box w="100%" mt="15px" mb="15px">
+          <Text fontSize="25px" fontWeight="700">
+            Chọn phương thức thanh toán:
+          </Text>
+          <Box
+            w="100%"
+            h="100px"
+            display="flex"
+            justifyContent="space-between"
+            mt="5"
+          >
+            <Box
+              w="49%"
+              textAlign="center"
+              border="1px solid red"
+              borderRadius="15px"
+            >
+              <Box marginBottom="5" mt="2">
+                <Icon as={FcHome} w={10} h={10} color="red" />
+              </Box>
+              Thanh toán khi nhận hàng
             </Box>
-            Thanh toán khi nhận hàng
-          </Box>
-          <Box w="49%" textAlign="center" border="1px solid red" borderRadius="15px">
-            <Box marginBottom="5" mt="2">
-              <Icon as={FaWallet} w={10} h={10} color="red" />
+            <Box
+              w="49%"
+              textAlign="center"
+              border="1px solid red"
+              borderRadius="15px"
+            >
+              <Box marginBottom="5" mt="2">
+                <Icon as={FaWallet} w={10} h={10} color="red" />
+              </Box>
+              Thanh toán qua ví VNPay
             </Box>
-            Thanh toán qua ví VNPay
           </Box>
         </Box>
-      </Box>
         <Flex justifyContent="flex-end">
           <TbTruckDelivery size={20} />
           <Heading

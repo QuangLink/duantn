@@ -31,7 +31,7 @@ import { RiProfileLine } from "react-icons/ri";
 import Checkout from "./Checkout";
 export const GetData = async () => {
   try {
-    let response = await axios.get(`http://localhost:9000/cart`);
+    let response = await axios.get(`https://duantn-backend.onrender.comcart`);
 
     return await response.data;
   } catch (err) {
@@ -49,7 +49,9 @@ const MainCartPage = () => {
   const [change, setChange] = useState(false);
   const DeleteRequest = async (cartID) => {
     try {
-      let response = await axios.delete(`http://localhost:9000/cart/${cartID}`);
+      let response = await axios.delete(
+        `https://duantn-backend.onrender.comcart/${cartID}`,
+      );
       setChange(!change);
     } catch (err) {
       return err;
@@ -151,7 +153,6 @@ const MainCartPage = () => {
               display="flex"
               flexWrap="wrap"
             >
-          
               <Flex
                 flexDirection={"column"}
                 border={"0px solid blue"}
@@ -194,7 +195,6 @@ const MainCartPage = () => {
                   />
                 ))}
               </Flex>
-             
             </Center>
             <Checkout />
             <CheckoutBox
@@ -205,10 +205,7 @@ const MainCartPage = () => {
               handleApply={handleApply}
               discount={coupon}
             />
-        
           </Center>
-          
-
         )}
       </Flex>
     </div>
