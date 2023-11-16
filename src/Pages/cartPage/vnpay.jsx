@@ -3,22 +3,28 @@ import axios from "axios";
 
 const Vnpay = () => {
   const [amount, setAmount] = React.useState("");
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://duantn-backend.onrender.com/order/create_payment_url",
+        "http://localhost:9000/order/create_payment_url",
         {
           amount,
           bankCode: event.target.bankCode.value,
           language: event.target.language.value,
         },
+        {
+          withCredentials: true,
+        },
       );
 
-      // Nếu thành công, chuyển hướng trình duyệt đến URL mới
-      if (response.data.success) {
-        window.location.href = response.data.redirectUrl;
+      console.log("Response from server:", response.data);
+
+      // Nếu thành công, redirect tới URL mới
+      if (response.data) {
+        window.location.href = response.data;
+      } else {
+        console.error("No vnpUrl found in response data");
       }
     } catch (error) {
       console.error(error);
@@ -92,6 +98,7 @@ const Vnpay = () => {
                 </div>
               </label>
             </div>
+
             <div className="form-group">
               <label>Ngôn ngữ</label>
               <label className="control-label">

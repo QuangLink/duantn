@@ -11,6 +11,7 @@ import {
   ListItem,
   Text,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -26,10 +27,16 @@ import ProductTable from "./ProductTable";
 import { PrApplePhone } from "../Home/CardDetails";
 import Cookies from "js-cookie";
 //add singleData to cart
+
 const postSingleData = async (data) => {
+  const userID = Cookies.get("userID");
+  if(!userID){
+    window.location.href = "/login";
+  }
+  else{
   try {
     // Lấy userID từ sessionStorage
-    const userID = Cookies.get("userID");
+    
 
     // Ensure data.prodID is a valid value, not [object Object]
     const prodID = data.prodID;
@@ -43,25 +50,20 @@ const postSingleData = async (data) => {
       userID,
     };
 
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
-      postData,
-    );
+    let response = await axios.post(`http://localhost:9000/cart/`, postData);
+    window.location.href = "/cart";
     return response.data;
   } catch (error) {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
+}
 
 export const postSingleDataWish = async (data) => {
   try {
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist`,
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+    let response = await axios.post(`http://localhost:9000/wishlist`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
     return response.data;
   } catch (error) {
     console.log(
@@ -72,6 +74,7 @@ export const postSingleDataWish = async (data) => {
 };
 
 const SingleProduct = (props) => {
+  const toast = useToast();
   const { typeOfProduct } = props;
   const [filters, setFilters] = useState({
     color: "",
@@ -111,9 +114,27 @@ const SingleProduct = (props) => {
 
   const dispatch = useDispatch();
   const handlePost = (prodID, colorID, storageID) => {
-    postSingleData({ prodID, colorID, storageID }).then((res) =>
-      navigate("/cart"),
-    );
+    postSingleData({ prodID, colorID, storageID })
+      .then((res) => {
+        toast({
+          title: "Đã thêm vào giỏ",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+
+      })
+      .catch((error) => {
+        console.error("Error handling post:", error);
+        // Handle the error as needed, e.g., display an error toast
+        toast({
+          title: "Lỗi",
+          
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
   };
 
   const applyColorFilter = (selectedColor) => {

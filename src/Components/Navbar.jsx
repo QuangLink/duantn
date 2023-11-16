@@ -91,17 +91,9 @@ function Navbar() {
   };
 
   useEffect(() => {
-    console.log(
-      "scroll.lastY scroll.y - scroll.lastY",
-      scroll.y,
-      scroll.lastY,
-      scroll.y - scroll.lastY,
-    );
     if (scroll.y > 100 && scroll.y - scroll.lastY > 0) {
-      console.log("down down down");
       setDirection("down");
     } else {
-      console.log("up up up");
       setDirection("up");
     }
   }, [scroll.y, scroll.lastY]);
@@ -135,7 +127,7 @@ function Navbar() {
     setIsFocused(false);
   };
   const fetchData = (value) => {
-    fetch("https://duantn-backend.onrender.com/products/search")
+    fetch("http://localhost:9000/products/search")
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);

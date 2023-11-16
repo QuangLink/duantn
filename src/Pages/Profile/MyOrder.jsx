@@ -38,7 +38,7 @@ function MyOrder() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `https://duantn-backend.onrender.com/orders/user/${userID}`,
+        `http://localhost:9000/orders/user/${userID}`,
       );
       console.log(response.data);
       setProducts(response.data);
@@ -104,15 +104,24 @@ function MyOrder() {
                   </Text>
                 </Box>
                 <Box mt="50">
-                  <Text
-                    class="badge bg-danger"
-                    fontWeight="600"
-                    fontSize="18px"
-                    ml="1"
-                    color="black"
-                  >
-                    Trạng thái: {product.orderStatus}
-                  </Text>
+              {product.orderStatus === "Đã thanh toán" ? (<Text
+                class="badge bg-success"
+                fontWeight="600"
+                fontSize="18px"
+                ml="1"
+                color="black"
+              >
+                Trạng thái: {product.orderStatus}
+              </Text>):(<Text
+                class="badge bg-danger"
+                fontWeight="600"
+                fontSize="18px"
+                ml="1"
+                color="black"
+              >
+                Trạng thái: {product.orderStatus}
+              </Text>)}
+                  
                 </Box>
               </Box>
               <Box>
@@ -149,7 +158,7 @@ function MyOrder() {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -180,7 +189,7 @@ function MyOrder() {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
     if (
       !addressData ||
@@ -231,7 +240,7 @@ function MyOrder() {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);

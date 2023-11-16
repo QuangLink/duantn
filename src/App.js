@@ -12,19 +12,14 @@ class App extends React.Component {
   }
 
   render() {
-    const footerStyle = {
-      position: "relative",
-      marginTop: "150px",
-      bottom: 0,
-      left: 0,
-      width: "100%",
-    };
+
+    
     return (
       <div className="App">
         <AuthContextProvider>
           <Navbar />
           <AllRoutes />
-          <Footer style={footerStyle} />
+          <Footer />
         </AuthContextProvider>
       </div>
     );

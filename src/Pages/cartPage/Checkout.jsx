@@ -47,7 +47,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,7 +78,7 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
     if (
       !addressData ||
@@ -129,7 +129,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -306,91 +306,8 @@ const Checkout = () => {
           </AccordionItem>
         </Accordion>
       </div>
-      <Heading
-        textAlign="center"
-        display="flex"
-        justifyContent="space-around"
-        w="95%"
-        m="15p% 10% 10% 10%"
-        mt="5"
-      >
-        <Box className="headingCart">
-          <Text className="textHeader">
-            <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
-          </Text>
-          <Center fontSize="30px" fontWeight="600" color="red.500">
-            GIỎ HÀNG
-          </Center>
-        </Box>
-      </Heading>
-      <Center
-        mt="5px"
-        width="100%"
-        border="1px solid pink"
-        w="95%"
-        borderRadius="20px"
-        display="flex"
-        flexWrap="wrap"
-        h="auto"
-      >
-        <Center className="">
-          <Box alignItems="center" justifyContent="center">
-            <Box
-              border="1px solid red"
-              borderRadius="50%"
-              w="50px"
-              h="50px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              ml="30"
-              marginTop="10px"
-            >
-              {" "}
-              <Icon as={BsFillCartCheckFill} w={6} h={6} color="red.500" />{" "}
-            </Box>
-            <Text>Chọn sản phẩm</Text>
-          </Box>
-          <span style={{ color: "red" }}>--------------------------</span>
-          <Box alignItems="center" justifyContent="center">
-            <Box
-              border="1px solid red"
-              borderRadius="50%"
-              w="50px"
-              h="50px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              ml="48px"
-              marginTop="10px"
-            >
-              {" "}
-              <Icon as={RiProfileLine} w={6} h={6} color="red.500" />{" "}
-            </Box>
-            <Text>Thông tin đơn hàng</Text>
-          </Box>
-          <span style={{ color: "red" }}>---------------</span>
-          <span style={{ color: "black" }}>---------------</span>
 
-          <Box alignItems="center" justifyContent="center">
-            <Box
-              border="1px solid black"
-              borderRadius="50%"
-              w="50px"
-              h="50px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              ml="15px"
-              marginTop="10px"
-            >
-              {" "}
-              <Icon as={AiFillCreditCard} w={6} h={6} color="black" />{" "}
-            </Box>
-            <Text>Thanh toán</Text>
-          </Box>
-        </Center>
-
+      <Center>
         <Flex w="710px " display="flex" flexWrap="wrap" p="10">
           <Box className="BgImg"></Box>
           <Box mt="5" display="flex" justifyContent="space-between" w="100%">
@@ -445,61 +362,10 @@ const Checkout = () => {
             )}
           </Box>
           {renderAddressData()}
-          <Box w="100%">
-            <Text fontSize="25px" fontWeight="700">
-              Thông tin bổ sung:
-            </Text>
-            <Box w="100%" h="100px">
-              <input
-                placeholder="Lời nhắn cho người bán..."
-                className="inputCheckout"
-                type="text"
-              />
-            </Box>
-          </Box>
         </Flex>
       </Center>
       <Center w="710px" mt="5" display="flex" flexWrap="wrap">
-        <Flex justifyContent="space-between" w="710px">
-          <Text
-            mt="2"
-            height="50px"
-            fontFamily="inherit"
-            color="#424245"
-            noOfLines={2}
-            fontSize="25px"
-            _hover={{ color: "red" }}
-            fontWeight="700"
-          >
-            Tổng tiền tạm tính:
-          </Text>
-
-          <Text fontWeight="700" fontSize="25px" mt="2" color="red">
-            12.000.000 VNĐ
-          </Text>
-        </Flex>
-
-        <Button
-          w="710px"
-          h="50px"
-          border="1px solid  red.600"
-          borderRadius="10px"
-          backgroundColor="red.600"
-          _hover={{ color: "red.600" }}
-        >
-          <Text color="white">Tiến hành đặt hàng</Text>
-        </Button>
-        <Button
-          mt="2"
-          w="710px"
-          h="50px"
-          border="1px solid red"
-          borderRadius="10px"
-          backgroundColor="white"
-          _hover={{ color: "white" }}
-        >
-          <Text color="red.600">Chọn thêm sản phẩm khác</Text>
-        </Button>
+        <Flex justifyContent="space-between" w="710px"></Flex>
       </Center>
     </Center>
   );

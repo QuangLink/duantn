@@ -9,7 +9,7 @@ import {
 } from "./FooterDetail";
 const Footer = () => {
   return (
-    <Box bg="#FFFFFF" color="#55555" justifyContent="center">
+    <Box bg="#FFFFFF" color="#55555" justifyContent="center" style={{marginTop: "5%"}}>
       <Grid
         templateColumns={{
           base: "repeat(1,1fr)",

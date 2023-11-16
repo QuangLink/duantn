@@ -212,7 +212,7 @@ const Form3 = () => {
     )
 }
 
-export default function MyProfile() {
+export default function Multistep() {
     const toast = useToast();
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(33.33);
@@ -270,7 +270,7 @@ export default function MyProfile() {
                                 height="50px"
                                 mr="5%"
                             >
-                                Đổi mật khẩu 
+                                Đỗi mật khẩu 
                             </Button>
                             <Button
                                 onClick={() => handleFormChange(3)}

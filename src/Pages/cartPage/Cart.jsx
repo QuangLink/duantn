@@ -1,7 +1,6 @@
 import React from "react";
 import MyCartLength from "./MyCartLength";
 import CartItem from "./CartItem";
-import CheckoutBox from "./CheckoutBox";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -12,23 +11,17 @@ import "./cartstyle.css";
 
 import {
   Box,
-  Image,
   Center,
   Flex,
   Heading,
   Text,
   Button,
-  CardFooter,
   useToast,
 } from "@chakra-ui/react";
-
+import { useNavigate } from "react-router-dom";
 import "react-slideshow-image/dist/styles.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Icon } from "@chakra-ui/react";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
-import { RiProfileLine } from "react-icons/ri";
-import Checkout from "./Checkout";
+import { WarningTwoIcon } from "@chakra-ui/icons";
+
 export const GetData = async () => {
   try {
     let response = await axios.get(`http://localhost:9000/cart`);
@@ -39,7 +32,8 @@ export const GetData = async () => {
   }
 };
 
-const MainCartPage = () => {
+const Cart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
@@ -53,30 +47,6 @@ const MainCartPage = () => {
       setChange(!change);
     } catch (err) {
       return err;
-    }
-  };
-
-  const handleApply = () => {
-    if (val === "MASAI40") {
-      dispatch({ type: "code", payload: val });
-      setVal("");
-      toast({
-        title: "Successful",
-        description: "Mã giảm giá đã áp dụng thành công",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-        position: "top",
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: "Mã giảm giá sai",
-        status: "warning",
-        duration: 9000,
-        isClosable: true,
-        position: "top",
-      });
     }
   };
 
@@ -116,13 +86,22 @@ const MainCartPage = () => {
         }}
       >
         {dataLength === 0 ? (
-          <Center>
-            <div style={{ textAlign: "center" }}>
-              <Text fontSize="2xl" fontWeight="bold" mt="10">
-                Your cart is empty
-              </Text>
-            </div>
-          </Center>
+          <Box
+            textAlign="center"
+            py={10}
+            px={6}
+            style={{
+              margin: "auto",
+              marginTop: "100px",
+              marginBottom: "100px",
+            }}
+          >
+            <WarningTwoIcon boxSize={"50px"} color={"red.500"} />
+            <Heading as="h3" size="xl" mt={6} mb={2}>
+              Giỏ hàng của bạn trống
+            </Heading>
+            <Text color={"gray.500"}>Hãy thêm sản phẩm vào giỏ hàng</Text>
+          </Box>
         ) : (
           <Center className="cartPage">
             <Heading
@@ -134,24 +113,18 @@ const MainCartPage = () => {
               mt="5"
             >
               <Box className="headingCart">
-                <Text className="textHeader">
-                  <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
-                </Text>
                 <Center fontSize="25px" fontWeight="500" color="red.500">
-                  Đặt hàng
+                  Giỏ hàng của bạn
                 </Center>
               </Box>
             </Heading>
             <Center
               mt="5px"
               width="100%"
-              border="1px solid pink"
               w="95%"
-              borderRadius="20px"
               display="flex"
               flexWrap="wrap"
             >
-          
               <Flex
                 flexDirection={"column"}
                 border={"0px solid blue"}
@@ -194,25 +167,44 @@ const MainCartPage = () => {
                   />
                 ))}
               </Flex>
-             
             </Center>
-            <Checkout />
-            <CheckoutBox
-              items={dataLength}
-              totalPrice={totalPrice}
-              paybalPrice={paybalPrice}
-              setVal={setVal}
-              handleApply={handleApply}
-              discount={coupon}
-            />
-        
-          </Center>
-          
+            <Flex justifyContent="space-between" w="710px">
+              <Text
+                mt="2"
+                height="50px"
+                fontFamily="inherit"
+                color="#424245"
+                noOfLines={2}
+                fontSize="20px"
+                fontWeight="700"
+              >
+                Tạm tính:
+              </Text>
 
+              <Text fontWeight="700" fontSize="20px" mt="2" color="red">
+                {paybalPrice &&
+                  paybalPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+              </Text>
+            </Flex>
+            <Button
+              w="710px"
+              h="50px"
+              border="1px solid  #70b1ea"
+              borderRadius="10px"
+              backgroundColor="#70b1ea"
+              _hover={{ color: "#4a90e2" }}
+              onClick={() => navigate("/checkout")}
+            >
+              <Text color="white">Tiến hành đặt hàng</Text>
+            </Button>
+          </Center>
         )}
       </Flex>
     </div>
   );
 };
 
-export default MainCartPage;
+export default Cart;
