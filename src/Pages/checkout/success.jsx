@@ -13,7 +13,7 @@ const Success = () => {
         console.log(location.search);
         // Send a POST request to your backend with the searchParams
         const response = await axios.get(
-          `https://duantn-backend.onrender.comorder/vnpay_return${location.search}`,
+          `https://duantn-backend.onrender.com/order/vnpay_return${location.search}`,
         );
 
         // Handle the response from the backend as needed

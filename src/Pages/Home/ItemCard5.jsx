@@ -38,7 +38,7 @@ const postSingleData = async (data) => {
     };
 
     let response = await axios.post(
-      `https://duantn-backend.onrender.comcart/`,
+      `https://duantn-backend.onrender.com/cart/`,
       postData,
     );
     return response.data;

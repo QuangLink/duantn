@@ -63,7 +63,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.comorders/create_payment_url",
+            "https://duantn-backend.onrender.com/orders/create_payment_url",
             {
               userID,
               amount,

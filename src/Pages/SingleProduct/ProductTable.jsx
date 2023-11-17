@@ -4,7 +4,7 @@ import axios from "axios";
 const postSingleData = async (data) => {
   try {
     let response = await axios.post(
-      `https://duantn-backend.onrender.comcart/`,
+      `https://duantn-backend.onrender.com/cart/`,
       data,
       {
         headers: { "Content-Type": "application/json" },
@@ -21,7 +21,7 @@ const postSingleData = async (data) => {
 export const postSingleDataWish = async (data) => {
   try {
     let response = await axios.post(
-      `https://duantn-backend.onrender.comwhishlist`,
+      `https://duantn-backend.onrender.com/whishlist`,
       data,
       {
         headers: { "Content-Type": "application/json" },

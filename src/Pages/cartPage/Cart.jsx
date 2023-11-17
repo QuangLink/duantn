@@ -24,7 +24,7 @@ import { WarningTwoIcon } from "@chakra-ui/icons";
 
 export const GetData = async () => {
   try {
-    let response = await axios.get(`https://duantn-backend.onrender.comcart`);
+    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
 
     return await response.data;
   } catch (err) {
@@ -44,7 +44,7 @@ const Cart = () => {
   const DeleteRequest = async (cartID) => {
     try {
       let response = await axios.delete(
-        `https://duantn-backend.onrender.comcart/${cartID}`,
+        `https://duantn-backend.onrender.com/cart/${cartID}`,
       );
       setChange(!change);
     } catch (err) {
