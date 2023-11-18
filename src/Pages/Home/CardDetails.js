@@ -4,8 +4,8 @@ const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
-  applephone: apiUrlBase + "apple/phone",
-  appletablet: apiUrlBase + "apple/tablet",
+  applephone: apiUrlBase + "apple",
+  appletablet: apiUrlBase + "apple",
   samsung: apiUrlBase + "samsung",
   xiaomi: apiUrlBase + "xiaomi",
   hp: apiUrlBase + "hp",
@@ -95,48 +95,56 @@ export const CateFeatures = [
     name: "Máy tính",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png",
+    prodType: "laptop",
   },
   {
     id: 2,
     name: "Tablet",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Tablet-128x129.png",
+    prodType: "tablet",
   },
   {
     id: 3,
     name: "Đồng hồ thông minh",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png",
+    prodType: "tablet",
   },
   {
     id: 4,
     name: "Điện thoại độc quyền",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/dien-thoai-doc-quyen-128x128.png",
+    prodType: "samsung",
   },
   {
     id: 5,
     name: "Màn hình máy tính",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png",
+    prodType: "tablet",
   },
   {
     id: 6,
     name: "Phụ kiện di động",
     imgcatehot:
       "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png",
+    prodType: "tablet",
   },
   {
     id: 7,
     name: "Phụ kiện Gaming",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png",
+    prodType: "tablet",
   },
   {
     id: 8,
     name: "Thiết bị âm thanh",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
+    prodType: "tablet",
   },
 ];
 

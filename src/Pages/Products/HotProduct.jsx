@@ -10,45 +10,52 @@ import {
   Badge,
   Center,
 } from "@chakra-ui/react";
+
+import RatingBar from "./RatingBar";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import Heading from "../Home/Heading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
-const HotProduct = ({ type, heading }) => {
+const HotProduct = ({ type}) => {
   return (
     <Box
-      justifyContent="center"
-      w="80%"
+      
+      w="60%"
       m="auto"
       mt="6"
       cursor="pointer"
-      textAlign="center"
-      backgroundColor="#CCF1F9"
+      
+      backgroundColor="#9b000a"
       borderRadius="5px"
       css={{ "@media (max-width: 768px)": { display: "none" } }}
     >
-      <Box>
-        <a href="">
+      <Box display="flex" justifyContent="center" mt="5">
+        <a href=""  >
           <Text
-            fontSize="2.1rem"
-            color="whiteAlpha.900"
-            fontWeight="black"
-            width="100%"
-            backgroundColor="blue.300"
-            h="60px"
-            p={2}
+          
+          
+            
+      
+            width="auto"
+            backgroundColor="#9b000a"
+            h="auto"
+            
           >
-            Các sản phẩm hot nhất tuần qua{" "}
+            
+                         <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/11/campaign/Frame-2-1200x120.png" w="100%" />{" "}
           </Text>
         </a>
       </Box>
-      {/* <Heading heading={heading} textAlign="center" display="flex" justifyContent="center" w="95%"  m="15p% 10% 10% 10%"/> */}
-      <Box mt="1">
+     
+      <Box mt="2" ml="4" mr="4">
         <Swiper
           modules={[Navigation, Autoplay]}
           navigation
@@ -80,15 +87,22 @@ const HotProduct = ({ type, heading }) => {
             <Box key={uuid()}>
               <SwiperSlide>
                 <Link to="/computers/">
+                
                   <Box
+                 
                     p="5"
-                    m="2"
-                    height="350px"
+                    ml="1"
+                    
+                    height="auto"
+                   mb="5"
                     backgroundColor="white"
                     borderRadius="10px"
                     transition="transform 2s ease-in-out"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
+                    <Box padding="10px" textAlign="left">
+            <FontAwesomeIcon icon={faEye} /> Xem
+          </Box>
                     <Square
                       m="auto"
                       _hover={{ transform: "translateY(-10px)" }}
@@ -107,20 +121,26 @@ const HotProduct = ({ type, heading }) => {
                         {i.name}
                       </Text>
                     </Box>
-                    <Box mt="2.5" m="20px 0 30px 0">
-                      <Flex>
+                    <Box mt="2.5" m="20px 0 30px 0" w="100%" >
+                      <Flex width="100%" display="flex" flexWrap="wrap">
+                        <Box w="100%" textAlign="left">
+                      <RatingBar rating={3} />
+                          </Box>                     
                         <Square>
-                          <Text color="gray.600" fontSize="14px">
+                        
+                          <Text color="gray.600" fontSize="14px" mt="2" >
                             Giá mới :{" "}
                           </Text>
                         </Square>
                         <Square>
                           <Text
-                            fontWeight="600"
+                            fontWeight="800"
                             fontSize="18px"
-                            ml="1"
+                            ml="2"
+                            mt="2"
+                          
                             color="red"
-                            _hover={{ color: "red" }}
+                            _hover={{ color: "blue.300" }}
                           >
                             {i.price&&
                               i.price.toLocaleString("vi-VN", {
@@ -133,7 +153,7 @@ const HotProduct = ({ type, heading }) => {
                       {i.original !== 0 && (
                         <>
                           <Flex>
-                            <Text color="gray.600" fontSize="14px">
+                            <Text color="gray.600" fontSize="14px" mt="2" mb="2">
                               Giá gốc:{" "}
                             </Text>
                             {"  "}
@@ -141,7 +161,9 @@ const HotProduct = ({ type, heading }) => {
                               as="s"
                               color="gray.600"
                               fontSize="14px"
-                              ml="1"
+                              ml="2"
+                              mt="2"
+                              mb="2"
                             >
                               {i.original&&
                                 i.original.toLocaleString("vi-VN", {
@@ -158,8 +180,9 @@ const HotProduct = ({ type, heading }) => {
                             bg="#FEB373"
                             mt="2"
                             textAlign="center"
+                            mb="10"
                           >
-                            <Text fontSize="10px" fontWeight="500">
+                            <Text fontSize="10px" fontWeight="500" >
                               GIẢM GIÁ SỐC
                             </Text>
                           </Box>

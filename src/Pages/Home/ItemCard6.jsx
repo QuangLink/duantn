@@ -3,6 +3,8 @@ import { Box, Grid, Flex, Text, Image, Center } from "@chakra-ui/react";
 import uuid from "react-uuid";
 
 const ItemCard6 = ({ type, heading }) => {
+
+
   return (
     <Box mb="2" cursor="pointer" w="75%" m="center" ml="12.5%">
       <Center>

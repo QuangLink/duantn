@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import {
   Box,
   Flex,
@@ -18,6 +20,29 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import "./stylehome.css";
 const PrDeal = ({ type }) => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    onGetData();
+  }, []);
+
+  const onGetData = async () => {
+    try {
+      let responce = await axios.get(
+        `https://duantn-backend.onrender.com/products`,
+      );
+      console.log("in the logi func try", responce.data);
+      if (responce.data) {
+        setFilteredProducts(responce.data || []);
+      }
+    } catch (error) {}
+  };
+  const listDataSaleLaptop = filteredProducts.filter(
+    (product) => product.prodType === "Laptop" && product.prodSale > 0,
+  );
+
+  console.log(listDataSaleLaptop, "listDataSaleLaptop");
+
   return (
     <Box
       marginTop="2  "
@@ -92,10 +117,10 @@ const PrDeal = ({ type }) => {
             },
           }}
         >
-          {type.map((i) => (
+          {listDataSaleLaptop.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to={i.linked}>
+                <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
                     className="list"
                     p="2"
@@ -111,20 +136,24 @@ const PrDeal = ({ type }) => {
                   >
                     <Box className="img">
                       <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                        <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
+                        <Image
+                          src={`${i.prodImg}`}
+                          alt={i.prodImg}
+                          boxSize="160px"
+                        />
                       </Square>
                       <Text
                         mt="2"
-                        h="70px"
-                        fontFamily="serif"
+                        height="70px"
+                        fontFamily={"Arial"}
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="25px"
-                        _hover={{ color: "red" }}
-                        fontWeight="700"
+                        fontSize="20px"
+                        _hover={{ color: "blue" }}
+                        fontWeight="500"
                       >
-                        {i.name}
+                        {i.prodName}
                       </Text>
                       <Center m="0 auto">
                         <Box mt="2.5" textAlign="center">
@@ -146,11 +175,11 @@ const PrDeal = ({ type }) => {
                                 color="red"
                                 _hover={{ color: "red" }}
                               >
-                                {i.price&&
-                                  i.price.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                {i.prodPrice &&
+                                  i.prodPrice.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Square>
                           </Flex>
@@ -168,11 +197,11 @@ const PrDeal = ({ type }) => {
                                     fontSize="14px"
                                     ml="1"
                                   >
-                                    {i.original&&
+                                    {i.original &&
                                       i.original.toLocaleString("vi-VN", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
                                   </Text>
                                 </Flex>
                                 <Box

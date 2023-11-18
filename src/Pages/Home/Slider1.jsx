@@ -19,9 +19,8 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 
-const Slider = ({ type }) => {
+const Slider1 = ({ type }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   useEffect(() => {
     onGetData();
   }, []);
@@ -29,7 +28,7 @@ const Slider = ({ type }) => {
   const onGetData = async () => {
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/apple`,
+        `https://duantn-backend.onrender.com/category/asus`,
       );
       console.log("in the logi func try", responce.data);
       if (responce.data) {
@@ -38,11 +37,9 @@ const Slider = ({ type }) => {
     } catch (error) {}
   };
   const listDataIphone = filteredProducts.filter(
-    (product) => product.prodType === "Phone",
+    (product) => product.prodType === "Laptop",
   );
-
   console.log(listDataIphone, "listDataIphone");
-
   return (
     <Swiper
       modules={[Navigation, Autoplay]}
@@ -77,10 +74,10 @@ const Slider = ({ type }) => {
             <Link to={`/${i.prodType}/${i.prodID}`}>
               <Box
                 p="2"
-                m={2}
+                m="2"
                 borderRadius="15px"
                 boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
-                width="310px"
+                width="340px"
               >
                 <Square m="5" _hover={{ transform: "scale(1.1)" }}>
                   <Image
@@ -106,11 +103,7 @@ const Slider = ({ type }) => {
                 <Box mt="2.5" m="20px 0 50px 30px">
                   <Flex>
                     <Square>
-                      <Text
-                        color="gray.600"
-                        fontSize="14px"
-                        justifyContent="center"
-                      >
+                      <Text color="gray.600" fontSize="14px">
                         Giá mới :{" "}
                       </Text>
                     </Square>
@@ -134,11 +127,7 @@ const Slider = ({ type }) => {
                     {i.original !== 0 && (
                       <>
                         <Flex>
-                          <Text
-                            color="gray.600"
-                            fontSize="14px"
-                            justifyContent="center"
-                          >
+                          <Text color="gray.600" fontSize="14px">
                             Giá gốc:{" "}
                           </Text>
                           {"  "}
@@ -176,4 +165,4 @@ const Slider = ({ type }) => {
   );
 };
 
-export default Slider;
+export default Slider1;

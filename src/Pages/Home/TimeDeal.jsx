@@ -14,6 +14,7 @@ import { Swiper, SwiperSlide, slidesPerView } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
+import axios from "axios";
 
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
@@ -25,6 +26,8 @@ const TimeDeal = ({ type, heading }) => {
     phut: 0,
     giay: 0,
   });
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const thoiGianKetThuc = new Date();
@@ -63,6 +66,28 @@ const TimeDeal = ({ type, heading }) => {
 
     return { gio, phut, giay };
   };
+
+  useEffect(() => {
+    onGetData();
+  }, []);
+
+  const onGetData = async () => {
+    try {
+      let responce = await axios.get(
+        `https://duantn-backend.onrender.com/products`,
+      );
+      console.log("in the logi func try", responce.data);
+      if (responce.data) {
+        setFilteredProducts(responce.data || []);
+      }
+    } catch (error) {}
+  };
+  const listDataSale = filteredProducts.filter(
+    (product) => product.prodSale > 0,
+  );
+
+  // console.log(listDataSale);
+
   return (
     <Box
       justifyContent="center"
@@ -102,7 +127,7 @@ const TimeDeal = ({ type, heading }) => {
               color="blackAlpha.800"
               mt="2"
             >
-              <i fontSize="10px">
+              <i fontSize="10px" fontFamily="-moz-initial">
                 {" "}
                 Kết thúc trong{" "}
                 <span>{thoiGianConLai.gio.toString().padStart(2, "0")}</span>:
@@ -122,7 +147,10 @@ const TimeDeal = ({ type, heading }) => {
             borderBottom="3px solid #E6CB47"
             borderBottomRadius="12px"
           >
-            <i fontSize="10px"> 08:00/23:59 </i>{" "}
+            <i fontSize="10px" fontFamily="-moz-initial">
+              {" "}
+              08:00/23:59{" "}
+            </i>{" "}
           </Text>
         </Box>
         <Box mt="8" className="time">
@@ -133,7 +161,10 @@ const TimeDeal = ({ type, heading }) => {
             color="blackAlpha.800"
             mt="2"
           >
-            <i fontSize="10px"> 08:00/23:59 </i>{" "}
+            <i fontSize="10px" fontFamily="-moz-initial">
+              {" "}
+              08:00/23:59{" "}
+            </i>{" "}
           </Text>
         </Box>
       </Heading>
@@ -161,15 +192,15 @@ const TimeDeal = ({ type, heading }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 5,
             },
           }}
         >
-          {type.map((i) => (
+          {listDataSale.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to={i.linked}>
+                <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
                     className="list"
                     p="2"
@@ -184,23 +215,23 @@ const TimeDeal = ({ type, heading }) => {
                   >
                     <Box className="img">
                       <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                        <Image src={`${i.img}`} boxSize="160px" />
+                        <Image src={`${i.prodImg}`} boxSize="160px" />
                       </Square>
 
                       <Text
                         mt="2"
                         height="70px"
-                        fontFamily="serif"
+                        fontFamily={"Arial"}
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="25px"
-                        _hover={{ color: "red" }}
-                        fontWeight="700"
+                        fontSize="17px"
+                        _hover={{ color: "blue" }}
+                        fontWeight="500"
                       >
-                        {i.name}
+                        {i.prodName}
                       </Text>
-                      <Box mt="2.5" m="20px 0 30px 0">
+                      <Box mt="2.5" m="10px 0 30px 0">
                         <Flex>
                           <Square>
                             <Text color="gray.600" fontSize="15px">
@@ -209,17 +240,18 @@ const TimeDeal = ({ type, heading }) => {
                           </Square>
                           <Square>
                             <Text
+                              textAlign="center"
                               fontWeight="650"
                               fontSize="18px"
                               ml="1"
                               color="red"
                               _hover={{ color: "red" }}
                             >
-                              {i.price&&
-                                i.price.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
+                              {i.prodPrice &&
+                                i.prodPrice.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
                             </Text>
                           </Square>
                         </Flex>
@@ -236,11 +268,11 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original&&
+                                {i.original &&
                                   i.original.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Flex>
                             <Box
@@ -280,12 +312,10 @@ const TimeDeal = ({ type, heading }) => {
                       </Box>
                     </Box>
                   </Box>
-
                   <Box
                     className="list"
                     p="2"
                     mt="4"
-                    mb="5"
                     ml="1"
                     mr="1"
                     backgroundColor="white"
@@ -296,23 +326,23 @@ const TimeDeal = ({ type, heading }) => {
                   >
                     <Box className="img">
                       <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                        <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
+                        <Image src={`${i.prodImg}`} boxSize="160px" />
                       </Square>
 
                       <Text
                         mt="2"
-                        h="70px"
-                        fontFamily="serif"
+                        height="70px"
+                        fontFamily={"Arial"}
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="25px"
-                        _hover={{ color: "red" }}
-                        fontWeight="700"
+                        fontSize="17px"
+                        _hover={{ color: "blue" }}
+                        fontWeight="500"
                       >
-                        {i.name}
+                        {i.prodName}
                       </Text>
-                      <Box mt="2.5" m="20px 0 30px 0">
+                      <Box mt="2.5" m="10px 0 30px 0">
                         <Flex>
                           <Square>
                             <Text color="gray.600" fontSize="15px">
@@ -321,16 +351,18 @@ const TimeDeal = ({ type, heading }) => {
                           </Square>
                           <Square>
                             <Text
+                              textAlign="center"
                               fontWeight="650"
                               fontSize="18px"
                               ml="1"
                               color="red"
                               _hover={{ color: "red" }}
                             >
-                              {i.price.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
+                              {i.prodPrice &&
+                                i.prodPrice.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
                             </Text>
                           </Square>
                         </Flex>
@@ -347,11 +379,11 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original&&
+                                {i.original &&
                                   i.original.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Flex>
                             <Box
@@ -369,7 +401,6 @@ const TimeDeal = ({ type, heading }) => {
                             </Box>
                           </>
                         )}
-
                         <Box
                           mt="4"
                           display="flex"

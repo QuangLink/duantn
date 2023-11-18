@@ -216,7 +216,7 @@ const Checkout = () => {
   };
 
   return (
-    <Center className="cartPage">
+    <Center className="cartPage"  >
       <div>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -306,11 +306,10 @@ const Checkout = () => {
           </AccordionItem>
         </Accordion>
       </div>
-
-      <Center>
-        <Flex w="710px " display="flex" flexWrap="wrap" p="10">
+     
+          
           <Box className="BgImg"></Box>
-          <Box mt="5" display="flex" justifyContent="space-between" w="100%">
+          <Box  display="flex" justifyContent="space-between" w="100%" mt="5">
             <Text fontSize="25px" fontWeight="700">
               <Icon
                 as={FaMapMarkerAlt}
@@ -362,11 +361,17 @@ const Checkout = () => {
             )}
           </Box>
           {renderAddressData()}
-        </Flex>
-      </Center>
-      <Center w="710px" mt="5" display="flex" flexWrap="wrap">
-        <Flex justifyContent="space-between" w="710px"></Flex>
-      </Center>
+                
+            
+           
+       
+        
+     
+
+    
+
+      
+      
     </Center>
   );
 };

@@ -8,17 +8,23 @@ const SlideProuct = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Box
-        backgroundColor="blue.300"
+      
         display="flex"
-        w="80%"
+        flexWrap="wrap"
+        
+        w="60%"
         m="auto"
         mt="6"
-        padding="10px"
-        borderRadius="5px"
+   
+        borderRadius="12px"
         css={{ "@media (max-width: 768px)": { display: "none" } }}
       >
-        <Box width="100%" mr="1%">
-          <Slide>
+        <Box w="100%" fontSize="25px" fontWeight="600">
+              KHUYẾN MÃI CHỈ CÓ TRÊN ONLINE
+              </Box>
+        <Box width="100%"  display="block" >
+        <img src="https://cdn.tgdd.vn/2023/09/banner/1200x150-tgdd-1200x150-1.png"   />
+          {/* <Slide>
             {type.map((i) => (
               <Box key={uuid()} h="220px">
                 <Image
@@ -29,7 +35,7 @@ const SlideProuct = ({ type }) => {
                 />
               </Box>
             ))}
-          </Slide>
+          </Slide> */}
         </Box>
       </Box>
     </Box>

@@ -78,6 +78,14 @@
 .cateName:hover{
   color: blue;
 }
+.cart-icon {
+  transition: transform 0.2s; /* Thêm hiệu ứng transition */
+}
+
+.cart-icon:hover {
+  transform: scale(1.2); /* Khi hover, icon sẽ phóng to lên 1.2 lần kích thước ban đầu */
+  color: #4f69ee;
+}
 
 @keyframes glowing {
     0% { background-position: 0 0; }

@@ -126,7 +126,10 @@ const MainCartPage = () => {
             </div>
           </Center>
         ) : (
-          <Center className="cartPage">
+          <Center className="cartPage"
+          borderRadius="2%"
+           boxShadow="4px 10px 6px 8px rgba(12,12,12,0.2)">
+            
             <Heading
               textAlign="center"
               display="flex"
@@ -147,11 +150,13 @@ const MainCartPage = () => {
             <Center
               mt="5px"
               width="100%"
-              border="1px solid pink"
-              w="95%"
+              
+             
               borderRadius="20px"
               display="flex"
               flexWrap="wrap"
+              borderBottom="none"
+              borderBottomRadius="none"
             >
               <Flex
                 flexDirection={"column"}
