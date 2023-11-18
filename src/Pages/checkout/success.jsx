@@ -16,7 +16,7 @@ const Success = () => {
         console.log(location.search);
 
         const response = await axios.get(
-          `http://localhost:9000/order/vnpay_return${location.search}`,
+          `https://duantn-backend.onrender.com/order/vnpay_return${location.search}`,
         );
 
         console.log("Response from backend:", response.data);

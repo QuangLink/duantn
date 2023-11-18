@@ -47,7 +47,10 @@ const postSingleData = async (data) => {
         userID,
       };
 
-      let response = await axios.post(`http://localhost:9000/cart/`, postData);
+      let response = await axios.post(
+        `https://duantn-backend.onrender.com/cart/`,
+        postData,
+      );
       window.location.href = "/cart";
       return response.data;
     } catch (error) {
@@ -58,9 +61,13 @@ const postSingleData = async (data) => {
 
 export const postSingleDataWish = async (data) => {
   try {
-    let response = await axios.post(`http://localhost:9000/wishlist`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    let response = await axios.post(
+      `https://duantn-backend.onrender.com/wishlist`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     return response.data;
   } catch (error) {
     console.log(
@@ -517,7 +524,7 @@ const SingleProduct = (props) => {
                       </Box>
                     </Box>
                     <Box className="box-table" mt={5}>
-                    <ProductTable product={applyFilters()[0]} />
+                      <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>
                 </Grid>

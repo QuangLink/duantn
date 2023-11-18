@@ -10,7 +10,7 @@ import uuid from "react-uuid";
 import axios from "axios";
 
 const RelateProduct = ({ type, heading }) => {
-  const apiUrlBase = "http://localhost:9000/category/";
+  const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
   const categoryUrl = {
     sale: apiUrlBase + type,
