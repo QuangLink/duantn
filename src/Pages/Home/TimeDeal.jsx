@@ -73,9 +73,7 @@ const TimeDeal = ({ type, heading }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
-      );
+      let responce = await axios.get(`http://localhost:9000/products`);
       console.log("in the logi func try", responce.data);
       if (responce.data) {
         setFilteredProducts(responce.data || []);
@@ -255,7 +253,7 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        {i.original !== 0 && (
+                        {i.prodPriceSale !== 0 && (
                           <>
                             <Flex>
                               <Text color="gray.600" fontSize="14px">
@@ -268,8 +266,8 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original &&
-                                  i.original.toLocaleString("vi-VN", {
+                                {i.prodPriceSale &&
+                                  i.prodPriceSale.toLocaleString("vi-VN", {
                                     style: "currency",
                                     currency: "VND",
                                   })}
@@ -366,7 +364,7 @@ const TimeDeal = ({ type, heading }) => {
                             </Text>
                           </Square>
                         </Flex>
-                        {i.original !== 0 && (
+                        {i.prodPriceSale !== 0 && (
                           <>
                             <Flex>
                               <Text color="gray.600" fontSize="14px">
@@ -379,8 +377,8 @@ const TimeDeal = ({ type, heading }) => {
                                 fontSize="14px"
                                 ml="1"
                               >
-                                {i.original &&
-                                  i.original.toLocaleString("vi-VN", {
+                                {i.prodPriceSale &&
+                                  i.prodPriceSale.toLocaleString("vi-VN", {
                                     style: "currency",
                                     currency: "VND",
                                   })}

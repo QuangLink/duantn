@@ -24,7 +24,7 @@ const Products = ({ typeOfProduct }) => {
     setLoading(true);
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+        `http://localhost:9000/category/${typeOfProduct}`,
       );
       console.log("in the logi func try", responce.data);
       if (responce.data) {

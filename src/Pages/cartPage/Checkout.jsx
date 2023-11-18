@@ -47,7 +47,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,7 +78,7 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
     if (
       !addressData ||
@@ -129,7 +129,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -216,7 +216,7 @@ const Checkout = () => {
   };
 
   return (
-    <Center className="cartPage"  >
+    <Center className="cartPage">
       <div>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -306,72 +306,56 @@ const Checkout = () => {
           </AccordionItem>
         </Accordion>
       </div>
-     
-          
-          <Box className="BgImg"></Box>
-          <Box  display="flex" justifyContent="space-between" w="100%" mt="5">
-            <Text fontSize="25px" fontWeight="700">
-              <Icon
-                as={FaMapMarkerAlt}
-                w={8}
-                h={8}
-                color="black"
-                marginRight="5px"
-              />
-              Địa chỉ nhận hàng
-            </Text>
-            {!addressData ||
-            !Array.isArray(addressData) ||
-            addressData.length === 0 ? (
-              <Button onClick={onOpen} colorScheme="blue" variant="outline">
-                Nhập địa chỉ giao hàng mới
-              </Button>
-            ) : (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                w="30%"
-                h="auto"
-                mt="2"
-              >
-                <Button
-                  color="red.400"
-                  border="1px solid red"
-                  borderRadius="5px"
-                >
-                  Mặc định
-                </Button>
-                <Button
-                  color="blue.400"
-                  border="1px solid #3788FA"
-                  borderRadius="5px"
-                  onClick={onOpen}
-                >
-                  Thay đổi
-                </Button>
-                <Button
-                  color="blue.400"
-                  border="1px solid #3788FA"
-                  borderRadius="5px"
-                  onClick={clearAddress}
-                >
-                  Xóa
-                </Button>
-              </Box>
-            )}
+
+      <Box className="BgImg"></Box>
+      <Box display="flex" justifyContent="space-between" w="100%" mt="5">
+        <Text fontSize="25px" fontWeight="700">
+          <Icon
+            as={FaMapMarkerAlt}
+            w={8}
+            h={8}
+            color="black"
+            marginRight="5px"
+          />
+          Địa chỉ nhận hàng
+        </Text>
+        {!addressData ||
+        !Array.isArray(addressData) ||
+        addressData.length === 0 ? (
+          <Button onClick={onOpen} colorScheme="blue" variant="outline">
+            Nhập địa chỉ giao hàng mới
+          </Button>
+        ) : (
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            w="30%"
+            h="auto"
+            mt="2"
+          >
+            <Button color="red.400" border="1px solid red" borderRadius="5px">
+              Mặc định
+            </Button>
+            <Button
+              color="blue.400"
+              border="1px solid #3788FA"
+              borderRadius="5px"
+              onClick={onOpen}
+            >
+              Thay đổi
+            </Button>
+            <Button
+              color="blue.400"
+              border="1px solid #3788FA"
+              borderRadius="5px"
+              onClick={clearAddress}
+            >
+              Xóa
+            </Button>
           </Box>
-          {renderAddressData()}
-                
-            
-           
-       
-        
-     
-
-    
-
-      
-      
+        )}
+      </Box>
+      {renderAddressData()}
     </Center>
   );
 };

@@ -1,24 +1,53 @@
-import React from "react";
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Square,
-  Button,
-  background,
-  Badge,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import Heading from "../Home/Heading";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
+import axios from "axios";
 
 const RelateProduct = ({ type, heading }) => {
+  const apiUrlBase = "http://localhost:9000/category/";
+
+  const categoryUrl = {
+    sale: apiUrlBase + type,
+  };
+
+  const fetchDataForCategory = async (category) => {
+    try {
+      const response = await axios.get(categoryUrl[category]);
+      return response.data.map((product) => ({
+        name: product.prodName,
+        img: product.prodImg,
+        price: product.prodPrice,
+        id: product.prodID,
+        sale: product.prodSale,
+        original: product.prodPriceSale,
+      }));
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+      return [];
+    }
+  };
+
+  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  useEffect(() => {
+    const loadRelated = async () => {
+      try {
+        const relatedData = await fetchDataForCategory("sale");
+        setRelatedProducts(relatedData);
+      } catch (error) {
+        console.error("Lỗi khi tải dữ liệu sản phẩm liên quan:", error);
+      }
+    };
+
+    loadRelated();
+  }, []); // Empty dependency array to run the effect only once
+
   return (
     <Box
       justifyContent="center"
@@ -40,8 +69,14 @@ const RelateProduct = ({ type, heading }) => {
             backgroundColor="blue.300"
             h="60px"
             p={2}
+            borderRadius="md"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            transition="background-color 0.3s ease"
+            _hover={{ backgroundColor: "blue.400" }}
           >
-            Các sản phẩm liên quan{" "}
+            Các sản phẩm liên quan
           </Text>
         </a>
       </Box>
@@ -74,10 +109,10 @@ const RelateProduct = ({ type, heading }) => {
             },
           }}
         >
-          {type.map((i) => (
+          {relatedProducts.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to="/computers/">
+                <Link to="/">
                   <Box
                     p="5"
                     m={["0%", "0%", "2%"]}
@@ -119,11 +154,11 @@ const RelateProduct = ({ type, heading }) => {
                             color="red"
                             _hover={{ color: "red" }}
                           >
-                            {i.price&&
+                            {i.price &&
                               i.price.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
+                                style: "currency",
+                                currency: "VND",
+                              })}
                           </Text>
                         </Square>
                       </Flex>
@@ -140,11 +175,11 @@ const RelateProduct = ({ type, heading }) => {
                               fontSize="14px"
                               ml="1"
                             >
-                              {i.original&&
+                              {i.original &&
                                 i.original.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
                             </Text>
                           </Flex>
                           <Box

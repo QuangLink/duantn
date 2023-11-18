@@ -12,7 +12,7 @@ import {
   Center,
   Icon,
 } from "@chakra-ui/react";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -34,7 +34,7 @@ const CheckoutBox = ({
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-  }
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -68,7 +68,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.com/orders/create_payment_url",
+            "http://localhost:9000/orders/create_payment_url",
             {
               userID,
               amount,
@@ -147,8 +147,14 @@ const CheckoutBox = ({
     ", " +
     tomorrow.getFullYear();
   return (
-    <div >
-      <Center w="̃70%" mt="5" display="flex" justifyContent="center" flexWrap="wrap"    >
+    <div>
+      <Center
+        w="̃70%"
+        mt="5"
+        display="flex"
+        justifyContent="center"
+        flexWrap="wrap"
+      >
         <Box w="70%" mt="15px" mb="15px">
           <Text fontSize="25px" fontWeight="700">
             Chọn phương thức thanh toán:
@@ -166,13 +172,18 @@ const CheckoutBox = ({
               border="1px solid red"
               borderRadius="15px"
               type="radio"
-              className={`payment-option ${selectedOption === 'cash' ? 'selected' : ''}`}
-              style={{ backgroundColor: selectedOption === 'cash' ? '#bdbdbd' : 'white' }}
-              onClick={() => handleOptionClick('cash')}
+              className={`payment-option ${
+                selectedOption === "cash" ? "selected" : ""
+              }`}
+              style={{
+                backgroundColor:
+                  selectedOption === "cash" ? "#bdbdbd" : "white",
+              }}
+              onClick={() => handleOptionClick("cash")}
             >
               <Box marginBottom="5" mt="2">
                 <Icon as={FcHome} w={10} h={10} color="red" />
-              </Box >
+              </Box>
               Thanh toán khi nhận hàng
             </Box>
             <Box
@@ -180,9 +191,14 @@ const CheckoutBox = ({
               textAlign="center"
               border="1px solid red"
               borderRadius="15px"
-              className={`payment-option ${selectedOption === 'vnpay' ? 'selected' : ''}`}
-               style={{ backgroundColor: selectedOption === 'vnpay' ? '#bdbdbd' : 'white' }}
-               onClick={() => handleOptionClick('vnpay')}
+              className={`payment-option ${
+                selectedOption === "vnpay" ? "selected" : ""
+              }`}
+              style={{
+                backgroundColor:
+                  selectedOption === "vnpay" ? "#bdbdbd" : "white",
+              }}
+              onClick={() => handleOptionClick("vnpay")}
             >
               <Box marginBottom="5" mt="2">
                 <Icon as={FaWallet} w={10} h={10} color="red" />
@@ -194,7 +210,6 @@ const CheckoutBox = ({
         <Flex justifyContent="center" w="60%" m="5">
           <TbTruckDelivery size={20} />
           <Heading
-          
             fontSize="13px"
             color={"rgb(0, 51, 128)"}
             lineHeight={"20px"}
@@ -203,11 +218,10 @@ const CheckoutBox = ({
           </Heading>
         </Flex>
         <Box marginTop={"20px"} width={"60%"}>
-          <InputGroup size="md" >
+          <InputGroup size="md">
             <Input
               pr="4.5rem"
               placeholder="Mã giảm giá"
-              
               onChange={(e) => setVal(e.target.value)}
             />
             <InputRightElement width="4rem">
@@ -282,7 +296,7 @@ const CheckoutBox = ({
               Tổng tiền:
             </Text>
           </Flex>
-         
+
           <Text fontWeight="700" fontSize="25px" mt="2" color="red">
             {paybalPrice &&
               paybalPrice.toLocaleString("vi-VN", {
@@ -291,19 +305,18 @@ const CheckoutBox = ({
               })}
           </Text>
         </Flex>
-        <Center w="70%" >
-        <Heading
-        
-          fontSize={"15px"}
-          fontWeight="500"
-          lineHeight={1.5}
-          color={"rgb(102, 102, 102)"}
-          marginTop="2"
-          marginBottom={"5"}
-        >
-          Thanh toán đảm bảo. Đổi trả dễ dàng. 100% hàng chính hãng
-        </Heading>
-      </Center>
+        <Center w="70%">
+          <Heading
+            fontSize={"15px"}
+            fontWeight="500"
+            lineHeight={1.5}
+            color={"rgb(102, 102, 102)"}
+            marginTop="2"
+            marginBottom={"5"}
+          >
+            Thanh toán đảm bảo. Đổi trả dễ dàng. 100% hàng chính hãng
+          </Heading>
+        </Center>
         <Button
           w="52%"
           h="50px"
@@ -316,7 +329,7 @@ const CheckoutBox = ({
           <Text color="white">Tiến hành đặt hàng</Text>
         </Button>
         <Button
-        mb="5"
+          mb="5"
           mt="2"
           w="52%"
           h="50px"
@@ -329,8 +342,6 @@ const CheckoutBox = ({
           <Text color="#4a90e2">Chọn thêm sản phẩm khác</Text>
         </Button>
       </Center>
-
-      
     </div>
   );
 };
