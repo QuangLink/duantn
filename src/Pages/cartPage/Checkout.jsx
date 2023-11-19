@@ -47,7 +47,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,7 +78,7 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
     if (
       !addressData ||
@@ -129,7 +129,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -333,19 +333,20 @@ const Checkout = () => {
             h="auto"
             mt="2"
           >
-            <Button color="red.400" border="1px solid red" borderRadius="5px">
+            <Button color="#ff2323" border="1px solid red" borderRadius="5px" marginRight="5px">
               Mặc định
             </Button>
             <Button
-              color="blue.400"
+              color="#4a90e2"
               border="1px solid #3788FA"
               borderRadius="5px"
               onClick={onOpen}
+              marginRight="5px"
             >
               Thay đổi
             </Button>
             <Button
-              color="blue.400"
+              color="#4a90e2"
               border="1px solid #3788FA"
               borderRadius="5px"
               onClick={clearAddress}

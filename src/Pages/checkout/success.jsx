@@ -1,55 +1,80 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Box, Center, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  Text,
+  Button,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+} from "@chakra-ui/react";
 
 import { Icon } from "@chakra-ui/react";
-
 import { FaCheckCircle } from "react-icons/fa";
+import Cookies from "js-cookie";
+
 const Success = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const [transactionData, setTransactionData] = useState({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(location.search);
-
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/order/vnpay_return${location.search}`,
+          `http://localhost:9000/order/vnpay_return${location.search}`
         );
 
         console.log("Response from backend:", response.data);
+        setTransactionData(response.data);
+
+        // Gọi axios.post ở đây, sau khi đã có dữ liệu từ axios.get
+        if (response.data) {
+          const email = Cookies.get("email");
+          await axios.post("http://localhost:9000/mail/", {
+            email: email,
+            code: response.data.code,
+            vnp_Amount: response.data.vnp_Amount,
+            vnp_TxnRef: response.data.vnp_TxnRef,
+            vnp_BankCode: response.data.vnp_BankCode,
+            vnp_PayDate: response.data.vnp_PayDate,
+            vnp_ResponseCode: response.data.vnp_ResponseCode,
+            vnp_TransactionNo: response.data.vnp_TransactionNo,
+            vnp_OrderInfo: response.data.vnp_OrderInfo,
+          });
+        }
       } catch (error) {
         console.error("Error calling backend API:", error);
       }
     };
 
     fetchData();
-  }, [searchParams]);
+  }, []); // Thêm dependency array rỗng để đảm bảo useEffect chỉ chạy một lần khi component mount
 
-  // Extract parameters from the searchParams
-  const code = searchParams.get("vnp_ResponseCode");
-  const vnp_Amount = searchParams.get("vnp_Amount");
-  const vnp_TxnRef = searchParams.get("vnp_TxnRef");
-  const vnp_BankCode = searchParams.get("vnp_BankCode");
-  const vnp_BankTranNo = searchParams.get("vnp_BankTranNo");
-  const vnp_PayDate = searchParams.get("vnp_PayDate");
+  const {
+    code,
+    vnp_Amount,
+    vnp_TxnRef,
+    vnp_BankCode,
+    vnp_PayDate,
+    vnp_ResponseCode,
+    vnp_TransactionNo,
+    vnp_OrderInfo,
+  } = transactionData;
+  
+  // Check if vnp_PayDate is defined before using slice
+  const formattedDate = vnp_PayDate
+    ? `${vnp_PayDate.slice(0, 4)}-${vnp_PayDate.slice(4, 6)}-${vnp_PayDate.slice(6, 8)} ${vnp_PayDate.slice(8, 10)}:${vnp_PayDate.slice(10, 12)}:${vnp_PayDate.slice(12, 14)}`
+    : '';
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
-  // Convert vnp_PayDate to date and time format
-  const payDate = new Date(
-    parseInt(vnp_PayDate.slice(0, 4)), // Year
-    parseInt(vnp_PayDate.slice(4, 6)) - 1, // Month (0-based)
-    parseInt(vnp_PayDate.slice(6, 8)), // Day
-    parseInt(vnp_PayDate.slice(8, 10)), // Hour
-    parseInt(vnp_PayDate.slice(10, 12)), // Minute
-    parseInt(vnp_PayDate.slice(12, 14)), // Second
-  );
-
-  const vnp_TransactionNo = searchParams.get("vnp_TransactionNo");
-  const vnp_OrderInfo = searchParams.get("vnp_OrderInfo");
-
-  // Your JSX rendering logic here
   return (
     <Center w="100%" alignItems="center" display="flex" flexWrap="wrap">
       {code === "00" ? (
@@ -64,146 +89,65 @@ const Success = () => {
             }}
           >
             <Icon as={FaCheckCircle} w={12} h={12} color="green.500" />
-
             <Heading as="h3" size="xl" mt={6} mb={2}>
               Đã giao dịch thành công
             </Heading>
           </Box>
           <Center
-            w="35%"
-            border="10px solid #288ad6"
+            w="50%"
+            h="auto"
             borderRadius="15px"
             display="flex"
             flexWrap="wrap"
+            boxShadow="xl"
+            p={4}
+            mt={4}
           >
-            <Text
-              style={{
-                textAlign: "center",
-                color: "green",
-                fontSize: "30px",
-                fontWeight: "600",
-                width: "100%",
-              }}
-            >
-              Thông tin giao dịch
-            </Text>
-
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              Số tiền thanh toán:{" "}
-              <Text color="#384edc" fontSize="20px">
-                {parseInt(vnp_Amount / 100).toLocaleString("vi-VN")} đ
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              Mã giao dịch:{" "}
-              <Text color="#384edc" fontSize="20px">
-                {vnp_TxnRef}{" "}
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              Mã Ngân hàng:{" "}
-              <Text color="black" fontSize="20px">
-                {vnp_BankCode}{" "}
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              Mã GD của Ngân hàng:{" "}
-              <Text color="black" fontSize="20px">
-                {vnp_BankTranNo}{" "}
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              {" "}
-              Thời gian thanh toán:
-              <Text color="black " fontSize="20px">
-                {" "}
-                {payDate.toLocaleString("vi-VN")}{" "}
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              Mã GD của VNPAY:{" "}
-              <Text color="black " fontSize="20px">
-                {vnp_TransactionNo}
-              </Text>{" "}
-            </Text>
-            <Text
-              style={{
-                textAlign: "left",
-                width: "90%",
-                marginTop: "5px",
-                marginBottom: "10px",
-                fontSize: "20px",
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              {" "}
-              Mã GD của Người bán:{" "}
-              <Text color="black " fontSize="20px">
-                {vnp_TxnRef}{" "}
-              </Text>{" "}
-            </Text>
+            <Center>
+              <Button onClick={toggleDropdown} mb={4} mx="auto">
+                {isDropdownOpen ? "Ẩn bớt" : "Hiển thị thông tin giao dịch"}
+              </Button>
+            </Center>
+            {isDropdownOpen && (
+              <Table variant="simple">
+                <Tbody>
+                  <Tr>
+                    <Td>Số tiền thanh toán:</Td>
+                    <Td>
+                      {parseInt(vnp_Amount / 100).toLocaleString("vi-VN")} đ
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã giao dịch:</Td>
+                    <Td>{vnp_TxnRef}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã Ngân hàng:</Td>
+                    <Td>{vnp_BankCode}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã GD của Ngân hàng:</Td>
+                    <Td>{vnp_TransactionNo}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Thời gian thanh toán:</Td>
+                    <Td>{formattedDate}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã GD của VNPAY:</Td>
+                    <Td>{vnp_TransactionNo}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã đơn hàng:</Td>
+                    <Td>{vnp_OrderInfo}</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Mã GD của Người bán:</Td>
+                    <Td>{vnp_TxnRef}</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            )}
           </Center>
         </Center>
       ) : (
@@ -233,11 +177,11 @@ const Success = () => {
           width="auto"
           h="auto"
           p="2"
-          borderRadius="15px"
+        
           display="flex"
           justifyContent="center"
-          boxShadow="2px 5px 12px 2px rgba(0,0,0,0.75)"
-          background="linear-gradient( #d4eff8 , #0b6ff5)"
+          
+          background="blue.500"
         >
           <a href="/myorder" style={{ color: "white" }}>
             Tình trạng đơn hàng

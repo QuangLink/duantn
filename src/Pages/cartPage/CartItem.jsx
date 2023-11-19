@@ -7,6 +7,7 @@ import {
   Heading,
   useToast,
   Icon,
+  Text,
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
 
@@ -26,6 +27,7 @@ const CartItem = ({
   color,
   storage,
   id,
+  QTY,
   DeleteRequest,
 }) => {
   const singleData = {
@@ -37,10 +39,56 @@ const CartItem = ({
     img,
     priceSale,
     price,
+    QTY,
   };
   const toast = useToast();
 
   const [count, setCount] = useState(quantity);
+  //handle change for this  onChange={(e) => setCount(e.target.value)}
+
+  const handleChange = (e) => {
+    let newCount = parseInt(e.target.value, 10);
+    if (!isNaN(newCount) && newCount >= 1) {
+      setCount(newCount);
+      let number = parseInt(price);
+      console.log(newCount);
+      dispatch({ type: "priceChange", payload: number * newCount });
+
+      if (newCount > QTY) {
+        toast({
+          title: "Lỗi",
+          description: "Số lượng vượt quá giới hạn",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        newCount = QTY;
+        setCount(QTY);
+        axios
+          .put(`http://localhost:9000/cart/set/${cartID}`, {
+            quantity: newCount,
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios
+          .put(`http://localhost:9000/cart/set/${cartID}`, {
+            quantity: newCount,
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } 
+  
+  };
 
   const dispatch = useDispatch();
   var navigate = useNavigate();
@@ -50,7 +98,7 @@ const CartItem = ({
     dispatch({ type: "priceIncrease", payload: number });
 
     axios
-      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
+      .put(`http://localhost:9000/cart/plus/${cartID}`, {
         quantity: count + 1,
       })
       .then((res) => {
@@ -68,7 +116,7 @@ const CartItem = ({
       dispatch({ type: "priceDecrease", payload: number });
 
       axios
-        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
+        .put(`http://localhost:9000/cart/minus/${cartID}`, {
           quantity: count + 1,
         })
         .then((res) => {
@@ -157,15 +205,20 @@ const CartItem = ({
           <Box>
             <Image src={img} alt={name} width="150px" />
           </Box>
+          <Box display="flex" alignItems="center">
+            <Text>Trong kho:</Text>
+            <Text color="red" marginLeft="4px">
+              {QTY}
+            </Text>
+          </Box>
           <Box display={"flex"} gap="5">
             <Button onClick={handleDec}>-</Button>
-            <Button
-              backgroundColor={"white"}
-              disabled={true}
-              fontWeight={"bold"}
-            >
-              {count}
-            </Button>
+            <input
+              type="number"
+              value={count}
+              onChange={handleChange}
+              style={{ width: "50px", textAlign: "center" }}
+            />
             <Button onClick={handleInc}>+</Button>
           </Box>
         </Flex>

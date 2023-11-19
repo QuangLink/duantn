@@ -17,11 +17,12 @@ export const loginGoogle = (user) => async (dispatch) => {
 
     Cookies.set("username", username);
     let res = await axios.post(
-      "https://duantn-backend.onrender.com/users/googleusers",
+      "http://localhost:9000/users/googleusers",
       { username, email }, // Pass the username and email as an object to the post request
     );
     const userID = res.data.payload.userID;
     Cookies.set("userID", userID);
+    Cookies.set("email", email);
     // Gọi action Redux để cập nhật trạng thái đăng nhập
     dispatch({
       type: LOGIN_SUCCESS,
@@ -40,19 +41,18 @@ export const loginGoogle = (user) => async (dispatch) => {
 export const login = (creds) => async (dispatch) => {
   dispatch({ type: LOGIN_LOADING });
   try {
-    let res = await axios.post(
-      "https://duantn-backend.onrender.com/users/login",
-      creds,
-    );
+    let res = await axios.post("http://localhost:9000/users/login", creds);
     const token = res.data.token; // Lấy token từ phản hồi
     const username = res.data.payload.username;
     const admin = res.data.payload.admin;
+    const email = res.data.payload.email;
     //lấy userID từ header token
     const userID = res.data.payload.userID;
     Cookies.set("token", token);
     Cookies.set("username", username);
     Cookies.set("admin", admin);
     Cookies.set("userID", userID);
+    Cookies.set("email", email);
 
     // Dispatch action để lưu token vào Redux store với payload chứa dữ liệu
     dispatch({
@@ -75,5 +75,6 @@ export const logout = () => {
   Cookies.remove("username");
   Cookies.remove("admin");
   Cookies.remove("userID");
+  Cookies.remove("email");
   return { type: LOGOUT };
 };
