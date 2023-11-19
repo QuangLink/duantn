@@ -1,9 +1,9 @@
-import { Box, Center, Grid, GridItem, Heading } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Box, Center, Grid, GridItem, Heading, Button } from "@chakra-ui/react";
+import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
-import { BannersCenter, PrApplePhone } from "../Home/CardDetails";
+import { BannersCenter, PrApplePhone, PrSale } from "../Home/CardDetails";
 import HotProduct from "./HotProduct";
 import Product from "./Product";
 import ProductFilter from "./ProductFilter";
@@ -13,6 +13,7 @@ const Products = ({ typeOfProduct }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(false);
+  const [visibleProducts, setVisibleProducts] = useState(12); // Initial number of products to display
   const error = useSelector((store) => store.product.error);
 
   useEffect(() => {
@@ -23,17 +24,17 @@ const Products = ({ typeOfProduct }) => {
     setFilter("all");
     setLoading(true);
     try {
-      let responce = await axios.get(
+      let response = await axios.get(
         `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
       );
-      console.log("in the logi func try", responce.data);
-      if (responce.data) {
-        setFilteredProducts(responce.data || []);
+      console.log("in the logic func try", response.data);
+      if (response.data) {
+        setFilteredProducts(response.data || []);
         console.log(
           "list type of list product",
           "typeOfProduct",
           typeOfProduct,
-          responce.data.map((el) => el.prodType),
+          response.data.map((el) => el.prodType),
         );
       }
       setLoading(false);
@@ -60,6 +61,10 @@ const Products = ({ typeOfProduct }) => {
     }
   };
 
+  const loadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
+  };
+
   if (error) {
     return (
       <Heading
@@ -69,22 +74,18 @@ const Products = ({ typeOfProduct }) => {
         marginTop={10}
         marginBottom="200px"
       >
-        Some thing went wrong...
+        Something went wrong...
       </Heading>
     );
   }
 
   return (
     <Box p="5">
-      {/* <Heading p="6" marginBottom={7}>
-        {category[typeOfProduct]}
-      </Heading>
-      <hr></hr> */}
       <Box>
         <SlideProuct type={BannersCenter} />
       </Box>
       <Box mb="2%">
-        <HotProduct type={PrApplePhone} />
+        <HotProduct type={PrSale} />
       </Box>
       <ProductFilter
         typeOfProduct={typeOfProduct}
@@ -99,7 +100,6 @@ const Products = ({ typeOfProduct }) => {
               strokeColor="grey"
               strokeWidth="5"
               animationDuration="0.75"
-              // width="150"
               height={50}
               visible={true}
             />
@@ -125,26 +125,35 @@ const Products = ({ typeOfProduct }) => {
             },
           }}
         >
-          {listData().map((elem, i) => {
-            return (
-              <GridItem
-                key={elem.prodName + i}
-                w="97%"
-                h="100%"
-                bg="white.500"
-                boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-                padding="5%"
-                _hover={{
-                  boxShadow:
-                    "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
-                  cursor: "pointer",
-                }}
-              >
-                <Product data={elem} typeOfProduct={typeOfProduct} />
-              </GridItem>
-            );
-          })}
+          {listData()
+            .slice(0, visibleProducts)
+            .map((elem, i) => {
+              return (
+                <GridItem
+                  key={elem.prodName + i}
+                  w="97%"
+                  h="100%"
+                  bg="white.500"
+                  boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
+                  padding="5%"
+                  _hover={{
+                    boxShadow:
+                      "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Product data={elem} typeOfProduct={typeOfProduct} />
+                </GridItem>
+              );
+            })}
         </Grid>
+      )}
+      {visibleProducts < listData().length && (
+        <Center mt="3">
+          <Button onClick={loadMore} colorScheme="blue" variant="outline">
+            Xem thêm
+          </Button>
+        </Center>
       )}
     </Box>
   );

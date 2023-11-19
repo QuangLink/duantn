@@ -101,7 +101,7 @@ const Success = () => {
             >
               Số tiền thanh toán:{" "}
               <Text color="#384edc" fontSize="20px">
-                {parseInt(vnp_Amount).toLocaleString("vi-VN")} đ
+                {parseInt(vnp_Amount / 100).toLocaleString("vi-VN")} đ
               </Text>{" "}
             </Text>
             <Text

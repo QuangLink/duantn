@@ -28,7 +28,6 @@ const AllRoutes = () => {
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/duantn" element={<Home />}></Route>
         <Route
           path="/laptop"
           element={<Products typeOfProduct="laptop" />}
