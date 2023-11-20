@@ -27,7 +27,7 @@ const Success = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9000/order/vnpay_return${location.search}`
+          `https://duantn-backend.onrender.com/order/vnpay_return${location.search}`,
         );
 
         console.log("Response from backend:", response.data);
@@ -36,7 +36,7 @@ const Success = () => {
         // Gọi axios.post ở đây, sau khi đã có dữ liệu từ axios.get
         if (response.data) {
           const email = Cookies.get("email");
-          await axios.post("http://localhost:9000/mail/", {
+          await axios.post("https://duantn-backend.onrender.com/mail/", {
             email: email,
             code: response.data.code,
             vnp_Amount: response.data.vnp_Amount,
@@ -66,11 +66,17 @@ const Success = () => {
     vnp_TransactionNo,
     vnp_OrderInfo,
   } = transactionData;
-  
+
   // Check if vnp_PayDate is defined before using slice
   const formattedDate = vnp_PayDate
-    ? `${vnp_PayDate.slice(0, 4)}-${vnp_PayDate.slice(4, 6)}-${vnp_PayDate.slice(6, 8)} ${vnp_PayDate.slice(8, 10)}:${vnp_PayDate.slice(10, 12)}:${vnp_PayDate.slice(12, 14)}`
-    : '';
+    ? `${vnp_PayDate.slice(0, 4)}-${vnp_PayDate.slice(
+        4,
+        6,
+      )}-${vnp_PayDate.slice(6, 8)} ${vnp_PayDate.slice(
+        8,
+        10,
+      )}:${vnp_PayDate.slice(10, 12)}:${vnp_PayDate.slice(12, 14)}`
+    : "";
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -177,10 +183,8 @@ const Success = () => {
           width="auto"
           h="auto"
           p="2"
-        
           display="flex"
           justifyContent="center"
-          
           background="blue.500"
         >
           <a href="/myorder" style={{ color: "white" }}>

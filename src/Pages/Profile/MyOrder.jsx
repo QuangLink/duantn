@@ -22,6 +22,7 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 function MyOrder() {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);
@@ -30,6 +31,7 @@ function MyOrder() {
   const address = useRef({});
   const toast = useToast();
   const navigate = useNavigate();
+  const [selectedOrderCode, setSelectedOrderCode] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -38,7 +40,7 @@ function MyOrder() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9000/orders/user/${userID}`,
+        `https://duantn-backend.onrender.com/orders/user/${userID}`,
       );
       console.log(response.data);
       setProducts(response.data);
@@ -48,7 +50,6 @@ function MyOrder() {
   };
 
   //render product
-
   const renderProducts = () => {
     const productsByOrderCode = products.reduce((acc, product) => {
       if (!acc[product.orderCode]) {
@@ -58,110 +59,166 @@ function MyOrder() {
       }
       return acc;
     }, {});
-    return Object.entries(productsByOrderCode).map(
-      ([orderCode, productList]) => (
-        <React.Fragment key={orderCode}>
-          <tr>
-            <td colSpan="8" style={{ fontWeight: "bold" }}>
-              Order Code: {orderCode}
-            </td>
-          </tr>
-          {productList.map((product) => (
-            <Box padding="10px" bg={"blackAlpha.50"} marginBottom={5}>
-              <Box
-                mt="5"
-                display="flex"
-                justifyContent="space-evenly"
-                borderWidth="1px"
-                borderRadius="md"
-                bg={"white"}
+
+    const handleOrderCodeClick = (orderCode) => {
+      setSelectedOrderCode((prevOrderCode) =>
+        prevOrderCode === orderCode ? null : orderCode,
+      );
+    };
+
+    return (
+      <React.Fragment>
+        {Object.entries(productsByOrderCode).map(([orderCode, productList]) => (
+          <React.Fragment key={orderCode}>
+            <tr>
+              <td
+                colSpan="8"
+                style={{ fontWeight: "bold", cursor: "pointer" }}
+                onClick={() => handleOrderCodeClick(orderCode)}
               >
-                <Box key={product.id} p={4} borderRadius="md" mb={4}>
-                  <img src={product.prodImg} width="200px" />
-                </Box>
-                <Box width="60%">
-                  <Text
-                    mt="2"
-                    height="50px"
-                    fontFamily="serif"
-                    color="#424245"
-                    noOfLines={2}
-                    fontSize="20px"
-                    fontWeight="700"
+                Order Code: {orderCode}{" "}
+                {selectedOrderCode === orderCode ? (
+                  <Icon as={FaChevronUp} />
+                ) : (
+                  <Icon as={FaChevronDown} />
+                )}
+              </td>
+            </tr>
+            {selectedOrderCode === orderCode &&
+              productList.map((product) => (
+                <Box padding="10px" bg={"blackAlpha.50"} marginBottom={5}>
+                  <Box
+                    mt="5"
+                    display="flex"
+                    justifyContent="space-evenly"
+                    borderWidth="1px"
+                    borderRadius="md"
+                    bg={"white"}
                   >
-                    Name: {product.prodName} ({product.prodID})
-                  </Text>
-                  <Text fontWeight="600" fontSize="18px" ml="1" color="red">
-                    Giá: {product.prodPrice} VNĐ
-                  </Text>
-                  <Text fontWeight="600" fontSize="18px" ml="1" color="black">
-                    Purchase Time:{" "}
-                    {new Date(product.orderDate).toLocaleString()}
-                  </Text>
-                  <Text fontWeight="600" fontSize="18px" ml="1" color="black">
-                    Delivery Time:{" "}
-                    {new Date(product.orderDate).toLocaleString()}
-                  </Text>
+                    <Box key={product.id} p={4} borderRadius="md" mb={4}>
+                      <img src={product.prodImg} width="200px" />
+                    </Box>
+                    <Box width="60%">
+                      <Text
+                        mt="2"
+                        height="50px"
+                        fontFamily="serif"
+                        color="#424245"
+                        noOfLines={2}
+                        fontSize="20px"
+                        fontWeight="700"
+                      >
+                        Name: {product.prodName} ({product.prodID})
+                      </Text>
+
+                      <Text fontWeight="600" fontSize="18px" ml="1" color="red">
+                        Giá: {product.prodPrice}VNĐ
+                      </Text>
+                      <Text fontWeight="600" fontSize="18px" ml="1" color="red">
+                        Số lượng: {product.quantity}
+                      </Text>
+
+                      <Text
+                        fontWeight="600"
+                        fontSize="18px"
+                        ml="1"
+                        color="black"
+                      >
+                        Purchase Time:{" "}
+                        {new Date(product.orderDate).toLocaleString()}
+                      </Text>
+                      <Text
+                        fontWeight="600"
+                        fontSize="18px"
+                        ml="1"
+                        color="black"
+                      >
+                        Delivery Time:{" "}
+                        {new Date(product.orderDate).toLocaleString()}
+                      </Text>
+                    </Box>
+                    <Box mt="50">
+                      {product.payment === "Banking" ? (
+                        <Text
+                          class="badge bg-success"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Phương thức: {product.payment}
+                        </Text>
+                      ) : (
+                        <Text
+                          class="badge bg-danger"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Phương thức: {product.payment}
+                        </Text>
+                      )}
+                    </Box>
+                    <Box mt="50">
+                      {product.orderStatus === "Đã thanh toán" ? (
+                        <Text
+                          class="badge bg-success"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Trạng thái: {product.orderStatus}
+                        </Text>
+                      ) : (
+                        <Text
+                          class="badge bg-danger"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Trạng thái: {product.orderStatus}
+                        </Text>
+                      )}
+                    </Box>
+                  </Box>
+                  <Box>
+                    <Box>
+                      <Text
+                        fontWeight="600"
+                        fontSize="18px"
+                        ml="1"
+                        color="red"
+                        _hover={{ color: "red" }}
+                      >
+                        Thanh toán: {product.prodPrice} VNĐ
+                      </Text>
+                    </Box>
+                    <Box mt="50">
+                      <Button type="submit" colorScheme="blue" marginRight={20}>
+                        Mua lại
+                      </Button>
+                      <Icon
+                        as={BsFillTrashFill}
+                        w={6}
+                        h={6}
+                        color="black"
+                        margin="auto"
+                      />
+                    </Box>
+                  </Box>
                 </Box>
-                <Box mt="50">
-                  {product.orderStatus === "Đã thanh toán" ? (
-                    <Text
-                      class="badge bg-success"
-                      fontWeight="600"
-                      fontSize="18px"
-                      ml="1"
-                      color="black"
-                    >
-                      Trạng thái: {product.orderStatus}
-                    </Text>
-                  ) : (
-                    <Text
-                      class="badge bg-danger"
-                      fontWeight="600"
-                      fontSize="18px"
-                      ml="1"
-                      color="black"
-                    >
-                      Trạng thái: {product.orderStatus}
-                    </Text>
-                  )}
-                </Box>
-              </Box>
-              <Box>
-                <Box>
-                  <Text
-                    fontWeight="600"
-                    fontSize="18px"
-                    ml="1"
-                    color="red"
-                    _hover={{ color: "red" }}
-                  >
-                    Thanh toán: {product.prodPrice} VNĐ
-                  </Text>
-                </Box>
-                <Box mt="50">
-                  <Button type="submit" colorScheme="blue" marginRight={20}>
-                    Mua lại
-                  </Button>
-                  <Icon
-                    as={BsFillTrashFill}
-                    w={6}
-                    h={6}
-                    color="black"
-                    margin="auto"
-                  />
-                </Box>
-              </Box>
-            </Box>
-          ))}
-        </React.Fragment>
-      ),
+              ))}
+          </React.Fragment>
+        ))}
+      </React.Fragment>
     );
   };
-
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `http://localhost:9000/users/address/${username}`;
+    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -192,7 +249,7 @@ function MyOrder() {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "http://localhost:9000/users/address";
+    const apiUrl = "https://duantn-backend.onrender.com/users/address";
 
     if (
       !addressData ||
@@ -243,7 +300,7 @@ function MyOrder() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9000/users/address/${username}`)
+      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);

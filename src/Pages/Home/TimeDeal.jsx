@@ -73,9 +73,12 @@ const TimeDeal = ({ type, heading }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(`http://localhost:9000/products`);
+      let responce = await axios.get(
+        `https://duantn-backend.onrender.com/products`,
+      );
       console.log("in the logi func try", responce.data);
       if (responce.data) {
+        console.log("in the logi func try", responce.data);
         setFilteredProducts(responce.data || []);
       }
     } catch (error) {}
@@ -303,7 +306,7 @@ const TimeDeal = ({ type, heading }) => {
                           </Text>
                           <Box ml="2">
                             <Text>
-                              <b>Còn 27/50 suất</b>
+                              <b>Còn {i.QTY}/100 suất</b>
                             </Text>
                           </Box>
                         </Box>
@@ -414,7 +417,7 @@ const TimeDeal = ({ type, heading }) => {
                           </Text>
                           <Box ml="2">
                             <Text>
-                              <b>Còn 27/50 suất</b>
+                              <b>Còn {i.QTY}/100 suất</b>
                             </Text>
                           </Box>
                         </Box>

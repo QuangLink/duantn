@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrlBase = "http://localhost:9000/category/";
+const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
@@ -23,6 +23,7 @@ const fetchDataForCategory = async (category) => {
       price: product.prodPrice,
       id: product.prodID,
       sale: product.prodSale,
+      QTY: product.QTY,
       original: product.prodPriceSale,
     }));
   } catch (error) {

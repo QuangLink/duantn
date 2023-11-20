@@ -57,43 +57,42 @@ const CheckoutBox = ({
       setTimeout(() => {
         navigate("/login");
       }, 1500);
-    } 
-    else if(selectedOption === "cash"){
+    } else if (selectedOption === "cash") {
       toast({
-      title: "Thanh toán khi nhận hàng",
-      description: "",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "top",
-    });
-    setTimeout(async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:9000/orders/cod",
-          {
-            userID,
-            amount,
-          },
-          {
-            withCredentials: true,
-          },
-        );
+        title: "Thanh toán khi nhận hàng",
+        description: "",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      setTimeout(async () => {
+        try {
+          const response = await axios.post(
+            "https://duantn-backend.onrender.com/orders/cod",
+            {
+              userID,
+              amount,
+            },
+            {
+              withCredentials: true,
+            },
+          );
 
-        console.log("Response from server:", response);
+          console.log("Response from server:", response);
 
-        // Check if vnpUrl exists in response data
-        if (response.data) {
-          // Open the payment url on a new tab
-        //  window.open(response.data);
-        } else {
-          console.error("No vnpUrl found in response data");
+          // Check if vnpUrl exists in response data
+          if (response.data) {
+            // Open the payment url on a new tab
+            //  window.open(response.data);
+          } else {
+            console.error("No vnpUrl found in response data");
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    });}
-    else {
+      });
+    } else {
       toast({
         title: "Proceed further for checkout",
         description: "",
@@ -105,7 +104,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "http://localhost:9000/orders/create_payment_url",
+            "https://duantn-backend.onrender.com/orders/create_payment_url",
             {
               userID,
               amount,
@@ -137,7 +136,7 @@ const CheckoutBox = ({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9000/users/address/${username}`)
+      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -205,55 +204,55 @@ const CheckoutBox = ({
         justifyContent="center"
         flexWrap="wrap"
       >
-    
-      
-      <Box w="70%" mt="15px" mb="15px">
-      <Text fontSize="25px" fontWeight="700">
-        Chọn phương thức thanh toán:
-      </Text>
-      <Box
-        w="100%"
-        h="200px"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-around"
-        mt="5"
-      >
-        {['cash', 'vnpay'].map((option) => (
+        <Box w="70%" mt="15px" mb="15px">
+          <Text fontSize="25px" fontWeight="700">
+            Chọn phương thức thanh toán:
+          </Text>
           <Box
-            key={option}
-        
-            className={`payment-option ${selectedOption === option ? "selected" : ""}`}
-            style={{
-              backgroundColor: selectedOption === option ? "#c6e0f7" : "white",
-              border:  "1px solid black",
-             borderShadow: selectedOption === option ? "0 0 0 3px #3182ce" : "none",
-              borderRadius: '5px',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              margin: '0 10px',
-            }}
-            onClick={() => handleOptionClick(option)}
+            w="100%"
+            h="200px"
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-around"
+            mt="5"
           >
-            <Box marginBottom="5" mt="2">
-              <Icon
-                as={option === 'cash' ? FcHome : FaWallet}
-          
-                ml={10}
-                mr={10}
-                w={10}
-                h={10}
-                color="red"
-              />
-              {option === 'cash' ? 'Thanh toán khi nhận hàng' : 'Thanh toán qua ví VNPay'}
-            </Box>
+            {["cash", "vnpay"].map((option) => (
+              <Box
+                key={option}
+                className={`payment-option ${
+                  selectedOption === option ? "selected" : ""
+                }`}
+                style={{
+                  backgroundColor:
+                    selectedOption === option ? "#c6e0f7" : "white",
+                  border: "1px solid black",
+                  borderShadow:
+                    selectedOption === option ? "0 0 0 3px #3182ce" : "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  margin: "0 10px",
+                }}
+                onClick={() => handleOptionClick(option)}
+              >
+                <Box marginBottom="5" mt="2">
+                  <Icon
+                    as={option === "cash" ? FcHome : FaWallet}
+                    ml={10}
+                    mr={10}
+                    w={10}
+                    h={10}
+                    color="red"
+                  />
+                  {option === "cash"
+                    ? "Thanh toán khi nhận hàng"
+                    : "Thanh toán qua ví VNPay"}
+                </Box>
+              </Box>
+            ))}
           </Box>
-        ))}
-      </Box>
-    </Box>
-    
-    
-  
+        </Box>
+
         <Flex justifyContent="center" w="60%" m="5">
           <TbTruckDelivery size={20} />
           <Heading
@@ -372,8 +371,12 @@ const CheckoutBox = ({
           backgroundColor="#3978d7"
           _hover={{ color: "#4a90e2" }}
           onClick={() => {
-            if (!addressData || !Array.isArray(addressData) || addressData.length === 0) {
-             toast({
+            if (
+              !addressData ||
+              !Array.isArray(addressData) ||
+              addressData.length === 0
+            ) {
+              toast({
                 title: "Bạn chưa có địa chỉ giao hàng",
                 description: "",
                 status: "error",
@@ -381,10 +384,8 @@ const CheckoutBox = ({
                 isClosable: true,
                 position: "top",
               });
-            
-            }
-            else if(selectedOption === null){
-            toast({
+            } else if (selectedOption === null) {
+              toast({
                 title: "Bạn chưa chọn phương thức thanh toán",
                 description: "",
                 status: "error",
@@ -392,9 +393,7 @@ const CheckoutBox = ({
                 isClosable: true,
                 position: "top",
               });
-
-            }
-             else {
+            } else {
               handleCheckout();
             }
           }}
