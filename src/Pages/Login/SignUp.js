@@ -40,7 +40,9 @@ function SignUpForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:9000/users/");
+        const response = await axios.get(
+          "https://duantn-backend.onrender.com/users/",
+        );
         setUsernamesFromApi(response.data.map((user) => user.username));
         setEmailsFromApi(response.data.map((user) => user.email));
       } catch (error) {
@@ -69,8 +71,6 @@ function SignUpForm() {
     }
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
@@ -93,7 +93,7 @@ function SignUpForm() {
         };
 
         const response = await axios.post(
-          "http://localhost:9000/users/register",
+          "https://duantn-backend.onrender.com/users/register",
           payload,
         );
 
