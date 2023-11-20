@@ -28,11 +28,28 @@ function SignUpForm() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [usernamesFromApi, setUsernamesFromApi] = useState([]);
+  const [emailsFromApi, setEmailsFromApi] = useState([]);
+  const [isUsernameDuplicate, setIsUsernameDuplicate] = useState(false);
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
   const toast = useToast();
   const { isAuth } = useSelector((store) => store.AuthManager);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { googleSignIn, user } = UserAuth(); // Lấy thông tin người dùng từ Firebase
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:9000/users/");
+        setUsernamesFromApi(response.data.map((user) => user.username));
+        setEmailsFromApi(response.data.map((user) => user.email));
+      } catch (error) {
+        console.error("Error fetching usernames:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn(); // Bắt đầu quá trình đăng nhập bằng Google
@@ -51,6 +68,8 @@ function SignUpForm() {
       console.log(error);
     }
   };
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,7 +93,7 @@ function SignUpForm() {
         };
 
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/users/register",
+          "http://localhost:9000/users/register",
           payload,
         );
 
@@ -142,6 +161,45 @@ function SignUpForm() {
     }
   }, [isAuth, username, navigate, toast]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Use the name attribute to determine which field is being updated
+    if (name === "username") {
+      setUserName(value);
+
+      // Check for duplicate username
+      if (usernamesFromApi.includes(value)) {
+        setIsUsernameDuplicate(true);
+        toast({
+          title: "Username đã tồn tại",
+          description: "Hãy sử dụng username khác",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        setIsUsernameDuplicate(false);
+      }
+    } else if (name === "email") {
+      setEmail(value);
+
+      // Check for duplicate email
+      if (emailsFromApi.includes(value)) {
+        setIsEmailDuplicate(true);
+        toast({
+          title: "Email đã tồn tại",
+          description: "Hãy sử dụng email khác",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      } else {
+        setIsEmailDuplicate(false);
+      }
+    }
+  };
+
   return (
     <div className="form-container sign-up-container">
       <form>
@@ -154,16 +212,26 @@ function SignUpForm() {
         <span>Hoặc đăng ký bằng email</span>
         <input
           type="text"
+          name="username"
           placeholder="Nhập tên người dùng"
           value={username}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={handleChange}
+          onBlur={handleChange} // Check duplicates on blur
+          style={{ border: isUsernameDuplicate ? "1px solid red" : "" }}
+          className={isUsernameDuplicate ? "shake-animation" : ""}
         />
+
         <input
           type="email"
+          name="email"
           placeholder="Nhập địa chỉ email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
+          onBlur={handleChange} // Check duplicates on blur
+          style={{ border: isEmailDuplicate ? "1px solid red" : "" }}
+          className={isEmailDuplicate ? "shake-animation" : ""}
         />
+
         <InputGroup>
           <input
             type={showPassword ? "text" : "password"}
