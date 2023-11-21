@@ -6,7 +6,8 @@ const ItemCard6 = ({ type, heading }) => {
 
 
   return (
-    <Box mb="2" cursor="pointer" w="75%" m="center" ml="12.5%">
+    <Center>
+       <Center mb="2"  w="73%" display="flex" flexWrap="wrap"  >
       <Center>
         <Text fontSize="xl" color="#003380" fontWeight="700" p="4">
           {heading}
@@ -58,7 +59,9 @@ const ItemCard6 = ({ type, heading }) => {
           </Flex>
         ))}
       </Grid>
-    </Box>
+    </Center>
+    </Center>
+   
   );
 };
 

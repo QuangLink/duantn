@@ -10,7 +10,7 @@ const ItemCard9 = ({ type }) => {
       <Box>
         <Slide>
           {type.map((i) => (
-            <Box key={uuid()} display="flex" width="100%">
+            <Box key={uuid()} display="flex" width="73%">
               <Image src={`${i.img}`} alt={i.caption} w="100%" h="350px" />
             </Box>
           ))}

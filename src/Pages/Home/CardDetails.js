@@ -22,8 +22,8 @@ const fetchDataForCategory = async (category) => {
       img: product.prodImg,
       price: product.prodPrice,
       id: product.prodID,
-      sale: product.prodSale,
       QTY: product.QTY,
+      sale: product.prodSale,
       original: product.prodPriceSale,
     }));
   } catch (error) {
@@ -76,7 +76,7 @@ export const BannersCenter = [
   {
     id: 1,
     name: "Máy tính",
-    imgbnct: "https://simplepage.vn/blog/wp-content/uploads/3-6.png",
+    imgbnct: "https://cdn.tgdd.vn/2023/10/campaign/MHD-desk-1920x500.png",
     videoUrl: "https://youtu.be/BMHg1Eq6ZF8?t=6",
   },
 ];

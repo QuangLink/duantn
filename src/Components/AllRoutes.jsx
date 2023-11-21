@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
 import MainCartPage from "../Pages/cartPage/MainCartPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/SignInApp";
@@ -17,17 +16,15 @@ import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
 import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
-import Success from "../Pages/checkout/success";
 import Cart from "../Pages/cartPage/Cart";
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/success" element={<Success />} />
-        <Route path="/success/vnpay_return" element={<Success />} />
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/duantn" element={<Home />}></Route>
         <Route
           path="/laptop"
           element={<Products typeOfProduct="laptop" />}
@@ -114,7 +111,7 @@ const AllRoutes = () => {
           path="/acer/:id"
           element={<SingleProduct typeOfProduct="acer" />}
         ></Route>
-        <Route
+            <Route
           path="/cart"
           element={
             <PrivateRoute>
@@ -122,12 +119,29 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/login" element={<Login />}></Route>
         <Route
           path="/checkout"
           element={
             <PrivateRoute>
               <MainCartPage />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route path="/login" element={<Login />}></Route>
+
+        <Route
+          path="/whishlist"
+          element={
+            <PrivateRoute>
+              <Wishlist typeOfProduct={"whishlist"} />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
             </PrivateRoute>
           }
         ></Route>

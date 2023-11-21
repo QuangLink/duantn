@@ -1,12 +1,11 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import CateFeature from "./CateFeature";
 import BannerCenter from "./BannerCenter";
-import Btn from "./Btn";
 import BackToTopButton from './BackToTopButton';
 import { Box } from "@chakra-ui/react";
 import {
   BannersCenter,
-  ItemDetails1,
+  
   PrSale,
   PrApplePhone,
   CateFeatures,
@@ -29,7 +28,6 @@ import {
   loadPrAcer,
 } from "./CardDetails";
 
-const ItemCard1 = lazy(() => import("./ItemCard1"));
 const ItemCard2 = lazy(() => import("./ItemCard2"));
 const ItemCard5 = lazy(() => import("./ItemCard5"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
@@ -66,9 +64,7 @@ const Home = () => {
         <BannerCenter type={BannersCenter} />
       </Suspense>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && <ItemCard1 type={ItemDetails1} />}
-      </Suspense>
+    
 
       <CateFeature type={CateFeatures} />
 
@@ -90,7 +86,7 @@ const Home = () => {
         <ItemCard2
           type={PrApplePhone}
           linked={"/personalcare"}
-          heading="Iphone "
+          heading="IPHONE"
         />
       </Suspense>
 
@@ -104,9 +100,7 @@ const Home = () => {
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Btn />
-      </Suspense>
+      
       <BackToTopButton />
     </Box>
 

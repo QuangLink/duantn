@@ -47,12 +47,12 @@ const PrDeal = ({ type }) => {
     <Box
       marginTop="2  "
       justifyContent="center"
-      w="70%"
+      w="73%"
       m="auto"
       mb="5"
       cursor="pointer"
       textAlign="center"
-      backgroundColor="#1078ff"
+      backgroundColor="#043174"
       borderRadius="15px"
     >
       <Heading
@@ -61,30 +61,13 @@ const PrDeal = ({ type }) => {
         justifyContent="center"
         w="100%"
         m="15p% 10% 10% 10%"
-      >
-        <Box>
-          <i>
-            {" "}
-            <img
-              width="120px"
-              src={require("../../Components/Images/HDSale.png")}
-            />
-          </i>
-        </Box>
-        <Box mt="8">
-          <Text fontSize="40px" color="#efefef" w="100%">
-            {" "}
-            TUẦN LỄ GIẢM GIÁ SẬP SÀN
-          </Text>
-        </Box>
-      </Heading>
+      ></Heading>
       <Swiper>
-        <Box h="200px" m="1" className="bannerPr">
+        <Box h="auto" className="bannerPr">
           <Image
-            src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg"
-            w="99%"
-            h="200px"
-            m="1"
+            src={require("../../Components/Images/bannerPr1.jpg")}
+            w="100%"
+            h="auto"
             borderRadius="15px"
           />
         </Box>
@@ -112,8 +95,8 @@ const PrDeal = ({ type }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
-              spaceBetween: 5,
+              slidesPerView: 5,
+              spaceBetween: 2,
             },
           }}
         >
@@ -125,9 +108,8 @@ const PrDeal = ({ type }) => {
                     className="list"
                     p="2"
                     mt="4"
-                    ml="1"
-                    mr="1"
-                    mb="5"
+                    m="2"
+                    mb="3"
                     backgroundColor="white"
                     borderRadius="15px "
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
@@ -135,11 +117,17 @@ const PrDeal = ({ type }) => {
                     h="auto"
                   >
                     <Box className="img">
-                      <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                      <Square
+                        m="auto"
+                        w={200}
+                        h={200}
+                        _hover={{ transform: "scale(1.1)" }}
+                      >
                         <Image
                           src={`${i.prodImg}`}
-                          alt={i.prodImg}
-                          boxSize="160px"
+                          maxW={200}
+                          maxH={150}
+                          objectFit={"cover"}
                         />
                       </Square>
                       <Text
@@ -151,7 +139,7 @@ const PrDeal = ({ type }) => {
                         textAlign="center"
                         fontSize="20px"
                         _hover={{ color: "blue" }}
-                        fontWeight="500"
+                        fontWeight="700"
                       >
                         {i.prodName}
                       </Text>
@@ -184,7 +172,7 @@ const PrDeal = ({ type }) => {
                             </Square>
                           </Flex>
                           <Box h="20px" mb="3">
-                            {i.original !== 0 && (
+                            {i.prodSale !== 0 && (
                               <>
                                 <Flex>
                                   <Text color="gray.600" fontSize="14px">
@@ -197,26 +185,45 @@ const PrDeal = ({ type }) => {
                                     fontSize="14px"
                                     ml="1"
                                   >
-                                    {i.original &&
-                                      i.original.toLocaleString("vi-VN", {
+                                    {i.prodPriceSale &&
+                                      i.prodPriceSale.toLocaleString("vi-VN", {
                                         style: "currency",
                                         currency: "VND",
                                       })}
                                   </Text>
                                 </Flex>
-                                <Box
-                                  padding="3px"
-                                  borderRadius="5px"
-                                  w="50%"
-                                  color="#EC4C0A"
-                                  bg="#FEB373"
-                                  mt="2"
-                                  textAlign="center"
-                                >
-                                  <Text fontSize="10px" fontWeight="500">
-                                    GIẢM GIÁ SỐC
-                                  </Text>
-                                </Box>
+                                {i.prodSale >= 20 ? (
+                                  <Box
+                                    borderRadius="5px"
+                                    w="70%"
+                                    backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
+                                    color="#fff "
+                                    _hover={{ color: "black" }}
+                                    mt=""
+                                    textAlign="center"
+                                  >
+                                    <Text fontSize="13px" fontWeight="500">
+                                      GIẢM GIÁ SỐC -{i.prodSale}%
+                                    </Text>
+                                  </Box>
+                                ) : (
+                                  <Flex>
+                                    <Text color="gray.600" fontSize="14px">
+                                      Giảm giá:{" "}
+                                    </Text>
+                                    {"  "}
+                                    <Text
+                                      bgColor="#fff0e9"
+                                      color="#eb5757"
+                                      fontSize="14px"
+                                      fontWeight="700"
+                                      borderRadius="5px"
+                                      ml="1"
+                                    >
+                                      -{i.prodSale}%
+                                    </Text>
+                                  </Flex>
+                                )}
                               </>
                             )}
                           </Box>

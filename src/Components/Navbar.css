@@ -3,7 +3,7 @@
     display: none; 
   }
   .input-bar.focused {
-    width: 744px;
+    width: 944px;
   }
   .input-bar-talest.focused {
     width: 470px;
@@ -29,14 +29,14 @@ margin-left: 15px;
 }
 .flex-container{
        width: 100%;
-        justify-content:center;
+        justify-content:space-between;
         align-items: center;
         margin: auto;
         background-color: #4a90e2;
-        /* padding: 5px; */
+        padding: 5px;
 }
 #flex-container{
-  width: 100%;
+  width: 80%;
    justify-content:center;
    align-items: center;
    margin: auto;

@@ -24,7 +24,7 @@ const BannerCenter = ({ type }) => {
   return (
     <Box cursor="pointer">
       <Center>
-        <Box width="70%" justifyContent="center">
+        <Box width="100%" justifyContent="center">
           {type.map((i) => (
             <Box className="bannerheader" key={uuid()} h="auto" display="flex">
               {isMobile ? (
@@ -38,7 +38,7 @@ const BannerCenter = ({ type }) => {
                 <Image
                   src={`${i.imgbnct}`}
                   width="100%"
-                  borderBottomRadius="15px"
+                
                 />
               )}
             </Box>

@@ -79,7 +79,7 @@ const ItemCard5 = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w="70%"
+      w="73%"
       m="auto"
       mt="6"
       mb="2"
@@ -117,7 +117,7 @@ const ItemCard5 = ({ type, heading }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 10,
             },
           }}
@@ -128,23 +128,25 @@ const ItemCard5 = ({ type, heading }) => {
                 <Box
                   className="list"
                   p="2"
-                  m="2"
+                  mt="4"
                   borderRadius="15px"
                   boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
-                  w="310px"
-                  justifyContent="center"
+                  w=""
                   h="auto"
                 >
                   <Link to={`/${i.prodType}/${i.prodID}`}>
-                    <Box className="list" p="2" mt="4" h="auto">
+                    <Box className="list" p="2" mt="4" w="" h="auto">
                       <Box className="img">
                         <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                           <Image
                             src={`${i.prodImg}`}
                             alt={i.prodName}
-                            boxSize="160px"
+                            h={100}
+                            w={150}
+                            objectFit={"cover"}
                           />
                         </Square>
+
                         <Text
                           mt="2"
                           height="70px"
@@ -154,7 +156,7 @@ const ItemCard5 = ({ type, heading }) => {
                           textAlign="center"
                           fontSize="20px"
                           _hover={{ color: "blue" }}
-                          fontWeight="500"
+                          fontWeight="700"
                         >
                           {i.prodName}
                         </Text>
@@ -182,7 +184,7 @@ const ItemCard5 = ({ type, heading }) => {
                             </Square>
                           </Flex>
                           <Box h="20px">
-                            {i.original !== 0 && (
+                            {i.prodSale !== 0 && (
                               <>
                                 <Flex>
                                   <Text color="gray.600" fontSize="14px">
@@ -195,26 +197,44 @@ const ItemCard5 = ({ type, heading }) => {
                                     fontSize="14px"
                                     ml="1"
                                   >
-                                    {i.origina &&
-                                      i.original.toLocaleString("vi-VN", {
+                                    {i.prodPriceSale &&
+                                      i.prodPriceSale.toLocaleString("vi-VN", {
                                         style: "currency",
                                         currency: "VND",
                                       })}
                                   </Text>
                                 </Flex>
-                                <Box
-                                  padding="3px"
-                                  borderRadius="5px"
-                                  w="50%"
-                                  color="#EC4C0A"
-                                  bg="#FEB373"
-                                  mt="2"
-                                  textAlign="center"
-                                >
-                                  <Text fontSize="10px" fontWeight="500">
-                                    GIẢM GIÁ SỐC
-                                  </Text>
-                                </Box>
+                                {i.prodSale >= 20 ? (
+                                  <Box
+                                    borderRadius="5px"
+                                    w="70%"
+                                    color="#EC4C0A"
+                                    bg="#FEB373"
+                                    mt=""
+                                    textAlign="center"
+                                  >
+                                    <Text fontSize="13px" fontWeight="500">
+                                      GIẢM GIÁ SỐC -{i.prodSale}%
+                                    </Text>
+                                  </Box>
+                                ) : (
+                                  <Flex>
+                                    <Text color="gray.600" fontSize="14px">
+                                      Giảm giá:{" "}
+                                    </Text>
+                                    {"  "}
+                                    <Text
+                                      bgColor="#fff0e9"
+                                      color="#eb5757"
+                                      fontSize="14px"
+                                      fontWeight="700"
+                                      borderRadius="5px"
+                                      ml="1"
+                                    >
+                                      -{i.prodSale}%
+                                    </Text>
+                                  </Flex>
+                                )}
                               </>
                             )}
                           </Box>
@@ -222,19 +242,6 @@ const ItemCard5 = ({ type, heading }) => {
                       </Box>
                     </Box>
                   </Link>
-                  <Box>
-                    <Box
-                      fontSize={"30px"}
-                      padding={"10px"}
-                      className="add-to-cart"
-                      onClick={() => handlePost(i.prodID)}
-                    >
-                      <FontAwesomeIcon
-                        icon={faShoppingCart}
-                        className="cart-icon"
-                      />
-                    </Box>
-                  </Box>
                 </Box>
               </SwiperSlide>
             </Box>

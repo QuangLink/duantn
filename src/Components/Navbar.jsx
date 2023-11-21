@@ -408,7 +408,7 @@ function Navbar() {
             <Flex
               bg="white"
               borderRadius={"5px"}
-              w="250px"
+              w="450px"
               h={10}
               p="5px"
               m="auto"
@@ -838,7 +838,7 @@ function Navbar() {
       >
         <Link to="/">
           <Box>
-            <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+            <Image src={require("./Images/logo.png")} alt="logo" w="120px" />
           </Box>
         </Link>
         <Box>
@@ -1065,7 +1065,7 @@ function Navbar() {
       >
         <Link to="/" className={`header-bar ${isFocused ? "focused" : ""}`}>
           <Box marginLeft={0}>
-            <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+            <Image src={require("./Images/logo.png")} alt="logo" w="120px" />
           </Box>
         </Link>
         <Box paddingLeft={2}>
