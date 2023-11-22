@@ -107,9 +107,9 @@ const Products = ({ typeOfProduct }) => {
         </Box>
       ) : (
         <Grid
-          width="80%"
+          width="73.5%"
           m="auto"
-          marginLeft="10%"
+          marginLeft="13.5%"
           templateColumns={[
             "repeat(2, 1fr)",
             "repeat(3,1fr)",

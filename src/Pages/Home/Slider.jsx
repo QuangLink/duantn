@@ -76,7 +76,7 @@ const Slider = ({ type }) => {
           <SwiperSlide>
             <Link to={`/${i.prodType}/${i.prodID}`}>
               <center>
-                <Box p="2" border="1px solid black" borderRadius="15px">
+                <Box p="2" m={1} border="1px solid black" borderRadius="15px">
                   <Square
                     m="auto"
                     w={200}
@@ -97,7 +97,7 @@ const Slider = ({ type }) => {
                     color="gray.800"
                     noOfLines={2}
                     textAlign="center"
-                    fontSize="25px"
+                    fontSize="17px"
                     w={{ xs: "80%", sm: "80%", base: "100px" }}
                     _hover={{ color: "red" }}
                     fontWeight="700"
@@ -127,62 +127,6 @@ const Slider = ({ type }) => {
                         </Text>
                       </Square>
                     </Flex>
-                    <Box h="20px">
-                      {i.prodSale !== 0 && (
-                        <>
-                          <Flex>
-                            <Text color="gray.600" fontSize="14px">
-                              Giá gốc:{" "}
-                            </Text>
-                            {"  "}
-                            <Text
-                              as="s"
-                              color="gray.600"
-                              fontSize="14px"
-                              ml="1"
-                            >
-                              {i.prodPriceSale &&
-                                i.prodPriceSale.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
-                            </Text>
-                          </Flex>
-                          {i.prodSale >= 20 ? (
-                            <Box
-                              borderRadius="5px"
-                              w="70%"
-                              backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
-                              color="#fff "
-                              _hover={{ color: "black" }}
-                              mt=""
-                              textAlign="center"
-                            >
-                              <Text fontSize="13px" fontWeight="500">
-                                GIẢM GIÁ SỐC -{i.prodSale}%
-                              </Text>
-                            </Box>
-                          ) : (
-                            <Flex>
-                              <Text color="gray.600" fontSize="14px">
-                                Giảm giá:{" "}
-                              </Text>
-                              {"  "}
-                              <Text
-                                bgColor="#fff0e9"
-                                color="#eb5757"
-                                fontSize="14px"
-                                fontWeight="700"
-                                borderRadius="5px"
-                                ml="1"
-                              >
-                                -{i.prodSale}%
-                              </Text>
-                            </Flex>
-                          )}
-                        </>
-                      )}
-                    </Box>
                   </Box>
                 </Box>
               </center>

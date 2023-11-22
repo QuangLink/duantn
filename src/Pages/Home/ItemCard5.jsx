@@ -82,7 +82,7 @@ const ItemCard5 = ({ type, heading }) => {
       w="73%"
       m="auto"
       mt="6"
-      mb="2"
+      mb="10"
       cursor="pointer"
       textAlign="center"
     >
@@ -128,21 +128,27 @@ const ItemCard5 = ({ type, heading }) => {
                 <Box
                   className="list"
                   p="2"
+                  m={0.5}
                   mt="4"
                   borderRadius="15px"
-                  boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+                  borderWidth={1}
+                  borderColor={"#555"}
                   w=""
                   h="auto"
                 >
                   <Link to={`/${i.prodType}/${i.prodID}`}>
                     <Box className="list" p="2" mt="4" w="" h="auto">
                       <Box className="img">
-                        <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                        <Square
+                          m="auto"
+                          w={200}
+                          h={200}
+                          _hover={{ transform: "scale(1.1)" }}
+                        >
                           <Image
                             src={`${i.prodImg}`}
-                            alt={i.prodName}
-                            h={100}
-                            w={150}
+                            maxW={200}
+                            maxH={150}
                             objectFit={"cover"}
                           />
                         </Square>
@@ -154,13 +160,13 @@ const ItemCard5 = ({ type, heading }) => {
                           color="#424245"
                           noOfLines={2}
                           textAlign="center"
-                          fontSize="20px"
+                          fontSize="17px"
                           _hover={{ color: "blue" }}
                           fontWeight="700"
                         >
                           {i.prodName}
                         </Text>
-                        <Box mt="3" m="10px 0 30px 20px">
+                        <Box mt="3" m="10px 0 30px 0px">
                           <Flex>
                             <Square>
                               <Text color="gray.600" fontSize="14px">
@@ -183,61 +189,6 @@ const ItemCard5 = ({ type, heading }) => {
                               </Text>
                             </Square>
                           </Flex>
-                          <Box h="20px">
-                            {i.prodSale !== 0 && (
-                              <>
-                                <Flex>
-                                  <Text color="gray.600" fontSize="14px">
-                                    Giá gốc:{" "}
-                                  </Text>
-                                  {"  "}
-                                  <Text
-                                    as="s"
-                                    color="gray.600"
-                                    fontSize="14px"
-                                    ml="1"
-                                  >
-                                    {i.prodPriceSale &&
-                                      i.prodPriceSale.toLocaleString("vi-VN", {
-                                        style: "currency",
-                                        currency: "VND",
-                                      })}
-                                  </Text>
-                                </Flex>
-                                {i.prodSale >= 20 ? (
-                                  <Box
-                                    borderRadius="5px"
-                                    w="70%"
-                                    color="#EC4C0A"
-                                    bg="#FEB373"
-                                    mt=""
-                                    textAlign="center"
-                                  >
-                                    <Text fontSize="13px" fontWeight="500">
-                                      GIẢM GIÁ SỐC -{i.prodSale}%
-                                    </Text>
-                                  </Box>
-                                ) : (
-                                  <Flex>
-                                    <Text color="gray.600" fontSize="14px">
-                                      Giảm giá:{" "}
-                                    </Text>
-                                    {"  "}
-                                    <Text
-                                      bgColor="#fff0e9"
-                                      color="#eb5757"
-                                      fontSize="14px"
-                                      fontWeight="700"
-                                      borderRadius="5px"
-                                      ml="1"
-                                    >
-                                      -{i.prodSale}%
-                                    </Text>
-                                  </Flex>
-                                )}
-                              </>
-                            )}
-                          </Box>
                         </Box>
                       </Box>
                     </Box>

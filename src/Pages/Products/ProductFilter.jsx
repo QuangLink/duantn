@@ -108,9 +108,11 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
   return (
     <div className="filter_1">
       <Box
-        width="80%"
+        width="73%"
         height="76px"
-        margin="0 0 3% 10%"
+        margin="auto"
+        marginBottom="2%"
+
         display="flex"
         justifyContent="space-between"
         borderRadius="3px"
@@ -230,7 +232,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
             Yêu thích
           </Button>
         </Flex>
-        <Flex width="13%">
+        <Flex width="15%">
           <Box
             margin="10% 0%"
             fontWeight="bold.800"

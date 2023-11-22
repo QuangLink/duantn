@@ -26,21 +26,16 @@ const Heading = ({ heading }) => {
       >
         <Box>
           <Text
-            mt="2"
-            height="70px"
-            fontFamily={"Arial"}
-            color="#424245"
-            noOfLines={2}
-            textAlign="center"
-            fontSize="20px"
-            _hover={{ color: "blue" }}
+            fontSize="2xl"
+            width=""
             fontWeight="700"
-            
+            textColor="black"
+            className="headingHome"
           >
             {heading}
           </Text>
         </Box>
-        
+
       </Center>
     </Flex>
   );

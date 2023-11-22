@@ -137,7 +137,7 @@ const PrDeal = ({ type }) => {
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="20px"
+                        fontSize="17px"
                         _hover={{ color: "blue" }}
                         fontWeight="700"
                       >

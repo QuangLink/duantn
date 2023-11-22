@@ -85,6 +85,11 @@ const TimeDeal = ({ type, heading }) => {
   const listDataSale = filteredProducts.filter(
     (product) => product.prodSale > 0,
   );
+  const firstHalfData = listDataSale.slice(
+    0,
+    Math.ceil(listDataSale.length / 2),
+  );
+  const secondHalfData = listDataSale.slice(Math.ceil(listDataSale.length / 2));
 
   return (
     <Box
@@ -195,7 +200,7 @@ const TimeDeal = ({ type, heading }) => {
             },
           }}
         >
-          {listDataSale.map((i) => (
+          {firstHalfData.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
                 <Link to={`/${i.prodType}/${i.prodID}`}>
@@ -233,7 +238,7 @@ const TimeDeal = ({ type, heading }) => {
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="20px"
+                        fontSize="17px"
                         _hover={{ color: "blue" }}
                         fontWeight="700"
                       >
@@ -339,28 +344,65 @@ const TimeDeal = ({ type, heading }) => {
                       </Box>
                     </Box>
                   </Box>
+                </Link>
+              </SwiperSlide>
+            </Box>
+          ))}
+        </Swiper>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          navigation
+          autoplay={{ delay: 4000 }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 5,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 5,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 5,
+            },
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 5,
+            },
+            1366: {
+              slidesPerView: 5,
+              spaceBetween: 1,
+            },
+          }}
+        >
+          {secondHalfData.map((i) => (
+            <Box key={uuid()}>
+              <SwiperSlide>
+                <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
                     className="list"
                     p="2"
                     mt="4"
                     m="2"
-                    boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                     backgroundColor="white"
                     borderRadius="15px "
+                    // boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                     w=""
                     h="auto"
+                    boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
                     <Box className="img">
                       <Square
                         m="auto"
-                        w={150}
-                        h={100}
+                        w={200}
+                        h={200}
                         _hover={{ transform: "scale(1.1)" }}
                       >
                         <Image
                           src={`${i.prodImg}`}
-                          maxW={150}
-                          maxH={100}
+                          maxW={200}
+                          maxH={150}
                           objectFit={"cover"}
                         />
                       </Square>
@@ -372,7 +414,7 @@ const TimeDeal = ({ type, heading }) => {
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="20px"
+                        fontSize="17px"
                         _hover={{ color: "blue" }}
                         fontWeight="700"
                       >
@@ -484,19 +526,6 @@ const TimeDeal = ({ type, heading }) => {
           ))}
         </Swiper>
       </Box>
-
-      <Center mt="2">
-        <Box mb="2">
-          <Button
-            type="button"
-            backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
-            color="#fff "
-            _hover={{ color: "black" }}
-          >
-            Xem tất cả...{" "}
-          </Button>
-        </Box>
-      </Center>
     </Box>
   );
 };
