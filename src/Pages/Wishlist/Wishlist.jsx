@@ -13,35 +13,39 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../Redux/Auth/auth.action";
-import { getProducts } from "../../Redux/Products/products.action";
+import { getProducts } from "../../Redux/Wishlist/products.action";
 import WishProduct from "./WishProduct";
+import Cookies from "js-cookie";
 const getData = async (typeOfProduct) => {
+  const userID = Cookies.get("userID");
   let response = await axios.get(
-    `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+    `https://duantn-backend.onrender.com/wishlist/${userID}`,
   );
   return response.data;
 };
 function Wishlist({ typeOfProduct }) {
-  const { name, email } = useSelector((store) => store.AuthManager);
+  const { username, email } = useSelector((store) => store.AuthManager);
   const productsList = useSelector((store) => store.product.data);
   const loading = useSelector((store) => store.product.loading);
   const error = useSelector((store) => store.product.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-  const handleDelete = (id, name) => {
+  const handleDelete = (userID, prodID) => {
     axios
-      .delete(`https://duantn-backend.onrender.com/cart/${id}`)
+      .delete(
+        `https://duantn-backend.onrender.com/wishlist/${userID}/${prodID}`,
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     toast({
       title: "Product Deleted.",
-      description: `${name} Delete from wishlist`,
+      description: `Delete from wishlist`,
       status: "success",
       duration: 9000,
       isClosable: true,
     });
-    navigate("/whishlist");
+    navigate("/wishlist");
   };
   useEffect(() => {
     // getData(typeOfProduct).then((res) => setProductArr(res));
@@ -81,7 +85,7 @@ function Wishlist({ typeOfProduct }) {
           cursor="pointer"
           border="1px solid black"
         >
-          <Heading size={"lg"}>{name}</Heading>
+          <Heading size={"lg"}>{username}</Heading>
           <Text size={"lg"}>{email}</Text>
           <Heading size={"md"}>My Account</Heading>
           <Text _hover={{ color: "blue", fontWeight: "bold" }}>My Profile</Text>
@@ -122,7 +126,7 @@ function Wishlist({ typeOfProduct }) {
                   // console.log("in the products page in the map method and elem is :- ", elem);
                   return (
                     <GridItem
-                      key={elem.name + i}
+                      key={elem.prodName + i}
                       w="100%"
                       bg="white.500"
                       boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"

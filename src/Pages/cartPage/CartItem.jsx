@@ -138,7 +138,7 @@ const CartItem = ({
 
     postSingleDataWish(newData)
       .then((res) => {
-        navigate("/whishlist");
+        navigate("/wishlist");
         toast({
           title: "Đã thêm vào giỏ hàng",
           description: "Product Added",

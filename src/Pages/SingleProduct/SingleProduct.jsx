@@ -60,20 +60,34 @@ const postSingleData = async (data) => {
 };
 
 export const postSingleDataWish = async (data) => {
-  try {
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist`,
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.log(
-      "Trong hàm postSingleDataWish xảy ra lỗi: ",
-      error.response.data,
-    );
+  const userID = Cookies.get("userID");
+  if (!userID) {
+    window.location.href = "/login";
+  } else {
+    try {
+      // Lấy userID từ sessionStorage
+
+      // Ensure data.prodID is a valid value, not [object Object]
+      const prodID = data.prodID;
+      const colorID = data.colorID;
+      const storageID = data.storageID;
+      // Tạo dữ liệu gửi đi kết hợp với userID và prodID
+      const postData = {
+        prodID,
+        colorID,
+        storageID,
+        userID,
+      };
+
+      let response = await axios.post(
+        `https://duantn-backend.onrender.com/wishlist/`,
+        postData,
+      );
+      window.location.href = "/wishlist";
+      return response.data;
+    } catch (error) {
+      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+    }
   }
 };
 
@@ -155,15 +169,27 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
-  const handleWish = (data) => {
-    let newData = {};
-    for (let i in data) {
-      if (i === "id") {
-        continue;
-      }
-      newData[i] = data[i];
-    }
-    postSingleDataWish(newData).then((res) => navigate("/wishlist"));
+  const handleWish = (prodID, colorID, storageID) => {
+    postSingleDataWish({ prodID, colorID, storageID })
+      .then((res) => {
+        toast({
+          title: "Đã thêm vào giỏ",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Error handling post:", error);
+        // Handle the error as needed, e.g., display an error toast
+        toast({
+          title: "Lỗi",
+
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
   };
 
   useEffect(() => {
@@ -473,9 +499,15 @@ const SingleProduct = (props) => {
                             fontSize="lg"
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
-                            onClick={() => handleWish(singleDatas[0].prodID)}
+                            onClick={() =>
+                              handleWish(
+                                applyFilters()[0].prodID,
+                                applyFilters()[0].colorID,
+                                applyFilters()[0].storageID,
+                              )
+                            }
                           >
-                            Mua ngay
+                            Yêu thích
                           </Button>
                         </Flex>
                         <Box

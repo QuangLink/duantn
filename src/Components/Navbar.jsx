@@ -401,7 +401,11 @@ function Navbar() {
         <Flex className="flex-container" px="15%">
           <Link to="/">
             <Box>
-              <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+              <Image
+                src={require("./Images/logodesktop.png")}
+                alt="logo"
+                w="200px"
+              />
             </Box>
           </Link>
           <Box>
@@ -469,15 +473,10 @@ function Navbar() {
               </MenuButton>
               <MenuList>
                 <Link to="/myprofile">
-                  <MenuItem>My Profile</MenuItem>
+                  <MenuItem>Profile</MenuItem>
                 </Link>
-                <Link to="/myorder">
-                  <MenuItem>My Order</MenuItem>
-                </Link>
-                <MenuItem>My Address</MenuItem>
-                <Link to="whishlist">
-                  {" "}
-                  <MenuItem>My Wishlist</MenuItem>
+                <Link to="/wishlist">
+                  <MenuItem>Wishlist</MenuItem>
                 </Link>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </MenuList>
@@ -512,34 +511,14 @@ function Navbar() {
               cursor={"pointer"}
               className={`header-bar ${isFocused ? "focused" : ""}`}
               _hover={{ bg: "#0077ff" }}
-            >
-              <Heading
-                fontWeight={400}
-                m="2"
-                cursor={"pointer"}
-                fontSize={"14px"}
-                color="#fff"
-              >
-                Khuyến mãi
-              </Heading>
-            </Flex>
+            ></Flex>
           </Link>
           <Link to="/cart">
             <Flex
               cursor={"pointer"}
               _hover={{ bg: "#0077ff" }}
               className={`header-bar ${isFocused ? "focused" : ""}`}
-            >
-              <Heading
-                fontWeight={400}
-                m="2"
-                cursor={"pointer"}
-                fontSize={"14px"}
-                color="#fff"
-              >
-                Chăm Sóc khách hàng
-              </Heading>
-            </Flex>
+            ></Flex>
           </Link>
           <Link to="/cart">
             <Flex
@@ -781,7 +760,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="accessories">
+            <Link to="smartwatch">
               <MenuButton
                 px={4}
                 py={2}
@@ -792,34 +771,6 @@ function Navbar() {
                 display="flex"
               >
                 <Icon as={BsSmartwatch} /> Smartwatch
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="mobilesandtablets">
-              <MenuButton
-                px={4}
-                py={2}
-                color="#fff"
-                transition="all 0.2s"
-                _hover={{ color: "white", fontSize: 18 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                <Icon as={BsSmartwatch} /> Đồng hồ
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="mobilesandtablets">
-              <MenuButton
-                px={4}
-                py={2}
-                color="#fff"
-                transition="all 0.2s"
-                _hover={{ color: "white", fontSize: 18 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                Máy cũ giá rẻ
               </MenuButton>
             </Link>
           </Menu>

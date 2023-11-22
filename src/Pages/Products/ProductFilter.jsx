@@ -15,48 +15,56 @@ import {
   Text,
   MenuItem,
   Button,
-  Select
+  Select,
 } from "@chakra-ui/react";
 import { PrApplePhone } from "../Home/CardDetails";
 
 import "./Productbox.css";
 import { Route } from "react-router-dom";
 
-
-const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, }) => {
+const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
   const [type, setType] = useState(typeOfProduct);
 
   useEffect(() => {
-    setType(typeOfProduct)
-  }, [typeOfProduct])
+    setType(typeOfProduct);
+  }, [typeOfProduct]);
   console.log(type);
 
-
-
   const CategoryProduct = () => {
-    if (type === 'phone' || type === 'apple' || type === 'xiaomi' || type === 'samsung') {
+    if (
+      type === "phone" ||
+      type === "apple" ||
+      type === "xiaomi" ||
+      type === "samsung"
+    ) {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link href="/applephone" >
+              <Link href="/apple/phone">
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/xiaomi" >
+              <Link href="/xiaomi">
                 <Box className="text-btn">Xiaomi</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/samsung" >
+              <Link href="/samsung/phone">
                 <Box className="text-btn">Samsung</Box>
               </Link>
             </Box>
           </Grid>
         </MenuList>
-      )
-    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+      );
+    } else if (
+      type === "laptop" ||
+      type === "asus" ||
+      type === "acer" ||
+      type === "lenovo" ||
+      type === "hp"
+    ) {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
@@ -82,21 +90,21 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, }) => {
             </Box>
           </Grid>
         </MenuList>
-      )
+      );
     } else {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link to="/appletablet">
+              <Link to="/apple/tablet">
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
           </Grid>
         </MenuList>
-      )
+      );
     }
-  }
+  };
   return (
     <div className="filter_1">
       <Box

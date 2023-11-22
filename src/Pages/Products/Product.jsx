@@ -16,11 +16,21 @@ import RatingBar from "./RatingBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
+import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
   try {
+    const userID = Cookies.get("userID");
+    console.log(data);
+
+    const postData = {
+      userID,
+      prodID: data.prodID,
+      colorID: data.colorID,
+      storageID: data.storageID,
+    };
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,
-      data,
+      `https://duantn-backend.onrender.com/wishlist/`,
+      postData,
       {
         headers: { "Content-Type": "application/json" },
       },
@@ -37,7 +47,6 @@ const postSingleDataWish = async (data) => {
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
-
   const { data } = props;
   const {
     prodID,
@@ -48,21 +57,13 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
+
   var navigate = useNavigate();
   const toast = useToast();
   const handleWish = (data) => {
-    console.log("this is data from hadleWhish", data);
-    let newData = {};
-    for (let i in data) {
-      if (i === "prodID") {
-        continue;
-      }
-      newData[i] = data[i];
-    }
-    // console.log("newData is :-", newData);
-    // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleDataWish(newData).then((res) => {
-      // console.log("in the handlePost function and viewing the data after the post request", res)
+    console.log(data);
+
+    postSingleDataWish(data).then((res) => {
       toast({
         title: "Added Item Successfully to WishList",
         status: "success",
@@ -70,11 +71,9 @@ const Product = (props, rating) => {
         isClosable: true,
         position: "bottom",
       });
-      setTimeout(() => {
-        navigate("/whishlist");
-      }, 1000);
     });
   };
+
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
@@ -119,9 +118,9 @@ const Product = (props, rating) => {
                   Giá mới:{" "}
                   {prodPrice &&
                     prodPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
@@ -131,11 +130,11 @@ const Product = (props, rating) => {
                   textDecoration="line-through"
                 >
                   Giá gốc:{" "}
-                  { prodPriceSale&&
+                  {prodPriceSale &&
                     prodPriceSale.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Text>
               </Box>
               <Badge
@@ -170,11 +169,11 @@ const Product = (props, rating) => {
                   fontWeight="black"
                 >
                   Giá:{" "}
-                  {prodPrice&&
+                  {prodPrice &&
                     prodPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Heading>
               </Box>
               <Badge

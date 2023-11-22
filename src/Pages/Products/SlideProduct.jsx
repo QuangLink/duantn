@@ -12,7 +12,7 @@ const SlideProuct = ({ type }) => {
         display="flex"
         flexWrap="wrap"
         
-        w="60%"
+        w="73%"
         m="auto"
         mt="6"
    
@@ -23,7 +23,7 @@ const SlideProuct = ({ type }) => {
               KHUYẾN MÃI CHỈ CÓ TRÊN ONLINE
               </Box>
         <Box width="100%"  display="block" >
-        <img src="https://cdn.tgdd.vn/2023/09/banner/1200x150-tgdd-1200x150-1.png"   />
+        <img src="https://cdn.tgdd.vn/2023/09/banner/1200x150-tgdd-1200x150-1.png" width="100%"   />
           {/* <Slide>
             {type.map((i) => (
               <Box key={uuid()} h="220px">

@@ -26,7 +26,7 @@ import uuid from "react-uuid";
 const HotProduct = ({ type }) => {
   return (
     <Box
-      w="60%"
+      w="73%"
       m="auto"
       mt="6"
       cursor="pointer"
@@ -34,15 +34,16 @@ const HotProduct = ({ type }) => {
       borderRadius="5px"
       css={{ "@media (max-width: 768px)": { display: "none" } }}
     >
-      <Box display="flex" justifyContent="center" mt="5">
-        <a href="">
-          <Text width="auto" backgroundColor="#9b000a" h="auto">
+      <Box display="flex" justifyContent="center"  width="100%">
+        
+          <Text width="100%" backgroundColor="#9b000a" h="auto">
             <img
               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/11/campaign/Frame-2-1200x120.png"
-              w="100%"
+
+              width="100%"
             />{" "}
           </Text>
-        </a>
+        
       </Box>
 
       <Box mt="2" ml="4" mr="4">
