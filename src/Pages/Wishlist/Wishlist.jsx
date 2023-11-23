@@ -18,9 +18,7 @@ import WishProduct from "./WishProduct";
 import Cookies from "js-cookie";
 const getData = async (typeOfProduct) => {
   const userID = Cookies.get("userID");
-  let response = await axios.get(
-    `https://duantn-backend.onrender.com/wishlist/${userID}`,
-  );
+  let response = await axios.get(`http://localhost:9000/wishlist/${userID}`);
   return response.data;
 };
 function Wishlist({ typeOfProduct }) {
@@ -33,9 +31,7 @@ function Wishlist({ typeOfProduct }) {
   const toast = useToast();
   const handleDelete = (userID, prodID) => {
     axios
-      .delete(
-        `https://duantn-backend.onrender.com/wishlist/${userID}/${prodID}`,
-      )
+      .delete(`http://localhost:9000/wishlist/${userID}/${prodID}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     toast({

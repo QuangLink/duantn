@@ -47,10 +47,7 @@ const postSingleData = async (data) => {
         userID,
       };
 
-      let response = await axios.post(
-        `https://duantn-backend.onrender.com/cart/`,
-        postData,
-      );
+      let response = await axios.post(`http://localhost:9000/cart/`, postData);
       window.location.href = "/cart";
       return response.data;
     } catch (error) {
@@ -80,7 +77,7 @@ export const postSingleDataWish = async (data) => {
       };
 
       let response = await axios.post(
-        `https://duantn-backend.onrender.com/wishlist/`,
+        `http://localhost:9000/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";
@@ -227,7 +224,7 @@ const SingleProduct = (props) => {
             <Box>
               <Box
                 width="100%"
-                m="0 0 0 7%"
+                m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
                 alignitem="center"
@@ -385,7 +382,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        mt="5%"
+                        width="91%"
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -465,13 +462,7 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
-                        <Input
-                          w="70%"
-                          borderRadius="none"
-                          placeholder="Enter / Mã giảm giá"
-                          p={2}
-                          marginBottom={3}
-                        ></Input>
+
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -499,15 +490,9 @@ const SingleProduct = (props) => {
                             fontSize="lg"
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
-                            onClick={() =>
-                              handleWish(
-                                applyFilters()[0].prodID,
-                                applyFilters()[0].colorID,
-                                applyFilters()[0].storageID,
-                              )
-                            }
+                            onClick={() => handleWish(singleDatas[0].prodID)}
                           >
-                            Yêu thích
+                            Mua ngay
                           </Button>
                         </Flex>
                         <Box
@@ -562,8 +547,6 @@ const SingleProduct = (props) => {
                 </Grid>
               </div>
               <Box className="box-slide">
-                <br />
-                <hr />
                 <RelateProduct type={singleDatas[0].catName} />
                 <ComProduct prodID={singleDatas[0].prodID} />
               </Box>

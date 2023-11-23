@@ -28,9 +28,7 @@ const Slider1 = ({ type }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/asus`,
-      );
+      let responce = await axios.get(`http://localhost:9000/category/asus`);
       console.log("in the logi func try", responce.data);
       if (responce.data) {
         setFilteredProducts(responce.data || []);

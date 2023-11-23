@@ -8,9 +8,10 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import axios from "axios";
+import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
-  const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+  const apiUrlBase = "http://localhost:9000/category/";
 
   const categoryUrl = {
     sale: apiUrlBase + type,
@@ -40,6 +41,7 @@ const RelateProduct = ({ type, heading }) => {
       try {
         const relatedData = await fetchDataForCategory("sale");
         setRelatedProducts(relatedData);
+        console.log(relatedData);
       } catch (error) {
         console.error("Lỗi khi tải dữ liệu sản phẩm liên quan:", error);
       }
@@ -51,30 +53,23 @@ const RelateProduct = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w={["100%", "100%", "80%"]}
+      w={["100%", "100%", "73%"]}
       display={["none", "block", "block"]}
       m="auto"
-      mt="6"
+      mt="5"
       cursor="pointer"
-      textAlign="center"
+      textAlign="left"
       backgroundColor="blackAlpha.50"
     >
       <Box>
         <a href="">
           <Text
-            fontSize="2.1rem"
-            color="whiteAlpha.900"
-            fontWeight="black"
-            width="100%"
-            backgroundColor="blue.300"
-            h="60px"
-            p={2}
-            borderRadius="md"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            transition="background-color 0.3s ease"
-            _hover={{ backgroundColor: "blue.400" }}
+            fontSize="2xl"
+            width=""
+            fontWeight="700"
+            textColor="black"
+            className="headingHome"
+            m="auto"
           >
             Các sản phẩm liên quan
           </Text>
@@ -112,11 +107,11 @@ const RelateProduct = ({ type, heading }) => {
           {relatedProducts.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to="/">
+                <Link to={`/${i.id}`}>
                   <Box
                     p="5"
-                    m={["0%", "0%", "2%"]}
-                    height="350px"
+                    m={["0%", "0%", "1%"]}
+                    height="auto"
                     backgroundColor="white"
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
@@ -162,8 +157,17 @@ const RelateProduct = ({ type, heading }) => {
                           </Text>
                         </Square>
                       </Flex>
-                      {i.original !== 0 && (
+                      {i.original !== i.price && (
                         <>
+                          <Flex>
+                            <Text color="red.600" fontSize="18px">
+                              Giảm:{" "}
+                            </Text>
+                            {"  "}
+                            <Text color="red.600" fontSize="18px" ml="1">
+                              {i.sale} %
+                            </Text>
+                          </Flex>
                           <Flex>
                             <Text color="gray.600" fontSize="14px">
                               Giá gốc:{" "}

@@ -38,10 +38,7 @@ const postSingleData = async (data) => {
       userID,
     };
 
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
-      postData,
-    );
+    let response = await axios.post(`http://localhost:9000/cart/`, postData);
     return response.data;
   } catch (error) {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
@@ -57,9 +54,7 @@ const ItemCard5 = ({ type, heading }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
-      );
+      let responce = await axios.get(`http://localhost:9000/products`);
       console.log("in the logi func try", responce.data);
       if (responce.data) {
         setFilteredProducts(responce.data || []);
