@@ -29,7 +29,7 @@ const ComProduct = ({ prodID }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:9000/feedback",
+          "https://duantn-backend.onrender.com/feedback",
           feedbackData,
         );
 
@@ -50,7 +50,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `http://localhost:9000/feedback/${prodID}`,
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -75,7 +75,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `http://localhost:9000/feedback/${prodID}`,
+          `https://duantn-backend.onrender.com/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -186,22 +186,21 @@ const ComProduct = ({ prodID }) => {
                 >
                   {comment.username}
                 </Text>
-          
+
                 <Text padding={2}>
                   <RatingBar rating={comment.prodRate || 0.5} />
                 </Text>
                 <Text
-                padding={2}
-                display="flex"
-                fontSize="20px"
-                flexWrap="wrap"
-                w="100%"
-                whiteSpace="normal"
-                h="auto"
-              >
-              
-                <p className="comment-outline">{comment.comment}</p>
-              </Text>
+                  padding={2}
+                  display="flex"
+                  fontSize="20px"
+                  flexWrap="wrap"
+                  w="100%"
+                  whiteSpace="normal"
+                  h="auto"
+                >
+                  <p className="comment-outline">{comment.comment}</p>
+                </Text>
                 <Text padding={2}>Ngày bình luận: 11/00/1002</Text>
               </Box>
             </li>

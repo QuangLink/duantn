@@ -47,7 +47,10 @@ const postSingleData = async (data) => {
         userID,
       };
 
-      let response = await axios.post(`http://localhost:9000/cart/`, postData);
+      let response = await axios.post(
+        `https://duantn-backend.onrender.com/cart/`,
+        postData,
+      );
       window.location.href = "/cart";
       return response.data;
     } catch (error) {
@@ -77,7 +80,7 @@ export const postSingleDataWish = async (data) => {
       };
 
       let response = await axios.post(
-        `http://localhost:9000/wishlist/`,
+        `https://duantn-backend.onrender.com/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";
