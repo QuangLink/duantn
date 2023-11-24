@@ -97,52 +97,81 @@ const TimeDeal = ({ type, heading }) => {
       mt="6"
       cursor="pointer"
       textAlign="center"
-      backgroundColor="#70b1ea"
+      backgroundColor="black"
       borderRadius="15px"
+      //chuyển màu background sang
     >
       <Heading
-        textAlign="center"
+        backgroundImage='url("https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif")'
+        h="auto"
+        textAlign="left"
         display="flex"
-        justifyContent="space-around"
-        w="95%"
-        m="15p% 10% 10% 10%"
+        w="100%"
+        borderRadius="15px"
       >
-        <Box mt="6" display="flex">
-          <i>
+        <Box mt="6" display="flex" mb="1" ml="6">
+          <Box mr="4">
             {" "}
             <img
               width="40px"
               height="75px"
               src="https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/homev2/lightning-ic.png"
             />
-          </i>
+          </Box>
 
           <Text>
-            <Text fontSize="30px" color="red">
+            <Text fontSize="40px" color="#ffd559">
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
-            <Text
-              fontFamily="-moz-initial"
-              fontSize="2xl"
-              color="blackAlpha.800"
-              mt="2"
-            >
-              <i fontSize="10px" fontFamily="-moz-initial">
+            <Text fontFamily="-moz-initial" fontSize="3xl" color="#fff" mt="3">
+              <Text>
                 {" "}
-                Kết thúc trong{" "}
-                <span>{thoiGianConLai.gio.toString().padStart(2, "0")}</span>:
-                <span>{thoiGianConLai.phut.toString().padStart(2, "0")}</span>:
-                <span>{thoiGianConLai.giay.toString().padStart(2, "0")} </span>
-              </i>{" "}
+                <i>Kết thúc trong</i>{" "}
+                <span
+                  style={{
+                    backgroundColor: "#ffe252",
+                    borderRadius: "9px",
+                    padding: "5px",
+                    marginRight: "5px",
+                    color: "black",
+                  }}
+                >
+                  {thoiGianConLai.gio.toString().padStart(2, "0")}
+                </span>
+                :
+                <span
+                  style={{
+                    backgroundColor: "#ffe252",
+                    borderRadius: "9px",
+                    padding: "5px",
+                    marginRight: "5px",
+                    color: "black",
+                  }}
+                >
+                  {thoiGianConLai.phut.toString().padStart(2, "0")}
+                </span>
+                :
+                <span
+                  style={{
+                    backgroundColor: "#ffe252",
+                    borderRadius: "9px",
+                    padding: "5px",
+                    marginRight: "5px",
+                    color: "black",
+                  }}
+                >
+                  {thoiGianConLai.giay.toString().padStart(2, "0")}{" "}
+                </span>
+              </Text>{" "}
             </Text>
           </Text>
         </Box>
-        <Box mt="8" className="time">
-          <Text fontSize="20px">Đang diễn ra</Text>
+        {/* <Box mt="8" className="time">
+          <Text fontSize="30px" color="#ffe252">Đang diễn ra</Text>
           <Text
             fontFamily="-moz-initial"
-            fontSize="2xl"
+            fontSize="3xl"
             color="blackAlpha.800"
             mt="2"
             borderBottom="3px solid #E6CB47"
@@ -155,19 +184,21 @@ const TimeDeal = ({ type, heading }) => {
           </Text>
         </Box>
         <Box mt="8" className="time">
-          <Text fontSize="20px">Ngày mai</Text>
+          <Text fontSize="30px" color="#ffe252">Sắp diễn ra</Text>
           <Text
             fontFamily="-moz-initial"
-            fontSize="2xl"
+            fontSize="3xl"
             color="blackAlpha.800"
             mt="2"
+            borderBottom="3px solid #ffe252"
+            borderBottomRadius="12px"
           >
             <i fontSize="10px" fontFamily="-moz-initial">
               {" "}
               08:00/23:59{" "}
             </i>{" "}
           </Text>
-        </Box>
+        </Box> */}
       </Heading>
 
       <Box mt="1" bachgroundColor="white">

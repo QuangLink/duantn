@@ -77,7 +77,7 @@ const Product = (props, rating) => {
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[280, 360, 520]}>
+        <Box h={[280, 360, 450]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -85,7 +85,9 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["65%", "80%", "90%"]}
+              w={["65%", "80%", "auto"]}
+              h={["65%", "80%", "200px"]}
+              objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
             />
@@ -103,7 +105,7 @@ const Product = (props, rating) => {
               <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
-                h={["20px", "40px", "60px"]}
+                h={["20px", "40px", "70px"]}
               >
                 {prodName}
               </Box>
@@ -155,7 +157,7 @@ const Product = (props, rating) => {
             <Box className="div_2">
               <Box
                 className="box_1"
-                h={["20px", "40px", "60px"]}
+                h={["20px", "40px", "70px"]}
                 fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
                 {prodName}
