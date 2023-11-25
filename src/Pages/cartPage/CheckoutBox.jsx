@@ -94,7 +94,7 @@ const CheckoutBox = ({
       });
     } else {
       toast({
-        title: "Proceed further for checkout",
+        title: "Thanh toán ngân hàng",
         description: "",
         status: "success",
         duration: 3000,

@@ -27,7 +27,7 @@ const Success = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/order/vnpay_return${location.search}`,
+          `https://duantn-backend.onrender.com/orders/vnpay_return${location.search}`,
         );
 
         console.log("Response from backend:", response.data);

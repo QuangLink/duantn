@@ -16,7 +16,7 @@ import MyProfile from "../Pages/Profile/MyProfile";
 import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
 import Cart from "../Pages/cartPage/Cart";
-
+import Success from "../Pages/checkout/success";
 const productTypes = [
   "laptop",
   "phone",
@@ -77,6 +77,14 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
+        <Route
+        path="/success"
+        element={
+          <PrivateRoute>
+            <Success />
+          </PrivateRoute>
+        }
+      ></Route>
         <Route path="/login" element={<Login />}></Route>
 
         <Route
