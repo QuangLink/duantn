@@ -91,7 +91,9 @@ function Navbar() {
       setIsSearchVisible(false);
     }
   };
-
+  function handleClick() {
+    window.location.reload();
+  }
   useEffect(() => {
     if (scroll.y > 100 && scroll.y - scroll.lastY > 0) {
       setDirection("down");
@@ -525,6 +527,7 @@ function Navbar() {
                 _hover={{
                   bg: "#0077ff",
                 }}
+               
               >
                 {" "}
                 <Icon
