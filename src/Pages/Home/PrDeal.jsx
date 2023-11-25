@@ -31,7 +31,7 @@ const PrDeal = ({ type }) => {
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/products`,
       );
-      console.log("in the logi func try", responce.data);
+     
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -41,7 +41,7 @@ const PrDeal = ({ type }) => {
     (product) => product.prodType === "Laptop" && product.prodSale > 0,
   );
 
-  console.log(listDataSaleLaptop, "listDataSaleLaptop");
+
 
   return (
     <Box

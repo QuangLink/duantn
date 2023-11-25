@@ -130,7 +130,7 @@ function Navbar() {
     fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
-        // console.log('check data', json);
+      
         const filteredResults = json.filter((search) => {
           return (
             search &&
@@ -139,7 +139,7 @@ function Navbar() {
           );
         });
         setResults(filteredResults);
-        console.log(filteredResults);
+       
       })
       .catch((error) => {
         console.error(error);

@@ -76,7 +76,7 @@ const TimeDeal = ({ type, heading }) => {
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/products`,
       );
-      console.log("in the logi func try", responce.data);
+      
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }

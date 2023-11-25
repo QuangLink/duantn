@@ -20,7 +20,7 @@ import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
   try {
     const userID = Cookies.get("userID");
-    console.log(data);
+
 
     const postData = {
       userID,
@@ -37,10 +37,7 @@ const postSingleDataWish = async (data) => {
     );
     return response.data;
   } catch (error) {
-    console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data,
-    );
+    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
 

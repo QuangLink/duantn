@@ -24,11 +24,13 @@ import {
   ModalBody,
   ModalFooter,
   Select,
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import "react-slideshow-image/dist/styles.css";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@chakra-ui/react";
-
+import { SearchIcon } from "@chakra-ui/icons";
 import "react-slideshow-image/dist/styles.css";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
@@ -59,7 +61,7 @@ const MyOrder = () => {
       const response = await axios.get(
         `https://duantn-backend.onrender.com/orders/user/${userID}`,
       );
-      console.log(response.data);
+   
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -109,12 +111,7 @@ const MyOrder = () => {
         <React.Fragment>
           {Object.entries(productsByOrderCode).map(
             ([orderCode, productList]) => (
-              <Box
-                borderWidth="1px"
-                borderRadius="md"
-                margin="10px"
-                padding="10px"
-              >
+              <Box borderWidth="1px" margin="10px" padding="10px">
                 <React.Fragment key={orderCode}>
                   <tr>
                     <td
@@ -122,7 +119,7 @@ const MyOrder = () => {
                       style={{ fontWeight: "bold", cursor: "pointer" }}
                       onClick={() => handleOrderCodeClick(orderCode)}
                     >
-                      Order Code: {orderCode}{" "}
+                      Mã giao dịch: {orderCode}{" "}
                       {selectedOrderCode === orderCode ? (
                         <Icon as={FaChevronUp} />
                       ) : (
@@ -140,43 +137,42 @@ const MyOrder = () => {
                           justifyContent="space-evenly"
                         >
                           <Box key={product.id} p={4} borderRadius="md" mb={4}>
-                            <img src={product.prodImg} width="200px" />
+                            <Image src={product.prodImg} w={100} />
                           </Box>
                           <Box width="60%" padding="10px">
                             <Text
                               height="60px"
-                              fontFamily="serif"
                               color="#424245"
                               noOfLines={2}
                               fontSize="20px"
-                              fontWeight="700"
+                              fontWeight="500"
                             >
-                              Name: {product.prodName} {product.color}{" "}
+                              Tên sản phẩm: {product.prodName} {product.color}{" "}
                               {product.storage_value}
+                            </Text>
+                            <Text
+                              fontWeight="500"
+                              fontSize="15px"
+                              ml="1"
+                              color="#cccc"
+                            >
+                              Số lượng: x{product.quantity}
                             </Text>
 
                             <Text
-                              fontWeight="600"
-                              fontSize="18px"
+                              fontWeight="500"
+                              fontSize="15px"
                               ml="1"
                               color="red"
                             >
                               Giá: {product.prodPrice}VNĐ
                             </Text>
-                            <Text
-                              fontWeight="600"
-                              fontSize="18px"
-                              ml="1"
-                              color="red"
-                            >
-                              Số lượng: {product.quantity}
-                            </Text>
 
                             <Text
-                              fontWeight="600"
-                              fontSize="18px"
+                              fontWeight="500"
+                              fontSize="15px"
                               ml="1"
-                              color="black"
+                              color="#000c"
                             >
                               Ngày đặt hàng:{" "}
                               {new Date(product.orderDate).toLocaleString()}
@@ -190,7 +186,6 @@ const MyOrder = () => {
                                   fontWeight="600"
                                   fontSize="18px"
                                   ml="1"
-                                  color="black"
                                 >
                                   Phương thức: {product.payment}
                                 </Text>
@@ -200,7 +195,6 @@ const MyOrder = () => {
                                   fontWeight="600"
                                   fontSize="18px"
                                   ml="1"
-                                  color="black"
                                 >
                                   Phương thức: {product.payment}
                                 </Text>
@@ -229,7 +223,7 @@ const MyOrder = () => {
                                 </Text>
                               )}
                             </Box>
-                            <Box display="flex" mt="60px">
+                            <Box display="flex" mt="30px">
                               <Link to={`/${product.prodID}`}>
                                 <Button
                                   type="submit"
@@ -246,22 +240,23 @@ const MyOrder = () => {
                       </Box>
                     ))}
                 </React.Fragment>
-                <Box>
+                <Box display="flex">
                   <Text
+                 
                     fontWeight="600"
                     fontSize="18px"
                     ml="1"
                     color="red"
                     _hover={{ color: "red" }}
                   >
-                    Thanh toán: {formatCurrency(productList[0].totalPay)}
+                    Thành Tiền: {formatCurrency(productList[0].totalPay)}
                   </Text>
                 </Box>
               </Box>
             ),
           )}
-          <Box mt="4">
-            <Text fontWeight="600" fontSize="18px" ml="1" color="green">
+          <Box m="4">
+            <Text fontWeight="700" fontSize="20px" ml="1" color="green">
               Tổng chi tiêu: {formatCurrency(totalExpenditure)}
             </Text>
           </Box>
@@ -275,7 +270,6 @@ const MyOrder = () => {
     axios
       .delete(apiUrl)
       .then((response) => {
-        console.log("Server response:", response.data);
         toast({
           title: "Địa chỉ được xóa thành công.",
           description: "Hãy thêm địa chỉ giao hàng mới.",
@@ -313,7 +307,7 @@ const MyOrder = () => {
       axios
         .post(apiUrl, newAddress)
         .then((response) => {
-          console.log("Server response:", response.data);
+      
 
           toast({
             title: "Địa chỉ được thêm thành công.",
@@ -332,7 +326,7 @@ const MyOrder = () => {
       axios
         .put(apiUrl, newAddress)
         .then((response) => {
-          console.log("Server response:", response.data);
+     
 
           toast({
             title: "Địa chỉ được cập nhật thành công.",
@@ -355,7 +349,7 @@ const MyOrder = () => {
     axios
       .get(`https://duantn-backend.onrender.com/users/address/${username}`)
       .then((response) => {
-        console.log("Server response:", response.data);
+      
         setAddressData(response.data);
       })
       .catch((error) => {
@@ -401,7 +395,7 @@ const MyOrder = () => {
       return (
         <Box
           textAlign="center"
-          p="50px"
+          p="20px"
           borderWidth="1px"
           width="100%"
           borderRadius="md"
@@ -437,21 +431,20 @@ const MyOrder = () => {
         borderWidth="1px"
         width="100%"
         borderRadius="md"
-        w="300px"
       >
         <Center>
           <Image
             src="https://icon-library.com/images/free-avatar-icon/free-avatar-icon-10.jpg"
             alt=""
             borderRadius="full"
-            boxSize="150px"
+            boxSize="200px"
           />
         </Center>
+        <Text fontSize="25px" fontWeight="bold" w="100%">
+          {address.username}
+        </Text>
         <Divider my="20px" />
-        <VStack spacing="10px">
-          <Text fontSize="2xl" fontWeight="bold">
-            {address.firstname} {address.lastname}
-          </Text>
+        <VStack spacing="10px " alignItems="flex-start">
           <Text fontSize="md">Username: {address.username}</Text>
           <Text fontSize="md">Đường: {address.street}</Text>
 
@@ -491,7 +484,7 @@ const MyOrder = () => {
       display="flex"
       maxW="30̀%"
       mt="20px"
-      p="20px"
+      p="10px"
       borderWidth="1px"
       borderRadius="md"
       className="profile-container"
@@ -586,12 +579,19 @@ const MyOrder = () => {
             </AccordionItem>
           </Accordion>
         </div>
-        <Box p="20px">{renderAddressData()}</Box>
       </Center>
-      <Box w={"80%"}>
-        <Heading as="h2" size="lg" mb={4}>
-          My Order
+      <Box w="30%">{renderAddressData()}</Box>
+      <Box w={"80%"} padding={"5px"}>
+        <Heading as="h2" size="lg" m={"0 7px 12px 12px"}>
+          Đơn mua
         </Heading>
+        <InputGroup margin={"10px"} w={"98%"} bg="#eaeaea">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input type="text" placeholder="Tìm kiếm đơn hàng ..." />
+        </InputGroup>
         {renderProducts()}
         <br />
       </Box>

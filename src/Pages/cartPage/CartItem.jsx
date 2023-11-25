@@ -51,7 +51,7 @@ const CartItem = ({
     if (!isNaN(newCount) && newCount >= 1) {
       setCount(newCount);
       let number = parseInt(price);
-      console.log(newCount);
+   
       dispatch({ type: "priceChange", payload: number * newCount });
 
       if (newCount > QTY) {
@@ -69,7 +69,7 @@ const CartItem = ({
             quantity: newCount,
           })
           .then((res) => {
-            console.log(res.data);
+    
           })
           .catch((err) => {
             console.log(err);

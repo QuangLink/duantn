@@ -28,7 +28,6 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
   useEffect(() => {
     setType(typeOfProduct);
   }, [typeOfProduct]);
-  console.log(type);
 
   const CategoryProduct = () => {
     if (

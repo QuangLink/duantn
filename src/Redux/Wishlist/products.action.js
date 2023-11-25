@@ -14,7 +14,7 @@ export const getProducts =
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/wishlist/26`,
       );
-      console.log("in the logi func try", responce.data);
+
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });
     } catch (error) {
       // console.log("in the logi func catch");

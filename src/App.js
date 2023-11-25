@@ -1,29 +1,41 @@
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar";
 import AllRoutes from "./Components/AllRoutes";
 import Footer from "./Components/Footer.jsx/Footer";
-import React from "react";
 import { AuthContextProvider } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
+const App = () => {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-  render() {
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
 
-    
-    return (
-      <div className="App">
-        <AuthContextProvider>
-          <Navbar />
-          <AllRoutes />
-          <Footer />
-        </AuthContextProvider>
-      </div>
-    );
-  }
-}
+    // Add event listener for location change
+    window.addEventListener("popstate", handleLocationChange);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []); // Run effect only once on component mount
+
+  const isAdminRoute = currentPath.includes("/admin");
+  console.log("isAdminRoute:", isAdminRoute);
+  console.log("Current path:", currentPath);
+
+  return (
+    <div className="App">
+      <AuthContextProvider>
+        {!isAdminRoute && <Navbar />}
+      <AllRoutes />
+        {!isAdminRoute && <Footer />}
+      </AuthContextProvider>
+      <ToastContainer />
+    </div>
+  );
+};
 
 export default App;

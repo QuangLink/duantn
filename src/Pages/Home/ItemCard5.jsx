@@ -60,7 +60,7 @@ const ItemCard5 = ({ type, heading }) => {
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/products`,
       );
-      console.log("in the logi func try", responce.data);
+      
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -70,7 +70,7 @@ const ItemCard5 = ({ type, heading }) => {
     (product) => product.prodType === "Laptop",
   );
 
-  console.log(listDataLaptop, "sa");
+
 
   var navigate = useNavigate();
   const handlePost = (prodID) => {
