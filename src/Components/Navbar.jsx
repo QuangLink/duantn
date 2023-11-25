@@ -26,6 +26,7 @@ import {
 import React, { useEffect, useState, useRef } from "react";
 import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
+import { BsPersonCircle } from "react-icons/bs";
 import {
   BsCart2,
   BsFillPersonFill,
@@ -50,6 +51,7 @@ function Navbar() {
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
   const { username } = useSelector((store) => store.AuthManager);
+  const { admin } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -130,7 +132,6 @@ function Navbar() {
     fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
-      
         const filteredResults = json.filter((search) => {
           return (
             search &&
@@ -139,7 +140,6 @@ function Navbar() {
           );
         });
         setResults(filteredResults);
-       
       })
       .catch((error) => {
         console.error(error);
@@ -483,11 +483,8 @@ function Navbar() {
                 <Link to="/myprofile">
                   <MenuItem>My Profile</MenuItem>
                 </Link>
-                <Link to="/myorder">
-                  <MenuItem>My Order</MenuItem>
-                </Link>
-                <MenuItem>My Address</MenuItem>
-                <Link to="whishlist">
+
+                <Link to="/wishlist">
                   {" "}
                   <MenuItem>My Wishlist</MenuItem>
                 </Link>
@@ -519,6 +516,38 @@ function Navbar() {
               </Heading>
             </Flex>
           </Link>
+          {admin === 1 && (
+            <Link to="/admin/dashboard">
+              <Flex
+                cursor={"pointer"}
+                textAlign={"center"}
+                borderRadius={5}
+                _hover={{
+                  bg: "#0077ff",
+                }}
+              >
+                {" "}
+                <Icon
+                  as={BsPersonCircle}
+                  w={5}
+                  h={5}
+                  color={"#fff"}
+                  margin={2}
+                />
+                <Heading
+                  fontWeight={400}
+                  m="2"
+                  cursor={"pointer"}
+                  fontSize={"18px"}
+                  color="#fff"
+                  flexDirection={"row"}
+                  className={`header-bar ${isFocused ? "focused" : ""}`}
+                >
+                  Admin
+                </Heading>
+              </Flex>
+            </Link>
+          )}
           <Link to="/">
             <Flex
               cursor={"pointer"}
@@ -871,11 +900,8 @@ function Navbar() {
               <Link to="/myprofile">
                 <MenuItem>My Profile</MenuItem>
               </Link>
-              <Link to="/myorder">
-                <MenuItem>My Order</MenuItem>
-              </Link>
-              <MenuItem>My Address</MenuItem>
-              <Link to="whishlist">
+
+              <Link to="/wishlist">
                 {" "}
                 <MenuItem>My Wishlist</MenuItem>
               </Link>
