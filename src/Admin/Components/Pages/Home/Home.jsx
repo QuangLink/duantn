@@ -38,10 +38,14 @@ const Dashboard = () => {
   for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  //render ra bảng tổng kết doanh thu dựa theo ngày map từ orders, các doanh thu trong orders là totalPay và ngày là orderDate
+
   // Đếm số phần tử trong mảng products
   const productCount = totalproducts.length;
   const userCount = users.length;
   const orderCount = orders.length;
+
   // Đếm số lượng sản phẩm còn lại trong kho
   const lowStock = products.filter((product) => product.QTY < 10).length;
 
@@ -59,13 +63,42 @@ const Dashboard = () => {
         const response = await fetchUsers();
         setUsers(response);
         setLoading(false);
-        
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     fetchApiUsers();
   }, []);
+  const renderTotalPay = () => {
+    // Create a Map to store totalPay for each unique date
+    const totalPayMap = new Map();
+
+    // Populate the Map with data
+    orders.forEach((order) => {
+      const orderDate = new Date(order.orderDate).toISOString().split("T")[0];
+      if (totalPayMap.has(orderDate)) {
+        totalPayMap.set(orderDate, totalPayMap.get(orderDate) + order.totalPay);
+      } else {
+        totalPayMap.set(orderDate, order.totalPay);
+      }
+    });
+
+    // Cộng tất cả totalPay lại để ra tổng doanh thu lưu vào totalPayAll
+
+    // Render the table
+    return (
+      <tbody>
+        {Array.from(totalPayMap.entries()).map(([date, totalPay]) => (
+          <tr key={date}>
+            <th scope="row">{date}</th>
+            <td>{convertToVND(totalPay)}</td>
+          </tr>
+        ))}
+      </tbody>
+    );
+  };
+  let totalPayAll = 0;
+  orders.forEach((order) => {
+    totalPayAll += order.totalPay;
+  });
 
   //render danh sách user từ api
   const renderUsers = () => {
@@ -269,27 +302,40 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col-md-12 col-lg-6">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="tile">
-                  <h3 className="tile-title">Dữ liệu 6 tháng đầu vào</h3>
-                  <div className="embed-responsive embed-responsive-16by9">
-                    <canvas
-                      className="embed-responsive-item"
-                      id="lineChartDemo"
-                    ></canvas>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="tile">
-                  <h3 className="tile-title">Thống kê 6 tháng doanh thu</h3>
-                  <div className="embed-responsive embed-responsive-16by9">
-                    <canvas
-                      className="embed-responsive-item"
-                      id="barChartDemo"
-                    ></canvas>
-                  </div>
+            <div className="col-md-12">
+              <div className="tile">
+                <h3 className="tile-title">Thống kê doanh thu</h3>
+                <div>
+                  <table className="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Ngày</th>
+                        <th>Doanh thu</th>
+                      </tr>
+                    </thead>
+                    {renderTotalPay()}
+
+                    <tr>
+                      <td class="fw-bolder">Tổng doanh thu</td>
+                      <td class="fw-bolder" style={{ color: "red" }}>
+                        {convertToVND(totalPayAll)}
+                      </td>
+                    </tr>
+                  </table>
+
+                  <ul className="pagination text-center">
+                    {pageNumbers.map((number) => (
+                      <li key={number} className="page-item">
+                        <a
+                          onClick={() => handlePageChange(number)}
+                          href="#"
+                          className="page-link"
+                        >
+                          {number}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
