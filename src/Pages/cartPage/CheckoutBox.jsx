@@ -60,7 +60,7 @@ const CheckoutBox = ({
     } else if (selectedOption === "cash") {
       toast({
         title: "Thanh toán khi nhận hàng",
-        description: "",
+        description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -91,6 +91,7 @@ const CheckoutBox = ({
         } catch (error) {
           console.error(error);
         }
+        navigate("/");
       });
     } else {
       toast({
