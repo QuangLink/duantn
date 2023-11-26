@@ -1,6 +1,11 @@
 import React from "react";
 import { Grid, Box } from "@chakra-ui/react";
-import { FooterCard1, FooterCard2, FooterCard4, FooterCard3 } from "./FooterCard";
+import {
+  FooterCard1,
+  FooterCard2,
+  FooterCard4,
+  FooterCard3,
+} from "./FooterCard";
 import {
   ProductCategories,
   SiteInfo,
@@ -9,7 +14,14 @@ import {
 } from "./FooterDetail";
 const Footer = () => {
   return (
-    <Box bg="#FFFFFF" color="#55555" justifyContent="space-between" mt={20} w={'100%'} alignItems={'center'}>
+    <Box
+      bg="#FFFFFF"
+      color="#55555"
+      justifyContent="space-between"
+      mt={20}
+      w={"100%"}
+      alignItems={"center"}
+    >
       <Grid
         templateColumns={{
           base: "repeat(1,1fr)",
@@ -21,7 +33,7 @@ const Footer = () => {
         gap={6}
         justifyContent="space-evenly"
         m="auto"
-        w="73%"
+        w="80%"
         p="2"
         lineHeight="32px"
       >

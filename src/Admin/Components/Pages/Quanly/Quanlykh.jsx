@@ -60,7 +60,7 @@ const Quanlynv = () => {
 
         <td>{user.mobile}</td>
 
-        <td class="table-td-center">
+        <td class="table-td-center" style={{display:"flex",justifyContent:"space-around"}}>
           <button
             class="btn btn-primary btn-sm trash"
             type="button"
@@ -93,7 +93,7 @@ const Quanlynv = () => {
           <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item active">
               <a href="#">
-                <b>Danh sách nhân viên</b>
+                <b>Danh sách khách hàng</b>
               </a>
             </li>
           </ul>
@@ -133,17 +133,17 @@ const Quanlynv = () => {
                   id="sampleTable"
                 >
                   <thead>
-                    <tr>
-                      <th width="10">
+                    <tr >
+                      <th width="10" >
                         <input type="checkbox" id="all" />
                       </th>
-                      <th>ID</th>
-                      <th width="150">User</th>
-                      <th>Địa chỉ</th>
+                      <th style={{fontSize:"20px",fontWeight:"600"}}>ID</th>
+                      <th width="20%" style={{fontSize:"20px",fontWeight:"600"}}>User</th>
+                      <th style={{fontSize:"20px",fontWeight:"600"}}>Địa chỉ</th>
 
-                      <th>SDT</th>
+                      <th width="15%" style={{fontSize:"20px",fontWeight:"600"}}>SDT</th>
 
-                      <th width="100">Tính năng</th>
+                      <th width="10%" style={{fontSize:"20px",fontWeight:"600"}}>Tính năng</th>
                     </tr>
                   </thead>
                   <tbody>{renderUsers()}</tbody>

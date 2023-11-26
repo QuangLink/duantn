@@ -28,8 +28,8 @@ const Menu = () => {
       <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
       <aside className="app-sidebar">
         <div className="app-sidebar__user">
-          <div className="app-sidebar__user-avatar-container">
-            <img
+          <div className="app-sidebar__user-avatar-container" style={{justifyContent:"center", display:"flex"}}>
+            <img 
               className="app-sidebar__user-avatar"
               src="https://decg5lu73tfmh.cloudfront.net/static/images/comprofiler/gallery/operator/operator_m.png"
               width="50px"

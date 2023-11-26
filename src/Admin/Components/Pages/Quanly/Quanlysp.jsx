@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+
 const Quanlysanpham = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -18,9 +21,7 @@ const Quanlysanpham = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        "https://duantn-backend.onrender.com/products",
-      );
+      const response = await axios.get("http://localhost:9000/products");
       setProducts(response.data);
 
       const uniqueCategories = Array.from(
@@ -42,9 +43,7 @@ const Quanlysanpham = () => {
   };
   const deleteProduct = async (prodID) => {
     try {
-      await axios.delete(
-        `https://duantn-backend.onrender.com/products/${prodID}`,
-      );
+      await axios.delete(`http://localhost:9000/products/${prodID}`);
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion
     } catch (error) {
@@ -185,19 +184,17 @@ const Quanlysanpham = () => {
           <div class="col-md-12">
             <div class="tile">
               <div class="tile-body">
-                <div class="row element-button">
+                <div
+                  class="row element-button"
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <div class="col-sm-2">
                     <a class="btn btn-add btn-sm" href="/themsp" title="Thêm">
                       <i class="fas fa-plus"></i>
                       Tạo mới sản phẩm
                     </a>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Tìm kiếm sản phẩm"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                  />
+
                   <div class="col-sm-2">
                     <a
                       class="btn btn-delete btn-sm"
@@ -209,6 +206,20 @@ const Quanlysanpham = () => {
                     </a>
                   </div>
                 </div>
+                <InputGroup margin={"10px"} w={"98%"} bg="#eaeaea">
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<SearchIcon color="blue.300" marginLeft="20px" />}
+                  />
+                  <Input
+                    type="text"
+                    value={searchTerm}
+                    border="none"
+                    onChange={handleSearchChange}
+                    placeholder="Tìm kiếm sản phẩm ..."
+                  />
+                </InputGroup>
+
                 <table
                   class="table table-hover table-bordered"
                   id="sampleTable"

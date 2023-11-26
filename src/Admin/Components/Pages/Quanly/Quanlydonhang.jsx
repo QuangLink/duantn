@@ -30,7 +30,7 @@ const Quanlydonhang = () => {
           : true) &&
         (searchOrderID
           ? product.infoID.toString().includes(searchOrderID)
-          : true)
+          : true),
     );
     setFilteredProducts(filtered);
   }, [selectedOrderStatus, searchTerm, searchDate, searchOrderID, products]);
@@ -42,11 +42,8 @@ const Quanlydonhang = () => {
   };
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        "https://duantn-backend.onrender.com/orders/"
-      );
+      const response = await axios.get("http://localhost:9000/orders/");
       setProducts(response.data);
-     
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -55,12 +52,9 @@ const Quanlydonhang = () => {
   const updateOrderStatus = async (infoID, status) => {
     try {
       // Send a PUT request to update the order status
-      await axios.put(
-        `https://duantn-backend.onrender.com/orders/update-order/${infoID}`,
-        {
-          status: status,
-        }
-      );
+      await axios.put(`http://localhost:9000/orders/update-order/${infoID}`, {
+        status: status,
+      });
 
       // Refresh the products list after updating
       fetchProducts();
@@ -82,7 +76,7 @@ const Quanlydonhang = () => {
           : true) &&
         (searchTerm
           ? product.orderCode.toLowerCase().includes(searchTerm.toLowerCase())
-          : true)
+          : true),
     );
     setFilteredProducts(filtered);
   }, [selectedOrderStatus, searchTerm, products]);
@@ -99,7 +93,7 @@ const Quanlydonhang = () => {
 
     const handleOrderCodeClick = (orderCode) => {
       setSelectedOrderCode((prevOrderCode) =>
-        prevOrderCode === orderCode ? null : orderCode
+        prevOrderCode === orderCode ? null : orderCode,
       );
     };
 
@@ -156,15 +150,55 @@ const Quanlydonhang = () => {
 
                 <th>
                   {productList[0].orderStatus === "Đã xác nhận" ? (
-                    <p style={{ color: "green" }}>
+                    <p
+                      style={{
+                        color: "green",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
+                    >
                       {productList[0].orderStatus}
                     </p>
                   ) : productList[0].orderStatus === "Đang giao hàng" ? (
-                    <p style={{ color: "green" }}>
+                    <p
+                      style={{
+                        color: "#3268e3",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {productList[0].orderStatus}
+                    </p>
+                  ) : productList[0].orderStatus === "Đợi xác nhận" ? (
+                    <p
+                      style={{
+                        color: "orange",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {productList[0].orderStatus}
+                    </p>
+                  ) : productList[0].orderStatus === "Đã hủy" ? (
+                    <p
+                      style={{
+                        color: "red",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
+                    >
                       {productList[0].orderStatus}
                     </p>
                   ) : (
-                    <p style={{ color: "red" }}>{productList[0].orderStatus}</p>
+                    <p
+                      style={{
+                        color: "green",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {productList[0].orderStatus}
+                    </p>
                   )}
                 </th>
                 <th>
@@ -177,19 +211,21 @@ const Quanlydonhang = () => {
                       _hover={{ color: "red" }}
                     >
                       <button
+                        style={{ width: "47%", marginRight: "5px" }}
                         type="button"
-                        className="btn btn-warning confirm-button"
+                        className="btn btn-primary confirm-button"
                         onClick={(e) => {
                           e.stopPropagation();
                           updateOrderStatus(
                             productList[0].infoID,
-                            "Đã xác nhận"
+                            "Đã xác nhận",
                           );
                         }}
                       >
                         Xác nhận
                       </button>
                       <button
+                        style={{ width: "47%", marginRight: "5px" }}
                         type="button"
                         className="btn btn-danger confirm-button"
                         onClick={(e) => {
@@ -208,28 +244,30 @@ const Quanlydonhang = () => {
                       color="#e64510"
                     >
                       <button
+                        style={{ width: "47%", marginRight: "5px" }}
                         type="button"
-                        className="btn btn-secondary confirm-button"
+                        className="btn btn-success confirm-button"
                         onClick={(e) => {
                           e.stopPropagation();
                           updateOrderStatus(
                             productList[0].infoID,
-                            "Đang giao hàng"
+                            "Đang giao hàng",
                           );
                         }}
                       >
                         Giao hàng
                       </button>
                       <button
-                      type="button"
-                      className="btn btn-danger confirm-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        updateOrderStatus(productList[0].infoID, "Đã hủy");
-                      }}
-                    >
-                      Hủy
-                    </button>
+                        style={{ width: "47%", marginRight: "5px" }}
+                        type="button"
+                        className="btn btn-danger confirm-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateOrderStatus(productList[0].infoID, "Đã hủy");
+                        }}
+                      >
+                        Hủy
+                      </button>
                     </Box>
                   ) : productList[0].orderStatus === "Đang giao hàng" ? (
                     <Box
@@ -239,28 +277,30 @@ const Quanlydonhang = () => {
                       color="#247bc6"
                     >
                       <button
+                        style={{ width: "47%", marginRight: "5px" }}
                         type="button"
                         className="btn btn-success confirm-button"
                         onClick={(e) => {
                           e.stopPropagation();
                           updateOrderStatus(
                             productList[0].infoID,
-                            "Đã giao hàng"
+                            "Đã giao hàng",
                           );
                         }}
                       >
                         Đã giao
                       </button>
                       <button
-                      type="button"
-                      className="btn btn-danger confirm-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        updateOrderStatus(productList[0].infoID, "Đã hủy");
-                      }}
-                    >
-                      Hủy
-                    </button>
+                        style={{ width: "47%", marginRight: "5px" }}
+                        type="button"
+                        className="btn btn-danger confirm-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateOrderStatus(productList[0].infoID, "Đã hủy");
+                        }}
+                      >
+                        Hủy
+                      </button>
                     </Box>
                   ) : null}
                 </th>
@@ -268,40 +308,48 @@ const Quanlydonhang = () => {
             </tbody>
             {selectedOrderCode === orderCode && (
               <thead>
-                <tr>
+                <tr style={{ backgroundColor: "#43e5a0", color: "black" }}>
                   <th>ID SP</th>
-                  <th>Tên SP</th>
-                  <th></th>
-                  <th>Số lượng</th>
-                  <th>Đơn giá</th>
-                  <th>Trong kho</th>
+                  <th colSpan={2} style={{ textAlign: "center" }}>
+                    Tên sản phẩm
+                  </th>
+                  <th style={{ textAlign: "center", width: "150px" }}>
+                    {" "}
+                    Ảnh SP
+                  </th>
+                  <th style={{ textAlign: "center" }}>Số lượng</th>
+                  <th style={{ textAlign: "center" }}>Đơn giá</th>
                 </tr>
               </thead>
             )}
             {selectedOrderCode === orderCode &&
               productList.map((product) => (
                 <tbody>
-                  <tr key={product.prodID}>
-                    <td style={{ padding: "5px" }}>{product.prodID}</td>
-                    <td style={{ padding: "5px" }}>{product.prodName}</td>
+                  <tr
+                    key={product.prodID}
+                    style={{ backgroundColor: "#dfedfa" }}
+                  >
+                    <td style={{ textAlign: "center" }}>{product.prodID}</td>
+                    <td colSpan={2} style={{ textAlign: "center" }}>
+                      {product.prodName}
+                    </td>
                     <td width="100px">
                       {product.prodImg && (
                         <img
                           src={product.prodImg}
                           alt="Product"
                           style={{
-                            width: "100px",
-                            height: "auto",
-                            marginLeft: "10px",
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
                           }}
                         />
                       )}
                     </td>
-                    <td style={{ padding: "5px" }}>{product.quantity}</td>
-                    <td style={{ padding: "5px" }}>
+                    <td style={{ textAlign: "center" }}>{product.quantity}</td>
+                    <td style={{ textAlign: "center" }}>
                       {formatCurrency(product.prodPrice)}
                     </td>
-                    <td style={{ padding: "5px" }}>{product.QTY}</td>
                   </tr>
                 </tbody>
               ))}
@@ -337,25 +385,28 @@ const Quanlydonhang = () => {
           <div class="col-md-12">
             <div class="tile">
               <div class="tile-body">
-                Các chức năng tìm kiếm
+                <Text fontSize="25px" fontWeight="500">
+                  {" "}
+                  Các chức năng tìm kiếm
+                </Text>
                 <div class="row element-button">
                   <div class="input-group mb-3">
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Search theo OrderCode"
+                      placeholder="Tìm kiếm theo OrderCode"
                       onChange={(e) => handleSearch(e.target.value)}
                     />
                     <input
                       type="date"
                       class="form-control"
-                      placeholder="Search by Order Date"
+                      placeholder="Tìm kiếm theo  Order Date"
                       onChange={(e) => setSearchDate(e.target.value)}
                     />
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Search theo Order ID"
+                      placeholder="Tìm kiếm theo Order ID"
                       onChange={(e) => setSearchOrderID(e.target.value)}
                     />
                   </div>
@@ -367,30 +418,75 @@ const Quanlydonhang = () => {
                   {" "}
                   <thead>
                     <tr>
-                      <th width="5%">
-                        <Text>ID Đơn</Text>
+                      <th width="6%">
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          ID Đơn
+                        </Text>
                       </th>
                       <th>
-                        <Text>OrderCode</Text>
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          OrderCode
+                        </Text>
                       </th>
                       <th>
-                        <Text>User</Text>
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          User
+                        </Text>
                       </th>
                       <th>
-                        <Text>Phương thức</Text>
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          Phương thức
+                        </Text>
                       </th>
                       <th>
-                        <Text>Ngày đặt hàng</Text>
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          Ngày đặt hàng
+                        </Text>
                       </th>
                       <th>
-                        <Text>Số tiền</Text>
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          Số tiền
+                        </Text>
                       </th>
-                      <th>
+                      <th width="10%">
                         <select
+                          style={{ border: "1px solid black" }}
                           onChange={(e) => handleFilterChange(e.target.value)}
                         >
                           <option value="">Lọc theo trạng thái</option>
-                          <option value="Đợi xác nhận">Đợi xác nhận</option>
+                          <option value="Đợi xác nhận" color="orange">
+                            Đợi xác nhận
+                          </option>
                           <option value="Đã xác nhận">Đã xác nhận</option>
                           <option value="Đang giao hàng">Đang giao hàng</option>
                           <option value="Đã giao hàng">Đã giao hàng</option>
@@ -398,8 +494,15 @@ const Quanlydonhang = () => {
                           <option value="Đã hủy">Đã hủy</option>
                         </select>
                       </th>
-                      <th>
-                        <Text>Thao tác</Text>
+                      <th width="18%">
+                        <Text
+                          fontSize="16px"
+                          fontWeight="700"
+                          textAlign="center"
+                          color="black"
+                        >
+                          Thao tác
+                        </Text>
                       </th>
                     </tr>
                   </thead>

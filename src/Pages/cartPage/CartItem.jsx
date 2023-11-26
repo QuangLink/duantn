@@ -51,7 +51,7 @@ const CartItem = ({
     if (!isNaN(newCount) && newCount >= 1) {
       setCount(newCount);
       let number = parseInt(price);
-   
+
       dispatch({ type: "priceChange", payload: number * newCount });
 
       if (newCount > QTY) {
@@ -65,18 +65,16 @@ const CartItem = ({
         newCount = QTY;
         setCount(QTY);
         axios
-          .put(`https://duantn-backend.onrender.com/cart/set/${cartID}`, {
+          .put(`http://localhost:9000/cart/set/${cartID}`, {
             quantity: newCount,
           })
-          .then((res) => {
-    
-          })
+          .then((res) => {})
           .catch((err) => {
             console.log(err);
           });
       } else {
         axios
-          .put(`https://duantn-backend.onrender.com/cart/set/${cartID}`, {
+          .put(`http://localhost:9000/cart/set/${cartID}`, {
             quantity: newCount,
           })
           .then((res) => {
@@ -97,7 +95,7 @@ const CartItem = ({
     dispatch({ type: "priceIncrease", payload: number });
 
     axios
-      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
+      .put(`http://localhost:9000/cart/plus/${cartID}`, {
         quantity: count + 1,
       })
       .then((res) => {
@@ -115,7 +113,7 @@ const CartItem = ({
       dispatch({ type: "priceDecrease", payload: number });
 
       axios
-        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
+        .put(`http://localhost:9000/cart/minus/${cartID}`, {
           quantity: count + 1,
         })
         .then((res) => {

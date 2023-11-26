@@ -59,9 +59,9 @@ const MyOrder = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `https://duantn-backend.onrender.com/orders/user/${userID}`,
+        `http://localhost:9000/orders/user/${userID}`,
       );
-   
+
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -242,7 +242,6 @@ const MyOrder = () => {
                 </React.Fragment>
                 <Box display="flex">
                   <Text
-                 
                     fontWeight="600"
                     fontSize="18px"
                     ml="1"
@@ -266,7 +265,7 @@ const MyOrder = () => {
   };
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `http://localhost:9000/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -296,7 +295,7 @@ const MyOrder = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = "http://localhost:9000/users/address";
 
     if (
       !addressData ||
@@ -307,8 +306,6 @@ const MyOrder = () => {
       axios
         .post(apiUrl, newAddress)
         .then((response) => {
-      
-
           toast({
             title: "Địa chỉ được thêm thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
@@ -326,8 +323,6 @@ const MyOrder = () => {
       axios
         .put(apiUrl, newAddress)
         .then((response) => {
-     
-
           toast({
             title: "Địa chỉ được cập nhật thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
@@ -347,9 +342,8 @@ const MyOrder = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(`http://localhost:9000/users/address/${username}`)
       .then((response) => {
-      
         setAddressData(response.data);
       })
       .catch((error) => {

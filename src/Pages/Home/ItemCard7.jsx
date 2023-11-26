@@ -5,7 +5,7 @@ import Heading from "./Heading";
 
 const ItemCard7 = ({ type, heading, src }) => {
   return (
-    <Box justifyContent="center" w="73%" m="auto" mt="6" cursor="pointer">
+    <Box justifyContent="center" w="80%" m="auto" mt="6" cursor="pointer">
       <Heading heading={heading} />
       <Flex mt="3" m="center">
         <Box
@@ -14,7 +14,6 @@ const ItemCard7 = ({ type, heading, src }) => {
         >
           <Slider1 type={type} />
         </Box>
-
       </Flex>
     </Box>
   );

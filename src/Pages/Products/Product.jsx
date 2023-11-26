@@ -21,7 +21,6 @@ const postSingleDataWish = async (data) => {
   try {
     const userID = Cookies.get("userID");
 
-
     const postData = {
       userID,
       prodID: data.prodID,
@@ -29,7 +28,7 @@ const postSingleDataWish = async (data) => {
       storageID: data.storageID,
     };
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist/`,
+      `http://localhost:9000/wishlist/`,
       postData,
       {
         headers: { "Content-Type": "application/json" },

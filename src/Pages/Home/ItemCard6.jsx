@@ -3,11 +3,9 @@ import { Box, Grid, Flex, Text, Image, Center } from "@chakra-ui/react";
 import uuid from "react-uuid";
 
 const ItemCard6 = ({ type, heading }) => {
-
-
   return (
     <Center>
-      <Center mb="2" w="73%" display="flex" flexWrap="wrap"  >
+      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
         <Center>
           <Text
             fontSize="2xl"
@@ -68,7 +66,6 @@ const ItemCard6 = ({ type, heading }) => {
         </Grid>
       </Center>
     </Center>
-
   );
 };
 

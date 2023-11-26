@@ -10,7 +10,7 @@ import {
   Heading,
   Center,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -28,10 +28,8 @@ const PrDeal = ({ type }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
-      );
-     
+      let responce = await axios.get(`http://localhost:9000/products`);
+
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -41,13 +39,11 @@ const PrDeal = ({ type }) => {
     (product) => product.prodType === "Laptop" && product.prodSale > 0,
   );
 
-
-
   return (
     <Box
       marginTop="2  "
       justifyContent="center"
-      w="73%"
+      w="80%"
       m="auto"
       mb="5"
       cursor="pointer"

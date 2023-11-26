@@ -11,7 +11,7 @@ import {
   Heading,
   useToast,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -28,9 +28,7 @@ const Slider = ({ type }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/apple`,
-      );
+      let responce = await axios.get(`http://localhost:9000/category/apple`);
 
       if (responce.data) {
         setFilteredProducts(responce.data || []);
@@ -40,8 +38,6 @@ const Slider = ({ type }) => {
   const listDataIphone = filteredProducts.filter(
     (product) => product.prodType === "Phone",
   );
-
-
 
   return (
     <Swiper

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
@@ -11,7 +11,7 @@ import axios from "axios";
 import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
-  const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+  const apiUrlBase = "http://localhost:9000/category/";
 
   const categoryUrl = {
     sale: apiUrlBase + type,
@@ -53,7 +53,7 @@ const RelateProduct = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w={["100%", "100%", "73%"]}
+      w={["100%", "100%", "80%"]}
       display={["none", "block", "block"]}
       m="auto"
       mt="5"

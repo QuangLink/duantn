@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+const apiUrlBase = "http://localhost:9000/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
@@ -12,6 +12,7 @@ const categoryUrls = {
   asus: apiUrlBase + "asus",
   lenovo: apiUrlBase + "lenovo",
   acer: apiUrlBase + "acer",
+  smartwatch: apiUrlBase + "smartwatch",
 };
 
 const fetchDataForCategory = async (category) => {
@@ -25,6 +26,7 @@ const fetchDataForCategory = async (category) => {
       QTY: product.QTY,
       sale: product.prodSale,
       original: product.prodPriceSale,
+      type: product.prodType,
     }));
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
@@ -41,9 +43,13 @@ export let PrHp = [];
 export let PrAsus = [];
 export let PrLenovo = [];
 export let PrAcer = [];
+export let PrSmartWatch = [];
 
 export async function loadPrSale() {
   PrSale = await fetchDataForCategory("sale");
+}
+export async function loadPrSmartWatch() {
+  PrSmartWatch = await fetchDataForCategory("smartwatch");
 }
 
 export async function loadPrApplePhone() {
@@ -71,7 +77,6 @@ export async function loadPrLenovo() {
 export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
 }
-
 
 export const BannersCenter = [
   {
@@ -148,7 +153,6 @@ export const CateFeatures = [
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
     prodType: "LoudSpeaker",
   },
-
 ];
 
 export const ItemDetails1 = [

@@ -1,11 +1,10 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import CateFeature from "./CateFeature";
 import BannerCenter from "./BannerCenter";
-import BackToTopButton from './BackToTopButton';
+import BackToTopButton from "./BackToTopButton";
 import { Box } from "@chakra-ui/react";
 import {
   BannersCenter,
-  
   PrSale,
   PrApplePhone,
   CateFeatures,
@@ -26,6 +25,8 @@ import {
   loadPrAsus,
   // loadPrLenovo,
   loadPrAcer,
+  loadPrSmartWatch,
+  PrSmartWatch,
 } from "./CardDetails";
 
 const ItemCard2 = lazy(() => import("./ItemCard2"));
@@ -34,9 +35,8 @@ const ItemCard6 = lazy(() => import("./ItemCard6"));
 const ItemCard7 = lazy(() => import("./ItemCard7"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
 const PrDeal = lazy(() => import("./PrDeal"));
-
+const ItemCardTest = lazy(() => import("./Test/ItemCardTest"));
 const Home = () => {
-
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
@@ -51,6 +51,7 @@ const Home = () => {
       loadPrAsus(),
       // loadPrLenovo(),
       loadPrAcer(),
+      loadPrSmartWatch(),
     ]).then(() => {
       // Set dataLoaded to true when all data is loaded.
       setDataLoaded(true);
@@ -59,19 +60,20 @@ const Home = () => {
 
   return (
     <Box>
-
       <Suspense fallback={<div>Loading...</div>}>
         <BannerCenter type={BannersCenter} />
       </Suspense>
-
-    
 
       <CateFeature type={CateFeatures} />
 
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <TimeDeal />}
       </Suspense>
-
+      <Suspense fallback={<div>Loading...</div>}>
+        {dataLoaded && (
+          <ItemCardTest type={PrSmartWatch} heading="MÁY TÍNH NỔI BẬT " />
+        )}
+      </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && (
           <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
@@ -100,10 +102,8 @@ const Home = () => {
         {dataLoaded && <ItemCard7 type={PrAcer} heading="SẢN PHẨM ASUS  " />}
       </Suspense>
 
-      
       <BackToTopButton />
     </Box>
-
   );
 };
 

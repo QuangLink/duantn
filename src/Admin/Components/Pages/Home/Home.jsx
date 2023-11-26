@@ -164,15 +164,27 @@ const Dashboard = () => {
                 <span className="badge badge-danger">
                   {product.orderStatus}
                 </span>
-              ) : product.orderStatus === "Đang giao hàng" ? (
+              )
+               : product.orderStatus === "Đang giao hàng" ? (
                 <span className="badge badge-warning text-dark">
                   {product.orderStatus}
                 </span>
-              ) : product.orderStatus === "Đã thanh toán" ? (
+              ) 
+              : product.orderStatus === "Đã hủy" ? (
+                <span className="badge badge-danger text-danger">
+                  {product.orderStatus}
+                </span>
+              ): product.orderStatus === "Đã thanh toán" ? (
                 <span className="badge badge-primary">
                   {product.orderStatus}
                 </span>
-              ) : (
+              )
+              : product.orderStatus === "Đã xác nhận" ? (
+                <span className="badge badge-primary">
+                  {product.orderStatus}
+                </span>
+              )
+               : (
                 <span className="badge badge-success">
                   {product.orderStatus}
                 </span>
@@ -306,7 +318,7 @@ const Dashboard = () => {
               <div className="col-md-12">
                 <div className="tile">
                   <h3 className="tile-title">
-                    <a href="/admin/quanlydonhang">Tình trạng đơn hàng</a>
+                    <a href="/admin/quanlydonhang" style={{fontSize:"25px", fontWeight:"700"}}>Tình trạng đơn hàng</a>
                   </h3>
                   <div>
                     <table className="table table-bordered">
@@ -339,7 +351,7 @@ const Dashboard = () => {
               <div className="col-md-12">
                 <div className="tile">
                   <h3 className="tile-title">
-                    <a href="/admin/quanlykh">Khách hàng mới</a>
+                    <a href="/admin/quanlykh" style={{fontSize:"25px", fontWeight:"700"}}>Khách hàng mới</a>
                   </h3>
                   <div>
                     <table className="table table-hover">

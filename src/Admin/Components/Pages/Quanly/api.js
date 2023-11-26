@@ -4,9 +4,7 @@ import axios from "axios";
 
 export const fetchTotalProducts = async () => {
   try {
-    const response = await axios.get(
-      "https://duantn-backend.onrender.com/products/total"
-    );
+    const response = await axios.get("http://localhost:9000/products/total");
     return response.data;
   } catch (error) {
     console.error("Error fetching total products:", error);
@@ -16,9 +14,7 @@ export const fetchTotalProducts = async () => {
 
 export const fetchProducts = async () => {
   try {
-    const response = await axios.get(
-      "https://duantn-backend.onrender.com/orders/"
-    );
+    const response = await axios.get("http://localhost:9000/orders/");
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -28,9 +24,7 @@ export const fetchProducts = async () => {
 
 export const fetchUsers = async () => {
   try {
-    const response = await axios.get(
-      "https://duantn-backend.onrender.com/users"
-    );
+    const response = await axios.get("http://localhost:9000/users");
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -40,9 +34,7 @@ export const fetchUsers = async () => {
 
 export const fetchOrders = async () => {
   try {
-    const response = await axios.get(
-      "https://duantn-backend.onrender.com/orders/"
-    );
+    const response = await axios.get("http://localhost:9000/orders/");
     return response.data;
   } catch (error) {
     console.error("Error fetching orders:", error);

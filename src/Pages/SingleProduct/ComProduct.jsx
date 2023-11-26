@@ -29,7 +29,7 @@ const ComProduct = ({ prodID }) => {
 
       try {
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/feedback",
+          "http://localhost:9000/feedback",
           feedbackData,
         );
 
@@ -50,7 +50,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+          `http://localhost:9000/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -75,7 +75,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+          `http://localhost:9000/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -93,7 +93,7 @@ const ComProduct = ({ prodID }) => {
   return (
     <Box
       justifyContent="center"
-      w="73%"
+      w="80%"
       m="auto"
       mt="6"
       cursor="pointer"

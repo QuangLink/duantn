@@ -9,7 +9,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CSSTransition } from "react-transition-group";
 import "swiper/css";
@@ -38,10 +38,7 @@ const postSingleData = async (data) => {
       userID,
     };
 
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
-      postData,
-    );
+    let response = await axios.post(`http://localhost:9000/cart/`, postData);
     return response.data;
   } catch (error) {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
@@ -57,10 +54,8 @@ const ItemCard5 = ({ type, heading }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
-      );
-      
+      let responce = await axios.get(`http://localhost:9000/products`);
+
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -70,8 +65,6 @@ const ItemCard5 = ({ type, heading }) => {
     (product) => product.prodType === "Laptop",
   );
 
-
-
   var navigate = useNavigate();
   const handlePost = (prodID) => {
     // postSingleData({ prodID }).then((res) => navigate("/cart"));
@@ -79,7 +72,7 @@ const ItemCard5 = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w="73%"
+      w="80%"
       m="auto"
       mt="6"
       mb="10"
