@@ -81,7 +81,6 @@ const Cart = () => {
       </style>
       <Flex
         border={"0px solid #4a90e2"}
-        margin="auto"
         width={"100%"}
         paddingX="20px"
         flexDirection={{
@@ -92,6 +91,13 @@ const Cart = () => {
           xl: "row",
           "2xl": "row",
         }}
+        style={{
+          margin: "auto",
+          width: "100%",
+          marginBottom: "100px",
+        }}
+        justifyContent="center"
+        alignItems="center"
       >
         {dataLength === 0 ? (
           <Box
