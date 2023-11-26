@@ -116,6 +116,13 @@ const MainCartPage = () => {
           xl: "row",
           "2xl": "row",
         }}
+        style={{
+          margin: "auto",
+          width: "100%",
+          marginBottom: "100px",
+        }}
+        justifyContent="center"
+        alignItems="center"
       >
         {dataLength === 0 ? (
           <Center>
