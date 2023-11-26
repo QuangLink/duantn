@@ -13,6 +13,8 @@ const Products = ({ typeOfProduct }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(false);
+  const [typeStorePhone, setTypeStorePhone] = useState('')
+
   const [visibleProducts, setVisibleProducts] = useState(12); // Initial number of products to display
   const error = useSelector((store) => store.product.error);
 
@@ -27,7 +29,7 @@ const Products = ({ typeOfProduct }) => {
       let response = await axios.get(
         `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
       );
-
+      console.log("in the logic func try", response.data);
       if (response.data) {
         setFilteredProducts(response.data || []);
         console.log(
@@ -46,9 +48,18 @@ const Products = ({ typeOfProduct }) => {
   const handleFilterChange = (event) => {
     const selectedFilter = event?.target?.value;
     setFilter(selectedFilter);
+    console.log(selectedFilter);
+  };
+
+  const onTypeChangeStore = (event) => {
+    const selectedFilter = event?.target?.value;
+    setTypeStorePhone(selectedFilter);
   };
 
   const listData = () => {
+    // type: ""/"256GB" /"128gb"
+
+
     switch (filter) {
       case "lowToHigh":
         return filteredProducts.sort((a, b) => a.prodPrice - b.prodPrice);
@@ -59,7 +70,33 @@ const Products = ({ typeOfProduct }) => {
       default:
         return filteredProducts;
     }
+
+
+
+
   };
+
+  const DataFilter = () => {
+    if (typeOfProduct === 'phone') {
+      switch (typeStorePhone) {
+        case "1tgb":
+          return listData().filter((el) => el?.storage_value === '1TGB');
+        case "512gb":
+          return listData().filter((el) => el?.storage_value === '512GB');
+        case "256gb":
+          return listData().filter((el) => el?.storage_value === '256GB');
+        case "128gb":
+          return listData().filter((el) => el?.storage_value === '128GB');
+
+        default:
+          return listData();
+      }
+    } else {
+
+      return listData();
+
+    }
+  }
 
   const loadMore = () => {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
@@ -88,6 +125,7 @@ const Products = ({ typeOfProduct }) => {
         <HotProduct type={PrSale} />
       </Box>
       <ProductFilter
+        onTypeChangeStore={onTypeChangeStore}
         typeOfProduct={typeOfProduct}
         filter={filter}
         handleFilterChange={handleFilterChange}
@@ -125,7 +163,7 @@ const Products = ({ typeOfProduct }) => {
             },
           }}
         >
-          {listData()
+          {DataFilter()
             .slice(0, visibleProducts)
             .map((elem, i) => {
               return (

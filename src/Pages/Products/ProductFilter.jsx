@@ -22,48 +22,38 @@ import { PrApplePhone } from "../Home/CardDetails";
 import "./Productbox.css";
 import { Route } from "react-router-dom";
 
-const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
+const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChangeStore }) => {
   const [type, setType] = useState(typeOfProduct);
 
   useEffect(() => {
     setType(typeOfProduct);
   }, [typeOfProduct]);
+  console.log(type);
 
   const CategoryProduct = () => {
-    if (
-      type === "phone" ||
-      type === "apple" ||
-      type === "xiaomi" ||
-      type === "samsung"
-    ) {
+    if (type === 'phone' || type === 'apple/phone' || type === 'xiaomi' || type === 'samsung') {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link href="/apple/phone">
+              <Link href="/applephone" >
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/xiaomi">
+              <Link href="/xiaomi" >
                 <Box className="text-btn">Xiaomi</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/samsung/phone">
+              <Link href="/samsung" >
                 <Box className="text-btn">Samsung</Box>
               </Link>
             </Box>
           </Grid>
         </MenuList>
-      );
-    } else if (
-      type === "laptop" ||
-      type === "asus" ||
-      type === "acer" ||
-      type === "lenovo" ||
-      type === "hp"
-    ) {
+      )
+    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
@@ -89,29 +79,100 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
             </Box>
           </Grid>
         </MenuList>
-      );
+      )
     } else {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link to="/apple/tablet">
+              <Link to="/appletablet">
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
           </Grid>
         </MenuList>
-      );
+      )
     }
-  };
+  }
+
+
+  const CategoryProduct2 = () => {
+    if (type === 'phone' || type === 'applephone' || type === 'xiaomi' || type === 'samsung') {
+      return (
+        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
+          <MenuButton className="menu-button" >Dung lượng</MenuButton>
+          <MenuList bg="white" >
+            <Grid className="grid-container" >
+              <Box>
+                <MenuItem value="128gb" onClick={onTypeChangeStore}>128GB</MenuItem>
+              </Box>
+              <Box>
+                <MenuItem value="256gb" onClick={onTypeChangeStore}>256GB</MenuItem>
+              </Box>
+              <Box>
+                <MenuItem value="512gb" onClick={onTypeChangeStore}>512GB</MenuItem>
+              </Box>
+              <Box>
+                <MenuItem value="1tgb" onClick={onTypeChangeStore}>1TGB</MenuItem>
+              </Box>
+              <Box>
+                <MenuItem value="" onClick={onTypeChangeStore}>ALL</MenuItem>
+              </Box>
+            </Grid>
+          </MenuList>
+        </Menu>
+      )
+    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+      return (
+        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
+          <MenuButton className="menu-button">Ram</MenuButton>
+          <MenuList bg="white">
+            <Link to="#">
+              <Grid className="grid-container">
+                <Box>
+                  <Text className="text-btn">4G</Text>
+                </Box>
+                <Box>
+                  <Text className="text-btn">8G</Text>
+                </Box>
+                <Box>
+                  <Text className="text-btn">16G</Text>
+                </Box>
+              </Grid>
+            </Link>
+          </MenuList>
+        </Menu>
+      )
+    } else {
+      return (
+        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
+          <MenuButton className="menu-button">Dung lượng</MenuButton>
+          <MenuList bg="white">
+            <Link to="#">
+              <Grid className="grid-container">
+                <Box>
+                  <Text className="text-btn">4G</Text>
+                </Box>
+                <Box>
+                  <Text className="text-btn">8G</Text>
+                </Box>
+                <Box>
+                  <Text className="text-btn">16G</Text>
+                </Box>
+              </Grid>
+            </Link>
+          </MenuList>
+        </Menu>
+      )
+    }
+  }
+
   return (
     <div className="filter_1">
       <Box
-        width="73%"
+        width="80%"
         height="76px"
-        margin="auto"
-        marginBottom="2%"
-
+        margin="0 0 3% 10%"
         display="flex"
         justifyContent="space-between"
         borderRadius="3px"
@@ -125,113 +186,15 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
           "@media (max-width: 426px)": { display: "none" },
         }}
       >
-        <Flex p={2}>
-          {/* <Menu>
-            <MenuButton className="menu-button">Giá</MenuButton>
-            <MenuList bg="white">
-              <Link to="#">
-                <Grid className="grid-container">
-                  <Box>
-                    <Text className="text-btn">Dưới 2 triệu</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Từ 2 - 4 triệu</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Từ 4 - 6 triệu</Text>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
-          </Menu> */}
+        <Flex width="65%" >
           <Menu>
             <MenuButton className="menu-button">Hãng</MenuButton>
             <CategoryProduct />
-            {/* <MenuList bg="white">
-              <Grid className="grid-container">
-                <Box>
-                  <Link to="/cart">
-                    <Box className="text-btn">Acer</Box>
-                  </Link>
-                </Box>
-                <Box>
-                  <Box className="text-btn">Asus</Box>
-                </Box>
-                <Box>
-                  <Box className="text-btn">Lenovo</Box>
-                </Box>
-                <Box>
-                  <Box className="text-btn">MacBook</Box>
-                </Box>
-              </Grid>
-            </MenuList>  */}
           </Menu>
-          <Menu>
-            <MenuButton className="menu-button">Loại</MenuButton>
-            <MenuList bg="white">
-              <Link to="#">
-                <Grid className="grid-container">
-                  <Box>
-                    <Text className="text-btn">Laptop văn phòng</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Laptop Gaming</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Cấu hình cao</Text>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton className="menu-button">Nhu cầu</MenuButton>
-            <MenuList bg="white">
-              <Link to="#">
-                <Grid className="grid-container">
-                  <Box>
-                    <Text className="text-btn">Học tập</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Chơi game</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">Làm việc</Text>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
-          </Menu>
-          <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-            <MenuButton className="menu-button">Ram</MenuButton>
-            <MenuList bg="white">
-              <Link to="#">
-                <Grid className="grid-container">
-                  <Box>
-                    <Text className="text-btn">4G</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">8G</Text>
-                  </Box>
-                  <Box>
-                    <Text className="text-btn">16G</Text>
-                  </Box>
-                </Grid>
-              </Link>
-            </MenuList>
-          </Menu>
-          <Button
-            border="1px solid #e0e0e0;"
-            fontSize="0.7rem"
-            height="50%"
-            backgroundColor="#FFFFFF"
-            margin="2%"
-            css={{ "@media (max-width: 768px)": { display: "none" } }}
-          >
-            Yêu thích
-          </Button>
+
+          <CategoryProduct2 />
         </Flex>
-        <Flex width="15%">
+        <Flex width="13%">
           <Box
             margin="10% 0%"
             fontWeight="bold.800"
@@ -249,7 +212,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange }) => {
           </Box>
         </Flex>
       </Box>
-    </div>
+    </div >
   );
 };
 export default ProductFilter;

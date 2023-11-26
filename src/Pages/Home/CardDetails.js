@@ -72,6 +72,7 @@ export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
 }
 
+
 export const BannersCenter = [
   {
     id: 1,
@@ -110,7 +111,7 @@ export const CateFeatures = [
     name: "Đồng hồ thông minh",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png",
-    prodType: "tablet",
+    prodType: "smartwatch",
   },
   {
     id: 4,
@@ -121,32 +122,33 @@ export const CateFeatures = [
   },
   {
     id: 5,
-    name: "Màn hình máy tính",
+    name: "Bàm phím Gaming",
     imgcatehot:
-      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png",
-    prodType: "tablet",
+      "https://www.ipopularshop.com/cdn/shop/products/1_04c83235-33a4-49cd-9f1e-1c611b986fd2.jpg?v=1669603425&width=1445",
+    prodType: "keyboard",
   },
   {
     id: 6,
-    name: "Phụ kiện di động",
+    name: "Cáp sạc di động",
     imgcatehot:
       "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png",
-    prodType: "tablet",
+    prodType: "cable",
   },
   {
     id: 7,
-    name: "Phụ kiện Gaming",
+    name: "Chuột Gaming",
     imgcatehot:
-      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png",
-    prodType: "tablet",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaZAErUASG2TVdC3MlnhrYhKM5jcKM-g3ZEw&usqp=CAU",
+    prodType: "mouse",
   },
   {
     id: 8,
-    name: "Thiết bị âm thanh",
+    name: "Loa Bluetooth ",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
-    prodType: "tablet",
+    prodType: "LoudSpeaker",
   },
+
 ];
 
 export const ItemDetails1 = [
