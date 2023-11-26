@@ -57,7 +57,13 @@ const Cart = () => {
   }, [change]);
 
   return (
-    <div>
+    <div
+      style={{
+        margin: "auto",
+        width: "100%",
+        marginBottom: "100px",
+      }}
+    >
       <style>
         {`
         @keyframes blink {
