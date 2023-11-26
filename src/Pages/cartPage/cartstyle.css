@@ -1,10 +1,11 @@
 .cartPage {
-  width: 70%;
+  width: 73%;
   justify-content: center;
   align-items: center;
 
   height: auto;
   margin: auto;
+  margin-left: 13%;
   margin-top: 6;
   margin-bottom: 2;
   cursor: pointer;
