@@ -31,7 +31,7 @@ import { RiProfileLine } from "react-icons/ri";
 import Checkout from "./Checkout";
 export const GetData = async () => {
   try {
-    let response = await axios.get(`http://localhost:9000/cart`);
+    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
 
     return await response.data;
   } catch (err) {
@@ -49,7 +49,9 @@ const MainCartPage = () => {
   const [change, setChange] = useState(false);
   const DeleteRequest = async (cartID) => {
     try {
-      let response = await axios.delete(`http://localhost:9000/cart/${cartID}`);
+      let response = await axios.delete(
+        `https://duantn-backend.onrender.com/cart/${cartID}`,
+      );
       setChange(!change);
     } catch (err) {
       return err;

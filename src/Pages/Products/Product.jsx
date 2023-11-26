@@ -28,7 +28,7 @@ const postSingleDataWish = async (data) => {
       storageID: data.storageID,
     };
     let response = await axios.post(
-      `http://localhost:9000/wishlist/`,
+      `https://duantn-backend.onrender.com/wishlist/`,
       postData,
       {
         headers: { "Content-Type": "application/json" },
