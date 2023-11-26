@@ -19,17 +19,17 @@ const Quanlysanpham = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/products"
+        "https://duantn-backend.onrender.com/products",
       );
       setProducts(response.data);
 
       const uniqueCategories = Array.from(
-        new Set(response.data.map((product) => product.catName))
+        new Set(response.data.map((product) => product.catName)),
       );
       setCategories(uniqueCategories);
 
       const uniqueProdTypes = Array.from(
-        new Set(response.data.map((product) => product.prodType))
+        new Set(response.data.map((product) => product.prodType)),
       );
       setProdTypes(uniqueProdTypes);
     } catch (error) {
@@ -43,7 +43,7 @@ const Quanlysanpham = () => {
   const deleteProduct = async (prodID) => {
     try {
       await axios.delete(
-        `https://duantn-backend.onrender.com/products/${prodID}`
+        `https://duantn-backend.onrender.com/products/${prodID}`,
       );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion
@@ -87,7 +87,7 @@ const Quanlysanpham = () => {
 
     const currentItems = filteredProducts.slice(
       indexOfFirstItem,
-      indexOfLastItem
+      indexOfLastItem,
     );
 
     return currentItems.map((product) => (
@@ -107,6 +107,7 @@ const Quanlysanpham = () => {
             />
           )}
         </td>
+
         <td>{product.QTY}</td>
         <td>
           {product.QTY > 10 ? (
@@ -227,7 +228,7 @@ const Quanlysanpham = () => {
                       </th>
                       <th width="10px">ID</th>
                       <th width="20%">Tên sản phẩm</th>
-                      <th>Ảnh</th>
+                      <th width="20%">Ảnh</th>
                       <th>Kho</th>
                       <th width="10%">
                         <select

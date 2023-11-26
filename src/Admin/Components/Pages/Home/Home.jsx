@@ -7,6 +7,8 @@ import {
   fetchUsers,
   fetchOrders,
 } from "../Quanly/api";
+import { useToast } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 const Dashboard = () => {
   const [products, setProducts] = React.useState([]);
   const [totalproducts, setTotalProducts] = React.useState([]);
@@ -14,7 +16,7 @@ const Dashboard = () => {
   const [orders, setOrders] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
+  const toast = useToast();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,6 +30,15 @@ const Dashboard = () => {
     };
 
     fetchData();
+  }, []);
+  useEffect(() => {
+    toast({
+      title: "Chào mừng bạn đến với trang quản trị",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom-right",
+    });
   }, []);
   // Gọi hàm fetchProducts khi component được render
   const handlePageChange = (pageNumber) => {
@@ -48,6 +59,16 @@ const Dashboard = () => {
 
   // Đếm số lượng sản phẩm còn lại trong kho
   const lowStock = products.filter((product) => product.QTY < 10).length;
+
+  useEffect(() => {
+    toast({
+      title: `Có ${lowStock} sản phẩm sắp hết hàng`,
+      status: "warning",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom-right", // Adjust position if needed
+    });
+  }, [lowStock, toast]);
 
   const convertToVND = (amount) => {
     return new Intl.NumberFormat("vi-VN", {
@@ -71,8 +92,13 @@ const Dashboard = () => {
     // Create a Map to store totalPay for each unique date
     const totalPayMap = new Map();
 
+    // Sort the orders by date in ascending order
+    const sortedOrders = orders.sort(
+      (a, b) => new Date(a.orderDate) - new Date(b.orderDate),
+    );
+
     // Populate the Map with data
-    orders.forEach((order) => {
+    sortedOrders.forEach((order) => {
       const orderDate = new Date(order.orderDate).toISOString().split("T")[0];
       if (totalPayMap.has(orderDate)) {
         totalPayMap.set(orderDate, totalPayMap.get(orderDate) + order.totalPay);
@@ -185,73 +211,103 @@ const Dashboard = () => {
             <div className="row">
               {/* <!-- col-6 --> */}
               <div className="col-md-6">
-                <div className="widget-small primary coloured-icon">
-                  <i className="icon bx bxs-user-account fa-3x"></i>
-                  <div className="info">
-                    <h4>Tổng khách hàng</h4>
-                    <p>
-                      <b>{userCount} khách hàng</b>
-                    </p>
-                    <p className="info-tong">
-                      Tổng số khách hàng được quản lý.
-                    </p>
+                <Link
+                  to="/admin/quanlysp"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div className="widget-small primary coloured-icon">
+                    <i className="icon bx bxs-user-account fa-3x"></i>
+                    <div className="info">
+                      <h4>
+                        <a href="/admin/quanlykh">Tổng khách hàng</a>
+                      </h4>
+                      <p>
+                        <b>{userCount} khách hàng</b>
+                      </p>
+                      <p className="info-tong">
+                        Tổng số khách hàng được quản lý.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
               {/* <!-- col-6 --> */}
               <div className="col-md-6">
-                <div className="widget-small info coloured-icon">
-                  <i className="icon bx bxs-data fa-3x"></i>
-                  <div className="info">
-                    <h4>Tổng sản phẩm</h4>
-                    <p>
-                      <b>{productCount} sản phẩm</b>
-                    </p>
-                    <p className="info-tong">Tổng số sản phẩm được quản lý.</p>
+                <Link
+                  to="/admin/quanlysp"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div className="widget-small info coloured-icon">
+                    <i className="icon bx bxs-data fa-3x"></i>
+                    <div className="info">
+                      <h4>
+                        <a href="/admin/quanlysp">Tổng sản phẩm</a>
+                      </h4>
+                      <p>
+                        <b>{productCount} sản phẩm</b>
+                      </p>
+                      <p className="info-tong">
+                        Tổng số sản phẩm được quản lý.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
               {/* <!-- col-6 --> */}
               <div className="col-md-6">
-                <div className="widget-small warning coloured-icon">
-                  <i className="icon bx bxs-shopping-bags fa-3x"></i>
-                  <div className="info">
-                    <h4>Tổng đơn hàng</h4>
-                    <p>
-                      <b>
-                        {" "}
-                        {orderCount === 0
-                          ? "0 đơn hàng"
-                          : `${orderCount} đơn hàng`}
-                      </b>
-                    </p>
-                    <p className="info-tong">
-                      Tổng số hóa đơn bán hàng trong tháng.
-                    </p>
+                <Link
+                  to="/admin/quanlydonhang"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div className="widget-small warning coloured-icon">
+                    <i className="icon bx bxs-shopping-bags fa-3x"></i>
+                    <div className="info">
+                      <h4>Tổng đơn hàng</h4>
+                      <p>
+                        <b>
+                          {" "}
+                          {orderCount === 0
+                            ? "0 đơn hàng"
+                            : `${orderCount} đơn hàng`}
+                        </b>
+                      </p>
+                      <p className="info-tong">
+                        Tổng số hóa đơn bán hàng trong tháng.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
               {/* <!-- col-6 --> */}
               <div className="col-md-6">
-                <div className="widget-small danger coloured-icon">
-                  <i className="icon bx bxs-error-alt fa-3x"></i>
-                  <div className="info">
-                    <h4>Sắp hết hàng</h4>
-                    <p>
-                      <b>
-                        {lowStock === 0 ? "0 Sản phẩm" : `${lowStock} Sản phẩm`}
-                      </b>
-                    </p>
-                    <p className="info-tong">
-                      Số sản phẩm cảnh báo hết cần nhập thêm.
-                    </p>
+                <Link
+                  to="/admin/quanlysp"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <div className="widget-small danger coloured-icon">
+                    <i className="icon bx bxs-error-alt fa-3x"></i>
+                    <div className="info">
+                      <h4>Sắp hết hàng</h4>
+                      <p>
+                        <b>
+                          {lowStock === 0
+                            ? "0 Sản phẩm"
+                            : `${lowStock} Sản phẩm`}
+                        </b>
+                      </p>
+                      <p className="info-tong">
+                        Số sản phẩm cảnh báo hết cần nhập thêm.
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
               {/* <!-- col-12 --> */}
               <div className="col-md-12">
                 <div className="tile">
-                  <h3 className="tile-title">Tình trạng đơn hàng</h3>
+                  <h3 className="tile-title">
+                    <a href="/admin/quanlydonhang">Tình trạng đơn hàng</a>
+                  </h3>
                   <div>
                     <table className="table table-bordered">
                       <thead>
@@ -282,7 +338,9 @@ const Dashboard = () => {
               </div>
               <div className="col-md-12">
                 <div className="tile">
-                  <h3 className="tile-title">Khách hàng mới</h3>
+                  <h3 className="tile-title">
+                    <a href="/admin/quanlykh">Khách hàng mới</a>
+                  </h3>
                   <div>
                     <table className="table table-hover">
                       <thead>
