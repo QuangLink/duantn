@@ -21,12 +21,13 @@ export const loginGoogle = (user) => async (dispatch) => {
       { username, email }, // Pass the username and email as an object to the post request
     );
     const userID = res.data.payload.userID;
+  
     Cookies.set("userID", userID);
     Cookies.set("email", email);
     // Gọi action Redux để cập nhật trạng thái đăng nhập
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: { username, userID },
+      payload: { username, userID,email },
     });
 
     console.log("Login with Google successful:");

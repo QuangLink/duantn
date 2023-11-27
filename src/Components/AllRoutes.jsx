@@ -27,6 +27,7 @@ import Quanlydonhang from "../Admin/Components/Pages/Quanly/Quanlydonhang";
 import Menu from "../Admin/Components/Layout/components/Menu";
 import Baocaodoanhthu from "../Admin/Components/Pages/Quanly/Baocaodoanhthu";
 import Themsanpham from "../Admin/Components/Pages/Task/Themsanpham";
+import ChangePass from "../Pages/Profile/ChangePass";
 import Navbar from "./Navbar";
 const productTypes = [
   "laptop",
@@ -54,7 +55,7 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        
+      <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
