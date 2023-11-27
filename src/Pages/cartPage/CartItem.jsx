@@ -8,9 +8,10 @@ import {
   useToast,
   Icon,
   Text,
+  
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
-
+import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
@@ -218,6 +219,37 @@ const CartItem = ({
             />
             <Button onClick={handleInc}>+</Button>
           </Box>
+          <Box justifyContent="right" >
+          <Button
+            backgroundColor={"white"}
+            color="rgb(23, 116, 239)"
+            _hover={{color:"red"}}
+            onClick={() => {
+              DeleteRequest(cartID)
+                .then((response) => {
+                  toast({
+                    title: "Delete Item Successfully",
+                    status: "success",
+                    duration: 4000,
+                    isClosable: true,
+                    position: "top",
+                  });
+                })
+                .catch((reject) => {
+                  toast({
+                    title: "Something Went Wrong",
+                    description: `${reject.message}`,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                  });
+                });
+            }}
+          >
+          xóa
+          </Button>
+        </Box> 
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
@@ -280,61 +312,19 @@ const CartItem = ({
                 currency: "VND",
               })}
           </Heading>
+          
 
-          <Heading fontSize="12px" color={"rgb(102, 102, 102)"}></Heading>
+          
         </Flex>
+       
+
+       
       </Flex>
-      <Flex
-        justifyContent={"space-between"}
-        alignItems="center"
-        borderTop={"1px solid rgb(224, 224, 225)"}
-        fontSize="13px"
-        fontWeight={"500"}
-        background="transparent"
-        textAlign={"center"}
-      >
-        <Box width={"50%"} borderRight="1px solid rgb(224, 224, 225)">
-          <Button
-            backgroundColor={"white"}
-            color=" rgb(23, 116, 239)"
-            _hover={"backgroundColor:white"}
-            onClick={() => {
-              DeleteRequest(cartID)
-                .then((response) => {
-                  toast({
-                    title: "Delete Item Successfully",
-                    status: "success",
-                    duration: 4000,
-                    isClosable: true,
-                    position: "top",
-                  });
-                })
-                .catch((reject) => {
-                  toast({
-                    title: "Something Went Wrong",
-                    description: `${reject.message}`,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-right",
-                  });
-                });
-            }}
-          >
-            Xóa
-          </Button>
-        </Box>
-        <Box width={"50%"}>
-          <Button
-            backgroundColor={"white"}
-            color=" rgb(23, 116, 239)"
-            _hover={"backgroundColor:white"}
-            onClick={() => handleWish(singleData)}
-          >
-            Thêm vào yêu thích
-          </Button>
-        </Box>
-      </Flex>
+     
+
+       
+        
+    
     </Flex>
   );
 };

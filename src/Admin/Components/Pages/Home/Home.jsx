@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import { useState, useEffect } from "react";
 import {
   fetchTotalProducts,
@@ -134,16 +135,16 @@ const Dashboard = () => {
     if (loading) return <p>Loading...</p>;
     return currentUsers.map((user) => (
       <tr>
-        <td>{user.userID}</td>
-        <td>{user.username}</td>
+        <td >{user.userID}</td>
+        <td >{user.username}</td>
 
-        <td>
+        <td >
           {user.flat}
           {user.street} {user.state} {user.city}{" "}
-        </td>
+        </td >
 
-        <td>{user.mobile}</td>
-        <td>{user.email}</td>
+        <td >{user.mobile}</td>
+        <td >{user.email}</td>
       </tr>
     ));
   };
@@ -224,7 +225,7 @@ const Dashboard = () => {
               {/* <!-- col-6 --> */}
               <div className="col-md-6">
                 <Link
-                  to="/admin/quanlysp"
+                  to="/admin/quanlykh"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <div className="widget-small primary coloured-icon">
@@ -357,11 +358,12 @@ const Dashboard = () => {
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Tên khách hàng</th>
-                          <th>Địa chỉ</th>
-                          <th>Số điện thoại</th>
-                          <th>Email</th>
+                          <th >ID</th>
+                          <th >Tên khách hàng</th>
+                          <th width="300px">Địa chỉ</th>
+                        
+                          <th width="100px" >Số điện thoại</th>
+                          <th >Email</th>
                         </tr>
                       </thead>
                       <tbody>{renderUsers()}</tbody>
@@ -374,7 +376,7 @@ const Dashboard = () => {
           <div className="col-md-12 col-lg-6">
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Thống kê doanh thu</h3>
+                <h3 className="tile-title" style={{fontSize:"25px", fontWeight:"700"}}>Thống kê doanh thu</h3>
                 <div>
                   <table className="table table-bordered">
                     <thead>
@@ -423,6 +425,7 @@ const Dashboard = () => {
             </b>
           </p>
         </div>
+   
       </main>
       <script src="js/jquery-3.2.1.min.js"></script>
       {/* <!--===============================================================================================--> */}

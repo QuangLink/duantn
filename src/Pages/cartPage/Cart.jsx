@@ -182,8 +182,9 @@ const Cart = () => {
                   />
                 ))}
               </Flex>
-            </Center>
-            <Flex justifyContent="space-between" w="710px">
+            </Center >
+           <Center width="100%">
+           <Flex justifyContent="space-between" w="50%">
               <Text
                 mt="2"
                 height="50px"
@@ -192,6 +193,7 @@ const Cart = () => {
                 noOfLines={2}
                 fontSize="20px"
                 fontWeight="700"
+                
               >
                 Tạm tính:
               </Text>
@@ -204,8 +206,9 @@ const Cart = () => {
                   })}
               </Text>
             </Flex>
+           </Center>
             <Button
-              w="710px"
+              w="50%"
               h="50px"
               border="1px solid  #70b1ea"
               borderRadius="10px"
