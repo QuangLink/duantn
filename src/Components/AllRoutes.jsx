@@ -18,8 +18,6 @@ import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
 import Cart from "../Pages/cartPage/Cart";
 import Success from "../Pages/checkout/success";
-import Dangnhap from "../Admin/Components/Pages/Dangnhap/Dangnhap";
-import Forgot from "../Admin/Components/Pages/Dangnhap/Forgot";
 import Dashboard from "../Admin/Components/Pages/Home/Home";
 import Quanlynv from "../Admin/Components/Pages/Quanly/Quanlykh";
 import Quanlysp from "../Admin/Components/Pages/Quanly/Quanlysp";
@@ -29,6 +27,10 @@ import Baocaodoanhthu from "../Admin/Components/Pages/Quanly/Baocaodoanhthu";
 import Themsanpham from "../Admin/Components/Pages/Task/Themsanpham";
 import ChangePass from "../Pages/Profile/ChangePass";
 import Navbar from "./Navbar";
+import Verified from "../Pages/Login/Verified";
+import Forgot from "../Pages/Login/Forgot";
+import Resetpass from "../Pages/Login/Resetpass";
+import NotFoundPage from "../Pages/404";
 const productTypes = [
   "laptop",
   "phone",
@@ -55,65 +57,69 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-      <Route path="/reset" element={<ChangePass />}></Route>
+        <Route path="/404" element={<NotFoundPage />}></Route>
+      <Route path="/resetpass" element={<Resetpass />}></Route>
+        <Route path="/forgot" element={<Forgot />}></Route>
+        <Route path="/verify" element={<Verified />}></Route>
+        <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/duantn" element={<Home />}></Route>
         <Route
-        path="/admin/dashboard"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Dashboard />
-          </AdminRoute>
-        }
-      ></Route>
-      <Route
-        path="/admin/Quanlykh"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Quanlynv />
-          </AdminRoute>
-        }
-      ></Route>
-      <Route
-        path="/admin/Quanlysp"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Quanlysp />
-          </AdminRoute>
-        }
-      ></Route>
-      <Route
-        path="/admin/Quanlydonhang"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Quanlydonhang />
-          </AdminRoute>
-        }
-      ></Route>
-      <Route
-        path="/admin/Themsanpham"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Themsanpham />
-          </AdminRoute>
-        }
-      ></Route>
-      <Route
-        path="/admin/doanhthu"
-        element={
-          <AdminRoute>
-          <Menu />
-            <Baocaodoanhthu />
-          </AdminRoute>
-        }
-      ></Route>
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Dashboard />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/Quanlykh"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlynv />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/Quanlysp"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlysp />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/Quanlydonhang"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlydonhang />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/Themsanpham"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Themsanpham />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/doanhthu"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Baocaodoanhthu />
+            </AdminRoute>
+          }
+        ></Route>
         {productTypes.map((type) => (
           <React.Fragment key={type}>
             <Route
@@ -202,7 +208,6 @@ const AllRoutes = () => {
           }
         ></Route>
         <Route path="/test" element={<ProductList />}></Route>
-        
       </Routes>
     </div>
   );

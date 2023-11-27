@@ -108,8 +108,7 @@ function SignUpForm() {
         } else {
           toast({
             title: "Tạo tài khoản thành công",
-            description:
-              "Chào mừng đến với JaguarStore, bạn đã có thể đăng nhập",
+            description: "Hãy kiểm tra email của bạn để xác thực tài khoản.",
             status: "success",
             duration: 2000,
             isClosable: true,
