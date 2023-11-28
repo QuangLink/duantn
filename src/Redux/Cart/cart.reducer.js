@@ -70,6 +70,13 @@ const CartReducer = (state = initialData, { type, payload }) => {
         paybalPrice: state.totalPrice - payload,
       };
     }
+    case "priceChange": {
+      return {
+        ...state,
+        totalPrice: payload,
+        paybalPrice: payload,
+      };
+    }
 
     default: {
       return state;

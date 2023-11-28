@@ -1,49 +1,99 @@
+import React, { useEffect, useState } from "react";
+import { Box, Center, Grid, GridItem, Heading, Button } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect } from "react";
-import Product from "./Product";
-import { Box, Grid, GridItem, Heading, Center } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../Redux/Products/products.action";
 import { RotatingLines } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { BannersCenter, PrApplePhone, PrSale } from "../Home/CardDetails";
 import HotProduct from "./HotProduct";
-import { BannersCenter, PrApplePhone } from "../Home/CardDetails";
-import SlideProuct from "./SlideProduct";
+import Product from "./Product";
 import ProductFilter from "./ProductFilter";
-const getData = async (typeOfProduct, brandOfProduct) => {
-  let response = await axios.get(
-    `https://duantn-backend.onrender.com/category/${typeOfProduct}/${brandOfProduct}`,
-  );
-  return response.data;
-};
-const Products = ({ typeOfProduct }) => {
-  // const [productArr, setProductArr] = useState([]);
-  const productsList = useSelector((store) => store.product.data);
-  console.log("in the products page and the products list", productsList);
+import SlideProuct from "./SlideProduct";
 
-  const loading = useSelector((store) => store.product.loading);
+const Products = ({ typeOfProduct }) => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(false);
+  const [typeStorePhone, setTypeStorePhone] = useState("");
+
+  const [visibleProducts, setVisibleProducts] = useState(12); // Initial number of products to display
   const error = useSelector((store) => store.product.error);
 
-  const dispatch = useDispatch();
-  //   console.log("in the products page and productlist is :-",productsList,"loading status is:- ",loading,"error status is :-",error);
-  const category = {
-    laptop: "LAPTOP",
-    tablet: "TABLET",
-    phone: "Phone",
-    apple: "APPLE",
-    xiaomi: "XIAOMI",
-    samsung: "SAMSUNG",
-    oppo: "OPPO",
-    hp: "HP",
-    asus: "ASUS",
-    lenovo: "LENOVO",
-    acer: "ACER",
-    whishlist: "whishlist",
+  useEffect(() => {
+    onGetData();
+  }, [typeOfProduct]);
+
+  const onGetData = async () => {
+    setFilter("all");
+    setLoading(true);
+    try {
+      let response = await axios.get(
+        `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+      );
+      console.log("in the logic func try", response.data);
+      if (response.data) {
+        setFilteredProducts(response.data || []);
+        console.log(
+          "list type of list product",
+          "typeOfProduct",
+          typeOfProduct,
+          response.data.map((el) => el.prodType),
+        );
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => {
-    // getData(typeOfProduct).then((res) => setProductArr(res));
-    dispatch(getProducts(typeOfProduct));
-  }, [typeOfProduct]);
+  const handleFilterChange = (event) => {
+    const selectedFilter = event?.target?.value;
+    setFilter(selectedFilter);
+    console.log(selectedFilter);
+  };
+
+  const onTypeChangeStore = (event) => {
+    const selectedFilter = event?.target?.value;
+    setTypeStorePhone(selectedFilter);
+  };
+
+  const listData = () => {
+    // type: ""/"256GB" /"128gb"
+
+    switch (filter) {
+      case "lowToHigh":
+        return filteredProducts.sort((a, b) => a.prodPrice - b.prodPrice);
+      case "highToLow":
+        return filteredProducts.sort((a, b) => b.prodPrice - a.prodPrice);
+      case "sale":
+        return filteredProducts.filter((product) => product.prodSale > 0);
+      default:
+        return filteredProducts;
+    }
+  };
+
+  const DataFilter = () => {
+    if (typeOfProduct === "phone") {
+      switch (typeStorePhone) {
+        case "1tgb":
+          return listData().filter((el) => el?.storage_value === "1TGB");
+        case "512gb":
+          return listData().filter((el) => el?.storage_value === "512GB");
+        case "256gb":
+          return listData().filter((el) => el?.storage_value === "256GB");
+        case "128gb":
+          return listData().filter((el) => el?.storage_value === "128GB");
+
+        default:
+          return listData();
+      }
+    } else {
+      return listData();
+    }
+  };
+
+  const loadMore = () => {
+    setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
+  };
 
   if (error) {
     return (
@@ -54,33 +104,33 @@ const Products = ({ typeOfProduct }) => {
         marginTop={10}
         marginBottom="200px"
       >
-        Some thing went wrong...
+        Something went wrong...
       </Heading>
     );
   }
 
   return (
     <Box p="5">
-      {/* <Heading p="6" marginBottom={7}>
-        {category[typeOfProduct]}
-      </Heading>
-      <hr></hr> */}
       <Box>
         <SlideProuct type={BannersCenter} />
       </Box>
       <Box mb="2%">
-        <HotProduct type={PrApplePhone} />
+        <HotProduct type={PrSale} />
       </Box>
-      <ProductFilter />
-
+      <ProductFilter
+        onTypeChangeStore={onTypeChangeStore}
+        typeOfProduct={typeOfProduct}
+        filter={filter}
+        handleFilterChange={handleFilterChange}
+      />
       {loading ? (
         <Box h={20}>
+          <Box></Box>
           <Center>
             <RotatingLines
               strokeColor="grey"
               strokeWidth="5"
               animationDuration="0.75"
-              // width="150"
               height={50}
               visible={true}
             />
@@ -90,7 +140,6 @@ const Products = ({ typeOfProduct }) => {
         <Grid
           width="80%"
           m="auto"
-          marginLeft="10%"
           templateColumns={[
             "repeat(2, 1fr)",
             "repeat(3,1fr)",
@@ -106,27 +155,35 @@ const Products = ({ typeOfProduct }) => {
             },
           }}
         >
-          {productsList.map((elem, i) => {
-            // console.log("in the products page in the map method and elem is :- ", elem);
-            return (
-              <GridItem
-                key={elem.prodName + i}
-                w="97%"
-                h="100%"
-                bg="white.500"
-                boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
-                padding="5%"
-                _hover={{
-                  boxShadow:
-                    "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
-                  cursor: "pointer",
-                }}
-              >
-                <Product data={elem} typeOfProduct={typeOfProduct} />
-              </GridItem>
-            );
-          })}
+          {DataFilter()
+            .slice(0, visibleProducts)
+            .map((elem, i) => {
+              return (
+                <GridItem
+                  key={elem.prodName + i}
+                  w="97%"
+                  h="100%"
+                  bg="white.500"
+                  boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
+                  padding="5%"
+                  _hover={{
+                    boxShadow:
+                      "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Product data={elem} typeOfProduct={typeOfProduct} />
+                </GridItem>
+              );
+            })}
         </Grid>
+      )}
+      {visibleProducts < listData().length && (
+        <Center mt="3">
+          <Button onClick={loadMore} colorScheme="blue" variant="outline">
+            Xem thêm
+          </Button>
+        </Center>
       )}
     </Box>
   );

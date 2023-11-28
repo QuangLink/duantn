@@ -37,13 +37,13 @@ const MyCartLength = ({ item }) => {
         borderRadius="4px"
         padding={"16px"}
         marginBottom="8px"
-        width={"90%"}
+        width={"100%"}
         justifyContent="space-between"
         marginTop={"20px"}
       >
         <Box>
           <Heading fontWeight={600} fontSize="16px">
-            My Cart ({item} Items)
+          Giỏ hàng ({item} sản phẩm)
           </Heading>
         </Box>
         <Box>

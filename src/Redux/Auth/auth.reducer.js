@@ -11,6 +11,7 @@ const init = {
   token: "",
   username: "",
   email: "",
+  admin: "",
   loading: false,
   error: false,
 };
@@ -50,6 +51,7 @@ export const Authreducer = (
         isAuth: true,
         username: payload.username,
         email: payload.email,
+        admin: payload.admin,
       };
       Cookies.set("authState", JSON.stringify(newState)); // Save the updated state to the cookie
       return newState;

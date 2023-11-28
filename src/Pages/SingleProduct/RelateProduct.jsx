@@ -1,47 +1,75 @@
-import React from "react";
-import {
-  Box,
-  Flex,
-  Text,
-  Image,
-  Square,
-  Button,
-  background,
-  Badge,
-} from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import React, { useState, useEffect } from "react";
+import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import Heading from "../Home/Heading";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
+import axios from "axios";
+import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
+  const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+
+  const categoryUrl = {
+    sale: apiUrlBase + type,
+  };
+
+  const fetchDataForCategory = async (category) => {
+    try {
+      const response = await axios.get(categoryUrl[category]);
+      return response.data.map((product) => ({
+        name: product.prodName,
+        img: product.prodImg,
+        price: product.prodPrice,
+        id: product.prodID,
+        sale: product.prodSale,
+        original: product.prodPriceSale,
+      }));
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
+      return [];
+    }
+  };
+
+  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  useEffect(() => {
+    const loadRelated = async () => {
+      try {
+        const relatedData = await fetchDataForCategory("sale");
+        setRelatedProducts(relatedData);
+      } catch (error) {
+        console.error("Lỗi khi tải dữ liệu sản phẩm liên quan:", error);
+      }
+    };
+
+    loadRelated();
+  }, []); // Empty dependency array to run the effect only once
+
   return (
     <Box
       justifyContent="center"
       w={["100%", "100%", "80%"]}
       display={["none", "block", "block"]}
       m="auto"
-      mt="6"
+      mt="20"
       cursor="pointer"
-      textAlign="center"
+      textAlign="left"
       backgroundColor="blackAlpha.50"
     >
       <Box>
         <a href="">
           <Text
-            fontSize="2.1rem"
-            color="whiteAlpha.900"
-            fontWeight="black"
-            width="100%"
-            backgroundColor="blue.300"
-            h="60px"
-            p={2}
+            fontSize="2xl"
+            width=""
+            fontWeight="700"
+            textColor="black"
+            className="headingHome"
           >
-            Các sản phẩm liên quan{" "}
+            Các sản phẩm liên quan
           </Text>
         </a>
       </Box>
@@ -74,14 +102,14 @@ const RelateProduct = ({ type, heading }) => {
             },
           }}
         >
-          {type.map((i) => (
+          {relatedProducts.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to="/computers/">
+                <Link to="/">
                   <Box
                     p="5"
-                    m={["0%", "0%", "2%"]}
-                    height="350px"
+                    m={["0%", "0%", "1%"]}
+                    height="auto"
                     backgroundColor="white"
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
@@ -119,10 +147,11 @@ const RelateProduct = ({ type, heading }) => {
                             color="red"
                             _hover={{ color: "red" }}
                           >
-                            {i.price.toLocaleString("vi-VN", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
+                            {i.price &&
+                              i.price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
                           </Text>
                         </Square>
                       </Flex>
@@ -139,10 +168,11 @@ const RelateProduct = ({ type, heading }) => {
                               fontSize="14px"
                               ml="1"
                             >
-                              {i.original.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
+                              {i.original &&
+                                i.original.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
                             </Text>
                           </Flex>
                           <Box

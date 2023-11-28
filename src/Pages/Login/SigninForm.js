@@ -51,7 +51,7 @@ function SignInForm() {
     if (isAuth) {
       navigate("/");
       toast({
-        title: "Login Success",
+        title: "Đăng nhập thành công",
         description: `Welcome ${username}`,
         status: "success",
         duration: 8000,
@@ -82,7 +82,7 @@ function SignInForm() {
           placeholder="Password"
           onChange={handleChange}
         />
-        <a href="#">Quên mật khẩu ?</a>
+        <a href="/forgot">Quên mật khẩu ?</a>
         <button className="action-btn">Đăng nhập</button>
       </form>
     </div>

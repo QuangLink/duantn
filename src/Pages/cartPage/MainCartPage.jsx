@@ -1,5 +1,4 @@
 import React from "react";
-import { Center, Flex, useToast } from "@chakra-ui/react";
 import MyCartLength from "./MyCartLength";
 import CartItem from "./CartItem";
 import CheckoutBox from "./CheckoutBox";
@@ -9,6 +8,27 @@ import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
+import "./cartstyle.css";
+
+import {
+  Box,
+  Image,
+  Center,
+  Flex,
+  Heading,
+  Text,
+  Button,
+  CardFooter,
+  useToast,
+} from "@chakra-ui/react";
+
+import "react-slideshow-image/dist/styles.css";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/react";
+import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
+import { AiFillCreditCard } from "react-icons/ai";
+import { RiProfileLine } from "react-icons/ri";
+import Checkout from "./Checkout";
 export const GetData = async () => {
   try {
     let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
@@ -27,10 +47,10 @@ const MainCartPage = () => {
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
-  const DeleteRequest = async (prodID) => {
+  const DeleteRequest = async (cartID) => {
     try {
       let response = await axios.delete(
-        `https://duantn-backend.onrender.com/cart/${prodID}`,
+        `https://duantn-backend.onrender.com/cart/${cartID}`,
       );
       setChange(!change);
     } catch (err) {
@@ -68,21 +88,6 @@ const MainCartPage = () => {
 
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: "#4a90e2",
-          textEmphasisColor: "white",
-          textAlign: "center",
-          width: "100%",
-          padding: "10px",
-          boxSizing: "border-box",
-          // marginTop: "20px",
-          marginBottom: "20px",
-          animation: "blink 3s infinite",
-        }}
-      >
-        Hãy áp dụng mã giảm giá : MASAI40
-      </div>
       <style>
         {`
         @keyframes blink {
@@ -99,9 +104,9 @@ const MainCartPage = () => {
       `}
       </style>
       <Flex
-        border={"0px solid red"}
+        border={"0px solid #4a90e2"}
         margin="auto"
-        width={"95%"}
+        width={"100%"}
         paddingX="20px"
         flexDirection={{
           base: "column",
@@ -111,66 +116,109 @@ const MainCartPage = () => {
           xl: "row",
           "2xl": "row",
         }}
+        style={{
+          margin: "auto",
+          width: "100%",
+          marginBottom: "100px",
+        }}
+        justifyContent="center"
+        alignItems="center"
       >
-        <Flex
-          flexDirection={"column"}
-          border={"0px solid blue"}
-          width={{
-            base: "100%",
-            sm: "100%",
-            md: "100%",
-            lg: "70%",
-            xl: "70%",
-            "2xl": "70%",
-          }}
-          gap={"4"}
-        >
-          <MyCartLength item={dataLength} />
-          {loading && (
-            <Center>
-              <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="96"
-                visible={true}
-              />
-            </Center>
-          )}
+        {dataLength === 0 ? (
+          <Center>
+            <div style={{ textAlign: "center" }}>
+              <Text fontSize="2xl" fontWeight="bold" mt="10">
+                Your cart is empty
+              </Text>
+            </div>
+          </Center>
+        ) : (
+          <Center
+            className="cartPage"
+            borderRadius="2%"
+            boxShadow="4px 10px 6px 8px rgba(12,12,12,0.2)"
+          >
+            <Heading
+              textAlign="center"
+              display="flex"
+              justifyContent="space-around"
+              w="95%"
+              m="15p% 10% 10% 10%"
+              mt="5"
+            >
+              <Box className="headingCart">
+                <Text className="textHeader">
+                  <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
+                </Text>
+                <Center fontSize="25px" fontWeight="500" color="red.500">
+                  Đặt hàng
+                </Center>
+              </Box>
+            </Heading>
+            <Center
+              mt="5px"
+              width="100%"
+              borderRadius="20px"
+              display="flex"
+              flexWrap="wrap"
+              borderBottom="none"
+              borderBottomRadius="none"
+            >
+              <Flex
+                flexDirection={"column"}
+                border={"0px solid blue"}
+                width={{
+                  base: "100%",
+                  sm: "100%",
+                  md: "100%",
+                  lg: "70%",
+                  xl: "70%",
+                  "2xl": "70%",
+                }}
+                gap={"1"}
+              >
+                <MyCartLength item={dataLength} />
+                {loading && (
+                  <Center>
+                    <RotatingLines
+                      strokeColor="grey"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="96"
+                      visible={true}
+                    />
+                  </Center>
+                )}
 
-          {data.map((product) => (
-            <CartItem
-              cartID={product.cartID}
-              key={product.prodID}
-              name={product.prodName}
-              img={product.prodImg}
-              price={product.prodPrice}
-              id={product.prodID}
-              quantity={product.quantity}
-              DeleteRequest={DeleteRequest}
+                {data.map((product) => (
+                  <CartItem
+                    cartID={product.cartID}
+                    color={product.color}
+                    storage={product.storage_value}
+                    key={product.prodID}
+                    name={product.prodName}
+                    img={product.prodImg}
+                    price={product.prodPrice}
+                    priceSale={product.prodPriceSale}
+                    QTY={product.QTY}
+                    id={product.prodID}
+                    quantity={product.quantity}
+                    DeleteRequest={DeleteRequest}
+                  />
+                ))}
+              </Flex>
+            </Center>
+            <Checkout />
+            <CheckoutBox
+              items={dataLength}
+              totalPrice={totalPrice}
+              paybalPrice={paybalPrice}
+              setVal={setVal}
+              handleApply={handleApply}
+              discount={coupon}
             />
-          ))}
-        </Flex>
-        <Flex
-          border={"0px solid green"}
-          width={{
-            base: "100%",
-            sm: "100%",
-            md: "100%",
-            lg: "30%",
-            xl: "30%",
-            "2xl": "30%",
-          }}
-        >
-          <CheckoutBox
-            items={dataLength}
-            totalPrice={totalPrice}
-            paybalPrice={paybalPrice}
-            setVal={setVal}
-            handleApply={handleApply}
-            discount={coupon}
-          />
-        </Flex>
+          </Center>
+        )}
       </Flex>
     </div>
   );

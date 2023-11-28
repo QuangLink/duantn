@@ -10,35 +10,39 @@ const CateFeature = ({ type }) => {
   const rows = [];
   for (let i = 0; i < 2; i++) {
     const row = [];
-    for (let j = i * 4; j < i * 4 + 4 && j < type.length; j++) {
+    for (let j = i * 8; j < i * 8 + 8 && j < type.length; j++) {
       row.push(
         <td key={j} style={{ textAlign: "center" }}>
-          <div
-            style={{
-              borderRadius: "10px",
-              border: "1px solid #b0b0b0",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={type[j].imgcatehot}
-              alt={type[j].name}
-              style={{ width: "60px", height: "60px", marginBottom: "10px" }}
-            />
-            <p
-              className="cateName"
+          <Link to={`${type[j].prodType}`}>
+            <div
               style={{
-                marginTop: "0",
-                wordWrap: "break-word",
-                padding: "5px",
-                margin: "2px",
+                borderRadius: "10px",
+          
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              {type[j].name}
-            </p>
-          </div>
+              <img
+                src={type[j].imgcatehot}
+                alt={type[j].name}
+                style={{ width: "60px", height: "60px", marginBottom: "10px" }}
+              />
+              <p
+                className="cateName"
+                style={{
+                  height:"60px",
+                  width:"150px",
+                  marginTop: "0",
+                  wordWrap: "break-word",
+                  padding: "5px",
+                  margin: "2px",
+                }}
+              >
+                {type[j].name}
+              </p>
+            </div>
+          </Link>
         </td>,
       );
     }
@@ -54,19 +58,21 @@ const CateFeature = ({ type }) => {
         textColor="black"
         mt="2%"
       >
-        Danh mục nổi bật
+        DANH MỤC NỔI BẬT
       </Heading>
 
       <Box
         justifyContent="center"
         w="70%"
         m="auto"
-        mt="6"
+        padding={"20px"}
         cursor="pointer"
         textAlign="center"
         display="flex"
         flexWrap="wrap"
         textSizeAdjust="auto"
+        bg="whiteAlpha.500"
+        borderRadius={"10px"}
       >
         <table>
           <tbody>{rows}</tbody>

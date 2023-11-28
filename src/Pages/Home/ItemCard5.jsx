@@ -9,7 +9,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CSSTransition } from "react-transition-group";
 import "swiper/css";
@@ -20,7 +20,8 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import "./stylehome.css";
 import axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 //add singleData to cart
 const postSingleData = async (data) => {
@@ -48,18 +49,38 @@ const postSingleData = async (data) => {
 };
 
 const ItemCard5 = ({ type, heading }) => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    onGetData();
+  }, []);
+
+  const onGetData = async () => {
+    try {
+      let responce = await axios.get(
+        `https://duantn-backend.onrender.com/products`,
+      );
+
+      if (responce.data) {
+        setFilteredProducts(responce.data || []);
+      }
+    } catch (error) {}
+  };
+  const listDataLaptop = filteredProducts.filter(
+    (product) => product.prodType === "Laptop",
+  );
+
   var navigate = useNavigate();
   const handlePost = (prodID) => {
-    postSingleData({ prodID }).then((res) => navigate("/cart"));
+    // postSingleData({ prodID }).then((res) => navigate("/cart"));
   };
-
   return (
     <Box
       justifyContent="center"
-      w="70%"
+      w="80%"
       m="auto"
       mt="6"
-      mb="2"
+      mb="10"
       cursor="pointer"
       textAlign="center"
     >
@@ -94,48 +115,58 @@ const ItemCard5 = ({ type, heading }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
-              spaceBetween: 5,
+              slidesPerView: 5,
+              spaceBetween: 10,
             },
           }}
         >
-          {type.map((i) => (
+          {listDataLaptop.slice(0, 10).map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
                 <Box
                   className="list"
                   p="2"
+                  m={0.5}
                   mt="4"
                   borderRadius="15px"
-                  boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
+                  borderWidth={1}
+                  borderColor={"#ccc"}
                   w=""
                   h="auto"
+                  bg="white"
                 >
-                  <Link to={i.linked}>
+                  <Link to={`/${i.prodType}/${i.prodID}`}>
                     <Box className="list" p="2" mt="4" w="" h="auto">
                       <Box className="img">
-                        <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                        <Square
+                          m="auto"
+                          w={200}
+                          h={200}
+                          transition="transform 0.3s ease-in-out"
+                          _hover={{ transform: "scale(1.1)" }}
+                        >
                           <Image
-                            src={`${i.img}`}
-                            alt={i.name}
-                            boxSize="160px"
+                            src={`${i.prodImg}`}
+                            maxW={200}
+                            maxH={150}
+                            objectFit={"cover"}
                           />
                         </Square>
 
                         <Text
                           mt="2"
                           height="70px"
-                          fontFamily="serif"
+                          fontFamily={"Arial"}
                           color="#424245"
                           noOfLines={2}
                           textAlign="center"
-                          fontSize="25px"
-                          _hover={{ color: "red" }}
+                          fontSize="17px"
+                          _hover={{ color: "blue" }}
                           fontWeight="700"
                         >
-                          {i.name}
+                          {i.prodName}
                         </Text>
-                        <Box mt="2.5" m="20px 0 30px 0">
+                        <Box mt="3" m="10px 0 30px 0px">
                           <Flex>
                             <Square>
                               <Text color="gray.600" fontSize="14px">
@@ -150,71 +181,18 @@ const ItemCard5 = ({ type, heading }) => {
                                 color="red"
                                 _hover={{ color: "red" }}
                               >
-                                {i.price.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                {i.prodPrice &&
+                                  i.prodPrice.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Square>
                           </Flex>
-                          <Box h="20px">
-                            {i.original !== 0 && (
-                              <>
-                                <Flex>
-                                  <Text color="gray.600" fontSize="14px">
-                                    Giá gốc:{" "}
-                                  </Text>
-                                  {"  "}
-                                  <Text
-                                    as="s"
-                                    color="gray.600"
-                                    fontSize="14px"
-                                    ml="1"
-                                  >
-                                    {i.original.toLocaleString("vi-VN", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
-                                  </Text>
-                                </Flex>
-                                <Box
-                                  padding="3px"
-                                  borderRadius="5px"
-                                  w="50%"
-                                  color="#EC4C0A"
-                                  bg="#FEB373"
-                                  mt="2"
-                                  textAlign="center"
-                                >
-                                  <Text fontSize="10px" fontWeight="500">
-                                    GIẢM GIÁ SỐC
-                                  </Text>
-                                </Box>
-                              </>
-                            )}
-                          </Box>
-
-                          {/* <Flex>
-                    <Text color="gray.600" fontSize="14px">
-                      Giảm giá:{" "} 
-                    </Text>
-                    {"  "}
-                    <Text color="gray.600" fontSize="14px" ml="1">
-                      {i.discount} <sup>đ</sup>
-                    </Text>
-                  </Flex> */}
                         </Box>
                       </Box>
                     </Box>
                   </Link>
-                  <Box>
-                    <Button
-                      className="add-to-cart"
-                      onClick={() => handlePost(i.prodID)}
-                    >
-                      Add to Cart
-                    </Button>
-                  </Box>
                 </Box>
               </SwiperSlide>
             </Box>

@@ -16,21 +16,27 @@ import RatingBar from "./RatingBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
+import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
   try {
+    const userID = Cookies.get("userID");
+
+    const postData = {
+      userID,
+      prodID: data.prodID,
+      colorID: data.colorID,
+      storageID: data.storageID,
+    };
     let response = await axios.post(
-      `https://rus-digital-televisions.onrender.com/whishlist`,
-      data,
+      `https://duantn-backend.onrender.com/wishlist/`,
+      postData,
       {
         headers: { "Content-Type": "application/json" },
       },
     );
     return response.data;
   } catch (error) {
-    console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data,
-    );
+    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
 
@@ -51,18 +57,9 @@ const Product = (props, rating) => {
   var navigate = useNavigate();
   const toast = useToast();
   const handleWish = (data) => {
-    console.log("this is data from hadleWhish", data);
-    let newData = {};
-    for (let i in data) {
-      if (i === "prodID") {
-        continue;
-      }
-      newData[i] = data[i];
-    }
-    // console.log("newData is :-", newData);
-    // console.log("in the handlePost function and viewing the data before the post request", data);
-    postSingleDataWish(newData).then((res) => {
-      // console.log("in the handlePost function and viewing the data after the post request", res)
+    console.log(data);
+
+    postSingleDataWish(data).then((res) => {
       toast({
         title: "Added Item Successfully to WishList",
         status: "success",
@@ -70,15 +67,13 @@ const Product = (props, rating) => {
         isClosable: true,
         position: "bottom",
       });
-      setTimeout(() => {
-        navigate("/whishlist");
-      }, 1000);
     });
   };
+
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[280, 360, 520]}>
+        <Box h={[280, 360, 450]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -86,7 +81,9 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["65%", "80%", "90%"]}
+              w={["65%", "80%", "auto"]}
+              h={["65%", "80%", "200px"]}
+              objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
             />
@@ -104,7 +101,7 @@ const Product = (props, rating) => {
               <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
-                h={["20px", "40px", "60px"]}
+                h={["20px", "40px", "70px"]}
               >
                 {prodName}
               </Box>
@@ -117,10 +114,11 @@ const Product = (props, rating) => {
                   fontWeight="black"
                 >
                   Giá mới:{" "}
-                  {prodPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                  {prodPrice &&
+                    prodPrice.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
@@ -130,10 +128,11 @@ const Product = (props, rating) => {
                   textDecoration="line-through"
                 >
                   Giá gốc:{" "}
-                  {prodPriceSale.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                  {prodPriceSale &&
+                    prodPriceSale.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Text>
               </Box>
               <Badge
@@ -154,7 +153,7 @@ const Product = (props, rating) => {
             <Box className="div_2">
               <Box
                 className="box_1"
-                h={["20px", "40px", "60px"]}
+                h={["20px", "40px", "70px"]}
                 fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
                 {prodName}
@@ -168,10 +167,11 @@ const Product = (props, rating) => {
                   fontWeight="black"
                 >
                   Giá:{" "}
-                  {prodPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                  {prodPrice &&
+                    prodPrice.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
                 </Heading>
               </Box>
               <Badge

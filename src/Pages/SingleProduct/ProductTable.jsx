@@ -1,99 +1,56 @@
 import React from "react";
-import axios from "axios";
 
-const postSingleData = async (data) => {
-  try {
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data,
-    );
+const ProductTable = ({ product }) => {
+  if (!product) {
+    return null; // or some placeholder for when data is not available
   }
-};
-export const postSingleDataWish = async (data) => {
-  try {
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/whishlist`,
-      data,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.log(
-      "in the postSingleData function and error is :- ",
-      error.response.data,
-    );
-  }
-};
-
-const ProductTable = () => {
-  const phone = {
-    brand: "Samsung",
-    model: "Galaxy S21",
-    color: "Phantom Black",
-    storage: "128GB",
-    ram: "8GB",
-    price: "$999",
-  };
 
   return (
     <table
-      style={{ fontFamily: "Arial", borderCollapse: "collapse", width: "100%" }}
+      style={{
+        border: "1px solid #ccc",
+        width: "91%",
+        boxShadow:
+        "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+        
+       
+      }}
+   
+      
     >
-      <thead>
+      <thead style={{ backgroundColor: "#f2f2f2", padding: "10px" }}>
         <tr>
-          <th style={{ padding: "10px", textAlign: "left" }}>
-            Thông tin cấu hình điện thoại
+          <th colSpan="2" style={{ textAlign: "center" }}>
+            Thông tin cấu hình
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr style={{ backgroundColor: "#f5f5f5" }}>
+        <tr>
           <td style={{ padding: "10px" }}>
-            <strong>Thương hiệu:</strong>
+            <strong>Sản phẩm:</strong>
           </td>
-          <td style={{ padding: "10px" }}>{phone.brand}</td>
+          <td style={{ padding: "10px" }}>{product.prodName}</td>
         </tr>
         <tr>
           <td style={{ padding: "10px" }}>
-            <strong>Model:</strong>
+            <strong>Màu:</strong>
           </td>
-          <td style={{ padding: "10px" }}>{phone.model}</td>
-        </tr>
-        <tr style={{ backgroundColor: "#f5f5f5" }}>
-          <td style={{ padding: "10px" }}>
-            <strong>Màu sắc:</strong>
-          </td>
-          <td style={{ padding: "10px" }}>{phone.color}</td>
+          <td style={{ padding: "10px" }}>{product.color}</td>
         </tr>
         <tr>
           <td style={{ padding: "10px" }}>
-            <strong>Bộ nhớ trong:</strong>
+            <strong>Hãng:</strong>
           </td>
-          <td style={{ padding: "10px" }}>{phone.storage}</td>
-        </tr>
-        <tr style={{ backgroundColor: "#f5f5f5" }}>
-          <td style={{ padding: "10px" }}>
-            <strong>RAM:</strong>
-          </td>
-          <td style={{ padding: "10px" }}>{phone.ram}</td>
+          <td style={{ padding: "10px" }}>{product.catName}</td>
         </tr>
         <tr>
           <td style={{ padding: "10px" }}>
-            <strong>Giá:</strong>
+            <strong>Dung lượng:</strong>
           </td>
-          <td style={{ padding: "10px" }}>{phone.price}</td>
+          <td style={{ padding: "10px" }}>{product.storage_value}</td>
         </tr>
+        {/* Other rows go here */}
       </tbody>
     </table>
   );

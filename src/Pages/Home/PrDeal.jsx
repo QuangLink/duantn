@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import {
   Box,
   Flex,
@@ -8,7 +10,7 @@ import {
   Heading,
   Center,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,16 +20,37 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import "./stylehome.css";
 const PrDeal = ({ type }) => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    onGetData();
+  }, []);
+
+  const onGetData = async () => {
+    try {
+      let responce = await axios.get(
+        `https://duantn-backend.onrender.com/products`,
+      );
+
+      if (responce.data) {
+        setFilteredProducts(responce.data || []);
+      }
+    } catch (error) {}
+  };
+  const listDataSaleLaptop = filteredProducts.filter(
+    (product) => product.prodType === "Laptop" && product.prodSale > 0,
+  );
+
   return (
     <Box
       marginTop="2  "
       justifyContent="center"
-      w="70%"
+      w="80%"
       m="auto"
       mb="5"
       cursor="pointer"
       textAlign="center"
-      backgroundColor="#1078ff"
+      backgroundColor="#043174"
       borderRadius="15px"
     >
       <Heading
@@ -36,30 +59,13 @@ const PrDeal = ({ type }) => {
         justifyContent="center"
         w="100%"
         m="15p% 10% 10% 10%"
-      >
-        <Box>
-          <i>
-            {" "}
-            <img
-              width="120px"
-              src={require("../../Components/Images/HDSale.png")}
-            />
-          </i>
-        </Box>
-        <Box mt="8">
-          <Text fontSize="40px" color="#efefef" w="100%">
-            {" "}
-            TUẦN LỄ GIẢM GIÁ SẬP SÀN
-          </Text>
-        </Box>
-      </Heading>
+      ></Heading>
       <Swiper>
-        <Box h="200px" m="1" className="bannerPr">
+        <Box h="auto" className="bannerPr">
           <Image
-            src="https://i.pinimg.com/564x/fd/e5/37/fde537bc33d05034f6aec0b0ea33f397.jpg"
-            w="99%"
-            h="200px"
-            m="1"
+            src={require("../../Components/Images/bannerPr1.jpg")}
+            w="100%"
+            h="auto"
             borderRadius="15px"
           />
         </Box>
@@ -87,22 +93,21 @@ const PrDeal = ({ type }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
-              spaceBetween: 5,
+              slidesPerView: 5,
+              spaceBetween: 2,
             },
           }}
         >
-          {type.map((i) => (
+          {listDataSaleLaptop.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to={i.linked}>
+                <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
                     className="list"
                     p="2"
                     mt="4"
-                    ml="1"
-                    mr="1"
-                    mb="5"
+                    m="2"
+                    mb="3"
                     backgroundColor="white"
                     borderRadius="15px "
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
@@ -110,21 +115,31 @@ const PrDeal = ({ type }) => {
                     h="auto"
                   >
                     <Box className="img">
-                      <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
-                        <Image src={`${i.img}`} alt={i.name} boxSize="160px" />
+                      <Square
+                        m="auto"
+                        w={200}
+                        h={200}
+                        _hover={{ transform: "scale(1.1)" }}
+                      >
+                        <Image
+                          src={`${i.prodImg}`}
+                          maxW={200}
+                          maxH={150}
+                          objectFit={"cover"}
+                        />
                       </Square>
                       <Text
                         mt="2"
-                        h="70px"
-                        fontFamily="serif"
+                        height="70px"
+                        fontFamily={"Arial"}
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="25px"
-                        _hover={{ color: "red" }}
+                        fontSize="17px"
+                        _hover={{ color: "blue" }}
                         fontWeight="700"
                       >
-                        {i.name}
+                        {i.prodName}
                       </Text>
                       <Center m="0 auto">
                         <Box mt="2.5" textAlign="center">
@@ -146,15 +161,16 @@ const PrDeal = ({ type }) => {
                                 color="red"
                                 _hover={{ color: "red" }}
                               >
-                                {i.price.toLocaleString("vi-VN", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}
+                                {i.prodPrice &&
+                                  i.prodPrice.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })}
                               </Text>
                             </Square>
                           </Flex>
                           <Box h="20px" mb="3">
-                            {i.original !== 0 && (
+                            {i.prodSale !== 0 && (
                               <>
                                 <Flex>
                                   <Text color="gray.600" fontSize="14px">
@@ -167,25 +183,44 @@ const PrDeal = ({ type }) => {
                                     fontSize="14px"
                                     ml="1"
                                   >
-                                    {i.original.toLocaleString("vi-VN", {
-                                      style: "currency",
-                                      currency: "VND",
-                                    })}
+                                    {i.prodPriceSale &&
+                                      i.prodPriceSale.toLocaleString("vi-VN", {
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
                                   </Text>
                                 </Flex>
-                                <Box
-                                  padding="3px"
-                                  borderRadius="5px"
-                                  w="50%"
-                                  color="#EC4C0A"
-                                  bg="#FEB373"
-                                  mt="2"
-                                  textAlign="center"
-                                >
-                                  <Text fontSize="10px" fontWeight="500">
-                                    GIẢM GIÁ SỐC
-                                  </Text>
-                                </Box>
+                                {i.prodSale >= 20 ? (
+                                  <Box
+                                    borderRadius="5px"
+                                    w="70%"
+                                    backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
+                                    color="#fff "
+                                    _hover={{ color: "black" }}
+                                    textAlign="center"
+                                  >
+                                    <Text fontSize="13px" fontWeight="500">
+                                      GIẢM GIÁ SỐC -{i.prodSale}%
+                                    </Text>
+                                  </Box>
+                                ) : (
+                                  <Flex>
+                                    <Text color="gray.600" fontSize="14px">
+                                      Giảm giá:{" "}
+                                    </Text>
+                                    {"  "}
+                                    <Text
+                                      bgColor="#fff0e9"
+                                      color="#eb5757"
+                                      fontSize="14px"
+                                      fontWeight="700"
+                                      borderRadius="5px"
+                                      ml="1"
+                                    >
+                                      -{i.prodSale}%
+                                    </Text>
+                                  </Flex>
+                                )}
                               </>
                             )}
                           </Box>

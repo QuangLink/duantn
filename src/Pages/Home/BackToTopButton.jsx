@@ -13,8 +13,6 @@ const BackToTopButton = () => {
         setIsVisible(false);
       }
     };
-
-
     window.addEventListener('scroll', toggleVisibility);
 
     return () => {
@@ -22,23 +20,18 @@ const BackToTopButton = () => {
 
     };
   }, []);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
-
     });
   };
-
   return (
     <button
-
       className={`back-to-top-button ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}
     >
       <ChevronUpIcon color="black" fontSize="40px"/>
-
     </button>
   );
 };
