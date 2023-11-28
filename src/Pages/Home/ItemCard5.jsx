@@ -64,7 +64,7 @@ const ItemCard5 = ({ type, heading }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const listDataLaptop = filteredProducts.filter(
     (product) => product.prodType === "Laptop",
@@ -142,6 +142,7 @@ const ItemCard5 = ({ type, heading }) => {
                           m="auto"
                           w={200}
                           h={200}
+                          transition="transform 0.3s ease-in-out"
                           _hover={{ transform: "scale(1.1)" }}
                         >
                           <Image

@@ -254,6 +254,7 @@ const TimeDeal = ({ type, heading }) => {
                         m="auto"
                         w={200}
                         h={200}
+                        transition="transform 0.3s ease-in-out"
                         _hover={{ transform: "scale(1.1)" }}
                       >
                         <Image
@@ -356,12 +357,12 @@ const TimeDeal = ({ type, heading }) => {
                           </>
                         )}
                         <Box
-                  
+                          mt="4"
                           display="flex"
                           backgroundColor="yellow"
                           borderRadius="15px"
                         >
-                          <Text mt="-2">
+                          <Text>
                             <img
                               width="22px"
                               height="22px"

@@ -36,7 +36,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link href="/applephone" >
+              <Link href="/apple/phone" >
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
@@ -85,7 +85,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link to="/appletablet">
+              <Link to="/apple/tablet">
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>

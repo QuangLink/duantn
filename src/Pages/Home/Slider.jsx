@@ -35,7 +35,7 @@ const Slider = ({ type }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const listDataIphone = filteredProducts.filter(
     (product) => product.prodType === "Phone",
@@ -74,18 +74,19 @@ const Slider = ({ type }) => {
           <SwiperSlide>
             <Link to={`/${i.prodType}/${i.prodID}`}>
               <center>
-                <Box p="2" m={1} borderRadius="15px" border="1px solid #ccc" bg="white"> 
+                <Box p="2" m={1} borderRadius="15px" border="1px solid #ccc" bg="white">
                   <Square
                     m="auto"
                     w={200}
                     h={200}
-                    _hover={{ transform: "scale(1.1)" }}
                   >
                     <Image
                       src={`${i.prodImg}`}
                       maxW={200}
                       maxH={150}
                       objectFit={"cover"}
+                      transition="transform 0.3s ease-in-out"
+                      _hover={{ transform: "scale(1.1)" }}
                     />
                   </Square>
                   <Text

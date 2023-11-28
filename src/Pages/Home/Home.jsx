@@ -63,7 +63,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Box bg={'#F1F3F7'}>
+    <Box bg={"#F1F3F7"}>
       <Suspense fallback={<div>Loading...</div>}>
         {/* <BannerCenter type={BannersCenter} /> */}
         <BannerHome type={BannerHomePage} heading=" " />
@@ -86,17 +86,12 @@ const Home = () => {
           <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
         )}
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && (
-          <ItemCardTest2 type={PrAcer} heading="MÁY TÍNH NỔI BẬT " />
-        )}
-      </Suspense>
-      
+   
 
       <Suspense fallback={<div>Loading...</div>}>
-        <ItemCard2
+        <ItemCardTest2
           type={PrApplePhone}
-          linked={"/personalcare"}
+          linked={"/apple/phone"}
           heading="IPHONE"
         />
       </Suspense>

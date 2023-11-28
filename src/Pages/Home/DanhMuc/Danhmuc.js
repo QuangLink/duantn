@@ -97,6 +97,8 @@ const Danhmuc = ({ type, heading }) => {
                                                     maxW={200}
                                                     maxH={150}
                                                     objectFit={"cover"}
+                                                    transition="transform 0.3s ease-in-out"
+                                                    _hover={{ transform: "scale(1.1)" }}
                                                 />
                                             </Square>
                                             <Text fontSize={18} mt={5} color={'black'}>{i.name}</Text>

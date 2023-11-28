@@ -35,7 +35,7 @@ const Slider1 = ({ type }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const listDataIphone = filteredProducts.filter(
     (product) => product.prodType === "Laptop",
@@ -85,6 +85,8 @@ const Slider1 = ({ type }) => {
                     maxW={200}
                     maxH={150}
                     objectFit={"cover"}
+                    transition="transform 0.3s ease-in-out"
+                    _hover={{ transform: "scale(1.1)" }}
                   />
                 </Square>
 

@@ -36,12 +36,9 @@ const BannerHome = ({ type }) => {
                     templateRows='repeat(3, 2fr)'
                     templateColumns='repeat(12, 1fr)'
                     gap={4}
-
                 >
                     <GridItem rowSpan={2} colSpan={9}  >
-
                         <Box position="relative">
-
                             <Slider ref={sliderRef} {...settings}>
                                 {type.map((i) => (
                                     <Box position="relative" style={{ height: "100%" }}>

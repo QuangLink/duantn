@@ -6,19 +6,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
-import { Flex, Text, Image, Square, Box, Center } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Image,
+  Square,
+  Box,
+  Center,
+  Stack,
+  Button,
+} from "@chakra-ui/react";
 import Heading from "../Heading";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
-const ItemCardTest2 = ({ type, heading }) => {
+const ItemCardTest = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap" >
+      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
         <Flex
           justifyContent="center"
           w="100%"
@@ -27,48 +36,62 @@ const ItemCardTest2 = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
-            position="absolute"
-            mt="5%"
-            ml="-45%"
-            transform="translate(-50%, -50%)"
-            textAlign="center"
-            zIndex={1} // Set z-index to ensure the text is on top of the image
-            color="white"
-            p="2"
-            w="15%"
+            w="29%"
             h="auto"
+            position="relative"
+            overflow="hidden"
             borderRadius="15px"
-            borderWidth={1}
-            borderColor={"#555"}
-            bg="rgba(0,0,0,0.5)"
-            fontSize="10px"
+            m={1}
+            mr={"1%"}
           >
-            <h3>Asus</h3>
-            <p>
-                Chọn theo phong cách của bạn
-            </p>
-            <button className="button button--primary">Show Now</button>
-          </Box>
             <Image
-              mt="1"
-              src="https://megabyte.andevfrontend.com/images/categories/sliders/notebooks.jpg"
+              src="https://i.postimg.cc/YCRGGw0Z/Untitled.png"
               alt="Smart Watch"
-              height="415px"
-              mr={"1%"}
-              width="30%"
+              height="100%"
               loading="lazy"
               borderRadius="15px"
-              zIndex={0} // Set z-index to ensure the image is behind the text
+              zIndex={1}
+              transition="transform 0.3s ease-in-out"
+              _hover={{ transform: "scale(1.1)" }}
             />
+            <Stack
+              ml="35px"
+              mb="30%"
+              position="absolute"
+              bottom={4}
+              zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
+            >
+              <Box
+                //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
+                color="white"
+                right={-10} // Shift the box to the left by 10px
+                p="2"
+                w="100%"
+                h="auto"
+              >
+                <h3>Các sản phẩm</h3>
+                <h3>Apple</h3>
+                <Link to="/apple/phone">
+                  <Text
+                    fontSize="18px"
+                    textDecoration="underline"
+                    m={1}
+                    color={"#black"}
+                  >
+                    {" "}
+                    Xem thêm{" "}
+                  </Text>
+                </Link>
+              </Box>
+            </Stack>
+          </Box>
           {/* Banner Image */}
-
 
           {/* Text Overlay */}
 
           {/* Swiper Slider */}
           <Box
-            w="75%" // Adjust the width of the Swiper slider as needed
+            w="70%" // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
@@ -80,7 +103,6 @@ const ItemCardTest2 = ({ type, heading }) => {
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-        
               modules={[Grid, Autoplay]}
               className="mySwiper"
             >
@@ -98,12 +120,13 @@ const ItemCardTest2 = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto" >
+                        <Box className="list" p="2" w="" h="auto">
                           <Box className="img">
                             <Square
                               m="auto"
                               w={100}
                               h={200}
+                              transition="transform 0.3s ease-in-out"
                               _hover={{ transform: "scale(1.1)" }}
                             >
                               <Image
@@ -166,4 +189,4 @@ const ItemCardTest2 = ({ type, heading }) => {
   );
 };
 
-export default ItemCardTest2;
+export default ItemCardTest;
