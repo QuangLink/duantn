@@ -123,7 +123,7 @@ const HotProduct = ({ type }) => {
                             ml="2"
                             mt="2"
                             color="red"
-                            _hover={{ color: "blue.300" }}
+                        
                           >
                             {i.price &&
                               i.price.toLocaleString("vi-VN", {

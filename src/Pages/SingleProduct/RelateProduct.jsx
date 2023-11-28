@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
@@ -41,7 +41,6 @@ const RelateProduct = ({ type, heading }) => {
       try {
         const relatedData = await fetchDataForCategory("sale");
         setRelatedProducts(relatedData);
-        console.log(relatedData);
       } catch (error) {
         console.error("Lỗi khi tải dữ liệu sản phẩm liên quan:", error);
       }
@@ -56,7 +55,7 @@ const RelateProduct = ({ type, heading }) => {
       w={["100%", "100%", "80%"]}
       display={["none", "block", "block"]}
       m="auto"
-      mt="5"
+      mt="20"
       cursor="pointer"
       textAlign="left"
       backgroundColor="blackAlpha.50"
@@ -64,12 +63,14 @@ const RelateProduct = ({ type, heading }) => {
       <Box>
         <a href="">
           <Text
-            fontSize="2xl"
-            width=""
-            fontWeight="700"
-            textColor="black"
-            className="headingHome"
-            m="auto"
+           fontSize="2xl"
+           width=""
+           fontWeight="700"
+           textColor="black"
+           className="headingHome"
+   
+          
+         
           >
             Các sản phẩm liên quan
           </Text>
@@ -107,7 +108,7 @@ const RelateProduct = ({ type, heading }) => {
           {relatedProducts.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to={`/${i.id}`}>
+                <Link to="/">
                   <Box
                     p="5"
                     m={["0%", "0%", "1%"]}
@@ -157,17 +158,8 @@ const RelateProduct = ({ type, heading }) => {
                           </Text>
                         </Square>
                       </Flex>
-                      {i.original !== i.price && (
+                      {i.original !== 0 && (
                         <>
-                          <Flex>
-                            <Text color="red.600" fontSize="18px">
-                              Giảm:{" "}
-                            </Text>
-                            {"  "}
-                            <Text color="red.600" fontSize="18px" ml="1">
-                              {i.sale} %
-                            </Text>
-                          </Flex>
                           <Flex>
                             <Text color="gray.600" fontSize="14px">
                               Giá gốc:{" "}
