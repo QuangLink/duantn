@@ -35,28 +35,7 @@ const Heading = ({ heading }) => {
             {heading}
           </Text>
         </Box>
-        <Box display="flex" justifyItems="space-around">
-          <Link to="/computers">
-            <motion.div variants={buttonVariants} whileHover="hover">
-              <Button
-                margin="10px"
-                border="2px solid gray"
-                borderRadius="10px"
-                width="100%"
-                fontSize="15px"
-                color="#116d93"
-                fontFamily="initial"
-                _hover={{
-                  letterSpacing: 0.5,
-                  color: "#c31212",
-                  textColor: "#c31212",
-                }}
-              >
-                <Text>Xem tất cả</Text>
-              </Button>
-            </motion.div>
-          </Link>
-        </Box>
+
       </Center>
     </Flex>
   );

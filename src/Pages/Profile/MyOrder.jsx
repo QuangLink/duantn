@@ -12,25 +12,44 @@ import {
   VStack,
   useDisclosure,
   useToast,
+  Input,
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Select,
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import "react-slideshow-image/dist/styles.css";
 import { useNavigate } from "react-router-dom";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Icon } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import "react-slideshow-image/dist/styles.css";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+
 import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
 import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-function MyOrder() {
+import { Link } from "react-router-dom";
+const MyOrder = () => {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);
   const username = Cookies.get("username");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const address = useRef({});
   const toast = useToast();
-  const navigate = useNavigate();
+
   const [selectedOrderCode, setSelectedOrderCode] = useState(null);
 
   useEffect(() => {
@@ -42,7 +61,7 @@ function MyOrder() {
       const response = await axios.get(
         `https://duantn-backend.onrender.com/orders/user/${userID}`,
       );
-      console.log(response.data);
+
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -66,154 +85,182 @@ function MyOrder() {
       );
     };
 
+    const formatCurrency = (amount) => {
+      // Format the amount as currency, you may want to use a library for this
+      // Example: using Intl.NumberFormat
+      const formatter = new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      });
+
+      return formatter.format(amount);
+    };
+    const processedOrderCodes = new Set();
+    const totalExpenditure = Object.values(productsByOrderCode)
+      .flat()
+      .reduce((total, product) => {
+        if (!processedOrderCodes.has(product.orderCode)) {
+          processedOrderCodes.add(product.orderCode);
+          return total + product.totalPay;
+        }
+        return total;
+      }, 0);
+
     return (
-      <React.Fragment>
-        {Object.entries(productsByOrderCode).map(([orderCode, productList]) => (
-          <React.Fragment key={orderCode}>
-            <tr>
-              <td
-                colSpan="8"
-                style={{ fontWeight: "bold", cursor: "pointer" }}
-                onClick={() => handleOrderCodeClick(orderCode)}
-              >
-                Order Code: {orderCode}{" "}
-                {selectedOrderCode === orderCode ? (
-                  <Icon as={FaChevronUp} />
-                ) : (
-                  <Icon as={FaChevronDown} />
-                )}
-              </td>
-            </tr>
-            {selectedOrderCode === orderCode &&
-              productList.map((product) => (
-                <Box padding="10px" bg={"blackAlpha.50"} marginBottom={5}>
-                  <Box
-                    mt="5"
-                    display="flex"
-                    justifyContent="space-evenly"
-                    borderWidth="1px"
-                    borderRadius="md"
-                    bg={"white"}
+      <Box>
+        <React.Fragment>
+          {Object.entries(productsByOrderCode).map(
+            ([orderCode, productList]) => (
+              <Box borderWidth="1px" margin="10px" padding="10px">
+                <React.Fragment key={orderCode}>
+                  <tr>
+                    <td
+                      colSpan="8"
+                      style={{ fontWeight: "bold", cursor: "pointer" }}
+                      onClick={() => handleOrderCodeClick(orderCode)}
+                    >
+                      Mã giao dịch: {orderCode}{" "}
+                      {selectedOrderCode === orderCode ? (
+                        <Icon as={FaChevronUp} />
+                      ) : (
+                        <Icon as={FaChevronDown} />
+                      )}
+                    </td>
+                  </tr>
+                  {selectedOrderCode === orderCode &&
+                    productList.map((product) => (
+                      <Box padding="10px">
+                        <hr />
+                        <Box
+                          mt="5"
+                          display="flex"
+                          justifyContent="space-evenly"
+                        >
+                          <Box key={product.id} p={4} borderRadius="md" mb={4}>
+                            <Image src={product.prodImg} w={100} />
+                          </Box>
+                          <Box width="60%" padding="10px">
+                            <Text
+                              height="60px"
+                              color="#424245"
+                              noOfLines={2}
+                              fontSize="20px"
+                              fontWeight="500"
+                            >
+                              Tên sản phẩm: {product.prodName} {product.color}{" "}
+                              {product.storage_value}
+                            </Text>
+                            <Text
+                              fontWeight="500"
+                              fontSize="15px"
+                              ml="1"
+                              color="#cccc"
+                            >
+                              Số lượng: x{product.quantity}
+                            </Text>
+
+                            <Text
+                              fontWeight="500"
+                              fontSize="15px"
+                              ml="1"
+                              color="red"
+                            >
+                              Giá: {product.prodPrice}VNĐ
+                            </Text>
+
+                            <Text
+                              fontWeight="500"
+                              fontSize="15px"
+                              ml="1"
+                              color="#000c"
+                            >
+                              Ngày đặt hàng:{" "}
+                              {new Date(product.orderDate).toLocaleString()}
+                            </Text>
+                          </Box>
+                          <Box width="23%">
+                            <Box mt="12px">
+                              {product.payment === "Banking" ? (
+                                <Text
+                                  class="badge bg-success"
+                                  fontWeight="600"
+                                  fontSize="18px"
+                                  ml="1"
+                                >
+                                  Phương thức: {product.payment}
+                                </Text>
+                              ) : (
+                                <Text
+                                  class="badge bg-danger"
+                                  fontWeight="600"
+                                  fontSize="18px"
+                                  ml="1"
+                                >
+                                  Phương thức: {product.payment}
+                                </Text>
+                              )}
+                            </Box>
+                            <Box mt="10px">
+                              {product.orderStatus === "Đã thanh toán" ? (
+                                <Text
+                                  class="badge bg-success"
+                                  fontWeight="600"
+                                  fontSize="18px"
+                                  ml="1"
+                                  color="black"
+                                >
+                                  Trạng thái: {product.orderStatus}
+                                </Text>
+                              ) : (
+                                <Text
+                                  class="badge bg-danger"
+                                  fontWeight="600"
+                                  fontSize="18px"
+                                  ml="1"
+                                  color="black"
+                                >
+                                  Trạng thái: {product.orderStatus}
+                                </Text>
+                              )}
+                            </Box>
+                            <Box display="flex" mt="30px">
+                              <Link to={`/${product.prodID}`}>
+                                <Button
+                                  type="submit"
+                                  colorScheme="blue"
+                                  marginRight="10px"
+                                  borderRadius={"2px"}
+                                >
+                                  Mua lại
+                                </Button>
+                              </Link>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ))}
+                </React.Fragment>
+                <Box display="flex">
+                  <Text
+                    fontWeight="600"
+                    fontSize="18px"
+                    ml="1"
+                    color="red"
+                    _hover={{ color: "red" }}
                   >
-                    <Box key={product.id} p={4} borderRadius="md" mb={4}>
-                      <img src={product.prodImg} width="200px" />
-                    </Box>
-                    <Box width="60%">
-                      <Text
-                        mt="2"
-                        height="50px"
-                        fontFamily="serif"
-                        color="#424245"
-                        noOfLines={2}
-                        fontSize="20px"
-                        fontWeight="700"
-                      >
-                        Name: {product.prodName} ({product.prodID})
-                      </Text>
-
-                      <Text fontWeight="600" fontSize="18px" ml="1" color="red">
-                        Giá: {product.prodPrice}VNĐ
-                      </Text>
-                      <Text fontWeight="600" fontSize="18px" ml="1" color="red">
-                        Số lượng: {product.quantity}
-                      </Text>
-
-                      <Text
-                        fontWeight="600"
-                        fontSize="18px"
-                        ml="1"
-                        color="black"
-                      >
-                        Purchase Time:{" "}
-                        {new Date(product.orderDate).toLocaleString()}
-                      </Text>
-                      <Text
-                        fontWeight="600"
-                        fontSize="18px"
-                        ml="1"
-                        color="black"
-                      >
-                        Delivery Time:{" "}
-                        {new Date(product.orderDate).toLocaleString()}
-                      </Text>
-                    </Box>
-                    <Box mt="50">
-                      {product.payment === "Banking" ? (
-                        <Text
-                          class="badge bg-success"
-                          fontWeight="600"
-                          fontSize="18px"
-                          ml="1"
-                          color="black"
-                        >
-                          Phương thức: {product.payment}
-                        </Text>
-                      ) : (
-                        <Text
-                          class="badge bg-danger"
-                          fontWeight="600"
-                          fontSize="18px"
-                          ml="1"
-                          color="black"
-                        >
-                          Phương thức: {product.payment}
-                        </Text>
-                      )}
-                    </Box>
-                    <Box mt="50">
-                      {product.orderStatus === "Đã thanh toán" ? (
-                        <Text
-                          class="badge bg-success"
-                          fontWeight="600"
-                          fontSize="18px"
-                          ml="1"
-                          color="black"
-                        >
-                          Trạng thái: {product.orderStatus}
-                        </Text>
-                      ) : (
-                        <Text
-                          class="badge bg-danger"
-                          fontWeight="600"
-                          fontSize="18px"
-                          ml="1"
-                          color="black"
-                        >
-                          Trạng thái: {product.orderStatus}
-                        </Text>
-                      )}
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Box>
-                      <Text
-                        fontWeight="600"
-                        fontSize="18px"
-                        ml="1"
-                        color="red"
-                        _hover={{ color: "red" }}
-                      >
-                        Thanh toán: {product.prodPrice} VNĐ
-                      </Text>
-                    </Box>
-                    <Box mt="50">
-                      <Button type="submit" colorScheme="blue" marginRight={20}>
-                        Mua lại
-                      </Button>
-                      <Icon
-                        as={BsFillTrashFill}
-                        w={6}
-                        h={6}
-                        color="black"
-                        margin="auto"
-                      />
-                    </Box>
-                  </Box>
+                    Thành Tiền: {formatCurrency(productList[0].totalPay)}
+                  </Text>
                 </Box>
-              ))}
-          </React.Fragment>
-        ))}
-      </React.Fragment>
+              </Box>
+            ),
+          )}
+          <Box m="4">
+            <Text fontWeight="700" fontSize="20px" ml="1" color="green">
+              Tổng chi tiêu: {formatCurrency(totalExpenditure)}
+            </Text>
+          </Box>
+        </React.Fragment>
+      </Box>
     );
   };
   const clearAddress = () => {
@@ -222,7 +269,6 @@ function MyOrder() {
     axios
       .delete(apiUrl)
       .then((response) => {
-        console.log("Server response:", response.data);
         toast({
           title: "Địa chỉ được xóa thành công.",
           description: "Hãy thêm địa chỉ giao hàng mới.",
@@ -260,8 +306,6 @@ function MyOrder() {
       axios
         .post(apiUrl, newAddress)
         .then((response) => {
-          console.log("Server response:", response.data);
-
           toast({
             title: "Địa chỉ được thêm thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
@@ -279,8 +323,6 @@ function MyOrder() {
       axios
         .put(apiUrl, newAddress)
         .then((response) => {
-          console.log("Server response:", response.data);
-
           toast({
             title: "Địa chỉ được cập nhật thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
@@ -297,12 +339,11 @@ function MyOrder() {
   };
   //show address data
   const [addressData, setAddressData] = useState([]);
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     axios
       .get(`https://duantn-backend.onrender.com/users/address/${username}`)
       .then((response) => {
-        console.log("Server response:", response.data);
         setAddressData(response.data);
       })
       .catch((error) => {
@@ -311,8 +352,6 @@ function MyOrder() {
   }, [username]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
 
   useEffect(() => {
     fetchData(2, setProvinces);
@@ -331,22 +370,8 @@ function MyOrder() {
       });
   };
 
-  const handleProvinceChange = (e) => {
-    const provinceName = e.target.value; // Giữ value là name
-    setSelectedProvince(provinceName);
-
-    if (provinceName) {
-      const selectedProvinceData = provinces.find(
-        (province) => province.name === provinceName,
-      );
-      setDistricts(selectedProvinceData.districts || []);
-    } else {
-      // Clear districts when no province is selected
-      setDistricts([]);
-    }
-    setSelectedDistrict(""); // reset selected district when province changes
-  };
-
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   const handleDistrictChange = (e) => {
     const districtName = e.target.value;
     const selectedDistrictData = districts.find(
@@ -362,46 +387,85 @@ function MyOrder() {
       addressData.length === 0
     ) {
       return (
-        <Flex w="100%">
-          <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic">
-            Bạn chưa có địa chỉ nhận hàng
-          </Text>
-        </Flex>
+        <Box
+          textAlign="center"
+          p="20px"
+          borderWidth="1px"
+          width="100%"
+          borderRadius="md"
+          w="300px"
+        >
+          <Center>
+            <Image
+              src="https://icon-library.com/images/free-avatar-icon/free-avatar-icon-10.jpg"
+              alt=""
+              borderRadius="full"
+              boxSize="150px"
+            />
+          </Center>
+          <Divider my="20px" />
+          <VStack spacing="10px">
+            <Text fontSize="2xl" fontWeight="bold">
+              {username}
+            </Text>
+            <Text fontSize="md">Bạn chưa có địa chỉ giao hàng</Text>
+            <Button onClick={onOpen} colorScheme="blue" variant="outline">
+              Nhập địa chỉ giao hàng mới
+            </Button>
+          </VStack>
+        </Box>
       );
     }
 
     return addressData.map((address, index) => (
-      <Flex key={index} w="100%">
-        <Image
-          src="https://example.com/avatar.jpg"
-          alt=""
-          borderRadius="full"
-          boxSize="150px"
-          justifyContent="center"
-        />
-        <hr />
-        <VStack spacing="10px" marginTop="20px">
-          <Text fontSize="xl">
-            {address.firstname} {address.lastname}
-          </Text>
-          <Text fontSize="md">{user.address}</Text>
-          <Text fontSize="md">Số điện thoại</Text>
-          <Text fontSize="md">Email</Text>
+      <Box
+        key={index}
+        textAlign="center"
+        p="50px"
+        borderWidth="1px"
+        width="100%"
+        borderRadius="md"
+      >
+        <Center>
+          <Image
+            src="https://icon-library.com/images/free-avatar-icon/free-avatar-icon-10.jpg"
+            alt=""
+            borderRadius="full"
+            boxSize="200px"
+          />
+        </Center>
+        <Text fontSize="25px" fontWeight="bold" w="100%">
+          {address.username}
+        </Text>
+        <Divider my="20px" />
+        <VStack spacing="10px " alignItems="flex-start">
+          <Text fontSize="md">Username: {address.username}</Text>
+          <Text fontSize="md">Đường: {address.street}</Text>
+
+          <Text fontSize="md">Địa chỉ: {address.flat}</Text>
+          <Text fontSize="md">Quận huyện: {address.state}</Text>
+          <Text fontSize="md">Tỉnh thành: {address.city}</Text>
+
+          <Text fontSize="md">Phone: {address.mobile}</Text>
+          <Text fontSize="md">Email: {address.email}</Text>
         </VStack>
-      </Flex>
+      </Box>
     ));
   };
+  const handleProvinceChange = (e) => {
+    const provinceName = e.target.value; // Giữ value là name
+    setSelectedProvince(provinceName);
 
-  const user = {
-    name: "Nguyễn Văn B",
-    username: "nguyenvana",
-    gender: "Nữ",
-    birthday: "01/01/1990",
-    age: 33,
-    country: "Việt Nam",
-    province: "Hà Nội",
-    address: "Số 123, Đường ABC, Quận XYZ, Hà Nội",
-    avatar: "https://example.com/avatar.jpg",
+    if (provinceName) {
+      const selectedProvinceData = provinces.find(
+        (province) => province.name === provinceName,
+      );
+      setDistricts(selectedProvinceData.districts || []);
+    } else {
+      // Clear districts when no province is selected
+      setDistricts([]);
+    }
+    setSelectedDistrict(""); // reset selected district when province changes
   };
   const [isChecked, setIsChecked] = useState(false);
 
@@ -410,28 +474,123 @@ function MyOrder() {
   };
 
   return (
-    <Box display="flex" justifyContent="center">
-      <Box>
-        <Box
-          textAlign="center"
-          padding="50px"
-          margin="10px 0px"
-          borderWidth="1px"
-          width="80%"
-          borderRadius="md"
-        >
-          {renderAddressData()}
-        </Box>
-      </Box>
-      <Box width="70%">
-        <Heading as="h2" size="lg" mb={4}>
-          My Order
+    <Box
+      display="flex"
+      maxW="30̀%"
+      mt="20px"
+      p="10px"
+      borderWidth="1px"
+      borderRadius="md"
+      className="profile-container"
+    >
+      <Center>
+        <div>
+          <Accordion defaultIndex={[0]} allowMultiple>
+            <AccordionItem>
+              <AccordionPanel>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Địa chỉ giao hàng</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <Flex flexDirection="column" gap="1rem">
+                        <Input
+                          placeholder="Họ*"
+                          ref={(e) => (address.current["setfirstname"] = e)}
+                        />
+                        <Input
+                          placeholder="Tên*"
+                          ref={(e) => (address.current["setlastname"] = e)}
+                        />
+                        <Input
+                          placeholder="Địa chỉ cụ thể (Tòa nhà)*"
+                          ref={(e) => (address.current["setflat"] = e)}
+                        />
+                        <Input
+                          placeholder="Đường*"
+                          ref={(e) => (address.current["setstreet"] = e)}
+                        />
+
+                        <Select
+                          id="provinces"
+                          onChange={handleProvinceChange}
+                          value={selectedProvince || ""}
+                          ref={(e) => (address.current["setcity"] = e)}
+                        >
+                          <option value="">Chọn tỉnh / thành phố</option>
+                          {provinces.map((province) => (
+                            <option key={province.code} value={province.name}>
+                              {province.name}
+                            </option>
+                          ))}
+                        </Select>
+
+                        <Select
+                          id="districts"
+                          onChange={handleDistrictChange}
+                          value={selectedDistrict.name || ""}
+                          ref={(e) => (address.current["setstate"] = e)}
+                        >
+                          <option value="">Chọn quận / huyện</option>
+                          {districts.map((district) => (
+                            <option
+                              key={district.code}
+                              value={district.name}
+                              data-code={district.code} // Lưu trữ code trong một thuộc tính tùy chỉnh
+                            >
+                              {district.name}
+                            </option>
+                          ))}
+                        </Select>
+                        <Input
+                          type="number"
+                          placeholder="Số điện thoại*"
+                          ref={(e) => (address.current["setmobile"] = e)}
+                        />
+                        <Button
+                          colorScheme="blue"
+                          mr={3}
+                          onClick={() => {
+                            handleAddressSubmit();
+                          }}
+                        >
+                          SUBMIT
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          colorScheme="blue"
+                          mr={3}
+                          onClick={onClose}
+                        >
+                          Cancel
+                        </Button>
+                      </Flex>
+                    </ModalBody>
+                  </ModalContent>
+                </Modal>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </Center>
+      <Box w="30%">{renderAddressData()}</Box>
+      <Box w={"80%"} padding={"5px"}>
+        <Heading as="h2" size="lg" m={"0 7px 12px 12px"}>
+          Đơn mua
         </Heading>
+        <InputGroup margin={"10px"} w={"98%"} bg="#eaeaea">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input type="text" placeholder="Tìm kiếm đơn hàng ..." />
+        </InputGroup>
         {renderProducts()}
         <br />
       </Box>
     </Box>
   );
-}
+};
 
 export default MyOrder;

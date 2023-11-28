@@ -57,7 +57,13 @@ const Cart = () => {
   }, [change]);
 
   return (
-    <div>
+    <div
+      style={{
+        margin: "auto",
+        width: "100%",
+        marginBottom: "100px",
+      }}
+    >
       <style>
         {`
         @keyframes blink {
@@ -75,7 +81,6 @@ const Cart = () => {
       </style>
       <Flex
         border={"0px solid #4a90e2"}
-        margin="auto"
         width={"100%"}
         paddingX="20px"
         flexDirection={{
@@ -86,6 +91,13 @@ const Cart = () => {
           xl: "row",
           "2xl": "row",
         }}
+        style={{
+          margin: "auto",
+          width: "100%",
+          marginBottom: "100px",
+        }}
+        justifyContent="center"
+        alignItems="center"
       >
         {dataLength === 0 ? (
           <Box
@@ -110,7 +122,7 @@ const Cart = () => {
               textAlign="center"
               display="flex"
               justifyContent="space-around"
-              w="95%"
+              w="100%"
               m="15p% 10% 10% 10%"
               mt="5"
             >
@@ -122,7 +134,7 @@ const Cart = () => {
             </Heading>
             <Center
               mt="5px"
-              width="100%"
+             
               w="95%"
               display="flex"
               flexWrap="wrap"
@@ -134,9 +146,9 @@ const Cart = () => {
                   base: "100%",
                   sm: "100%",
                   md: "100%",
-                  lg: "70%",
-                  xl: "70%",
-                  "2xl": "70%",
+                  lg: "75%",
+                  xl: "75%",
+                  "2xl": "74%",
                 }}
                 gap={"1"}
               >
@@ -170,8 +182,9 @@ const Cart = () => {
                   />
                 ))}
               </Flex>
-            </Center>
-            <Flex justifyContent="space-between" w="710px">
+            </Center >
+           <Center width="100%">
+           <Flex justifyContent="space-between" w="50%">
               <Text
                 mt="2"
                 height="50px"
@@ -180,6 +193,7 @@ const Cart = () => {
                 noOfLines={2}
                 fontSize="20px"
                 fontWeight="700"
+                
               >
                 Tạm tính:
               </Text>
@@ -192,8 +206,9 @@ const Cart = () => {
                   })}
               </Text>
             </Flex>
+           </Center>
             <Button
-              w="710px"
+              w="50%"
               h="50px"
               border="1px solid  #70b1ea"
               borderRadius="10px"
@@ -201,7 +216,7 @@ const Cart = () => {
               _hover={{ color: "#4a90e2" }}
               onClick={() => navigate("/checkout")}
             >
-              <Text color="white">Tiến hành đặt hàng</Text>
+              <Text color="white" m="auto">Tiến hành đặt hàng</Text>
             </Button>
           </Center>
         )}

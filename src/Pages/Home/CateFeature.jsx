@@ -10,14 +10,14 @@ const CateFeature = ({ type }) => {
   const rows = [];
   for (let i = 0; i < 2; i++) {
     const row = [];
-    for (let j = i * 4; j < i * 4 + 4 && j < type.length; j++) {
+    for (let j = i * 8; j < i * 8 + 8 && j < type.length; j++) {
       row.push(
         <td key={j} style={{ textAlign: "center" }}>
           <Link to={`${type[j].prodType}`}>
             <div
               style={{
                 borderRadius: "10px",
-                border: "1px solid #b0b0b0",
+          
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -31,6 +31,8 @@ const CateFeature = ({ type }) => {
               <p
                 className="cateName"
                 style={{
+                  height:"60px",
+                  width:"150px",
                   marginTop: "0",
                   wordWrap: "break-word",
                   padding: "5px",
@@ -56,7 +58,7 @@ const CateFeature = ({ type }) => {
         textColor="black"
         mt="2%"
       >
-        Danh mục nổi bật
+        DANH MỤC NỔI BẬT
       </Heading>
 
       <Box

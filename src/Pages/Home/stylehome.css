@@ -163,3 +163,32 @@
 
 
 
+/* Style for option */
+.option-select {
+  font-family: Arial, sans-serif;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  
+}
+
+.options button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.options button:hover {
+  background: #f0f0f0;
+}
+
+.options .selected {
+  color: #0078d4;
+  border-bottom: 2px solid #0078d4;
+}

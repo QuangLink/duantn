@@ -11,7 +11,7 @@ import {
   Heading,
   useToast,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -31,7 +31,7 @@ const Slider = ({ type }) => {
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/category/apple`,
       );
-      console.log("in the logi func try", responce.data);
+
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -40,8 +40,6 @@ const Slider = ({ type }) => {
   const listDataIphone = filteredProducts.filter(
     (product) => product.prodType === "Phone",
   );
-
-  console.log(listDataIphone, "listDataIphone");
 
   return (
     <Swiper
@@ -66,7 +64,7 @@ const Slider = ({ type }) => {
           spaceBetween: 5,
         },
         1366: {
-          slidesPerView: 4,
+          slidesPerView: 5,
           spaceBetween: 5,
         },
       }}
@@ -75,99 +73,64 @@ const Slider = ({ type }) => {
         <Box key={uuid()}>
           <SwiperSlide>
             <Link to={`/${i.prodType}/${i.prodID}`}>
-              <Box
-                p="2"
-                m={2}
-                borderRadius="15px"
-                boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
-                width="310px"
-              >
-                <Square m="5" _hover={{ transform: "scale(1.1)" }}>
-                  <Image
-                    src={`${i.prodImg}`}
-                    alt={i.prodName}
-                    boxSize={{ base: "160px" }}
-                  />
-                </Square>
-                <Text
-                  mt="2"
-                  h="30px"
-                  fontFamily="Arial"
-                  color="gray.800"
-                  noOfLines={2}
-                  textAlign="center"
-                  fontSize="20px"
-                  w={{ xs: "80%", sm: "80%", base: "100px" }}
-                  _hover={{ color: "blue" }}
-                  fontWeight="500"
+              <center>
+                <Box
+                  p="2"
+                  m={1}
+                  borderRadius="15px"
+                  border="1px solid #ccc"
+                  bg="white"
                 >
-                  {i.prodName}
-                </Text>
-                <Box mt="2.5" m="20px 0 50px 30px">
-                  <Flex>
-                    <Square>
-                      <Text
-                        color="gray.600"
-                        fontSize="14px"
-                        justifyContent="center"
-                      >
-                        Giá mới :{" "}
-                      </Text>
-                    </Square>
-                    <Square>
-                      <Text
-                        fontWeight="600"
-                        fontSize="18px"
-                        ml="1"
-                        color="red"
-                        _hover={{ color: "red" }}
-                      >
-                        {i.prodPrice &&
-                          i.prodPrice.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                          })}
-                      </Text>
-                    </Square>
-                  </Flex>
-                  <Box h="20px">
-                    {i.original !== 0 && (
-                      <>
-                        <Flex>
-                          <Text
-                            color="gray.600"
-                            fontSize="14px"
-                            justifyContent="center"
-                          >
-                            Giá gốc:{" "}
-                          </Text>
-                          {"  "}
-                          <Text as="s" color="gray.600" fontSize="14px" ml="1">
-                            {i.original &&
-                              i.original.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                              })}
-                          </Text>
-                        </Flex>
-                        <Box
-                          padding="3px"
-                          borderRadius="5px"
-                          w="50%"
-                          color="#EC4C0A"
-                          bg="#FEB373"
-                          mt="2"
-                          textAlign="center"
+                  <Square m="auto" w={200} h={200}>
+                    <Image
+                      src={`${i.prodImg}`}
+                      maxW={200}
+                      maxH={150}
+                      objectFit={"cover"}
+                      transition="transform 0.3s ease-in-out"
+                      _hover={{ transform: "scale(1.1)" }}
+                    />
+                  </Square>
+                  <Text
+                    mt="2"
+                    h="70px"
+                    fontFamily="Arial"
+                    color="gray.800"
+                    noOfLines={2}
+                    textAlign="center"
+                    fontSize="17px"
+                    w={{ xs: "80%", sm: "80%", base: "100px" }}
+                    _hover={{ color: "red" }}
+                    fontWeight="700"
+                  >
+                    {i.prodName}
+                  </Text>
+                  <Box mt="2.5" m="20px 0 30px 0">
+                    <Flex>
+                      <Square>
+                        <Text color="gray.600" fontSize="14px">
+                          Giá mới :{" "}
+                        </Text>
+                      </Square>
+                      <Square>
+                        <Text
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="red"
+                          _hover={{ color: "red" }}
                         >
-                          <Text fontSize="10px" fontWeight="500">
-                            GIẢM GIÁ SỐC
-                          </Text>
-                        </Box>
-                      </>
-                    )}
+                          {i.prodPrice &&
+                            i.prodPrice.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                        </Text>
+                      </Square>
+                    </Flex>
                   </Box>
                 </Box>
-              </Box>
+              </center>
             </Link>
           </SwiperSlide>
         </Box>

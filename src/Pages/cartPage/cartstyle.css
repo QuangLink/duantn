@@ -1,10 +1,11 @@
 .cartPage {
-  width: 70%;
+  width: 80%;
   justify-content: center;
   align-items: center;
 
   height: auto;
   margin: auto;
+ 
   margin-top: 6;
   margin-bottom: 2;
   cursor: pointer;
@@ -42,7 +43,7 @@
 /* checkoutpage */
 .BgImg {
   height: 3px;
-  width: 100%;
+  width: 90%;
   background-position-x: -30px;
   background-size: 116px 3px;
   background-image: repeating-linear-gradient(

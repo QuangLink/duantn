@@ -1,29 +1,33 @@
-import "./App.css";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import AllRoutes from "./Components/AllRoutes";
 import Footer from "./Components/Footer.jsx/Footer";
-import React from "react";
 import { AuthContextProvider } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
+const App = () => {
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState(location.pathname);
 
-  render() {
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location.pathname]);
 
-    
-    return (
-      <div className="App">
-        <AuthContextProvider>
-          <Navbar />
-          <AllRoutes />
-          <Footer />
-        </AuthContextProvider>
-      </div>
-    );
-  }
-}
+  const isAdminRoute = currentPath.includes("/admin");
+  console.log("isAdminRoute:", isAdminRoute);
+  console.log("Current path:", currentPath);
+
+  return (
+    <div className="App">
+      <AuthContextProvider>
+        {!isAdminRoute && <Navbar />}
+        <AllRoutes />
+        {!isAdminRoute && <Footer />}
+      </AuthContextProvider>
+      <ToastContainer />
+    </div>
+  );
+};
 
 export default App;

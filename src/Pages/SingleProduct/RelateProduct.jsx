@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,6 +8,7 @@ import "swiper/css/autoplay";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import axios from "axios";
+import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
   const apiUrlBase = "https://duantn-backend.onrender.com/category/";
@@ -54,27 +55,19 @@ const RelateProduct = ({ type, heading }) => {
       w={["100%", "100%", "80%"]}
       display={["none", "block", "block"]}
       m="auto"
-      mt="6"
+      mt="20"
       cursor="pointer"
-      textAlign="center"
+      textAlign="left"
       backgroundColor="blackAlpha.50"
     >
       <Box>
         <a href="">
           <Text
-            fontSize="2.1rem"
-            color="whiteAlpha.900"
-            fontWeight="black"
-            width="100%"
-            backgroundColor="blue.300"
-            h="60px"
-            p={2}
-            borderRadius="md"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            transition="background-color 0.3s ease"
-            _hover={{ backgroundColor: "blue.400" }}
+            fontSize="2xl"
+            width=""
+            fontWeight="700"
+            textColor="black"
+            className="headingHome"
           >
             Các sản phẩm liên quan
           </Text>
@@ -115,8 +108,8 @@ const RelateProduct = ({ type, heading }) => {
                 <Link to="/">
                   <Box
                     p="5"
-                    m={["0%", "0%", "2%"]}
-                    height="350px"
+                    m={["0%", "0%", "1%"]}
+                    height="auto"
                     backgroundColor="white"
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"

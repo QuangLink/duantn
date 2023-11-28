@@ -9,7 +9,7 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CSSTransition } from "react-transition-group";
 import "swiper/css";
@@ -60,7 +60,7 @@ const ItemCard5 = ({ type, heading }) => {
       let responce = await axios.get(
         `https://duantn-backend.onrender.com/products`,
       );
-      console.log("in the logi func try", responce.data);
+
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
@@ -70,8 +70,6 @@ const ItemCard5 = ({ type, heading }) => {
     (product) => product.prodType === "Laptop",
   );
 
-  console.log(listDataLaptop, "sa");
-
   var navigate = useNavigate();
   const handlePost = (prodID) => {
     // postSingleData({ prodID }).then((res) => navigate("/cart"));
@@ -79,10 +77,10 @@ const ItemCard5 = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w="70%"
+      w="80%"
       m="auto"
       mt="6"
-      mb="2"
+      mb="10"
       cursor="pointer"
       textAlign="center"
     >
@@ -117,7 +115,7 @@ const ItemCard5 = ({ type, heading }) => {
               spaceBetween: 5,
             },
             1366: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 10,
             },
           }}
@@ -128,23 +126,33 @@ const ItemCard5 = ({ type, heading }) => {
                 <Box
                   className="list"
                   p="2"
-                  m="2"
+                  m={0.5}
+                  mt="4"
                   borderRadius="15px"
-                  boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
-                  w="310px"
-                  justifyContent="center"
+                  borderWidth={1}
+                  borderColor={"#ccc"}
+                  w=""
                   h="auto"
+                  bg="white"
                 >
                   <Link to={`/${i.prodType}/${i.prodID}`}>
-                    <Box className="list" p="2" mt="4" h="auto">
+                    <Box className="list" p="2" mt="4" w="" h="auto">
                       <Box className="img">
-                        <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                        <Square
+                          m="auto"
+                          w={200}
+                          h={200}
+                          transition="transform 0.3s ease-in-out"
+                          _hover={{ transform: "scale(1.1)" }}
+                        >
                           <Image
                             src={`${i.prodImg}`}
-                            alt={i.prodName}
-                            boxSize="160px"
+                            maxW={200}
+                            maxH={150}
+                            objectFit={"cover"}
                           />
                         </Square>
+
                         <Text
                           mt="2"
                           height="70px"
@@ -152,13 +160,13 @@ const ItemCard5 = ({ type, heading }) => {
                           color="#424245"
                           noOfLines={2}
                           textAlign="center"
-                          fontSize="20px"
+                          fontSize="17px"
                           _hover={{ color: "blue" }}
-                          fontWeight="500"
+                          fontWeight="700"
                         >
                           {i.prodName}
                         </Text>
-                        <Box mt="3" m="10px 0 30px 20px">
+                        <Box mt="3" m="10px 0 30px 0px">
                           <Flex>
                             <Square>
                               <Text color="gray.600" fontSize="14px">
@@ -181,60 +189,10 @@ const ItemCard5 = ({ type, heading }) => {
                               </Text>
                             </Square>
                           </Flex>
-                          <Box h="20px">
-                            {i.original !== 0 && (
-                              <>
-                                <Flex>
-                                  <Text color="gray.600" fontSize="14px">
-                                    Giá gốc:{" "}
-                                  </Text>
-                                  {"  "}
-                                  <Text
-                                    as="s"
-                                    color="gray.600"
-                                    fontSize="14px"
-                                    ml="1"
-                                  >
-                                    {i.origina &&
-                                      i.original.toLocaleString("vi-VN", {
-                                        style: "currency",
-                                        currency: "VND",
-                                      })}
-                                  </Text>
-                                </Flex>
-                                <Box
-                                  padding="3px"
-                                  borderRadius="5px"
-                                  w="50%"
-                                  color="#EC4C0A"
-                                  bg="#FEB373"
-                                  mt="2"
-                                  textAlign="center"
-                                >
-                                  <Text fontSize="10px" fontWeight="500">
-                                    GIẢM GIÁ SỐC
-                                  </Text>
-                                </Box>
-                              </>
-                            )}
-                          </Box>
                         </Box>
                       </Box>
                     </Box>
                   </Link>
-                  <Box>
-                    <Box
-                      fontSize={"30px"}
-                      padding={"10px"}
-                      className="add-to-cart"
-                      onClick={() => handlePost(i.prodID)}
-                    >
-                      <FontAwesomeIcon
-                        icon={faShoppingCart}
-                        className="cart-icon"
-                      />
-                    </Box>
-                  </Box>
                 </Box>
               </SwiperSlide>
             </Box>

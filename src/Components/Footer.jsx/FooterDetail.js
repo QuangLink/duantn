@@ -1,101 +1,101 @@
 export const ProductCategories = [
   {
-    labels: "Smartphones",
+    labels: "Điện Thoại",
+    pordType: 'phone'
   },
   {
-    labels: "Laptops",
+    labels: "Laptop",
+    pordType: 'laptop'
   },
   {
-    labels: "DSLR Cameras",
+    labels: "Tablet",
+    pordType: 'tablet'
   },
   {
-    labels: "Televisions",
+    labels: "Smartwatch",
+    pordType: 'smartwatch'
   },
   {
-    labels: "Air Conditioners",
+    labels: "Bàn phím",
+    pordType: 'keyboard'
   },
   {
-    labels: "Refrigerators",
+    labels: "Chuột",
+    pordType: 'mouse'
   },
   {
-    labels: "Kitchen Appliances",
+    labels: "Loa Blutooth",
+    pordType: 'LoudSpeaker'
   },
   {
-    labels: "Accessories",
+    labels: "Cáp sạc",
+    pordType: 'cable'
   },
   {
-    labels: "Personal Care & Grooming",
+    labels: "Tai nghe AriPods",
+    pordType: 'EarPhone'
+  },
+  {
+    labels: "Sạc dự phòng",
+    pordType: 'Battery'
   },
 ];
 
 export const SiteInfo = [
   {
-    labels: "About Reliance Digital",
+    labels: "Giới thiệu về chúng tôi",
   },
   {
-    labels: "resQ Services",
+    labels: "Hệ thống cửa hàng",
   },
   {
-    labels: "Site Map",
+    labels: "Trung tâm bảo hành",
   },
   {
-    labels: "Gift Cards",
+    labels: "Tin công nghệ",
   },
   {
-    labels: "Corporate Enquires",
+    labels: "Hỏi đáp",
   },
   {
-    labels: "Contact Us",
+    labels: "Tuyển dụng",
   },
 ];
 
 export const ResourcesCenter = [
   {
-    labels: "Product Reviews",
+    labels: "Thẻ ưu đãi",
   },
   {
-    labels: "Buying Guides",
+    labels: "Hướng dẫn mua online",
   },
   {
-    labels: "How Tos",
+    labels: "Ưu đãi dành cho danh nghiệp",
   },
   {
-    labels: "Featured Stories",
+    labels: "Chích sách trả góp",
   },
   {
-    labels: "Events & Happenings",
+    labels: "Dịch vụ sửa chữa",
   },
+
 ];
 
 export const Policies = [
   {
-    labels: "Terms of Use",
+    labels: "Điều kiện giao dịch chung",
   },
   {
-    labels: "FAQs",
+    labels: "Chính sách bảo hành",
   },
   {
-    labels: "Cancellation and Return Policy",
+    labels: "Chính sách đổi trả",
   },
   {
-    labels: "Pricing and Payments Policy",
+    labels: "Chính sách thanh toán",
   },
   {
-    labels: "Shipping and Delivery Policy",
+    labels: "Giao hành và lắp đặt tại nhà",
   },
-  {
-    labels: "Privacy Policy",
-  },
-  {
-    labels: "E-waste Recycling Policy",
-  },
-  {
-    labels: "EMI and Additional Cashback T&C",
-  },
-  {
-    labels: "RelianceOne Loyalty Program T&C",
-  },
-  {
-    labels: "Caution Notice",
-  },
+
 ];

@@ -97,14 +97,15 @@ const ComProduct = ({ prodID }) => {
       m="auto"
       mt="6"
       cursor="pointer"
-      backgroundColor="blackAlpha.50"
+      backgroundColor="#dfedfa"
       borderRadius="10px"
       height="auto"
+      boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px"
+      padding="10px"
     >
       <Box>
         <div
           style={{
-            borderTop: "1px solid #ccc",
             borderRadius: "5px",
             padding: "20px",
           }}
@@ -144,6 +145,8 @@ const ComProduct = ({ prodID }) => {
           </div>
           <br />
           <Textarea
+            outline="1px solid black"
+            placeholder="Hãy nhận xét về sản phẩm này"
             backgroundColor="white"
             value={newComment}
             onChange={handleCommentChange}
@@ -164,7 +167,6 @@ const ComProduct = ({ prodID }) => {
         <ul>
           {comments.map((comment, index) => (
             <li key={index}>
-              <hr />
               <Box
                 m={5}
                 p={2}
@@ -174,31 +176,33 @@ const ComProduct = ({ prodID }) => {
                 backgroundColor="#FFFFFF"
                 boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 3px"
                 width="auto"
+                border="1px solid black"
               >
                 <Text
                   text-transform="capitalize"
-                  color="#222b45"
-                  display=" inline"
-                  fontWeight="bold"
-                  fontSize="14px"
-                  line-height="16px"
-                  mr="10px"
-                  textDecoration="underline"
+                  color="black"
+                  fontWeight="500"
+                  fontSize="20px"
                 >
                   {comment.username}
                 </Text>
-                <Text padding={2}>
-                  <p>{comment.comment}</p>
-                </Text>
+
                 <Text padding={2}>
                   <RatingBar rating={comment.prodRate || 0.5} />
                 </Text>
-                <Flex justifyContent="end">
-                  <a href="">Thích</a>
-                  <a href="">Trả lời</a>
-                </Flex>
+                <Text
+                  padding={2}
+                  display="flex"
+                  fontSize="20px"
+                  flexWrap="wrap"
+                  w="100%"
+                  whiteSpace="normal"
+                  h="auto"
+                >
+                  <p className="comment-outline">{comment.comment}</p>
+                </Text>
+                <Text padding={2}>Ngày bình luận: 11/00/1002</Text>
               </Box>
-              <br />
             </li>
           ))}
         </ul>

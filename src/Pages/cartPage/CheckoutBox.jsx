@@ -60,7 +60,7 @@ const CheckoutBox = ({
     } else if (selectedOption === "cash") {
       toast({
         title: "Thanh toán khi nhận hàng",
-        description: "",
+        description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -91,10 +91,11 @@ const CheckoutBox = ({
         } catch (error) {
           console.error(error);
         }
+        navigate("/");
       });
     } else {
       toast({
-        title: "Proceed further for checkout",
+        title: "Thanh toán ngân hàng",
         description: "",
         status: "success",
         duration: 3000,
@@ -198,7 +199,7 @@ const CheckoutBox = ({
   return (
     <div>
       <Center
-        w="̃70%"
+        w="̃80%"
         mt="5"
         display="flex"
         justifyContent="center"
@@ -208,24 +209,26 @@ const CheckoutBox = ({
           <Text fontSize="25px" fontWeight="700">
             Chọn phương thức thanh toán:
           </Text>
-          <Box
-            w="100%"
-            h="200px"
+          <Flex
+            w="auto"
+            h="auto"
             display="flex"
-            flexDirection="column"
+           
             justifyContent="space-around"
             mt="5"
           >
             {["cash", "vnpay"].map((option) => (
               <Box
+              width="49%"
                 key={option}
                 className={`payment-option ${
                   selectedOption === option ? "selected" : ""
                 }`}
                 style={{
+                  
                   backgroundColor:
                     selectedOption === option ? "#c6e0f7" : "white",
-                  border: "1px solid black",
+                  
                   borderShadow:
                     selectedOption === option ? "0 0 0 3px #3182ce" : "none",
                   borderRadius: "5px",
@@ -235,7 +238,7 @@ const CheckoutBox = ({
                 }}
                 onClick={() => handleOptionClick(option)}
               >
-                <Box marginBottom="5" mt="2">
+                <Box marginBottom="5" mt="5" >
                   <Icon
                     as={option === "cash" ? FcHome : FaWallet}
                     ml={10}
@@ -250,10 +253,10 @@ const CheckoutBox = ({
                 </Box>
               </Box>
             ))}
-          </Box>
+          </Flex>
         </Box>
 
-        <Flex justifyContent="center" w="60%" m="5">
+        <Flex justifyContent="center" w="70%" m="5">
           <TbTruckDelivery size={20} />
           <Heading
             fontSize="13px"
@@ -263,7 +266,7 @@ const CheckoutBox = ({
             Giao hàng nhanh: {dtString} / {change}
           </Heading>
         </Flex>
-        <Box marginTop={"20px"} width={"60%"}>
+        <Box marginTop={"20px"} width={"70%"}>
           <InputGroup size="md">
             <Input
               pr="4.5rem"
@@ -286,7 +289,7 @@ const CheckoutBox = ({
             </InputRightElement>
           </InputGroup>
         </Box>
-        <Flex justifyContent="space-between" w="60%">
+        <Flex justifyContent="space-between" w="70%">
           <Text
             mt="2"
             height="50px"
@@ -307,7 +310,7 @@ const CheckoutBox = ({
               })}{" "}
           </Text>
         </Flex>
-        <Flex justifyContent="space-between" w="60%">
+        <Flex justifyContent="space-between" w="70%">
           <Text
             mt="2"
             height="50px"
@@ -328,7 +331,7 @@ const CheckoutBox = ({
               })}
           </Text>
         </Flex>
-        <Flex justifyContent="space-between" w="60%">
+        <Flex justifyContent="space-between" w="70%">
           <Flex justifyContent="space-between" w="70%" display="flex-start">
             <Text
               mt="2"
@@ -364,7 +367,7 @@ const CheckoutBox = ({
           </Heading>
         </Center>
         <Button
-          w="52%"
+          w="70%"
           h="50px"
           border="1px solid  #70b1ea"
           borderRadius="10px"
@@ -398,12 +401,13 @@ const CheckoutBox = ({
             }
           }}
         >
-          <Text color="white">Tiến hành đặt hàng</Text>
+          <Text color="white" m="auto">Tiến hành đặt hàng</Text>
         </Button>
         <Button
+      
           mb="5"
           mt="2"
-          w="52%"
+          w="70%"
           h="50px"
           border="1px solid #4a90e2"
           borderRadius="10px"
@@ -411,7 +415,7 @@ const CheckoutBox = ({
           _hover={{ color: "white" }}
           onClick={() => navigate("/")}
         >
-          <Text color="#4a90e2">Chọn thêm sản phẩm khác</Text>
+          <Text color="#4a90e2"   m="auto">Chọn thêm sản phẩm khác</Text>
         </Button>
       </Center>
     </div>

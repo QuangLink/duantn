@@ -40,6 +40,7 @@ import { logout } from "../Redux/Auth/auth.action";
 import "./Navbar.css";
 import useScrollListener from "./useScroll";
 import { UserAuth } from "../context/AuthContext";
+import { BsPersonCircle } from "react-icons/bs";
 function Navbar() {
   const { user, logOut } = UserAuth();
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
@@ -50,6 +51,7 @@ function Navbar() {
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
   const { username } = useSelector((store) => store.AuthManager);
+  const { admin } = useSelector((store) => store.AuthManager);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -237,12 +239,20 @@ function Navbar() {
                           </Text>
                           <Text fontSize="lg" color="gray.500">
                             <span className="prodPrice">
-                              {results.prodPrice} <sup>đ</sup>
+                              {results.prodPrice &&
+                                results.prodPrice.toLocaleString("vi-VN", {})}
+                              đ
                             </span>
-                            <span className="prodPriceSale">
-                              {results.prodPriceSale}
-                              <sup>đ</sup>{" "}
-                            </span>
+
+                            {results.prodPriceSale !== 0 && (
+                              <span className="prodPriceSale">
+                                {results.prodPriceSale &&
+                                  results.prodPriceSale.toLocaleString(
+                                    "vi-VN",
+                                    {},
+                                  )}
+                              </span>
+                            )}
                           </Text>
                         </Box>
                       </Flex>
@@ -401,14 +411,18 @@ function Navbar() {
         <Flex className="flex-container" px="15%">
           <Link to="/">
             <Box>
-              <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+              <Image
+                src={require("./Images/logodesktop.png")}
+                alt="logo"
+                w="200px"
+              />
             </Box>
           </Link>
           <Box>
             <Flex
               bg="white"
               borderRadius={"5px"}
-              w="250px"
+              w="450px"
               h={10}
               p="5px"
               m="auto"
@@ -437,10 +451,11 @@ function Navbar() {
               cursor={"pointer"}
               borderRadius={5}
               _hover={{ bg: "#0077ff" }}
+              className={`header-bar ${isFocused ? "focused" : ""}`}
             >
               <Icon
-                w={4}
-                h={4}
+                w={5}
+                h={5}
                 color={"#fff"}
                 margin={2}
                 as={BsFillPersonFill}
@@ -450,38 +465,39 @@ function Navbar() {
                   fontWeight={400}
                   m="2"
                   cursor={"pointer"}
-                  fontSize={"14px"}
+                  fontSize={"18px"}
                   color="#fff"
-                  className={`header-bar ${isFocused ? "focused" : ""}`}
                 >
                   Đăng nhập
                 </Heading>
               </Link>
             </Flex>
           ) : (
-            <Menu>
-              <MenuButton
-                color="black"
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-              >
-                Hi {username}
-              </MenuButton>
-              <MenuList>
-                <Link to="/myprofile">
-                  <MenuItem>My Profile</MenuItem>
-                </Link>
-                <Link to="/myorder">
-                  <MenuItem>My Order</MenuItem>
-                </Link>
-                <MenuItem>My Address</MenuItem>
-                <Link to="whishlist">
-                  {" "}
-                  <MenuItem>My Wishlist</MenuItem>
-                </Link>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
+            <Box className={`header-bar ${isFocused ? "focused" : ""}`}>
+              <Menu>
+                <MenuButton
+                  color="black"
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  Hi {username}
+                </MenuButton>
+                <MenuList>
+                  <Link to="/myprofile">
+                    <MenuItem>My Profile</MenuItem>
+                  </Link>
+                  <Link to="/myorder">
+                    <MenuItem>My Order</MenuItem>
+                  </Link>
+                  <MenuItem>My Address</MenuItem>
+                  <Link to="/wishlist">
+                    {" "}
+                    <MenuItem>My Wishlist</MenuItem>
+                  </Link>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
           )}
           <Link to="/cart">
             <Flex
@@ -491,14 +507,15 @@ function Navbar() {
               _hover={{
                 bg: "#0077ff",
               }}
+              className={`header-bar ${isFocused ? "focused" : ""}`}
             >
               {" "}
-              <Icon as={BsCart2} w={4} h={4} color={"#fff"} margin={2} />
+              <Icon as={BsCart2} w={5} h={5} color={"#fff"} margin={2} />
               <Heading
                 fontWeight={400}
                 m="2"
                 cursor={"pointer"}
-                fontSize={"14px"}
+                fontSize={"18px"}
                 color="#fff"
                 flexDirection={"row"}
                 className={`header-bar ${isFocused ? "focused" : ""}`}
@@ -507,54 +524,51 @@ function Navbar() {
               </Heading>
             </Flex>
           </Link>
-          <Link to="/cart">
-            <Flex
-              cursor={"pointer"}
-              className={`header-bar ${isFocused ? "focused" : ""}`}
-              _hover={{ bg: "#0077ff" }}
-            >
-              <Heading
-                fontWeight={400}
-                m="2"
+          {admin === 1 && (
+            <Link to="/admin/dashboard">
+              <Flex
                 cursor={"pointer"}
-                fontSize={"14px"}
-                color="#fff"
+                textAlign={"center"}
+                borderRadius={5}
+                _hover={{
+                  bg: "#0077ff",
+                }}
               >
-                Khuyến mãi
-              </Heading>
-            </Flex>
-          </Link>
-          <Link to="/cart">
-            <Flex
-              cursor={"pointer"}
-              _hover={{ bg: "#0077ff" }}
-              className={`header-bar ${isFocused ? "focused" : ""}`}
-            >
-              <Heading
-                fontWeight={400}
-                m="2"
-                cursor={"pointer"}
-                fontSize={"14px"}
-                color="#fff"
-              >
-                Chăm Sóc khách hàng
-              </Heading>
-            </Flex>
-          </Link>
-          <Link to="/cart">
+                {" "}
+                <Icon
+                  as={BsPersonCircle}
+                  w={5}
+                  h={5}
+                  color={"#fff"}
+                  margin={2}
+                />
+                <Heading
+                  fontWeight={400}
+                  m="2"
+                  cursor={"pointer"}
+                  fontSize={"18px"}
+                  color="#fff"
+                  flexDirection={"row"}
+                  className={`header-bar ${isFocused ? "focused" : ""}`}
+                >
+                  Admin
+                </Heading>
+              </Flex>
+            </Link>
+          )}
+          <Link to="/">
             <Flex
               cursor={"pointer"}
               bg={"#fff"}
               textAlign={"center"}
               borderRadius={15}
               _hover={{ bg: "#fff" }}
-              className={`header-bar ${isFocused ? "focused" : ""}`}
             >
               <Heading
                 fontWeight={700}
                 m="2"
                 cursor={"pointer"}
-                fontSize={"14px"}
+                fontSize={"18px"}
                 color="red"
                 flexDirection={"row"}
               >
@@ -592,150 +606,154 @@ function Navbar() {
               <ChevronDownIcon />
             </MenuButton>
             <MenuList bg="#FFF">
-              <Link to="headphones">
-                <Grid
-                  p="15px"
-                  gridTemplateColumns={"repeat(5,1fr)"}
-                  gap="20px"
-                  justifyContent="space-around"
-                  alignContent={"center"}
-                  textAlign="center"
-                  color="#55555"
-                >
-                  <Box>
-                    <Heading
-                      my="8px"
-                      fontSize={"18px"}
-                      _hover={{ textDecoration: "underline" }}
-                    >
-                      <Image
-                        w={20}
-                        marginLeft={10}
-                        src={require("../Components/Images/Laptop-129x129.webp")}
-                      />
-                      <Text> LapTop</Text>
-                    </Heading>
+              <Grid
+                p="15px"
+                gridTemplateColumns={"repeat(5,1fr)"}
+                gap="20px"
+                justifyContent="space-around"
+                alignContent={"center"}
+                textAlign="center"
+                color="#55555"
+              >
+                <Box>
+                  <Heading
+                    my="8px"
+                    fontSize={"18px"}
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    <Image
+                      w={20}
+                      marginLeft={10}
+                      src={require("../Components/Images/Laptop-129x129.webp")}
+                    />
+                    <Link to="/laptop">
+                      {" "}
+                      <Text> Laptop</Text>
+                    </Link>
+                  </Heading>
+                  <Link to="/asus">
+                    {" "}
                     <Text className="hoverText">Asus</Text>
+                  </Link>
+                  <Link to="lenovo">
                     <Text className="hoverText"> Lenovo</Text>
+                  </Link>
+                  <Link to="acer">
                     <Text className="hoverText">Acer</Text>
+                  </Link>
+                  <Link to="hp">
+                    {" "}
                     <Text className="hoverText">Hp</Text>
-                    <Text className="hoverText">MacBook</Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      <Image
-                        w={20}
-                        marginLeft={10}
-                        src={require("../Components/Images/dien-thoai-doc-quyen-128x128.webp")}
-                      />
+                  </Link>
+                </Box>
+                <Box>
+                  <Heading className="hoverText" my="8px" fontSize={"18px"}>
+                    <Image
+                      w={20}
+                      marginLeft={10}
+                      src={require("../Components/Images/dien-thoai-doc-quyen-128x128.webp")}
+                    />
+                    <Link to="phone">
+                      {" "}
                       <Text>Điện thoại</Text>
-                    </Heading>
+                    </Link>
+                  </Heading>
+                  <Link to="apple/phone">
                     <Text className="hoverText">Apple</Text>
+                  </Link>
+                  <Link to="samsung">
+                    {" "}
                     <Text className="hoverText">Samsung</Text>
+                  </Link>
+                  <Link to="xiaomi">
+                    {" "}
                     <Text className="hoverText">Xiaomi</Text>
+                  </Link>
+                  <Link to="oppo">
+                    {" "}
                     <Text className="hoverText"> Oppo</Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
+                  </Link>
+                </Box>
+                <Box>
+                  <Heading className="hoverText" my="8px" fontSize={"18px"}>
+                    <Link to="tablet">
                       <Image
                         w={20}
                         marginLeft={10}
                         src={require("../Components/Images/Tablet-128x129.webp")}
                       />
                       <Text> Tablet</Text>
-                    </Heading>
+                    </Link>
+                  </Heading>
+                  <Link to="tablet">
+                    {" "}
                     <Text className="hoverText">IPad </Text>
+                  </Link>
+                  <Link to="tablet">
+                    {" "}
                     <Text className="hoverText"> Samsung </Text>
+                  </Link>
+                  <Link to="tablet">
+                    {" "}
                     <Text className="hoverText">Xiaomi</Text>
+                  </Link>
+                  <Link to="tablet">
+                    {" "}
                     <Text className="hoverText"> Nokia </Text>
-                    <Text className="hoverText">Lenovo</Text>
-                    <Text className="hoverText"> Readme</Text>
-                  </Box>
-                  <Box>
-                    <Heading
-                      _hover={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                      my="8px"
-                      fontSize={"18px"}
-                    >
-                      <Image
-                        w={20}
-                        marginLeft={10}
-                        src={require("../Components/Images/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png")}
-                      />
-                      <Text> Phụ kiện di động</Text>
-                    </Heading>
+                  </Link>
+                </Box>
+                <Box>
+                  <Heading
+                    _hover={{
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                    my="8px"
+                    fontSize={"18px"}
+                  >
+                    <Image
+                      w={20}
+                      marginLeft={10}
+                      src={require("../Components/Images/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png")}
+                    />
+                    <Text> Phụ kiện di động</Text>
+                  </Heading>
+                  <Link to="Battery">
+                    {" "}
                     <Text className="hoverText"> Sạc dự phòng </Text>
+                  </Link>
+                  <Link to="cable">
+                    {" "}
                     <Text className="hoverText"> Cáp, sạc </Text>
-                    <Text className="hoverText"> Bàn phím , bút tablet</Text>
-                    <Text className="hoverText"> Miếng dán</Text>
-                    <Text className="hoverText"> Túi đựng AriPods</Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      <Image
-                        w={20}
-                        marginLeft={10}
-                        src={require("../Components/Images/icon-moi-128x129.webp")}
-                      />
-                      <Text>Đồng hồ </Text>
-                    </Heading>
-                    <Text className="hoverText"> Đồng hồ nam </Text>
-                    <Text className="hoverText"> Đồng hồ nữ</Text>
-                    <Text className="hoverText"> Đồng hồ Casio </Text>
-                    <Text className="hoverText"> Đồng hồ Orient </Text>
-                    <Text className="hoverText"> Đồng hồ Citizen </Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      Thiết bị lưu trữ{" "}
-                    </Heading>
-                    <Text className="hoverText"> Ổ cứng di động</Text>
-                    <Text className="hoverText"> Thẻ nhớ </Text>
-                    <Text className="hoverText"> USB </Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      {" "}
-                      Smartwatch
-                    </Heading>
-                    <Text className="hoverText"> Apple Watch</Text>
-                    <Text className="hoverText"> Samsung </Text>
-                    <Text className="hoverText">BiFit </Text>
-                    <Text className="hoverText"> Xiaomi </Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      {" "}
-                      Phụ kiện laptop{" "}
-                    </Heading>
-                    <Text className="hoverText"> Chuột, bàn phím </Text>
-                    <Text className="hoverText"> Thiết bị mạng </Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      {" "}
-                      Phụ kiện điện thoại{" "}
-                    </Heading>
-                    <Text className="hoverText"> Tai nghe </Text>
-                    <Text className="hoverText"> Pin dự phòng </Text>
-                    <Text className="hoverText"> Cáp sạc </Text>
-                    <Text className="hoverText"> Loa nghe nhạc </Text>
-                    <Text className="hoverText">Thẻ nhớ </Text>
-                  </Box>
-                  <Box>
-                    <Heading className="hoverText" my="8px" fontSize={"18px"}>
-                      Thiết bị Mạng
-                    </Heading>
-                    <Text className="hoverText"> Thiết bị mạng Asus </Text>
-                    <Text className="hoverText">Thiết bị mạng Xiaomi</Text>
-                    <Text className="hoverText"> Thiết bị mạng TotoLink </Text>
-                    <Text className="hoverText"> Thiết bị mạng TP-LINK </Text>
-                  </Box>
-                </Grid>
-              </Link>
+                  </Link>
+                  <Link to="EarPhone">
+                    {" "}
+                    <Text className="hoverText"> Tai nghe AriPods</Text>
+                  </Link>
+                </Box>
+                <Box>
+                  <Heading className="hoverText" my="8px" fontSize={"18px"}>
+                    <Image
+                      w={20}
+                      marginLeft={10}
+                      src={require("../Components/Images/Phukiengaming.png")}
+                    />
+                    <Text> Phụ kiện PC</Text>
+                  </Heading>
+                  <Link to="mouse">
+                    {" "}
+                    <Text className="hoverText"> Chuột</Text>
+                  </Link>
+                  <Link to="keyboard">
+                    {" "}
+                    <Text className="hoverText">Bàn phím </Text>
+                  </Link>
+                  <Link to="LoudSpeaker">
+                    {" "}
+                    <Text className="hoverText">Loa Bluetooth </Text>
+                  </Link>
+                </Box>
+              </Grid>
             </MenuList>
           </Menu>
           <Menu>
@@ -781,7 +799,7 @@ function Navbar() {
             </Link>
           </Menu>
           <Menu>
-            <Link to="accessories">
+            <Link to="smartwatch">
               <MenuButton
                 px={4}
                 py={2}
@@ -792,34 +810,6 @@ function Navbar() {
                 display="flex"
               >
                 <Icon as={BsSmartwatch} /> Smartwatch
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="mobilesandtablets">
-              <MenuButton
-                px={4}
-                py={2}
-                color="#fff"
-                transition="all 0.2s"
-                _hover={{ color: "white", fontSize: 18 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                <Icon as={BsSmartwatch} /> Đồng hồ
-              </MenuButton>
-            </Link>
-          </Menu>
-          <Menu>
-            <Link to="mobilesandtablets">
-              <MenuButton
-                px={4}
-                py={2}
-                color="#fff"
-                transition="all 0.2s"
-                _hover={{ color: "white", fontSize: 18 }}
-                _focus={{ boxShadow: "0px 3px 0px  rgba(56, 169, 240, 0.75)" }}
-              >
-                Máy cũ giá rẻ
               </MenuButton>
             </Link>
           </Menu>
@@ -838,7 +828,7 @@ function Navbar() {
       >
         <Link to="/">
           <Box>
-            <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+            <Image src={require("./Images/logo.png")} alt="logo" w="120px" />
           </Box>
         </Link>
         <Box>
@@ -1006,7 +996,7 @@ function Navbar() {
                     </Link>
                   </Box>
                   <Box borderBottom={"1px solid #555"}>
-                    <Link to="computers">
+                    <Link to="smartwatch">
                       <Heading
                         w={"200px"}
                         marginBottom={5}
@@ -1015,32 +1005,6 @@ function Navbar() {
                         color="#55555"
                       >
                         Smartwatch
-                      </Heading>
-                    </Link>
-                  </Box>
-                  <Box borderBottom={"1px solid #555"}>
-                    <Link to="kitchen" alignItems="center">
-                      <Heading
-                        w={"200px"}
-                        marginBottom={5}
-                        cursor={"pointer"}
-                        fontSize={"17px"}
-                        color="#55555"
-                      >
-                        Đồng hồ
-                      </Heading>
-                    </Link>
-                  </Box>
-                  <Box borderBottom={"1px solid #555"}>
-                    <Link to="personalcare">
-                      <Heading
-                        w={"200px"}
-                        marginBottom={5}
-                        cursor={"pointer"}
-                        fontSize={"17px"}
-                        color="#55555"
-                      >
-                        Máy cũ giá rẻ
                       </Heading>
                     </Link>
                   </Box>
@@ -1065,7 +1029,7 @@ function Navbar() {
       >
         <Link to="/" className={`header-bar ${isFocused ? "focused" : ""}`}>
           <Box marginLeft={0}>
-            <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
+            <Image src={require("./Images/logo.png")} alt="logo" w="120px" />
           </Box>
         </Link>
         <Box paddingLeft={2}>
@@ -1222,7 +1186,7 @@ function Navbar() {
                     </Link>
                   </Box>
                   <Box borderBottom={"1px solid #555"}>
-                    <Link to="computers">
+                    <Link to="smartwatch">
                       <Heading
                         w={"200px"}
                         marginBottom={5}
@@ -1231,32 +1195,6 @@ function Navbar() {
                         color="#55555"
                       >
                         Smartwatch
-                      </Heading>
-                    </Link>
-                  </Box>
-                  <Box borderBottom={"1px solid #555"}>
-                    <Link to="kitchen" alignItems="center">
-                      <Heading
-                        w={"200px"}
-                        marginBottom={5}
-                        cursor={"pointer"}
-                        fontSize={"17px"}
-                        color="#55555"
-                      >
-                        Đồng hồ
-                      </Heading>
-                    </Link>
-                  </Box>
-                  <Box borderBottom={"1px solid #555"}>
-                    <Link to="personalcare">
-                      <Heading
-                        w={"200px"}
-                        marginBottom={5}
-                        cursor={"pointer"}
-                        fontSize={"17px"}
-                        color="#55555"
-                      >
-                        Máy cũ giá rẻ
                       </Heading>
                     </Link>
                   </Box>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
 import MainCartPage from "../Pages/cartPage/MainCartPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/SignInApp";
@@ -8,112 +7,135 @@ import Products from "../Pages/Products/Products";
 import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import Payments from "../Pages/payment/Payments";
-// import Checkout from "../Pages/checkout/oldcheckout";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
+import AdminRoute from "./PrivateRoute/AdminRoutes";
 import ProductList from "../testlist";
 import Checkout from "../Pages/cartPage/Checkout";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
 import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
-import Success from "../Pages/checkout/success";
 import Cart from "../Pages/cartPage/Cart";
+import Success from "../Pages/checkout/success";
+import Dashboard from "../Admin/Components/Pages/Home/Home";
+import Quanlynv from "../Admin/Components/Pages/Quanly/Quanlykh";
+import Quanlysp from "../Admin/Components/Pages/Quanly/Quanlysp";
+import Quanlydonhang from "../Admin/Components/Pages/Quanly/Quanlydonhang";
+import Menu from "../Admin/Components/Layout/components/Menu";
+import Baocaodoanhthu from "../Admin/Components/Pages/Quanly/Baocaodoanhthu";
+import Themsanpham from "../Admin/Components/Pages/Task/Themsanpham";
+import ChangePass from "../Pages/Profile/ChangePass";
+import Navbar from "./Navbar";
+import Verified from "../Pages/Login/Verified";
+import Forgot from "../Pages/Login/Forgot";
+import Resetpass from "../Pages/Login/Resetpass";
+import NotFoundPage from "../Pages/404";
+const productTypes = [
+  "laptop",
+  "phone",
+  "tablet",
+  "iphone",
+  "apple/phone",
+  "apple/tablet",
+  "samsung/phone",
+  "samsung/tablet",
+  "xiaomi",
+  "samsung",
+  "oppo",
+  "hp",
+  "asus",
+  "lenovo",
+  "acer",
+  "cable",
+  "Battery",
+  "LoudSpeaker",
+  "mouse",
+  "keyboard",
+  "smartwatch",
+  "EarPhone",
+];
+
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/success" element={<Success />} />
-        <Route path="/success/vnpay_return" element={<Success />} />
+        <Route path="/404" element={<NotFoundPage />}></Route>
+      <Route path="/resetpass" element={<Resetpass />}></Route>
+        <Route path="/forgot" element={<Forgot />}></Route>
+        <Route path="/verify" element={<Verified />}></Route>
+        <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/duantn" element={<Home />}></Route>
         <Route
-          path="/laptop"
-          element={<Products typeOfProduct="laptop" />}
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Dashboard />
+            </AdminRoute>
+          }
         ></Route>
         <Route
-          path="/laptop/:id"
-          element={<SingleProduct typeOfProduct="laptop" />}
+          path="/admin/Quanlykh"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlynv />
+            </AdminRoute>
+          }
         ></Route>
         <Route
-          path="/phone"
-          element={<Products typeOfProduct="phone" />}
+          path="/admin/Quanlysp"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlysp />
+            </AdminRoute>
+          }
         ></Route>
         <Route
-          path="/phone/:id"
-          element={<SingleProduct typeOfProduct="phone" />}
+          path="/admin/Quanlydonhang"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Quanlydonhang />
+            </AdminRoute>
+          }
         ></Route>
         <Route
-          path="/tablet"
-          element={<Products typeOfProduct="tablet" />}
+          path="/admin/Themsanpham"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Themsanpham />
+            </AdminRoute>
+          }
         ></Route>
         <Route
-          path="/tablet/:id"
-          element={<SingleProduct typeOfProduct="tablet" />}
+          path="/admin/doanhthu"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Baocaodoanhthu />
+            </AdminRoute>
+          }
         ></Route>
-        <Route
-          path="/iphone"
-          element={<Products typeOfProduct="iphone" />}
-        ></Route>
-
-        <Route
-          path="/iphone/:id"
-          element={<SingleProduct typeOfProduct="iphone" />}
-        ></Route>
-        <Route
-          path="/applephone"
-          element={<Products typeOfProduct="apple/phone" />}
-        ></Route>
-        <Route
-          path="/applephone/:id"
-          element={<SingleProduct typeOfProduct="phone" />}
-        ></Route>
-        <Route
-          path="/xiaomi"
-          element={<Products typeOfProduct="xiaomi" />}
-        ></Route>
-
-        <Route
-          path="/xiaomi/:id"
-          element={<SingleProduct typeOfProduct="xiaomi" />}
-        ></Route>
-        <Route
-          path="/samsung"
-          element={<Products typeOfProduct="samsung" />}
-        ></Route>
-        <Route
-          path="/samsung/:id"
-          element={<SingleProduct typeOfProduct="samsung" />}
-        ></Route>
-        <Route path="/oppo" element={<Products typeOfProduct="oppo" />}></Route>
-        <Route
-          path="/oppo/:id"
-          element={<SingleProduct typeOfProduct="oppo" />}
-        ></Route>
-        <Route path="/hp" element={<Products typeOfProduct="hp" />}></Route>
-        <Route
-          path="/hp/:id"
-          element={<SingleProduct typeOfProduct="hp" />}
-        ></Route>
-        <Route path="/asus" element={<Products typeOfProduct="asus" />}></Route>
-        <Route
-          path="/asus/:id"
-          element={<SingleProduct typeOfProduct="asus" />}
-        ></Route>
-        <Route
-          path="/lenovo"
-          element={<Products typeOfProduct="asus" />}
-        ></Route>
-        <Route
-          path="/lenovo/:id"
-          element={<SingleProduct typeOfProduct="lenovo" />}
-        ></Route>
-        <Route path="/acer" element={<Products typeOfProduct="acer" />}></Route>
-        <Route
-          path="/acer/:id"
-          element={<SingleProduct typeOfProduct="acer" />}
-        ></Route>
+        {productTypes.map((type) => (
+          <React.Fragment key={type}>
+            <Route
+              path={`/${type}`}
+              element={<Products typeOfProduct={type} />}
+            ></Route>
+            <Route
+              path={`/${type}/:id`}
+              element={<SingleProduct typeOfProduct={type} />}
+            ></Route>
+          </React.Fragment>
+        ))}
+        <Route path={`/:id`} element={<SingleProduct />}></Route>
         <Route
           path="/cart"
           element={
@@ -122,12 +144,37 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/login" element={<Login />}></Route>
         <Route
           path="/checkout"
           element={
             <PrivateRoute>
               <MainCartPage />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/success"
+          element={
+            <PrivateRoute>
+              <Success />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route path="/login" element={<Login />}></Route>
+
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateRoute>
+              <Wishlist />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
             </PrivateRoute>
           }
         ></Route>
@@ -164,11 +211,9 @@ const AllRoutes = () => {
           }
         ></Route>
         <Route path="/test" element={<ProductList />}></Route>
-        {/* <Route path="/order" element={<Products typeOfProduct={"order"}/>}></Route>
-            <Route path="/contactus" element={<Products typeOfProduct={"contactus"}/>}></Route>
-            <Route path="/profile" element={<Products typeOfProduct={"profile"}/>}></Route> */}
       </Routes>
     </div>
   );
 };
+
 export default AllRoutes;

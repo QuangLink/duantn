@@ -4,14 +4,18 @@ const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
-  applephone: apiUrlBase + "apple",
-  appletablet: apiUrlBase + "apple",
+  phone: apiUrlBase + "phone",
+  tablet: apiUrlBase + "tablet",
+  laptop: apiUrlBase + "laptop",
+  applephone: apiUrlBase + "apple/phone",
+  appletablet: apiUrlBase + "apple/tablet",
   samsung: apiUrlBase + "samsung",
   xiaomi: apiUrlBase + "xiaomi",
   hp: apiUrlBase + "hp",
   asus: apiUrlBase + "asus",
   lenovo: apiUrlBase + "lenovo",
   acer: apiUrlBase + "acer",
+  smartwatch: apiUrlBase + "smartwatch",
 };
 
 const fetchDataForCategory = async (category) => {
@@ -22,9 +26,10 @@ const fetchDataForCategory = async (category) => {
       img: product.prodImg,
       price: product.prodPrice,
       id: product.prodID,
-      sale: product.prodSale,
       QTY: product.QTY,
+      sale: product.prodSale,
       original: product.prodPriceSale,
+      type: product.prodType,
     }));
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
@@ -41,9 +46,19 @@ export let PrHp = [];
 export let PrAsus = [];
 export let PrLenovo = [];
 export let PrAcer = [];
+export let PrSmartWatch = [];
+export let PrPhone = [];
+export let PrTablet = [];
+export let PrLaptop = [];
 
+export async function loadPrPhone() {
+  PrPhone = await fetchDataForCategory("phone");
+}
 export async function loadPrSale() {
   PrSale = await fetchDataForCategory("sale");
+}
+export async function loadPrSmartWatch() {
+  PrSmartWatch = await fetchDataForCategory("smartwatch");
 }
 
 export async function loadPrApplePhone() {
@@ -71,12 +86,18 @@ export async function loadPrLenovo() {
 export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
 }
+export async function loadPrTablet() {
+  PrTablet = await fetchDataForCategory("tablet");
+}
+export async function loadPrLaptop() {
+  PrLaptop = await fetchDataForCategory("laptop");
+}
 
 export const BannersCenter = [
   {
     id: 1,
     name: "Máy tính",
-    imgbnct: "https://simplepage.vn/blog/wp-content/uploads/3-6.png",
+    imgbnct: "https://cdn.tgdd.vn/2023/10/campaign/MHD-desk-1920x500.png",
     videoUrl: "https://youtu.be/BMHg1Eq6ZF8?t=6",
   },
 ];
@@ -87,6 +108,36 @@ export const BannersLeft = [
     name: "Máy tính",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Laptop-129x129.png",
+  },
+];
+
+export const BannerHomePage = [
+  {
+    id: 1,
+    image:
+      "https://isotech-demo.myshopify.com/cdn/shop/files/2_f639d039-1b63-405c-ab7d-4561d7871d76.png?v=1696134235",
+    name: "Samsung Galaxy Z Fold5 5G",
+    title:
+      "Điện thoại này mở ra những trải nghiệm di động mới mẻ và linh hoạt thông qua khả năng gập độc đáo, màn hình lớn sắc nét và hiệu năng vượt trội cho khả năng đa nhiệm tối ưu, đáp ứng tốt các yêu cầu từ người dùng.",
+    prodType: "samsung",
+  },
+  {
+    id: 2,
+    image:
+      "https://isotech-demo.myshopify.com/cdn/shop/files/2_ae5cc69e-78af-4aea-9cc7-bb616d558539.png?v=1695797615",
+    name: "Iphone 15 Pro Max",
+    title:
+      "Hiệu năng dẫn đầu phân khúc GPU của chip A17 Pro nhanh hơn Iphone 12 Pro lên đến 70%.",
+    prodType: "apple/phone",
+  },
+  {
+    id: 3,
+    image:
+      "https://isotech-demo.myshopify.com/cdn/shop/files/1_1cae1484-6708-4556-af27-18db5a0b650c.png?v=1696134352",
+    name: "Xiaomi 13T Pro 5G",
+    title:
+      "Điện thoại ấn tượng nhờ được trang bị chip Dimensity 9200+, camera 50 MP có kèm sự hợp tác với Leica cùng kiểu thiết kế tinh tế đầy sang trọng.",
+    prodType: "xiaomi",
   },
 ];
 
@@ -110,7 +161,7 @@ export const CateFeatures = [
     name: "Đồng hồ thông minh",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/icon-moi-128x129.png",
-    prodType: "tablet",
+    prodType: "smartwatch",
   },
   {
     id: 4,
@@ -121,31 +172,31 @@ export const CateFeatures = [
   },
   {
     id: 5,
-    name: "Màn hình máy tính",
+    name: "Bàm phím Gaming",
     imgcatehot:
-      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Manhinhmaytinh-128x129.png",
-    prodType: "tablet",
+      "https://www.ipopularshop.com/cdn/shop/products/1_04c83235-33a4-49cd-9f1e-1c611b986fd2.jpg?v=1669603425&width=1445",
+    prodType: "keyboard",
   },
   {
     id: 6,
-    name: "Phụ kiện di động",
+    name: "Cáp sạc di động",
     imgcatehot:
       "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png",
-    prodType: "tablet",
+    prodType: "cable",
   },
   {
     id: 7,
-    name: "Phụ kiện Gaming",
+    name: "Chuột Gaming",
     imgcatehot:
-      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Phukiengaming-128x129.png",
-    prodType: "tablet",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaZAErUASG2TVdC3MlnhrYhKM5jcKM-g3ZEw&usqp=CAU",
+    prodType: "mouse",
   },
   {
     id: 8,
-    name: "Thiết bị âm thanh",
+    name: "Loa Bluetooth ",
     imgcatehot:
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn//content/Loa-128x128.png",
-    prodType: "tablet",
+    prodType: "LoudSpeaker",
   },
 ];
 

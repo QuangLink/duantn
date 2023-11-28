@@ -8,9 +8,11 @@ import {
   useToast,
   Icon,
   Text,
+  Center
+  
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
-
+import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
@@ -51,7 +53,7 @@ const CartItem = ({
     if (!isNaN(newCount) && newCount >= 1) {
       setCount(newCount);
       let number = parseInt(price);
-      console.log(newCount);
+
       dispatch({ type: "priceChange", payload: number * newCount });
 
       if (newCount > QTY) {
@@ -68,9 +70,7 @@ const CartItem = ({
           .put(`https://duantn-backend.onrender.com/cart/set/${cartID}`, {
             quantity: newCount,
           })
-          .then((res) => {
-            console.log(res.data);
-          })
+          .then((res) => {})
           .catch((err) => {
             console.log(err);
           });
@@ -138,7 +138,7 @@ const CartItem = ({
 
     postSingleDataWish(newData)
       .then((res) => {
-        navigate("/whishlist");
+        navigate("/wishlist");
         toast({
           title: "Đã thêm vào giỏ hàng",
           description: "Product Added",
@@ -204,22 +204,9 @@ const CartItem = ({
           <Box>
             <Image src={img} alt={name} width="150px" />
           </Box>
-          <Box display="flex" alignItems="center">
-            <Text>Trong kho:</Text>
-            <Text color="red" marginLeft="4px">
-              {QTY}
-            </Text>
-          </Box>
-          <Box display={"flex"} gap="5">
-            <Button onClick={handleDec}>-</Button>
-            <input
-              type="number"
-              value={count}
-              onChange={handleChange}
-              style={{ width: "50px", textAlign: "center" }}
-            />
-            <Button onClick={handleInc}>+</Button>
-          </Box>
+          
+          
+          
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
@@ -250,6 +237,7 @@ const CartItem = ({
               này
             </Heading>
           </Flex>
+
         </Flex>
         {/* //part3- line 71 to 99*/}
         <Flex
@@ -261,6 +249,7 @@ const CartItem = ({
             xl: "right",
             "2xl": "right",
           }}
+          width="20%"
           gap={1}
           fontWeight="500"
         >
@@ -282,24 +271,35 @@ const CartItem = ({
                 currency: "VND",
               })}
           </Heading>
+          
 
-          <Heading fontSize="12px" color={"rgb(102, 102, 102)"}></Heading>
+          
         </Flex>
-      </Flex>
-      <Flex
-        justifyContent={"space-between"}
-        alignItems="center"
-        borderTop={"1px solid rgb(224, 224, 225)"}
-        fontSize="13px"
-        fontWeight={"500"}
-        background="transparent"
-        textAlign={"center"}
-      >
-        <Box width={"50%"} borderRight="1px solid rgb(224, 224, 225)">
-          <Button
+
+        <Center flexWrap="wrap" display="flex" height="100px" mt="-3">
+        <Box display={"flex"} >
+            <Button onClick={handleDec}>-</Button>
+            <input
+              type="number"
+              value={count}
+              onChange={handleChange}
+              style={{ width: "30px", height:"40px", textAlign: "center" }}
+            />
+            <Button onClick={handleInc}>+</Button>
+          </Box>
+          <Center width="100%">
+            <Text>Trong kho:</Text>
+            <Text color="red" marginLeft="4px">
+              {QTY}
+            </Text>
+          </Center>
+          <Box justifyContent="center" display="flex" width="90%">
+          <Button width="100%"  
+          textAlign="center"
+          border="none"
             backgroundColor={"white"}
-            color=" rgb(23, 116, 239)"
-            _hover={"backgroundColor:white"}
+            color="rgb(23, 116, 239)"
+            _hover={{color:"red"}}
             onClick={() => {
               DeleteRequest(cartID)
                 .then((response) => {
@@ -323,20 +323,22 @@ const CartItem = ({
                 });
             }}
           >
-            Xóa
+          xóa
           </Button>
-        </Box>
-        <Box width={"50%"}>
-          <Button
-            backgroundColor={"white"}
-            color=" rgb(23, 116, 239)"
-            _hover={"backgroundColor:white"}
-            onClick={() => handleWish(singleData)}
-          >
-            Thêm vào yêu thích
-          </Button>
-        </Box>
+        </Box> 
+          
+        </Center>
+        
+        
+       
+
+       
       </Flex>
+     
+
+       
+        
+    
     </Flex>
   );
 };

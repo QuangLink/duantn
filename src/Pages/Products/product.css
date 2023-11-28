@@ -1,42 +1,39 @@
-.box_1{
-    margin-top: 10px;
-    margin-bottom: 3;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    font-family: "Source Sans Pro";
-    color: #333;
-    line-height: 120%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    
+.box_1 {
+  margin-top: 10px;
+  margin-bottom: 3;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-family: "Source Sans Pro";
+  color: #333;
+  line-height: 120%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
-.box_1:hover{
-    color: blue;
+.box_1:hover {
+  color: blue;
 }
-.box_2{
-    width: 100%;
-    margin-bottom: 2%;
-    margin-left: 5%;
+.box_2 {
+  width: 100%;
+  margin-bottom: 2%;
+  margin-left: 5%;
 }
-.box_2_heading{
-    font-size: 0.1rem;
-    color: red;
-    font-weight: black;
+.box_2_heading {
+  font-size: 0.1rem;
+  color: red;
+  font-weight: black;
 }
-
 
 .div_1 Button {
-    width: 100%;
-    border-top: 1px solid rgb(202, 201, 201);
-    background-color: white;
-    color: gray;
-    border-radius: 0;
+  width: 100%;
+  border-top: 1px solid rgb(202, 201, 201);
+  background-color: white;
+  color: gray;
+  border-radius: 0;
 }
 
 @media (min-width: 426px) and (max-width: 768px) {
-    .box_2{
-        justify-content: center;
-    }
+  .box_2 {
+    justify-content: center;
+  }
 }
-
