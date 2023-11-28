@@ -357,7 +357,7 @@ const TimeDeal = ({ type, heading }) => {
                           </>
                         )}
                         <Box
-                          mt="4"
+                       
                           display="flex"
                           backgroundColor="yellow"
                           borderRadius="15px"

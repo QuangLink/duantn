@@ -69,8 +69,8 @@ const ItemCardTest = ({ type, heading }) => {
                 w="100%"
                 h="auto"
               >
-                <h3>Các sản phẩm</h3>
-                <h3>Apple</h3>
+                
+                <h3>Apple Iphone</h3>
                 <Link to="/apple/phone">
                   <Text
                     fontSize="18px"
