@@ -33,7 +33,7 @@ const ItemCardTest2 = ({ type, heading }) => {
             ml="-45%"
             transform="translate(-50%, -50%)"
             textAlign="center"
-            zIndex={2} // Set z-index to ensure the text is on top of the image
+            zIndex={1} // Set z-index to ensure the text is on top of the image
             color="white"
             p="2"
             w="15%"
@@ -59,7 +59,7 @@ const ItemCardTest2 = ({ type, heading }) => {
               width="30%"
               loading="lazy"
               borderRadius="15px"
-              zIndex={1} // Set z-index to ensure the image is behind the text
+              zIndex={0} // Set z-index to ensure the image is behind the text
             />
           {/* Banner Image */}
 

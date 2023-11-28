@@ -101,7 +101,7 @@ const HotProduct = ({ type }) => {
                         textAlign="center"
                         fontSize="15px"
                         fontWeight="bold"
-                        _hover={{ color: "#fd8002" }}
+                        _hover={{ color: "blue" }}
                       >
                         {i.name}
                       </Text>
