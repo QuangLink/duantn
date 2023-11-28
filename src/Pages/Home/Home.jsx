@@ -40,7 +40,7 @@ import ItemCardTest2 from "./Test/ItemCardTest2";
 const ItemList = lazy(() => import("./ItemList"));
 const ItemCard5 = lazy(() => import("./ItemCard5"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
-const ItemCard7 = lazy(() => import("./ItemCard7"));
+
 const TimeDeal = lazy(() => import("./TimeDeal"));
 const PrDeal = lazy(() => import("./PrDeal"));
 const ItemCardTest = lazy(() => import("./Test/ItemCardTest"));
