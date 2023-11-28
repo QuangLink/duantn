@@ -121,7 +121,7 @@ const TimeDeal = ({ type, heading }) => {
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
-            <Text fontFamily="-moz-initial" fontSize="3xl" color="#fff" mt="3">
+            <Text fontFamily="-moz-initial" fontSize="2xl" color="#fff" mt="3">
               <Text>
                 {" "}
                 <i>Kết thúc trong</i>{" "}
@@ -356,7 +356,7 @@ const TimeDeal = ({ type, heading }) => {
                           </>
                         )}
                         <Box
-                          mt="4"
+                  
                           display="flex"
                           backgroundColor="yellow"
                           borderRadius="15px"

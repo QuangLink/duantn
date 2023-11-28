@@ -27,7 +27,11 @@ import {
   loadPrAcer,
   loadPrSmartWatch,
   PrSmartWatch,
+  BannerHomePage,
 } from "./CardDetails";
+import BannerHome from "./BannerHomePage/BannerHome";
+import Danhmuc from "./DanhMuc/Danhmuc";
+import ItemCardTest2 from "./Test/ItemCardTest2";
 
 const ItemCard2 = lazy(() => import("./ItemCard2"));
 const ItemCard5 = lazy(() => import("./ItemCard5"));
@@ -59,15 +63,18 @@ const Home = () => {
   }, []);
 
   return (
-    <Box>
+    <Box bg={'#F1F3F7'}>
       <Suspense fallback={<div>Loading...</div>}>
-        <BannerCenter type={BannersCenter} />
+        {/* <BannerCenter type={BannersCenter} /> */}
+        <BannerHome type={BannerHomePage} heading=" " />
       </Suspense>
-
-      <CateFeature type={CateFeatures} />
 
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && <TimeDeal />}
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* <BannerCenter type={BannersCenter} /> */}
+        <Danhmuc heading="DANH MỤC" type={CateFeatures} />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         {dataLoaded && (
@@ -79,10 +86,12 @@ const Home = () => {
           <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
         )}
       </Suspense>
-
       <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && <PrDeal type={PrAsus} />}
+        {dataLoaded && (
+          <ItemCardTest2 type={PrAcer} heading="MÁY TÍNH NỔI BẬT " />
+        )}
       </Suspense>
+      
 
       <Suspense fallback={<div>Loading...</div>}>
         <ItemCard2

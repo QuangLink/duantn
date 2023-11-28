@@ -96,6 +96,31 @@ export const BannersLeft = [
   },
 ];
 
+export const BannerHomePage = [
+  {
+    id: 1,
+    image: 'https://isotech-demo.myshopify.com/cdn/shop/files/2_f639d039-1b63-405c-ab7d-4561d7871d76.png?v=1696134235',
+    name: 'Samsung Galaxy Z Fold5 5G',
+    title: 'Điện thoại này mở ra những trải nghiệm di động mới mẻ và linh hoạt thông qua khả năng gập độc đáo, màn hình lớn sắc nét và hiệu năng vượt trội cho khả năng đa nhiệm tối ưu, đáp ứng tốt các yêu cầu từ người dùng.',
+    prodType: 'samsung',
+  },
+  {
+    id: 2,
+    image: 'https://isotech-demo.myshopify.com/cdn/shop/files/2_ae5cc69e-78af-4aea-9cc7-bb616d558539.png?v=1695797615',
+    name: 'Iphone 15 Pro Max',
+    title: 'Hiệu năng dẫn đầu phân khúc GPU của chip A17 Pro nhanh hơn Iphone 12 Pro lên đến 70%.',
+    prodType: 'apple/phone',
+
+  },
+  {
+    id: 3,
+    image: 'https://isotech-demo.myshopify.com/cdn/shop/files/1_1cae1484-6708-4556-af27-18db5a0b650c.png?v=1696134352',
+    name: 'Xiaomi 13T Pro 5G',
+    title: 'Điện thoại ấn tượng nhờ được trang bị chip Dimensity 9200+, camera 50 MP có kèm sự hợp tác với Leica cùng kiểu thiết kế tinh tế đầy sang trọng.',
+    prodType: 'xiaomi',
+  }
+]
+
 export const CateFeatures = [
   {
     id: 1,

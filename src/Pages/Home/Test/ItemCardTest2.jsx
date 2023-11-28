@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import Button from 'react-bootstrap/Button';
+
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
@@ -15,10 +15,10 @@ import Heading from "../Heading";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
-const ItemCardTest = ({ type, heading }) => {
+const ItemCardTest2 = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
+      <Center mb="2" w="80%" display="flex" flexWrap="wrap" >
         <Flex
           justifyContent="center"
           w="100%"
@@ -29,56 +29,58 @@ const ItemCardTest = ({ type, heading }) => {
           <Box
             //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
             position="absolute"
-            mt="8%"
-            ml="-35%"
+            mt="5%"
+            ml="-45%"
             transform="translate(-50%, -50%)"
             textAlign="center"
             zIndex={2} // Set z-index to ensure the text is on top of the image
             color="white"
             p="2"
-            w="20%"
+            w="15%"
             h="auto"
             borderRadius="15px"
             borderWidth={1}
             borderColor={"#555"}
             bg="rgba(0,0,0,0.5)"
+            fontSize="10px"
           >
-            <h3>SmartWatch</h3>
+            <h3>Asus</h3>
             <p>
-             Làm chủ thời gian và công việc của bạn với đồng hồ thông minh
+                Chọn theo phong cách của bạn
             </p>
-            <Button variant="light">Xem thêm</Button>{' '}
+            <button className="button button--primary">Show Now</button>
           </Box>
-          <Image
-            mt="1"
-            src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
-            alt="Smart Watch"
-            height="835px"
-            mr={"1%"}
-            width="30%"
-            loading="lazy"
-            borderRadius="15px"
-            zIndex={1} // Set z-index to ensure the image is behind the text
-          />
+            <Image
+              mt="1"
+              src="https://megabyte.andevfrontend.com/images/categories/sliders/notebooks.jpg"
+              alt="Smart Watch"
+              height="415px"
+              mr={"1%"}
+              width="30%"
+              loading="lazy"
+              borderRadius="15px"
+              zIndex={1} // Set z-index to ensure the image is behind the text
+            />
           {/* Banner Image */}
+
 
           {/* Text Overlay */}
 
           {/* Swiper Slider */}
           <Box
-            w="70%" // Adjust the width of the Swiper slider as needed
+            w="75%" // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
             <Swiper
               slidesPerView={4}
-              grid={{ rows: 2, fill: "row" }}
+              grid={{ rows: 1, fill: "row" }}
               spaceBetween={10}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-          
+        
               modules={[Grid, Autoplay]}
               className="mySwiper"
             >
@@ -96,7 +98,7 @@ const ItemCardTest = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto">
+                        <Box className="list" p="2" w="" h="auto" >
                           <Box className="img">
                             <Square
                               m="auto"
@@ -164,4 +166,4 @@ const ItemCardTest = ({ type, heading }) => {
   );
 };
 
-export default ItemCardTest;
+export default ItemCardTest2;

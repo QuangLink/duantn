@@ -73,7 +73,7 @@ const Slider1 = ({ type }) => {
         <Box key={uuid()}>
           <SwiperSlide>
             <Link to={`/${i.prodType}/${i.prodID}`}>
-              <Box p="2" m="1" borderRadius="15px" border="1px solid black">
+              <Box p="2" m="1" borderRadius="15px" border="1px solid #ccc" bg="white">
                 <Square
                   m="auto"
                   w={200}

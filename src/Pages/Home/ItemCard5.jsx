@@ -130,12 +130,13 @@ const ItemCard5 = ({ type, heading }) => {
                   mt="4"
                   borderRadius="15px"
                   borderWidth={1}
-                  borderColor={"#555"}
+                  borderColor={"#ccc"}
                   w=""
                   h="auto"
+                  bg="white"
                 >
                   <Link to={`/${i.prodType}/${i.prodID}`}>
-                    <Box className="list" p="2" mt="4" w="" h="auto">
+                    <Box className="list" p="2" mt="4" w="" h="auto" >
                       <Box className="img">
                         <Square
                           m="auto"
