@@ -64,7 +64,7 @@ const ItemCard5 = ({ type, heading }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
   const listDataLaptop = filteredProducts.filter(
     (product) => product.prodType === "Laptop",
@@ -136,7 +136,7 @@ const ItemCard5 = ({ type, heading }) => {
                   bg="white"
                 >
                   <Link to={`/${i.prodType}/${i.prodID}`}>
-                    <Box className="list" p="2" mt="4" w="" h="auto" >
+                    <Box className="list" p="2" mt="4" w="" h="auto">
                       <Box className="img">
                         <Square
                           m="auto"

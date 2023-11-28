@@ -202,7 +202,6 @@ const TimeDeal = ({ type, heading }) => {
         <Swiper
           slidesPerView={3}
           grid={{ rows: 2, fill: "row" }}
-          navigation
           spaceBetween={30}
           autoplay={{
             delay: 2500,
@@ -357,7 +356,6 @@ const TimeDeal = ({ type, heading }) => {
                           </>
                         )}
                         <Box
-                       
                           display="flex"
                           backgroundColor="yellow"
                           borderRadius="15px"

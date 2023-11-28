@@ -191,7 +191,8 @@ const Checkout = () => {
       addressData.length === 0
     ) {
       return (
-        <Flex w="100%">
+
+        <Flex w="70%">
           <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic">
             Bạn chưa có địa chỉ nhận hàng
           </Text>
@@ -308,7 +309,7 @@ const Checkout = () => {
       </div>
 
       <Box className="BgImg"></Box>
-      <Box display="flex" justifyContent="space-between" w="100%" mt="5">
+      <Center display="flex" justifyContent="space-between" w="88%" mt="5" >
         <Text fontSize="25px" fontWeight="700">
           <Icon
             as={FaMapMarkerAlt}
@@ -360,7 +361,7 @@ const Checkout = () => {
             </Button>
           </Box>
         )}
-      </Box>
+      </Center>
       {renderAddressData()}
     </Center>
   );

@@ -63,14 +63,11 @@ const RelateProduct = ({ type, heading }) => {
       <Box>
         <a href="">
           <Text
-           fontSize="2xl"
-           width=""
-           fontWeight="700"
-           textColor="black"
-           className="headingHome"
-   
-          
-         
+            fontSize="2xl"
+            width=""
+            fontWeight="700"
+            textColor="black"
+            className="headingHome"
           >
             Các sản phẩm liên quan
           </Text>

@@ -59,8 +59,7 @@ const ItemCard6 = ({ type, heading }) => {
               <Center>
                 <Text fontSize="15px" color="gray.600" className="descDV" p="1">
                   {i.desc}
-                </Text>
-              </Center>
+                </Text>              </Center>
             </Flex>
           ))}
         </Grid>

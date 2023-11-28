@@ -8,6 +8,7 @@ import {
   useToast,
   Icon,
   Text,
+  Center
   
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
@@ -203,53 +204,9 @@ const CartItem = ({
           <Box>
             <Image src={img} alt={name} width="150px" />
           </Box>
-          <Box display="flex" alignItems="center">
-            <Text>Trong kho:</Text>
-            <Text color="red" marginLeft="4px">
-              {QTY}
-            </Text>
-          </Box>
-          <Box display={"flex"} gap="5">
-            <Button onClick={handleDec}>-</Button>
-            <input
-              type="number"
-              value={count}
-              onChange={handleChange}
-              style={{ width: "50px", textAlign: "center" }}
-            />
-            <Button onClick={handleInc}>+</Button>
-          </Box>
-          <Box justifyContent="right" >
-          <Button
-            backgroundColor={"white"}
-            color="rgb(23, 116, 239)"
-            _hover={{color:"red"}}
-            onClick={() => {
-              DeleteRequest(cartID)
-                .then((response) => {
-                  toast({
-                    title: "Delete Item Successfully",
-                    status: "success",
-                    duration: 4000,
-                    isClosable: true,
-                    position: "top",
-                  });
-                })
-                .catch((reject) => {
-                  toast({
-                    title: "Something Went Wrong",
-                    description: `${reject.message}`,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-right",
-                  });
-                });
-            }}
-          >
-          xóa
-          </Button>
-        </Box> 
+          
+          
+          
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
@@ -280,6 +237,7 @@ const CartItem = ({
               này
             </Heading>
           </Flex>
+
         </Flex>
         {/* //part3- line 71 to 99*/}
         <Flex
@@ -291,6 +249,7 @@ const CartItem = ({
             xl: "right",
             "2xl": "right",
           }}
+          width="20%"
           gap={1}
           fontWeight="500"
         >
@@ -316,6 +275,61 @@ const CartItem = ({
 
           
         </Flex>
+
+        <Center flexWrap="wrap" display="flex" height="100px" mt="-3">
+        <Box display={"flex"} >
+            <Button onClick={handleDec}>-</Button>
+            <input
+              type="number"
+              value={count}
+              onChange={handleChange}
+              style={{ width: "30px", height:"40px", textAlign: "center" }}
+            />
+            <Button onClick={handleInc}>+</Button>
+          </Box>
+          <Center width="100%">
+            <Text>Trong kho:</Text>
+            <Text color="red" marginLeft="4px">
+              {QTY}
+            </Text>
+          </Center>
+          <Box justifyContent="center" display="flex" width="90%">
+          <Button width="100%"  
+          textAlign="center"
+          border="none"
+            backgroundColor={"white"}
+            color="rgb(23, 116, 239)"
+            _hover={{color:"red"}}
+            onClick={() => {
+              DeleteRequest(cartID)
+                .then((response) => {
+                  toast({
+                    title: "Delete Item Successfully",
+                    status: "success",
+                    duration: 4000,
+                    isClosable: true,
+                    position: "top",
+                  });
+                })
+                .catch((reject) => {
+                  toast({
+                    title: "Something Went Wrong",
+                    description: `${reject.message}`,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                  });
+                });
+            }}
+          >
+          xóa
+          </Button>
+        </Box> 
+          
+        </Center>
+        
+        
        
 
        

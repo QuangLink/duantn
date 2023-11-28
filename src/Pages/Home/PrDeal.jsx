@@ -197,7 +197,6 @@ const PrDeal = ({ type }) => {
                                     backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
                                     color="#fff "
                                     _hover={{ color: "black" }}
-                               
                                     textAlign="center"
                                   >
                                     <Text fontSize="13px" fontWeight="500">

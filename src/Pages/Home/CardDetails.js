@@ -4,6 +4,9 @@ const apiUrlBase = "https://duantn-backend.onrender.com/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
+  phone: apiUrlBase + "phone",
+  tablet: apiUrlBase + "tablet",
+  laptop: apiUrlBase + "laptop",
   applephone: apiUrlBase + "apple/phone",
   appletablet: apiUrlBase + "apple/tablet",
   samsung: apiUrlBase + "samsung",
@@ -44,7 +47,13 @@ export let PrAsus = [];
 export let PrLenovo = [];
 export let PrAcer = [];
 export let PrSmartWatch = [];
+export let PrPhone = [];
+export let PrTablet = [];
+export let PrLaptop = [];
 
+export async function loadPrPhone() {
+  PrPhone = await fetchDataForCategory("phone");
+}
 export async function loadPrSale() {
   PrSale = await fetchDataForCategory("sale");
 }
@@ -76,6 +85,12 @@ export async function loadPrLenovo() {
 }
 export async function loadPrAcer() {
   PrAcer = await fetchDataForCategory("acer");
+}
+export async function loadPrTablet() {
+  PrTablet = await fetchDataForCategory("tablet");
+}
+export async function loadPrLaptop() {
+  PrLaptop = await fetchDataForCategory("laptop");
 }
 
 export const BannersCenter = [

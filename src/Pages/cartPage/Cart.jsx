@@ -122,7 +122,7 @@ const Cart = () => {
               textAlign="center"
               display="flex"
               justifyContent="space-around"
-              w="95%"
+              w="100%"
               m="15p% 10% 10% 10%"
               mt="5"
             >
@@ -134,7 +134,7 @@ const Cart = () => {
             </Heading>
             <Center
               mt="5px"
-              width="100%"
+             
               w="95%"
               display="flex"
               flexWrap="wrap"
@@ -146,9 +146,9 @@ const Cart = () => {
                   base: "100%",
                   sm: "100%",
                   md: "100%",
-                  lg: "70%",
-                  xl: "70%",
-                  "2xl": "70%",
+                  lg: "75%",
+                  xl: "75%",
+                  "2xl": "74%",
                 }}
                 gap={"1"}
               >
@@ -216,7 +216,7 @@ const Cart = () => {
               _hover={{ color: "#4a90e2" }}
               onClick={() => navigate("/checkout")}
             >
-              <Text color="white">Tiến hành đặt hàng</Text>
+              <Text color="white" m="auto">Tiến hành đặt hàng</Text>
             </Button>
           </Center>
         )}
