@@ -8,8 +8,7 @@ import {
   useToast,
   Icon,
   Text,
-  Center
-  
+  Center,
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
@@ -169,11 +168,12 @@ const CartItem = ({
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"100%"}
-      margin={"0px 0px 16px 0px"}
+      m="1"
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >
       <Flex
+        m="1"
         p={"16px"}
         flexDirection={{
           base: "column",
@@ -204,9 +204,6 @@ const CartItem = ({
           <Box>
             <Image src={img} alt={name} width="150px" />
           </Box>
-          
-          
-          
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
@@ -237,7 +234,6 @@ const CartItem = ({
               này
             </Heading>
           </Flex>
-
         </Flex>
         {/* //part3- line 71 to 99*/}
         <Flex
@@ -271,19 +267,16 @@ const CartItem = ({
                 currency: "VND",
               })}
           </Heading>
-          
-
-          
         </Flex>
 
         <Center flexWrap="wrap" display="flex" height="100px" mt="-3">
-        <Box display={"flex"} >
+          <Box display={"flex"}>
             <Button onClick={handleDec}>-</Button>
             <input
               type="number"
               value={count}
               onChange={handleChange}
-              style={{ width: "30px", height:"40px", textAlign: "center" }}
+              style={{ width: "30px", height: "40px", textAlign: "center" }}
             />
             <Button onClick={handleInc}>+</Button>
           </Box>
@@ -294,51 +287,43 @@ const CartItem = ({
             </Text>
           </Center>
           <Box justifyContent="center" display="flex" width="90%">
-          <Button width="100%"  
-          textAlign="center"
-          border="none"
-            backgroundColor={"white"}
-            color="rgb(23, 116, 239)"
-            _hover={{color:"red"}}
-            onClick={() => {
-              DeleteRequest(cartID)
-                .then((response) => {
-                  toast({
-                    title: "Delete Item Successfully",
-                    status: "success",
-                    duration: 4000,
-                    isClosable: true,
-                    position: "top",
+            <Button
+              h="auto"
+              m="0"
+              width="100%"
+              textAlign="center"
+              border="none"
+              backgroundColor={"white"}
+              color="rgb(23, 116, 239)"
+              _hover={{ color: "red" }}
+              onClick={() => {
+                DeleteRequest(cartID)
+                  .then((response) => {
+                    toast({
+                      title: "Delete Item Successfully",
+                      status: "success",
+                      duration: 4000,
+                      isClosable: true,
+                      position: "top",
+                    });
+                  })
+                  .catch((reject) => {
+                    toast({
+                      title: "Something Went Wrong",
+                      description: `${reject.message}`,
+                      status: "error",
+                      duration: 5000,
+                      isClosable: true,
+                      position: "bottom-right",
+                    });
                   });
-                })
-                .catch((reject) => {
-                  toast({
-                    title: "Something Went Wrong",
-                    description: `${reject.message}`,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-right",
-                  });
-                });
-            }}
-          >
-          xóa
-          </Button>
-        </Box> 
-          
+              }}
+            >
+              xóa
+            </Button>
+          </Box>
         </Center>
-        
-        
-       
-
-       
       </Flex>
-     
-
-       
-        
-    
     </Flex>
   );
 };

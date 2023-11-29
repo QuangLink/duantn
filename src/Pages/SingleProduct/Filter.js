@@ -13,7 +13,6 @@ const ColorFilter = ({ colors, applyFilter }) => {
     <div>
       {colors.map((color) => (
         <Button
-        
           key={color}
           onClick={() => handleColorClick(color)}
           bg={selectedColor === color ? "#22a8ff" : color}
@@ -27,7 +26,7 @@ const ColorFilter = ({ colors, applyFilter }) => {
               ? { backgroundColor: "#22a8ff" }
               : {}
           }
-            style={{ marginRight: "10px", marginBottom: "10px" }}
+          style={{ marginRight: "10px", marginBottom: "10px" }}
         >
           {color}
         </Button>
@@ -62,7 +61,6 @@ const StorageValueFilter = ({ storageValues, applyFilter }) => {
               : {}
           }
           style={{ marginRight: "10px", marginBottom: "10px" }}
-          
         >
           {value}
         </Button>

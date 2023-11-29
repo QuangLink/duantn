@@ -22,7 +22,12 @@ import { PrApplePhone } from "../Home/CardDetails";
 import "./Productbox.css";
 import { Route } from "react-router-dom";
 
-const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChangeStore }) => {
+const ProductFilter = ({
+  typeOfProduct,
+  filter,
+  handleFilterChange,
+  onTypeChangeStore,
+}) => {
   const [type, setType] = useState(typeOfProduct);
 
   useEffect(() => {
@@ -31,29 +36,40 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
   console.log(type);
 
   const CategoryProduct = () => {
-    if (type === 'phone' || type === 'apple/phone' || type === 'xiaomi' || type === 'samsung') {
+    if (
+      type === "phone" ||
+      type === "apple/phone" ||
+      type === "xiaomi" ||
+      type === "samsung"
+    ) {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
             <Box>
-              <Link href="/apple/phone" >
+              <Link href="/apple/phone">
                 <Box className="text-btn">Apple</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/xiaomi" >
+              <Link href="/xiaomi">
                 <Box className="text-btn">Xiaomi</Box>
               </Link>
             </Box>
             <Box>
-              <Link href="/samsung" >
+              <Link href="/samsung">
                 <Box className="text-btn">Samsung</Box>
               </Link>
             </Box>
           </Grid>
         </MenuList>
-      )
-    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+      );
+    } else if (
+      type === "laptop" ||
+      type === "asus" ||
+      type === "acer" ||
+      type === "lenovo" ||
+      type === "hp"
+    ) {
       return (
         <MenuList bg="white">
           <Grid className="grid-container">
@@ -79,7 +95,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
             </Box>
           </Grid>
         </MenuList>
-      )
+      );
     } else {
       return (
         <MenuList bg="white">
@@ -91,38 +107,58 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
             </Box>
           </Grid>
         </MenuList>
-      )
+      );
     }
-  }
-
+  };
 
   const CategoryProduct2 = () => {
-    if (type === 'phone' || type === 'applephone' || type === 'xiaomi' || type === 'samsung') {
+    if (
+      type === "phone" ||
+      type === "applephone" ||
+      type === "xiaomi" ||
+      type === "samsung"
+    ) {
       return (
         <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button" >Dung lượng</MenuButton>
-          <MenuList bg="white" >
-            <Grid className="grid-container" >
+          <MenuButton className="menu-button">Dung lượng</MenuButton>
+          <MenuList bg="white">
+            <Grid className="grid-container">
               <Box>
-                <MenuItem value="128gb" onClick={onTypeChangeStore}>128GB</MenuItem>
+                <MenuItem value="128gb" onClick={onTypeChangeStore}>
+                  128GB
+                </MenuItem>
               </Box>
               <Box>
-                <MenuItem value="256gb" onClick={onTypeChangeStore}>256GB</MenuItem>
+                <MenuItem value="256gb" onClick={onTypeChangeStore}>
+                  256GB
+                </MenuItem>
               </Box>
               <Box>
-                <MenuItem value="512gb" onClick={onTypeChangeStore}>512GB</MenuItem>
+                <MenuItem value="512gb" onClick={onTypeChangeStore}>
+                  512GB
+                </MenuItem>
               </Box>
               <Box>
-                <MenuItem value="1tgb" onClick={onTypeChangeStore}>1TGB</MenuItem>
+                <MenuItem value="1tgb" onClick={onTypeChangeStore}>
+                  1TGB
+                </MenuItem>
               </Box>
               <Box>
-                <MenuItem value="" onClick={onTypeChangeStore}>ALL</MenuItem>
+                <MenuItem value="" onClick={onTypeChangeStore}>
+                  ALL
+                </MenuItem>
               </Box>
             </Grid>
           </MenuList>
         </Menu>
-      )
-    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+      );
+    } else if (
+      type === "laptop" ||
+      type === "asus" ||
+      type === "acer" ||
+      type === "lenovo" ||
+      type === "hp"
+    ) {
       return (
         <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
           <MenuButton className="menu-button">Ram</MenuButton>
@@ -142,7 +178,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
             </Link>
           </MenuList>
         </Menu>
-      )
+      );
     } else {
       return (
         <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
@@ -163,9 +199,9 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
             </Link>
           </MenuList>
         </Menu>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="filter_1">
@@ -186,7 +222,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
           "@media (max-width: 426px)": { display: "none" },
         }}
       >
-        <Flex width="65%" >
+        <Flex width="65%">
           <Menu>
             <MenuButton className="menu-button">Hãng</MenuButton>
             <CategoryProduct />
@@ -212,7 +248,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
           </Box>
         </Flex>
       </Box>
-    </div >
+    </div>
   );
 };
 export default ProductFilter;

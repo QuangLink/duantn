@@ -61,7 +61,7 @@ const AllRoutes = () => {
     <div>
       <Routes>
         <Route path="/404" element={<NotFoundPage />}></Route>
-      <Route path="/resetpass" element={<Resetpass />}></Route>
+        <Route path="/resetpass" element={<Resetpass />}></Route>
         <Route path="/forgot" element={<Forgot />}></Route>
         <Route path="/verify" element={<Verified />}></Route>
         <Route path="/reset" element={<ChangePass />}></Route>

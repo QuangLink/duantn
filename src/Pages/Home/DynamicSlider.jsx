@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
@@ -20,9 +20,9 @@ import {
   Stack,
   Button,
 } from "@chakra-ui/react";
-import Heading from "../Heading";
+import Heading from "./Heading";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./stylehome.css";
 
 const ItemCardTest = ({ type, heading }) => {
   return (
@@ -45,7 +45,7 @@ const ItemCardTest = ({ type, heading }) => {
             mr={"1%"}
           >
             <Image
-              src="https://i.postimg.cc/YCRGGw0Z/Untitled.png"
+              src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
               alt="Smart Watch"
               height="100%"
               loading="lazy"
@@ -56,7 +56,7 @@ const ItemCardTest = ({ type, heading }) => {
             />
             <Stack
               ml="35px"
-              mb="30%"
+              mb="135%"
               position="absolute"
               bottom={4}
               zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
@@ -64,23 +64,18 @@ const ItemCardTest = ({ type, heading }) => {
               <Box
                 //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
                 color="white"
-                right={-10} // Shift the box to the left by 10px
+                right={1}
                 p="2"
-                w="100%"
+                w="90%"
                 h="auto"
+                borderColor={"#555"}
               >
-                
-                <h3>Apple Iphone</h3>
-                <Link to="/apple/phone">
-                  <Text
-                    fontSize="18px"
-                    textDecoration="underline"
-                    m={1}
-                    color={"#black"}
-                  >
-                    {" "}
-                    Xem thêm{" "}
-                  </Text>
+                <h3>SmartWatch</h3>
+                <p>
+                  Làm chủ thời gian và công nghệ với đồng hồ thông minh hiện đại
+                </p>
+                <Link to="/smartwatch">
+                  <Button>Xem thêm</Button>
                 </Link>
               </Box>
             </Stack>
@@ -97,7 +92,7 @@ const ItemCardTest = ({ type, heading }) => {
           >
             <Swiper
               slidesPerView={4}
-              grid={{ rows: 1, fill: "row" }}
+              grid={{ rows: 2, fill: "row" }}
               spaceBetween={10}
               autoplay={{
                 delay: 2500,

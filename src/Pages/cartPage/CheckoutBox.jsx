@@ -213,22 +213,20 @@ const CheckoutBox = ({
             w="auto"
             h="auto"
             display="flex"
-           
             justifyContent="space-around"
             mt="5"
           >
             {["cash", "vnpay"].map((option) => (
               <Box
-              width="49%"
+                width="49%"
                 key={option}
                 className={`payment-option ${
                   selectedOption === option ? "selected" : ""
                 }`}
                 style={{
-                  
                   backgroundColor:
                     selectedOption === option ? "#c6e0f7" : "white",
-                  
+
                   borderShadow:
                     selectedOption === option ? "0 0 0 3px #3182ce" : "none",
                   borderRadius: "5px",
@@ -238,7 +236,7 @@ const CheckoutBox = ({
                 }}
                 onClick={() => handleOptionClick(option)}
               >
-                <Box marginBottom="5" mt="5" >
+                <Box marginBottom="5" mt="5">
                   <Icon
                     as={option === "cash" ? FcHome : FaWallet}
                     ml={10}
@@ -401,10 +399,11 @@ const CheckoutBox = ({
             }
           }}
         >
-          <Text color="white" m="auto">Tiến hành đặt hàng</Text>
+          <Text color="white" m="auto">
+            Tiến hành đặt hàng
+          </Text>
         </Button>
         <Button
-      
           mb="5"
           mt="2"
           w="70%"
@@ -415,7 +414,9 @@ const CheckoutBox = ({
           _hover={{ color: "white" }}
           onClick={() => navigate("/")}
         >
-          <Text color="#4a90e2"   m="auto">Chọn thêm sản phẩm khác</Text>
+          <Text color="#4a90e2" m="auto">
+            Chọn thêm sản phẩm khác
+          </Text>
         </Button>
       </Center>
     </div>

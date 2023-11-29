@@ -1,43 +1,43 @@
 export const ProductCategories = [
   {
     labels: "Điện Thoại",
-    pordType: 'phone'
+    pordType: "phone",
   },
   {
     labels: "Laptop",
-    pordType: 'laptop'
+    pordType: "laptop",
   },
   {
     labels: "Tablet",
-    pordType: 'tablet'
+    pordType: "tablet",
   },
   {
     labels: "Smartwatch",
-    pordType: 'smartwatch'
+    pordType: "smartwatch",
   },
   {
     labels: "Bàn phím",
-    pordType: 'keyboard'
+    pordType: "keyboard",
   },
   {
     labels: "Chuột",
-    pordType: 'mouse'
+    pordType: "mouse",
   },
   {
     labels: "Loa Blutooth",
-    pordType: 'LoudSpeaker'
+    pordType: "LoudSpeaker",
   },
   {
     labels: "Cáp sạc",
-    pordType: 'cable'
+    pordType: "cable",
   },
   {
     labels: "Tai nghe AriPods",
-    pordType: 'EarPhone'
+    pordType: "EarPhone",
   },
   {
     labels: "Sạc dự phòng",
-    pordType: 'Battery'
+    pordType: "Battery",
   },
 ];
 
@@ -78,7 +78,6 @@ export const ResourcesCenter = [
   {
     labels: "Dịch vụ sửa chữa",
   },
-
 ];
 
 export const Policies = [
@@ -97,5 +96,4 @@ export const Policies = [
   {
     labels: "Giao hành và lắp đặt tại nhà",
   },
-
 ];

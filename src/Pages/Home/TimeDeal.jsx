@@ -96,7 +96,6 @@ const TimeDeal = ({ type, heading }) => {
       textAlign="center"
       backgroundColor="black"
       borderRadius="15px"
-      //chuyển màu background sang
     >
       <Heading
         backgroundImage='url("https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif")'
@@ -105,6 +104,7 @@ const TimeDeal = ({ type, heading }) => {
         display="flex"
         w="100%"
         borderRadius="15px"
+        backgroundRepeat="repeat-x"
       >
         <Box mt="6" display="flex" mb="1" ml="6">
           <Box mr="4">
@@ -164,38 +164,6 @@ const TimeDeal = ({ type, heading }) => {
             </Text>
           </Text>
         </Box>
-        {/* <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Đang diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #E6CB47"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box>
-        <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Sắp diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #ffe252"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box> */}
       </Heading>
 
       <Box mt="1" bachgroundColor="white">

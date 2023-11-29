@@ -17,10 +17,7 @@ const Quanlynv = () => {
         const response = await fetchUsers();
         setUsers(response);
         setLoading(false);
-   
-      } catch (error) {
-       
-      }
+      } catch (error) {}
     };
     fetchApiUsers();
   }, []);
@@ -43,7 +40,7 @@ const Quanlynv = () => {
           .toString()
           .toLowerCase()
           .includes(searchID.toLowerCase()) &&
-        user.username.toLowerCase().includes(searchUsername.toLowerCase())
+        user.username.toLowerCase().includes(searchUsername.toLowerCase()),
     );
 
     return filteredUsers.map((user, index) => (
@@ -60,7 +57,10 @@ const Quanlynv = () => {
 
         <td>{user.mobile}</td>
 
-        <td class="table-td-center" style={{display:"flex",justifyContent:"space-around"}}>
+        <td
+          class="table-td-center"
+          style={{ display: "flex", justifyContent: "space-around" }}
+        >
           <button
             class="btn btn-primary btn-sm trash"
             type="button"
@@ -133,17 +133,36 @@ const Quanlynv = () => {
                   id="sampleTable"
                 >
                   <thead>
-                    <tr >
-                      <th width="10" >
+                    <tr>
+                      <th width="10">
                         <input type="checkbox" id="all" />
                       </th>
-                      <th style={{fontSize:"20px",fontWeight:"600"}}>ID</th>
-                      <th width="20%" style={{fontSize:"20px",fontWeight:"600"}}>User</th>
-                      <th style={{fontSize:"20px",fontWeight:"600"}}>Địa chỉ</th>
+                      <th style={{ fontSize: "20px", fontWeight: "600" }}>
+                        ID
+                      </th>
+                      <th
+                        width="20%"
+                        style={{ fontSize: "20px", fontWeight: "600" }}
+                      >
+                        User
+                      </th>
+                      <th style={{ fontSize: "20px", fontWeight: "600" }}>
+                        Địa chỉ
+                      </th>
 
-                      <th width="15%" style={{fontSize:"20px",fontWeight:"600"}}>SDT</th>
+                      <th
+                        width="15%"
+                        style={{ fontSize: "20px", fontWeight: "600" }}
+                      >
+                        SDT
+                      </th>
 
-                      <th width="10%" style={{fontSize:"20px",fontWeight:"600"}}>Tính năng</th>
+                      <th
+                        width="10%"
+                        style={{ fontSize: "20px", fontWeight: "600" }}
+                      >
+                        Tính năng
+                      </th>
                     </tr>
                   </thead>
                   <tbody>{renderUsers()}</tbody>

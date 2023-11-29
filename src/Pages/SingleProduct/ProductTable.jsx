@@ -11,12 +11,8 @@ const ProductTable = ({ product }) => {
         border: "1px solid #ccc",
         width: "91%",
         boxShadow:
-        "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
-        
-       
+          "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
       }}
-   
-      
     >
       <thead style={{ backgroundColor: "#f2f2f2", padding: "10px" }}>
         <tr>

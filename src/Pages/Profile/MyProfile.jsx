@@ -31,7 +31,6 @@ export default function MyProfile() {
   const [progress, setProgress] = useState(33.33);
 
   const handleFormChange = (newStep) => {
-
     setStep(newStep);
     setProgress((newStep - 1) * 33.33);
   };

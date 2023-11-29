@@ -181,14 +181,37 @@
   border: none;
   background: none;
   cursor: pointer;
-  transition: background 0.3s ease;
+  /* transition: background 0.3s ease; */
+  transition: all 0.3s ease;
 }
 
 .options button:hover {
-  background: #f0f0f0;
+  transform: scale(1.1);
+  color: #0078d4;
 }
 
 .options .selected {
   color: #0078d4;
   border-bottom: 2px solid #0078d4;
+}
+
+
+.heading{
+  padding-top: 25px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: black;
+}
+.amin{
+  opacity: 0;
+  transform: translateY(30px);
+  animation: moveup 0.5s linear forwards;
+}
+@keyframes moveup {
+  100%{
+      opacity: 1;
+      transform: translateY(0px);
+  }
+  
 }

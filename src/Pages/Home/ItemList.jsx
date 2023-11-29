@@ -10,13 +10,22 @@ import "swiper/css/pagination";
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
-import { Flex, Text, Image, Square, Box, Center, Stack, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Image,
+  Square,
+  Box,
+  Center,
+  Stack,
+  Button,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const ItemList = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap" >
+      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
         <Flex
           justifyContent="center"
           w="100%"
@@ -24,7 +33,6 @@ const ItemList = ({ type, heading }) => {
           cursor="pointer"
           textAlign="center"
         >
-   
           <Box
             w="100%" // Adjust the width of the Swiper slider as needed
             m="auto"
@@ -38,7 +46,6 @@ const ItemList = ({ type, heading }) => {
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-      
               modules={[Grid, Autoplay]}
               className="mySwiper"
             >
@@ -56,7 +63,7 @@ const ItemList = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto" >
+                        <Box className="list" p="2" w="" h="auto">
                           <Box className="img">
                             <Square
                               m="auto"
@@ -121,23 +128,21 @@ const ItemList = ({ type, heading }) => {
           </Box>
         </Flex>
         <Center w="80%" mt="2">
-        <Link to={`/${heading}`}>
-        <Button
-        variant='outline'
-            w="100%"
-            mt="6"
-            bg="white"
-            color="#424245"
-            _hover={{ color: "blue" }}
-            fontWeight="700"
-        >
-            Xem thêm
-        </Button>
-        </Link>
-    </Center>
+          <Link to={`/${heading}`}>
+            <Button
+              variant="outline"
+              w="100%"
+              mt="6"
+              bg="white"
+              color="#424245"
+              _hover={{ color: "blue" }}
+              fontWeight="700"
+            >
+              Xem thêm
+            </Button>
+          </Link>
+        </Center>
       </Center>
-
-  
     </Center>
   );
 };

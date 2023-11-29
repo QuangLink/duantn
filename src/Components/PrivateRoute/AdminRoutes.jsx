@@ -14,7 +14,7 @@ function AdminRoute({ children }) {
     if (!isAuth || admin === undefined || isNaN(admin) || admin === 0) {
       // Use the navigate function directly
       navigate("/");
-      
+
       // Reload the current page only once
       if (!isReloaded.current) {
         window.location.reload();

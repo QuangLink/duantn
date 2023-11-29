@@ -43,7 +43,7 @@ const MyCartLength = ({ item }) => {
       >
         <Box>
           <Heading fontWeight={600} fontSize="16px">
-          Giỏ hàng ({item} sản phẩm)
+            Giỏ hàng ({item} sản phẩm)
           </Heading>
         </Box>
         <Box>

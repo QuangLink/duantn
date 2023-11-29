@@ -132,13 +132,7 @@ const Cart = () => {
                 </Center>
               </Box>
             </Heading>
-            <Center
-              mt="5px"
-             
-              w="95%"
-              display="flex"
-              flexWrap="wrap"
-            >
+            <Center mt="5px" w="95%" display="flex" flexWrap="wrap">
               <Flex
                 flexDirection={"column"}
                 border={"0px solid blue"}
@@ -182,31 +176,30 @@ const Cart = () => {
                   />
                 ))}
               </Flex>
-            </Center >
-           <Center width="100%">
-           <Flex justifyContent="space-between" w="50%">
-              <Text
-                mt="2"
-                height="50px"
-                fontFamily="inherit"
-                color="#424245"
-                noOfLines={2}
-                fontSize="20px"
-                fontWeight="700"
-                
-              >
-                Tạm tính:
-              </Text>
+            </Center>
+            <Center width="100%">
+              <Flex justifyContent="space-between" w="50%">
+                <Text
+                  mt="2"
+                  height="50px"
+                  fontFamily="inherit"
+                  color="#424245"
+                  noOfLines={2}
+                  fontSize="20px"
+                  fontWeight="700"
+                >
+                  Tạm tính:
+                </Text>
 
-              <Text fontWeight="700" fontSize="20px" mt="2" color="red">
-                {paybalPrice &&
-                  paybalPrice.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
-              </Text>
-            </Flex>
-           </Center>
+                <Text fontWeight="700" fontSize="20px" mt="2" color="red">
+                  {paybalPrice &&
+                    paybalPrice.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                </Text>
+              </Flex>
+            </Center>
             <Button
               w="50%"
               h="50px"
@@ -216,7 +209,9 @@ const Cart = () => {
               _hover={{ color: "#4a90e2" }}
               onClick={() => navigate("/checkout")}
             >
-              <Text color="white" m="auto">Tiến hành đặt hàng</Text>
+              <Text color="white" m="auto">
+                Tiến hành đặt hàng
+              </Text>
             </Button>
           </Center>
         )}

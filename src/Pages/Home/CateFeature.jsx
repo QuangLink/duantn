@@ -17,7 +17,7 @@ const CateFeature = ({ type }) => {
             <div
               style={{
                 borderRadius: "10px",
-          
+
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -31,8 +31,8 @@ const CateFeature = ({ type }) => {
               <p
                 className="cateName"
                 style={{
-                  height:"60px",
-                  width:"150px",
+                  height: "60px",
+                  width: "150px",
                   marginTop: "0",
                   wordWrap: "break-word",
                   padding: "5px",

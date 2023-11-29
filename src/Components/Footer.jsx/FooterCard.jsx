@@ -5,25 +5,22 @@ import { TfiTwitter } from "react-icons/tfi";
 import { CiYoutube } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
-
 export const FooterCard1 = ({ type, heading }) => {
-  console.log('====================================');
+  console.log("====================================");
   console.log(type);
-  console.log('====================================');
+  console.log("====================================");
   return (
     <Box cursor="pointer">
-      <Text fontSize={18} fontWeight="700">{heading}</Text>
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
       <Box>
         {type.map((i, index) => (
-
           <Box key={index}>
             <Link to={`/${i.pordType}`}>
-              <Text fontSize="15px">
-                {i.labels}
-              </Text>
+              <Text fontSize="15px">{i.labels}</Text>
             </Link>
           </Box>
-
         ))}
       </Box>
     </Box>
@@ -33,16 +30,14 @@ export const FooterCard1 = ({ type, heading }) => {
 export const FooterCard2 = ({ type, heading }) => {
   return (
     <Box cursor="pointer">
-      <Text fontSize={18} fontWeight="700">{heading}</Text>
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
       <Box>
         {type.map((i, index) => (
-
           <Box key={index}>
-            <Text fontSize="15px">
-              {i.labels}
-            </Text>
+            <Text fontSize="15px">{i.labels}</Text>
           </Box>
-
         ))}
       </Box>
     </Box>
@@ -51,16 +46,14 @@ export const FooterCard2 = ({ type, heading }) => {
 export const FooterCard3 = ({ type, heading }) => {
   return (
     <Box cursor="pointer">
-      <Text fontSize={18} fontWeight="700">{heading}</Text>
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
       <Box>
         {type.map((i, index) => (
-
           <Box key={index}>
-            <Text fontSize="15px">
-              {i.labels}
-            </Text>
+            <Text fontSize="15px">{i.labels}</Text>
           </Box>
-
         ))}
       </Box>
     </Box>
@@ -70,16 +63,14 @@ export const FooterCard3 = ({ type, heading }) => {
 export const FooterCard4 = ({ type, heading }) => {
   return (
     <Box cursor="pointer">
-      <Text fontSize={18} fontWeight="700">{heading}</Text>
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
       <Box>
         {type.map((i, index) => (
-
           <Box key={index}>
-            <Text fontSize="15px">
-              {i.labels}
-            </Text>
+            <Text fontSize="15px">{i.labels}</Text>
           </Box>
-
         ))}
       </Box>
     </Box>

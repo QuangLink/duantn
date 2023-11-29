@@ -16,6 +16,12 @@ const categoryUrls = {
   lenovo: apiUrlBase + "lenovo",
   acer: apiUrlBase + "acer",
   smartwatch: apiUrlBase + "smartwatch",
+  keyboard: apiUrlBase + "keyboard",
+  mouse: apiUrlBase + "mouse",
+  cable: apiUrlBase + "cable",
+  Battery: apiUrlBase + "Battery",
+  LoudSpeaker: apiUrlBase + "LoudSpeaker",
+  EarPhone: apiUrlBase + "EarPhone",
 };
 
 const fetchDataForCategory = async (category) => {
@@ -50,6 +56,12 @@ export let PrSmartWatch = [];
 export let PrPhone = [];
 export let PrTablet = [];
 export let PrLaptop = [];
+export let PrKeyboard = [];
+export let PrMouse = [];
+export let PrCable = [];
+export let PrBattery = [];
+export let PrLoudSpeaker = [];
+export let PrEarPhone = [];
 
 export async function loadPrPhone() {
   PrPhone = await fetchDataForCategory("phone");
@@ -91,6 +103,24 @@ export async function loadPrTablet() {
 }
 export async function loadPrLaptop() {
   PrLaptop = await fetchDataForCategory("laptop");
+}
+export async function loadPrKeyboard() {
+  PrKeyboard = await fetchDataForCategory("keyboard");
+}
+export async function loadPrMouse() {
+  PrMouse = await fetchDataForCategory("mouse");
+}
+export async function loadPrCable() {
+  PrCable = await fetchDataForCategory("cable");
+}
+export async function loadPrBattery() {
+  PrBattery = await fetchDataForCategory("Battery");
+}
+export async function loadPrLoudSpeaker() {
+  PrLoudSpeaker = await fetchDataForCategory("LoudSpeaker");
+}
+export async function loadPrEarPhone() {
+  PrEarPhone = await fetchDataForCategory("EarPhone");
 }
 
 export const BannersCenter = [
@@ -180,8 +210,7 @@ export const CateFeatures = [
   {
     id: 6,
     name: "Cáp sạc di động",
-    imgcatehot:
-      "https://duhung.vn/wp-content/uploads/2023/05/Bo-phu-kien-di-dong-Yealink-cho-WH6367-2.png",
+    imgcatehot: "https://wklife.vn/wp-content/uploads/iCon-Cap-Sac.webp",
     prodType: "cable",
   },
   {
@@ -232,27 +261,27 @@ export const ItemDetails7 = [
 
 export const ItemDetails9 = [
   {
-    img: "https://www.reliancedigital.in/medias/Insta-Delivery-Brand-Promise-Icon.png?context=bWFzdGVyfGltYWdlc3wxNTM3fGltYWdlL3BuZ3xpbWFnZXMvaGI2L2gwNS85NDQ3MTcwMzQyOTQyLnBuZ3w2Yzc1ZmY1ZjYwOWIyNWU0ZTgwMjFlYmRkMTU5ZTgzMGI4ZDNmZTE2NjVjYmRlMmUwMmRiODI2OTExNWM5ZTdk",
+    img: "https://baobihuuco.com/wp-content/uploads/2019/04/icon-giao-hang-toan-quoc.jpg",
     caption: "Slide 1",
     title: "Ship hàng toàn quốc",
     desc: "Freeship nội thành TP.HCM",
   },
   {
-    img: "https://www.reliancedigital.in/medias/Best-Finance-Options-2.png?context=bWFzdGVyfGltYWdlc3wxMjM4fGltYWdlL3BuZ3xpbWFnZXMvaDJmL2gxOS85NDQ3MTcwNDA4NDc4LnBuZ3xlMDBiNjY4YWI5YzMzYjZkZDhlZTMyMDhjYjE2YzI2OTY2NWJhYjk2M2VkNzdjZDg3NTNlMGEyMTA1ZjFlODZh",
+    img: "https://baobihuuco.com/wp-content/uploads/2019/04/icon-thanh-toan-cod.jpg",
     caption: "Slide 2",
-    title: "Dùng thử sản phẩm 30 ngày",
-    desc: "Bảo hành 365 ngày",
+    title: "Thanh toán khi nhận hàng",
+    desc: "Thanh toán ngay khi nhận được hàng",
   },
   {
-    img: "https://www.reliancedigital.in/medias/service-img.png?context=bWFzdGVyfGltYWdlc3w5MTB8aW1hZ2UvcG5nfGltYWdlcy9oMDYvaGEzLzkwOTA3OTc5OTQwMTQucG5nfGJjZmJhNzM1ODdkYTQ5ODI3YzNiMzQ1ZTdlM2JjNjUwMTBjM2E3YWFjNmUxZjdmMmEyOGRjZDMxOGI4ZWE0MWY",
+    img: "https://scontent.xx.fbcdn.net/v/t1.15752-9/405450353_207490879064623_2855196075071546846_n.png?stp=dst-png_s206x206&_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=A_EBQMA91fgAX8CS_s2&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdQnImNUvtuWspp2LdMIK72Ha-IgaDYT7oh9urciYR0_Qg&oe=658DF407",
     caption: "Slide 3",
-    title: "Hỗ trợ trả góp 0 đồng",
-    desc: "Linh hoạt nhiều hình thức thanh toán",
+    title: "Hỗ trợ khách hàng",
+    desc: "Hổ trợ khách hàng 24/24",
   },
   {
-    img: "https://www.reliancedigital.in/medias/unmatched-network-img.png?context=bWFzdGVyfGltYWdlc3w3NDV8aW1hZ2UvcG5nfGltYWdlcy9oODIvaDJhLzkwOTA3OTgwNTk1NTAucG5nfDFmMThjYzdiYTNiOTgxYjA5YzdlZTFiMmQyODI5MGY2NTM4ZTcxOWZkZTA1ZjAzY2Q1ZTk5YjQ1NTMxMWViYzU",
+    img: "https://baobihuuco.com/wp-content/uploads/2019/04/icon-dam-bao-chat-luong-1.jpg",
     caption: "Slide 4",
-    title: "Thu cũ - Đổi mới",
-    desc: "Hỗ trợ thu lại máy cũ, bù tiền lấy mới",
+    title: "Cam kết chất lượng",
+    desc: "Chất lượng hoàng toàn đúng như trong mô tả",
   },
 ];
