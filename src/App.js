@@ -15,9 +15,6 @@ const App = () => {
   }, [location.pathname]);
 
   const isAdminRoute = currentPath.includes("/admin");
-  console.log("isAdminRoute:", isAdminRoute);
-  console.log("Current path:", currentPath);
-
   return (
     <div className="App">
       <AuthContextProvider>

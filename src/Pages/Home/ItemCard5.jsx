@@ -20,33 +20,7 @@ import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import "./stylehome.css";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import Cookies from "js-cookie";
 //add singleData to cart
-const postSingleData = async (data) => {
-  try {
-    // Lấy userID từ sessionStorage
-    const userID = Cookies.get("userID");
-
-    // Ensure data.prodID is a valid value, not [object Object]
-    const prodID = data.prodID;
-
-    // Tạo dữ liệu gửi đi kết hợp với userID và prodID
-    const postData = {
-      prodID,
-      userID,
-    };
-
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
-      postData,
-    );
-    return response.data;
-  } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
-  }
-};
 
 const ItemCard5 = ({ type, heading }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);

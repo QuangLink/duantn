@@ -11,6 +11,7 @@ let initialData = {
 };
 
 const CartReducer = (state = initialData, { type, payload }) => {
+
   switch (type) {
     case CartLoading: {
       return {
@@ -21,7 +22,7 @@ const CartReducer = (state = initialData, { type, payload }) => {
     case CartSuccess: {
       // Tính toán giá trị tổng cộng của sản phẩm trong giỏ hàng
       const totalPrice = payload.reduce((acc, item) => {
-        const productPrice = item.prodPrice * item.quantity;
+        const productPrice = item.cart[0].prodPrice * item.quantity;
         return acc + productPrice;
       }, 0);
 

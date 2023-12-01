@@ -33,7 +33,6 @@ const BannerHome = ({ type }) => {
     }, 3000); // Thay đổi số 3000 thành khoảng thời gian bạn muốn chuyển slide (đơn vị là milliseconds)
     return () => clearInterval(interval);
   }, []);
-  console.log(type);
   return (
     <>
       <Center>

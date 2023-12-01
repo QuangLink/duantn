@@ -8,7 +8,7 @@ const override = {
 };
 
 function Loader() {
-  let [color, setColor] = useState("#1bbbff");
+  let [color, setColor] = useState("#6bdaf3");
 
   return (
     <div

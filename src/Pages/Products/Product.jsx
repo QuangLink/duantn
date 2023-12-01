@@ -36,7 +36,7 @@ const postSingleDataWish = async (data) => {
     );
     return response.data;
   } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+    console.log(error);
   }
 };
 

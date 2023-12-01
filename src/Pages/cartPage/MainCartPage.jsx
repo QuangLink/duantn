@@ -10,24 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
 import "./cartstyle.css";
 
-import {
-  Box,
-  Image,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  Button,
-  CardFooter,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 
 import "react-slideshow-image/dist/styles.css";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Icon } from "@chakra-ui/react";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
-import { RiProfileLine } from "react-icons/ri";
 import Checkout from "./Checkout";
 export const GetData = async () => {
   try {
@@ -41,7 +27,7 @@ export const GetData = async () => {
 
 const MainCartPage = () => {
   const dispatch = useDispatch();
-  const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
+  const { loading, data, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
 
   const [val, setVal] = useState("");
@@ -88,21 +74,6 @@ const MainCartPage = () => {
 
   return (
     <div>
-      <style>
-        {`
-        @keyframes blink {
-          0% {
-            color: black;
-          }
-          50% {
-            color: white;
-          }
-          100% {
-            color: yellow;
-          }
-        }
-      `}
-      </style>
       <Flex
         border={"0px solid #4a90e2"}
         margin="auto"
@@ -133,11 +104,10 @@ const MainCartPage = () => {
             </div>
           </Center>
         ) : (
-          <Center
-            className="cartPage"
-            borderRadius="2%"
-            boxShadow="4px 10px 6px 8px rgba(12,12,12,0.2)"
-          >
+          <Box className="cartPage" padding="0 0 2% 2%">
+            {/* Box Tổng */}
+
+            {/* Header  */}
             <Heading
               textAlign="center"
               display="flex"
@@ -150,20 +120,14 @@ const MainCartPage = () => {
                 <Text className="textHeader">
                   <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
                 </Text>
-                <Center fontSize="25px" fontWeight="500" color="red.500">
+                <Center fontSize="32px" fontWeight="700" color="black">
                   Đặt hàng
                 </Center>
               </Box>
             </Heading>
-            <Center
-              mt="5px"
-              width="100%"
-              borderRadius="20px"
-              display="flex"
-              flexWrap="wrap"
-              borderBottom="none"
-              borderBottomRadius="none"
-            >
+            {/* Header  */}
+
+            <Box display="flex" justifyContent="space-between">
               <Flex
                 flexDirection={"column"}
                 border={"0px solid blue"}
@@ -192,32 +156,35 @@ const MainCartPage = () => {
 
                 {data.map((product) => (
                   <CartItem
-                    cartID={product.cartID}
-                    color={product.color}
-                    storage={product.storage_value}
-                    key={product.prodID}
-                    name={product.prodName}
-                    img={product.prodImg}
-                    price={product.prodPrice}
-                    priceSale={product.prodPriceSale}
+                    color={product.cart[0].color}
+                    storage={product.cart[0].storage_value}
+                    key={product.cart[0].prodID}
+                    name={product.cart[0].prodName}
+                    img={product.cart[0].prodImg}
+                    price={product.cart[0].prodPrice}
+                    priceSale={product.cart[0].prodPriceSale}
+                    id={product.cart[0].prodID}
                     QTY={product.QTY}
-                    id={product.prodID}
                     quantity={product.quantity}
                     DeleteRequest={DeleteRequest}
                   />
                 ))}
+                <Checkout />
               </Flex>
-            </Center>
-            <Checkout />
-            <CheckoutBox
-              items={dataLength}
-              totalPrice={totalPrice}
-              paybalPrice={paybalPrice}
-              setVal={setVal}
-              handleApply={handleApply}
-              discount={coupon}
-            />
-          </Center>
+              {/* Phân tách 2 box */}
+
+              <Flex width="30%">
+                <CheckoutBox
+                  items={dataLength}
+                  totalPrice={totalPrice}
+                  paybalPrice={paybalPrice}
+                  setVal={setVal}
+                  handleApply={handleApply}
+                  discount={coupon}
+                />
+              </Flex>
+            </Box>
+          </Box>
         )}
       </Flex>
     </div>

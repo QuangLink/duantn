@@ -13,14 +13,17 @@ import {
 import { FcPlus } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-
+import { getData } from "../../Redux/Cart/cart.action";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
 const CartItem = ({
+  userID,
+
   quantity,
-  cartID,
+  colorID,
+  storageID,
   name,
   img,
   price,
@@ -32,7 +35,10 @@ const CartItem = ({
   DeleteRequest,
 }) => {
   const singleData = {
-    cartID,
+    userID,
+    id,
+    colorID,
+    storageID,
     quantity,
     color,
     storage,
@@ -47,7 +53,7 @@ const CartItem = ({
   const [count, setCount] = useState(quantity);
   //handle change for this  onChange={(e) => setCount(e.target.value)}
 
-  const handleChange = (e) => {
+  const handleChange = (e, userID, id, colorID, storageID) => {
     let newCount = parseInt(e.target.value, 10);
     if (!isNaN(newCount) && newCount >= 1) {
       setCount(newCount);
@@ -55,6 +61,28 @@ const CartItem = ({
 
       dispatch({ type: "priceChange", payload: number * newCount });
 
+      // Get the current cart data from session storage
+      const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+
+      // Get the user's cart directly using the userID
+      const userCart = cartData[userID] || [];
+      // Find the index of the item to be deleted based on specified conditions
+      const itemIndex = userCart.findIndex(
+        (item) =>
+          item.prodID === id &&
+          (colorID === null || item.colorID === colorID) &&
+          (storageID === null || item.storageID === storageID),
+      );
+
+      // If the item is found, change it quantity from the cart
+      if (itemIndex !== -1) {
+        // Remove the item from the array
+        userCart[itemIndex].quantity = newCount;
+
+        // Update the cart data in session storage
+        cartData[userID] = userCart;
+        sessionStorage.setItem("cart", JSON.stringify(cartData));
+      }
       if (newCount > QTY) {
         toast({
           title: "Lỗi",
@@ -63,66 +91,40 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
         });
-        newCount = QTY;
-        setCount(QTY);
-        axios
-          .put(`https://duantn-backend.onrender.com/cart/set/${cartID}`, {
-            quantity: newCount,
-          })
-          .then((res) => {})
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        axios
-          .put(`https://duantn-backend.onrender.com/cart/set/${cartID}`, {
-            quantity: newCount,
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        newCount = quantity;
+        setCount(quantity);
       }
     }
   };
 
   const dispatch = useDispatch();
   var navigate = useNavigate();
+
   const handleInc = () => {
-    setCount(count + 1);
+    const newCount = count + 1;
     let number = parseInt(price);
     dispatch({ type: "priceIncrease", payload: number });
-
-    axios
-      .put(`https://duantn-backend.onrender.com/cart/plus/${cartID}`, {
-        quantity: count + 1,
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    handleChange(
+      { target: { value: newCount } },
+      userID,
+      id,
+      colorID,
+      storageID,
+    );
   };
 
   const handleDec = () => {
     if (count > 1) {
+      const newCount = count - 1;
       let number = parseInt(price);
-      setCount(count - 1);
       dispatch({ type: "priceDecrease", payload: number });
-
-      axios
-        .put(`https://duantn-backend.onrender.com/cart/minus/${cartID}`, {
-          quantity: count + 1,
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      handleChange(
+        { target: { value: newCount } },
+        userID,
+        id,
+        colorID,
+        storageID,
+      );
     }
   };
 
@@ -163,7 +165,7 @@ const CartItem = ({
 
   return (
     <Flex
-      key={cartID}
+      key={id}
       className=""
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
@@ -275,9 +277,10 @@ const CartItem = ({
             <input
               type="number"
               value={count}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, userID, id, colorID, storageID)}
               style={{ width: "30px", height: "40px", textAlign: "center" }}
             />
+
             <Button onClick={handleInc}>+</Button>
           </Box>
           <Center width="100%">
@@ -297,26 +300,7 @@ const CartItem = ({
               color="rgb(23, 116, 239)"
               _hover={{ color: "red" }}
               onClick={() => {
-                DeleteRequest(cartID)
-                  .then((response) => {
-                    toast({
-                      title: "Delete Item Successfully",
-                      status: "success",
-                      duration: 4000,
-                      isClosable: true,
-                      position: "top",
-                    });
-                  })
-                  .catch((reject) => {
-                    toast({
-                      title: "Something Went Wrong",
-                      description: `${reject.message}`,
-                      status: "error",
-                      duration: 5000,
-                      isClosable: true,
-                      position: "bottom-right",
-                    });
-                  });
+                DeleteRequest(userID, id, colorID, storageID);
               }}
             >
               xóa

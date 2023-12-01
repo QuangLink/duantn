@@ -34,7 +34,6 @@ import {
   BsLaptop,
 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
@@ -42,8 +41,6 @@ import "./Navbar.css";
 import useScrollListener from "./useScroll";
 import { UserAuth } from "../context/AuthContext";
 import { BsPersonCircle } from "react-icons/bs";
-import { useHistory, useLocation } from "react-router-dom";
-import axios from "axios";
 function Navbar() {
   const { user, logOut } = UserAuth();
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
@@ -56,7 +53,6 @@ function Navbar() {
   const { username } = useSelector((store) => store.AuthManager);
   const { admin } = useSelector((store) => store.AuthManager);
   const { userID } = useSelector((store) => store.AuthManager);
-  const { dataLength } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -68,41 +64,21 @@ function Navbar() {
   const [direction, setDirection] = useState("");
   const scroll = useScrollListener();
   const searchRef = useRef(null);
-  const location = useLocation();
+
   const [cartLength, setCartLength] = useState(0);
-  const [cart, setCart] = useState([]);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(
-        `https://duantn-backend.onrender.com/cart/${userID}`,
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      throw error;
-    }
+  const getCartByUserID = (userID) => {
+    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+
+    return cartData[userID] || [];
   };
-
   useEffect(() => {
-    const fetchData = async () => {
-      if (isAuth) {
-        const data = await fetchProducts();
-        setCart(data);
+    const cart = getCartByUserID(userID);
+    const newCartLength = cart.length;
+    setCartLength(newCartLength);
+  }, [userID, getCartByUserID]);
 
-        // Calculate and update cartLength
-        const count = data.reduce((acc, item) => acc + item.quantity, 0);
-        setCartLength(count);
-
-        // Save cartLength to session storage
-        sessionStorage.setItem("cartLength", count.toString());
-      }
-    };
-
-    fetchData();
-  }, [isAuth, location.pathname]);
-
-  console.log("cartLength", cartLength);
+  // Extract prodID, colorID, and storageID from cart
 
   const navbar = {
     active: {
@@ -173,7 +149,6 @@ function Navbar() {
     fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
-        // console.log('check data', json);
         const filteredResults = json.filter((search) => {
           return (
             search &&
@@ -182,7 +157,6 @@ function Navbar() {
           );
         });
         setResults(filteredResults);
-        console.log(filteredResults);
       })
       .catch((error) => {
         console.error(error);
@@ -441,8 +415,6 @@ function Navbar() {
       );
     }
   };
-
-  // console.log(name);
   if (isLargerThan1100) {
     return (
       <Box

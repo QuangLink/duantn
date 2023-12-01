@@ -31,6 +31,7 @@ const MyCartLength = ({ item }) => {
   return (
     <div>
       <Flex
+      
         border={"1px solid rgb(224, 224, 225)"}
         backgroundColor="rgb(255, 255, 255)"
         boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}

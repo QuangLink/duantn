@@ -29,34 +29,41 @@ import Cookies from "js-cookie";
 
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
-  if (!userID) {
-    window.location.href = "/login";
-  } else {
-    try {
-      // Lấy userID từ sessionStorage
 
-      // Ensure data.prodID is a valid value, not [object Object]
-      const prodID = data.prodID;
-      const colorID = data.colorID;
-      const storageID = data.storageID;
-      // Tạo dữ liệu gửi đi kết hợp với userID và prodID
-      const postData = {
-        prodID,
-        colorID,
-        storageID,
-        userID,
-      };
+  const prodID = data.prodID;
+  const colorID = data.colorID;
+  const storageID = data.storageID;
+  //cartID tự tăng giá trị
+  const cartID = Math.floor(Math.random() * 1000000000);
 
-      let response = await axios.post(
-        `https://duantn-backend.onrender.com/cart/`,
-        postData,
-      );
-      window.location.href = "/cart";
-      return response.data;
-    } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
-    }
+  const productData = {
+    cartID,
+    userID,
+    prodID,
+    colorID,
+    storageID,
+    quantity: 1,
+  };
+
+  const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+
+  if (!cartData[userID]) {
+    cartData[userID] = [];
   }
+
+  const existingProductIndex = cartData[userID].findIndex(
+    (product) =>
+      product.prodID === prodID &&
+      product.colorID === colorID &&
+      product.storageID === storageID,
+  );
+
+  if (existingProductIndex !== -1) {
+    cartData[userID][existingProductIndex].quantity += 1;
+  } else {
+    cartData[userID].push(productData);
+  }
+  sessionStorage.setItem("cart", JSON.stringify(cartData));
 };
 
 export const postSingleDataWish = async (data) => {
@@ -65,9 +72,6 @@ export const postSingleDataWish = async (data) => {
     window.location.href = "/login";
   } else {
     try {
-      // Lấy userID từ sessionStorage
-
-      // Ensure data.prodID is a valid value, not [object Object]
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
@@ -92,6 +96,7 @@ export const postSingleDataWish = async (data) => {
 };
 
 const SingleProduct = (props) => {
+  const { userID } = useSelector((store) => store.AuthManager);
   const toast = useToast();
   const { typeOfProduct } = props;
   const [filters, setFilters] = useState({
@@ -208,6 +213,7 @@ const SingleProduct = (props) => {
       </Heading>
     );
   }
+
   return (
     <>
       {loading ? (
@@ -480,6 +486,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                userID,
                               )
                             }
                           >

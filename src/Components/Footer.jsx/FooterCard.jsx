@@ -6,9 +6,6 @@ import { CiYoutube } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 export const FooterCard1 = ({ type, heading }) => {
-  console.log("====================================");
-  console.log(type);
-  console.log("====================================");
   return (
     <Box cursor="pointer">
       <Text fontSize={18} fontWeight="700">

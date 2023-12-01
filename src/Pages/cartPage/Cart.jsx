@@ -8,7 +8,7 @@ import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
 import "./cartstyle.css";
-
+import Cookies from "js-cookie";
 import {
   Box,
   Center,
@@ -22,17 +22,8 @@ import { useNavigate } from "react-router-dom";
 import "react-slideshow-image/dist/styles.css";
 import { WarningTwoIcon } from "@chakra-ui/icons";
 
-export const GetData = async () => {
-  try {
-    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
-
-    return await response.data;
-  } catch (err) {
-    return err;
-  }
-};
-
 const Cart = () => {
+  const userID = Cookies.get("userID");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
@@ -41,20 +32,54 @@ const Cart = () => {
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
-  const DeleteRequest = async (cartID) => {
-    try {
-      let response = await axios.delete(
-        `https://duantn-backend.onrender.com/cart/${cartID}`,
-      );
-      setChange(!change);
-    } catch (err) {
-      return err;
+  const DeleteRequest = (userID, prodID, colorID, storageID) => {
+    // Get the current cart data from session storage
+    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+
+    // Get the user's cart directly using the userID
+    const userCart = cartData[userID] || [];
+
+    // Find the index of the item to be deleted based on specified conditions
+    const itemIndex = userCart.findIndex(
+      (item) =>
+        item.prodID === prodID &&
+        (colorID === null || item.colorID === colorID) &&
+        (storageID === null || item.storageID === storageID),
+    );
+
+    // If the item is found, delete it from the cart
+    if (itemIndex !== -1) {
+      // Remove the item from the array
+      userCart.splice(itemIndex, 1);
+
+      // Update the cart data in session storage
+      cartData[userID] = userCart;
+      sessionStorage.setItem("cart", JSON.stringify(cartData));
+
+      dispatch(getData());
+      toast({
+        title: "Đã xóa sản phẩm khỏi giỏ hàng",
+        description: "",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      // If the item is not found, display an error toast
+      toast({
+        title: "Lỗi",
+        description: "Không thể xóa sản phẩm khỏi giỏ hàng",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
+  //sau khi DeleteRequest thì gọi lại hàm getData để cập nhật lại giỏ hàng
 
   useEffect(() => {
     dispatch(getData());
-  }, [change]);
+  }, []);
 
   return (
     <div
@@ -161,16 +186,19 @@ const Cart = () => {
 
                 {data.map((product) => (
                   <CartItem
-                    cartID={product.cartID}
-                    color={product.color}
-                    storage={product.storage_value}
-                    key={product.prodID}
-                    name={product.prodName}
-                    img={product.prodImg}
-                    price={product.prodPrice}
-                    priceSale={product.prodPriceSale}
-                    id={product.prodID}
-                    QTY={product.QTY}
+                    userID={userID}
+                    colorID={product.cart[0].colorID}
+                    storageID={product.cart[0].storageID}
+                    color={product.cart[0].color}
+                    storage={product.cart[0].storage_value}
+                    key={product.cart[0].prodID}
+                    name={product.cart[0].prodName}
+                    img={product.cart[0].prodImg}
+                    price={product.cart[0].prodPrice}
+                    priceSale={product.cart[0].prodPriceSale}
+                    id={product.cart[0].prodID}
+                    QTY={product.cart[0].QTY}
+                    cartID={product.cart[0].cartID}
                     quantity={product.quantity}
                     DeleteRequest={DeleteRequest}
                   />
