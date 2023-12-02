@@ -31,6 +31,9 @@ import Verified from "../Pages/Login/Verified";
 import Forgot from "../Pages/Login/Forgot";
 import Resetpass from "../Pages/Login/Resetpass";
 import NotFoundPage from "../Pages/404";
+import Thembienthe from "../Admin/Components/Pages/Task/Thembienthe";
+import BlogContent from "../Pages/blog/blogcontent";
+import BlogList from "../Pages/blog/bloglist";
 const productTypes = [
   "laptop",
   "phone",
@@ -60,6 +63,8 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
+      <Route path="/blog" element={<BlogList />}></Route>
+        <Route path="/blog/:id" element={<BlogContent />}></Route>
         <Route path="/404" element={<NotFoundPage />}></Route>
         <Route path="/resetpass" element={<Resetpass />}></Route>
         <Route path="/forgot" element={<Forgot />}></Route>
@@ -75,6 +80,24 @@ const AllRoutes = () => {
             <AdminRoute>
               <Menu />
               <Dashboard />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/themsp"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Themsanpham />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/thembienthe"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Thembienthe />
             </AdminRoute>
           }
         ></Route>

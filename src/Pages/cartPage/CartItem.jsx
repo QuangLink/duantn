@@ -170,7 +170,7 @@ const CartItem = ({
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"100%"}
-      m="1"
+     
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >

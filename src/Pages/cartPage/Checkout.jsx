@@ -191,16 +191,17 @@ const Checkout = () => {
       addressData.length === 0
     ) {
       return (
-        <Flex w="70%">
-          <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic">
+        <Box w="66%">
+        
+          <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic" width="100%">
             Bạn chưa có địa chỉ nhận hàng
           </Text>
-        </Flex>
+        </Box>
       );
     }
 
     return addressData.map((address, index) => (
-      <Flex key={index} w="100%">
+      <Flex key={index} w="90%">
         <Text mt="5" fontSize="15px" fontWeight="700">
           {address.firstname} {address.lastname}
         </Text>
@@ -216,7 +217,7 @@ const Checkout = () => {
   };
 
   return (
-    <Center className="cartPage">
+    <Center  border={"1px solid rgb(224, 224, 225)"} width="100%" display="flex" flexWrap="wrap" padding="16px">
       <div>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -307,8 +308,8 @@ const Checkout = () => {
         </Accordion>
       </div>
 
-      <Box className="BgImg"></Box>
-      <Center display="flex" justifyContent="space-between" w="88%" mt="5">
+
+      <Center display="flex" justifyContent="space-between" w="100%" mt="7" >
         <Text fontSize="25px" fontWeight="700">
           <Icon
             as={FaMapMarkerAlt}

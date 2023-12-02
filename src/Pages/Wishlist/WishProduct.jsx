@@ -29,47 +29,49 @@ const WishProduct = (props) => {
   const handleAdd = () => {
     let flag = false;
     const userID = Cookies.get("userID");
-    axios
-      .get(`https://duantn-backend.onrender.com/cart/${userID}`)
-      .then((res) => {
-        res.data.map((i) => {
-          if (i.prodID === data.prodID) {
-            flag = true;
-          }
-        });
-        if (flag) {
-          toast({
-            title: "Sản phẩm đang trong giỏ hàng",
-            description: `${prodName} hiện đã trong giỏ hàng`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-        } else {
-          const newData = {
-            userID: userID,
-            prodID: prodID,
-            colorID: colorID,
-            storageID: storageID,
-          };
-          axios
-            .post("https://duantn-backend.onrender.com/cart", newData)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-          toast({
-            title: "Đơn hàng đã được thêm vào giỏ hàng",
-            description: `${prodName} thêm vào giỏ hàng thành công`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
+   //cartID tự tăng giá trị
+   const cartID = Math.floor(Math.random() * 1000000000);
+
+   const productData = {
+     cartID,
+     userID,
+     prodID,
+     colorID,
+     storageID,
+     quantity: 1,
+   };
+ 
+   const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+ 
+   if (!cartData[userID]) {
+     cartData[userID] = [];
+   }
+ 
+   const existingProductIndex = cartData[userID].findIndex(
+     (product) =>
+       product.prodID === prodID &&
+       product.colorID === colorID &&
+       product.storageID === storageID,
+   );
+ 
+   if (existingProductIndex !== -1) {
+     cartData[userID][existingProductIndex].quantity += 1;
+   } else {
+     cartData[userID].push(productData);
+   }
+   sessionStorage.setItem("cart", JSON.stringify(cartData));
+    toast({
+      title: "Product Added.",
+      description: `Added to cart`,
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+
   };
 
   return (
-    <Link to={`/${prodID}`} style={{ textDecoration: "none" }}>
+    
       <Box>
         <Image src={prodImg} alt={prodName} p="5" h="200" _hover={{ p: "0" }} />
         <Box
@@ -149,7 +151,6 @@ const WishProduct = (props) => {
           </Button>
         </Flex>
       </Box>
-    </Link>
   );
 };
 

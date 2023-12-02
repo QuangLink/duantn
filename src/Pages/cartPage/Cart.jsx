@@ -152,7 +152,7 @@ const Cart = () => {
               mt="5"
             >
               <Box className="headingCart">
-                <Center fontSize="25px" fontWeight="500" color="red.500">
+                <Center fontSize="32px" fontWeight="700" color="black">
                   Giỏ hàng của bạn
                 </Center>
               </Box>
@@ -228,12 +228,13 @@ const Cart = () => {
                 </Text>
               </Flex>
             </Center>
+            <Center width="50%" display="flex" flexWrap="wrap">
             <Button
-              w="50%"
+              w="100%"
               h="50px"
-              border="1px solid  #70b1ea"
+              
               borderRadius="10px"
-              backgroundColor="#70b1ea"
+              backgroundColor="red"
               _hover={{ color: "#4a90e2" }}
               onClick={() => navigate("/checkout")}
             >
@@ -241,6 +242,22 @@ const Cart = () => {
                 Tiến hành đặt hàng
               </Text>
             </Button>
+            <Button
+          mb="5"
+          mt="2"
+          w="100%"
+          h="50px"
+          border="1px solid #FF2323"
+          borderRadius="10px"
+          backgroundColor="white"
+          _hover={{ color: "white" }}
+          onClick={() => navigate("/")}
+        >
+          <Text color="#FF2323" m="auto">
+            Chọn thêm sản phẩm khác
+          </Text>
+        </Button>
+            </Center>
           </Center>
         )}
       </Flex>

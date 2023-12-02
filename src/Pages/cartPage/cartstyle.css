@@ -4,13 +4,14 @@
   align-items: center;
 
   height: auto;
+  
   margin: auto;
- 
   margin-top: 6;
   margin-bottom: 2;
   cursor: pointer;
   display: flex;
   flex-wrap: wrap;
+
 }
 .headingCart {
   width: 100%;
@@ -21,12 +22,17 @@
   text-align: left;
   font-size: 20px;
   font-weight: 500;
-  color: #ff0000;
+  color: red;
   position: absolute;
   margin-top: 5px;
 
-  translate: 50%;
+  translate: -35%;
 }
+
+
+
+
+
 .iteminBox {
   justify-content: center;
   align-items: center;

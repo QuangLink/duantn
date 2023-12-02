@@ -8,7 +8,7 @@ import {
   Center,
   Flex,
   Button,
-  Checkbox,
+  Badge,
   VStack,
   useDisclosure,
   useToast,
@@ -33,7 +33,7 @@ import { Icon } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import "react-slideshow-image/dist/styles.css";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-
+import UserInfo from "./UserInfo";
 import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
 import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
@@ -51,6 +51,7 @@ const MyOrder = () => {
   const toast = useToast();
 
   const [selectedOrderCode, setSelectedOrderCode] = useState(null);
+  //change status button
 
   useEffect(() => {
     fetchProducts();
@@ -105,7 +106,14 @@ const MyOrder = () => {
         }
         return total;
       }, 0);
-
+    const handleCancelOrder = (infoID) => {
+      axios.put(
+        `https://duantn-backend.onrender.com/orders/update-order/${infoID}`,
+        {
+          status: "Đã hủy",
+        },
+      );
+    };
     return (
       <Box>
         <React.Fragment>
@@ -126,7 +134,62 @@ const MyOrder = () => {
                         <Icon as={FaChevronDown} />
                       )}
                     </td>
+                    <Box mt="12px">
+                      {productList[0].payment === "Banking" ? (
+                        <Badge
+                          colorScheme="green"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Phương thức: {productList[0].payment}
+                        </Badge>
+                      ) : (
+                        <Badge
+                          colorScheme="yellow"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Phương thức: {productList[0].payment}
+                        </Badge>
+                      )}
+                      {productList[0].orderStatus === "Đã thanh toán" ? (
+                        <Badge
+                          colorScheme="green"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Trạng thái: {productList[0].orderStatus}
+                        </Badge>
+                      ) : productList[0].orderStatus === "Đã hủy" ? (
+                        <Badge
+                          colorScheme="red"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Trạng thái: {productList[0].orderStatus}
+                        </Badge>
+                      ) : (
+                        <Badge
+                          colorScheme="yellow"
+                          fontWeight="600"
+                          fontSize="18px"
+                          ml="1"
+                          color="black"
+                        >
+                          Trạng thái: {productList[0].orderStatus}
+                        </Badge>
+                      )}
+                    </Box>
                   </tr>
+
                   {selectedOrderCode === orderCode &&
                     productList.map((product) => (
                       <Box padding="10px">
@@ -179,50 +242,6 @@ const MyOrder = () => {
                             </Text>
                           </Box>
                           <Box width="23%">
-                            <Box mt="12px">
-                              {product.payment === "Banking" ? (
-                                <Text
-                                  class="badge bg-success"
-                                  fontWeight="600"
-                                  fontSize="18px"
-                                  ml="1"
-                                >
-                                  Phương thức: {product.payment}
-                                </Text>
-                              ) : (
-                                <Text
-                                  class="badge bg-danger"
-                                  fontWeight="600"
-                                  fontSize="18px"
-                                  ml="1"
-                                >
-                                  Phương thức: {product.payment}
-                                </Text>
-                              )}
-                            </Box>
-                            <Box mt="10px">
-                              {product.orderStatus === "Đã thanh toán" ? (
-                                <Text
-                                  class="badge bg-success"
-                                  fontWeight="600"
-                                  fontSize="18px"
-                                  ml="1"
-                                  color="black"
-                                >
-                                  Trạng thái: {product.orderStatus}
-                                </Text>
-                              ) : (
-                                <Text
-                                  class="badge bg-danger"
-                                  fontWeight="600"
-                                  fontSize="18px"
-                                  ml="1"
-                                  color="black"
-                                >
-                                  Trạng thái: {product.orderStatus}
-                                </Text>
-                              )}
-                            </Box>
                             <Box display="flex" mt="30px">
                               <Link to={`/${product.prodID}`}>
                                 <Button
@@ -251,6 +270,16 @@ const MyOrder = () => {
                     Thành Tiền: {formatCurrency(productList[0].totalPay)}
                   </Text>
                 </Box>
+                {productList[0].orderStatus !== "Đã hủy" ? (
+                  <Button
+                    colorScheme="red"
+                    onClick={() => {
+                      handleCancelOrder(productList[0].infoID);
+                    }}
+                  >
+                    Hủy đơn
+                  </Button>
+                ) : null}
               </Box>
             ),
           )}
@@ -418,38 +447,9 @@ const MyOrder = () => {
     }
 
     return addressData.map((address, index) => (
-      <Box
-        key={index}
-        textAlign="center"
-        p="50px"
-        borderWidth="1px"
-        width="100%"
-        borderRadius="md"
-      >
-        <Center>
-          <Image
-            src="https://icon-library.com/images/free-avatar-icon/free-avatar-icon-10.jpg"
-            alt=""
-            borderRadius="full"
-            boxSize="200px"
-          />
-        </Center>
-        <Text fontSize="25px" fontWeight="bold" w="100%">
-          {address.username}
-        </Text>
-        <Divider my="20px" />
-        <VStack spacing="10px " alignItems="flex-start">
-          <Text fontSize="md">Username: {address.username}</Text>
-          <Text fontSize="md">Đường: {address.street}</Text>
-
-          <Text fontSize="md">Địa chỉ: {address.flat}</Text>
-          <Text fontSize="md">Quận huyện: {address.state}</Text>
-          <Text fontSize="md">Tỉnh thành: {address.city}</Text>
-
-          <Text fontSize="md">Phone: {address.mobile}</Text>
-          <Text fontSize="md">Email: {address.email}</Text>
-        </VStack>
-      </Box>
+      <>
+        <UserInfo address={address} />
+      </>
     ));
   };
   const handleProvinceChange = (e) => {

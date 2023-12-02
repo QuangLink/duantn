@@ -34,6 +34,7 @@ import {
   BsLaptop,
 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
@@ -52,7 +53,7 @@ function Navbar() {
   const { isAuth } = useSelector((store) => store.AuthManager);
   const { username } = useSelector((store) => store.AuthManager);
   const { admin } = useSelector((store) => store.AuthManager);
-  const { userID } = useSelector((store) => store.AuthManager);
+  const { dataLength } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
@@ -65,20 +66,6 @@ function Navbar() {
   const scroll = useScrollListener();
   const searchRef = useRef(null);
 
-  const [cartLength, setCartLength] = useState(0);
-
-  const getCartByUserID = (userID) => {
-    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
-
-    return cartData[userID] || [];
-  };
-  useEffect(() => {
-    const cart = getCartByUserID(userID);
-    const newCartLength = cart.length;
-    setCartLength(newCartLength);
-  }, [userID, getCartByUserID]);
-
-  // Extract prodID, colorID, and storageID from cart
 
   const navbar = {
     active: {
@@ -149,6 +136,7 @@ function Navbar() {
     fetch("https://duantn-backend.onrender.com/products/search")
       .then((response) => response.json())
       .then((json) => {
+        // console.log('check data', json);
         const filteredResults = json.filter((search) => {
           return (
             search &&
@@ -157,6 +145,7 @@ function Navbar() {
           );
         });
         setResults(filteredResults);
+        console.log(filteredResults);
       })
       .catch((error) => {
         console.error(error);
@@ -415,32 +404,72 @@ function Navbar() {
       );
     }
   };
+
+  // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box
-        w={"100%"}
-        backgroundColor="#FFFFFF"
-        position={"relative"}
-        zIndex={2}
-      >
-        <Flex className="flex-container">
-          <Link to="/">
-            <Box pr="150px">
-              <Image
-                src={require("./Images/logodesktop.png")}
-                alt="logo"
-                w="200px"
-              />
-            </Box>
-          </Link>
-          {admin === 1 && (
+      <Box w={'100%'} backgroundColor="#FFFFFF" position={"relative"} zIndex={2}>
+        <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
+          <Box></Box>
+        </Flex>
+        <Flex className="flex-container" >
+          <Box w='29%'>
+            <Flex justifyContent={'space-between'} alignItems={'center'}>
+
+
+              <Link to="/">
+                <Box>
+                  <Image
+                    src={require("./Images/logodesktop.png")}
+                    alt="logo"
+                    w="200px"
+                  />
+                </Box>
+              </Link>
+
+              {admin === 1 && (
+                <Link to="/admin/dashboard">
+                  <Flex
+                    cursor={"pointer"}
+                    textAlign={"center"}
+                    borderRadius={5}
+
+                    bg="#F5F5F5"
+
+                  >
+                    {" "}
+                    <Icon
+                      as={BsPersonCircle}
+                      w={5}
+                      h={5}
+                      color={"#555"}
+                      margin={2}
+                    />
+                    <Heading
+                      fontWeight={400}
+                      m="2"
+                      cursor={"pointer"}
+                      fontSize={"18px"}
+                      color="#555"
+                      flexDirection={"row"}
+                    // className={`header-bar ${isFocused ? "focused" : ""}`}
+                    >
+                      Admin
+                    </Heading>
+                  </Flex>
+                </Link>
+              )}
+            </Flex>
+          </Box>
+
+          {/* {admin === 1 && (
             <Link to="/admin/dashboard">
               <Flex
                 cursor={"pointer"}
                 textAlign={"center"}
                 borderRadius={5}
                 _hover={{
-                  bg: "#F5F5F5",
+                  bg: "#0077ff",
                 }}
               >
                 {" "}
@@ -448,7 +477,7 @@ function Navbar() {
                   as={BsPersonCircle}
                   w={5}
                   h={5}
-                  color={"#555"}
+                  color={"#fff"}
                   margin={2}
                 />
                 <Heading
@@ -456,22 +485,23 @@ function Navbar() {
                   m="2"
                   cursor={"pointer"}
                   fontSize={"18px"}
-                  color="#555"
+                  color="#fff"
                   flexDirection={"row"}
-                  // className={`header-bar ${isFocused ? "focused" : ""}`}
+                // className={`header-bar ${isFocused ? "focused" : ""}`}
                 >
                   Admin
                 </Heading>
               </Flex>
             </Link>
-          )}
-          <Box>
+          )} */}
+          <Box w='40%'>
             <Flex
               bg="#F5F5F5"
               borderRadius={"15px"}
-              w="680px"
+              w="100%"
               h={10}
               p="5px"
+
               textAlign={"center"}
             >
               <Input
@@ -491,143 +521,130 @@ function Navbar() {
             </Flex>
             <Closesearch ref={searchRef} />
           </Box>
-          <Flex justifyContent={"flex-end"} alignItems={"center"}>
-            {!isAuth ? (
-              <Link to="login">
+          <Box w='29%'>
+            <Flex justifyContent={'flex-end'} alignItems={'center'}>
+              {!isAuth ? (
+                <Link to="login">
+                  <Flex
+                    cursor={"pointer"}
+                    borderRadius={5}
+                    w={180}
+                    mr={2}
+                    _hover={{ bg: "#F5F5F5" }}
+                  >
+                    <Icon
+                      fontSize={40} color={"#555"} m={3}
+                      as={BsFillPersonFill}
+                    />
+
+                    <Text
+
+                      // fontWeight={400}
+                      m="2"
+                      // cursor={"pointer"}
+                      fontSize={"16px"}
+                      color="#555"
+                    >
+                    Đăng nhập
+                      Đăng ký
+                    </Text>
+
+                  </Flex>
+                </Link>
+              ) : (
+                <Box  >
+
+                  <Menu>
+                    <MenuButton
+                      bg="#FFFFFF"
+
+                      h={50}
+                      pt={5}
+                      fontSize={16}
+                      color="#55555"
+                      as={Button}
+                      rightIcon={<ChevronDownIcon />}
+                    >
+                      <Flex>
+                        <Icon
+                          fontSize={46} color={"#555"}
+                          as={BsFillPersonFill}
+                        />
+                        <Box pt={1}>
+                          Xin chào ,
+                          <Text fontSize={16}> {username}</Text>
+                        </Box>
+
+                      </Flex>
+
+                    </MenuButton>
+                    <MenuList>
+                      <Link to="/myprofile">
+                        <MenuItem>My Profile</MenuItem>
+                      </Link>
+                      <Link to="/myorder">
+                        <MenuItem>My Order</MenuItem>
+                      </Link>
+                      <MenuItem>My Address</MenuItem>
+                      <Link to="/wishlist">
+                        {" "}
+                        <MenuItem>My Wishlist</MenuItem>
+                      </Link>
+                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </MenuList>
+                  </Menu>
+                </Box>
+              )}
+              <Link to="/cart">
                 <Flex
-                  cursor={"pointer"}
+                  // cursor={"pointer"}
+                  textAlign={"center"}
                   borderRadius={5}
-                  w={180}
                   mr={2}
-                  _hover={{ bg: "#F5F5F5" }}
+                  w={160}
+                  _hover={{
+                    bg: "#F5F5F5",
+                  }}
                 >
-                  <Icon
-                    fontSize={40}
-                    color={"#555"}
-                    m={3}
-                    as={BsFillPersonFill}
-                  />
+                  {" "}
+                  <Box position="relative" display="inline-block">
+                    <Icon as={BsCart2} fontSize={40} color={"#555"} m={3} position='relative' />
+
+                    <Box h={5} w={5} position="absolute" top="6px" right="5px" color="white" bg="red" borderRadius="100%" p={1}>
+                      <Text fontSize={15} position="absolute" top='-2px' left={1.5}>{dataLength}</Text>
+                    </Box>
+                  </Box>
 
                   <Text
-                    // fontWeight={400}
+                    fontWeight={400}
                     m="2"
                     // cursor={"pointer"}
+
                     fontSize={"16px"}
                     color="#555"
+                    flexDirection={"row"}
                   >
-                    Đăng nhập Đăng ký
+                    Giỏ hàng của bạn
                   </Text>
                 </Flex>
               </Link>
-            ) : (
-              <Box>
-                <Menu>
-                  <MenuButton
-                    bg="#FFFFFF"
-                    h={50}
-                    pt={5}
-                    fontSize={16}
-                    color="#55555"
-                    as={Button}
-                    rightIcon={<ChevronDownIcon />}
-                  >
-                    <Flex>
-                      <Icon
-                        fontSize={46}
-                        color={"#555"}
-                        as={BsFillPersonFill}
-                      />
-                      <Box pt={1}>
-                        Xin chào
-                        <Text fontSize={16}> {username}</Text>
-                      </Box>
-                    </Flex>
-                  </MenuButton>
-                  <MenuList>
-                    <Link to="/myprofile">
-                      <MenuItem>My Profile</MenuItem>
-                    </Link>
-                    <Link to="/myorder">
-                      <MenuItem>My Order</MenuItem>
-                    </Link>
-                    <MenuItem>My Address</MenuItem>
-                    <Link to="/wishlist">
-                      {" "}
-                      <MenuItem>My Wishlist</MenuItem>
-                    </Link>
-                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                  </MenuList>
-                </Menu>
-              </Box>
-            )}
-            <Link to="/cart">
-              <Flex
-                // cursor={"pointer"}
-                textAlign={"center"}
-                borderRadius={5}
-                mr={2}
-                w={160}
-                _hover={{
-                  bg: "#F5F5F5",
-                }}
-              >
-                {" "}
-                <Box position="relative" display="inline-block">
-                  <Icon
-                    as={BsCart2}
-                    fontSize={40}
-                    color={"#555"}
-                    m={3}
-                    position="relative"
-                  />
 
-                  <Box
-                    h={5}
-                    w={5}
-                    position="absolute"
-                    top="6px"
-                    right="5px"
-                    color="white"
-                    bg="red"
-                    borderRadius="100%"
-                    p={1}
-                  >
-                    <Text
-                      fontSize={15}
-                      position="absolute"
-                      top="-2px"
-                      left={1.5}
-                      m="auto"
-                    >
-                      {cartLength}
-                    </Text>
-                  </Box>
-                </Box>
-                <Text
-                  fontWeight={400}
-                  m="auto"
-                  // cursor={"pointer"}
 
-                  fontSize={"16px"}
-                  color="#555"
-                  flexDirection={"row"}
-                >
-                  Giỏ hàng
-                </Text>
-              </Flex>
-            </Link>
-          </Flex>
+            </Flex>
+          </Box>
+
+
         </Flex>
         <Flex
-          w="100%"
+          w="80%"
           h="70px"
           borderWidth={1}
           textAlign={"center"}
-          justifyContent={"center"}
+          justifyContent="center"
           alignItems={"center"}
           m="auto"
           bg="#FFFFFF"
-          px="15%"
+          // px="15%"
           style={{
             position: isMenuFixed ? "fixed" : "static",
             top: "0px",
@@ -636,12 +653,11 @@ function Navbar() {
         >
           <Menu>
             <MenuButton
-              px={4}
-              py={2}
-              color="#555"
-              fontWeight="500"
-              transition="transform 0.3s ease-in-out"
-              _hover={{ transform: "translateY(-3px)" }}
+              // px={4}
+              // py={2}
+              color="#55555"
+              alignContent={"center"}
+              _hover={{ color: "55555", fontSize: 18 }}
               _focus={{ boxShadow: "0px 3px 0px  #555" }}
             >
               <HamburgerIcon w={50} h={7} paddingBottom={1} />
@@ -804,11 +820,12 @@ function Navbar() {
               <MenuButton
                 px={4}
                 py={2}
-                color="#555"
-                fontWeight="500"
-                transition="transform 0.3s ease-in-out"
-                _hover={{ transform: "translateY(-3px)" }}
+                color="#55555"
+
+                _hover={{ color: "#555", fontSize: 18 }}
+
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
+
               >
                 <Icon as={BsPhone} /> Điện Thoại
               </MenuButton>
@@ -819,11 +836,10 @@ function Navbar() {
               <MenuButton
                 px={4}
                 py={2}
-                color="#555"
-                fontWeight="500"
-                transition="transform 0.3s ease-in-out"
-                _hover={{ transform: "translateY(-3px)" }}
+                color="#55555"
+                _hover={{ color: "#555", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
+
               >
                 <Icon boxSize={5} h={5} as={AiOutlineLaptop} /> Laptop
               </MenuButton>
@@ -834,11 +850,11 @@ function Navbar() {
               <MenuButton
                 px={4}
                 py={2}
-                color="#555"
-                fontWeight="500"
-                transition="transform 0.3s ease-in-out"
-                _hover={{ transform: "translateY(-3px)" }}
+                color="#55555"
+                _hover={{ color: "#555", fontSize: 18 }}
+
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
+
               >
                 <Icon as={AiOutlineTablet} /> Tablet
               </MenuButton>
@@ -849,11 +865,11 @@ function Navbar() {
               <MenuButton
                 px={4}
                 py={2}
-                color="#555"
-                fontWeight="500"
-                transition="transform 0.3s ease-in-out"
-                _hover={{ transform: "translateY(-3px)" }}
+                color="#55555"
+                _hover={{ color: "#555", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
+
+                display="flex"
               >
                 <Icon as={BsSmartwatch} /> Smartwatch
               </MenuButton>

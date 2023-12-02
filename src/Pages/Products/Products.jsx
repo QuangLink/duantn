@@ -114,9 +114,6 @@ const Products = ({ typeOfProduct }) => {
       <Box>
         <SlideProuct type={BannersCenter} />
       </Box>
-      <Box mb="2%">
-        <HotProduct type={PrSale} />
-      </Box>
       <ProductFilter
         onTypeChangeStore={onTypeChangeStore}
         typeOfProduct={typeOfProduct}
@@ -161,7 +158,7 @@ const Products = ({ typeOfProduct }) => {
               return (
                 <GridItem
                   key={elem.prodName + i}
-                  w="97%"
+                  w="100%"
                   h="100%"
                   bg="white.500"
                   boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"

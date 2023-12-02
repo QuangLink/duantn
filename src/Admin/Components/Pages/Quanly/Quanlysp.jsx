@@ -193,7 +193,11 @@ const Quanlysanpham = () => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="/themsp" title="Thêm">
+                    <a
+                      class="btn btn-add btn-sm"
+                      href="/admin/themsp"
+                      title="Thêm"
+                    >
                       <i class="fas fa-plus"></i>
                       Tạo mới sản phẩm
                     </a>

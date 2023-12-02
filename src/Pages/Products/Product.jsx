@@ -36,7 +36,7 @@ const postSingleDataWish = async (data) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
 
@@ -122,6 +122,7 @@ const Product = (props, rating) => {
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  m="auto"
                   mt={2}
                   fontWeight="bold"
                   color="blackAlpha.600"
@@ -142,8 +143,7 @@ const Product = (props, rating) => {
                 backgroundColor="#fff0e9"
                 color="#eb5757"
                 fontSize={{ base: "10px", md: "15px", lg: "13px" }}
-                marginBottom="10"
-                marginLeft={5}
+                ml="5%"
               >
                 Giá ưu đãi
               </Badge>
@@ -181,8 +181,7 @@ const Product = (props, rating) => {
                 backgroundColor="#fff0e9"
                 color="#eb5757"
                 fontSize={{ base: "10px", md: "15px", lg: "13px" }}
-                marginBottom="10"
-                marginLeft={5}
+                ml="5%"
               >
                 Giá tốt
               </Badge>

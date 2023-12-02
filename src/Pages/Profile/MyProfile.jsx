@@ -37,6 +37,7 @@ export default function MyProfile() {
 
   return (
     <>
+
       <Box width="80%" p={6} m="5px auto" as="form">
         <ButtonGroup w="100%">
           <Flex w="100%" justifyContent="center">

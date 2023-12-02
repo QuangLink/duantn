@@ -32,12 +32,12 @@ import BannerHome from "./BannerHomePage/BannerHome";
 import Danhmuc from "./DanhMuc/Danhmuc";
 import GridLoader from "react-spinners/ClipLoader";
 import ItemCardTest2 from "./SmartWatchSlider";
-import BackToTopButton from "./BackToTopButton";
 import Loader from "./Loader";
 const ItemList = lazy(() => import("./ItemList"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
 const ItemCardTest = lazy(() => import("./DynamicSlider"));
+
 const Home = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
@@ -106,7 +106,8 @@ const Home = () => {
 
   return (
     <Box bg={"#F1F3F7"}>
-      <Suspense>
+   
+      <Suspense fallback={<div>Loading</div>}>
         {error ? (
           <div>
             {/* Display a user-friendly error message */}
@@ -206,7 +207,6 @@ const Home = () => {
               heading="IPHONE"
             />
             <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
-            <BackToTopButton />
           </>
         ) : (
           <div>

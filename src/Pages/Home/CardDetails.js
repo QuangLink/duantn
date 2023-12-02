@@ -143,7 +143,7 @@ export const BannersLeft = [
 
 export const BannerHomePage = [
   {
-    id: 1,
+    id: 2,
     image:
       "https://isotech-demo.myshopify.com/cdn/shop/files/2_f639d039-1b63-405c-ab7d-4561d7871d76.png?v=1696134235",
     name: "Samsung Galaxy Z Fold5 5G",
@@ -152,7 +152,7 @@ export const BannerHomePage = [
     prodType: "samsung",
   },
   {
-    id: 2,
+    id: 1,
     image:
       "https://isotech-demo.myshopify.com/cdn/shop/files/2_ae5cc69e-78af-4aea-9cc7-bb616d558539.png?v=1695797615",
     name: "Iphone 15 Pro Max",

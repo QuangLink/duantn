@@ -3,6 +3,13 @@ import "./Themsp.css";
 import axios from "axios";
 
 const Themsanpham = () => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [prodTypes, setProdTypes] = useState([]);
+  const [prodcatID, setProdcatID] = useState([]);
+  const [catName, setCatName] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [storage, setStorage] = useState([]);
   const [product, setProduct] = useState({
     prodName: "",
     prodType: "",
@@ -10,13 +17,24 @@ const Themsanpham = () => {
     prodcatID: "",
     prodPrice: 0,
     prodSale: 0,
-    prodPriceSale: 0,
     prodDesc: "",
-    prodStatus: 1,
-    prodQuantity: 0,
+    QTY: 0,
   });
+  const [variant, setVariant] = useState({
+    colorID: "",
+    storageID: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "prodcatID") {
+      const selectedCatName = categories.find(
+        (category) => category.prodcatID === parseInt(value, 10),
+      )?.catName;
+      setCatName(selectedCatName || ""); // Set an empty string if no matching category is found
+    }
+
     setProduct({
       ...product,
       [name]: value,
@@ -24,14 +42,58 @@ const Themsanpham = () => {
   };
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
+  const fetchColors = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/color",
+      );
+      setColors(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  const fetchStorage = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/storage",
+      );
+      setStorage(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/category/catID",
+      );
+      setCategories(response.data);
+      const uniqueProdcatID = Array.from(
+        new Set(response.data.map((product) => product.prodcatID)),
+      );
+      setProdcatID(uniqueProdcatID);
+      //get catName base on prodcatID
+      const catName = response.data.map((product) => product.catName);
+      setCatName(catName);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
         "https://duantn-backend.onrender.com/products",
       );
-      setProduct(response.data);
+      setProducts(response.data);
+
+      const uniqueProdTypes = Array.from(
+        new Set(response.data.map((product) => product.prodType)),
+      );
+      setProdTypes(uniqueProdTypes);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -39,17 +101,6 @@ const Themsanpham = () => {
   const handleAddProduct = async () => {
     // Tính giá trước khi giảm dựa trên giá bán và phần trăm giảm giá
     const price = parseFloat(product.prodPrice);
-    const sale = parseFloat(product.prodSale);
-
-    if (!isNaN(price) && !isNaN(sale)) {
-      const priceBeforeSale = price + (price * sale) / 100;
-      // Cập nhật giá trước khi giảm trong state product
-      setProduct({
-        ...product,
-        prodPriceSale: priceBeforeSale,
-      });
-    }
-
     try {
       // Sau khi tính giá trước khi giảm, gửi yêu cầu POST với dữ liệu sản phẩm
       await axios.post("https://duantn-backend.onrender.com/products", product);
@@ -62,10 +113,8 @@ const Themsanpham = () => {
         prodImg: "",
         prodPrice: 0,
         prodSale: 0,
-        prodPriceSale: 0,
         prodDesc: "",
-        prodStatus: 1,
-        prodQuantity: 0,
+        QTY: 0,
       });
     } catch (error) {
       console.error("Error adding product:", error);
@@ -85,101 +134,9 @@ const Themsanpham = () => {
   };
   return (
     <body className="app sidebar-mini rtl">
-      <header className="app-header">
-        <a
-          className="app-sidebar__toggle"
-          href="#"
-          data-toggle="sidebar"
-          aria-label="Hide Sidebar"
-        ></a>
-        <ul className="app-nav">
-          {/* <!-- User Menu--> */}
-          <li>
-            <a className="app-nav__item" href="/">
-              <i className="bx bx-log-out bx-rotate-180"></i>{" "}
-            </a>
-          </li>
-        </ul>
-      </header>
       {/* <!-- Sidebar menu--> */}
       <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
-      <aside className="app-sidebar">
-        <div className="app-sidebar__user">
-          <img
-            className="app-sidebar__user-avatar"
-            src="/images/hay.jpg"
-            width="50px"
-            alt="User Image"
-          />
-          <div>
-            <p className="app-sidebar__user-name">
-              <b>Nguyễn Vũ Duy Hoài</b>
-            </p>
-            <p className="app-sidebar__user-designation">
-              Chào mừng bạn trở lại
-            </p>
-          </div>
-        </div>
-        <hr />
-        <ul className="app-menu">
-          <li>
-            <a className="app-menu__item haha" href="phan-mem-ban-hang.html">
-              <i className="app-menu__icon bx bx-cart-alt"></i>
-              <span className="app-menu__label">POS Bán Hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item " href="index.html">
-              <i className="app-menu__icon bx bx-tachometer"></i>
-              <span className="app-menu__label">Bảng điều khiển</span>
-            </a>
-          </li>
 
-          <li>
-            <a className="app-menu__item " href="#">
-              <i className="app-menu__icon bx bx-user-voice"></i>
-              <span className="app-menu__label">Quản lý khách hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item active" href="table-data-product.html">
-              <i className="app-menu__icon bx bx-purchase-tag-alt"></i>
-              <span className="app-menu__label">Quản lý sản phẩm</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-oder.html">
-              <i className="app-menu__icon bx bx-task"></i>
-              <span className="app-menu__label">Quản lý đơn hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-banned.html">
-              <i className="app-menu__icon bx bx-run"></i>
-              <span className="app-menu__label">Quản lý nội bộ</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-money.html">
-              <i className="app-menu__icon bx bx-dollar"></i>
-              <span className="app-menu__label">Bảng kê lương</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="quan-ly-bao-cao.html">
-              <i className="app-menu__icon bx bx-pie-chart-alt-2"></i>
-              <span className="app-menu__label">Báo cáo doanh thu</span>
-            </a>
-          </li>
-
-          <li>
-            <a className="app-menu__item" href="#">
-              <i className="app-menu__icon bx bx-cog"></i>
-              <span className="app-menu__label">Cài đặt hệ thống</span>
-            </a>
-          </li>
-        </ul>
-      </aside>
       <main className="app-content">
         <div className="app-title">
           <ul className="app-breadcrumb breadcrumb">
@@ -237,8 +194,8 @@ const Themsanpham = () => {
                   <input
                     className="form-control"
                     type="number"
-                    name="prodQuantity"
-                    value={product.prodQuantity}
+                    name="QTY"
+                    value={product.QTY}
                     onChange={handleChange}
                   />
                 </div>
@@ -274,10 +231,12 @@ const Themsanpham = () => {
                     value={product.prodType}
                     onChange={handleChange}
                   >
-                    <option value="">-- Chọn loại --</option>
-                    <option value="Laptop">Laptop</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Tablet">Tablet</option>
+                    <option value="all">Loại</option>
+                    {prodTypes.map((prodType) => (
+                      <option key={prodType} value={prodType}>
+                        {prodType}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -292,15 +251,15 @@ const Themsanpham = () => {
                     value={product.prodcatID}
                     onChange={handleChange}
                   >
-                    <option value="">-- Chọn Hãng --</option>
-                    <option value="1">Apple</option>
-                    <option value="2">SamSung</option>
-                    <option value="3">Oppo</option>
-                    <option value="4">Xiaomi</option>
-                    <option value="5">Hp</option>
-                    <option value="6">Asus</option>
-                    <option value="7">Lenovo</option>
-                    <option value="8">Acer</option>
+                    <option value="all">Hãng</option>
+                    {categories.map((category) => (
+                      <option
+                        key={category.prodcatID}
+                        value={category.prodcatID}
+                      >
+                        {category.catName}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="form-group col-md-3">

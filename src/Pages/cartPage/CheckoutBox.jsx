@@ -262,14 +262,21 @@ const CheckoutBox = ({
           </Flex>
         </Box>
 
-        <Flex justifyContent="center" w="90%" m="2">
-          <TbTruckDelivery size={20} />
+        <Flex justifyContent="center" w="80%" m="2">
+          <TbTruckDelivery size={20} color="gray" marginTop="1"/>
           <Heading
+          marginLeft="10px"
             fontSize="13px"
-            color={"rgb(0, 51, 128)"}
+            color={"gray"}
             lineHeight={"20px"}
+            width="100%"
           >
-            Giao hàng nhanh: {dtString} / {change}
+            Giao hàng nhanh: 
+                <Text>
+                {dtString} / {change}
+                </Text>
+          
+           
           </Heading>
         </Flex>
         <Box width={"90%"} mb="3">
@@ -279,20 +286,17 @@ const CheckoutBox = ({
               placeholder="Mã giảm giá"
               onChange={(e) => setVal(e.target.value)}
             />
-            <InputRightElement width="4rem">
-              <Button
-                h="2.30rem"
-                size="sm"
-                borderRadius={"none"}
-                color="rgb(54,129,240)"
-                backgroundColor="white"
-                borderLeft={"4px solid rgb(54,129,240)"}
-                borderRight={"1px solid rgb(224, 224, 225)"}
+            
+            <Button
+                h="auto"
+                _hover={{backgroundColor:"rgb(54,129,240)", color:"#fff"}}
+                borderRadius={"5px"}
+                color="#fff"
+                backgroundColor="rgb(54,129,240)"
                 onClick={handleApply}
               >
                 Áp dụng
               </Button>
-            </InputRightElement>
           </InputGroup>
         </Box>
 
@@ -305,14 +309,14 @@ const CheckoutBox = ({
           <Flex justifyContent="space-between" w="100%" mt="3">
             <Text
               fontFamily="inherit"
-              color="#424245"
-              fontSize="20px"
-              fontWeight="700"
+              color="gray"
+              fontSize="18px"
+              fontWeight="500"
             >
               Tạm tính ({items} sản phẩm):
             </Text>
 
-            <Text fontWeight="700" fontSize="20px" color="red">
+            <Text fontWeight="500" fontSize="18px" color="red">
               {totalPrice &&
                 totalPrice.toLocaleString("vi-VN", {
                   style: "currency",
@@ -323,14 +327,14 @@ const CheckoutBox = ({
           <Flex justifyContent="space-between" w="100%">
             <Text
               fontFamily="inherit"
-              color="#424245"
-              fontSize="20px"
-              fontWeight="700"
+              color="gray"
+              fontSize="18px"
+              fontWeight="500"
             >
               Giảm giá:
             </Text>
 
-            <Text fontWeight="700" fontSize="20px" mt="2" color="green">
+            <Text fontWeight="500" fontSize="18px"  color="green">
               {discount &&
                 discount.toLocaleString("vi-VN", {
                   style: "currency",

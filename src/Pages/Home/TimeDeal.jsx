@@ -80,7 +80,7 @@ const TimeDeal = ({ type, heading }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const listDataSale = filteredProducts.filter(
     (product) => product.prodSale > 0,
@@ -98,16 +98,18 @@ const TimeDeal = ({ type, heading }) => {
       borderRadius="15px"
     >
       <Heading
-        backgroundImage='url("https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif")'
+
         h="auto"
-        textAlign="left"
+        textAlign="center"
         display="flex"
         w="100%"
         borderRadius="15px"
-        backgroundRepeat="repeat-x"
       >
-        <Box mt="6" display="flex" mb="1" ml="6">
-          <Box mr="4">
+        <Box width="100%">
+          <Image  borderRadius="15px" src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif" width="100%" />
+        </Box>
+        <Box mt="6" display="flex" mb="1" ml="6" style={{ position: "absolute" }}>
+          <Box mr="4" borderRadius="20px">
             {" "}
             <img
               width="40px"
@@ -172,7 +174,7 @@ const TimeDeal = ({ type, heading }) => {
           grid={{ rows: 2, fill: "row" }}
           spaceBetween={30}
           autoplay={{
-            delay: 2500,
+            delay: 100000,
             disableOnInteraction: false,
           }}
           modules={[Grid, Pagination, Autoplay]}
@@ -245,10 +247,10 @@ const TimeDeal = ({ type, heading }) => {
                       >
                         {i.prodName}
                       </Text>
-                      <Box mt="2.5" m="10px 0 30px 0">
+                      <Box mt="2.5" m="10px 10px 10px 10px">
                         <Flex>
                           <Square>
-                            <Text color="gray.600" fontSize="15px">
+                            <Text color="gray.600" fontSize="15px" m="auto">
                               Giá mới:{" "}
                             </Text>
                           </Square>
@@ -257,6 +259,7 @@ const TimeDeal = ({ type, heading }) => {
                               textAlign="center"
                               fontWeight="650"
                               fontSize="18px"
+                              m="auto"
                               ml="1"
                               color="red"
                               _hover={{ color: "red" }}
@@ -272,7 +275,7 @@ const TimeDeal = ({ type, heading }) => {
                         {i.prodSale !== 0 && (
                           <>
                             <Flex>
-                              <Text color="gray.600" fontSize="14px">
+                              <Text color="gray.600" fontSize="14px" mb='2%'>
                                 Giá gốc:{" "}
                               </Text>
                               {"  "}
@@ -280,7 +283,7 @@ const TimeDeal = ({ type, heading }) => {
                                 as="s"
                                 color="gray.600"
                                 fontSize="14px"
-                                ml="1"
+                                ml="2"
                               >
                                 {i.prodPriceSale &&
                                   i.prodPriceSale.toLocaleString("vi-VN", {
@@ -305,7 +308,7 @@ const TimeDeal = ({ type, heading }) => {
                               </Box>
                             ) : (
                               <Flex>
-                                <Text color="gray.600" fontSize="14px">
+                                <Text color="gray.600" fontSize="14px" >
                                   Giảm giá:{" "}
                                 </Text>
                                 {"  "}
@@ -328,15 +331,15 @@ const TimeDeal = ({ type, heading }) => {
                           backgroundColor="yellow"
                           borderRadius="15px"
                         >
-                          <Text>
+                          <Box ml="3%">
                             <img
                               width="22px"
-                              height="22px"
+                              height="auto"
                               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"
                             />
-                          </Text>
-                          <Box ml="2">
-                            <Text>
+                          </Box>
+                          <Box m="1% 3%">
+                            <Text m="auto">
                               <b>Còn {i.QTY}/100 suất</b>
                             </Text>
                           </Box>

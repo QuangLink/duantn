@@ -137,10 +137,9 @@ const ItemCardTest = ({ type, heading }) => {
                                 objectFit={"fill"}
                               />
                             </Square>
-
                             <Text
                               mt="2"
-                              height="70px"
+                              height="30px"
                               fontFamily={"Arial"}
                               color="#424245"
                               noOfLines={2}
@@ -152,7 +151,7 @@ const ItemCardTest = ({ type, heading }) => {
                               {i.name}
                             </Text>
                             <Box mt="3" m="10px 0 30px 0px">
-                              <Flex>
+                              <Flex justifyContent="center">
                                 <Square>
                                   <Text color="gray.600" fontSize="14px">
                                     Giá mới :{" "}

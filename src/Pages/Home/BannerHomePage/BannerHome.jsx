@@ -30,9 +30,10 @@ const BannerHome = ({ type }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 3000); // Thay đổi số 3000 thành khoảng thời gian bạn muốn chuyển slide (đơn vị là milliseconds)
+    }, 5000); // Thay đổi số 3000 thành khoảng thời gian bạn muốn chuyển slide (đơn vị là milliseconds)
     return () => clearInterval(interval);
   }, []);
+  console.log(type);
   return (
     <>
       <Center>
@@ -77,15 +78,18 @@ const BannerHome = ({ type }) => {
                           p={7}
                           className="amin"
                         >
+                        <Link to={`/blog/${i.id}`}>
                           <Text
                             fontSize="18px"
                             textDecoration="underline"
                             m={1}
                             color={"#black"}
+
                           >
                             {" "}
                             Xem thêm{" "}
                           </Text>
+                          </Link>
                           <ArrowForwardIcon color={"black"} fontSize={24} />
                         </Button>
                       </Link>

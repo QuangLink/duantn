@@ -146,7 +146,7 @@ const ItemCardTest = ({ type, heading }) => {
                               {i.name}
                             </Text>
                             <Box mt="3" m="10px 0 30px 0px">
-                              <Flex>
+                              <Flex justifyContent="center">
                                 <Square>
                                   <Text color="gray.600" fontSize="14px">
                                     Giá mới :{" "}

@@ -5,7 +5,6 @@ import AllRoutes from "./Components/AllRoutes";
 import Footer from "./Components/Footer.jsx/Footer";
 import { AuthContextProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
-
 const App = () => {
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
@@ -17,6 +16,7 @@ const App = () => {
   const isAdminRoute = currentPath.includes("/admin");
   return (
     <div className="App">
+    
       <AuthContextProvider>
         {!isAdminRoute && <Navbar />}
         <AllRoutes />

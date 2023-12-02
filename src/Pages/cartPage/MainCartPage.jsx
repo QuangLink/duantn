@@ -117,9 +117,7 @@ const MainCartPage = () => {
               mt="5"
             >
               <Box className="headingCart">
-                <Text className="textHeader">
-                  <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
-                </Text>
+                
                 <Center fontSize="32px" fontWeight="700" color="black">
                   Đặt hàng
                 </Center>
@@ -129,6 +127,7 @@ const MainCartPage = () => {
 
             <Box display="flex" justifyContent="space-between">
               <Flex
+              padding="0 15px 0 0"
                 flexDirection={"column"}
                 border={"0px solid blue"}
                 width={{
@@ -140,8 +139,12 @@ const MainCartPage = () => {
                   "2xl": "70%",
                 }}
                 gap={"1"}
+                
+                
               >
-                <MyCartLength item={dataLength} />
+
+          <Checkout />
+                <MyCartLength item={dataLength}  />
                 {loading && (
                   <Center>
                     <RotatingLines
@@ -150,6 +153,7 @@ const MainCartPage = () => {
                       animationDuration="0.75"
                       width="96"
                       visible={true}
+                      
                     />
                   </Center>
                 )}
@@ -169,11 +173,11 @@ const MainCartPage = () => {
                     DeleteRequest={DeleteRequest}
                   />
                 ))}
-                <Checkout />
+                
               </Flex>
               {/* Phân tách 2 box */}
 
-              <Flex width="30%">
+              <Flex width="30%"   border={"1px solid rgb(224, 224, 225)"} padding="0 0 10px">
                 <CheckoutBox
                   items={dataLength}
                   totalPrice={totalPrice}
