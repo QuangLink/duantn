@@ -78,17 +78,16 @@ const BannerHome = ({ type }) => {
                           p={7}
                           className="amin"
                         >
-                        <Link to={`/blog/${i.id}`}>
-                          <Text
-                            fontSize="18px"
-                            textDecoration="underline"
-                            m={1}
-                            color={"#black"}
-
-                          >
-                            {" "}
-                            Xem thêm{" "}
-                          </Text>
+                          <Link to={`/blog/${i.id}`}>
+                            <Text
+                              fontSize="18px"
+                              textDecoration="underline"
+                              m={1}
+                              color={"#black"}
+                            >
+                              {" "}
+                              Xem thêm{" "}
+                            </Text>
                           </Link>
                           <ArrowForwardIcon color={"black"} fontSize={24} />
                         </Button>
@@ -230,7 +229,7 @@ const BannerHome = ({ type }) => {
           <GridItem colSpan={4}>
             <Box position="relative">
               <Image
-                src="https://maytinhtoanvu.com/wp-content/uploads/2018/11/banner.jpg"
+                src="https://cdn.vectorstock.com/i/preview-1x/35/83/software-development-programming-vector-24033583.jpg"
                 alt="Slide 3"
                 h={220}
                 style={{
