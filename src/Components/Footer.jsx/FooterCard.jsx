@@ -1,10 +1,12 @@
 import React from "react";
-import { Box, Text, Grid, Flex, Image, Center } from "@chakra-ui/react";
+import { Box, Text, Grid, Flex, Image, Center, Img } from "@chakra-ui/react";
 import { AiFillFacebook } from "react-icons/ai";
 import { TfiTwitter } from "react-icons/tfi";
 import { CiYoutube } from "react-icons/ci";
 import { Link } from "react-router-dom";
-
+import { Icon } from '@chakra-ui/react'
+import { CiMoneyCheck1, CiMoneyBill } from "react-icons/ci";
+import { GoClock } from "react-icons/go";
 export const FooterCard1 = ({ type, heading }) => {
   return (
     <Box cursor="pointer">
@@ -70,6 +72,42 @@ export const FooterCard4 = ({ type, heading }) => {
           </Box>
         ))}
       </Box>
+    </Box>
+  );
+};
+
+export const FooterCard5 = ({ type, heading }) => {
+  return (
+    <Box ml={115} cursor="pointer">
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
+      <Image w={1000} h={'auto'} src='https://shopfront-cdn.tekoapis.com/static/vnpay_banks.png' />
+
+    </Box>
+  );
+};
+
+export const FooterCard6 = ({ type, heading }) => {
+  return (
+    <Box cursor="pointer">
+      <Text fontSize={18} fontWeight="700">
+        {heading}
+      </Text>
+      <Box>
+        <Flex>
+          <Link>
+            <Box mr={5}>  <Center><Icon fontSize={40} as={CiMoneyBill} /></Center> <Text>Tiền mặt</Text></Box>
+          </Link>
+          <Link>
+            <Box mr={5}> <Center><Icon fontSize={40} as={GoClock} /></Center> <Text>Trả góp</Text></Box>
+          </Link>
+          <Link>
+            <Box mr={5}> <Center><Icon fontSize={40} as={CiMoneyCheck1} /></Center> <Text>Banking</Text></Box>
+          </Link>
+        </Flex>
+      </Box>
+
     </Box>
   );
 };

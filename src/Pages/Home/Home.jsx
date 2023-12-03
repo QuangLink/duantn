@@ -33,6 +33,7 @@ import Danhmuc from "./DanhMuc/Danhmuc";
 import GridLoader from "react-spinners/ClipLoader";
 import ItemCardTest2 from "./SmartWatchSlider";
 import Loader from "./Loader";
+import BlogHome from "./Blog";
 const ItemList = lazy(() => import("./ItemList"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
@@ -207,6 +208,7 @@ const Home = () => {
               heading="IPHONE"
             />
             <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+            <BlogHome  heading="Tin tức công nghệ" type={CateFeatures}/>
           </>
         ) : (
           <div>

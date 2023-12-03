@@ -1,5 +1,9 @@
 export const ProductCategories = [
   {
+    labels: "Blog",
+    pordType: "blog",
+  },
+  {
     labels: "Điện Thoại",
     pordType: "phone",
   },
@@ -15,30 +19,7 @@ export const ProductCategories = [
     labels: "Smartwatch",
     pordType: "smartwatch",
   },
-  {
-    labels: "Bàn phím",
-    pordType: "keyboard",
-  },
-  {
-    labels: "Chuột",
-    pordType: "mouse",
-  },
-  {
-    labels: "Loa Blutooth",
-    pordType: "LoudSpeaker",
-  },
-  {
-    labels: "Cáp sạc",
-    pordType: "cable",
-  },
-  {
-    labels: "Tai nghe AriPods",
-    pordType: "EarPhone",
-  },
-  {
-    labels: "Sạc dự phòng",
-    pordType: "Battery",
-  },
+
 ];
 
 export const SiteInfo = [
@@ -57,11 +38,7 @@ export const SiteInfo = [
   {
     labels: "Hỏi đáp",
   },
-  {
-    labels: "Tuyển dụng",
-  },
 ];
-
 export const ResourcesCenter = [
   {
     labels: "Thẻ ưu đãi",

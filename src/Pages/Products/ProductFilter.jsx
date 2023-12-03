@@ -43,30 +43,38 @@ const ProductFilter = ({
       type === "samsung"
     ) {
       return (
-
         <Flex className="grid-container">
           <Box>
             <Link href="/apple/phone">
-              <Box className="text-btn"><img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-iphone-220x48.png"/></Box>
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-iphone-220x48.png"
+                />
+              </Box>
             </Link>
           </Box>
           <Box>
             <Link href="/xiaomi">
-              <Box className="text-btn"><img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-xiaomi-220x48-5.png"/></Box>
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-xiaomi-220x48-5.png"
+                />
+              </Box>
             </Link>
           </Box>
           <Box>
             <Link href="/samsung">
-              <Box className="text-btn"><img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/samsungnew-220x48-1.png"/></Box>
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/samsungnew-220x48-1.png"
+                />
+              </Box>
             </Link>
           </Box>
         </Flex>
@@ -83,30 +91,33 @@ const ProductFilter = ({
           <Box>
             <Link href="/asus">
               <Box className="text-btn">
-              <img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-asus-149x40.png"/>
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-asus-149x40.png"
+                />
               </Box>
             </Link>
           </Box>
           <Box>
             <Link href="/acer">
               <Box className="text-btn">
-              <img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-acer-149x40.png"/>
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-acer-149x40.png"
+                />
               </Box>
             </Link>
           </Box>
           <Box>
             <Link href="/lenovo">
               <Box className="text-btn">
-              <img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-lenovo-149x40.png"/>
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-lenovo-149x40.png"
+                />
               </Box>
             </Link>
           </Box>
@@ -114,22 +125,17 @@ const ProductFilter = ({
             <Link href="/hp">
               <Box className="text-btn">
                 <img
-                width="100%"
-                height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-hp-149x40-1.png"
-              /></Box>
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-hp-149x40-1.png"
+                />
+              </Box>
             </Link>
           </Box>
         </Flex>
-
       );
     } else {
-      return (
-
-        <Box>
-
-        </Box>
-      );
+      return <Box></Box>;
     }
   };
 
@@ -141,33 +147,66 @@ const ProductFilter = ({
       type === "samsung"
     ) {
       return (
-            <Flex className="grid-container" css={{ "@media (max-width: 768px)": { display: "none" } }}>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1"value="128gb" onClick={onTypeChangeStore}>
-                  128GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1" value="256gb" onClick={onTypeChangeStore}>
-                  256GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1" value="512gb" onClick={onTypeChangeStore}>
-                  512GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1" value="1tgb" onClick={onTypeChangeStore}>
-                  1TGB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450'  bg="white" className="text-btn1" value="" onClick={onTypeChangeStore}>
-                  ALL
-                </Button>
-              </Box>
-            </Flex>
+        <Flex
+          className="grid-container"
+          css={{ "@media (max-width: 768px)": { display: "none" } }}
+        >
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="128gb"
+              onClick={onTypeChangeStore}
+            >
+              128GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="256gb"
+              onClick={onTypeChangeStore}
+            >
+              256GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="512gb"
+              onClick={onTypeChangeStore}
+            >
+              512GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="1tgb"
+              onClick={onTypeChangeStore}
+            >
+              1TGB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value=""
+              onClick={onTypeChangeStore}
+            >
+              ALL
+            </Button>
+          </Box>
+        </Flex>
       );
     } else if (
       type === "laptop" ||
@@ -204,35 +243,61 @@ const ProductFilter = ({
         //     </Flex>
         //   </MenuList>
         // </Menu>
-        <Flex className="grid-container" css={{ "@media (max-width: 768px)": { display: "none" } }}>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1"value="8gb" onClick={onTypeChangeStore}>
-                  8GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1" value="16gb" onClick={onTypeChangeStore}>
-                  16GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450' bg="white" className="text-btn1" value="32gb" onClick={onTypeChangeStore}>
-                  32GB
-                </Button>
-              </Box>
-              <Box>
-                <Button fontWeight='450'  bg="white" className="text-btn1" value="" onClick={onTypeChangeStore}>
-                  ALL
-                </Button>
-              </Box>
-            </Flex>
+        <Flex
+          className="grid-container"
+          css={{ "@media (max-width: 768px)": { display: "none" } }}
+        >
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="8gb"
+              onClick={onTypeChangeStore}
+            >
+              8GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="16gb"
+              onClick={onTypeChangeStore}
+            >
+              16GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="32gb"
+              onClick={onTypeChangeStore}
+            >
+              32GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value=""
+              onClick={onTypeChangeStore}
+            >
+              ALL
+            </Button>
+          </Box>
+        </Flex>
       );
     } else {
       return (
         <>
-        <Box>
-          
-          </Box></>
+          <Box></Box>
+        </>
       );
     }
   };
@@ -257,7 +322,6 @@ const ProductFilter = ({
       >
         <Flex width="65%">
           <Menu>
-
             <CategoryProduct />
           </Menu>
         </Flex>
@@ -278,8 +342,7 @@ const ProductFilter = ({
         }}
       >
         <CategoryProduct2 />
-        <Flex width="11%"
-        padding= "15px 0px">
+        <Flex width="13%" padding="15px 0px">
           <Box
             fontWeight="bold.800"
             height="px"

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const BlogContent = () => {
-  const { id } = useParams(); // Extract id from URL
+  const { id } = useParams();
   console.log(id);
 
   const [data, setData] = useState([]);
@@ -16,9 +17,7 @@ const BlogContent = () => {
         );
         const result = await response.json();
         setData(result);
-        console.log(result);
 
-        // If data is empty, set redirectToNotFound to true
         if (result.length === 0) {
           setRedirectToNotFound(true);
         }
@@ -30,7 +29,9 @@ const BlogContent = () => {
     fetchData();
   }, [id]);
 
-  // Render the Redirect component if redirectToNotFound is true
+  const sanitizedHTML =
+    data.length > 0 ? DOMPurify.sanitize(data[0].content) : "";
+
   if (redirectToNotFound) {
     return <Navigate to="/404" />;
   }
@@ -40,7 +41,7 @@ const BlogContent = () => {
       <div className="blog-content__container">
         {data.length > 0 && (
           <div className="blog-content__container__item">
-            <div dangerouslySetInnerHTML={{ __html: data[0].content }} />
+            <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
           </div>
         )}
       </div>

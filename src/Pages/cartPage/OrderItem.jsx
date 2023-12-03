@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Box,
@@ -6,15 +6,11 @@ import {
   Button,
   Heading,
   useToast,
-  Icon,
-  Text,
-  Center,
+  Input,
 } from "@chakra-ui/react";
-import { FcPlus } from "react-icons/fc";
-import { MdDeleteForever } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../../Redux/Cart/cart.action";
-import axios from "axios";
+
+import { useDispatch } from "react-redux";
+import { DeleteIcon } from '@chakra-ui/icons'
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
@@ -170,13 +166,12 @@ const OrderItem = ({
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"100%"}
-     
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >
       <Flex
         m="1"
-        p={"16px"}
+        p="1"
         flexDirection={{
           base: "column",
           sm: "column",
@@ -195,17 +190,30 @@ const OrderItem = ({
         }}
         gap={{ sm: "8px", base: "7px" }}
       >
-        {/* //part1-17to 44line */}
-        <Flex
-          flexDirection="column"
-          border={"0px solid blue"}
-          justifyContent="center"
-          alignItems={"center"}
-          gap="2"
-        >
+        <Flex border={"0px solid blue"} flexWrap="wrap">
           <Box>
-            <Image src={img} alt={name} width="50px" />
+            <Image src={img} alt={name} width="60px" />
+            <Box>
+              <Button
+                width="100%"
+                h="auto"
+                fontSize="12px"
+                m="auto"
+                border="none"
+                backgroundColor={"white"}
+                color="gray"
+                _hover={{ color: "red" }}
+                onClick={() => {
+                  DeleteRequest(userID, id, colorID, storageID);
+                }}
+              >
+                <DeleteIcon />
+                xóa
+              </Button>
+            </Box>
           </Box>
+
+          <Box justifyContent="center" display="flex" width="90%"></Box>
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
@@ -218,22 +226,22 @@ const OrderItem = ({
             xl: "left",
             "2xl": "left",
           }}
+          width="50%"
           gap={2}
         >
           <Heading
-            fontSize="14px"
-            color={" rgb(0, 51, 128)"}
-            fontWeight="600"
+            fontSize="15px"
+            fontWeight="550"
+            color="black"
+            _hover={{ color: "red" }}
             lineHeight={"1.1"}
           >
-            {name} {color} {storage}
+            {name}
           </Heading>
 
           <Flex>
-            <FcPlus />
-            <Heading fontSize="12px" color={"gray"} fontStyle="italic">
-              Dịch vụ/Gói bảo hành thiết bị điện tử được áp dụng cho sản phẩm
-              này
+            <Heading fontSize="10px" color={"gray"}>
+              {color} {storage}
             </Heading>
           </Flex>
         </Flex>
@@ -247,11 +255,11 @@ const OrderItem = ({
             xl: "right",
             "2xl": "right",
           }}
-          width="20%"
+          width="25%"
           gap={1}
           fontWeight="500"
         >
-          <Heading fontSize="18px" color={"red"}>
+          <Heading fontSize="15px" color={"red"} fontWeight="500">
             {price &&
               price.toLocaleString("vi-VN", {
                 style: "currency",
@@ -259,9 +267,10 @@ const OrderItem = ({
               })}
           </Heading>
           <Heading
-            fontSize="17px"
+            fontSize="13px"
             color={"gray"}
-            textDecoration={"line-through"}
+            fontWeight="500"
+            textDecoration="line-through"
           >
             {priceSale &&
               priceSale.toLocaleString("vi-VN", {
@@ -269,44 +278,24 @@ const OrderItem = ({
                 currency: "VND",
               })}
           </Heading>
-        </Flex>
-
-        <Center flexWrap="wrap" display="flex" height="100px" mt="-3">
-          <Box display={"flex"}>
-            <Button onClick={handleDec}>-</Button>
-            <input
+          <Box display={"flex"} justifyContent="end" fontSize="15px">
+            <Button onClick={handleDec} size="xs" color="gray">
+              -
+            </Button>
+            <Input
               type="number"
               value={count}
-              onChange={(e) => handleChange(e, userID, id, colorID, storageID)}
-              style={{ width: "30px", height: "40px", textAlign: "center" }}
-            />
-
-            <Button onClick={handleInc}>+</Button>
-          </Box>
-          <Center width="100%">
-            <Text>Trong kho:</Text>
-            <Text color="red" marginLeft="4px">
-              {QTY}
-            </Text>
-          </Center>
-          <Box justifyContent="center" display="flex" width="90%">
-            <Button
-              h="auto"
-              m="0"
-              width="100%"
+              onChange={handleChange}
+              size="xs"
+              width="30px"
               textAlign="center"
-              border="none"
-              backgroundColor={"white"}
-              color="rgb(23, 116, 239)"
-              _hover={{ color: "red" }}
-              onClick={() => {
-                DeleteRequest(userID, id, colorID, storageID);
-              }}
-            >
-              xóa
+              marginX={2}
+            />
+            <Button onClick={handleInc} size="xs" color="blue">
+              +
             </Button>
           </Box>
-        </Center>
+        </Flex>
       </Flex>
     </Flex>
   );

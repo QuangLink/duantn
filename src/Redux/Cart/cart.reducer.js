@@ -11,7 +11,6 @@ let initialData = {
 };
 
 const CartReducer = (state = initialData, { type, payload }) => {
-
   switch (type) {
     case CartLoading: {
       return {
@@ -47,14 +46,21 @@ const CartReducer = (state = initialData, { type, payload }) => {
       };
     }
     case "code": {
-      let finalprice = 0;
-      if (state.paybalPrice >= 1000 && payload === "MASAI40") {
+      let finalprice = state.paybalPrice;
+      let coupon = 0;
+
+      if (state.paybalPrice >= 1000 && payload === "DUANTN") {
         finalprice = state.paybalPrice - 500000;
+        coupon = 500000;
+      } else if (payload === "JAGUARS") {
+        finalprice = state.paybalPrice * 0.9; // Apply 10% discount
+        coupon = state.paybalPrice * 0.1; // Amount discounted
       }
+
       return {
         ...state,
         paybalPrice: finalprice,
-        coupon: 500000,
+        coupon: coupon,
       };
     }
     case "priceIncrease": {

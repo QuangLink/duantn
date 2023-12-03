@@ -45,7 +45,7 @@ const MainCartPage = () => {
   };
 
   const handleApply = () => {
-    if (val === "MASAI40") {
+    if (val === "DUANTN" || val === "JAGUARS") {
       dispatch({ type: "code", payload: val });
       setVal("");
       toast({
