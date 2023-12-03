@@ -38,7 +38,7 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const Checkout = () => {
+const Address = () => {
   const username = Cookies.get("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
@@ -192,8 +192,13 @@ const Checkout = () => {
     ) {
       return (
         <Box w="66%">
-        
-          <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic" width="100%">
+          <Text
+            mt="5"
+            fontSize="15px"
+            fontWeight="500"
+            fontStyle="italic"
+            width="100%"
+          >
             Bạn chưa có địa chỉ nhận hàng
           </Text>
         </Box>
@@ -217,7 +222,13 @@ const Checkout = () => {
   };
 
   return (
-    <Center  border={"1px solid rgb(224, 224, 225)"} width="100%" display="flex" flexWrap="wrap" padding="16px">
+    <Center
+      border={"1px solid rgb(224, 224, 225)"}
+      width="100%"
+      display="flex"
+      flexWrap="wrap"
+      padding="16px"
+    >
       <div>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -308,8 +319,7 @@ const Checkout = () => {
         </Accordion>
       </div>
 
-
-      <Center display="flex" justifyContent="space-between" w="100%" mt="7" >
+      <Center display="flex" justifyContent="space-between" w="100%" mt="7">
         <Text fontSize="25px" fontWeight="700">
           <Icon
             as={FaMapMarkerAlt}
@@ -367,4 +377,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Address;

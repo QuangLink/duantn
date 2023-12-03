@@ -263,20 +263,18 @@ const CheckoutBox = ({
         </Box>
 
         <Flex justifyContent="center" w="80%" m="2">
-          <TbTruckDelivery size={20} color="gray" marginTop="1"/>
+          <TbTruckDelivery size={20} color="gray" marginTop="1" />
           <Heading
-          marginLeft="10px"
+            marginLeft="10px"
             fontSize="13px"
             color={"gray"}
             lineHeight={"20px"}
             width="100%"
           >
-            Giao hàng nhanh: 
-                <Text>
-                {dtString} / {change}
-                </Text>
-          
-           
+            Giao hàng nhanh:
+            <Text>
+              {dtString} / {change}
+            </Text>
           </Heading>
         </Flex>
         <Box width={"90%"} mb="3">
@@ -286,17 +284,17 @@ const CheckoutBox = ({
               placeholder="Mã giảm giá"
               onChange={(e) => setVal(e.target.value)}
             />
-            
+
             <Button
-                h="auto"
-                _hover={{backgroundColor:"rgb(54,129,240)", color:"#fff"}}
-                borderRadius={"5px"}
-                color="#fff"
-                backgroundColor="rgb(54,129,240)"
-                onClick={handleApply}
-              >
-                Áp dụng
-              </Button>
+              h="auto"
+              _hover={{ backgroundColor: "rgb(54,129,240)", color: "#fff" }}
+              borderRadius={"5px"}
+              color="#fff"
+              backgroundColor="rgb(54,129,240)"
+              onClick={handleApply}
+            >
+              Áp dụng
+            </Button>
           </InputGroup>
         </Box>
 
@@ -334,7 +332,7 @@ const CheckoutBox = ({
               Giảm giá:
             </Text>
 
-            <Text fontWeight="500" fontSize="18px"  color="green">
+            <Text fontWeight="500" fontSize="18px" color="green">
               {discount &&
                 discount.toLocaleString("vi-VN", {
                   style: "currency",

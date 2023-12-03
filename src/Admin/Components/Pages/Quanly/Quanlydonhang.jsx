@@ -378,7 +378,7 @@ const Quanlydonhang = () => {
       <main class="app-content">
         <div class="app-title">
           <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active">
+            <li class="breadcrumb-item">
               <a href="#">
                 <b>Danh sách đơn hàng</b>
               </a>

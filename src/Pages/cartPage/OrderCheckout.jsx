@@ -1,6 +1,6 @@
 import React from "react";
 import MyCartLength from "./MyCartLength";
-import CartItem from "./CartItem";
+import OrderItem from "./OrderItem";
 import CheckoutBox from "./CheckoutBox";
 import axios from "axios";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 
 import "react-slideshow-image/dist/styles.css";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import Checkout from "./Checkout";
+import Address from "./Address";
 export const GetData = async () => {
   try {
     let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
@@ -117,7 +117,6 @@ const MainCartPage = () => {
               mt="5"
             >
               <Box className="headingCart">
-                
                 <Center fontSize="32px" fontWeight="700" color="black">
                   Đặt hàng
                 </Center>
@@ -127,7 +126,7 @@ const MainCartPage = () => {
 
             <Box display="flex" justifyContent="space-between">
               <Flex
-              padding="0 15px 0 0"
+                padding="0 15px 0 0"
                 flexDirection={"column"}
                 border={"0px solid blue"}
                 width={{
@@ -139,12 +138,9 @@ const MainCartPage = () => {
                   "2xl": "70%",
                 }}
                 gap={"1"}
-                
-                
               >
-
-          <Checkout />
-                <MyCartLength item={dataLength}  />
+                <Address />
+                <MyCartLength item={dataLength} />
                 {loading && (
                   <Center>
                     <RotatingLines
@@ -153,13 +149,12 @@ const MainCartPage = () => {
                       animationDuration="0.75"
                       width="96"
                       visible={true}
-                      
                     />
                   </Center>
                 )}
 
                 {data.map((product) => (
-                  <CartItem
+                  <OrderItem
                     color={product.cart[0].color}
                     storage={product.cart[0].storage_value}
                     key={product.cart[0].prodID}
@@ -168,16 +163,19 @@ const MainCartPage = () => {
                     price={product.cart[0].prodPrice}
                     priceSale={product.cart[0].prodPriceSale}
                     id={product.cart[0].prodID}
-                    QTY={product.QTY}
+                    QTY={product.cart[0].QTY}
                     quantity={product.quantity}
                     DeleteRequest={DeleteRequest}
                   />
                 ))}
-                
               </Flex>
               {/* Phân tách 2 box */}
 
-              <Flex width="30%"   border={"1px solid rgb(224, 224, 225)"} padding="0 0 10px">
+              <Flex
+                width="30%"
+                border={"1px solid rgb(224, 224, 225)"}
+                padding="0 0 10px"
+              >
                 <CheckoutBox
                   items={dataLength}
                   totalPrice={totalPrice}

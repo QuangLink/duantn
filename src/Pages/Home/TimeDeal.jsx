@@ -80,7 +80,7 @@ const TimeDeal = ({ type, heading }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
   const listDataSale = filteredProducts.filter(
     (product) => product.prodSale > 0,
@@ -98,7 +98,6 @@ const TimeDeal = ({ type, heading }) => {
       borderRadius="15px"
     >
       <Heading
-
         h="auto"
         textAlign="center"
         display="flex"
@@ -106,9 +105,19 @@ const TimeDeal = ({ type, heading }) => {
         borderRadius="15px"
       >
         <Box width="100%">
-          <Image  borderRadius="15px" src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif" width="100%" />
+          <Image
+            borderRadius="15px"
+            src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif"
+            width="100%"
+          />
         </Box>
-        <Box mt="6" display="flex" mb="1" ml="6" style={{ position: "absolute" }}>
+        <Box
+          mt="6"
+          display="flex"
+          mb="1"
+          ml="6"
+          style={{ position: "absolute" }}
+        >
           <Box mr="4" borderRadius="20px">
             {" "}
             <img
@@ -275,7 +284,7 @@ const TimeDeal = ({ type, heading }) => {
                         {i.prodSale !== 0 && (
                           <>
                             <Flex>
-                              <Text color="gray.600" fontSize="14px" mb='2%'>
+                              <Text color="gray.600" fontSize="14px" mb="2%">
                                 Giá gốc:{" "}
                               </Text>
                               {"  "}
@@ -308,7 +317,7 @@ const TimeDeal = ({ type, heading }) => {
                               </Box>
                             ) : (
                               <Flex>
-                                <Text color="gray.600" fontSize="14px" >
+                                <Text color="gray.600" fontSize="14px">
                                   Giảm giá:{" "}
                                 </Text>
                                 {"  "}

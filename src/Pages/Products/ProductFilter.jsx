@@ -86,7 +86,7 @@ const ProductFilter = ({
               <img
                 width="100%"
                 height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-acer-149x40.png"/>
+                src="https://cdn.tgdd.vn/Brand/1/logo-asus-149x40.png"/>
               </Box>
             </Link>
           </Box>
@@ -96,7 +96,7 @@ const ProductFilter = ({
               <img
                 width="100%"
                 height="75px"
-                src="https://cdn.tgdd.vn/Brand/1/logo-hp-149x40-1.png"/>
+                src="https://cdn.tgdd.vn/Brand/1/logo-acer-149x40.png"/>
               </Box>
             </Link>
           </Box>
@@ -141,38 +141,33 @@ const ProductFilter = ({
       type === "samsung"
     ) {
       return (
-        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button">Dung lượng</MenuButton>
-          <MenuList bg="white">
-            <Flex className="grid-container">
+            <Flex className="grid-container" css={{ "@media (max-width: 768px)": { display: "none" } }}>
               <Box>
-                <MenuItem value="128gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1"value="128gb" onClick={onTypeChangeStore}>
                   128GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="256gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1" value="256gb" onClick={onTypeChangeStore}>
                   256GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="512gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1" value="512gb" onClick={onTypeChangeStore}>
                   512GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="1tgb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1" value="1tgb" onClick={onTypeChangeStore}>
                   1TGB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="" onClick={onTypeChangeStore}>
+                <Button fontWeight='450'  bg="white" className="text-btn1" value="" onClick={onTypeChangeStore}>
                   ALL
-                </MenuItem>
+                </Button>
               </Box>
             </Flex>
-          </MenuList>
-        </Menu>
       );
     } else if (
       type === "laptop" ||
@@ -182,33 +177,55 @@ const ProductFilter = ({
       type === "hp"
     ) {
       return (
-        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button">Ram</MenuButton>
-          <MenuList bg="white">
-            <Flex className="grid-container">
+        // <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
+        //   <MenuButton className="menu-button">Ram</MenuButton>
+        //   <MenuList bg="white">
+        //     <Flex className="grid-container">
+        //       <Box>
+        //         <MenuItem value="128gb" onClick={onTypeChangeStore}>
+        //           8GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="256gb" onClick={onTypeChangeStore}>
+        //           16GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="512gb" onClick={onTypeChangeStore}>
+        //           32GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="" onClick={onTypeChangeStore}>
+        //           ALL
+        //         </MenuItem>
+        //       </Box>
+        //     </Flex>
+        //   </MenuList>
+        // </Menu>
+        <Flex className="grid-container" css={{ "@media (max-width: 768px)": { display: "none" } }}>
               <Box>
-                <MenuItem value="128gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1"value="8gb" onClick={onTypeChangeStore}>
                   8GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="256gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1" value="16gb" onClick={onTypeChangeStore}>
                   16GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="512gb" onClick={onTypeChangeStore}>
+                <Button fontWeight='450' bg="white" className="text-btn1" value="32gb" onClick={onTypeChangeStore}>
                   32GB
-                </MenuItem>
+                </Button>
               </Box>
               <Box>
-                <MenuItem value="" onClick={onTypeChangeStore}>
+                <Button fontWeight='450'  bg="white" className="text-btn1" value="" onClick={onTypeChangeStore}>
                   ALL
-                </MenuItem>
+                </Button>
               </Box>
             </Flex>
-          </MenuList>
-        </Menu>
       );
     } else {
       return (
@@ -261,7 +278,8 @@ const ProductFilter = ({
         }}
       >
         <CategoryProduct2 />
-        <Flex width="13%">
+        <Flex width="11%"
+        padding= "15px 0px">
           <Box
             fontWeight="bold.800"
             height="px"

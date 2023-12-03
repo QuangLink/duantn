@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Themsp.css";
 import axios from "axios";
+import {
+  Box,
+  Image,
+  Center,
+  Flex,
+  AspectRatio,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 
 const Themsanpham = () => {
   const [products, setProducts] = useState([]);
@@ -15,10 +24,10 @@ const Themsanpham = () => {
     prodType: "",
     prodImg: "",
     prodcatID: "",
-    prodPrice: 0,
-    prodSale: 0,
+    prodPrice: "",
+    prodSale: "",
     prodDesc: "",
-    QTY: 0,
+    QTY: "",
   });
   const [variant, setVariant] = useState({
     colorID: "",
@@ -154,34 +163,44 @@ const Themsanpham = () => {
               <h3 className="tile-title">Tạo mới sản phẩm</h3>
               <div className="tile-body">
                 <div className="row element-button">
-                  <div className="col-sm-2"></div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#adddanhmuc"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm danh mục
-                    </a>
-                  </div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#addtinhtrang"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm tình trạng
-                    </a>
-                  </div>
+                  <Box width="100%" display="flex" padding="0 0 0 18px">
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#adddanhmuc"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm danh mục
+                      </a>
+                    </div>
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#addtinhtrang"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm tình trạng
+                      </a>
+                    </div>
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#adddanhmuc"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm biến thể
+                      </a>
+                    </div>
+                  </Box>
                 </div>
 
                 <form className="row" />
 
-                <div className="form-group col-md-3">
+                <div className="form-group col-md-6">
                   <label className="control-label">Tên sản phẩm </label>
                   <input
                     className="form-control"
-                    placeholder=""
+                    placeholder="Tên sản phẩm"
                     type="text"
                     name="prodName"
                     value={product.prodName}
@@ -189,84 +208,101 @@ const Themsanpham = () => {
                   />
                 </div>
 
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Số lượng</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="QTY"
-                    value={product.QTY}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Giá bán</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="prodPrice"
-                    value={product.prodPrice}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Phần trăm giảm giá</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="prodSale"
-                    value={product.prodSale}
-                    onChange={handleChange}
-                  />
-                </div>
+                {/* tên sp */}
 
-                <div className="form-group col-md-3 ">
-                  <label for="exampleSelect1" className="control-label">
-                    Loại sản phẩm
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleSelect1"
-                    name="prodType"
-                    value={product.prodType}
-                    onChange={handleChange}
-                  >
-                    <option value="all">Loại</option>
-                    {prodTypes.map((prodType) => (
-                      <option key={prodType} value={prodType}>
-                        {prodType}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <Box width="100%" display="flex">
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Số lượng</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="QTY"
+                      value={product.QTY}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* số lượng */}
 
-                <div className="form-group col-md-3 ">
-                  <label for="exampleSelect1" className="control-label">
-                    Hãng
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleSelect1"
-                    name="prodcatID"
-                    value={product.prodcatID}
-                    onChange={handleChange}
-                  >
-                    <option value="all">Hãng</option>
-                    {categories.map((category) => (
-                      <option
-                        key={category.prodcatID}
-                        value={category.prodcatID}
-                      >
-                        {category.catName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group col-md-3">
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Giá bán</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="prodPrice"
+                      value={product.prodPrice}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* Giá bán */}
+
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Phần trăm giảm giá</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="prodSale"
+                      value={product.prodSale}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* Phần trăm giảm giá */}
+
+                  {/* Hãng */}
+                </Box>
+                <Box width="100%" display="flex">
+                  <div className="form-group col-md-3 ">
+                    <label for="exampleSelect1" className="control-label">
+                      Loại sản phẩm
+                    </label>
+                    <select
+                      className="form-control"
+                      id="exampleSelect1"
+                      name="prodType"
+                      value={product.prodType}
+                      onChange={handleChange}
+                    >
+                      <option value="all">Loại</option>
+                      {prodTypes.map((prodType) => (
+                        <option key={prodType} value={prodType}>
+                          {prodType}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* Loại sản phẩm */}
+
+                  <div className="form-group col-md-3 ">
+                    <label for="exampleSelect1" className="control-label">
+                      Hãng
+                    </label>
+                    <select
+                      className="form-control"
+                      id="exampleSelect1"
+                      name="prodcatID"
+                      value={product.prodcatID}
+                      onChange={handleChange}
+                    >
+                      <option value="all">Hãng</option>
+                      {categories.map((category) => (
+                        <option
+                          key={category.prodcatID}
+                          value={category.prodcatID}
+                        >
+                          {category.catName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </Box>
+
+                <div className="form-group col-md-6">
                   <label className="control-label">Ảnh sản phẩm </label>
                   <input
                     className="form-control"
-                    placeholder=""
+                    placeholder="Vui lòng dán link hình ảnh sản phẩm"
                     type="text"
                     name="prodImg"
                     value={product.prodImg}
@@ -281,9 +317,10 @@ const Themsanpham = () => {
                   )}
                 </div>
 
-                <div className="form-group col-md-12">
+                <div className="form-group col-md-6">
                   <label className="control-label">Mô tả sản phẩm</label>
                   <textarea
+                    placeholder="Thêm mô tả..."
                     className="form-control"
                     id="mota"
                     name="prodDesc"
@@ -292,17 +329,51 @@ const Themsanpham = () => {
                   ></textarea>
                   <script>CKEDITOR.replace('mota');</script>
                 </div>
+                {/* Mô tả */}
               </div>
-              <button
-                className="btn btn-save"
-                type="button"
-                onClick={handleAddProduct}
+
+              <Box
+                width="50%"
+                display="flex"
+                justifyContent="space-around"
+                padding="10px"
               >
-                Lưu lại
-              </button>
-              <a className="btn btn-cancel" href="">
-                Hủy bỏ
-              </a>
+                <Button
+                  padding="10px"
+                  w="49%"
+                  h="auto"
+                  color="#fff"
+                  borderRadius="10px"
+                  backgroundColor="red"
+                  _hover={{ color: "red", backgroundColor: "#fff" }}
+                  border="1px solid red"
+                  className=" btn-save"
+                  type="button"
+                  onClick={handleAddProduct}
+                >
+                  Thêm sản phẩm
+                </Button>
+
+                <a
+                  style={{ width: "49%", backgroundColor: "#fff" }}
+                  className=" btn-cancel"
+                  href=""
+                >
+                  <Box
+                    padding="8px"
+                    textAlign="center"
+                    w="100%"
+                    h="auto"
+                    color="#fff"
+                    border="1px solid red"
+                    borderRadius="10px"
+                    backgroundColor="red"
+                    _hover={{ color: "red", backgroundColor: "#fff" }}
+                  >
+                    Hủy Bỏ
+                  </Box>
+                </a>
+              </Box>
             </div>
           </div>
         </div>

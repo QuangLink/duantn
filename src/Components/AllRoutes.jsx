@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import MainCartPage from "../Pages/cartPage/MainCartPage";
+import MainCartPage from "../Pages/cartPage/OrderCheckout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/SignInApp";
 import Products from "../Pages/Products/Products";
@@ -11,7 +11,7 @@ import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import AdminRoute from "./PrivateRoute/AdminRoutes";
 import ProductList from "../testlist";
-import Checkout from "../Pages/cartPage/Checkout";
+import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
 import CheckoutTest from "../Pages/checkout/oldcheckout";
@@ -34,6 +34,7 @@ import NotFoundPage from "../Pages/404";
 import Thembienthe from "../Admin/Components/Pages/Task/Thembienthe";
 import BlogContent from "../Pages/blog/blogcontent";
 import BlogList from "../Pages/blog/bloglist";
+import { Editsp } from "../Admin/Components/Pages/Task/Editsp";
 const productTypes = [
   "laptop",
   "phone",
@@ -63,7 +64,7 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-      <Route path="/blog" element={<BlogList />}></Route>
+        <Route path="/blog" element={<BlogList />}></Route>
         <Route path="/blog/:id" element={<BlogContent />}></Route>
         <Route path="/404" element={<NotFoundPage />}></Route>
         <Route path="/resetpass" element={<Resetpass />}></Route>
@@ -98,6 +99,15 @@ const AllRoutes = () => {
             <AdminRoute>
               <Menu />
               <Thembienthe />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/editsp/:id"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Editsp />
             </AdminRoute>
           }
         ></Route>

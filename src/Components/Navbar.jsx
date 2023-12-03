@@ -66,7 +66,6 @@ function Navbar() {
   const scroll = useScrollListener();
   const searchRef = useRef(null);
 
-
   const navbar = {
     active: {
       visibility: "visible",
@@ -408,15 +407,18 @@ function Navbar() {
   // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box w={'100%'} backgroundColor="#FFFFFF" position={"relative"} zIndex={2}>
+      <Box
+        w={"100%"}
+        backgroundColor="#FFFFFF"
+        position={"relative"}
+        zIndex={2}
+      >
         <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
           <Box></Box>
         </Flex>
-        <Flex className="flex-container" >
-          <Box w='29%'>
-            <Flex justifyContent={'space-between'} alignItems={'center'}>
-
-
+        <Flex className="flex-container">
+          <Box w="29%">
+            <Flex justifyContent={"space-between"} alignItems={"center"}>
               <Link to="/">
                 <Box>
                   <Image
@@ -433,9 +435,7 @@ function Navbar() {
                     cursor={"pointer"}
                     textAlign={"center"}
                     borderRadius={5}
-
                     bg="#F5F5F5"
-
                   >
                     {" "}
                     <Icon
@@ -452,7 +452,7 @@ function Navbar() {
                       fontSize={"18px"}
                       color="#555"
                       flexDirection={"row"}
-                    // className={`header-bar ${isFocused ? "focused" : ""}`}
+                      // className={`header-bar ${isFocused ? "focused" : ""}`}
                     >
                       Admin
                     </Heading>
@@ -494,14 +494,13 @@ function Navbar() {
               </Flex>
             </Link>
           )} */}
-          <Box w='40%'>
+          <Box w="40%">
             <Flex
               bg="#F5F5F5"
               borderRadius={"15px"}
               w="100%"
               h={10}
               p="5px"
-
               textAlign={"center"}
             >
               <Input
@@ -521,8 +520,8 @@ function Navbar() {
             </Flex>
             <Closesearch ref={searchRef} />
           </Box>
-          <Box w='29%'>
-            <Flex justifyContent={'flex-end'} alignItems={'center'}>
+          <Box w="29%">
+            <Flex justifyContent={"flex-end"} alignItems={"center"}>
               {!isAuth ? (
                 <Link to="login">
                   <Flex
@@ -533,31 +532,28 @@ function Navbar() {
                     _hover={{ bg: "#F5F5F5" }}
                   >
                     <Icon
-                      fontSize={40} color={"#555"} m={3}
+                      fontSize={40}
+                      color={"#555"}
+                      m={3}
                       as={BsFillPersonFill}
                     />
 
                     <Text
-
                       // fontWeight={400}
                       m="2"
                       // cursor={"pointer"}
                       fontSize={"16px"}
                       color="#555"
                     >
-                    Đăng nhập
-                      Đăng ký
+                      Đăng nhập Đăng ký
                     </Text>
-
                   </Flex>
                 </Link>
               ) : (
-                <Box  >
-
+                <Box>
                   <Menu>
                     <MenuButton
                       bg="#FFFFFF"
-
                       h={50}
                       pt={5}
                       fontSize={16}
@@ -567,16 +563,14 @@ function Navbar() {
                     >
                       <Flex>
                         <Icon
-                          fontSize={46} color={"#555"}
+                          fontSize={46}
+                          color={"#555"}
                           as={BsFillPersonFill}
                         />
                         <Box pt={1}>
-                          Xin chào ,
-                          <Text fontSize={16}> {username}</Text>
+                          Xin chào ,<Text fontSize={16}> {username}</Text>
                         </Box>
-
                       </Flex>
-
                     </MenuButton>
                     <MenuList>
                       <Link to="/myprofile">
@@ -608,13 +602,35 @@ function Navbar() {
                 >
                   {" "}
                   <Box position="relative" display="inline-block">
-                    <Icon as={BsCart2} fontSize={40} color={"#555"} m={3} position='relative' />
+                    <Icon
+                      as={BsCart2}
+                      fontSize={40}
+                      color={"#555"}
+                      m={3}
+                      position="relative"
+                    />
 
-                    <Box h={5} w={5} position="absolute" top="6px" right="5px" color="white" bg="red" borderRadius="100%" p={1}>
-                      <Text fontSize={15} position="absolute" top='-2px' left={1.5}>{dataLength}</Text>
+                    <Box
+                      h={5}
+                      w={5}
+                      position="absolute"
+                      top="6px"
+                      right="5px"
+                      color="white"
+                      bg="red"
+                      borderRadius="100%"
+                      p={1}
+                    >
+                      <Text
+                        fontSize={15}
+                        position="absolute"
+                        top="-2px"
+                        left={1.5}
+                      >
+                        {dataLength}
+                      </Text>
                     </Box>
                   </Box>
-
                   <Text
                     fontWeight={400}
                     m="2"
@@ -628,12 +644,8 @@ function Navbar() {
                   </Text>
                 </Flex>
               </Link>
-
-
             </Flex>
           </Box>
-
-
         </Flex>
         <Flex
           w="80%"
@@ -821,11 +833,8 @@ function Navbar() {
                 px={4}
                 py={2}
                 color="#55555"
-
                 _hover={{ color: "#555", fontSize: 18 }}
-
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
-
               >
                 <Icon as={BsPhone} /> Điện Thoại
               </MenuButton>
@@ -839,7 +848,6 @@ function Navbar() {
                 color="#55555"
                 _hover={{ color: "#555", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
-
               >
                 <Icon boxSize={5} h={5} as={AiOutlineLaptop} /> Laptop
               </MenuButton>
@@ -852,9 +860,7 @@ function Navbar() {
                 py={2}
                 color="#55555"
                 _hover={{ color: "#555", fontSize: 18 }}
-
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
-
               >
                 <Icon as={AiOutlineTablet} /> Tablet
               </MenuButton>
@@ -868,7 +874,6 @@ function Navbar() {
                 color="#55555"
                 _hover={{ color: "#555", fontSize: 18 }}
                 _focus={{ boxShadow: "0px 3px 0px  #555" }}
-
                 display="flex"
               >
                 <Icon as={BsSmartwatch} /> Smartwatch

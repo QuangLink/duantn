@@ -1,4 +1,13 @@
 import { useEffect, useState } from "react";
+import {
+  Box,
+  Image,
+  Center,
+  Flex,
+  AspectRatio,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 
 export default function Thembienthe() {
   const [products, setProducts] = useState([]);
@@ -12,7 +21,7 @@ export default function Thembienthe() {
   const [prodPrice, setProdPrice] = useState(""); // Track product price
   const [prodImg, setProdImg] = useState(""); // Track product image
   const [variants, setVariants] = useState([]);
-
+  const [prodSale, setProdSale] = useState("");
   const fetchProduct = async () => {
     const response = await fetch(
       "https://duantn-backend.onrender.com/products",
@@ -82,6 +91,7 @@ export default function Thembienthe() {
         colorID: selectedColor,
         storageID: selectedStorage,
         prodPrice: prodPrice,
+        prodSale: prodSale,
         prodImg: prodImg,
       };
 
@@ -113,55 +123,62 @@ export default function Thembienthe() {
   return (
     <div>
       <main className="app-content">
-        <div className="app-title">
-          <ul className="app-breadcrumb breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/quanlysp">Danh sách sản phẩm</a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href="#">Thêm sản phẩm</a>
+        <div class="app-title" style={{ marginTop: "45px" }}>
+          <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item">
+              <a href="#">
+                <b>Tạo mới biến thể</b>
+              </a>
             </li>
           </ul>
+          <div id="clock"></div>
         </div>
         <div className="row">
           <div className="col-md-12">
             <div className="tile">
-              <h3 className="tile-title">Tạo mới sản phẩm</h3>
+              <h3 className="tile-title">Tạo mới biến thể của sản phẩm</h3>
               <div className="tile-body">
                 <div className="row element-button">
-                  <div className="col-sm-2"></div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#adddanhmuc"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm danh mục
-                    </a>
-                  </div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#addtinhtrang"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm tình trạng
-                    </a>
-                  </div>
+                  <Box width="100%" display="flex" padding="0 0 0 18px">
+                    <div className="col-sm-2" style={{ marginRight: "10px" }}>
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#adddanhmuc"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm danh mục
+                      </a>
+                    </div>
+                    <div className="col-sm-2" style={{ marginLeft: "10px" }}>
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#addtinhtrang"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm tình trạng
+                      </a>
+                    </div>
+                  </Box>
                 </div>
 
                 <form className="row" />
+
                 <form onSubmit={handleAddVariant}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Tìm kiếm..."
-                    value={searchValue}
-                    onChange={handleNameSearch}
-                  />
                   <div className="form-group col-md-3">
-                    <select
+                    <input
+                      type="text"
                       className="form-control"
+                      placeholder="Tìm kiếm sản phẩm"
+                      value={searchValue}
+                      onChange={handleNameSearch}
+                    />
+                  </div>
+                  <div className="form-group col-md-3">
+                    <label for="exampleSelect1" className="control-label">
+                      Sản phẩm
+                    </label>
+                    <select
+                      className="form-control "
                       onChange={(e) => handleSelectChange(e, "product")}
                       defaultValue={selectedProduct}
                     >
@@ -172,28 +189,40 @@ export default function Thembienthe() {
                       ))}
                     </select>
                   </div>
-                  <select
-                    className="form-control"
-                    onChange={(e) => handleSelectChange(e, "color")}
-                    defaultValue={selectedColor}
-                  >
-                    {color.map((item) => (
-                      <option key={item.colorID} value={item.colorID}>
-                        {item.color}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-control"
-                    onChange={(e) => handleSelectChange(e, "storage")}
-                    defaultValue={selectedStorage}
-                  >
-                    {storage.map((item) => (
-                      <option key={item.storageID} value={item.storageID}>
-                        {item.storage_value}
-                      </option>
-                    ))}
-                  </select>
+
+                  <div className="form-group col-md-3">
+                    <label for="exampleSelect1" className="control-label">
+                      Màu sắc
+                    </label>
+                    <select
+                      className="form-control "
+                      onChange={(e) => handleSelectChange(e, "color")}
+                      defaultValue={selectedColor}
+                    >
+                      {color.map((item) => (
+                        <option key={item.colorID} value={item.colorID}>
+                          {item.color}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group col-md-3">
+                    <label for="exampleSelect1" className="control-label">
+                      Dung lượng
+                    </label>
+
+                    <select
+                      className="form-control"
+                      onChange={(e) => handleSelectChange(e, "storage")}
+                      defaultValue={selectedStorage}
+                    >
+                      {storage.map((item) => (
+                        <option key={item.storageID} value={item.storageID}>
+                          {item.storage_value}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
                   <div className="form-group  col-md-3">
                     <label className="control-label">Giá bán</label>
@@ -203,6 +232,16 @@ export default function Thembienthe() {
                       name="prodPrice"
                       value={prodPrice}
                       onChange={(e) => setProdPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group  col-md-3">
+                    <label className="control-label">Giá bán</label>
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="prodSale"
+                      value={prodSale || 0}
+                      onChange={(e) => setProdSale(e.target.value)}
                     />
                   </div>
                   <div className="form-group col-md-3">
@@ -228,7 +267,22 @@ export default function Thembienthe() {
                     )}
                   </div>
 
-                  <button type="submit">Thêm biến thể</button>
+                  <div className="form-group col-md-3">
+                    <Button
+                      padding="10px"
+                      w="100%"
+                      h="auto"
+                      color="#fff"
+                      borderRadius="10px"
+                      backgroundColor="red"
+                      _hover={{ color: "red", backgroundColor: "#fff" }}
+                      border="1px solid red"
+                      className=" btn-save"
+                      type="button"
+                    >
+                      <button type="submit">Thêm biến thể</button>
+                    </Button>
+                  </div>
                 </form>
               </div>
             </div>

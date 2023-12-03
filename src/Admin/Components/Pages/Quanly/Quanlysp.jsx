@@ -6,6 +6,7 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const Quanlysanpham = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [statusFilter, setStatusFilter] = useState("all");
@@ -152,6 +153,7 @@ const Quanlysanpham = () => {
             id="show-emp"
             data-toggle="modal"
             data-target="#ModalUP"
+            onClick={() => navigate(`/admin/editsp/${product.prodID}`)}
           >
             <i class="fas fa-edit"></i>
           </button>
@@ -176,7 +178,7 @@ const Quanlysanpham = () => {
       <main class="app-content">
         <div class="app-title">
           <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active">
+            <li class="breadcrumb-item">
               <a href="#">
                 <b>Danh sách sản phẩm</b>
               </a>

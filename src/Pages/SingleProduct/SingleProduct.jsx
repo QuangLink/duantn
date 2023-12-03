@@ -59,7 +59,7 @@ const postSingleData = async (data) => {
   );
 
   if (existingProductIndex !== -1) {
-    cartData[userID][existingProductIndex].quantity += 1;
+    throw new Error("Product already exists in the cart");
   } else {
     cartData[userID].push(productData);
   }
@@ -90,7 +90,8 @@ export const postSingleDataWish = async (data) => {
       window.location.href = "/wishlist";
       return response.data;
     } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+      console.log(error);
+      throw error;
     }
   }
 };
@@ -148,14 +149,25 @@ const SingleProduct = (props) => {
       })
       .catch((error) => {
         console.error("Error handling post:", error);
-        // Handle the error as needed, e.g., display an error toast
-        toast({
-          title: "Lỗi",
 
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
+        // Check if the error is due to an existing product
+        if (error.message === "Product already exists in the cart") {
+          // Handle it appropriately, e.g., display a different toast
+          toast({
+            title: "Sản phẩm đã tồn tại trong giỏ",
+            status: "warning",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          // Handle other errors
+          toast({
+            title: "Lỗi",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
       });
   };
 
@@ -188,9 +200,8 @@ const SingleProduct = (props) => {
         console.error("Error handling post:", error);
         // Handle the error as needed, e.g., display an error toast
         toast({
-          title: "Lỗi",
-
-          status: "error",
+          title: "Sản phẩm đã có trong wishlist",
+          status: "warning",
           duration: 9000,
           isClosable: true,
         });
@@ -500,9 +511,16 @@ const SingleProduct = (props) => {
                             fontSize="lg"
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
-                            onClick={() => handleWish(singleDatas[0].prodID)}
+                            onClick={() =>
+                              handleWish(
+                                applyFilters()[0].prodID,
+                                applyFilters()[0].colorID,
+                                applyFilters()[0].storageID,
+                                userID,
+                              )
+                            }
                           >
-                            Mua ngay
+                            Yêu thích
                           </Button>
                         </Flex>
                         <Box

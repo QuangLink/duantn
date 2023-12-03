@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Heading, Flex, useToast } from "@chakra-ui/react";
-import { GetData } from "./MainCartPage";
+import { GetData } from "./OrderCheckout";
 import { useState } from "react";
 
 const MyCartLength = ({ item }) => {
@@ -31,7 +31,6 @@ const MyCartLength = ({ item }) => {
   return (
     <div>
       <Flex
-      
         border={"1px solid rgb(224, 224, 225)"}
         backgroundColor="rgb(255, 255, 255)"
         boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}

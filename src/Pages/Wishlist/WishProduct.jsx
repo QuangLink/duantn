@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   Flex,
   Heading,
   Image,
@@ -13,9 +14,13 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { FaHeartBroken } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
+
 const WishProduct = (props) => {
   const toast = useToast();
   const { data, handleDelete } = props;
+  const userID = Cookies.get("userID");
   const {
     prodID,
     prodName,
@@ -23,134 +28,141 @@ const WishProduct = (props) => {
     prodPrice,
     prodPriceSale,
     colorID,
+    color,
+    storage_value,
     storageID,
   } = data;
 
   const handleAdd = () => {
     let flag = false;
     const userID = Cookies.get("userID");
-   //cartID tự tăng giá trị
-   const cartID = Math.floor(Math.random() * 1000000000);
-
-   const productData = {
-     cartID,
-     userID,
-     prodID,
-     colorID,
-     storageID,
-     quantity: 1,
-   };
- 
-   const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
- 
-   if (!cartData[userID]) {
-     cartData[userID] = [];
-   }
- 
-   const existingProductIndex = cartData[userID].findIndex(
-     (product) =>
-       product.prodID === prodID &&
-       product.colorID === colorID &&
-       product.storageID === storageID,
-   );
- 
-   if (existingProductIndex !== -1) {
-     cartData[userID][existingProductIndex].quantity += 1;
-   } else {
-     cartData[userID].push(productData);
-   }
-   sessionStorage.setItem("cart", JSON.stringify(cartData));
-    toast({
-      title: "Product Added.",
-      description: `Added to cart`,
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-
+    axios
+      .get(`https://duantn-backend.onrender.com/wishlist/${userID}`)
+      .then((res) => {
+        res.data.map((i) => {
+          if (i.prodID === data.prodID) {
+            flag = true;
+          }
+        });
+        if (flag) {
+          toast({
+            title: "Sản phẩm đang trong giỏ hàng",
+            description: `${prodName} hiện đã trong giỏ hàng`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          const newData = {
+            userID: userID,
+            prodID: prodID,
+            colorID: colorID,
+            storageID: storageID,
+          };
+          axios
+            .post("https://duantn-backend.onrender.com/cart", newData)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+          toast({
+            title: "Đơn hàng đã được thêm vào giỏ hàng",
+            description: `${prodName} thêm vào giỏ hàng thành công`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
-    
-      <Box>
-        <Image src={prodImg} alt={prodName} p="5" h="200" _hover={{ p: "0" }} />
-        <Box
-          h="10"
-          w="100%"
-          color="blue.700"
-          lineHeight="120%"
-          marginBottom="3"
-          textOverflow="ellipsis"
-          overflow="hidden"
-          _hover={{ color: "red" }}
-        >
-          {prodName}
-        </Box>
-        <Flex
-          w="75%"
-          justifyContent="space-between"
-          alignItems="center"
-          marginBottom="2"
-        >
-          <Heading as="h3" size="xs" color="red">
-            {prodPrice
-              ? `${prodPrice.toLocaleString("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                })}`
-              : ""}
+    <Box>
+      <Center>
+        <Image
+          src={prodImg}
+          alt={prodName}
+          p="5"
+          justifyItems="center"
+          w={["65%", "80%", "auto"]}
+          h={["65%", "80%", "180px"]}
+          objectFit="cover"
+          transition="transform 0.3s ease-in-out"
+          _hover={{ transform: "translateY(-10px)" }}
+        />
+      </Center>
+      <Box
+        h="10"
+        w="100%"
+        fontFamily="Arial"
+        color="#424245"
+        lineHeight="120%"
+        marginBottom="3"
+        textOverflow="ellipsis"
+        overflow="hidden"
+        _hover={{ color: "red" }}
+        className="box_1"
+        fontSize={{ base: "15px", md: "20px", lg: "17px" }}
+        fontWeight="700"
+      >
+        {prodName} {color} {storage_value}
+      </Box>
+      <Center w="100%" h="70px" marginBottom="2">
+        <Box>
+          <Heading
+            as="h3"
+            fontSize={{ base: "10px", md: "15px", lg: "16px" }}
+            color="red"
+            fontWeight="650"
+          >
+            Giá mới:{" "}
+            {prodPrice &&
+              prodPrice.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
           </Heading>
           <Text
-            fontSize="sm"
+            fontSize={{ base: "10px", md: "15px", lg: "16px" }}
+            mt={2}
             fontWeight="bold"
             color="blackAlpha.600"
             textDecoration="line-through"
           >
-            {prodPriceSale
-              ? `${prodPriceSale.toLocaleString("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                })}`
-              : ""}
+            Giá gốc:{" "}
+            {prodPriceSale &&
+              prodPriceSale.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
           </Text>
-        </Flex>
-        <Badge
-          borderRadius="full"
-          px="2"
-          border="1px solid green"
-          color="green"
-          fontSize="xs"
-          marginBottom="10"
+        </Box>
+      </Center>
+      <Flex
+        w="100%"
+        justifyContent="space-around"
+        borderTop="1px solid rgb(202, 201, 201)"
+      >
+        <Button
+          w=""
+          borderRadius="0"
+          color="gray"
+          bg="white"
+          _hover={{ color: "red", fontWeight: "bold" }}
+          onClick={() => handleDelete(userID, prodID)}
         >
-          Giảm giá còn khả dụng
-        </Badge>
-        <Flex>
-          <Button
-            w="125%"
-            marginLeft="-6"
-            borderRadius="0"
-            borderTop="1px solid rgb(202, 201, 201)"
-            color="gray"
-            bg="white"
-            _hover={{ color: "red", fontWeight: "bold" }}
-            onClick={() => handleDelete(prodID)}
-          >
-            Xóa
-          </Button>
-          <Button
-            w="125%"
-            marginLeft="-6"
-            borderRadius="0"
-            borderTop="1px solid rgb(202, 201, 201)"
-            color="gray"
-            bg="white"
-            _hover={{ color: "red", fontWeight: "bold" }}
-            onClick={handleAdd}
-          >
-            Thêm vào giỏ
-          </Button>
-        </Flex>
-      </Box>
+          <FaHeartBroken fontSize="25px" />
+        </Button>
+        <Button
+          borderRadius="0"
+          color="gray"
+          bg="white"
+          _hover={{ color: "green", fontWeight: "bold" }}
+          onClick={handleAdd}
+        >
+          <FaCartPlus fontSize="25px" />
+        </Button>
+      </Flex>
+    </Box>
   );
 };
 
