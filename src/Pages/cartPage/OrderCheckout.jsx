@@ -9,11 +9,8 @@ import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
 import "./cartstyle.css";
-
 import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
-
 import "react-slideshow-image/dist/styles.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import Address from "./Address";
 export const GetData = async () => {
   try {
@@ -24,12 +21,10 @@ export const GetData = async () => {
     return err;
   }
 };
-
-const MainCartPage = () => {
+const CheckoutPage = () => {
   const dispatch = useDispatch();
   const { loading, data, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
-
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
@@ -43,7 +38,6 @@ const MainCartPage = () => {
       return err;
     }
   };
-
   const handleApply = () => {
     if (val === "DUANTN" || val === "JAGUARS") {
       dispatch({ type: "code", payload: val });
@@ -67,11 +61,9 @@ const MainCartPage = () => {
       });
     }
   };
-
   useEffect(() => {
     dispatch(getData());
   }, [change]);
-
   return (
     <div>
       <Flex
@@ -192,5 +184,4 @@ const MainCartPage = () => {
     </div>
   );
 };
-
-export default MainCartPage;
+export default CheckoutPage;

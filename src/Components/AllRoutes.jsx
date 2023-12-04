@@ -14,7 +14,6 @@ import ProductList from "../testlist";
 import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
-import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
 import Cart from "../Pages/cartPage/Cart";
 import Success from "../Pages/checkout/success";
@@ -26,7 +25,6 @@ import Menu from "../Admin/Components/Layout/components/Menu";
 import Baocaodoanhthu from "../Admin/Components/Pages/Quanly/Baocaodoanhthu";
 import Themsanpham from "../Admin/Components/Pages/Task/Themsanpham";
 import ChangePass from "../Pages/Profile/ChangePass";
-import Navbar from "./Navbar";
 import Verified from "../Pages/Login/Verified";
 import Forgot from "../Pages/Login/Forgot";
 import Resetpass from "../Pages/Login/Resetpass";
@@ -72,7 +70,6 @@ const AllRoutes = () => {
         <Route path="/verify" element={<Verified />}></Route>
         <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
-        <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/duantn" element={<Home />}></Route>
         <Route

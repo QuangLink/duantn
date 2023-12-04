@@ -37,6 +37,7 @@ import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
 import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import uuid from "react-uuid";
 
 const Address = () => {
   const username = Cookies.get("username");
@@ -206,7 +207,7 @@ const Address = () => {
     }
 
     return addressData.map((address, index) => (
-      <Flex key={index} w="90%">
+      <Flex key={uuid()} w="90%">
         <Text mt="5" fontSize="15px" fontWeight="700">
           {address.firstname} {address.lastname}
         </Text>
@@ -265,7 +266,7 @@ const Address = () => {
                       >
                         <option value="">Chọn tỉnh / thành phố</option>
                         {provinces.map((province) => (
-                          <option key={province.code} value={province.name}>
+                          <option key={uuid()} value={province.name}>
                             {province.name}
                           </option>
                         ))}
@@ -280,7 +281,7 @@ const Address = () => {
                         <option value="">Chọn quận / huyện</option>
                         {districts.map((district) => (
                           <option
-                            key={district.code}
+                            key={uuid()}
                             value={district.name}
                             data-code={district.code} // Lưu trữ code trong một thuộc tính tùy chỉnh
                           >

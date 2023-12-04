@@ -8,6 +8,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import uuid from "react-uuid";
 
 export default function Thembienthe() {
   const [products, setProducts] = useState([]);
@@ -183,7 +184,7 @@ export default function Thembienthe() {
                       defaultValue={selectedProduct}
                     >
                       {filteredProducts.map((item) => (
-                        <option key={item.prodID} value={item.prodID}>
+                        <option key={uuid()} value={item.prodID}>
                           {item.prodName}
                         </option>
                       ))}
@@ -200,7 +201,7 @@ export default function Thembienthe() {
                       defaultValue={selectedColor}
                     >
                       {color.map((item) => (
-                        <option key={item.colorID} value={item.colorID}>
+                        <option key={uuid()} value={item.colorID}>
                           {item.color}
                         </option>
                       ))}
@@ -217,7 +218,7 @@ export default function Thembienthe() {
                       defaultValue={selectedStorage}
                     >
                       {storage.map((item) => (
-                        <option key={item.storageID} value={item.storageID}>
+                        <option key={uuid()} value={item.storageID}>
                           {item.storage_value}
                         </option>
                       ))}

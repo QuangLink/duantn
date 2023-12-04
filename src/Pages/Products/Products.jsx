@@ -4,7 +4,6 @@ import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { BannersCenter, PrApplePhone, PrSale } from "../Home/CardDetails";
-import HotProduct from "./HotProduct";
 import Product from "./Product";
 import ProductFilter from "./ProductFilter";
 import SlideProuct from "./SlideProduct";
@@ -14,14 +13,11 @@ const Products = ({ typeOfProduct }) => {
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(false);
   const [typeStorePhone, setTypeStorePhone] = useState("");
-
-  const [visibleProducts, setVisibleProducts] = useState(12); // Initial number of products to display
+  const [visibleProducts, setVisibleProducts] = useState(12);
   const error = useSelector((store) => store.product.error);
-
   useEffect(() => {
     onGetData();
   }, [typeOfProduct]);
-
   const onGetData = async () => {
     setFilter("all");
     setLoading(true);
@@ -44,18 +40,15 @@ const Products = ({ typeOfProduct }) => {
       setLoading(false);
     }
   };
-
   const handleFilterChange = (event) => {
     const selectedFilter = event?.target?.value;
     setFilter(selectedFilter);
     console.log(selectedFilter);
   };
-
   const onTypeChangeStore = (event) => {
     const selectedFilter = event?.target?.value;
     setTypeStorePhone(selectedFilter);
   };
-
   const listData = () => {
     // type: ""/"256GB" /"128gb"
 
@@ -70,7 +63,6 @@ const Products = ({ typeOfProduct }) => {
         return filteredProducts;
     }
   };
-
   const DataFilter = () => {
     if (typeOfProduct === "phone") {
       switch (typeStorePhone) {
@@ -90,11 +82,9 @@ const Products = ({ typeOfProduct }) => {
       return listData();
     }
   };
-
   const loadMore = () => {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
   };
-
   if (error) {
     return (
       <Heading
@@ -108,7 +98,6 @@ const Products = ({ typeOfProduct }) => {
       </Heading>
     );
   }
-
   return (
     <Box p="5">
       <Box>
@@ -185,5 +174,4 @@ const Products = ({ typeOfProduct }) => {
     </Box>
   );
 };
-
 export default Products;

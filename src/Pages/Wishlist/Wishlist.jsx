@@ -19,15 +19,8 @@ import { logout } from "../../Redux/Auth/auth.action";
 import { getProducts } from "../../Redux/Wishlist/products.action";
 import WishProduct from "./WishProduct";
 import Cookies from "js-cookie";
-const getData = async (typeOfProduct) => {
-  const userID = Cookies.get("userID");
-  let response = await axios.get(
-    `https://duantn-backend.onrender.com/wishlist/${userID}`,
-  );
-  return response.data;
-};
+
 function Wishlist({ typeOfProduct }) {
-  const { username, email } = useSelector((store) => store.AuthManager);
   const productsList = useSelector((store) => store.product.data);
   const loading = useSelector((store) => store.product.loading);
   const error = useSelector((store) => store.product.error);
@@ -73,17 +66,6 @@ function Wishlist({ typeOfProduct }) {
       </Heading>
     );
   }
-  const handleLogout = () => {
-    dispatch(logout());
-    toast({
-      title: "Logout  Success.",
-      description: `We will miss you 😭`,
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-    navigate("/login");
-  };
   return (
     <Center w="80%" m="auto">
       <Box w="100%" m="auto" p="3px">

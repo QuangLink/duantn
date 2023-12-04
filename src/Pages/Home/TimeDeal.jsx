@@ -216,6 +216,7 @@ const TimeDeal = ({ type, heading }) => {
               <SwiperSlide>
                 <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
+                    key={i.prodID}
                     className="list"
                     p="2"
                     mt="4"

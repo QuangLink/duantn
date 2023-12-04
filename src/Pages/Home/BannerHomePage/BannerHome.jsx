@@ -15,6 +15,7 @@ import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import "./styles.css";
+import uuid from "react-uuid";
 
 const BannerHome = ({ type }) => {
   const settings = {
@@ -49,7 +50,12 @@ const BannerHome = ({ type }) => {
             <Box position="relative">
               <Slider ref={sliderRef} {...settings}>
                 {type.map((i) => (
-                  <Box position="relative" style={{ height: "100%" }}>
+                  <Box
+                    Box
+                    key={uuid()}
+                    position="relative"
+                    style={{ height: "100%" }}
+                  >
                     <Image
                       src={i.image}
                       style={{

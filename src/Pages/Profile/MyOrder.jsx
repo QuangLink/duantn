@@ -46,17 +46,12 @@ const MyOrder = () => {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);
   const username = Cookies.get("username");
-
   const address = useRef({});
   const toast = useToast();
-
   const [selectedOrderCode, setSelectedOrderCode] = useState(null);
-  //change status button
-
   useEffect(() => {
     fetchProducts();
   }, []);
-
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
@@ -68,8 +63,6 @@ const MyOrder = () => {
       console.error("Error fetching products:", error);
     }
   };
-
-  //render product
   const renderProducts = () => {
     const productsByOrderCode = products.reduce((acc, product) => {
       if (!acc[product.orderCode]) {
@@ -311,7 +304,6 @@ const MyOrder = () => {
         console.error("Error deleting address:", error);
       });
   };
-
   const handleAddressSubmit = () => {
     const newAddress = {
       username: username,
@@ -366,7 +358,6 @@ const MyOrder = () => {
         });
     }
   };
-  //show address data
   const [addressData, setAddressData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
@@ -381,11 +372,9 @@ const MyOrder = () => {
   }, [username]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
-
   useEffect(() => {
     fetchData(2, setProvinces);
   }, []);
-
   const fetchData = (depth, setData, parentCode = null) => {
     axios
       .get(
@@ -398,7 +387,6 @@ const MyOrder = () => {
         console.log(error);
       });
   };
-
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const handleDistrictChange = (e) => {
@@ -406,7 +394,6 @@ const MyOrder = () => {
     const selectedDistrictData = districts.find(
       (district) => district.name === districtName,
     );
-
     setSelectedDistrict(selectedDistrictData || {});
   };
   const renderAddressData = () => {
@@ -467,12 +454,6 @@ const MyOrder = () => {
     }
     setSelectedDistrict(""); // reset selected district when province changes
   };
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
   return (
     <Box
       display="flex"

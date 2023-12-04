@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
-import { Box, Select, Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
   PrApplePhone,
   CateFeatures,
@@ -30,7 +30,7 @@ import {
 } from "./CardDetails";
 import BannerHome from "./BannerHomePage/BannerHome";
 import Danhmuc from "./DanhMuc/Danhmuc";
-import GridLoader from "react-spinners/ClipLoader";
+
 import ItemCardTest2 from "./SmartWatchSlider";
 import Loader from "./Loader";
 import BlogHome from "./Blog";
@@ -38,7 +38,6 @@ const ItemList = lazy(() => import("./ItemList"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
 const ItemCardTest = lazy(() => import("./DynamicSlider"));
-
 const Home = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
@@ -56,7 +55,6 @@ const Home = () => {
         return <ItemList type={PrPhone} heading="phone" />;
     }
   };
-
   const RenderCategoryAssessories = () => {
     switch (selectedAssessories) {
       case "Battery":
@@ -75,7 +73,6 @@ const Home = () => {
         return <ItemList type={PrBattery} heading="Battery" />;
     }
   };
-
   const loadData = async () => {
     try {
       await Promise.all([
@@ -99,9 +96,7 @@ const Home = () => {
       setError(error);
     }
   };
-
   useEffect(() => {
-    // Load data for each product category before rendering the components.
     loadData();
   }, []);
 
@@ -220,5 +215,4 @@ const Home = () => {
     </Box>
   );
 };
-
 export default Home;

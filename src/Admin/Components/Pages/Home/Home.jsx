@@ -89,15 +89,11 @@ const Dashboard = () => {
     fetchApiUsers();
   }, []);
   const renderTotalPay = () => {
-    // Create a Map to store totalPay for each unique date
     const totalPayMap = new Map();
-
-    // Sort the orders by date in ascending order
     const sortedOrders = orders.sort(
       (a, b) => new Date(a.orderDate) - new Date(b.orderDate),
     );
 
-    // Populate the Map with data
     sortedOrders.forEach((order) => {
       const orderDate = new Date(order.orderDate).toISOString().split("T")[0];
       if (totalPayMap.has(orderDate)) {
@@ -107,9 +103,6 @@ const Dashboard = () => {
       }
     });
 
-    // Cộng tất cả totalPay lại để ra tổng doanh thu lưu vào totalPayAll
-
-    // Render the table
     return (
       <tbody>
         {Array.from(totalPayMap.entries()).map(([date, totalPay]) => (

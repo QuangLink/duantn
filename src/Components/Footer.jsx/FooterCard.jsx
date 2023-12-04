@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Icon } from '@chakra-ui/react'
 import { CiMoneyCheck1, CiMoneyBill } from "react-icons/ci";
 import { GoClock } from "react-icons/go";
+import uuid from "react-uuid";
 export const FooterCard1 = ({ type, heading }) => {
   return (
     <Box cursor="pointer">
@@ -15,7 +16,7 @@ export const FooterCard1 = ({ type, heading }) => {
       </Text>
       <Box>
         {type.map((i, index) => (
-          <Box key={index}>
+          <Box key={uuid()}>
             <Link to={`/${i.pordType}`}>
               <Text fontSize="15px">{i.labels}</Text>
             </Link>
@@ -34,7 +35,7 @@ export const FooterCard2 = ({ type, heading }) => {
       </Text>
       <Box>
         {type.map((i, index) => (
-          <Box key={index}>
+          <Box key={uuid()}>
             <Text fontSize="15px">{i.labels}</Text>
           </Box>
         ))}
@@ -50,7 +51,7 @@ export const FooterCard3 = ({ type, heading }) => {
       </Text>
       <Box>
         {type.map((i, index) => (
-          <Box key={index}>
+          <Box key={uuid()}>
             <Text fontSize="15px">{i.labels}</Text>
           </Box>
         ))}
@@ -67,7 +68,7 @@ export const FooterCard4 = ({ type, heading }) => {
       </Text>
       <Box>
         {type.map((i, index) => (
-          <Box key={index}>
+          <Box key={uuid()}>
             <Text fontSize="15px">{i.labels}</Text>
           </Box>
         ))}

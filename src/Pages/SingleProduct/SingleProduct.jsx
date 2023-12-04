@@ -22,20 +22,15 @@ import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter } from "./Filter";
-
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
-//add singleData to cart
-
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
-
   const prodID = data.prodID;
   const colorID = data.colorID;
   const storageID = data.storageID;
   //cartID tự tăng giá trị
   const cartID = Math.floor(Math.random() * 1000000000);
-
   const productData = {
     cartID,
     userID,
@@ -44,20 +39,16 @@ const postSingleData = async (data) => {
     storageID,
     quantity: 1,
   };
-
   const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
-
   if (!cartData[userID]) {
     cartData[userID] = [];
   }
-
   const existingProductIndex = cartData[userID].findIndex(
     (product) =>
       product.prodID === prodID &&
       product.colorID === colorID &&
       product.storageID === storageID,
   );
-
   if (existingProductIndex !== -1) {
     throw new Error("Product already exists in the cart");
   } else {
@@ -65,7 +56,6 @@ const postSingleData = async (data) => {
   }
   sessionStorage.setItem("cart", JSON.stringify(cartData));
 };
-
 export const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
@@ -95,7 +85,6 @@ export const postSingleDataWish = async (data) => {
     }
   }
 };
-
 const SingleProduct = (props) => {
   const { userID } = useSelector((store) => store.AuthManager);
   const toast = useToast();

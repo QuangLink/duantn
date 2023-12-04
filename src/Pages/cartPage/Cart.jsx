@@ -1,7 +1,6 @@
 import React from "react";
 import MyCartLength from "./MyCartLength";
 import CartItem from "./CartItem";
-import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
@@ -21,17 +20,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import "react-slideshow-image/dist/styles.css";
 import { WarningTwoIcon } from "@chakra-ui/icons";
-
 const Cart = () => {
   const userID = Cookies.get("userID");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
-
   const [val, setVal] = useState("");
   const toast = useToast();
-  const [change, setChange] = useState(false);
   const DeleteRequest = (userID, prodID, colorID, storageID) => {
     // Get the current cart data from session storage
     const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
@@ -75,8 +71,6 @@ const Cart = () => {
       });
     }
   };
-  //sau khi DeleteRequest thì gọi lại hàm getData để cập nhật lại giỏ hàng
-
   useEffect(() => {
     dispatch(getData());
   }, []);

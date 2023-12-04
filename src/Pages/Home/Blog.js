@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import {
-    Box,
-    Flex,
-    Text,
-    Image,
-    Square,
-    Badge,
-    Heading,
-    useToast,
-    Center,
-    Button,
+  Box,
+  Flex,
+  Text,
+  Image,
+  Square,
+  Badge,
+  Heading,
+  useToast,
+  Center,
+  Button,
 } from "@chakra-ui/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,46 +23,42 @@ import uuid from "react-uuid";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import "./stylehome.css";
 
-
-
-
-
 const BlogHome = ({ type, heading }) => {
-    const [data, setData] = useState([]);
-    const fetchData = async () => {
-        try {
-            const response = await fetch("https://duantn-backend.onrender.com/blog");
-            const result = await response.json();
-            setData(result);
-            console.log(result);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    useEffect(() => {
-        fetchData();
-    }, []);
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://duantn-backend.onrender.com/blog");
+      const result = await response.json();
+      setData(result);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
-    return (
-        <Center>
-            <Box w={"80%"} mt={10} mb={10} >
-                <Flex justifyContent={"space-between"} mb={5}>
-                    <Box>
-                        <Text
-                            fontSize="2xl"
-                            width=""
-                            fontWeight="700"
-                            textColor="black"
-                            className="headingHome"
-                        >
-                            {heading}
-                        </Text>
-                    </Box>
-                    <Box>
-                        {/* <Button
+  console.log("====================================");
+  console.log(data);
+  console.log("====================================");
+  return (
+    <Center>
+      <Box w={"80%"} mt={10} mb={10}>
+        <Flex justifyContent={"space-between"} mb={5}>
+          <Box>
+            <Text
+              fontSize="2xl"
+              width=""
+              fontWeight="700"
+              textColor="black"
+              className="headingHome"
+            >
+              {heading}
+            </Text>
+          </Box>
+          <Box>
+            {/* <Button
                             border="1px"
                             mr={2}
                             borderRadius={20}
@@ -73,70 +69,81 @@ const BlogHome = ({ type, heading }) => {
                         <Button border="1px" borderRadius={20} className="custom-next">
                             <ArrowForwardIcon fontSize={30} />
                         </Button> */}
-                    </Box>
-                </Flex>
+          </Box>
+        </Flex>
 
-                <Swiper
-                    modules={[Navigation, Autoplay]}
-                    loop={true}
-                    autoplay={{ delay: 3000 }}
-                    speed={1000}
-                    effect="fade" // Hiệu ứng chuyển slide
-                    // navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
-                    // navigation
-                    onSlideChange
-                    breakpoints={{
-                        0: {
-                            slidesPerView: 1,
-                            spaceBetween: 5,
-                        },
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 5,
-                        },
-                        1024: {
-                            slidesPerView: 3,
-                            spaceBetween: 5,
-                        },
-                        1280: {
-                            slidesPerView: 4,
-                            spaceBetween: 6,
-                        },
-                        1366: {
-                            slidesPerView: 3,
-                            spaceBetween: 3,
-                        },
-                    }}
-                >
-                    {data.map((i) => (
-                        <Box Box key={uuid()}>
-                            <SwiperSlide>
-                                <Link to={`/blog/${i.blogID}`}>
-                                    <Center>
-                                        <Box w={"100%"} p="2" bgColor={'white'} m={1} borderRadius={15}>
-                                            <Image
-                                                borderRadius={15}
-                                                src={`${i.thumbnail}`}
-                                                w={'100%'}
-                                                maxH={250}
-                                            />
-                                            <Center>
-                                                <Box>
-                                                    <Text mt={5} fontWeight={500} fontSize={18} color={"black"}>
-                                                        {i.title}
-                                                    </Text>
-                                                </Box>
-                                            </Center>
-                                        </Box>
-                                    </Center>
-                                </Link>
-                            </SwiperSlide>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          loop={true}
+          autoplay={{ delay: 3000 }}
+          speed={1000}
+          effect="fade" // Hiệu ứng chuyển slide
+          // navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
+          // navigation
+          onSlideChange
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 5,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 5,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 5,
+            },
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 6,
+            },
+            1366: {
+              slidesPerView: 3,
+              spaceBetween: 3,
+            },
+          }}
+        >
+          {data.map((i) => (
+            <Box Box key={uuid()}>
+              <SwiperSlide>
+                <Link to={`/blog/${i.blogID}`}>
+                  <Center>
+                    <Box
+                      w={"100%"}
+                      p="2"
+                      bgColor={"white"}
+                      m={1}
+                      borderRadius={15}
+                    >
+                      <Image
+                        borderRadius={15}
+                        src={`${i.thumbnail}`}
+                        w={"100%"}
+                        maxH={250}
+                      />
+                      <Center>
+                        <Box>
+                          <Text
+                            mt={5}
+                            fontWeight={500}
+                            fontSize={18}
+                            color={"black"}
+                          >
+                            {i.title}
+                          </Text>
                         </Box>
-                    ))}
-                </Swiper>
+                      </Center>
+                    </Box>
+                  </Center>
+                </Link>
+              </SwiperSlide>
             </Box>
-        </Center>
-    );
+          ))}
+        </Swiper>
+      </Box>
+    </Center>
+  );
 };
 
 export default BlogHome;

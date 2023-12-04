@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import uuid from "react-uuid";
 
 const Quanlysanpham = () => {
   const navigate = useNavigate();
@@ -111,7 +112,6 @@ const Quanlysanpham = () => {
             />
           )}
         </td>
-
         <td>{product.QTY}</td>
         <td>
           {product.QTY > 10 ? (
@@ -277,7 +277,7 @@ const Quanlysanpham = () => {
                         >
                           <option value="all">Loại</option>
                           {prodTypes.map((prodType) => (
-                            <option key={prodType} value={prodType}>
+                            <option key={uuid()} value={prodType}>
                               {prodType}
                             </option>
                           ))}
@@ -293,7 +293,7 @@ const Quanlysanpham = () => {
                         >
                           <option value="all">Hãng</option>
                           {categories.map((category) => (
-                            <option key={category} value={category}>
+                            <option key={uuid()} value={category}>
                               {category}
                             </option>
                           ))}
@@ -307,7 +307,7 @@ const Quanlysanpham = () => {
                 </table>
                 <ul className="pagination">
                   {pageNumbers.map((number) => (
-                    <li key={number} className="page-item">
+                    <li key={uuid()} className="page-item">
                       <a
                         onClick={() => handlePageChange(number)}
                         href="#"
