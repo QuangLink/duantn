@@ -33,20 +33,17 @@ const ChangePass = () => {
 
     // Your fetch logic here
     // Ensure to replace the placeholder URL with your actual backend endpoint
-    const response = await fetch(
-      "https://duantn-backend.onrender.com/users/password",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userID,
-          oldPassword: currentPassword,
-          newPassword,
-        }),
+    const response = await fetch("http://localhost:9000/users/password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        userID,
+        oldPassword: currentPassword,
+        newPassword,
+      }),
+    });
 
     const data = await response.json();
 

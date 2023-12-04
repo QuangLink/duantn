@@ -28,9 +28,7 @@ const PrDeal = ({ type }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
-      );
+      let responce = await axios.get(`http://localhost:9000/products`);
 
       if (responce.data) {
         setFilteredProducts(responce.data || []);

@@ -24,42 +24,47 @@ import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter } from "./Filter";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
+
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
-  const prodID = data.prodID;
-  const colorID = data.colorID;
-  const storageID = data.storageID;
-  //cartID tự tăng giá trị
-  const cartID = Math.floor(Math.random() * 1000000000);
-  const productData = {
-    cartID,
-    userID,
-    prodID,
-    colorID,
-    storageID,
-    quantity: 1,
-  };
-  const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
-  if (!cartData[userID]) {
-    cartData[userID] = [];
-  }
-  const existingProductIndex = cartData[userID].findIndex(
-    (product) =>
-      product.prodID === prodID &&
-      product.colorID === colorID &&
-      product.storageID === storageID,
-  );
-  if (existingProductIndex !== -1) {
-    throw new Error("Product already exists in the cart");
+  if (!userID) {
+    throw new Error("Chưa đăng nhập");
   } else {
-    cartData[userID].push(productData);
+    const prodID = data.prodID;
+    const colorID = data.colorID;
+    const storageID = data.storageID;
+    //cartID tự tăng giá trị
+    const cartID = Math.floor(Math.random() * 1000000000);
+    const productData = {
+      cartID,
+      userID,
+      prodID,
+      colorID,
+      storageID,
+      quantity: 1,
+    };
+    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+    if (!cartData[userID]) {
+      cartData[userID] = [];
+    }
+    const existingProductIndex = cartData[userID].findIndex(
+      (product) =>
+        product.prodID === prodID &&
+        product.colorID === colorID &&
+        product.storageID === storageID,
+    );
+    if (existingProductIndex !== -1) {
+      throw new Error("Product already exists in the cart");
+    } else {
+      cartData[userID].push(productData);
+    }
+    sessionStorage.setItem("cart", JSON.stringify(cartData));
   }
-  sessionStorage.setItem("cart", JSON.stringify(cartData));
 };
 export const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
-    window.location.href = "/login";
+    throw new Error("Chưa đăng nhập");
   } else {
     try {
       const prodID = data.prodID;
@@ -74,7 +79,7 @@ export const postSingleDataWish = async (data) => {
       };
 
       let response = await axios.post(
-        `https://duantn-backend.onrender.com/wishlist/`,
+        `http://localhost:9000/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";
@@ -148,6 +153,14 @@ const SingleProduct = (props) => {
             duration: 9000,
             isClosable: true,
           });
+        } else if (error.message === "Chưa đăng nhập") {
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          navigate("/login");
         } else {
           // Handle other errors
           toast({
@@ -188,12 +201,15 @@ const SingleProduct = (props) => {
       .catch((error) => {
         console.error("Error handling post:", error);
         // Handle the error as needed, e.g., display an error toast
-        toast({
-          title: "Sản phẩm đã có trong wishlist",
-          status: "warning",
-          duration: 9000,
-          isClosable: true,
-        });
+        if ((error.message = "Chưa đăng nhập")) {
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          navigate("/login");
+        }
       });
   };
 

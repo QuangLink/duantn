@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+const apiUrlBase = "http://localhost:9000/category/";
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",

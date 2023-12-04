@@ -16,29 +16,6 @@ import RatingBar from "./RatingBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
-import Cookies from "js-cookie";
-const postSingleDataWish = async (data) => {
-  try {
-    const userID = Cookies.get("userID");
-
-    const postData = {
-      userID,
-      prodID: data.prodID,
-      colorID: data.colorID,
-      storageID: data.storageID,
-    };
-    let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist/`,
-      postData,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
-  }
-};
 
 // const singleData = useSelector((store) => store.singleProduct.data);
 
@@ -53,22 +30,7 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-
-  var navigate = useNavigate();
-  const toast = useToast();
-  const handleWish = (data) => {
-    console.log(data);
-
-    postSingleDataWish(data).then((res) => {
-      toast({
-        title: "Added Item Successfully to WishList",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      });
-    });
-  };
+  console.log(data.prodID);
 
   return (
     <div className="div_1">
@@ -189,9 +151,6 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(data)}>
-        <BsSuitHeart /> Yêu Thích
-      </Button>
     </div>
   );
 };

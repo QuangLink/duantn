@@ -3,7 +3,7 @@ export default function BlogList() {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await fetch("https://duantn-backend.onrender.com/blog");
+      const response = await fetch("http://localhost:9000/blog");
       const result = await response.json();
       setData(result);
       console.log(result);

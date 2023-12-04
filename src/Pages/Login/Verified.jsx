@@ -14,9 +14,7 @@ const Verified = () => {
     const token = queryParams.get("token");
 
     axios
-      .get(
-        `https://duantn-backend.onrender.com/users/verify?email=${email}&token=${token}`,
-      )
+      .get(`http://localhost:9000/users/verify?email=${email}&token=${token}`)
       .then((response) => {
         setMessage(response.data.message);
       })

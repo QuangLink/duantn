@@ -28,9 +28,7 @@ const Slider = ({ type }) => {
 
   const onGetData = async () => {
     try {
-      let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/apple`,
-      );
+      let responce = await axios.get(`http://localhost:9000/category/apple`);
 
       if (responce.data) {
         setFilteredProducts(responce.data || []);
