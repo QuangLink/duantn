@@ -96,18 +96,29 @@ const TimeDeal = ({ type, heading }) => {
       textAlign="center"
       backgroundColor="black"
       borderRadius="15px"
-      //chuyển màu background sang
     >
       <Heading
-        backgroundImage='url("https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif")'
         h="auto"
-        textAlign="left"
+        textAlign="center"
         display="flex"
         w="100%"
         borderRadius="15px"
       >
-        <Box mt="6" display="flex" mb="1" ml="6">
-          <Box mr="4">
+        <Box width="100%">
+          <Image
+            borderRadius="15px"
+            src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif"
+            width="100%"
+          />
+        </Box>
+        <Box
+          mt="6"
+          display="flex"
+          mb="1"
+          ml="6"
+          style={{ position: "absolute" }}
+        >
+          <Box mr="4" borderRadius="20px">
             {" "}
             <img
               width="40px"
@@ -164,38 +175,6 @@ const TimeDeal = ({ type, heading }) => {
             </Text>
           </Text>
         </Box>
-        {/* <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Đang diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #E6CB47"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box>
-        <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Sắp diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #ffe252"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box> */}
       </Heading>
 
       <Box mt="1" bachgroundColor="white">
@@ -204,7 +183,7 @@ const TimeDeal = ({ type, heading }) => {
           grid={{ rows: 2, fill: "row" }}
           spaceBetween={30}
           autoplay={{
-            delay: 2500,
+            delay: 100000,
             disableOnInteraction: false,
           }}
           modules={[Grid, Pagination, Autoplay]}
@@ -237,6 +216,7 @@ const TimeDeal = ({ type, heading }) => {
               <SwiperSlide>
                 <Link to={`/${i.prodType}/${i.prodID}`}>
                   <Box
+                    key={i.prodID}
                     className="list"
                     p="2"
                     mt="4"
@@ -277,10 +257,10 @@ const TimeDeal = ({ type, heading }) => {
                       >
                         {i.prodName}
                       </Text>
-                      <Box mt="2.5" m="10px 0 30px 0">
+                      <Box mt="2.5" m="10px 10px 10px 10px">
                         <Flex>
                           <Square>
-                            <Text color="gray.600" fontSize="15px">
+                            <Text color="gray.600" fontSize="15px" m="auto">
                               Giá mới:{" "}
                             </Text>
                           </Square>
@@ -289,6 +269,7 @@ const TimeDeal = ({ type, heading }) => {
                               textAlign="center"
                               fontWeight="650"
                               fontSize="18px"
+                              m="auto"
                               ml="1"
                               color="red"
                               _hover={{ color: "red" }}
@@ -304,7 +285,7 @@ const TimeDeal = ({ type, heading }) => {
                         {i.prodSale !== 0 && (
                           <>
                             <Flex>
-                              <Text color="gray.600" fontSize="14px">
+                              <Text color="gray.600" fontSize="14px" mb="2%">
                                 Giá gốc:{" "}
                               </Text>
                               {"  "}
@@ -312,7 +293,7 @@ const TimeDeal = ({ type, heading }) => {
                                 as="s"
                                 color="gray.600"
                                 fontSize="14px"
-                                ml="1"
+                                ml="2"
                               >
                                 {i.prodPriceSale &&
                                   i.prodPriceSale.toLocaleString("vi-VN", {
@@ -360,15 +341,15 @@ const TimeDeal = ({ type, heading }) => {
                           backgroundColor="yellow"
                           borderRadius="15px"
                         >
-                          <Text>
+                          <Box ml="3%">
                             <img
                               width="22px"
-                              height="22px"
+                              height="auto"
                               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"
                             />
-                          </Text>
-                          <Box ml="2">
-                            <Text>
+                          </Box>
+                          <Box m="1% 3%">
+                            <Text m="auto">
                               <b>Còn {i.QTY}/100 suất</b>
                             </Text>
                           </Box>

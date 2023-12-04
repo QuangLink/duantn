@@ -22,52 +22,46 @@ import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter } from "./Filter";
-
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
-//add singleData to cart
-
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
-  if (!userID) {
-    window.location.href = "/login";
-  } else {
-    try {
-      // Lấy userID từ sessionStorage
-
-      // Ensure data.prodID is a valid value, not [object Object]
-      const prodID = data.prodID;
-      const colorID = data.colorID;
-      const storageID = data.storageID;
-      // Tạo dữ liệu gửi đi kết hợp với userID và prodID
-      const postData = {
-        prodID,
-        colorID,
-        storageID,
-        userID,
-      };
-
-      let response = await axios.post(
-        `https://duantn-backend.onrender.com/cart/`,
-        postData,
-      );
-      window.location.href = "/cart";
-      return response.data;
-    } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
-    }
+  const prodID = data.prodID;
+  const colorID = data.colorID;
+  const storageID = data.storageID;
+  //cartID tự tăng giá trị
+  const cartID = Math.floor(Math.random() * 1000000000);
+  const productData = {
+    cartID,
+    userID,
+    prodID,
+    colorID,
+    storageID,
+    quantity: 1,
+  };
+  const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+  if (!cartData[userID]) {
+    cartData[userID] = [];
   }
+  const existingProductIndex = cartData[userID].findIndex(
+    (product) =>
+      product.prodID === prodID &&
+      product.colorID === colorID &&
+      product.storageID === storageID,
+  );
+  if (existingProductIndex !== -1) {
+    throw new Error("Product already exists in the cart");
+  } else {
+    cartData[userID].push(productData);
+  }
+  sessionStorage.setItem("cart", JSON.stringify(cartData));
 };
-
 export const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
     window.location.href = "/login";
   } else {
     try {
-      // Lấy userID từ sessionStorage
-
-      // Ensure data.prodID is a valid value, not [object Object]
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
@@ -86,12 +80,13 @@ export const postSingleDataWish = async (data) => {
       window.location.href = "/wishlist";
       return response.data;
     } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+      console.log(error);
+      throw error;
     }
   }
 };
-
 const SingleProduct = (props) => {
+  const { userID } = useSelector((store) => store.AuthManager);
   const toast = useToast();
   const { typeOfProduct } = props;
   const [filters, setFilters] = useState({
@@ -143,14 +138,25 @@ const SingleProduct = (props) => {
       })
       .catch((error) => {
         console.error("Error handling post:", error);
-        // Handle the error as needed, e.g., display an error toast
-        toast({
-          title: "Lỗi",
 
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
+        // Check if the error is due to an existing product
+        if (error.message === "Product already exists in the cart") {
+          // Handle it appropriately, e.g., display a different toast
+          toast({
+            title: "Sản phẩm đã tồn tại trong giỏ",
+            status: "warning",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          // Handle other errors
+          toast({
+            title: "Lỗi",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
       });
   };
 
@@ -183,9 +189,8 @@ const SingleProduct = (props) => {
         console.error("Error handling post:", error);
         // Handle the error as needed, e.g., display an error toast
         toast({
-          title: "Lỗi",
-
-          status: "error",
+          title: "Sản phẩm đã có trong wishlist",
+          status: "warning",
           duration: 9000,
           isClosable: true,
         });
@@ -208,6 +213,7 @@ const SingleProduct = (props) => {
       </Heading>
     );
   }
+
   return (
     <>
       {loading ? (
@@ -480,6 +486,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                userID,
                               )
                             }
                           >
@@ -493,9 +500,16 @@ const SingleProduct = (props) => {
                             fontSize="lg"
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
-                            onClick={() => handleWish(singleDatas[0].prodID)}
+                            onClick={() =>
+                              handleWish(
+                                applyFilters()[0].prodID,
+                                applyFilters()[0].colorID,
+                                applyFilters()[0].storageID,
+                                userID,
+                              )
+                            }
                           >
-                            Mua ngay
+                            Yêu thích
                           </Button>
                         </Flex>
                         <Box

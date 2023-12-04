@@ -22,7 +22,12 @@ import { PrApplePhone } from "../Home/CardDetails";
 import "./Productbox.css";
 import { Route } from "react-router-dom";
 
-const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChangeStore }) => {
+const ProductFilter = ({
+  typeOfProduct,
+  filter,
+  handleFilterChange,
+  onTypeChangeStore,
+}) => {
   const [type, setType] = useState(typeOfProduct);
 
   useEffect(() => {
@@ -31,152 +36,281 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
   console.log(type);
 
   const CategoryProduct = () => {
-    if (type === 'phone' || type === 'apple/phone' || type === 'xiaomi' || type === 'samsung') {
+    if (
+      type === "phone" ||
+      type === "apple/phone" ||
+      type === "xiaomi" ||
+      type === "samsung"
+    ) {
       return (
-        <MenuList bg="white">
-          <Grid className="grid-container">
-            <Box>
-              <Link href="/apple/phone" >
-                <Box className="text-btn">Apple</Box>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/xiaomi" >
-                <Box className="text-btn">Xiaomi</Box>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/samsung" >
-                <Box className="text-btn">Samsung</Box>
-              </Link>
-            </Box>
-          </Grid>
-        </MenuList>
-      )
-    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+        <Flex className="grid-container">
+          <Box>
+            <Link href="/apple/phone">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-iphone-220x48.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+          <Box>
+            <Link href="/xiaomi">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-xiaomi-220x48-5.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+          <Box>
+            <Link href="/samsung">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/samsungnew-220x48-1.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+        </Flex>
+      );
+    } else if (
+      type === "laptop" ||
+      type === "asus" ||
+      type === "acer" ||
+      type === "lenovo" ||
+      type === "hp"
+    ) {
       return (
-        <MenuList bg="white">
-          <Grid className="grid-container">
-            <Box>
-              <Link href="/asus">
-                <Box className="text-btn">Asus</Box>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/acer">
-                <Box className="text-btn">Acer</Box>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/lenovo">
-                <Box className="text-btn">Lenovo</Box>
-              </Link>
-            </Box>
-            <Box>
-              <Link href="/hp">
-                <Box className="text-btn">Hp</Box>
-              </Link>
-            </Box>
-          </Grid>
-        </MenuList>
-      )
+        <Flex className="grid-container">
+          <Box>
+            <Link href="/asus">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-asus-149x40.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+          <Box>
+            <Link href="/acer">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-acer-149x40.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+          <Box>
+            <Link href="/lenovo">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-lenovo-149x40.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+          <Box>
+            <Link href="/hp">
+              <Box className="text-btn">
+                <img
+                  width="100%"
+                  height="75px"
+                  src="https://cdn.tgdd.vn/Brand/1/logo-hp-149x40-1.png"
+                />
+              </Box>
+            </Link>
+          </Box>
+        </Flex>
+      );
     } else {
-      return (
-        <MenuList bg="white">
-          <Grid className="grid-container">
-            <Box>
-              <Link to="/apple/tablet">
-                <Box className="text-btn">Apple</Box>
-              </Link>
-            </Box>
-          </Grid>
-        </MenuList>
-      )
+      return <Box></Box>;
     }
-  }
-
+  };
 
   const CategoryProduct2 = () => {
-    if (type === 'phone' || type === 'applephone' || type === 'xiaomi' || type === 'samsung') {
+    if (
+      type === "phone" ||
+      type === "applephone" ||
+      type === "xiaomi" ||
+      type === "samsung"
+    ) {
       return (
-        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button" >Dung lượng</MenuButton>
-          <MenuList bg="white" >
-            <Grid className="grid-container" >
-              <Box>
-                <MenuItem value="128gb" onClick={onTypeChangeStore}>128GB</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem value="256gb" onClick={onTypeChangeStore}>256GB</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem value="512gb" onClick={onTypeChangeStore}>512GB</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem value="1tgb" onClick={onTypeChangeStore}>1TGB</MenuItem>
-              </Box>
-              <Box>
-                <MenuItem value="" onClick={onTypeChangeStore}>ALL</MenuItem>
-              </Box>
-            </Grid>
-          </MenuList>
-        </Menu>
-      )
-    } else if (type === 'laptop' || type === 'asus' || type === 'acer' || type === 'lenovo' || type === 'hp') {
+        <Flex
+          className="grid-container"
+          css={{ "@media (max-width: 768px)": { display: "none" } }}
+        >
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="128gb"
+              onClick={onTypeChangeStore}
+            >
+              128GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="256gb"
+              onClick={onTypeChangeStore}
+            >
+              256GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="512gb"
+              onClick={onTypeChangeStore}
+            >
+              512GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="1tgb"
+              onClick={onTypeChangeStore}
+            >
+              1TGB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value=""
+              onClick={onTypeChangeStore}
+            >
+              ALL
+            </Button>
+          </Box>
+        </Flex>
+      );
+    } else if (
+      type === "laptop" ||
+      type === "asus" ||
+      type === "acer" ||
+      type === "lenovo" ||
+      type === "hp"
+    ) {
       return (
-        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button">Ram</MenuButton>
-          <MenuList bg="white">
-            <Link to="#">
-              <Grid className="grid-container">
-                <Box>
-                  <Text className="text-btn">4G</Text>
-                </Box>
-                <Box>
-                  <Text className="text-btn">8G</Text>
-                </Box>
-                <Box>
-                  <Text className="text-btn">16G</Text>
-                </Box>
-              </Grid>
-            </Link>
-          </MenuList>
-        </Menu>
-      )
+        // <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
+        //   <MenuButton className="menu-button">Ram</MenuButton>
+        //   <MenuList bg="white">
+        //     <Flex className="grid-container">
+        //       <Box>
+        //         <MenuItem value="128gb" onClick={onTypeChangeStore}>
+        //           8GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="256gb" onClick={onTypeChangeStore}>
+        //           16GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="512gb" onClick={onTypeChangeStore}>
+        //           32GB
+        //         </MenuItem>
+        //       </Box>
+        //       <Box>
+        //         <MenuItem value="" onClick={onTypeChangeStore}>
+        //           ALL
+        //         </MenuItem>
+        //       </Box>
+        //     </Flex>
+        //   </MenuList>
+        // </Menu>
+        <Flex
+          className="grid-container"
+          css={{ "@media (max-width: 768px)": { display: "none" } }}
+        >
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="8gb"
+              onClick={onTypeChangeStore}
+            >
+              8GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="16gb"
+              onClick={onTypeChangeStore}
+            >
+              16GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="32gb"
+              onClick={onTypeChangeStore}
+            >
+              32GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value=""
+              onClick={onTypeChangeStore}
+            >
+              ALL
+            </Button>
+          </Box>
+        </Flex>
+      );
     } else {
       return (
-        <Menu css={{ "@media (max-width: 768px)": { display: "none" } }}>
-          <MenuButton className="menu-button">Dung lượng</MenuButton>
-          <MenuList bg="white">
-            <Link to="#">
-              <Grid className="grid-container">
-                <Box>
-                  <Text className="text-btn">4G</Text>
-                </Box>
-                <Box>
-                  <Text className="text-btn">8G</Text>
-                </Box>
-                <Box>
-                  <Text className="text-btn">16G</Text>
-                </Box>
-              </Grid>
-            </Link>
-          </MenuList>
-        </Menu>
-      )
+        <>
+          <Box></Box>
+        </>
+      );
     }
-  }
+  };
 
   return (
     <div className="filter_1">
       <Box
         width="80%"
         height="76px"
-        margin="0 0 3% 10%"
+        margin="0 0 0 10%"
         display="flex"
         justifyContent="space-between"
         borderRadius="3px"
-        boxShadow="rgba(0, 0, 0, 0.15) 0px 0px 2px"
         css={{
           "@media (max-width: 768px)": {
             margin: "2% 0%",
@@ -186,17 +320,30 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
           "@media (max-width: 426px)": { display: "none" },
         }}
       >
-        <Flex width="65%" >
+        <Flex width="65%">
           <Menu>
-            <MenuButton className="menu-button">Hãng</MenuButton>
             <CategoryProduct />
           </Menu>
-
-          <CategoryProduct2 />
         </Flex>
-        <Flex width="13%">
+      </Box>
+      <Box
+        width="80%"
+        height="76px"
+        margin="0 0 0% 10%"
+        display="flex"
+        justifyContent="space-between"
+        css={{
+          "@media (max-width: 768px)": {
+            margin: "2% 0%",
+            width: "100%",
+            justifyContent: "space-evenly",
+          },
+          "@media (max-width: 426px)": { display: "none" },
+        }}
+      >
+        <CategoryProduct2 />
+        <Flex width="13%" padding="15px 0px">
           <Box
-            margin="10% 0%"
             fontWeight="bold.800"
             height="px"
             fontSize="0.7rem"
@@ -212,7 +359,7 @@ const ProductFilter = ({ typeOfProduct, filter, handleFilterChange, onTypeChange
           </Box>
         </Flex>
       </Box>
-    </div >
+    </div>
   );
 };
 export default ProductFilter;

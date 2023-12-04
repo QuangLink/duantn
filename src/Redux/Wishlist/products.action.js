@@ -4,15 +4,17 @@ import {
   GET_PRODUCTS_LOADING,
   GET_PRODUCTS_SUCCESS,
 } from "./products.type";
+import Cookies from "js-cookie";
 
 // Product actions here
 export const getProducts =
   (typeOfProduct, brandOfProduct) => async (dispatch) => {
+    const userID = Cookies.get("userID");
     // console.log("in the logi func");
     dispatch({ type: GET_PRODUCTS_LOADING });
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/wishlist/26`,
+        `https://duantn-backend.onrender.com/wishlist/${userID}`,
       );
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });

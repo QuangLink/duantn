@@ -124,6 +124,7 @@ const ItemCard5 = ({ type, heading }) => {
             <Box key={uuid()}>
               <SwiperSlide>
                 <Box
+                  key={uuid()}
                   className="list"
                   p="2"
                   m={0.5}

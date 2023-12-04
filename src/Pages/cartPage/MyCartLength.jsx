@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Heading, Flex, useToast } from "@chakra-ui/react";
-import { GetData } from "./MainCartPage";
+import { GetData } from "./OrderCheckout";
 import { useState } from "react";
 
 const MyCartLength = ({ item }) => {
@@ -43,7 +43,7 @@ const MyCartLength = ({ item }) => {
       >
         <Box>
           <Heading fontWeight={600} fontSize="16px">
-          Giỏ hàng ({item} sản phẩm)
+            Giỏ hàng ({item} sản phẩm)
           </Heading>
         </Box>
         <Box>

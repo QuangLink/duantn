@@ -1,156 +1,217 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
-
-import BackToTopButton from "./BackToTopButton";
-import { Box, Select,Button } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
-  BannersCenter,
-  PrSale,
   PrApplePhone,
   CateFeatures,
   ItemDetails9,
-  PrAppleTablet,
-  PrSamsung,
-  PrXiaomi,
-  PrHp,
-  PrAsus,
-  PrLenovo,
   PrPhone,
   PrTablet,
   PrLaptop,
-  PrAcer,
+  PrKeyboard,
+  PrMouse,
+  PrCable,
+  PrBattery,
+  PrLoudSpeaker,
+  PrEarPhone,
+  PrSmartWatch,
   loadPrSale,
   loadPrApplePhone,
-  loadPrAppleTablet,
-  loadPrSamsung,
-  loadPrXiaomi,
-  loadPrHp,
-  loadPrAsus,
-  loadPrLenovo,
-  loadPrAcer,
+  loadPrKeyboard,
+  loadPrMouse,
+  loadPrCable,
+  loadPrBattery,
+  loadPrLoudSpeaker,
+  loadPrEarPhone,
   loadPrSmartWatch,
   loadPrLaptop,
   loadPrPhone,
   loadPrTablet,
-  PrSmartWatch,
   BannerHomePage,
 } from "./CardDetails";
 import BannerHome from "./BannerHomePage/BannerHome";
 import Danhmuc from "./DanhMuc/Danhmuc";
-import ItemCardTest2 from "./Test/ItemCardTest2";
+
+import ItemCardTest2 from "./SmartWatchSlider";
+import Loader from "./Loader";
+import BlogHome from "./Blog";
 const ItemList = lazy(() => import("./ItemList"));
-const ItemCard5 = lazy(() => import("./ItemCard5"));
 const ItemCard6 = lazy(() => import("./ItemCard6"));
-const ItemCard7 = lazy(() => import("./ItemCard7"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
-const PrDeal = lazy(() => import("./PrDeal"));
-const ItemCardTest = lazy(() => import("./Test/ItemCardTest"));
+const ItemCardTest = lazy(() => import("./DynamicSlider"));
 const Home = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("PrAsus");
-
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedAssessories, setSelectedAssessories] = useState();
+  const [error, setError] = useState(null);
   const RenderCategoryPhone = () => {
     switch (selectedCategory) {
       case "Phone":
-        return <ItemList type={PrPhone} heading="phone"/>;
+        return <ItemList type={PrPhone} heading="phone" />;
       case "Tablet":
-        return <ItemList type={PrTablet}heading="tablet" />;
+        return <ItemList type={PrTablet} heading="tablet" />;
       case "Laptop":
-        return <ItemList type={PrLaptop} heading="laptop"/>;
+        return <ItemList type={PrLaptop} heading="laptop" />;
       default:
-        return <ItemList type={PrPhone} heading="phone"/>;
+        return <ItemList type={PrPhone} heading="phone" />;
     }
   };
-
-  useEffect(() => {
-    // Load data for each product category before rendering the components.
-    Promise.all([
-      loadPrSale(),
-      loadPrApplePhone(),
-      loadPrAppleTablet(),
-      loadPrSamsung(),
-      loadPrXiaomi(),
-      loadPrHp(),
-      loadPrAsus(),
-      loadPrLenovo(),
-      loadPrAcer(),
-      loadPrSmartWatch(),
-      loadPrLaptop(),
-      loadPrPhone(),
-      loadPrTablet(),
-    ]).then(() => {
+  const RenderCategoryAssessories = () => {
+    switch (selectedAssessories) {
+      case "Battery":
+        return <ItemList type={PrBattery} heading="Battery" />;
+      case "Cable":
+        return <ItemList type={PrCable} heading="Cable" />;
+      case "Earphone":
+        return <ItemList type={PrEarPhone} heading="Earphone" />;
+      case "LoudSpeaker":
+        return <ItemList type={PrLoudSpeaker} heading="LoudSpeaker" />;
+      case "Keyboard":
+        return <ItemList type={PrKeyboard} heading="Keyboard" />;
+      case "Mouse":
+        return <ItemList type={PrMouse} heading="Mouse" />;
+      default:
+        return <ItemList type={PrBattery} heading="Battery" />;
+    }
+  };
+  const loadData = async () => {
+    try {
+      await Promise.all([
+        loadPrSale(),
+        loadPrApplePhone(),
+        loadPrSmartWatch(),
+        loadPrLaptop(),
+        loadPrPhone(),
+        loadPrTablet(),
+        loadPrKeyboard(),
+        loadPrMouse(),
+        loadPrCable(),
+        loadPrBattery(),
+        loadPrLoudSpeaker(),
+        loadPrEarPhone(),
+      ]);
       // Set dataLoaded to true when all data is loaded.
       setDataLoaded(true);
-    });
+    } catch (error) {
+      // Handle errors and set the error state
+      setError(error);
+    }
+  };
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (
     <Box bg={"#F1F3F7"}>
-      <Suspense fallback={<div>Loading...</div>}>
-        {/* <BannerCenter type={BannersCenter} /> */}
-        <BannerHome type={BannerHomePage} heading=" " />
-      </Suspense>
-
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && <TimeDeal />}
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        {/* <BannerCenter type={BannersCenter} /> */}
-        <Danhmuc heading="DANH MỤC" type={CateFeatures} />
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Box width="80%" margin="auto">
-          <div className="option-select">
-            <h1>Danh mục nổi bật</h1>
-            <div className="options">
-              <button
-                className={selectedCategory === "Phone" ? "selected" : ""}
-                onClick={() => setSelectedCategory("Phone")}
-              >
-                Điện Thoại
-              </button>
-              <button
-                className={selectedCategory === "Tablet" ? "selected" : ""}
-                onClick={() => setSelectedCategory("Tablet")}
-              >
-                Tablet
-              </button>
-              <button
-                className={selectedCategory === "Laptop" ? "selected" : ""}
-                onClick={() => setSelectedCategory("Laptop")}
-              >
-                Laptop
-              </button>
-            </div>
+   
+      <Suspense fallback={<div>Loading</div>}>
+        {error ? (
+          <div>
+            {/* Display a user-friendly error message */}
+            <p>Oops! Something went wrong. Please try again later.</p>
           </div>
-        </Box>
-        {dataLoaded && RenderCategoryPhone()}
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && (
-          <ItemCardTest type={PrSmartWatch} heading="MÁY TÍNH NỔI BẬT " />
+        ) : dataLoaded ? (
+          <>
+            <BannerHome type={BannerHomePage} heading=" " />
+            <TimeDeal />
+            <Danhmuc heading="DANH MỤC" type={CateFeatures} />
+            <Box width="80%" margin="auto">
+              <div className="option-select">
+                <Text className="heading">DANH MỤC NỔI BẬT</Text>
+                <div className="options">
+                  <button
+                    className={selectedCategory === "Phone" ? "selected" : ""}
+                    onClick={() => setSelectedCategory("Phone")}
+                  >
+                    Điện Thoại
+                  </button>
+                  <button
+                    className={selectedCategory === "Tablet" ? "selected" : ""}
+                    onClick={() => setSelectedCategory("Tablet")}
+                  >
+                    Tablet
+                  </button>
+                  <button
+                    className={selectedCategory === "Laptop" ? "selected" : ""}
+                    onClick={() => setSelectedCategory("Laptop")}
+                  >
+                    Laptop
+                  </button>
+                </div>
+              </div>
+            </Box>
+            {RenderCategoryPhone()}
+            <ItemCardTest type={PrSmartWatch} />
+            <Box width="80%" margin="auto">
+              <div className="option-select">
+                <Text className="heading">Các phụ kiện khác</Text>
+                <div className="options">
+                  <button
+                    className={
+                      selectedAssessories === "Battery" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("Battery")}
+                  >
+                    Pin dự phòng
+                  </button>
+                  <button
+                    className={
+                      selectedAssessories === "Cable" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("Cable")}
+                  >
+                    Cáp sạc
+                  </button>
+                  <button
+                    className={
+                      selectedAssessories === "Earphone" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("Earphone")}
+                  >
+                    Tai nghe
+                  </button>
+                  <button
+                    className={
+                      selectedAssessories === "LoudSpeaker" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("LoudSpeaker")}
+                  >
+                    Loa
+                  </button>
+                  <button
+                    className={
+                      selectedAssessories === "Keyboard" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("Keyboard")}
+                  >
+                    Bàn phím
+                  </button>
+                  <button
+                    className={
+                      selectedAssessories === "Mouse" ? "selected" : ""
+                    }
+                    onClick={() => setSelectedAssessories("Mouse")}
+                  >
+                    Chuột
+                  </button>
+                </div>
+              </div>
+            </Box>
+            {RenderCategoryAssessories()}
+            <ItemCardTest2
+              type={PrApplePhone}
+              linked={"/apple/phone"}
+              heading="IPHONE"
+            />
+            <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+            <BlogHome  heading="Tin tức công nghệ" type={CateFeatures}/>
+          </>
+        ) : (
+          <div>
+            {/* Display a loading spinner while data is being fetched */}
+            <Loader loading={!dataLoaded} />
+          </div>
         )}
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && (
-          <ItemCard5 type={PrApplePhone} heading="MÁY TÍNH NỔI BẬT " />
-        )}
-      </Suspense>
-
-      <Suspense fallback={<div>Loading...</div>}>
-        <ItemCardTest2
-          type={PrApplePhone}
-          linked={"/apple/phone"}
-          heading="IPHONE"
-        />
-      </Suspense>
-
-      <Suspense fallback={<div>Loading...</div>}>
-        {dataLoaded && (
-          <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
-        )}
-      </Suspense>
-
-      <BackToTopButton />
     </Box>
   );
 };

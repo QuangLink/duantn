@@ -1,17 +1,7 @@
 import {
-  Box,
   Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
   InputGroup,
   InputRightElement,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -70,7 +60,6 @@ function SignUpForm() {
       console.log(error);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
@@ -142,7 +131,6 @@ function SignUpForm() {
       });
     }
   };
-
   const isValidEmail = (email) => {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailPattern.test(email);
@@ -159,7 +147,6 @@ function SignUpForm() {
       });
     }
   }, [isAuth, username, navigate, toast]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -198,7 +185,6 @@ function SignUpForm() {
       }
     }
   };
-
   return (
     <div className="form-container sign-up-container">
       <form>
@@ -254,5 +240,4 @@ function SignUpForm() {
     </div>
   );
 }
-
 export default SignUpForm;

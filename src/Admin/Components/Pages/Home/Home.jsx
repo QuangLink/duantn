@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import { useState, useEffect } from "react";
 import {
   fetchTotalProducts,
@@ -90,15 +89,11 @@ const Dashboard = () => {
     fetchApiUsers();
   }, []);
   const renderTotalPay = () => {
-    // Create a Map to store totalPay for each unique date
     const totalPayMap = new Map();
-
-    // Sort the orders by date in ascending order
     const sortedOrders = orders.sort(
       (a, b) => new Date(a.orderDate) - new Date(b.orderDate),
     );
 
-    // Populate the Map with data
     sortedOrders.forEach((order) => {
       const orderDate = new Date(order.orderDate).toISOString().split("T")[0];
       if (totalPayMap.has(orderDate)) {
@@ -108,9 +103,6 @@ const Dashboard = () => {
       }
     });
 
-    // Cộng tất cả totalPay lại để ra tổng doanh thu lưu vào totalPayAll
-
-    // Render the table
     return (
       <tbody>
         {Array.from(totalPayMap.entries()).map(([date, totalPay]) => (
@@ -135,16 +127,16 @@ const Dashboard = () => {
     if (loading) return <p>Loading...</p>;
     return currentUsers.map((user) => (
       <tr>
-        <td >{user.userID}</td>
-        <td >{user.username}</td>
+        <td>{user.userID}</td>
+        <td>{user.username}</td>
 
-        <td >
+        <td>
           {user.flat}
           {user.street} {user.state} {user.city}{" "}
-        </td >
+        </td>
 
-        <td >{user.mobile}</td>
-        <td >{user.email}</td>
+        <td>{user.mobile}</td>
+        <td>{user.email}</td>
       </tr>
     ));
   };
@@ -165,27 +157,23 @@ const Dashboard = () => {
                 <span className="badge badge-danger">
                   {product.orderStatus}
                 </span>
-              )
-               : product.orderStatus === "Đang giao hàng" ? (
+              ) : product.orderStatus === "Đang giao hàng" ? (
                 <span className="badge badge-warning text-dark">
                   {product.orderStatus}
                 </span>
-              ) 
-              : product.orderStatus === "Đã hủy" ? (
+              ) : product.orderStatus === "Đã hủy" ? (
                 <span className="badge badge-danger text-danger">
                   {product.orderStatus}
                 </span>
-              ): product.orderStatus === "Đã thanh toán" ? (
+              ) : product.orderStatus === "Đã thanh toán" ? (
                 <span className="badge badge-primary">
                   {product.orderStatus}
                 </span>
-              )
-              : product.orderStatus === "Đã xác nhận" ? (
+              ) : product.orderStatus === "Đã xác nhận" ? (
                 <span className="badge badge-primary">
                   {product.orderStatus}
                 </span>
-              )
-               : (
+              ) : (
                 <span className="badge badge-success">
                   {product.orderStatus}
                 </span>
@@ -319,7 +307,12 @@ const Dashboard = () => {
               <div className="col-md-12">
                 <div className="tile">
                   <h3 className="tile-title">
-                    <a href="/admin/quanlydonhang" style={{fontSize:"25px", fontWeight:"700"}}>Tình trạng đơn hàng</a>
+                    <a
+                      href="/admin/quanlydonhang"
+                      style={{ fontSize: "25px", fontWeight: "700" }}
+                    >
+                      Tình trạng đơn hàng
+                    </a>
                   </h3>
                   <div>
                     <table className="table table-bordered">
@@ -352,18 +345,23 @@ const Dashboard = () => {
               <div className="col-md-12">
                 <div className="tile">
                   <h3 className="tile-title">
-                    <a href="/admin/quanlykh" style={{fontSize:"25px", fontWeight:"700"}}>Khách hàng mới</a>
+                    <a
+                      href="/admin/quanlykh"
+                      style={{ fontSize: "25px", fontWeight: "700" }}
+                    >
+                      Khách hàng mới
+                    </a>
                   </h3>
                   <div>
                     <table className="table table-hover">
                       <thead>
                         <tr>
-                          <th >ID</th>
-                          <th >Tên khách hàng</th>
+                          <th>ID</th>
+                          <th>Tên khách hàng</th>
                           <th width="300px">Địa chỉ</th>
-                        
-                          <th width="100px" >Số điện thoại</th>
-                          <th >Email</th>
+
+                          <th width="100px">Số điện thoại</th>
+                          <th>Email</th>
                         </tr>
                       </thead>
                       <tbody>{renderUsers()}</tbody>
@@ -376,7 +374,12 @@ const Dashboard = () => {
           <div className="col-md-12 col-lg-6">
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title" style={{fontSize:"25px", fontWeight:"700"}}>Thống kê doanh thu</h3>
+                <h3
+                  className="tile-title"
+                  style={{ fontSize: "25px", fontWeight: "700" }}
+                >
+                  Thống kê doanh thu
+                </h3>
                 <div>
                   <table className="table table-bordered">
                     <thead>
@@ -425,7 +428,6 @@ const Dashboard = () => {
             </b>
           </p>
         </div>
-   
       </main>
       <script src="js/jquery-3.2.1.min.js"></script>
       {/* <!--===============================================================================================--> */}

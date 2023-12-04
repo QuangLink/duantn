@@ -11,7 +11,7 @@ import { AppContextProvider } from "./Pages/context/AppContext";
 import { PageContextProvider } from "./Pages/context/PageContext";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import '@fortawesome/fontawesome-free/css/all.css';
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

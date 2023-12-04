@@ -1,22 +1,49 @@
 import React, { useState, useEffect } from "react";
 import "./Themsp.css";
 import axios from "axios";
+import {
+  Box,
+  Image,
+  Center,
+  Flex,
+  AspectRatio,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 
 const Themsanpham = () => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [prodTypes, setProdTypes] = useState([]);
+  const [prodcatID, setProdcatID] = useState([]);
+  const [catName, setCatName] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [storage, setStorage] = useState([]);
   const [product, setProduct] = useState({
     prodName: "",
     prodType: "",
     prodImg: "",
     prodcatID: "",
-    prodPrice: 0,
-    prodSale: 0,
-    prodPriceSale: 0,
+    prodPrice: "",
+    prodSale: "",
     prodDesc: "",
-    prodStatus: 1,
-    prodQuantity: 0,
+    QTY: "",
   });
+  const [variant, setVariant] = useState({
+    colorID: "",
+    storageID: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "prodcatID") {
+      const selectedCatName = categories.find(
+        (category) => category.prodcatID === parseInt(value, 10),
+      )?.catName;
+      setCatName(selectedCatName || ""); // Set an empty string if no matching category is found
+    }
+
     setProduct({
       ...product,
       [name]: value,
@@ -24,14 +51,58 @@ const Themsanpham = () => {
   };
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
+  const fetchColors = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/color",
+      );
+      setColors(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  const fetchStorage = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/storage",
+      );
+      setStorage(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/category/catID",
+      );
+      setCategories(response.data);
+      const uniqueProdcatID = Array.from(
+        new Set(response.data.map((product) => product.prodcatID)),
+      );
+      setProdcatID(uniqueProdcatID);
+      //get catName base on prodcatID
+      const catName = response.data.map((product) => product.catName);
+      setCatName(catName);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
         "https://duantn-backend.onrender.com/products",
       );
-      setProduct(response.data);
+      setProducts(response.data);
+
+      const uniqueProdTypes = Array.from(
+        new Set(response.data.map((product) => product.prodType)),
+      );
+      setProdTypes(uniqueProdTypes);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -39,17 +110,6 @@ const Themsanpham = () => {
   const handleAddProduct = async () => {
     // Tính giá trước khi giảm dựa trên giá bán và phần trăm giảm giá
     const price = parseFloat(product.prodPrice);
-    const sale = parseFloat(product.prodSale);
-
-    if (!isNaN(price) && !isNaN(sale)) {
-      const priceBeforeSale = price + (price * sale) / 100;
-      // Cập nhật giá trước khi giảm trong state product
-      setProduct({
-        ...product,
-        prodPriceSale: priceBeforeSale,
-      });
-    }
-
     try {
       // Sau khi tính giá trước khi giảm, gửi yêu cầu POST với dữ liệu sản phẩm
       await axios.post("https://duantn-backend.onrender.com/products", product);
@@ -62,10 +122,8 @@ const Themsanpham = () => {
         prodImg: "",
         prodPrice: 0,
         prodSale: 0,
-        prodPriceSale: 0,
         prodDesc: "",
-        prodStatus: 1,
-        prodQuantity: 0,
+        QTY: 0,
       });
     } catch (error) {
       console.error("Error adding product:", error);
@@ -85,101 +143,9 @@ const Themsanpham = () => {
   };
   return (
     <body className="app sidebar-mini rtl">
-      <header className="app-header">
-        <a
-          className="app-sidebar__toggle"
-          href="#"
-          data-toggle="sidebar"
-          aria-label="Hide Sidebar"
-        ></a>
-        <ul className="app-nav">
-          {/* <!-- User Menu--> */}
-          <li>
-            <a className="app-nav__item" href="/">
-              <i className="bx bx-log-out bx-rotate-180"></i>{" "}
-            </a>
-          </li>
-        </ul>
-      </header>
       {/* <!-- Sidebar menu--> */}
       <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
-      <aside className="app-sidebar">
-        <div className="app-sidebar__user">
-          <img
-            className="app-sidebar__user-avatar"
-            src="/images/hay.jpg"
-            width="50px"
-            alt="User Image"
-          />
-          <div>
-            <p className="app-sidebar__user-name">
-              <b>Nguyễn Vũ Duy Hoài</b>
-            </p>
-            <p className="app-sidebar__user-designation">
-              Chào mừng bạn trở lại
-            </p>
-          </div>
-        </div>
-        <hr />
-        <ul className="app-menu">
-          <li>
-            <a className="app-menu__item haha" href="phan-mem-ban-hang.html">
-              <i className="app-menu__icon bx bx-cart-alt"></i>
-              <span className="app-menu__label">POS Bán Hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item " href="index.html">
-              <i className="app-menu__icon bx bx-tachometer"></i>
-              <span className="app-menu__label">Bảng điều khiển</span>
-            </a>
-          </li>
 
-          <li>
-            <a className="app-menu__item " href="#">
-              <i className="app-menu__icon bx bx-user-voice"></i>
-              <span className="app-menu__label">Quản lý khách hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item active" href="table-data-product.html">
-              <i className="app-menu__icon bx bx-purchase-tag-alt"></i>
-              <span className="app-menu__label">Quản lý sản phẩm</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-oder.html">
-              <i className="app-menu__icon bx bx-task"></i>
-              <span className="app-menu__label">Quản lý đơn hàng</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-banned.html">
-              <i className="app-menu__icon bx bx-run"></i>
-              <span className="app-menu__label">Quản lý nội bộ</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="table-data-money.html">
-              <i className="app-menu__icon bx bx-dollar"></i>
-              <span className="app-menu__label">Bảng kê lương</span>
-            </a>
-          </li>
-          <li>
-            <a className="app-menu__item" href="quan-ly-bao-cao.html">
-              <i className="app-menu__icon bx bx-pie-chart-alt-2"></i>
-              <span className="app-menu__label">Báo cáo doanh thu</span>
-            </a>
-          </li>
-
-          <li>
-            <a className="app-menu__item" href="#">
-              <i className="app-menu__icon bx bx-cog"></i>
-              <span className="app-menu__label">Cài đặt hệ thống</span>
-            </a>
-          </li>
-        </ul>
-      </aside>
       <main className="app-content">
         <div className="app-title">
           <ul className="app-breadcrumb breadcrumb">
@@ -197,34 +163,44 @@ const Themsanpham = () => {
               <h3 className="tile-title">Tạo mới sản phẩm</h3>
               <div className="tile-body">
                 <div className="row element-button">
-                  <div className="col-sm-2"></div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#adddanhmuc"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm danh mục
-                    </a>
-                  </div>
-                  <div className="col-sm-2">
-                    <a
-                      className="btn btn-add btn-sm"
-                      data-toggle="modal"
-                      data-target="#addtinhtrang"
-                    >
-                      <i className="fas fa-folder-plus"></i> Thêm tình trạng
-                    </a>
-                  </div>
+                  <Box width="100%" display="flex" padding="0 0 0 18px">
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#adddanhmuc"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm danh mục
+                      </a>
+                    </div>
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#addtinhtrang"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm tình trạng
+                      </a>
+                    </div>
+                    <div className="col-sm-2">
+                      <a
+                        className="btn btn-add btn-sm"
+                        data-toggle="modal"
+                        data-target="#adddanhmuc"
+                      >
+                        <i className="fas fa-folder-plus"></i> Thêm biến thể
+                      </a>
+                    </div>
+                  </Box>
                 </div>
 
                 <form className="row" />
 
-                <div className="form-group col-md-3">
+                <div className="form-group col-md-6">
                   <label className="control-label">Tên sản phẩm </label>
                   <input
                     className="form-control"
-                    placeholder=""
+                    placeholder="Tên sản phẩm"
                     type="text"
                     name="prodName"
                     value={product.prodName}
@@ -232,82 +208,101 @@ const Themsanpham = () => {
                   />
                 </div>
 
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Số lượng</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="prodQuantity"
-                    value={product.prodQuantity}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Giá bán</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="prodPrice"
-                    value={product.prodPrice}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Phần trăm giảm giá</label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    name="prodSale"
-                    value={product.prodSale}
-                    onChange={handleChange}
-                  />
-                </div>
+                {/* tên sp */}
 
-                <div className="form-group col-md-3 ">
-                  <label for="exampleSelect1" className="control-label">
-                    Loại sản phẩm
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleSelect1"
-                    name="prodType"
-                    value={product.prodType}
-                    onChange={handleChange}
-                  >
-                    <option value="">-- Chọn loại --</option>
-                    <option value="Laptop">Laptop</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Tablet">Tablet</option>
-                  </select>
-                </div>
+                <Box width="100%" display="flex">
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Số lượng</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="QTY"
+                      value={product.QTY}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* số lượng */}
 
-                <div className="form-group col-md-3 ">
-                  <label for="exampleSelect1" className="control-label">
-                    Hãng
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleSelect1"
-                    name="prodcatID"
-                    value={product.prodcatID}
-                    onChange={handleChange}
-                  >
-                    <option value="">-- Chọn Hãng --</option>
-                    <option value="1">Apple</option>
-                    <option value="2">SamSung</option>
-                    <option value="3">Oppo</option>
-                    <option value="4">Xiaomi</option>
-                    <option value="5">Hp</option>
-                    <option value="6">Asus</option>
-                    <option value="7">Lenovo</option>
-                    <option value="8">Acer</option>
-                  </select>
-                </div>
-                <div className="form-group col-md-3">
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Giá bán</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="prodPrice"
+                      value={product.prodPrice}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* Giá bán */}
+
+                  <div className="form-group  col-md-2">
+                    <label className="control-label">Phần trăm giảm giá</label>
+                    <input
+                      placeholder="0"
+                      className="form-control"
+                      type="number"
+                      name="prodSale"
+                      value={product.prodSale}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {/* Phần trăm giảm giá */}
+
+                  {/* Hãng */}
+                </Box>
+                <Box width="100%" display="flex">
+                  <div className="form-group col-md-3 ">
+                    <label for="exampleSelect1" className="control-label">
+                      Loại sản phẩm
+                    </label>
+                    <select
+                      className="form-control"
+                      id="exampleSelect1"
+                      name="prodType"
+                      value={product.prodType}
+                      onChange={handleChange}
+                    >
+                      <option value="all">Loại</option>
+                      {prodTypes.map((prodType) => (
+                        <option key={prodType} value={prodType}>
+                          {prodType}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* Loại sản phẩm */}
+
+                  <div className="form-group col-md-3 ">
+                    <label for="exampleSelect1" className="control-label">
+                      Hãng
+                    </label>
+                    <select
+                      className="form-control"
+                      id="exampleSelect1"
+                      name="prodcatID"
+                      value={product.prodcatID}
+                      onChange={handleChange}
+                    >
+                      <option value="all">Hãng</option>
+                      {categories.map((category) => (
+                        <option
+                          key={category.prodcatID}
+                          value={category.prodcatID}
+                        >
+                          {category.catName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </Box>
+
+                <div className="form-group col-md-6">
                   <label className="control-label">Ảnh sản phẩm </label>
                   <input
                     className="form-control"
-                    placeholder=""
+                    placeholder="Vui lòng dán link hình ảnh sản phẩm"
                     type="text"
                     name="prodImg"
                     value={product.prodImg}
@@ -322,9 +317,10 @@ const Themsanpham = () => {
                   )}
                 </div>
 
-                <div className="form-group col-md-12">
+                <div className="form-group col-md-6">
                   <label className="control-label">Mô tả sản phẩm</label>
                   <textarea
+                    placeholder="Thêm mô tả..."
                     className="form-control"
                     id="mota"
                     name="prodDesc"
@@ -333,17 +329,51 @@ const Themsanpham = () => {
                   ></textarea>
                   <script>CKEDITOR.replace('mota');</script>
                 </div>
+                {/* Mô tả */}
               </div>
-              <button
-                className="btn btn-save"
-                type="button"
-                onClick={handleAddProduct}
+
+              <Box
+                width="50%"
+                display="flex"
+                justifyContent="space-around"
+                padding="10px"
               >
-                Lưu lại
-              </button>
-              <a className="btn btn-cancel" href="">
-                Hủy bỏ
-              </a>
+                <Button
+                  padding="10px"
+                  w="49%"
+                  h="auto"
+                  color="#fff"
+                  borderRadius="10px"
+                  backgroundColor="red"
+                  _hover={{ color: "red", backgroundColor: "#fff" }}
+                  border="1px solid red"
+                  className=" btn-save"
+                  type="button"
+                  onClick={handleAddProduct}
+                >
+                  Thêm sản phẩm
+                </Button>
+
+                <a
+                  style={{ width: "49%", backgroundColor: "#fff" }}
+                  className=" btn-cancel"
+                  href=""
+                >
+                  <Box
+                    padding="8px"
+                    textAlign="center"
+                    w="100%"
+                    h="auto"
+                    color="#fff"
+                    border="1px solid red"
+                    borderRadius="10px"
+                    backgroundColor="red"
+                    _hover={{ color: "red", backgroundColor: "#fff" }}
+                  >
+                    Hủy Bỏ
+                  </Box>
+                </a>
+              </Box>
             </div>
           </div>
         </div>

@@ -7,6 +7,9 @@ import {
   Text,
   useToast,
   VStack,
+  Center,
+  Image,
+  Divider,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -16,27 +19,29 @@ import { logout } from "../../Redux/Auth/auth.action";
 import { getProducts } from "../../Redux/Wishlist/products.action";
 import WishProduct from "./WishProduct";
 import Cookies from "js-cookie";
-const getData = async (typeOfProduct) => {
-  const userID = Cookies.get("userID");
-  let response = await axios.get(
-    `https://duantn-backend.onrender.com/wishlist/${userID}`,
-  );
-  return response.data;
-};
+
 function Wishlist({ typeOfProduct }) {
-  const { username, email } = useSelector((store) => store.AuthManager);
   const productsList = useSelector((store) => store.product.data);
   const loading = useSelector((store) => store.product.loading);
   const error = useSelector((store) => store.product.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+
+  useEffect(() => {
+    // getData(typeOfProduct).then((res) => setProductArr(res));
+    dispatch(getProducts(typeOfProduct));
+  }, [typeOfProduct, dispatch]);
+
   const handleDelete = (userID, prodID) => {
     axios
       .delete(
         `https://duantn-backend.onrender.com/wishlist/${userID}/${prodID}`,
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        dispatch(getProducts(typeOfProduct)); // Fetch data again after delete
+      })
       .catch((err) => console.log(err));
     toast({
       title: "Product Deleted.",
@@ -47,10 +52,6 @@ function Wishlist({ typeOfProduct }) {
     });
     navigate("/wishlist");
   };
-  useEffect(() => {
-    // getData(typeOfProduct).then((res) => setProductArr(res));
-    dispatch(getProducts(typeOfProduct));
-  }, [typeOfProduct, dispatch]);
 
   if (error) {
     return (
@@ -65,41 +66,13 @@ function Wishlist({ typeOfProduct }) {
       </Heading>
     );
   }
-  const handleLogout = () => {
-    dispatch(logout());
-    toast({
-      title: "Logout  Success.",
-      description: `We will miss you 😭`,
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-    navigate("/login");
-  };
   return (
-    <Box w="100%" m="auto">
-      <HStack w="95%" m="auto" p="3px">
-        <VStack
-          p="20px"
-          alignItems={"center"}
-          cursor="pointer"
-          border="1px solid black"
-        >
-          <Heading size={"lg"}>{username}</Heading>
-          <Text size={"lg"}>{email}</Text>
-          <Heading size={"md"}>My Account</Heading>
-          <Text _hover={{ color: "blue", fontWeight: "bold" }}>My Profile</Text>
-          <Text _hover={{ color: "blue", fontWeight: "bold" }}>My Order</Text>
-          <Text _hover={{ color: "blue", fontWeight: "bold" }}>My Address</Text>
-          <Text _hover={{ color: "blue", fontWeight: "bold" }}>My Credit</Text>
-          <Heading size={"md"} onClick={handleLogout}>
-            Logout
-          </Heading>
-        </VStack>
+    <Center w="80%" m="auto">
+      <Box w="100%" m="auto" p="3px">
         <Box>
-          <Box p="5">
+          <Box>
             <Heading p="5" marginBottom={5}>
-              Wishlist
+              Sản phẩm yêu thích
             </Heading>
             {loading ? (
               <Heading
@@ -114,10 +87,9 @@ function Wishlist({ typeOfProduct }) {
             ) : (
               <Grid
                 templateColumns={[
-                  "repeat(1, 1fr)",
-                  "repeat(2,1fr)",
+                  "repeat(2, 1fr)",
                   "repeat(3,1fr)",
-                  "repeat(4,1fr)",
+                  "repeat(3,1fr)",
                   "repeat(5,1fr)",
                 ]}
                 gap={3}
@@ -149,8 +121,8 @@ function Wishlist({ typeOfProduct }) {
             )}
           </Box>
         </Box>
-      </HStack>
-    </Box>
+      </Box>
+    </Center>
   );
 }
 
