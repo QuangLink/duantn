@@ -1,35 +1,3 @@
 {
-  "routes": [
-    { "src": "/blog/(.*)", "dest": "/blog/$1" },
-    { "src": "/404", "dest": "/404" },
-    { "src": "/resetpass", "dest": "/resetpass" },
-    { "src": "/forgot", "dest": "/forgot" },
-    { "src": "/verify", "dest": "/verify" },
-    { "src": "/reset", "dest": "/reset" },
-    { "src": "/vnpay", "dest": "/vnpay" },
-    { "src": "/duantn", "dest": "/" },
-    { "src": "/admin/dashboard", "dest": "/admin/dashboard" },
-    { "src": "/admin/themsp", "dest": "/admin/themsp" },
-    { "src": "/admin/thembienthe", "dest": "/admin/thembienthe" },
-    { "src": "/admin/editsp/:id", "dest": "/admin/editsp/:id" },
-    { "src": "/admin/Quanlykh", "dest": "/admin/Quanlykh" },
-    { "src": "/admin/Quanlysp", "dest": "/admin/Quanlysp" },
-    { "src": "/admin/Quanlydonhang", "dest": "/admin/Quanlydonhang" },
-    { "src": "/admin/Themsanpham", "dest": "/admin/Themsanpham" },
-    { "src": "/admin/doanhthu", "dest": "/admin/doanhthu" },
-    { "src": "/cart", "dest": "/cart" },
-    { "src": "/checkout", "dest": "/checkout" },
-    { "src": "/success", "dest": "/success" },
-    { "src": "/login", "dest": "/login" },
-    { "src": "/wishlist", "dest": "/wishlist" },
-    { "src": "/checkout", "dest": "/checkout" },
-    { "src": "/myorder", "dest": "/myorder" },
-    { "src": "/myprofile", "dest": "/myprofile" },
-    { "src": "/payments", "dest": "/payments" },
-    { "src": "/lastpage", "dest": "/lastpage" },
-    { "src": "/test", "dest": "/test" },
-    { "src": "/:id", "dest": "/:id" },
-    { "src": "/:type", "dest": "/:type" },
-    { "src": "/:type/:id", "dest": "/:type/:id" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
