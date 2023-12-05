@@ -147,4 +147,4 @@ const ItemList = ({ type, heading }) => {
   );
 };
 
-export default ItemList;
+export default React.memo(ItemList);

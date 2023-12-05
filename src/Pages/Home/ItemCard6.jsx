@@ -69,4 +69,4 @@ const ItemCard6 = ({ type, heading }) => {
   );
 };
 
-export default ItemCard6;
+export default React.memo(ItemCard6);

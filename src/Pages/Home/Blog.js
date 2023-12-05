@@ -146,4 +146,4 @@ const BlogHome = ({ type, heading }) => {
   );
 };
 
-export default BlogHome;
+export default React.memo(BlogHome);

@@ -1,26 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Product from "./Product";
-import {
-  Box,
-  Link,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Input,
-  Menu,
-  MenuButton,
-  MenuList,
-  Text,
-  MenuItem,
-  Button,
-  Select,
-} from "@chakra-ui/react";
-import { PrApplePhone } from "../Home/CardDetails";
-
+import { Box, Flex, Menu, Button, Select } from "@chakra-ui/react";
 import "./Productbox.css";
-import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductFilter = ({
   typeOfProduct,
@@ -45,7 +26,7 @@ const ProductFilter = ({
       return (
         <Flex className="grid-container">
           <Box>
-            <Link href="/apple/phone">
+            <Link to="/apple/phone">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -56,7 +37,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/xiaomi">
+            <Link to="/xiaomi">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -67,7 +48,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/samsung">
+            <Link to="/samsung">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -89,7 +70,7 @@ const ProductFilter = ({
       return (
         <Flex className="grid-container">
           <Box>
-            <Link href="/asus">
+          <Link to="/asus">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -100,7 +81,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/acer">
+            <Link to="/acer">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -111,7 +92,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/lenovo">
+            <Link to="/lenovo">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -122,7 +103,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/hp">
+            <Link to="/hp">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -142,7 +123,7 @@ const ProductFilter = ({
   const CategoryProduct2 = () => {
     if (
       type === "phone" ||
-      type === "applephone" ||
+      type === "apple/phone" ||
       type === "xiaomi" ||
       type === "samsung"
     ) {
@@ -362,4 +343,4 @@ const ProductFilter = ({
     </div>
   );
 };
-export default ProductFilter;
+export default React.memo(ProductFilter);

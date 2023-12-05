@@ -174,4 +174,4 @@ const Products = ({ typeOfProduct }) => {
     </Box>
   );
 };
-export default Products;
+export default React.memo(Products);

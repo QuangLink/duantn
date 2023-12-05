@@ -148,7 +148,7 @@ const WishProduct = (props) => {
           color="gray"
           bg="white"
           _hover={{ color: "red", fontWeight: "bold" }}
-          onClick={() => handleDelete(userID, prodID)}
+          onClick={() => handleDelete(userID, prodID, colorID, storageID)}
         >
           <FaHeartBroken fontSize="25px" />
         </Button>

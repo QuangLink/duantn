@@ -10,7 +10,6 @@ import Payments from "../Pages/payment/Payments";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import AdminRoute from "./PrivateRoute/AdminRoutes";
-import ProductList from "../testlist";
 import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
@@ -38,8 +37,6 @@ const productTypes = [
   "phone",
   "tablet",
   "iphone",
-  "apple/phone",
-  "apple/tablet",
   "samsung/phone",
   "samsung/tablet",
   "xiaomi",
@@ -71,7 +68,15 @@ const AllRoutes = () => {
         <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/duantn" element={<Home />}></Route>
+        <Route
+              path={`/apple/phone`}
+              element={<Products typeOfProduct={"apple/phone"} />}
+            ></Route>
+       
+        <Route
+              path={`/apple/tablet`}
+              element={<Products typeOfProduct={"apple/tablet"} />}
+            ></Route>
         <Route
           path="/admin/dashboard"
           element={
@@ -240,7 +245,7 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/test" element={<ProductList />}></Route>
+  
       </Routes>
     </div>
   );

@@ -18,9 +18,13 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
-  try {
-    const userID = Cookies.get("userID");
+  const userID = Cookies.get("userID");
 
+  if (userID === undefined) {
+    throw new Error("userID is undefined");
+  }
+
+  try {
     const postData = {
       userID,
       prodID: data.prodID,
@@ -39,7 +43,6 @@ const postSingleDataWish = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
-
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
@@ -56,18 +59,37 @@ const Product = (props, rating) => {
 
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = (data) => {
-    console.log(data);
-
-    postSingleDataWish(data).then((res) => {
+  const handleWish = () => {
+    try {
+      postSingleDataWish(data)
+        .then((res) => {
+          toast({
+            title: "Đã thêm vào giỏ",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.error("Error handling post:", error);
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            description: "Bạn cần đăng nhập để thực hiện chức năng này",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+    } catch (error) {
+      console.error("Error handling wish:", error);
       toast({
-        title: "Added Item Successfully to WishList",
-        status: "success",
-        duration: 3000,
+        title: "Error handling wish",
+        description: error.message,
+        status: "error",
+        duration: 9000,
         isClosable: true,
-        position: "bottom",
       });
-    });
+    }
   };
 
   return (
@@ -189,7 +211,7 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(data)}>
+      <Button onClick={() => handleWish(prodID)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

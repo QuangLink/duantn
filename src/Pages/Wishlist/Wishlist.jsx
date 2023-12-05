@@ -33,11 +33,11 @@ function Wishlist({ typeOfProduct }) {
     dispatch(getProducts(typeOfProduct));
   }, [typeOfProduct, dispatch]);
 
-  const handleDelete = (userID, prodID) => {
+  const handleDelete = (userID, prodID, storageID, colorID) => {
     axios
-      .delete(
-        `https://duantn-backend.onrender.com/wishlist/${userID}/${prodID}`,
-      )
+      .delete(`https://duantn-backend.onrender.com/wishlist/`, {
+        data: { userID, prodID, colorID, storageID },
+      })
       .then((res) => {
         console.log(res);
         dispatch(getProducts(typeOfProduct)); // Fetch data again after delete
