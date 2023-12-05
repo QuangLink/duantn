@@ -156,11 +156,11 @@ const SingleProduct = (props) => {
         } else if (error.message === "Chưa đăng nhập") {
           toast({
             title: "Vui lòng đăng nhập trước",
+            description: "Bạn cần đăng nhập để thực hiện chức năng này",
             status: "error",
             duration: 9000,
             isClosable: true,
           });
-          navigate("/login");
         } else {
           // Handle other errors
           toast({
