@@ -14,7 +14,7 @@ export const getProducts =
     dispatch({ type: GET_PRODUCTS_LOADING });
     try {
       let responce = await axios.get(
-        `http://localhost:9000/wishlist/${userID}`,
+        `https://duantn-backend.onrender.com/wishlist/${userID}`,
       );
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });

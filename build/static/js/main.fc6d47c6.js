@@ -64995,104 +64995,7 @@
                         children: (0, c.jsx)(sg.xu, {
                           overflowY: "scroll",
                           h: 450,
-                          children: j
-                            .slice(0, 10)
-                            .map((e, t) =>
-                              (0, c.jsx)(wm.rU, {
-                                to: "/"
-                                  .concat(e.prodType, "/")
-                                  .concat(e.prodID),
-                                onClick: W,
-                                children: (0, c.jsxs)(
-                                  lg.k,
-                                  {
-                                    direction: "row",
-                                    align: "flex-start",
-                                    borderBottom: "1px solid #555",
-                                    justifyContent: "flex-start",
-                                    _hover: { bg: "#9ecdf2" },
-                                    children: [
-                                      (0, c.jsx)(sg.xu, {
-                                        mb: 6,
-                                        margin: 5,
-                                        paddingLeft: 20,
-                                        marginRight: 10,
-                                        children: (0, c.jsx)(cg.E, {
-                                          src: e.prodImg,
-                                          w: 70,
-                                          h: 50,
-                                          alt: "Memory Card",
-                                        }),
-                                      }),
-                                      (0, c.jsxs)(sg.xu, {
-                                        mb: 6,
-                                        children: [
-                                          (0, c.jsx)(ug.x, {
-                                            fontSize: "xl",
-                                            fontWeight: "600",
-                                            children: e.prodName,
-                                          }),
-                                          (0, c.jsxs)(ug.x, {
-                                            fontSize: "lg",
-                                            color: "gray.500",
-                                            children: [
-                                              (0, c.jsxs)("span", {
-                                                className: "prodPrice",
-                                                children: [
-                                                  e.prodPrice &&
-                                                    e.prodPrice.toLocaleString(
-                                                      "vi-VN",
-                                                      {},
-                                                    ),
-                                                  "\u0111",
-                                                ],
-                                              }),
-                                              0 !== e.prodPriceSale &&
-                                                (0, c.jsx)("span", {
-                                                  className: "prodPriceSale",
-                                                  children:
-                                                    e.prodPriceSale &&
-                                                    e.prodPriceSale.toLocaleString(
-                                                      "vi-VN",
-                                                      {},
-                                                    ),
-                                                }),
-                                            ],
-                                          }),
-                                        ],
-                                      }),
-                                    ],
-                                  },
-                                  t,
-                                ),
-                              }),
-                            ),
-                        }),
-                      }),
-                  }),
-            Y = () =>
-              0 === j.length
-                ? (0, c.jsx)(sg.xu, {})
-                : (0, c.jsx)(c.Fragment, {
-                    children:
-                      E &&
-                      C &&
-                      (0, c.jsx)(sg.xu, {
-                        bg: "#fff",
-                        width: "90%",
-                        height: "auto",
-                        position: "fixed",
-                        marginTop: 500,
-                        borderRadius: 15,
-                        overflowY: "scroll",
-                        h: 400,
-                        isOpen: u,
-                        onClose: p,
-                        finalFocusRef: f,
-                        ref: I,
-                        children: j
-                          .slice(0, 5)
-                          .map((e, t) =>
+                          children: j.slice(0, 10).map((e, t) =>
                             (0, c.jsx)(wm.rU, {
                               to: "/".concat(e.prodType, "/").concat(e.prodID),
                               onClick: W,
@@ -65102,12 +65005,13 @@
                                   direction: "row",
                                   align: "flex-start",
                                   borderBottom: "1px solid #555",
-                                  justify: "center",
+                                  justifyContent: "flex-start",
                                   _hover: { bg: "#9ecdf2" },
                                   children: [
                                     (0, c.jsx)(sg.xu, {
                                       mb: 6,
                                       margin: 5,
+                                      paddingLeft: 20,
                                       marginRight: 10,
                                       children: (0, c.jsx)(cg.E, {
                                         src: e.prodImg,
@@ -65131,23 +65035,24 @@
                                             (0, c.jsxs)("span", {
                                               className: "prodPrice",
                                               children: [
-                                                e.prodPrice,
-                                                " ",
-                                                (0, c.jsx)("sup", {
-                                                  children: "\u0111",
-                                                }),
+                                                e.prodPrice &&
+                                                  e.prodPrice.toLocaleString(
+                                                    "vi-VN",
+                                                    {},
+                                                  ),
+                                                "\u0111",
                                               ],
                                             }),
-                                            (0, c.jsxs)("span", {
-                                              className: "prodPriceSale",
-                                              children: [
-                                                e.prodPriceSale,
-                                                (0, c.jsx)("sup", {
-                                                  children: "\u0111",
-                                                }),
-                                                " ",
-                                              ],
-                                            }),
+                                            0 !== e.prodPriceSale &&
+                                              (0, c.jsx)("span", {
+                                                className: "prodPriceSale",
+                                                children:
+                                                  e.prodPriceSale &&
+                                                  e.prodPriceSale.toLocaleString(
+                                                    "vi-VN",
+                                                    {},
+                                                  ),
+                                              }),
                                           ],
                                         }),
                                       ],
@@ -65158,6 +65063,95 @@
                               ),
                             }),
                           ),
+                        }),
+                      }),
+                  }),
+            Y = () =>
+              0 === j.length
+                ? (0, c.jsx)(sg.xu, {})
+                : (0, c.jsx)(c.Fragment, {
+                    children:
+                      E &&
+                      C &&
+                      (0, c.jsx)(sg.xu, {
+                        bg: "#fff",
+                        width: "90%",
+                        height: "auto",
+                        position: "fixed",
+                        marginTop: 500,
+                        borderRadius: 15,
+                        overflowY: "scroll",
+                        h: 400,
+                        isOpen: u,
+                        onClose: p,
+                        finalFocusRef: f,
+                        ref: I,
+                        children: j.slice(0, 5).map((e, t) =>
+                          (0, c.jsx)(wm.rU, {
+                            to: "/".concat(e.prodType, "/").concat(e.prodID),
+                            onClick: W,
+                            children: (0, c.jsxs)(
+                              lg.k,
+                              {
+                                direction: "row",
+                                align: "flex-start",
+                                borderBottom: "1px solid #555",
+                                justify: "center",
+                                _hover: { bg: "#9ecdf2" },
+                                children: [
+                                  (0, c.jsx)(sg.xu, {
+                                    mb: 6,
+                                    margin: 5,
+                                    marginRight: 10,
+                                    children: (0, c.jsx)(cg.E, {
+                                      src: e.prodImg,
+                                      w: 70,
+                                      h: 50,
+                                      alt: "Memory Card",
+                                    }),
+                                  }),
+                                  (0, c.jsxs)(sg.xu, {
+                                    mb: 6,
+                                    children: [
+                                      (0, c.jsx)(ug.x, {
+                                        fontSize: "xl",
+                                        fontWeight: "600",
+                                        children: e.prodName,
+                                      }),
+                                      (0, c.jsxs)(ug.x, {
+                                        fontSize: "lg",
+                                        color: "gray.500",
+                                        children: [
+                                          (0, c.jsxs)("span", {
+                                            className: "prodPrice",
+                                            children: [
+                                              e.prodPrice,
+                                              " ",
+                                              (0, c.jsx)("sup", {
+                                                children: "\u0111",
+                                              }),
+                                            ],
+                                          }),
+                                          (0, c.jsxs)("span", {
+                                            className: "prodPriceSale",
+                                            children: [
+                                              e.prodPriceSale,
+                                              (0, c.jsx)("sup", {
+                                                children: "\u0111",
+                                              }),
+                                              " ",
+                                            ],
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              },
+                              t,
+                            ),
+                          }),
+                        ),
                       }),
                   }),
             q = () =>
@@ -65180,74 +65174,72 @@
                         onClose: p,
                         finalFocusRef: f,
                         ref: I,
-                        children: j
-                          .slice(0, 5)
-                          .map((e, t) =>
-                            (0, c.jsx)(wm.rU, {
-                              to: "/".concat(e.prodType, "/").concat(e.prodID),
-                              onClick: W,
-                              children: (0, c.jsxs)(
-                                lg.k,
-                                {
-                                  direction: "row",
-                                  align: "flex-start",
-                                  borderBottom: "1px solid #555",
-                                  justifyContent: "flex-start",
-                                  _hover: { bg: "#9ecdf2" },
-                                  children: [
-                                    (0, c.jsx)(sg.xu, {
-                                      mb: 6,
-                                      margin: 5,
-                                      marginRight: 10,
-                                      children: (0, c.jsx)(cg.E, {
-                                        src: e.prodImg,
-                                        w: 70,
-                                        h: 50,
-                                        alt: "Memory Card",
+                        children: j.slice(0, 5).map((e, t) =>
+                          (0, c.jsx)(wm.rU, {
+                            to: "/".concat(e.prodType, "/").concat(e.prodID),
+                            onClick: W,
+                            children: (0, c.jsxs)(
+                              lg.k,
+                              {
+                                direction: "row",
+                                align: "flex-start",
+                                borderBottom: "1px solid #555",
+                                justifyContent: "flex-start",
+                                _hover: { bg: "#9ecdf2" },
+                                children: [
+                                  (0, c.jsx)(sg.xu, {
+                                    mb: 6,
+                                    margin: 5,
+                                    marginRight: 10,
+                                    children: (0, c.jsx)(cg.E, {
+                                      src: e.prodImg,
+                                      w: 70,
+                                      h: 50,
+                                      alt: "Memory Card",
+                                    }),
+                                  }),
+                                  (0, c.jsxs)(sg.xu, {
+                                    mb: 6,
+                                    children: [
+                                      (0, c.jsx)(ug.x, {
+                                        fontSize: "l",
+                                        fontWeight: "600",
+                                        children: e.prodName,
                                       }),
-                                    }),
-                                    (0, c.jsxs)(sg.xu, {
-                                      mb: 6,
-                                      children: [
-                                        (0, c.jsx)(ug.x, {
-                                          fontSize: "l",
-                                          fontWeight: "600",
-                                          children: e.prodName,
-                                        }),
-                                        (0, c.jsxs)(ug.x, {
-                                          fontSize: "l",
-                                          color: "gray.500",
-                                          children: [
-                                            (0, c.jsxs)("span", {
-                                              className: "prodPrice",
-                                              children: [
-                                                e.prodPrice,
-                                                " ",
-                                                (0, c.jsx)("sup", {
-                                                  children: "\u0111",
-                                                }),
-                                              ],
-                                            }),
-                                            (0, c.jsxs)("span", {
-                                              className: "prodPriceSale",
-                                              children: [
-                                                e.prodPriceSale,
-                                                (0, c.jsx)("sup", {
-                                                  children: "\u0111",
-                                                }),
-                                                " ",
-                                              ],
-                                            }),
-                                          ],
-                                        }),
-                                      ],
-                                    }),
-                                  ],
-                                },
-                                t,
-                              ),
-                            }),
-                          ),
+                                      (0, c.jsxs)(ug.x, {
+                                        fontSize: "l",
+                                        color: "gray.500",
+                                        children: [
+                                          (0, c.jsxs)("span", {
+                                            className: "prodPrice",
+                                            children: [
+                                              e.prodPrice,
+                                              " ",
+                                              (0, c.jsx)("sup", {
+                                                children: "\u0111",
+                                              }),
+                                            ],
+                                          }),
+                                          (0, c.jsxs)("span", {
+                                            className: "prodPriceSale",
+                                            children: [
+                                              e.prodPriceSale,
+                                              (0, c.jsx)("sup", {
+                                                children: "\u0111",
+                                              }),
+                                              " ",
+                                            ],
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              },
+                              t,
+                            ),
+                          }),
+                        ),
                       }),
                   });
           return o
@@ -92207,20 +92199,18 @@
           let { children: t } = e;
           return (0, c.jsx)(XY.Provider, { value: "sumit", children: t });
         };
-      r
-        .createRoot(document.getElementById("root"))
-        .render(
-          (0, c.jsx)(Um, {
-            store: AY,
-            children: (0, c.jsx)(JY, {
-              children: (0, c.jsx)(QY, {
-                children: (0, c.jsx)(wm.VK, {
-                  children: (0, c.jsx)(xm, { children: (0, c.jsx)(hY, {}) }),
-                }),
+      r.createRoot(document.getElementById("root")).render(
+        (0, c.jsx)(Um, {
+          store: AY,
+          children: (0, c.jsx)(JY, {
+            children: (0, c.jsx)(QY, {
+              children: (0, c.jsx)(wm.VK, {
+                children: (0, c.jsx)(xm, { children: (0, c.jsx)(hY, {}) }),
               }),
             }),
           }),
-        ),
+        }),
+      ),
         o();
     })();
 })();

@@ -16,6 +16,28 @@ import RatingBar from "./RatingBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
+import Cookies from "js-cookie";
+const postSingleDataWish = async (data) => {
+  const userID = Cookies.get("userID");
+  try {
+    const postData = {
+      userID,
+      prodID: data.prodID,
+      colorID: data.colorID,
+      storageID: data.storageID,
+    };
+    let response = await axios.post(
+      `https://duantn-backend.onrender.com/wishlist/`,
+      postData,
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+  }
+};
 
 // const singleData = useSelector((store) => store.singleProduct.data);
 
@@ -30,7 +52,24 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-  console.log(data.prodID);
+
+  var navigate = useNavigate();
+  const toast = useToast();
+  const handleWish = () => {
+    postSingleDataWish(data)
+      .then((res) => {
+        toast({
+          title: "Đã thêm vào giỏ",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Error handling post:", error);
+        // Handle the error as needed, e.g., display an error toast
+      });
+  };
 
   return (
     <div className="div_1">
@@ -151,6 +190,9 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
+      <Button onClick={() => handleWish(prodID)}>
+        <BsSuitHeart /> Yêu Thích
+      </Button>
     </div>
   );
 };

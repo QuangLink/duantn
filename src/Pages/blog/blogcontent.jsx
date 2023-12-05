@@ -12,7 +12,9 @@ const BlogContent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:9000/blog/${id}`);
+        const response = await fetch(
+          `https://duantn-backend.onrender.com/blog/${id}`,
+        );
         const result = await response.json();
         setData(result);
 
