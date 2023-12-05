@@ -70,7 +70,7 @@ const ProductFilter = ({
       return (
         <Flex className="grid-container">
           <Box>
-            <Link href="/asus">
+          <Link to="/asus">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -81,7 +81,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/acer">
+            <Link to="/acer">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -92,7 +92,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/lenovo">
+            <Link to="/lenovo">
               <Box className="text-btn">
                 <img
                   width="100%"
@@ -103,7 +103,7 @@ const ProductFilter = ({
             </Link>
           </Box>
           <Box>
-            <Link href="/hp">
+            <Link to="/hp">
               <Box className="text-btn">
                 <img
                   width="100%"
