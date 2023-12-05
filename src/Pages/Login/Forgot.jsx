@@ -17,7 +17,7 @@ const Forgot = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:9000/users/forgot",
+        "https://duantn-backend.onrender.com/users/forgot",
         {
           method: "POST",
           headers: {
