@@ -37,7 +37,7 @@ const WishProduct = (props) => {
     let flag = false;
     const userID = Cookies.get("userID");
     axios
-      .get(`http://localhost:9000/wishlist/${userID}`)
+      .get(`https://duantn-backend.onrender.com/wishlist/${userID}`)
       .then((res) => {
         res.data.map((i) => {
           if (i.prodID === data.prodID) {
@@ -60,7 +60,7 @@ const WishProduct = (props) => {
             storageID: storageID,
           };
           axios
-            .post("http://localhost:9000/cart", newData)
+            .post("https://duantn-backend.onrender.com/cart", newData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
           toast({

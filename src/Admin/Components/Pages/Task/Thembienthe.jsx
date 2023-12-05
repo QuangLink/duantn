@@ -24,7 +24,9 @@ export default function Thembienthe() {
   const [variants, setVariants] = useState([]);
   const [prodSale, setProdSale] = useState("");
   const fetchProduct = async () => {
-    const response = await fetch("http://localhost:9000/products");
+    const response = await fetch(
+      "https://duantn-backend.onrender.com/products",
+    );
     const data = await response.json();
     setProducts(data);
     setFilteredProducts(data);
@@ -32,14 +34,18 @@ export default function Thembienthe() {
   };
 
   const fetchColor = async () => {
-    const response = await fetch("http://localhost:9000/products/colors");
+    const response = await fetch(
+      "https://duantn-backend.onrender.com/products/colors",
+    );
     const data = await response.json();
     setColor(data);
     setSelectedColor(data.length > 0 ? data[0].colorID : "");
   };
 
   const fetchStorage = async () => {
-    const response = await fetch("http://localhost:9000/products/storages");
+    const response = await fetch(
+      "https://duantn-backend.onrender.com/products/storages",
+    );
     const data = await response.json();
     setStorage(data);
     setSelectedStorage(data.length > 0 ? data[0].storageID : "");
@@ -91,13 +97,16 @@ export default function Thembienthe() {
       };
 
       // Send the new variant to the backend
-      const response = await fetch("http://localhost:9000/products/variants", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://duantn-backend.onrender.com/products/variants",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(variant),
         },
-        body: JSON.stringify(variant),
-      });
+      );
 
       // Check the response status
       if (response.ok) {

@@ -45,7 +45,9 @@
         }, []);
         const w = async () => {
             try {
-              let e = await x.Z.get("http://localhost:9000/products");
+              let e = await x.Z.get(
+                "https://duantn-backend.onrender.com/products",
+              );
               e.data && j(e.data || []);
             } catch (e) {}
           },

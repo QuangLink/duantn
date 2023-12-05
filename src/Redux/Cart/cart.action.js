@@ -22,7 +22,7 @@ export const getData = () => async (dispatch) => {
 
     // Make an HTTP request for each item in the cart
     for (let i = 0; i < cart.length; i++) {
-      let url = `http://localhost:9000/products/${cart[i].prodID}`;
+      let url = `https://duantn-backend.onrender.com/products/${cart[i].prodID}`;
 
       if (cart[i].colorID !== null) {
         url += `/${cart[i].colorID}`;

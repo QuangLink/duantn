@@ -79,7 +79,7 @@ export const postSingleDataWish = async (data) => {
       };
 
       let response = await axios.post(
-        `http://localhost:9000/wishlist/`,
+        `https://duantn-backend.onrender.com/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";

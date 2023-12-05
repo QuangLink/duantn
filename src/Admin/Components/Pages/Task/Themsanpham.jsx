@@ -55,7 +55,9 @@ const Themsanpham = () => {
   }, []);
   const fetchColors = async () => {
     try {
-      const response = await axios.get("http://localhost:9000/color");
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/color",
+      );
       setColors(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -63,7 +65,9 @@ const Themsanpham = () => {
   };
   const fetchStorage = async () => {
     try {
-      const response = await axios.get("http://localhost:9000/storage");
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/storage",
+      );
       setStorage(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -72,7 +76,9 @@ const Themsanpham = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:9000/category/catID");
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/category/catID",
+      );
       setCategories(response.data);
       const uniqueProdcatID = Array.from(
         new Set(response.data.map((product) => product.prodcatID)),
@@ -88,7 +94,9 @@ const Themsanpham = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:9000/products");
+      const response = await axios.get(
+        "https://duantn-backend.onrender.com/products",
+      );
       setProducts(response.data);
 
       const uniqueProdTypes = Array.from(
@@ -104,7 +112,7 @@ const Themsanpham = () => {
     const price = parseFloat(product.prodPrice);
     try {
       // Sau khi tính giá trước khi giảm, gửi yêu cầu POST với dữ liệu sản phẩm
-      await axios.post("http://localhost:9000/products", product);
+      await axios.post("https://duantn-backend.onrender.com/products", product);
       alert("Product added successfully");
       // Reset the form after successful submission
       setProduct({
@@ -125,7 +133,7 @@ const Themsanpham = () => {
 
   const editProduct = async (prodID) => {
     try {
-      await axios.put(`http://localhost:9000/products/${prodID}`);
+      await axios.put(`https://duantn-backend.onrender.com/products/${prodID}`);
       alert("Product edited successfully");
       fetchProducts(); // Refresh the list after deletion
     } catch (error) {

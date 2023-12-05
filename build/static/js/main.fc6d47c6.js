@@ -59132,10 +59132,13 @@
               r = e.email;
             YS.set("username", n);
             const o = (
-              await BS.Z.post("http://localhost:9000/users/googleusers", {
-                username: n,
-                email: r,
-              })
+              await BS.Z.post(
+                "https://duantn-backend.onrender.com/users/googleusers",
+                {
+                  username: n,
+                  email: r,
+                },
+              )
             ).data.payload.userID;
             return (
               YS.set("userID", o),
@@ -64929,7 +64932,7 @@
                 l(t),
                 "" === t
                   ? (k([]), T(!0))
-                  : fetch("http://localhost:9000/products/search")
+                  : fetch("https://duantn-backend.onrender.com/products/search")
                       .then((e) => e.json())
                       .then((e) => {
                         const t = e.filter(
@@ -68744,7 +68747,7 @@
         ZO = n.n(HO);
       const QO = (e) => {
         let { type: n, heading: r } = e;
-        const o = { sale: "http://localhost:9000/category/" + n },
+        const o = { sale: "https://duantn-backend.onrender.com/category/" + n },
           [i, a] = (0, t.useState)([]);
         return (
           (0, t.useEffect)(() => {
@@ -69142,7 +69145,7 @@
               !(async function () {
                 try {
                   const e = await BS.Z.get(
-                    "http://localhost:9000/feedback/".concat(n),
+                    "https://duantn-backend.onrender.com/feedback/".concat(n),
                   );
                   if (200 === e.status) {
                     const t = e.data;
@@ -69163,7 +69166,7 @@
               !(async function () {
                 try {
                   const e = await BS.Z.get(
-                    "http://localhost:9000/feedback/".concat(n),
+                    "https://duantn-backend.onrender.com/feedback/".concat(n),
                   );
                   if (200 === e.status) {
                     const t = e.data;
@@ -69260,8 +69263,12 @@
                         };
                         try {
                           200 ===
-                          (await BS.Z.post("http://localhost:9000/feedback", e))
-                            .status
+                          (
+                            await BS.Z.post(
+                              "https://duantn-backend.onrender.com/feedback",
+                              e,
+                            )
+                          ).status
                             ? (a(""), u(""), p(!0))
                             : console.error(
                                 "Th\xeam ph\u1ea3n h\u1ed3i th\u1ea5t b\u1ea1i",
@@ -69486,7 +69493,10 @@
                   storageID: e.storageID,
                   userID: t,
                 };
-              let i = await BS.Z.post("http://localhost:9000/wishlist/", o);
+              let i = await BS.Z.post(
+                "https://duantn-backend.onrender.com/wishlist/",
+                o,
+              );
               return (window.location.href = "/wishlist"), i.data;
             } catch (n) {
               throw (console.log(n), n);
@@ -69575,7 +69585,7 @@
                   e({ type: HC });
                   try {
                     let n = await BS.Z.get(
-                      "http://localhost:9000/products/".concat(t),
+                      "https://duantn-backend.onrender.com/products/".concat(t),
                     );
                     e({ type: ZC, payload: n.data });
                   } catch (p) {
@@ -70519,7 +70529,9 @@
             h = YS.get("username"),
             [m, g] = (0, t.useState)([]);
           (0, t.useEffect)(() => {
-            BS.Z.get("http://localhost:9000/users/address/".concat(h))
+            BS.Z.get(
+              "https://duantn-backend.onrender.com/users/address/".concat(h),
+            )
               .then((e) => {
                 g(e.data);
               })
@@ -70827,7 +70839,7 @@
                                     200 ===
                                       (
                                         await BS.Z.post(
-                                          "http://localhost:9000/orders/cod",
+                                          "https://duantn-backend.onrender.com/orders/cod",
                                           { userID: e, amount: i, userCart: r },
                                           { withCredentials: !0 },
                                         )
@@ -70872,7 +70884,7 @@
                                 setTimeout(async () => {
                                   try {
                                     const n = await BS.Z.post(
-                                      "http://localhost:9000/orders/create_payment_url",
+                                      "https://duantn-backend.onrender.com/orders/create_payment_url",
                                       {
                                         userID: e,
                                         amount: i,
@@ -70947,7 +70959,9 @@
             })(t),
             r = [];
           for (let e = 0; e < n.length; e++) {
-            let t = "http://localhost:9000/products/".concat(n[e].prodID);
+            let t = "https://duantn-backend.onrender.com/products/".concat(
+              n[e].prodID,
+            );
             null !== n[e].colorID && (t += "/".concat(n[e].colorID)),
               null !== n[e].storageID && (t += "/".concat(n[e].storageID));
             const o = await BS.Z.get(t, {});
@@ -71722,7 +71736,9 @@
             a = ag(),
             [s, l] = ((0, Qm.s0)(), (0, t.useState)([]));
           (0, t.useEffect)(() => {
-            BS.Z.get("http://localhost:9000/users/address/".concat(e))
+            BS.Z.get(
+              "https://duantn-backend.onrender.com/users/address/".concat(e),
+            )
               .then((e) => {
                 console.log("Server response:", e.data), l(e.data);
               })
@@ -71879,7 +71895,7 @@
                                               mobile: i.current.setmobile.value,
                                             },
                                             n =
-                                              "http://localhost:9000/users/address";
+                                              "https://duantn-backend.onrender.com/users/address";
                                           s &&
                                           Array.isArray(s) &&
                                           0 !== s.length
@@ -72000,7 +72016,7 @@
                             borderRadius: "5px",
                             onClick: () => {
                               const t =
-                                "http://localhost:9000/users/address/".concat(
+                                "https://duantn-backend.onrender.com/users/address/".concat(
                                   e,
                                 );
                               BS.Z.delete(t)
@@ -72092,7 +72108,7 @@
         },
         lM = async () => {
           try {
-            let e = await BS.Z.get("http://localhost:9000/cart");
+            let e = await BS.Z.get("https://duantn-backend.onrender.com/cart");
             return await e.data;
           } catch (KY) {
             return KY;
@@ -72113,7 +72129,9 @@
             [p, f] = (0, t.useState)(!1),
             h = async (e) => {
               try {
-                await BS.Z.delete("http://localhost:9000/cart/".concat(e));
+                await BS.Z.delete(
+                  "https://duantn-backend.onrender.com/cart/".concat(e),
+                );
                 f(!p);
               } catch (KY) {
                 return KY;
@@ -72267,7 +72285,7 @@
             })
           );
         },
-        uM = "http://localhost:9000/category/",
+        uM = "https://duantn-backend.onrender.com/category/",
         dM = {
           sale: uM + "sale",
           phone: uM + "phone",
@@ -73131,7 +73149,9 @@
             (0, t.useEffect)(() => {
               (async () => {
                 try {
-                  const e = await fetch("http://localhost:9000/blog"),
+                  const e = await fetch(
+                      "https://duantn-backend.onrender.com/blog",
+                    ),
                     t = await e.json();
                   i(t), console.log(t);
                 } catch (e) {
@@ -73475,7 +73495,7 @@
                       e({ type: qS });
                       try {
                         let t = await BS.Z.post(
-                          "http://localhost:9000/users/login",
+                          "https://duantn-backend.onrender.com/users/login",
                           n,
                         );
                         const r = t.data.token,
@@ -73661,7 +73681,9 @@
         (0, t.useEffect)(() => {
           (async () => {
             try {
-              const e = await BS.Z.get("http://localhost:9000/users/");
+              const e = await BS.Z.get(
+                "https://duantn-backend.onrender.com/users/",
+              );
               d(e.data.map((e) => e.username)), f(e.data.map((e) => e.email));
             } catch (e) {
               console.error("Error fetching usernames:", e);
@@ -73782,7 +73804,7 @@
                       try {
                         const e = { username: r, email: i, password: s },
                           t = await BS.Z.post(
-                            "http://localhost:9000/users/register",
+                            "https://duantn-backend.onrender.com/users/register",
                             e,
                           );
                         t.data && t.data.error
@@ -76952,9 +76974,13 @@
                     storageID: e.storageID,
                   };
                   return (
-                    await BS.Z.post("http://localhost:9000/wishlist/", t, {
-                      headers: { "Content-Type": "application/json" },
-                    })
+                    await BS.Z.post(
+                      "https://duantn-backend.onrender.com/wishlist/",
+                      t,
+                      {
+                        headers: { "Content-Type": "application/json" },
+                      },
+                    )
                   ).data;
                 } catch (t) {
                   console.log(
@@ -78838,7 +78864,7 @@
               a("all"), l(!0);
               try {
                 let e = await BS.Z.get(
-                  "http://localhost:9000/category/".concat(n),
+                  "https://duantn-backend.onrender.com/category/".concat(n),
                 );
                 console.log("in the logic func try", e.data),
                   e.data &&
@@ -79023,7 +79049,9 @@
             e({
               type: "products/success",
               payload: (
-                await BS.Z.get("http://localhost:9000/wishlist/".concat(t))
+                await BS.Z.get(
+                  "https://duantn-backend.onrender.com/wishlist/".concat(t),
+                )
               ).data,
             });
           } catch (n) {
@@ -79137,7 +79165,11 @@
                     onClick: () => {
                       let e = !1;
                       const r = YS.get("userID");
-                      BS.Z.get("http://localhost:9000/wishlist/".concat(r))
+                      BS.Z.get(
+                        "https://duantn-backend.onrender.com/wishlist/".concat(
+                          r,
+                        ),
+                      )
                         .then((o) => {
                           if (
                             (o.data.map((t) => {
@@ -79163,7 +79195,10 @@
                               colorID: d,
                               storageID: h,
                             };
-                            BS.Z.post("http://localhost:9000/cart", e)
+                            BS.Z.post(
+                              "https://duantn-backend.onrender.com/cart",
+                              e,
+                            )
                               .then((e) => console.log(e))
                               .catch((e) => console.log(e)),
                               t({
@@ -79201,7 +79236,9 @@
         }, [n, a]);
         const u = (e, t) => {
           BS.Z.delete(
-            "http://localhost:9000/wishlist/".concat(e, "/").concat(t),
+            "https://duantn-backend.onrender.com/wishlist/"
+              .concat(e, "/")
+              .concat(t),
           )
             .then((e) => {
               console.log(e), a(vR());
@@ -79626,7 +79663,9 @@
           }, []);
           const r = async () => {
             try {
-              const e = await BS.Z.get("http://localhost:9000/orders/");
+              const e = await BS.Z.get(
+                "https://duantn-backend.onrender.com/orders/",
+              );
               n(e.data);
             } catch (e) {
               console.error("Error fetching products:", e);
@@ -79748,7 +79787,7 @@
                                             (async (e) => {
                                               try {
                                                 await BS.Z.delete(
-                                                  "http://localhost:9000/orders/".concat(
+                                                  "https://duantn-backend.onrender.com/orders/".concat(
                                                     e,
                                                   ),
                                                 ),
@@ -80177,7 +80216,7 @@
         const u = async () => {
             try {
               const t = await BS.Z.get(
-                "http://localhost:9000/orders/user/".concat(e),
+                "https://duantn-backend.onrender.com/orders/user/".concat(e),
               );
               r(t.data);
             } catch (t) {
@@ -80187,7 +80226,9 @@
           [d, p] = (0, t.useState)([]),
           { isOpen: f, onOpen: h, onClose: m } = og();
         (0, t.useEffect)(() => {
-          BS.Z.get("http://localhost:9000/users/address/".concat(o))
+          BS.Z.get(
+            "https://duantn-backend.onrender.com/users/address/".concat(o),
+          )
             .then((e) => {
               p(e.data);
             })
@@ -80347,7 +80388,7 @@
                                               mobile: i.current.setmobile.value,
                                             },
                                             t =
-                                              "http://localhost:9000/users/address";
+                                              "https://duantn-backend.onrender.com/users/address";
                                           d &&
                                           Array.isArray(d) &&
                                           0 !== d.length
@@ -80750,7 +80791,7 @@
                                       var e;
                                       (e = o[0].infoID),
                                         BS.Z.put(
-                                          "http://localhost:9000/orders/update-order/".concat(
+                                          "https://duantn-backend.onrender.com/orders/update-order/".concat(
                                             e,
                                           ),
                                           { status: "\u0110\xe3 h\u1ee7y" },
@@ -83970,7 +84011,7 @@
                         isClosable: !0,
                       });
                     const c = await fetch(
-                        "http://localhost:9000/users/password",
+                        "https://duantn-backend.onrender.com/users/password",
                         {
                           method: "PUT",
                           headers: { "Content-Type": "application/json" },
@@ -84607,7 +84648,9 @@
             (async () => {
               try {
                 const t = await BS.Z.get(
-                  "http://localhost:9000/orders/vnpay_return".concat(e.search),
+                  "https://duantn-backend.onrender.com/orders/vnpay_return".concat(
+                    e.search,
+                  ),
                 );
                 if (
                   (console.log("Response from backend:", t.data),
@@ -84615,7 +84658,7 @@
                   t.data)
                 ) {
                   const e = YS.get("email");
-                  await BS.Z.post("http://localhost:9000/mail/", {
+                  await BS.Z.post("https://duantn-backend.onrender.com/mail/", {
                     email: e,
                     code: t.data.code,
                     vnp_Amount: t.data.vnp_Amount,
@@ -84835,29 +84878,37 @@
         },
         IB = async () => {
           try {
-            return (await BS.Z.get("http://localhost:9000/products/total"))
-              .data;
+            return (
+              await BS.Z.get(
+                "https://duantn-backend.onrender.com/products/total",
+              )
+            ).data;
           } catch (e) {
             throw (console.error("Error fetching total products:", e), e);
           }
         },
         DB = async () => {
           try {
-            return (await BS.Z.get("http://localhost:9000/orders/")).data;
+            return (
+              await BS.Z.get("https://duantn-backend.onrender.com/orders/")
+            ).data;
           } catch (e) {
             throw (console.error("Error fetching products:", e), e);
           }
         },
         RB = async () => {
           try {
-            return (await BS.Z.get("http://localhost:9000/users")).data;
+            return (await BS.Z.get("https://duantn-backend.onrender.com/users"))
+              .data;
           } catch (e) {
             throw (console.error("Error fetching users:", e), e);
           }
         },
         zB = async () => {
           try {
-            return (await BS.Z.get("http://localhost:9000/orders/")).data;
+            return (
+              await BS.Z.get("https://duantn-backend.onrender.com/orders/")
+            ).data;
           } catch (e) {
             throw (console.error("Error fetching orders:", e), e);
           }
@@ -86141,7 +86192,9 @@
           }, []);
           const b = async () => {
               try {
-                const e = await BS.Z.get("http://localhost:9000/products");
+                const e = await BS.Z.get(
+                  "https://duantn-backend.onrender.com/products",
+                );
                 r(e.data);
                 const t = Array.from(new Set(e.data.map((e) => e.catName)));
                 i(t);
@@ -86478,7 +86531,7 @@
                                                 (async (e) => {
                                                   try {
                                                     await BS.Z.delete(
-                                                      "http://localhost:9000/products/".concat(
+                                                      "https://duantn-backend.onrender.com/products/".concat(
                                                         e,
                                                       ),
                                                     ),
@@ -86580,7 +86633,9 @@
             }, [i, h, u, p, e]);
           const g = async () => {
               try {
-                const e = await BS.Z.get("http://localhost:9000/orders/");
+                const e = await BS.Z.get(
+                  "https://duantn-backend.onrender.com/orders/",
+                );
                 n(e.data);
               } catch (e) {
                 console.error("Error fetching products:", e);
@@ -86589,7 +86644,9 @@
             v = async (e, t) => {
               try {
                 await BS.Z.put(
-                  "http://localhost:9000/orders/update-order/".concat(e),
+                  "https://duantn-backend.onrender.com/orders/update-order/".concat(
+                    e,
+                  ),
                   { status: t },
                 ),
                   g();
@@ -87917,7 +87974,7 @@
           const w = async () => {
               try {
                 const e = await BS.Z.get(
-                  "http://localhost:9000/category/catID",
+                  "https://duantn-backend.onrender.com/category/catID",
                 );
                 o(e.data);
                 const t = Array.from(new Set(e.data.map((e) => e.prodcatID)));
@@ -87930,7 +87987,9 @@
             },
             S = async () => {
               try {
-                const e = await BS.Z.get("http://localhost:9000/products");
+                const e = await BS.Z.get(
+                  "https://duantn-backend.onrender.com/products",
+                );
                 n(e.data);
                 const t = Array.from(new Set(e.data.map((e) => e.prodType)));
                 a(t);
@@ -87941,7 +88000,10 @@
             j = async () => {
               parseFloat(g.prodPrice);
               try {
-                await BS.Z.post("http://localhost:9000/products", g),
+                await BS.Z.post(
+                  "https://duantn-backend.onrender.com/products",
+                  g,
+                ),
                   alert("Product added successfully"),
                   v({
                     prodName: "",
@@ -88512,7 +88574,7 @@
                 t = e.get("email"),
                 r = e.get("token");
               BS.Z.get(
-                "http://localhost:9000/users/verify?email="
+                "https://duantn-backend.onrender.com/users/verify?email="
                   .concat(t, "&token=")
                   .concat(r),
               )
@@ -88573,11 +88635,14 @@
               onSubmit: async (t) => {
                 t.preventDefault();
                 try {
-                  const t = await fetch("http://localhost:9000/users/forgot", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email: e }),
-                  });
+                  const t = await fetch(
+                    "https://duantn-backend.onrender.com/users/forgot",
+                    {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email: e }),
+                    },
+                  );
                   404 === t.status
                     ? r({
                         title:
@@ -88706,7 +88771,7 @@
                               r = e.get("token");
                             t && r
                               ? BS.Z.put(
-                                  "http://localhost:9000/users/resetpass",
+                                  "https://duantn-backend.onrender.com/users/resetpass",
                                   { email: t, token: r, password: i },
                                 )
                                   .then((e) => {
@@ -88776,17 +88841,23 @@
           [k, E] = (0, t.useState)("");
         (0, t.useEffect)(() => {
           (async () => {
-            const e = await fetch("http://localhost:9000/products"),
+            const e = await fetch(
+                "https://duantn-backend.onrender.com/products",
+              ),
               t = await e.json();
             n(t), o(t), f(t.length > 0 ? t[0].prodID : "");
           })(),
             (async () => {
-              const e = await fetch("http://localhost:9000/products/colors"),
+              const e = await fetch(
+                  "https://duantn-backend.onrender.com/products/colors",
+                ),
                 t = await e.json();
               a(t), m(t.length > 0 ? t[0].colorID : "");
             })(),
             (async () => {
-              const e = await fetch("http://localhost:9000/products/storages"),
+              const e = await fetch(
+                  "https://duantn-backend.onrender.com/products/storages",
+                ),
                 t = await e.json();
               l(t), v(t.length > 0 ? t[0].storageID : "");
             })();
@@ -88892,7 +88963,7 @@
                                 };
                                 (
                                   await fetch(
-                                    "http://localhost:9000/products/variants",
+                                    "https://duantn-backend.onrender.com/products/variants",
                                     {
                                       method: "POST",
                                       headers: {
@@ -89105,7 +89176,9 @@
         (0, t.useEffect)(() => {
           (async () => {
             try {
-              const t = await fetch("http://localhost:9000/blog/".concat(e)),
+              const t = await fetch(
+                  "https://duantn-backend.onrender.com/blog/".concat(e),
+                ),
                 n = await t.json();
               r(n), 0 === n.length && i(!0);
             } catch (t) {
@@ -89136,7 +89209,7 @@
         (0, t.useEffect)(() => {
           (async () => {
             try {
-              const e = await fetch("http://localhost:9000/blog"),
+              const e = await fetch("https://duantn-backend.onrender.com/blog"),
                 t = await e.json();
               n(t), console.log(t);
             } catch (e) {
@@ -89211,7 +89284,9 @@
             r = window.location.pathname.split("/")[3];
           return (
             (0, t.useEffect)(() => {
-              fetch("http://localhost:9000/products/edit/".concat(r))
+              fetch(
+                "https://duantn-backend.onrender.com/products/edit/".concat(r),
+              )
                 .then((e) => e.json())
                 .then((e) => {
                   n(e);
