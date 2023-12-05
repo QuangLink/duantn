@@ -14,7 +14,7 @@ import "react-slideshow-image/dist/styles.css";
 import Address from "./Address";
 export const GetData = async () => {
   try {
-    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
+    let response = await axios.get(`http://localhost:9000/cart`);
 
     return await response.data;
   } catch (err) {
@@ -30,9 +30,7 @@ const CheckoutPage = () => {
   const [change, setChange] = useState(false);
   const DeleteRequest = async (cartID) => {
     try {
-      let response = await axios.delete(
-        `https://duantn-backend.onrender.com/cart/${cartID}`,
-      );
+      let response = await axios.delete(`http://localhost:9000/cart/${cartID}`);
       setChange(!change);
     } catch (err) {
       return err;

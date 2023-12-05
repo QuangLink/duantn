@@ -71,7 +71,7 @@ const AllRoutes = () => {
         <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/duantn" element={<Home />}></Route>
+  
         <Route
           path="/admin/dashboard"
           element={

@@ -142,7 +142,7 @@ const ProductFilter = ({
   const CategoryProduct2 = () => {
     if (
       type === "phone" ||
-      type === "applephone" ||
+      type === "apple/phone" ||
       type === "xiaomi" ||
       type === "samsung"
     ) {
@@ -362,4 +362,4 @@ const ProductFilter = ({
     </div>
   );
 };
-export default ProductFilter;
+export default React.memo(ProductFilter);

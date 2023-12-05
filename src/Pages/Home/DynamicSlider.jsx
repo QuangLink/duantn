@@ -24,7 +24,7 @@ import Heading from "./Heading";
 import { Link } from "react-router-dom";
 import "./stylehome.css";
 
-const ItemCardTest = ({ type, heading }) => {
+const DynamicSlider = ({ type, heading }) => {
   return (
     <Center>
       <Center mb="2" w="80%" display="flex" flexWrap="wrap">
@@ -184,4 +184,4 @@ const ItemCardTest = ({ type, heading }) => {
   );
 };
 
-export default ItemCardTest;
+export default React.memo(DynamicSlider);

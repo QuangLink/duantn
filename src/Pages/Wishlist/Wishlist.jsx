@@ -35,7 +35,7 @@ function Wishlist({ typeOfProduct }) {
 
   const handleDelete = (userID, prodID, storageID, colorID) => {
     axios
-      .delete(`https://duantn-backend.onrender.com/wishlist/`, {
+      .delete(`http://localhost:9000/wishlist/`, {
         data: { userID, prodID, colorID, storageID },
       })
       .then((res) => {
