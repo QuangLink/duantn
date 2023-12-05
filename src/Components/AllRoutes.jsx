@@ -10,7 +10,6 @@ import Payments from "../Pages/payment/Payments";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import AdminRoute from "./PrivateRoute/AdminRoutes";
-import ProductList from "../testlist";
 import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
@@ -246,7 +245,7 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/test" element={<ProductList />}></Route>
+  
       </Routes>
     </div>
   );
