@@ -25,7 +25,7 @@ import { Link } from "react-router-dom";
 const ItemList = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="90%" display="flex" flexWrap="wrap">
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
         <Flex
           justifyContent="center"
           w="100%"
@@ -42,7 +42,7 @@ const ItemList = ({ type, heading }) => {
               breakpoints={{
                 0: {
                   slidesPerView: 2,
-                  spaceBetween: 1,
+                  spaceBetween: 5,
                 },
                 768: {
                   slidesPerView: 2,
@@ -84,20 +84,20 @@ const ItemList = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto">
+                        <Box className="list" w="" h="auto">
                           <Box className="img">
                             <Square
                               m="auto"
-                              w={{ lg: 200, sm: 150 }}
-                              h={{ lg: 200, sm: 150 }}
+                              w={{ lg: 200, base: 150 }}
+                              h={{ lg: 200, base: 150 }}
                               transition="transform 0.3s ease-in-out"
                               _hover={{ transform: "scale(1.1)" }}
                             >
                               <Image
                                 src={`${i.img}`}
 
-                                maxW={{ lg: 200, sm: 150 }}
-                                maxH={{ lg: 150, sm: 100 }}
+                                maxW={{ lg: 200, base: 150 }}
+                                maxH={{ lg: 150, base: 100 }}
                                 objectFit={"fill"}
                               />
                             </Square>

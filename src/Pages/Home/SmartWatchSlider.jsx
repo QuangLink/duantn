@@ -27,17 +27,16 @@ import "./stylehome.css";
 const ItemCardTest = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', sm: '90%' }} display="flex" flexWrap="wrap">
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
         <Box
-          display={{ lg: 'none', sm: 'block' }}
+          display={{ lg: 'none', base: 'block' }}
 
           w="100%"
           h="auto"
           position="relative"
           overflow="hidden"
           borderRadius="15px"
-          m={1}
-          mr={"1%"}
+          mt={5}
         >
           <Image
             src="https://i.postimg.cc/YCRGGw0Z/Untitled.png"
@@ -89,7 +88,7 @@ const ItemCardTest = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            display={{ lg: 'block', sm: 'none' }}
+            display={{ lg: 'block', base: 'none' }}
             w="29%"
             h="auto"
             position="relative"
@@ -146,7 +145,7 @@ const ItemCardTest = ({ type, heading }) => {
 
           {/* Swiper Slider */}
           <Box
-            w={{ lg: '70%', sm: '100%' }}  // Adjust the width of the Swiper slider as needed
+            w={{ lg: '70%', base: '100%' }}  // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
@@ -154,7 +153,7 @@ const ItemCardTest = ({ type, heading }) => {
               breakpoints={{
                 0: {
                   slidesPerView: 2,
-                  spaceBetween: 1,
+                  spaceBetween: 5,
                 },
                 768: {
                   slidesPerView: 2,

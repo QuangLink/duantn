@@ -89,9 +89,9 @@ const TimeDeal = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w={{ lg: "80%", sm: "90%" }}
+      w={{ lg: "80%", base: "90%" }}
       m="auto"
-      mt="6"
+      mt="3"
       cursor="pointer"
       textAlign="center"
       backgroundColor="black"
@@ -128,7 +128,7 @@ const TimeDeal = ({ type, heading }) => {
           </Box>
 
           <Text>
-            <Text fontSize={{ lg: 40, sm: 25 }} color="#ffd559">
+            <Text fontSize={{ lg: 40, base: 25 }} color="#ffd559">
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
@@ -220,7 +220,7 @@ const TimeDeal = ({ type, heading }) => {
                     className="list"
                     p="2"
                     mt="4"
-                    m="2"
+                    m={{ lg: 2, base: 1 }}
                     backgroundColor="white"
                     borderRadius="15px "
                     // boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
@@ -231,52 +231,42 @@ const TimeDeal = ({ type, heading }) => {
                     <Box className="img">
                       <Square
                         m="auto"
-                        w={{ lg: 200, sm: 150 }}
-                        h={{ lg: 200, sm: 150 }}
+                        w={{ lg: 200, base: 150 }}
+                        h={{ lg: 200, base: 150 }}
                         transition="transform 0.3s ease-in-out"
                         _hover={{ transform: "scale(1.1)" }}
                       >
                         <Image
                           src={`${i.prodImg}`}
-                          maxW={{ lg: 200, sm: 150 }}
-                          maxH={{ lg: 150, sm: 100 }}
+                          maxW={{ base: 150, lg: 200 }}
+                          maxH={{ base: 100, lg: 150 }}
                           objectFit={"cover"}
                         />
                       </Square>
 
                       <Text
-                        display={{ lg: "none", sm: "block" }}
+                        display={{ lg: "none", base: "block" }}
                         mt="2"
                         height="70px"
                         fontFamily={"Arial"}
                         color="#424245"
                         noOfLines={2}
                         textAlign="center"
-                        fontSize="17px"
+                        fontSize={{ lg: "17px", base: "15px" }}
                         _hover={{ color: "blue" }}
                         fontWeight="700"
                       >
-                        {i.prodName.substring(0, i.prodName.length / 1.5) +
+                        {i.prodName.substring(0, i.prodName.length / 0.5) +
                           "..."}
-                      </Text>
-                      <Text
-                        display={{ lg: "block", sm: "none" }}
-                        mt="2"
-                        height="70px"
-                        fontFamily={"Arial"}
-                        color="#424245"
-                        noOfLines={2}
-                        textAlign="center"
-                        fontSize="17px"
-                        _hover={{ color: "blue" }}
-                        fontWeight="700"
-                      >
-                        {i.prodName}
                       </Text>
                       <Box mt="2.5" m="10px 10px 10px 10px">
                         <Flex>
                           <Square>
-                            <Text color="gray.600" fontSize="15px" m="auto">
+                            <Text
+                              color="gray.600"
+                              fontSize={{ lg: "14px", base: "12px" }}
+                              m="auto"
+                            >
                               Giá mới:{" "}
                             </Text>
                           </Square>
@@ -284,7 +274,7 @@ const TimeDeal = ({ type, heading }) => {
                             <Text
                               textAlign="center"
                               fontWeight="650"
-                              fontSize="18px"
+                              fontSize={{ lg: "18px", base: "14px" }}
                               m="auto"
                               ml="1"
                               color="red"
@@ -301,14 +291,18 @@ const TimeDeal = ({ type, heading }) => {
                         {i.prodSale !== 0 && (
                           <>
                             <Flex>
-                              <Text color="gray.600" fontSize="14px" mb="2%">
+                              <Text
+                                color="gray.600"
+                                fontSize={{ lg: "14px", base: "12px" }}
+                                mb="2%"
+                              >
                                 Giá gốc:{" "}
                               </Text>
                               {"  "}
                               <Text
                                 as="s"
                                 color="gray.600"
-                                fontSize="14px"
+                                fontSize={{ lg: "14px", base: "12px" }}
                                 ml="2"
                               >
                                 {i.prodPriceSale &&
@@ -321,7 +315,7 @@ const TimeDeal = ({ type, heading }) => {
                             {i.prodSale >= 20 ? (
                               <Box
                                 borderRadius="5px"
-                                w={{ lg: "70%", sm: "100%" }}
+                                w={{ lg: "70%", base: "100%" }}
                                 backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
                                 color="#fff "
                                 _hover={{ color: "black" }}
@@ -334,14 +328,17 @@ const TimeDeal = ({ type, heading }) => {
                               </Box>
                             ) : (
                               <Flex>
-                                <Text color="gray.600" fontSize="14px">
+                                <Text
+                                  color="gray.600"
+                                  fontSize={{ lg: "14px", base: "12px" }}
+                                >
                                   Giảm giá:{" "}
                                 </Text>
                                 {"  "}
                                 <Text
                                   bgColor="#fff0e9"
                                   color="#eb5757"
-                                  fontSize="14px"
+                                  fontSize={{ lg: "14px", base: "12px" }}
                                   fontWeight="700"
                                   borderRadius="5px"
                                   ml="1"
@@ -364,10 +361,10 @@ const TimeDeal = ({ type, heading }) => {
                               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"
                             />
                           </Box>
-                          <Box m={{ lg: "1% 3%", sm: "2% 3%" }}>
+                          <Box m={{ lg: "1% 3%", base: "3% 3%" }}>
                             <Text
                               m="auto"
-                              fontSize={{ lg: "auto", sm: "14px" }}
+                              fontSize={{ lg: "auto", base: "12px" }}
                             >
                               <b>Còn {i.QTY}/100 suất</b>
                             </Text>
