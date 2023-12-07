@@ -34,7 +34,39 @@ const ColorFilter = ({ colors, applyFilter }) => {
     </div>
   );
 };
+const RamFilter = ({ rams, applyFilter }) => {
+  const [selectedRam, setSelectedRam] = useState("");
 
+  const handleRamClick = (ram) => {
+    applyFilter(ram);
+    setSelectedRam(ram);
+  };
+
+  return (
+    <div>
+      {rams.map((ram) => (
+        <Button
+          key={ram}
+          onClick={() => handleRamClick(ram)}
+          bg={selectedRam === ram ? "#22a8ff" : "white"}
+          color={selectedRam === ram ? "white" : "black"}
+          borderRadius="10px"
+          fontSize="md"
+          variant="outline"
+          p={6}
+          _hover={
+            !selectedRam || selectedRam === ram
+              ? { backgroundColor: "#22a8ff" }
+              : {}
+          }
+          style={{ marginRight: "10px", marginBottom: "10px" }}
+        >
+          {ram}
+        </Button>
+      ))}
+    </div>
+  );
+}
 const StorageValueFilter = ({ storageValues, applyFilter }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -69,4 +101,4 @@ const StorageValueFilter = ({ storageValues, applyFilter }) => {
   );
 };
 
-export { ColorFilter, StorageValueFilter };
+export { ColorFilter, StorageValueFilter,RamFilter };

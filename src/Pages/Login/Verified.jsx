@@ -15,7 +15,7 @@ const Verified = () => {
 
     axios
       .get(
-        `https://duantn-backend.onrender.com/users/verify?email=${email}&token=${token}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/verify?email=${email}&token=${token}`,
       )
       .then((response) => {
         setMessage(response.data.message);

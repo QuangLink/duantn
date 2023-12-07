@@ -39,7 +39,7 @@ const postSingleData = async (data) => {
     };
 
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/cart/`,
+      `${process.env.REACT_APP_DATABASE_API_URL}/cart/`,
       postData,
     );
     return response.data;
@@ -58,7 +58,7 @@ const ItemCard5 = ({ type, heading }) => {
   const onGetData = async () => {
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
 
       if (responce.data) {

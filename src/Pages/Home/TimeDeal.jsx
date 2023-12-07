@@ -74,7 +74,7 @@ const TimeDeal = ({ type, heading }) => {
   const onGetData = async () => {
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/products`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
 
       if (responce.data) {
@@ -89,7 +89,7 @@ const TimeDeal = ({ type, heading }) => {
   return (
     <Box
       justifyContent="center"
-      w="80%"
+      w={{ lg: "80%", sm: "90%" }}
       m="auto"
       mt="6"
       cursor="pointer"
@@ -128,7 +128,7 @@ const TimeDeal = ({ type, heading }) => {
           </Box>
 
           <Text>
-            <Text fontSize="40px" color="#ffd559">
+            <Text fontSize={{ lg: 40, sm: 25 }} color="#ffd559">
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
@@ -190,8 +190,8 @@ const TimeDeal = ({ type, heading }) => {
           className="mySwiper"
           breakpoints={{
             0: {
-              slidesPerView: 1,
-              spaceBetween: 5,
+              slidesPerView: 2,
+              spaceBetween: 1,
             },
             768: {
               slidesPerView: 2,
@@ -231,20 +231,36 @@ const TimeDeal = ({ type, heading }) => {
                     <Box className="img">
                       <Square
                         m="auto"
-                        w={200}
-                        h={200}
+                        w={{ lg: 200, sm: 150 }}
+                        h={{ lg: 200, sm: 150 }}
                         transition="transform 0.3s ease-in-out"
                         _hover={{ transform: "scale(1.1)" }}
                       >
                         <Image
                           src={`${i.prodImg}`}
-                          maxW={200}
-                          maxH={150}
+                          maxW={{ lg: 200, sm: 150 }}
+                          maxH={{ lg: 150, sm: 100 }}
                           objectFit={"cover"}
                         />
                       </Square>
 
                       <Text
+                        display={{ lg: "none", sm: "block" }}
+                        mt="2"
+                        height="70px"
+                        fontFamily={"Arial"}
+                        color="#424245"
+                        noOfLines={2}
+                        textAlign="center"
+                        fontSize="17px"
+                        _hover={{ color: "blue" }}
+                        fontWeight="700"
+                      >
+                        {i.prodName.substring(0, i.prodName.length / 1.5) +
+                          "..."}
+                      </Text>
+                      <Text
+                        display={{ lg: "block", sm: "none" }}
                         mt="2"
                         height="70px"
                         fontFamily={"Arial"}
@@ -305,7 +321,7 @@ const TimeDeal = ({ type, heading }) => {
                             {i.prodSale >= 20 ? (
                               <Box
                                 borderRadius="5px"
-                                w="70%"
+                                w={{ lg: "70%", sm: "100%" }}
                                 backgroundImage="linear-gradient(135deg, rgb(255, 87, 87) 0%, rgb(255, 0, 0) 100%)"
                                 color="#fff "
                                 _hover={{ color: "black" }}
@@ -348,8 +364,11 @@ const TimeDeal = ({ type, heading }) => {
                               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"
                             />
                           </Box>
-                          <Box m="1% 3%">
-                            <Text m="auto">
+                          <Box m={{ lg: "1% 3%", sm: "2% 3%" }}>
+                            <Text
+                              m="auto"
+                              fontSize={{ lg: "auto", sm: "14px" }}
+                            >
                               <b>Còn {i.QTY}/100 suất</b>
                             </Text>
                           </Box>

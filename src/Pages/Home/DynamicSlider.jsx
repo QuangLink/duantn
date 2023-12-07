@@ -27,7 +27,54 @@ import "./stylehome.css";
 const DynamicSlider = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
+      <Center mb="2" w={{ lg: '80%', sm: '90%' }} display="flex" flexWrap="wrap">
+        <Box
+          display={{ lg: 'none', sm: 'block' }}
+          w="100%"
+          h="auto"
+          position="relative"
+          overflow="hidden"
+          borderRadius="15px"
+          m={1}
+          mr={"1%"}
+        >
+          <Image
+            src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
+            alt="Smart Watch"
+            height="100%"
+
+            loading="lazy"
+            borderRadius="15px"
+            zIndex={1}
+            transition="transform 0.3s ease-in-out"
+            _hover={{ transform: "scale(1.1)" }}
+          />
+          <Stack
+            ml="35px"
+            mb="135%"
+            position="absolute"
+            bottom={4}
+            zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
+          >
+            <Box
+              //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
+              color="white"
+              right={1}
+              p="2"
+              w="90%"
+              h="auto"
+              borderColor={"#555"}
+            >
+              <h3>SmartWatch</h3>
+              <p>
+                Làm chủ thời gian và công nghệ với đồng hồ thông minh hiện đại
+              </p>
+              <Link to="/smartwatch">
+                <Button>Xem thêm</Button>
+              </Link>
+            </Box>
+          </Stack>
+        </Box>
         <Flex
           justifyContent="center"
           w="100%"
@@ -36,7 +83,9 @@ const DynamicSlider = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            w="29%"
+            display={{ lg: 'block', sm: 'none' }}
+
+            w="30%"
             h="auto"
             position="relative"
             overflow="hidden"
@@ -48,6 +97,7 @@ const DynamicSlider = ({ type, heading }) => {
               src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
               alt="Smart Watch"
               height="100%"
+
               loading="lazy"
               borderRadius="15px"
               zIndex={1}
@@ -86,12 +136,33 @@ const DynamicSlider = ({ type, heading }) => {
 
           {/* Swiper Slider */}
           <Box
-            w="70%" // Adjust the width of the Swiper slider as needed
+            w={{ lg: '70%', sm: '100%' }} // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
             <Swiper
-              slidesPerView={4}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                  spaceBetween: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 5,
+                },
+                1280: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+                1366: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+              }}
               grid={{ rows: 2, fill: "row" }}
               spaceBetween={10}
               autoplay={{

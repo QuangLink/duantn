@@ -12,7 +12,7 @@ export const getSingleProduct = (typeOfProduct, id) => async (dispatch) => {
   dispatch({ type: GET_SINGLE_PRODUCT_LOADING });
   try {
     let responce = await axios.get(
-      `https://duantn-backend.onrender.com/products/${id}`,
+      `${process.env.REACT_APP_DATABASE_API_URL}/products/${id}`,
     );
 
     // console.log("in the logi func try",responce.data);

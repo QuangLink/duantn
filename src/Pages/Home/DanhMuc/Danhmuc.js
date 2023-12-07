@@ -25,12 +25,13 @@ import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 const Danhmuc = ({ type, heading }) => {
   return (
     <Center>
-      <Box w={"80%"} mt={10} mb={10}>
+      <Box w={"90%"} mt={10} mb={10}>
         <Flex justifyContent={"space-between"} mb={5}>
-          <Box>
+          <Box >
             <Text className="heading">DANH MỤC</Text>
           </Box>
-          <Box>
+          <Box pt={7}>
+
             <Button
               border="1px"
               mr={2}
@@ -42,6 +43,7 @@ const Danhmuc = ({ type, heading }) => {
             <Button border="1px" borderRadius={20} className="custom-next">
               <ArrowForwardIcon fontSize={30} />
             </Button>
+
           </Box>
         </Flex>
 
@@ -55,7 +57,7 @@ const Danhmuc = ({ type, heading }) => {
           // navigation
           breakpoints={{
             0: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 5,
             },
             768: {
@@ -85,15 +87,15 @@ const Danhmuc = ({ type, heading }) => {
                       <Square
                         borderRadius={100}
                         m="auto"
-                        w={200}
-                        h={200}
+                        w={{ lg: 200, sm: 180 }}
+                        h={{ lg: 200, sm: 180 }}
                         bgColor={"white"}
                       >
                         <Image
                           borderRadius={50}
                           src={`${i.imgcatehot}`}
-                          maxW={200}
-                          maxH={150}
+                          maxW={{ lg: 200, sm: 200 }}
+                          maxH={{ lg: 150, sm: 150 }}
                           objectFit={"cover"}
                           transition="transform 0.3s ease-in-out"
                           _hover={{ transform: "scale(1.1)" }}

@@ -25,7 +25,7 @@ export default function Thembienthe() {
   const [prodSale, setProdSale] = useState("");
   const fetchProduct = async () => {
     const response = await fetch(
-      "https://duantn-backend.onrender.com/products",
+      `${process.env.REACT_APP_DATABASE_API_URL}/products`,
     );
     const data = await response.json();
     setProducts(data);
@@ -35,7 +35,7 @@ export default function Thembienthe() {
 
   const fetchColor = async () => {
     const response = await fetch(
-      "https://duantn-backend.onrender.com/products/colors",
+      `${process.env.REACT_APP_DATABASE_API_URL}/products/colors`,
     );
     const data = await response.json();
     setColor(data);
@@ -44,7 +44,7 @@ export default function Thembienthe() {
 
   const fetchStorage = async () => {
     const response = await fetch(
-      "https://duantn-backend.onrender.com/products/storages",
+      `${process.env.REACT_APP_DATABASE_API_URL}/products/storages`,
     );
     const data = await response.json();
     setStorage(data);
@@ -98,7 +98,7 @@ export default function Thembienthe() {
 
       // Send the new variant to the backend
       const response = await fetch(
-        "https://duantn-backend.onrender.com/products/variants",
+        `${process.env.REACT_APP_DATABASE_API_URL}/products/variants`,
         {
           method: "POST",
           headers: {

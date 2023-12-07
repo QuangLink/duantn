@@ -27,7 +27,9 @@ const BlogHome = ({ type, heading }) => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await fetch("https://duantn-backend.onrender.com/blog");
+      const response = await fetch(
+        `${process.env.REACT_APP_DATABASE_API_URL}/blog`,
+      );
       const result = await response.json();
       setData(result);
       console.log(result);
@@ -44,7 +46,7 @@ const BlogHome = ({ type, heading }) => {
   console.log("====================================");
   return (
     <Center>
-      <Box w={"80%"} mt={10} mb={10}>
+      <Box w={{ lg: "80%", sm: "90%" }} mt={10} mb={10}>
         <Flex justifyContent={"space-between"} mb={5}>
           <Box>
             <Text
@@ -120,7 +122,7 @@ const BlogHome = ({ type, heading }) => {
                         borderRadius={15}
                         src={`${i.thumbnail}`}
                         w={"100%"}
-                        maxH={250}
+                        maxH={{ lg: 250, sm: 200 }}
                       />
                       <Center>
                         <Box>

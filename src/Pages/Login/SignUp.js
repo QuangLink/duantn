@@ -31,7 +31,7 @@ function SignUpForm() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://duantn-backend.onrender.com/users/",
+          `${process.env.REACT_APP_DATABASE_API_URL}/users/`,
         );
         setUsernamesFromApi(response.data.map((user) => user.username));
         setEmailsFromApi(response.data.map((user) => user.email));
@@ -82,7 +82,7 @@ function SignUpForm() {
         };
 
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/users/register",
+          `${process.env.REACT_APP_DATABASE_API_URL}/users/register`,
           payload,
         );
 

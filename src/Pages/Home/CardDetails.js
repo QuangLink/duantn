@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+const apiUrlBase = `${process.env.REACT_APP_DATABASE_API_URL}/category/`;
 
 const categoryUrls = {
   sale: apiUrlBase + "sale",
@@ -143,16 +143,16 @@ export const BannersLeft = [
 
 export const BannerHomePage = [
   {
-    id: 2,
+    id: 1,
     image:
       "https://isotech-demo.myshopify.com/cdn/shop/files/2_f639d039-1b63-405c-ab7d-4561d7871d76.png?v=1696134235",
     name: "Samsung Galaxy Z Fold5 5G",
     title:
-      "Điện thoại này mở ra những trải nghiệm di động mới mẻ và linh hoạt thông qua khả năng gập độc đáo, màn hình lớn sắc nét và hiệu năng vượt trội cho khả năng đa nhiệm tối ưu, đáp ứng tốt các yêu cầu từ người dùng.",
+      "Điện thoại này mở ra những trải nghiệm di động mới mẻ và linh hoạt thông qua khả năng gập độc đáo, đáp ứng tốt các yêu cầu từ người dùng.",
     prodType: "samsung",
   },
   {
-    id: 1,
+    id: 2,
     image:
       "https://isotech-demo.myshopify.com/cdn/shop/files/2_ae5cc69e-78af-4aea-9cc7-bb616d558539.png?v=1695797615",
     name: "Iphone 15 Pro Max",

@@ -39,14 +39,14 @@ const BannerHome = ({ type }) => {
     <>
       <Center>
         <Grid
-          mt={4}
-          w={"80%"}
+          mt={{ lg: 4, sm: 100 }}
+          w={{ lg: "80%", sm: '100%' }}
           h="auto"
-          templateRows="repeat(3, 2fr)"
-          templateColumns="repeat(12, 1fr)"
+          templateRows={{ base: "repeat(3, 2fr)", sm: "repeat(1, 1fr)" }}
+          templateColumns={{ base: "repeat(12, 1fr)", sm: "repeat(12, 1fr)" }}
           gap={4}
         >
-          <GridItem rowSpan={2} colSpan={9}>
+          <GridItem rowSpan={{ lg: 2, sm: 1 }} colSpan={{ lg: 9, sm: 12 }}>
             <Box position="relative">
               <Slider ref={sliderRef} {...settings}>
                 {type.map((i) => (
@@ -58,16 +58,14 @@ const BannerHome = ({ type }) => {
                   >
                     <Image
                       src={i.image}
-                      style={{
-                        width: "100%",
-                        height: "501px",
-                        objectFit: "cover",
-                        borderRadius: "15px",
-                        overflow: "hidden",
-                      }}
+                      width="100%"
+                      height={{ lg: "520px", sm: '300px' }}
+                      objectFit="cover"
+                      borderRadius="15px"
+                      overflow="hidden"
                     />
-                    <Box position="absolute" top="150px" left="40px" w={600}>
-                      <Text color="white" fontSize="46px" className="amin">
+                    <Box position="absolute" top={{ lg: 150, sm: 10 }} left="40px" w={{ lg: 600, sm: 400 }}>
+                      <Text color="white" fontSize={{ lg: 46, sm: 24 }} className="amin">
                         {i.name}
                       </Text>
                       <Text fontSize={14} color="white" className="amin">
@@ -105,13 +103,14 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={3}>
+          <GridItem colSpan={{ lg: 3, sm: 12 }} display={{ lg: 'block', sm: 'none' }} >
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/Frame_14.png?v=1695797658&width=1500"
                 alt="Slide 3"
                 style={{
                   width: "100%",
+                  height: '250px',
                   objectFit: "cover",
                   borderRadius: "15px",
                   overflow: "hidden",
@@ -136,13 +135,15 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={3}>
+          <GridItem colSpan={{ lg: 3, sm: 12 }} display={{ lg: 'block', sm: 'none' }}>
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/Frame_15.png?v=1695797682&width=1500"
                 alt="Slide 3"
                 style={{
+
                   width: "100%",
+                  height: '250px',
                   objectFit: "cover",
                   borderRadius: "15px",
                   overflow: "hidden",
@@ -167,7 +168,7 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={4} display={{ lg: 'block', sm: 'none' }}>
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/3_Banner_4.png?v=1695813715&width=550"
@@ -200,7 +201,7 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={4}>
+          <GridItem colSpan={4} display={{ lg: 'block', sm: 'none' }}>
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/3_Banner_5.png?v=1695813736&width=550"
@@ -232,7 +233,7 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={4} display={{ lg: 'block', sm: 'none' }}>
             <Box position="relative">
               <Image
                 src="https://cdn.vectorstock.com/i/preview-1x/35/83/software-development-programming-vector-24033583.jpg"
@@ -265,7 +266,7 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
         </Grid>
-      </Center>
+      </Center >
     </>
   );
 };

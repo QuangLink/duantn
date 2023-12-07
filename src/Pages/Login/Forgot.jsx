@@ -17,7 +17,7 @@ const Forgot = () => {
 
     try {
       const response = await fetch(
-        "https://duantn-backend.onrender.com/users/forgot",
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/forgot`,
         {
           method: "POST",
           headers: {

@@ -25,7 +25,7 @@ import { Link } from "react-router-dom";
 const ItemList = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
+      <Center mb="2" w="90%" display="flex" flexWrap="wrap">
         <Flex
           justifyContent="center"
           w="100%"
@@ -39,7 +39,28 @@ const ItemList = ({ type, heading }) => {
             mt="1"
           >
             <Swiper
-              slidesPerView={5}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                  spaceBetween: 1,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 5,
+                },
+                1280: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+                1366: {
+                  slidesPerView: 5,
+                  spaceBetween: 2,
+                },
+              }}
               grid={{ rows: 2, fill: "row" }}
               spaceBetween={10}
               autoplay={{
@@ -67,15 +88,16 @@ const ItemList = ({ type, heading }) => {
                           <Box className="img">
                             <Square
                               m="auto"
-                              w={100}
-                              h={200}
+                              w={{ lg: 200, sm: 150 }}
+                              h={{ lg: 200, sm: 150 }}
                               transition="transform 0.3s ease-in-out"
                               _hover={{ transform: "scale(1.1)" }}
                             >
                               <Image
                                 src={`${i.img}`}
-                                maxW={200}
-                                maxH={150}
+
+                                maxW={{ lg: 200, sm: 150 }}
+                                maxH={{ lg: 150, sm: 100 }}
                                 objectFit={"fill"}
                               />
                             </Square>
