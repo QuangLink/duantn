@@ -27,9 +27,7 @@ const BlogHome = ({ type, heading }) => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_DATABASE_API_URL}/blog`,
-      );
+      const response = await fetch(`${process.env.REACT_APP_DATABASE_API_URL}/blog`);
       const result = await response.json();
       setData(result);
       console.log(result);
@@ -41,16 +39,13 @@ const BlogHome = ({ type, heading }) => {
     fetchData();
   }, []);
 
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
   return (
     <Center>
-      <Box w={{ lg: "80%", sm: "90%" }} mt={10} mb={10}>
+      <Box w={{ lg: '80%', base: '90%' }} mt={10} mb={10}>
         <Flex justifyContent={"space-between"} mb={5}>
           <Box>
             <Text
-              fontSize="2xl"
+              fontSize={{ lg: '2x1', base: '22px' }}
               width=""
               fontWeight="700"
               textColor="black"
@@ -122,7 +117,7 @@ const BlogHome = ({ type, heading }) => {
                         borderRadius={15}
                         src={`${i.thumbnail}`}
                         w={"100%"}
-                        maxH={{ lg: 250, sm: 200 }}
+                        maxH={{ lg: 250, base: 200 }}
                       />
                       <Center>
                         <Box>

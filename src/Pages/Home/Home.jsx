@@ -141,9 +141,9 @@ const Home = () => {
             </Box>
             {RenderCategoryPhone()}
             <ItemCardTest type={PrSmartWatch} />
-            <Box width="80%" margin="auto">
+            <Box width={{ lg: "80%", base: '90%' }} margin="auto">
               <div className="option-select">
-                <Text className="heading">Các phụ kiện khác</Text>
+                <Text className="heading" fontSize={{ lg: '2x1', base: '22px' }}>CÁC PHỤ KIỆN KHÁC</Text>
                 <div className="options">
                   <button
                     className={
@@ -151,7 +151,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("Battery")}
                   >
-                    Pin dự phòng
+                    <Text fontSize={{ lg: 16, base: 14 }}>Pin dự phòng</Text>
                   </button>
                   <button
                     className={
@@ -159,7 +159,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("Cable")}
                   >
-                    Cáp sạc
+                    <Text fontSize={{ lg: 16, base: 14 }}>Cáp sạc</Text>
                   </button>
                   <button
                     className={
@@ -167,7 +167,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("Earphone")}
                   >
-                    Tai nghe
+                    <Text fontSize={{ lg: 16, base: 14 }}> Tai nghe</Text>
                   </button>
                   <button
                     className={
@@ -175,7 +175,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("LoudSpeaker")}
                   >
-                    Loa
+                    <Text fontSize={{ lg: 16, base: 14 }}>Loa</Text>
                   </button>
                   <button
                     className={
@@ -183,7 +183,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("Keyboard")}
                   >
-                    Bàn phím
+                    <Text fontSize={{ lg: 16, base: 14 }}>Bàn phím</Text>
                   </button>
                   <button
                     className={
@@ -191,7 +191,7 @@ const Home = () => {
                     }
                     onClick={() => setSelectedAssessories("Mouse")}
                   >
-                    Chuột
+                    <Text fontSize={{ lg: 16, base: 14 }}> Chuột</Text>
                   </button>
                 </div>
               </div>
@@ -203,7 +203,7 @@ const Home = () => {
               heading="IPHONE"
             />
             <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
-            <BlogHome heading="Tin tức công nghệ" type={CateFeatures} />
+            <BlogHome heading="TIN TỨC CÔNG NGHỆ" type={CateFeatures} />
           </>
         ) : (
           <div>

@@ -27,7 +27,7 @@ import "./stylehome.css";
 const DynamicSlider = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', sm: '90%' }} display="flex" flexWrap="wrap">
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
         <Box
           display={{ lg: 'none', sm: 'block' }}
           w="100%"
@@ -35,8 +35,7 @@ const DynamicSlider = ({ type, heading }) => {
           position="relative"
           overflow="hidden"
           borderRadius="15px"
-          m={1}
-          mr={"1%"}
+          mt={5}
         >
           <Image
             src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
@@ -50,8 +49,9 @@ const DynamicSlider = ({ type, heading }) => {
             _hover={{ transform: "scale(1.1)" }}
           />
           <Stack
+
             ml="35px"
-            mb="135%"
+            mb="125%"
             position="absolute"
             bottom={4}
             zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
@@ -59,9 +59,9 @@ const DynamicSlider = ({ type, heading }) => {
             <Box
               //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
               color="white"
-              right={1}
-              p="2"
-              w="90%"
+              r={1}
+              p="5px"
+              w="100%"
               h="auto"
               borderColor={"#555"}
             >
@@ -83,7 +83,7 @@ const DynamicSlider = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            display={{ lg: 'block', sm: 'none' }}
+            display={{ lg: 'block', base: 'none' }}
 
             w="30%"
             h="auto"
@@ -136,7 +136,7 @@ const DynamicSlider = ({ type, heading }) => {
 
           {/* Swiper Slider */}
           <Box
-            w={{ lg: '70%', sm: '100%' }} // Adjust the width of the Swiper slider as needed
+            w={{ lg: '70%', base: '100%' }} // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
@@ -144,7 +144,7 @@ const DynamicSlider = ({ type, heading }) => {
               breakpoints={{
                 0: {
                   slidesPerView: 2,
-                  spaceBetween: 1,
+                  spaceBetween: 5,
                 },
                 768: {
                   slidesPerView: 2,
