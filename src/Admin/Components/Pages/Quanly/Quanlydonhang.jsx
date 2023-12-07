@@ -43,7 +43,7 @@ const Quanlydonhang = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/orders/",
+        `${process.env.REACT_APP_DATABASE_API_URL}/orders/`,
       );
       setProducts(response.data);
     } catch (error) {
@@ -55,7 +55,7 @@ const Quanlydonhang = () => {
     try {
       // Send a PUT request to update the order status
       await axios.put(
-        `https://duantn-backend.onrender.com/orders/update-order/${infoID}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/orders/update-order/${infoID}`,
         {
           status: status,
         },

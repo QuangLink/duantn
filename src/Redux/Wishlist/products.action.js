@@ -14,7 +14,7 @@ export const getProducts =
     dispatch({ type: GET_PRODUCTS_LOADING });
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/wishlist/${userID}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`,
       );
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });

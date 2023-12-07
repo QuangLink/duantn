@@ -48,7 +48,7 @@ const Address = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -79,7 +79,7 @@ const Address = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address`;
 
     if (
       !addressData ||
@@ -130,7 +130,9 @@ const Address = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`,
+      )
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);

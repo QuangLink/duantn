@@ -68,7 +68,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.com/orders/cod",
+            `${process.env.REACT_APP_DATABASE_API_URL}/orders/cod`,
             {
               userID,
               amount,
@@ -118,7 +118,7 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.com/orders/create_payment_url",
+            `${process.env.REACT_APP_DATABASE_API_URL}/orders/create_payment_url`,
             {
               userID,
               amount,
@@ -152,7 +152,9 @@ const CheckoutBox = ({
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`,
+      )
       .then((response) => {
         setAddressData(response.data);
       })

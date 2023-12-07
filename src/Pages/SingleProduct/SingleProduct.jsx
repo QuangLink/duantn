@@ -21,7 +21,7 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import { ColorFilter, StorageValueFilter } from "./Filter";
+import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 
@@ -33,6 +33,7 @@ const postSingleData = async (data) => {
     const prodID = data.prodID;
     const colorID = data.colorID;
     const storageID = data.storageID;
+    const ramID = data.ramID;
     //cartID tự tăng giá trị
     const cartID = Math.floor(Math.random() * 1000000000);
     const productData = {
@@ -41,19 +42,21 @@ const postSingleData = async (data) => {
       prodID,
       colorID,
       storageID,
+      ramID,
       quantity: 1,
     };
     const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
     if (!cartData[userID]) {
       cartData[userID] = [];
     }
-    const existingProductIndex = cartData[userID].findIndex(
+    const existingProduct = cartData[userID].find(
       (product) =>
         product.prodID === prodID &&
         product.colorID === colorID &&
-        product.storageID === storageID,
+        product.storageID === storageID &&
+        product.ramID === ramID,
     );
-    if (existingProductIndex !== -1) {
+    if (existingProduct) {
       throw new Error("Product already exists in the cart");
     } else {
       cartData[userID].push(productData);
@@ -70,16 +73,18 @@ export const postSingleDataWish = async (data) => {
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
+      const ramID = data.ramID;
       // Tạo dữ liệu gửi đi kết hợp với userID và prodID
       const postData = {
         prodID,
         colorID,
         storageID,
+        ramID,
         userID,
       };
 
       let response = await axios.post(
-        `https://duantn-backend.onrender.com/wishlist/`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";
@@ -97,6 +102,7 @@ const SingleProduct = (props) => {
   const [filters, setFilters] = useState({
     color: "",
     storage_value: "",
+    ram: "",
   });
 
   const applyFilters = () => {
@@ -115,6 +121,12 @@ const SingleProduct = (props) => {
         (product) => product.storage_value === filters.storage_value,
       );
     }
+    // Apply ram filter
+    if (filters.ram) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.ram === filters.ram,
+      );
+    }
 
     return filteredProducts;
   };
@@ -126,13 +138,14 @@ const SingleProduct = (props) => {
   var navigate = useNavigate();
 
   const singleDatas = useSelector((store) => store.singleProduct.data);
+  console.log("filters", singleDatas);
   // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (prodID, colorID, storageID) => {
-    postSingleData({ prodID, colorID, storageID })
+  const handlePost = (prodID, colorID, storageID, ramID) => {
+    postSingleData({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
           title: "Đã thêm vào giỏ",
@@ -179,6 +192,9 @@ const SingleProduct = (props) => {
   const applyStorageValueFilter = (selectedValue) => {
     setFilters({ ...filters, storage_value: selectedValue });
   };
+  const applyRamFilter = (selectedRam) => {
+    setFilters({ ...filters, ram: selectedRam });
+  };
   const colors =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.color))]
@@ -188,6 +204,11 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
+  const rams =
+    singleDatas && Array.isArray(singleDatas)
+      ? [...new Set(singleDatas.map((product) => product.ram))]
+      : [];
+
   const handleWish = (prodID, colorID, storageID) => {
     postSingleDataWish({ prodID, colorID, storageID })
       .then((res) => {
@@ -464,13 +485,16 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
-
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
                             applyFilter={applyStorageValueFilter}
                           />
                         )}
+                        {applyFilters()[0].ram != null && (
+                          <RamFilter rams={rams} applyFilter={applyRamFilter} />
+                        )}
+
                         <Text
                           fontSize="sm"
                           style={{ fontWeight: "bold" }}
@@ -479,7 +503,6 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
-
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -487,7 +510,6 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
-
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -502,6 +524,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
                                 userID,
                               )
                             }
@@ -521,6 +544,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
                                 userID,
                               )
                             }

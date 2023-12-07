@@ -5,7 +5,7 @@ import axios from "axios";
 export const fetchTotalProducts = async () => {
   try {
     const response = await axios.get(
-      "https://duantn-backend.onrender.com/products/total",
+      `${process.env.REACT_APP_DATABASE_API_URL}/products/total`,
     );
     return response.data;
   } catch (error) {
@@ -17,7 +17,7 @@ export const fetchTotalProducts = async () => {
 export const fetchProducts = async () => {
   try {
     const response = await axios.get(
-      "https://duantn-backend.onrender.com/orders/",
+      `${process.env.REACT_APP_DATABASE_API_URL}/orders/`,
     );
     return response.data;
   } catch (error) {
@@ -29,7 +29,7 @@ export const fetchProducts = async () => {
 export const fetchUsers = async () => {
   try {
     const response = await axios.get(
-      "https://duantn-backend.onrender.com/users",
+      `${process.env.REACT_APP_DATABASE_API_URL}/users`,
     );
     return response.data;
   } catch (error) {
@@ -41,7 +41,7 @@ export const fetchUsers = async () => {
 export const fetchOrders = async () => {
   try {
     const response = await axios.get(
-      "https://duantn-backend.onrender.com/orders/",
+      `${process.env.REACT_APP_DATABASE_API_URL}/orders/`,
     );
     return response.data;
   } catch (error) {

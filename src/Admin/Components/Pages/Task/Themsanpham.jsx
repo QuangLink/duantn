@@ -56,7 +56,7 @@ const Themsanpham = () => {
   const fetchColors = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/color",
+        `${process.env.REACT_APP_DATABASE_API_URL}/color`,
       );
       setColors(response.data);
     } catch (error) {
@@ -66,7 +66,7 @@ const Themsanpham = () => {
   const fetchStorage = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/storage",
+        `${process.env.REACT_APP_DATABASE_API_URL}/storage`,
       );
       setStorage(response.data);
     } catch (error) {
@@ -77,7 +77,7 @@ const Themsanpham = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/category/catID",
+        `${process.env.REACT_APP_DATABASE_API_URL}/category/catID`,
       );
       setCategories(response.data);
       const uniqueProdcatID = Array.from(
@@ -95,7 +95,7 @@ const Themsanpham = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/products",
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
       setProducts(response.data);
 
@@ -112,7 +112,10 @@ const Themsanpham = () => {
     const price = parseFloat(product.prodPrice);
     try {
       // Sau khi tính giá trước khi giảm, gửi yêu cầu POST với dữ liệu sản phẩm
-      await axios.post("https://duantn-backend.onrender.com/products", product);
+      await axios.post(
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
+        product,
+      );
       alert("Product added successfully");
       // Reset the form after successful submission
       setProduct({
@@ -133,7 +136,9 @@ const Themsanpham = () => {
 
   const editProduct = async (prodID) => {
     try {
-      await axios.put(`https://duantn-backend.onrender.com/products/${prodID}`);
+      await axios.put(
+        `${process.env.REACT_APP_DATABASE_API_URL}/products/${prodID}`,
+      );
       alert("Product edited successfully");
       fetchProducts(); // Refresh the list after deletion
     } catch (error) {

@@ -102,7 +102,7 @@ const Home = () => {
 
   return (
     <Box bg={"#F1F3F7"}>
-   
+
       <Suspense fallback={<div>Loading</div>}>
         {error ? (
           <div>
@@ -203,7 +203,7 @@ const Home = () => {
               heading="IPHONE"
             />
             <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
-            <BlogHome  heading="Tin tức công nghệ" type={CateFeatures}/>
+            <BlogHome heading="Tin tức công nghệ" type={CateFeatures} />
           </>
         ) : (
           <div>

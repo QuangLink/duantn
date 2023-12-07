@@ -24,7 +24,7 @@ const Quanlysanpham = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/products",
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
       setProducts(response.data);
 
@@ -48,7 +48,7 @@ const Quanlysanpham = () => {
   const deleteProduct = async (prodID) => {
     try {
       await axios.delete(
-        `https://duantn-backend.onrender.com/products/${prodID}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/products/${prodID}`,
       );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion

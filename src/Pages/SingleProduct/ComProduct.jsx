@@ -29,7 +29,7 @@ const ComProduct = ({ prodID }) => {
 
       try {
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/feedback",
+          `${process.env.REACT_APP_DATABASE_API_URL}/feedback`,
           feedbackData,
         );
 
@@ -50,7 +50,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+          `${process.env.REACT_APP_DATABASE_API_URL}/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;
@@ -75,7 +75,7 @@ const ComProduct = ({ prodID }) => {
     async function fetchComments() {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/feedback/${prodID}`,
+          `${process.env.REACT_APP_DATABASE_API_URL}/feedback/${prodID}`,
         );
         if (response.status === 200) {
           const data = response.data;

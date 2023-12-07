@@ -132,7 +132,7 @@ function Navbar() {
     setIsFocused(false);
   };
   const fetchData = (value) => {
-    fetch("https://duantn-backend.onrender.com/products/search")
+    fetch(`${process.env.REACT_APP_DATABASE_API_URL}/products/search`)
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);

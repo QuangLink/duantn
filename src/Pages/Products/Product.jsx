@@ -19,11 +19,9 @@ import "./product.css";
 import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
-
   if (userID === undefined) {
     throw new Error("userID is undefined");
   }
-
   try {
     const postData = {
       userID,
@@ -32,7 +30,7 @@ const postSingleDataWish = async (data) => {
       storageID: data.storageID,
     };
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist/`,
+      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
       postData,
       {
         headers: { "Content-Type": "application/json" },
