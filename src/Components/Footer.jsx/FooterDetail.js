@@ -19,7 +19,6 @@ export const ProductCategories = [
     labels: "Smartwatch",
     pordType: "smartwatch",
   },
-
 ];
 
 export const SiteInfo = [

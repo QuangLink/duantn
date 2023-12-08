@@ -16,11 +16,9 @@ import {
   AtmOnline,
 } from "./FooterDetail";
 
-
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Footer = () => {
- 
   return (
     <Center>
       <Box
@@ -30,7 +28,7 @@ const Footer = () => {
         mt={20}
         mb={20}
         w={"100%"}
-      // alignItems={"center"}
+        // alignItems={"center"}
       >
         <Grid
           templateColumns={{
@@ -54,14 +52,15 @@ const Footer = () => {
           <FooterCard4 type={Policies} heading="Chính sách mua hàng" />
         </Grid>
         <Flex
-
           // gap={6}
           justifyContent="flex-start"
           m="auto"
           w="80%"
-
         >
-          <FooterCard6 type={ProductCategories} heading="Phương thức thanh toán " />
+          <FooterCard6
+            type={ProductCategories}
+            heading="Phương thức thanh toán "
+          />
           <FooterCard5 heading="Danh sách các ngân hàng thanh toán online" />
         </Flex>
       </Box>

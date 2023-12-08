@@ -18,11 +18,9 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
-  const userID = Cookies.get("userID");
-  if (userID === undefined) {
-    throw new Error("userID is undefined");
-  }
   try {
+    const userID = Cookies.get("userID");
+
     const postData = {
       userID,
       prodID: data.prodID,
@@ -41,6 +39,7 @@ const postSingleDataWish = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
+
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
@@ -57,43 +56,24 @@ const Product = (props, rating) => {
 
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = () => {
-    try {
-      postSingleDataWish(data)
-        .then((res) => {
-          toast({
-            title: "Đã thêm vào giỏ",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-        })
-        .catch((error) => {
-          console.error("Error handling post:", error);
-          toast({
-            title: "Vui lòng đăng nhập trước",
-            description: "Bạn cần đăng nhập để thực hiện chức năng này",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        });
-    } catch (error) {
-      console.error("Error handling wish:", error);
+  const handleWish = (data) => {
+    console.log(data);
+
+    postSingleDataWish(data).then((res) => {
       toast({
-        title: "Error handling wish",
-        description: error.message,
-        status: "error",
-        duration: 9000,
+        title: "Added Item Successfully to WishList",
+        status: "success",
+        duration: 3000,
         isClosable: true,
+        position: "bottom",
       });
-    }
+    });
   };
 
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[280, 360, 450]}>
+        <Box h={[300, 340, 430]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -101,11 +81,18 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["65%", "80%", "auto"]}
-              h={["65%", "80%", "200px"]}
+              w={["auto", "auto", "auto"]}
+              h={["120px", "140px", "200px"]}
               objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
+              css={{
+                "@media (max-width: 425px)": {
+                  width: "auto",
+                  height: "120px",
+                  objectFit: "cover",
+                },
+              }}
             />
           </Center>
           {prodSale !== 0 && (
@@ -114,13 +101,12 @@ const Product = (props, rating) => {
               css={{
                 "@media (max-width: 430px)": {
                   width: "100%",
-                  textAlign: "center",
                 },
               }}
             >
               <Box
                 className="box_1"
-                fontSize={{ base: "15px", md: "20px", lg: "18px" }}
+                fontSize={{ base: "20px", md: "20px", lg: "18px" }}
                 h={["20px", "40px", "70px"]}
               >
                 {prodName}
@@ -129,7 +115,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -141,7 +127,7 @@ const Product = (props, rating) => {
                     })}
                 </Heading>
                 <Text
-                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
                   m="auto"
                   mt={2}
                   fontWeight="bold"
@@ -162,7 +148,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
                 ml="5%"
               >
                 Giá ưu đãi
@@ -182,7 +168,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -200,7 +186,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
                 ml="5%"
               >
                 Giá tốt
@@ -209,7 +195,7 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(prodID)}>
+      <Button onClick={() => handleWish(data)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

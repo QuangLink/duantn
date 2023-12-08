@@ -1085,14 +1085,14 @@ function Navbar() {
   } else if (islesserThan740px) {
     return (
       <Flex
-        className="flex-container"
+        // className="flex-container"
         gap={0}
         px="0%"
         bg="#4a90e2"
         justifyContent="center"
         h={20}
-        zIndex={2}
-        style={direction === "up" ? navbar.active : navbar.hidden}
+        // zIndex={2}
+        // style={direction === "up" ? navbar.active : navbar.hidden}
       >
         <Link to="/" className={`header-bar ${isFocused ? "focused" : ""}`}>
           <Box marginLeft={0}>

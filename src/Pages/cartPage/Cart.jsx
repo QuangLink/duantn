@@ -99,9 +99,9 @@ const Cart = () => {
       `}
       </style>
       <Flex
+        marginTop={{ "2xl": "0", base: "80px" }}
         border={"0px solid #4a90e2"}
         width={"100%"}
-        paddingX="20px"
         flexDirection={{
           base: "column",
           sm: "column",
@@ -136,7 +136,11 @@ const Cart = () => {
             <Text color={"gray.500"}>Hãy thêm sản phẩm vào giỏ hàng</Text>
           </Box>
         ) : (
-          <Center className="cartPage">
+          <Center
+            className="cartPage"
+            width={"98%"}
+            padding={{ "2xl": "0", base: "0 1% 0 1%" }}
+          >
             <Heading
               textAlign="center"
               display="flex"
@@ -146,12 +150,23 @@ const Cart = () => {
               mt="5"
             >
               <Box className="headingCart">
-                <Center fontSize="32px" fontWeight="700" color="black">
+                <Center
+                  fontSize={{
+                    base: "28px",
+                    md: "30px",
+                    lg: "32px",
+                    "2xl": "32px",
+                  }}
+                  marginTop={{ base: "80px", "2xl": "0" }}
+                  fontWeight="700"
+                  color="black"
+                  className="textHeadingCart"
+                >
                   Giỏ hàng của bạn
                 </Center>
               </Box>
             </Heading>
-            <Center mt="5px" w="95%" display="flex" flexWrap="wrap">
+            <Center mt="5px" display="flex" flexWrap="wrap">
               <Flex
                 flexDirection={"column"}
                 border={"0px solid blue"}
@@ -200,7 +215,10 @@ const Cart = () => {
               </Flex>
             </Center>
             <Center width="100%">
-              <Flex justifyContent="space-between" w="50%">
+              <Flex
+                justifyContent="space-between"
+                w={{ base: "90%", "2xl": "40%" }}
+              >
                 <Text
                   mt="2"
                   height="50px"
@@ -222,35 +240,38 @@ const Cart = () => {
                 </Text>
               </Flex>
             </Center>
-            <Center width="50%" display="flex" flexWrap="wrap">
-            <Button
-              w="100%"
-              h="50px"
-              
-              borderRadius="10px"
-              backgroundColor="red"
-              _hover={{ color: "#4a90e2" }}
-              onClick={() => navigate("/checkout")}
+            <Center
+              width={{ base: "90%", "2xl": "40%" }}
+              display="flex"
+              flexWrap="wrap"
             >
-              <Text color="white" m="auto">
-                Tiến hành đặt hàng
-              </Text>
-            </Button>
-            <Button
-          mb="5"
-          mt="2"
-          w="100%"
-          h="50px"
-          border="1px solid #FF2323"
-          borderRadius="10px"
-          backgroundColor="white"
-          _hover={{ color: "white" }}
-          onClick={() => navigate("/")}
-        >
-          <Text color="#FF2323" m="auto">
-            Chọn thêm sản phẩm khác
-          </Text>
-        </Button>
+              <Button
+                width="100%"
+                h="50px"
+                borderRadius="10px"
+                backgroundColor="red"
+                _hover={{ color: "#4a90e2" }}
+                onClick={() => navigate("/checkout")}
+              >
+                <Text color="white" m="auto">
+                  Tiến hành đặt hàng
+                </Text>
+              </Button>
+              <Button
+                mb="5"
+                mt="2"
+                w="100%"
+                h="50px"
+                border="1px solid #FF2323"
+                borderRadius="10px"
+                backgroundColor="white"
+                _hover={{ color: "white" }}
+                onClick={() => navigate("/")}
+              >
+                <Text color="#FF2323" m="auto">
+                  Chọn thêm sản phẩm khác
+                </Text>
+              </Button>
             </Center>
           </Center>
         )}

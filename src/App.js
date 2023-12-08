@@ -16,7 +16,6 @@ const App = () => {
   const isAdminRoute = currentPath.includes("/admin");
   return (
     <div className="App">
-    
       <AuthContextProvider>
         {!isAdminRoute && <Navbar />}
         <AllRoutes />

@@ -29,6 +29,14 @@ const CheckoutBox = ({
   setVal,
   handleApply,
 }) => {
+  const breakpoints = {
+    base: "320px", // 0px
+    sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
+    md: "600px", // ~768px
+    lg: "800px", // ~992px
+    xl: "768px", // ~1280px
+    "2xl": "1024px", // ~1536px
+  };
   const userID = Cookies.get("userID");
   const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
 
@@ -221,11 +229,17 @@ const CheckoutBox = ({
         justifyContent="center"
         flexWrap="wrap"
       >
-        <Box w="94%" mt="15px" mb="15px">
-          <Text fontSize="25px" fontWeight="700">
+        <Box w="94%" mt={{ "2xl": "15px" }} mb={{ "2xl": "15px" }}>
+          <Text fontSize={{ "2xl": "25px", base: "20px" }} fontWeight="700">
             Chọn phương thức thanh toán:
           </Text>
-          <Flex w="auto" h="auto" display="flex" flexWrap="wrap">
+          <Flex
+            w="auto"
+            h="auto"
+            display="flex"
+            flexWrap={{ "2xl": "wrap" }}
+            width="100%"
+          >
             {["cash", "vnpay"].map((option) => (
               <Box
                 width="100%"
@@ -242,23 +256,32 @@ const CheckoutBox = ({
                   borderRadius: "5px",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
-                  margin: "0 10px",
                 }}
                 onClick={() => handleOptionClick(option)}
               >
-                <Box marginBottom="5" mt="5">
+                <Center
+                  marginBottom={{ "2xl": "5px", base: "0" }}
+                  mt={{ "2xl": "15px", base: "12px" }}
+                  display="flex"
+                >
                   <Icon
                     as={option === "cash" ? FcHome : FaWallet}
-                    ml={10}
-                    mr={10}
-                    w={10}
-                    h={10}
+                    ml={{ "2xl": "10", base: "3" }}
+                    mr={{ "2xl": "10", base: "3" }}
+                    mb={{ base: "5" }}
+                    w={{ "2xl": "10", base: "5" }}
+                    h={{ "2xl": "10", base: "5" }}
                     color="red"
                   />
-                  {option === "cash"
-                    ? "Thanh toán khi nhận hàng"
-                    : "Thanh toán qua ví VNPay"}
-                </Box>
+                  <Text
+                    width={{ "2xl": "auto", base: "80%" }}
+                    fontSize={{ "2xl": "18px", base: "12px" }}
+                  >
+                    {option === "cash"
+                      ? "Thanh toán khi nhận hàng"
+                      : "Thanh toán qua ví VNPay"}
+                  </Text>
+                </Center>
               </Box>
             ))}
           </Flex>
@@ -268,7 +291,7 @@ const CheckoutBox = ({
           <TbTruckDelivery size={20} color="gray" marginTop="1" />
           <Heading
             marginLeft="10px"
-            fontSize="13px"
+            fontSize={{ "2xl": "13px", base: "10px" }}
             color={"gray"}
             lineHeight={"20px"}
             width="100%"
@@ -280,9 +303,9 @@ const CheckoutBox = ({
           </Heading>
         </Flex>
         <Box width={"90%"} mb="3">
-          <InputGroup size="md">
+          <InputGroup size="md" display="flex">
             <Input
-              pr="4.5rem"
+              width="80%"
               placeholder="Mã giảm giá"
               onChange={(e) => setVal(e.target.value)}
             />
@@ -291,9 +314,11 @@ const CheckoutBox = ({
               h="auto"
               _hover={{ backgroundColor: "rgb(54,129,240)", color: "#fff" }}
               borderRadius={"5px"}
+              border="11px solid rgb(54,129,240)"
               color="#fff"
               backgroundColor="rgb(54,129,240)"
               onClick={handleApply}
+              width={{ "2xl": "30%", base: "30%" }}
             >
               Áp dụng
             </Button>
@@ -310,13 +335,17 @@ const CheckoutBox = ({
             <Text
               fontFamily="inherit"
               color="gray"
-              fontSize="18px"
+              fontSize={{ "2xl": "18px", base: "12px" }}
               fontWeight="500"
             >
               Tạm tính ({items} sản phẩm):
             </Text>
 
-            <Text fontWeight="500" fontSize="18px" color="red">
+            <Text
+              fontWeight="500"
+              fontSize={{ "2xl": "18px", base: "12px" }}
+              color="red"
+            >
               {totalPrice &&
                 totalPrice.toLocaleString("vi-VN", {
                   style: "currency",
@@ -328,13 +357,17 @@ const CheckoutBox = ({
             <Text
               fontFamily="inherit"
               color="gray"
-              fontSize="18px"
+              fontSize={{ "2xl": "18px", base: "12px" }}
               fontWeight="500"
             >
               Giảm giá:
             </Text>
 
-            <Text fontWeight="500" fontSize="18px" color="green">
+            <Text
+              fontWeight="500"
+              fontSize={{ "2xl": "18px", base: "12px" }}
+              color="green"
+            >
               {discount &&
                 discount.toLocaleString("vi-VN", {
                   style: "currency",
@@ -350,14 +383,19 @@ const CheckoutBox = ({
                 height="auto"
                 fontFamily="inherit"
                 color="#424245"
-                fontSize="25px"
+                fontSize={{ "2xl": "25px", base: "16px" }}
                 fontWeight="700"
               >
                 Tổng tiền:
               </Text>
             </Flex>
 
-            <Text fontWeight="700" fontSize="25px" mt="2" color="red">
+            <Text
+              fontWeight="700"
+              fontSize={{ "2xl": "25px", base: "16px" }}
+              mt="2"
+              color="red"
+            >
               {paybalPrice &&
                 paybalPrice.toLocaleString("vi-VN", {
                   style: "currency",
@@ -369,7 +407,7 @@ const CheckoutBox = ({
 
         <Center w="90%">
           <Heading
-            fontSize={"15px"}
+            fontSize={{ "2xl": "15px", base: "12px" }}
             fontWeight="500"
             lineHeight={1.5}
             color={"rgb(102, 102, 102)"}
