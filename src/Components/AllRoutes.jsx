@@ -69,14 +69,14 @@ const AllRoutes = () => {
         <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route
-          path={`/apple/phone`}
-          element={<Products typeOfProduct={"apple/phone"} />}
-        ></Route>
-
+              path={`/apple/phone`}
+              element={<Products typeOfProduct={"apple/phone"} />}
+            ></Route>
+       
         <Route
-          path={`/apple/tablet`}
-          element={<Products typeOfProduct={"apple/tablet"} />}
-        ></Route>
+              path={`/apple/tablet`}
+              element={<Products typeOfProduct={"apple/tablet"} />}
+            ></Route>
         <Route
           path="/admin/dashboard"
           element={
@@ -245,6 +245,7 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
+  
       </Routes>
     </div>
   );
