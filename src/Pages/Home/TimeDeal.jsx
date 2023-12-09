@@ -99,14 +99,17 @@ const TimeDeal = ({ type, heading }) => {
       //chuyển màu background sang
     >
       <Heading
-        backgroundImage='url("https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif")'
+    
         h="auto"
-        textAlign="left"
+        textAlign="center"
         display="flex"
         w="100%"
         borderRadius="15px"
       >
-        <Box mt="6" display="flex" mb="1" ml="6">
+     <Box width="100%">
+     <img src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif" width="100%"  />
+     </Box>
+        <Box mt="6" display="flex" mb="1" ml="6" style={{position:"absolute"}}>
           <Box mr="4">
             {" "}
             <img
@@ -117,11 +120,11 @@ const TimeDeal = ({ type, heading }) => {
           </Box>
 
           <Text>
-            <Text fontSize="40px" color="#ffd559">
+            <Text fontSize="50px" color="#ffd559">
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
-            <Text fontFamily="-moz-initial" fontSize="2xl" color="#fff" mt="3">
+            <Text fontFamily="-moz-initial" fontSize="3xl" color="#fff" mt="3">
               <Text>
                 {" "}
                 <i>Kết thúc trong</i>{" "}
@@ -164,38 +167,8 @@ const TimeDeal = ({ type, heading }) => {
             </Text>
           </Text>
         </Box>
-        {/* <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Đang diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #E6CB47"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box>
-        <Box mt="8" className="time">
-          <Text fontSize="30px" color="#ffe252">Sắp diễn ra</Text>
-          <Text
-            fontFamily="-moz-initial"
-            fontSize="3xl"
-            color="blackAlpha.800"
-            mt="2"
-            borderBottom="3px solid #ffe252"
-            borderBottomRadius="12px"
-          >
-            <i fontSize="10px" fontFamily="-moz-initial">
-              {" "}
-              08:00/23:59{" "}
-            </i>{" "}
-          </Text>
-        </Box> */}
+      
+
       </Heading>
 
       <Box mt="1" bachgroundColor="white">

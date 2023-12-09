@@ -169,11 +169,13 @@ const CartItem = ({
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"100%"}
-      margin={"0px 0px 16px 0px"}
+
+      m="1"
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >
       <Flex
+      m="1"
         p={"16px"}
         flexDirection={{
           base: "column",
@@ -294,7 +296,10 @@ const CartItem = ({
             </Text>
           </Center>
           <Box justifyContent="center" display="flex" width="90%">
-          <Button width="100%"  
+          <Button 
+          h="auto"
+        m="0"
+          width="100%"  
           textAlign="center"
           border="none"
             backgroundColor={"white"}
