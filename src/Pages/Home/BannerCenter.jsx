@@ -35,11 +35,7 @@ const BannerCenter = ({ type }) => {
                   />
                 </video>
               ) : (
-                <Image
-                  src={`${i.imgbnct}`}
-                  width="100%"
-                
-                />
+                <Image src={`${i.imgbnct}`} width="100%" />
               )}
             </Box>
           ))}

@@ -10,13 +10,22 @@ import "swiper/css/pagination";
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
-import { Flex, Text, Image, Square, Box, Center, Stack, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Image,
+  Square,
+  Box,
+  Center,
+  Stack,
+  Button,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const ItemList = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap" >
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
         <Flex
           justifyContent="center"
           w="100%"
@@ -24,21 +33,40 @@ const ItemList = ({ type, heading }) => {
           cursor="pointer"
           textAlign="center"
         >
-   
           <Box
             w="100%" // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
             <Swiper
-              slidesPerView={5}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 5,
+                },
+                1280: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+                1366: {
+                  slidesPerView: 5,
+                  spaceBetween: 2,
+                },
+              }}
               grid={{ rows: 2, fill: "row" }}
               spaceBetween={10}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-      
               modules={[Grid, Autoplay]}
               className="mySwiper"
             >
@@ -56,26 +84,27 @@ const ItemList = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto" >
+                        <Box className="list" w="" h="auto">
                           <Box className="img">
                             <Square
                               m="auto"
-                              w={100}
-                              h={200}
+                              w={{ lg: 200, base: 150 }}
+                              h={{ lg: 200, base: 150 }}
                               transition="transform 0.3s ease-in-out"
                               _hover={{ transform: "scale(1.1)" }}
                             >
                               <Image
                                 src={`${i.img}`}
-                                maxW={200}
-                                maxH={150}
+
+                                maxW={{ lg: 200, base: 150 }}
+                                maxH={{ lg: 150, base: 100 }}
                                 objectFit={"fill"}
                               />
                             </Square>
 
                             <Text
                               mt="2"
-                              height="70px"
+                              height="30px"
                               fontFamily={"Arial"}
                               color="#424245"
                               noOfLines={2}
@@ -87,7 +116,7 @@ const ItemList = ({ type, heading }) => {
                               {i.name}
                             </Text>
                             <Box mt="3" m="10px 0 30px 0px">
-                              <Flex>
+                              <Flex justifyContent="center">
                                 <Square>
                                   <Text color="gray.600" fontSize="14px">
                                     Giá mới :{" "}
@@ -121,25 +150,23 @@ const ItemList = ({ type, heading }) => {
           </Box>
         </Flex>
         <Center w="80%" mt="2">
-        <Link to={`/${heading}`}>
-        <Button
-        variant='outline'
-            w="100%"
-            mt="6"
-            bg="white"
-            color="#424245"
-            _hover={{ color: "blue" }}
-            fontWeight="700"
-        >
-            Xem thêm
-        </Button>
-        </Link>
-    </Center>
+          <Link to={`/${heading}`}>
+            <Button
+              variant="outline"
+              w="100%"
+              mt="6"
+              bg="white"
+              color="#424245"
+              _hover={{ color: "blue" }}
+              fontWeight="700"
+            >
+              Xem thêm
+            </Button>
+          </Link>
+        </Center>
       </Center>
-
-  
     </Center>
   );
 };
 
-export default ItemList;
+export default React.memo(ItemList);

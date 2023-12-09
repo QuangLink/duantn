@@ -8,13 +8,11 @@ import { auth } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
 function SignInForm() {
   const [loginCreds, setLoginCreds] = useState({});
-
   const dispatch = useDispatch();
   const toast = useToast();
   const { isAuth, username } = useSelector((store) => store.AuthManager);
   const navigate = useNavigate();
   const { googleSignIn, user } = UserAuth(); // Lấy thông tin người dùng từ Firebase
-
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn(); // Bắt đầu quá trình đăng nhập bằng Google
@@ -33,7 +31,6 @@ function SignInForm() {
       console.log(error);
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginCreds((prevLoginCreds) => ({
@@ -41,12 +38,10 @@ function SignInForm() {
       [name]: value,
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(loginCreds));
   };
-
   useEffect(() => {
     if (isAuth) {
       navigate("/");
@@ -59,7 +54,6 @@ function SignInForm() {
       });
     }
   }, [isAuth, username, navigate, toast]);
-
   return (
     <div className="form-container sign-in-container">
       <form onSubmit={handleSubmit}>

@@ -16,13 +16,16 @@ const Forgot = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://duantn-backend.onrender.com/users/forgot", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/forgot`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
         },
-        body: JSON.stringify({ email }),
-      });
+      );
 
       if (response.status === 404) {
         toast({

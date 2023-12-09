@@ -31,13 +31,13 @@ export default function MyProfile() {
   const [progress, setProgress] = useState(33.33);
 
   const handleFormChange = (newStep) => {
-
     setStep(newStep);
     setProgress((newStep - 1) * 33.33);
   };
 
   return (
     <>
+
       <Box width="80%" p={6} m="5px auto" as="form">
         <ButtonGroup w="100%">
           <Flex w="100%" justifyContent="center">

@@ -5,7 +5,6 @@ import {
   InputGroup,
   InputRightElement,
   Box,
-  Divider,
   Heading,
   Text,
   useToast,
@@ -14,13 +13,13 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-import { useNavigate, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
+
 import { TbTruckDelivery } from "react-icons/tb";
-import { FaMapMarkerAlt, FaWallet } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
 import { FcHome } from "react-icons/fc";
 const CheckoutBox = ({
   items,
@@ -30,6 +29,11 @@ const CheckoutBox = ({
   setVal,
   handleApply,
 }) => {
+  const userID = Cookies.get("userID");
+  const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+
+  // Get the user's cart directly using the userID
+  const userCart = cartData[userID] || [];
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionClick = (option) => {
@@ -40,9 +44,12 @@ const CheckoutBox = ({
   const toast = useToast();
 
   const handleCheckout = async () => {
-    const paymentMethod = selectedOption;
-    const amount = paybalPrice;
     const userID = Cookies.get("userID");
+    const paymentMethod = selectedOption;
+    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+    const userCart = cartData[userID] || [];
+    const amount = paybalPrice;
+
     const bankCode = "VNBANK";
     const language = "vn";
     if (items === 0) {
@@ -58,38 +65,44 @@ const CheckoutBox = ({
         navigate("/login");
       }, 1500);
     } else if (selectedOption === "cash") {
-      toast({
-        title: "Thanh toán khi nhận hàng",
-        description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.com/orders/cod",
+            `${process.env.REACT_APP_DATABASE_API_URL}/orders/cod`,
             {
               userID,
               amount,
+              userCart,
             },
             {
               withCredentials: true,
             },
           );
 
-          console.log("Response from server:", response);
-
-          // Check if vnpUrl exists in response data
-          if (response.data) {
-            // Open the payment url on a new tab
-            //  window.open(response.data);
-          } else {
-            console.error("No vnpUrl found in response data");
+          if (response.status === 200) {
+            // Remove the cart data for the specific userID
+            delete cartData[userID];
+            // Update the cartData in sessionStorage
+            sessionStorage.setItem("cart", JSON.stringify(cartData));
+            toast({
+              title: "Thanh toán khi nhận hàng",
+              description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+              position: "top",
+            });
           }
         } catch (error) {
           console.error(error);
+          toast({
+            title: "Lỗi",
+            description: "Có lỗi khi đặt hàng",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
         }
         navigate("/");
       });
@@ -105,22 +118,24 @@ const CheckoutBox = ({
       setTimeout(async () => {
         try {
           const response = await axios.post(
-            "https://duantn-backend.onrender.com/orders/create_payment_url",
+            `${process.env.REACT_APP_DATABASE_API_URL}/orders/create_payment_url`,
             {
               userID,
               amount,
               bankCode,
               language,
+              userCart,
             },
             {
               withCredentials: true,
             },
           );
 
-          console.log("Response from server:", response);
-
           // Check if vnpUrl exists in response data
           if (response.data) {
+            delete cartData[userID];
+            // Update the cartData in sessionStorage
+            sessionStorage.setItem("cart", JSON.stringify(cartData));
             // Open the payment url on a new tab
             window.open(response.data);
           } else {
@@ -137,9 +152,10 @@ const CheckoutBox = ({
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`,
+      )
       .then((response) => {
-        console.log("Server response:", response.data);
         setAddressData(response.data);
       })
       .catch((error) => {
@@ -199,36 +215,28 @@ const CheckoutBox = ({
   return (
     <div>
       <Center
-        w="̃80%"
+        w="100%"
         mt="5"
         display="flex"
         justifyContent="center"
         flexWrap="wrap"
       >
-        <Box w="70%" mt="15px" mb="15px">
+        <Box w="94%" mt="15px" mb="15px">
           <Text fontSize="25px" fontWeight="700">
             Chọn phương thức thanh toán:
           </Text>
-          <Flex
-            w="auto"
-            h="auto"
-            display="flex"
-           
-            justifyContent="space-around"
-            mt="5"
-          >
+          <Flex w="auto" h="auto" display="flex" flexWrap="wrap">
             {["cash", "vnpay"].map((option) => (
               <Box
-              width="49%"
+                width="100%"
                 key={option}
                 className={`payment-option ${
                   selectedOption === option ? "selected" : ""
                 }`}
                 style={{
-                  
                   backgroundColor:
                     selectedOption === option ? "#c6e0f7" : "white",
-                  
+
                   borderShadow:
                     selectedOption === option ? "0 0 0 3px #3182ce" : "none",
                   borderRadius: "5px",
@@ -238,7 +246,7 @@ const CheckoutBox = ({
                 }}
                 onClick={() => handleOptionClick(option)}
               >
-                <Box marginBottom="5" mt="5" >
+                <Box marginBottom="5" mt="5">
                   <Icon
                     as={option === "cash" ? FcHome : FaWallet}
                     ml={10}
@@ -256,105 +264,110 @@ const CheckoutBox = ({
           </Flex>
         </Box>
 
-        <Flex justifyContent="center" w="70%" m="5">
-          <TbTruckDelivery size={20} />
+        <Flex justifyContent="center" w="80%" m="2">
+          <TbTruckDelivery size={20} color="gray" marginTop="1" />
           <Heading
+            marginLeft="10px"
             fontSize="13px"
-            color={"rgb(0, 51, 128)"}
+            color={"gray"}
             lineHeight={"20px"}
+            width="100%"
           >
-            Giao hàng nhanh: {dtString} / {change}
+            Giao hàng nhanh:
+            <Text>
+              {dtString} / {change}
+            </Text>
           </Heading>
         </Flex>
-        <Box marginTop={"20px"} width={"70%"}>
+        <Box width={"90%"} mb="3">
           <InputGroup size="md">
             <Input
               pr="4.5rem"
               placeholder="Mã giảm giá"
               onChange={(e) => setVal(e.target.value)}
             />
-            <InputRightElement width="4rem">
-              <Button
-                h="2.30rem"
-                size="sm"
-                borderRadius={"none"}
-                color="rgb(54,129,240)"
-                backgroundColor="white"
-                borderLeft={"4px solid rgb(54,129,240)"}
-                borderRight={"1px solid rgb(224, 224, 225)"}
-                onClick={handleApply}
-              >
-                Áp dụng
-              </Button>
-            </InputRightElement>
+
+            <Button
+              h="auto"
+              _hover={{ backgroundColor: "rgb(54,129,240)", color: "#fff" }}
+              borderRadius={"5px"}
+              color="#fff"
+              backgroundColor="rgb(54,129,240)"
+              onClick={handleApply}
+            >
+              Áp dụng
+            </Button>
           </InputGroup>
         </Box>
-        <Flex justifyContent="space-between" w="70%">
-          <Text
-            mt="2"
-            height="50px"
-            fontFamily="inherit"
-            color="#424245"
-            noOfLines={2}
-            fontSize="20px"
-            fontWeight="700"
-          >
-            Tạm tính ({items} sản phẩm):
-          </Text>
 
-          <Text fontWeight="700" fontSize="20px" mt="2" color="red">
-            {totalPrice &&
-              totalPrice.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })}{" "}
-          </Text>
-        </Flex>
-        <Flex justifyContent="space-between" w="70%">
-          <Text
-            mt="2"
-            height="50px"
-            fontFamily="inherit"
-            color="#424245"
-            noOfLines={2}
-            fontSize="20px"
-            fontWeight="700"
-          >
-            Giảm giá:
-          </Text>
-
-          <Text fontWeight="700" fontSize="20px" mt="2" color="green">
-            {discount &&
-              discount.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })}
-          </Text>
-        </Flex>
-        <Flex justifyContent="space-between" w="70%">
-          <Flex justifyContent="space-between" w="70%" display="flex-start">
+        <Box
+          width="90%"
+          border="1px solid #ccc"
+          padding="10px"
+          borderRadius="10px"
+        >
+          <Flex justifyContent="space-between" w="100%" mt="3">
             <Text
-              mt="2"
-              height="50px"
               fontFamily="inherit"
-              color="#424245"
-              noOfLines={2}
-              fontSize="25px"
-              fontWeight="700"
+              color="gray"
+              fontSize="18px"
+              fontWeight="500"
             >
-              Tổng tiền:
+              Tạm tính ({items} sản phẩm):
+            </Text>
+
+            <Text fontWeight="500" fontSize="18px" color="red">
+              {totalPrice &&
+                totalPrice.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}{" "}
+            </Text>
+          </Flex>
+          <Flex justifyContent="space-between" w="100%">
+            <Text
+              fontFamily="inherit"
+              color="gray"
+              fontSize="18px"
+              fontWeight="500"
+            >
+              Giảm giá:
+            </Text>
+
+            <Text fontWeight="500" fontSize="18px" color="green">
+              {discount &&
+                discount.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
             </Text>
           </Flex>
 
-          <Text fontWeight="700" fontSize="25px" mt="2" color="red">
-            {paybalPrice &&
-              paybalPrice.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })}
-          </Text>
-        </Flex>
-        <Center w="70%">
+          <Flex justifyContent="space-between" w="100%">
+            <Flex justifyContent="space-between" w="100%" display="flex-start">
+              <Text
+                mt="2"
+                height="auto"
+                fontFamily="inherit"
+                color="#424245"
+                fontSize="25px"
+                fontWeight="700"
+              >
+                Tổng tiền:
+              </Text>
+            </Flex>
+
+            <Text fontWeight="700" fontSize="25px" mt="2" color="red">
+              {paybalPrice &&
+                paybalPrice.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+            </Text>
+          </Flex>
+        </Box>
+
+        <Center w="90%">
           <Heading
             fontSize={"15px"}
             fontWeight="500"
@@ -363,15 +376,14 @@ const CheckoutBox = ({
             marginTop="2"
             marginBottom={"5"}
           >
-            Thanh toán đảm bảo. Đổi trả dễ dàng. 100% hàng chính hãng
+            Thanh toán tiện lợi. Đảm bảo 100% hàng chính hãng.
           </Heading>
         </Center>
         <Button
-          w="70%"
+          w="90%"
           h="50px"
-          border="1px solid  #70b1ea"
           borderRadius="10px"
-          backgroundColor="#3978d7"
+          backgroundColor="#FF2323"
           _hover={{ color: "#4a90e2" }}
           onClick={() => {
             if (
@@ -401,21 +413,24 @@ const CheckoutBox = ({
             }
           }}
         >
-          <Text color="white" m="auto">Tiến hành đặt hàng</Text>
+          <Text color="white" m="auto">
+            Tiến hành đặt hàng
+          </Text>
         </Button>
         <Button
-      
           mb="5"
           mt="2"
-          w="70%"
+          w="90%"
           h="50px"
-          border="1px solid #4a90e2"
+          border="1px solid #FF2323"
           borderRadius="10px"
           backgroundColor="white"
           _hover={{ color: "white" }}
           onClick={() => navigate("/")}
         >
-          <Text color="#4a90e2"   m="auto">Chọn thêm sản phẩm khác</Text>
+          <Text color="#FF2323" m="auto">
+            Chọn thêm sản phẩm khác
+          </Text>
         </Button>
       </Center>
     </div>

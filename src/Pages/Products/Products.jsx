@@ -4,7 +4,6 @@ import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { BannersCenter, PrApplePhone, PrSale } from "../Home/CardDetails";
-import HotProduct from "./HotProduct";
 import Product from "./Product";
 import ProductFilter from "./ProductFilter";
 import SlideProuct from "./SlideProduct";
@@ -14,20 +13,17 @@ const Products = ({ typeOfProduct }) => {
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(false);
   const [typeStorePhone, setTypeStorePhone] = useState("");
-
-  const [visibleProducts, setVisibleProducts] = useState(12); // Initial number of products to display
+  const [visibleProducts, setVisibleProducts] = useState(12);
   const error = useSelector((store) => store.product.error);
-
   useEffect(() => {
     onGetData();
   }, [typeOfProduct]);
-
   const onGetData = async () => {
     setFilter("all");
     setLoading(true);
     try {
       let response = await axios.get(
-        `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/category/${typeOfProduct}`,
       );
       console.log("in the logic func try", response.data);
       if (response.data) {
@@ -44,18 +40,15 @@ const Products = ({ typeOfProduct }) => {
       setLoading(false);
     }
   };
-
   const handleFilterChange = (event) => {
     const selectedFilter = event?.target?.value;
     setFilter(selectedFilter);
     console.log(selectedFilter);
   };
-
   const onTypeChangeStore = (event) => {
     const selectedFilter = event?.target?.value;
     setTypeStorePhone(selectedFilter);
   };
-
   const listData = () => {
     // type: ""/"256GB" /"128gb"
 
@@ -70,7 +63,6 @@ const Products = ({ typeOfProduct }) => {
         return filteredProducts;
     }
   };
-
   const DataFilter = () => {
     if (typeOfProduct === "phone") {
       switch (typeStorePhone) {
@@ -90,11 +82,9 @@ const Products = ({ typeOfProduct }) => {
       return listData();
     }
   };
-
   const loadMore = () => {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
   };
-
   if (error) {
     return (
       <Heading
@@ -108,14 +98,10 @@ const Products = ({ typeOfProduct }) => {
       </Heading>
     );
   }
-
   return (
     <Box p="5">
       <Box>
         <SlideProuct type={BannersCenter} />
-      </Box>
-      <Box mb="2%">
-        <HotProduct type={PrSale} />
       </Box>
       <ProductFilter
         onTypeChangeStore={onTypeChangeStore}
@@ -161,7 +147,7 @@ const Products = ({ typeOfProduct }) => {
               return (
                 <GridItem
                   key={elem.prodName + i}
-                  w="97%"
+                  w="100%"
                   h="100%"
                   bg="white.500"
                   boxShadow="rgba(0, 0, 0, 0.15) 0px 2px 8px"
@@ -188,5 +174,4 @@ const Products = ({ typeOfProduct }) => {
     </Box>
   );
 };
-
-export default Products;
+export default React.memo(Products);

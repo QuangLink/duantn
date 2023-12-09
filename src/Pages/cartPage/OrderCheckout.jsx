@@ -1,6 +1,6 @@
 import React from "react";
 import MyCartLength from "./MyCartLength";
-import CartItem from "./CartItem";
+import OrderItem from "./OrderItem";
 import CheckoutBox from "./CheckoutBox";
 import axios from "axios";
 import { useEffect } from "react";
@@ -9,57 +9,39 @@ import { RotatingLines } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../Redux/Cart/cart.action";
 import "./cartstyle.css";
-
-import {
-  Box,
-  Image,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  Button,
-  CardFooter,
-  useToast,
-} from "@chakra-ui/react";
-
+import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
 import "react-slideshow-image/dist/styles.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Icon } from "@chakra-ui/react";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
-import { RiProfileLine } from "react-icons/ri";
-import Checkout from "./Checkout";
+import Address from "./Address";
 export const GetData = async () => {
   try {
-    let response = await axios.get(`https://duantn-backend.onrender.com/cart`);
+    let response = await axios.get(
+      `${process.env.REACT_APP_DATABASE_API_URL}/cart`,
+    );
 
     return await response.data;
   } catch (err) {
     return err;
   }
 };
-
-const MainCartPage = () => {
+const CheckoutPage = () => {
   const dispatch = useDispatch();
-  const { loading, data, error, dataLength, totalPrice, paybalPrice, coupon } =
+  const { loading, data, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
-
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
   const DeleteRequest = async (cartID) => {
     try {
       let response = await axios.delete(
-        `https://duantn-backend.onrender.com/cart/${cartID}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/cart/${cartID}`,
       );
       setChange(!change);
     } catch (err) {
       return err;
     }
   };
-
   const handleApply = () => {
-    if (val === "MASAI40") {
+    if (val === "DUANTN" || val === "JAGUARS") {
       dispatch({ type: "code", payload: val });
       setVal("");
       toast({
@@ -81,28 +63,11 @@ const MainCartPage = () => {
       });
     }
   };
-
   useEffect(() => {
     dispatch(getData());
   }, [change]);
-
   return (
     <div>
-      <style>
-        {`
-        @keyframes blink {
-          0% {
-            color: black;
-          }
-          50% {
-            color: white;
-          }
-          100% {
-            color: yellow;
-          }
-        }
-      `}
-      </style>
       <Flex
         border={"0px solid #4a90e2"}
         margin="auto"
@@ -133,11 +98,10 @@ const MainCartPage = () => {
             </div>
           </Center>
         ) : (
-          <Center
-            className="cartPage"
-            borderRadius="2%"
-            boxShadow="4px 10px 6px 8px rgba(12,12,12,0.2)"
-          >
+          <Box className="cartPage" padding="0 0 2% 2%">
+            {/* Box Tổng */}
+
+            {/* Header  */}
             <Heading
               textAlign="center"
               display="flex"
@@ -147,24 +111,16 @@ const MainCartPage = () => {
               mt="5"
             >
               <Box className="headingCart">
-                <Text className="textHeader">
-                  <ArrowBackIcon w={6} h={6} color="red.500" /> Trang chủ{" "}
-                </Text>
-                <Center fontSize="25px" fontWeight="500" color="red.500">
+                <Center fontSize="32px" fontWeight="700" color="black">
                   Đặt hàng
                 </Center>
               </Box>
             </Heading>
-            <Center
-              mt="5px"
-              width="100%"
-              borderRadius="20px"
-              display="flex"
-              flexWrap="wrap"
-              borderBottom="none"
-              borderBottomRadius="none"
-            >
+            {/* Header  */}
+
+            <Box display="flex" justifyContent="space-between">
               <Flex
+                padding="0 15px 0 0"
                 flexDirection={"column"}
                 border={"0px solid blue"}
                 width={{
@@ -177,6 +133,7 @@ const MainCartPage = () => {
                 }}
                 gap={"1"}
               >
+                <Address />
                 <MyCartLength item={dataLength} />
                 {loading && (
                   <Center>
@@ -191,37 +148,42 @@ const MainCartPage = () => {
                 )}
 
                 {data.map((product) => (
-                  <CartItem
-                    cartID={product.cartID}
-                    color={product.color}
-                    storage={product.storage_value}
-                    key={product.prodID}
-                    name={product.prodName}
-                    img={product.prodImg}
-                    price={product.prodPrice}
-                    priceSale={product.prodPriceSale}
-                    QTY={product.QTY}
-                    id={product.prodID}
+                  <OrderItem
+                    color={product.cart[0].color}
+                    storage={product.cart[0].storage_value}
+                    key={product.cart[0].prodID}
+                    name={product.cart[0].prodName}
+                    img={product.cart[0].prodImg}
+                    price={product.cart[0].prodPrice}
+                    priceSale={product.cart[0].prodPriceSale}
+                    id={product.cart[0].prodID}
+                    QTY={product.cart[0].QTY}
                     quantity={product.quantity}
                     DeleteRequest={DeleteRequest}
                   />
                 ))}
               </Flex>
-            </Center>
-            <Checkout />
-            <CheckoutBox
-              items={dataLength}
-              totalPrice={totalPrice}
-              paybalPrice={paybalPrice}
-              setVal={setVal}
-              handleApply={handleApply}
-              discount={coupon}
-            />
-          </Center>
+              {/* Phân tách 2 box */}
+
+              <Flex
+                width="30%"
+                border={"1px solid rgb(224, 224, 225)"}
+                padding="0 0 10px"
+              >
+                <CheckoutBox
+                  items={dataLength}
+                  totalPrice={totalPrice}
+                  paybalPrice={paybalPrice}
+                  setVal={setVal}
+                  handleApply={handleApply}
+                  discount={coupon}
+                />
+              </Flex>
+            </Box>
+          </Box>
         )}
       </Flex>
     </div>
   );
 };
-
-export default MainCartPage;
+export default CheckoutPage;

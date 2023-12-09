@@ -34,7 +34,7 @@ const Resetpass = () => {
     }
 
     axios
-      .put(`https://duantn-backend.onrender.com/users/resetpass`, {
+      .put(`${process.env.REACT_APP_DATABASE_API_URL}/users/resetpass`, {
         email,
         token,
         password,

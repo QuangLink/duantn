@@ -17,7 +17,6 @@ const SlideProuct = ({ type }) => {
         css={{ "@media (max-width: 768px)": { display: "none" } }}
       >
         <Box w="100%" fontSize="25px" fontWeight="600">
-          KHUYẾN MÃI CHỈ CÓ TRÊN ONLINE
         </Box>
         <Box width="100%" display="block">
           <img

@@ -1,17 +1,7 @@
 import {
-  Box,
   Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
   InputGroup,
   InputRightElement,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -41,7 +31,7 @@ function SignUpForm() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://duantn-backend.onrender.com/users/",
+          `${process.env.REACT_APP_DATABASE_API_URL}/users/`,
         );
         setUsernamesFromApi(response.data.map((user) => user.username));
         setEmailsFromApi(response.data.map((user) => user.email));
@@ -70,7 +60,6 @@ function SignUpForm() {
       console.log(error);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
@@ -93,7 +82,7 @@ function SignUpForm() {
         };
 
         const response = await axios.post(
-          "https://duantn-backend.onrender.com/users/register",
+          `${process.env.REACT_APP_DATABASE_API_URL}/users/register`,
           payload,
         );
 
@@ -142,7 +131,6 @@ function SignUpForm() {
       });
     }
   };
-
   const isValidEmail = (email) => {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailPattern.test(email);
@@ -159,7 +147,6 @@ function SignUpForm() {
       });
     }
   }, [isAuth, username, navigate, toast]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -198,7 +185,6 @@ function SignUpForm() {
       }
     }
   };
-
   return (
     <div className="form-container sign-up-container">
       <form>
@@ -254,5 +240,4 @@ function SignUpForm() {
     </div>
   );
 }
-
 export default SignUpForm;

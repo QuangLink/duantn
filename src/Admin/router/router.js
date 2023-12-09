@@ -2,9 +2,8 @@ import Forgot from "../Components/Pages/Dangnhap/Forgot";
 import Dangnhap from "../Components/Pages/Dangnhap/Dangnhap";
 import Home from "../Components/Pages/Home/Home";
 import Quanlynv from "../Components/Pages/Quanly/Quanlykh";
-import Quanlysp from "../Components/Pages/Quanly/Quanlysp"
+import Quanlysp from "../Components/Pages/Quanly/Quanlysp";
 import Quanlydonhang from "../Components/Pages/Quanly/Quanlydonhang";
-
 
 import Baocaodoanhthu from "../Components/Pages/Quanly/Baocaodoanhthu";
 import Themsanpham from "../Components/Pages/Task/Themsanpham";
@@ -19,14 +18,8 @@ const publicRoutes = [
   { path: "/quanlydonhang", component: Quanlydonhang, layout: null },
 
   { path: "/doanhthu", component: Baocaodoanhthu, layout: null },
-  {path:"/themsp", component: Themsanpham, layout: null},
-  {path:"/prodlist", component: ProductList, layout: null},
-  
-
-
-
-
-
+  { path: "/themsp", component: Themsanpham, layout: null },
+  { path: "/prodlist", component: ProductList, layout: null },
 ];
 
 const privateRoutes = [];

@@ -21,82 +21,88 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import { ColorFilter, StorageValueFilter } from "./Filter";
-
+import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
-//add singleData to cart
 
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
-    window.location.href = "/login";
+    throw new Error("Chưa đăng nhập");
   } else {
-    try {
-      // Lấy userID từ sessionStorage
-
-      // Ensure data.prodID is a valid value, not [object Object]
-      const prodID = data.prodID;
-      const colorID = data.colorID;
-      const storageID = data.storageID;
-      // Tạo dữ liệu gửi đi kết hợp với userID và prodID
-      const postData = {
-        prodID,
-        colorID,
-        storageID,
-        userID,
-      };
-
-      let response = await axios.post(
-        `https://duantn-backend.onrender.com/cart/`,
-        postData,
-      );
-      window.location.href = "/cart";
-      return response.data;
-    } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+    const prodID = data.prodID;
+    const colorID = data.colorID;
+    const storageID = data.storageID;
+    const ramID = data.ramID;
+    //cartID tự tăng giá trị
+    const cartID = Math.floor(Math.random() * 1000000000);
+    const productData = {
+      cartID,
+      userID,
+      prodID,
+      colorID,
+      storageID,
+      ramID,
+      quantity: 1,
+    };
+    const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+    if (!cartData[userID]) {
+      cartData[userID] = [];
     }
+    const existingProduct = cartData[userID].find(
+      (product) =>
+        product.prodID === prodID &&
+        product.colorID === colorID &&
+        product.storageID === storageID &&
+        product.ramID === ramID,
+    );
+    if (existingProduct) {
+      throw new Error("Product already exists in the cart");
+    } else {
+      cartData[userID].push(productData);
+    }
+    sessionStorage.setItem("cart", JSON.stringify(cartData));
   }
 };
-
 export const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
-    window.location.href = "/login";
+    throw new Error("Chưa đăng nhập");
   } else {
     try {
-      // Lấy userID từ sessionStorage
-
-      // Ensure data.prodID is a valid value, not [object Object]
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
+      const ramID = data.ramID;
       // Tạo dữ liệu gửi đi kết hợp với userID và prodID
       const postData = {
         prodID,
         colorID,
         storageID,
+        ramID,
         userID,
       };
 
       let response = await axios.post(
-        `https://duantn-backend.onrender.com/wishlist/`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
         postData,
       );
       window.location.href = "/wishlist";
       return response.data;
     } catch (error) {
-      console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+      console.log(error);
+      throw error;
     }
   }
 };
-
 const SingleProduct = (props) => {
+  const { userID } = useSelector((store) => store.AuthManager);
   const toast = useToast();
   const { typeOfProduct } = props;
   const [filters, setFilters] = useState({
     color: "",
     storage_value: "",
+    ram: "",
   });
 
   const applyFilters = () => {
@@ -115,6 +121,12 @@ const SingleProduct = (props) => {
         (product) => product.storage_value === filters.storage_value,
       );
     }
+    // Apply ram filter
+    if (filters.ram) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.ram === filters.ram,
+      );
+    }
 
     return filteredProducts;
   };
@@ -126,13 +138,14 @@ const SingleProduct = (props) => {
   var navigate = useNavigate();
 
   const singleDatas = useSelector((store) => store.singleProduct.data);
+  console.log("filters", singleDatas);
   // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (prodID, colorID, storageID) => {
-    postSingleData({ prodID, colorID, storageID })
+  const handlePost = (prodID, colorID, storageID, ramID) => {
+    postSingleData({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
           title: "Đã thêm vào giỏ",
@@ -143,14 +156,33 @@ const SingleProduct = (props) => {
       })
       .catch((error) => {
         console.error("Error handling post:", error);
-        // Handle the error as needed, e.g., display an error toast
-        toast({
-          title: "Lỗi",
 
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
+        // Check if the error is due to an existing product
+        if (error.message === "Product already exists in the cart") {
+          // Handle it appropriately, e.g., display a different toast
+          toast({
+            title: "Sản phẩm đã tồn tại trong giỏ",
+            status: "warning",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else if (error.message === "Chưa đăng nhập") {
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            description: "Bạn cần đăng nhập để thực hiện chức năng này",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          // Handle other errors
+          toast({
+            title: "Lỗi",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
       });
   };
 
@@ -159,6 +191,9 @@ const SingleProduct = (props) => {
   };
   const applyStorageValueFilter = (selectedValue) => {
     setFilters({ ...filters, storage_value: selectedValue });
+  };
+  const applyRamFilter = (selectedRam) => {
+    setFilters({ ...filters, ram: selectedRam });
   };
   const colors =
     singleDatas && Array.isArray(singleDatas)
@@ -169,6 +204,11 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
+  const rams =
+    singleDatas && Array.isArray(singleDatas)
+      ? [...new Set(singleDatas.map((product) => product.ram))]
+      : [];
+
   const handleWish = (prodID, colorID, storageID) => {
     postSingleDataWish({ prodID, colorID, storageID })
       .then((res) => {
@@ -182,13 +222,15 @@ const SingleProduct = (props) => {
       .catch((error) => {
         console.error("Error handling post:", error);
         // Handle the error as needed, e.g., display an error toast
-        toast({
-          title: "Lỗi",
-
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
+        if ((error.message = "Chưa đăng nhập")) {
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          navigate("/login");
+        }
       });
   };
 
@@ -208,6 +250,7 @@ const SingleProduct = (props) => {
       </Heading>
     );
   }
+
   return (
     <>
       {loading ? (
@@ -442,13 +485,16 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
-
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
                             applyFilter={applyStorageValueFilter}
                           />
                         )}
+                        {applyFilters()[0].ram != null && (
+                          <RamFilter rams={rams} applyFilter={applyRamFilter} />
+                        )}
+
                         <Text
                           fontSize="sm"
                           style={{ fontWeight: "bold" }}
@@ -457,7 +503,6 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
-
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -465,7 +510,6 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
-
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -480,6 +524,8 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
+                                userID,
                               )
                             }
                           >
@@ -493,9 +539,17 @@ const SingleProduct = (props) => {
                             fontSize="lg"
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
-                            onClick={() => handleWish(singleDatas[0].prodID)}
+                            onClick={() =>
+                              handleWish(
+                                applyFilters()[0].prodID,
+                                applyFilters()[0].colorID,
+                                applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
+                                userID,
+                              )
+                            }
                           >
-                            Mua ngay
+                            Yêu thích
                           </Button>
                         </Flex>
                         <Box

@@ -17,7 +17,7 @@ export const loginGoogle = (user) => async (dispatch) => {
 
     Cookies.set("username", username);
     let res = await axios.post(
-      "https://duantn-backend.onrender.com/users/googleusers",
+      `${process.env.REACT_APP_DATABASE_API_URL}/users/googleusers`,
       { username, email }, // Pass the username and email as an object to the post request
     );
     const userID = res.data.payload.userID;
@@ -43,7 +43,7 @@ export const login = (creds) => async (dispatch) => {
   dispatch({ type: LOGIN_LOADING });
   try {
     let res = await axios.post(
-      "https://duantn-backend.onrender.com/users/login",
+      `${process.env.REACT_APP_DATABASE_API_URL}/users/login`,
       creds,
     );
     const token = res.data.token; // Lấy token từ phản hồi

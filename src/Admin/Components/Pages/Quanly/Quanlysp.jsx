@@ -4,8 +4,10 @@ import axios from "axios";
 
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import uuid from "react-uuid";
 
 const Quanlysanpham = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [statusFilter, setStatusFilter] = useState("all");
@@ -22,7 +24,7 @@ const Quanlysanpham = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/products",
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
       setProducts(response.data);
 
@@ -46,7 +48,7 @@ const Quanlysanpham = () => {
   const deleteProduct = async (prodID) => {
     try {
       await axios.delete(
-        `https://duantn-backend.onrender.com/products/${prodID}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/products/${prodID}`,
       );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion
@@ -110,7 +112,6 @@ const Quanlysanpham = () => {
             />
           )}
         </td>
-
         <td>{product.QTY}</td>
         <td>
           {product.QTY > 10 ? (
@@ -152,6 +153,7 @@ const Quanlysanpham = () => {
             id="show-emp"
             data-toggle="modal"
             data-target="#ModalUP"
+            onClick={() => navigate(`/admin/editsp/${product.prodID}`)}
           >
             <i class="fas fa-edit"></i>
           </button>
@@ -176,7 +178,7 @@ const Quanlysanpham = () => {
       <main class="app-content">
         <div class="app-title">
           <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active">
+            <li class="breadcrumb-item">
               <a href="#">
                 <b>Danh sách sản phẩm</b>
               </a>
@@ -193,7 +195,11 @@ const Quanlysanpham = () => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="/themsp" title="Thêm">
+                    <a
+                      class="btn btn-add btn-sm"
+                      href="/admin/themsp"
+                      title="Thêm"
+                    >
                       <i class="fas fa-plus"></i>
                       Tạo mới sản phẩm
                     </a>
@@ -271,7 +277,7 @@ const Quanlysanpham = () => {
                         >
                           <option value="all">Loại</option>
                           {prodTypes.map((prodType) => (
-                            <option key={prodType} value={prodType}>
+                            <option key={uuid()} value={prodType}>
                               {prodType}
                             </option>
                           ))}
@@ -287,7 +293,7 @@ const Quanlysanpham = () => {
                         >
                           <option value="all">Hãng</option>
                           {categories.map((category) => (
-                            <option key={category} value={category}>
+                            <option key={uuid()} value={category}>
                               {category}
                             </option>
                           ))}
@@ -301,7 +307,7 @@ const Quanlysanpham = () => {
                 </table>
                 <ul className="pagination">
                   {pageNumbers.map((number) => (
-                    <li key={number} className="page-item">
+                    <li key={uuid()} className="page-item">
                       <a
                         onClick={() => handlePageChange(number)}
                         href="#"

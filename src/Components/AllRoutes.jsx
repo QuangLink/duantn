@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import MainCartPage from "../Pages/cartPage/MainCartPage";
+import MainCartPage from "../Pages/cartPage/OrderCheckout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/SignInApp";
 import Products from "../Pages/Products/Products";
@@ -10,11 +10,9 @@ import Payments from "../Pages/payment/Payments";
 import { LastPage } from "../Pages/cartPage/LastPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoutes";
 import AdminRoute from "./PrivateRoute/AdminRoutes";
-import ProductList from "../testlist";
-import Checkout from "../Pages/cartPage/Checkout";
+import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
-import CheckoutTest from "../Pages/checkout/oldcheckout";
 import Vnpay from "../Pages/cartPage/vnpay";
 import Cart from "../Pages/cartPage/Cart";
 import Success from "../Pages/checkout/success";
@@ -26,18 +24,19 @@ import Menu from "../Admin/Components/Layout/components/Menu";
 import Baocaodoanhthu from "../Admin/Components/Pages/Quanly/Baocaodoanhthu";
 import Themsanpham from "../Admin/Components/Pages/Task/Themsanpham";
 import ChangePass from "../Pages/Profile/ChangePass";
-import Navbar from "./Navbar";
 import Verified from "../Pages/Login/Verified";
 import Forgot from "../Pages/Login/Forgot";
 import Resetpass from "../Pages/Login/Resetpass";
 import NotFoundPage from "../Pages/404";
+import Thembienthe from "../Admin/Components/Pages/Task/Thembienthe";
+import BlogContent from "../Pages/blog/blogcontent";
+import BlogList from "../Pages/blog/bloglist";
+import { Editsp } from "../Admin/Components/Pages/Task/Editsp";
 const productTypes = [
   "laptop",
   "phone",
   "tablet",
   "iphone",
-  "apple/phone",
-  "apple/tablet",
   "samsung/phone",
   "samsung/tablet",
   "xiaomi",
@@ -60,21 +59,57 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
+        <Route path="/blog" element={<BlogList />}></Route>
+        <Route path="/blog/:id" element={<BlogContent />}></Route>
         <Route path="/404" element={<NotFoundPage />}></Route>
-      <Route path="/resetpass" element={<Resetpass />}></Route>
+        <Route path="/resetpass" element={<Resetpass />}></Route>
         <Route path="/forgot" element={<Forgot />}></Route>
         <Route path="/verify" element={<Verified />}></Route>
         <Route path="/reset" element={<ChangePass />}></Route>
         <Route path="/vnpay" element={<Vnpay />}></Route>
-        <Route path="/checkouttest" element={<CheckoutTest />}></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/duantn" element={<Home />}></Route>
+        <Route
+              path={`/apple/phone`}
+              element={<Products typeOfProduct={"apple/phone"} />}
+            ></Route>
+       
+        <Route
+              path={`/apple/tablet`}
+              element={<Products typeOfProduct={"apple/tablet"} />}
+            ></Route>
         <Route
           path="/admin/dashboard"
           element={
             <AdminRoute>
               <Menu />
               <Dashboard />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/themsp"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Themsanpham />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/thembienthe"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Thembienthe />
+            </AdminRoute>
+          }
+        ></Route>
+        <Route
+          path="/admin/editsp/:id"
+          element={
+            <AdminRoute>
+              <Menu />
+              <Editsp />
             </AdminRoute>
           }
         ></Route>
@@ -210,7 +245,7 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/test" element={<ProductList />}></Route>
+  
       </Routes>
     </div>
   );

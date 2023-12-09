@@ -5,10 +5,10 @@ import uuid from "react-uuid";
 const ItemCard6 = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap">
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
         <Center>
           <Text
-            fontSize="2xl"
+            fontSize={{ lg: '2x1', base: '22px' }}
             width=""
             fontWeight="700"
             textColor="black"
@@ -34,18 +34,18 @@ const ItemCard6 = ({ type, heading }) => {
             <Flex
               height="auto"
               key={uuid()}
-              border="2px"
-              borderColor="gray.500"
               flexDirection="column"
-              backgroundColor="#fff"
+              backgroundColor="white"
               borderRadius="md"
               p="1"
-              _hover={{ backgroundColor: "fd8002" }}
+              boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+              _hover={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.5)" }}
             >
               <Center>
                 <Image
                   boxSize="40px"
                   width="70px"
+                  height="70px"
                   src={`${i.img}`}
                   alt={i.name}
                   _hover={{ backgroundColor: "fd8002" }}
@@ -59,7 +59,8 @@ const ItemCard6 = ({ type, heading }) => {
               <Center>
                 <Text fontSize="15px" color="gray.600" className="descDV" p="1">
                   {i.desc}
-                </Text>              </Center>
+                </Text>{" "}
+              </Center>
             </Flex>
           ))}
         </Grid>
@@ -68,4 +69,4 @@ const ItemCard6 = ({ type, heading }) => {
   );
 };
 
-export default ItemCard6;
+export default React.memo(ItemCard6);

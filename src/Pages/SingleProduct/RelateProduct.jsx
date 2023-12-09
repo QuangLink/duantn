@@ -11,7 +11,7 @@ import axios from "axios";
 import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
-  const apiUrlBase = "https://duantn-backend.onrender.com/category/";
+  const apiUrlBase = `${process.env.REACT_APP_DATABASE_API_URL}/category/`;
 
   const categoryUrl = {
     sale: apiUrlBase + type,

@@ -34,7 +34,7 @@ const ChangePass = () => {
     // Your fetch logic here
     // Ensure to replace the placeholder URL with your actual backend endpoint
     const response = await fetch(
-      "https://duantn-backend.onrender.com/users/password",
+      `${process.env.REACT_APP_DATABASE_API_URL}/users/password`,
       {
         method: "PUT",
         headers: {

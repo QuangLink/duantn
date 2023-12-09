@@ -12,7 +12,7 @@ const ProductList = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://duantn-backend.onrender.com/products",
+        `${process.env.REACT_APP_DATABASE_API_URL}/products`,
       );
       setProducts(response.data);
     } catch (error) {
@@ -23,7 +23,7 @@ const ProductList = () => {
   const deleteProduct = async (productId) => {
     try {
       await axios.delete(
-        `https://duantn-backend.onrender.com/users/${productId}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/${productId}`,
       );
       alert("Product deleted successfully");
       fetchProducts(); // Refresh the list after deletion

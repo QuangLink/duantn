@@ -35,7 +35,6 @@ const Heading = ({ heading }) => {
             {heading}
           </Text>
         </Box>
-
       </Center>
     </Flex>
   );

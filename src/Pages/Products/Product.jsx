@@ -18,9 +18,11 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
+  const userID = Cookies.get("userID");
+  if (userID === undefined) {
+    throw new Error("userID is undefined");
+  }
   try {
-    const userID = Cookies.get("userID");
-
     const postData = {
       userID,
       prodID: data.prodID,
@@ -28,7 +30,7 @@ const postSingleDataWish = async (data) => {
       storageID: data.storageID,
     };
     let response = await axios.post(
-      `https://duantn-backend.onrender.com/wishlist/`,
+      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
       postData,
       {
         headers: { "Content-Type": "application/json" },
@@ -39,7 +41,6 @@ const postSingleDataWish = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
-
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
@@ -56,18 +57,37 @@ const Product = (props, rating) => {
 
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = (data) => {
-    console.log(data);
-
-    postSingleDataWish(data).then((res) => {
+  const handleWish = () => {
+    try {
+      postSingleDataWish(data)
+        .then((res) => {
+          toast({
+            title: "Đã thêm vào giỏ",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.error("Error handling post:", error);
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            description: "Bạn cần đăng nhập để thực hiện chức năng này",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+    } catch (error) {
+      console.error("Error handling wish:", error);
       toast({
-        title: "Added Item Successfully to WishList",
-        status: "success",
-        duration: 3000,
+        title: "Error handling wish",
+        description: error.message,
+        status: "error",
+        duration: 9000,
         isClosable: true,
-        position: "bottom",
       });
-    });
+    }
   };
 
   return (
@@ -122,6 +142,7 @@ const Product = (props, rating) => {
                 </Heading>
                 <Text
                   fontSize={{ base: "10px", md: "15px", lg: "13px" }}
+                  m="auto"
                   mt={2}
                   fontWeight="bold"
                   color="blackAlpha.600"
@@ -142,8 +163,7 @@ const Product = (props, rating) => {
                 backgroundColor="#fff0e9"
                 color="#eb5757"
                 fontSize={{ base: "10px", md: "15px", lg: "13px" }}
-                marginBottom="10"
-                marginLeft={5}
+                ml="5%"
               >
                 Giá ưu đãi
               </Badge>
@@ -181,8 +201,7 @@ const Product = (props, rating) => {
                 backgroundColor="#fff0e9"
                 color="#eb5757"
                 fontSize={{ base: "10px", md: "15px", lg: "13px" }}
-                marginBottom="10"
-                marginLeft={5}
+                ml="5%"
               >
                 Giá tốt
               </Badge>
@@ -190,7 +209,7 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(data)}>
+      <Button onClick={() => handleWish(prodID)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

@@ -29,7 +29,7 @@ const Slider1 = ({ type }) => {
   const onGetData = async () => {
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/asus`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/category/asus`,
       );
 
       if (responce.data) {

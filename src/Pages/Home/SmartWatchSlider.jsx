@@ -6,19 +6,80 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 // import required modules
 import { v4 as uuid } from "uuid";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
-import { Flex, Text, Image, Square, Box, Center, Stack, Button } from "@chakra-ui/react";
-import Heading from "../Heading";
+import {
+  Flex,
+  Text,
+  Image,
+  Square,
+  Box,
+  Center,
+  Stack,
+  Button,
+} from "@chakra-ui/react";
+import Heading from "./Heading";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./stylehome.css";
 
 const ItemCardTest = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w="80%" display="flex" flexWrap="wrap" >
+      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
+        <Box
+          display={{ lg: 'none', base: 'block' }}
+
+          w="100%"
+          h="auto"
+          position="relative"
+          overflow="hidden"
+          borderRadius="15px"
+          mt={5}
+        >
+          <Image
+            src="https://i.postimg.cc/YCRGGw0Z/Untitled.png"
+            alt="Smart Watch"
+            height="100%"
+            loading="lazy"
+            borderRadius="15px"
+            zIndex={1}
+            transition="transform 0.3s ease-in-out"
+            _hover={{ transform: "scale(1.1)" }}
+          />
+          <Stack
+            ml="35px"
+            mb="30%"
+            position="absolute"
+            bottom={4}
+            zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
+          >
+            <Box
+              //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
+              color="white"
+              right={-10} // Shift the box to the left by 10px
+              p="2"
+              w="100%"
+              h="auto"
+            >
+              <h3>Apple Iphone</h3>
+              <Link to="/apple/phone">
+                <Text
+                  fontSize="18px"
+                  textDecoration="underline"
+                  m={1}
+                  color={"#black"}
+                  transition="transform 0.3s ease-in-out"
+                  _hover={{ transform: "scale(1.1)" }}
+                >
+                  {" "}
+                  Xem thêm{" "}
+                </Text>
+              </Link>
+            </Box>
+          </Stack>
+        </Box>
         <Flex
           justifyContent="center"
           w="100%"
@@ -26,9 +87,18 @@ const ItemCardTest = ({ type, heading }) => {
           cursor="pointer"
           textAlign="center"
         >
-          <Box w="29%" h="auto" position="relative" overflow="hidden" borderRadius="15px" m={1} mr={"1%"}>
+          <Box
+            display={{ lg: 'block', base: 'none' }}
+            w="29%"
+            h="auto"
+            position="relative"
+            overflow="hidden"
+            borderRadius="15px"
+            m={1}
+            mr={"1%"}
+          >
             <Image
-              src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
+              src="https://i.postimg.cc/YCRGGw0Z/Untitled.png"
               alt="Smart Watch"
               height="100%"
               loading="lazy"
@@ -39,7 +109,7 @@ const ItemCardTest = ({ type, heading }) => {
             />
             <Stack
               ml="35px"
-              mb="135%"
+              mb="30%"
               position="absolute"
               bottom={4}
               zIndex={1} // Đặt zIndex của Stack lên cao hơn hình ảnh
@@ -47,44 +117,67 @@ const ItemCardTest = ({ type, heading }) => {
               <Box
                 //hiện box này bên trên banner image và trong box này có text overlay và button show now có width bên trong Image
                 color="white"
-                right={1}
+                right={-10} // Shift the box to the left by 10px
                 p="2"
-                w="90%"
+                w="100%"
                 h="auto"
-                borderRadius="15px"
-                borderWidth={1}
-                borderColor={"#555"}
-                bg="rgba(0,0,0,0.5)"
               >
-                <h3>Hot Deals</h3>
-                <p>
-                  Pair text with an image to focus on your chosen product,
-                  collection, or blog post.
-                </p>
-                <Button>Xem thêm</Button>
+                <h3>Apple Iphone</h3>
+                <Link to="/apple/phone">
+                  <Text
+                    fontSize="18px"
+                    textDecoration="underline"
+                    m={1}
+                    color={"#black"}
+                    transition="transform 0.3s ease-in-out"
+                    _hover={{ transform: "scale(1.1)" }}
+                  >
+                    {" "}
+                    Xem thêm{" "}
+                  </Text>
+                </Link>
               </Box>
             </Stack>
           </Box>
           {/* Banner Image */}
 
-
           {/* Text Overlay */}
 
           {/* Swiper Slider */}
           <Box
-            w="70%" // Adjust the width of the Swiper slider as needed
+            w={{ lg: '70%', base: '100%' }}  // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
             <Swiper
-              slidesPerView={4}
-              grid={{ rows: 2, fill: "row" }}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 5,
+                },
+                1280: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+                1366: {
+                  slidesPerView: 4,
+                  spaceBetween: 5,
+                },
+              }}
+              grid={{ rows: 1, fill: "row" }}
               spaceBetween={10}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-      
               modules={[Grid, Autoplay]}
               className="mySwiper"
             >
@@ -102,7 +195,7 @@ const ItemCardTest = ({ type, heading }) => {
                       bg="white"
                     >
                       <Link to={`/${i.type}/${i.id}`}>
-                        <Box className="list" p="2" w="" h="auto" >
+                        <Box className="list" p="2" w="" h="auto">
                           <Box className="img">
                             <Square
                               m="auto"
@@ -118,10 +211,9 @@ const ItemCardTest = ({ type, heading }) => {
                                 objectFit={"fill"}
                               />
                             </Square>
-
                             <Text
                               mt="2"
-                              height="70px"
+                              height="30px"
                               fontFamily={"Arial"}
                               color="#424245"
                               noOfLines={2}
@@ -133,7 +225,7 @@ const ItemCardTest = ({ type, heading }) => {
                               {i.name}
                             </Text>
                             <Box mt="3" m="10px 0 30px 0px">
-                              <Flex>
+                              <Flex justifyContent="center">
                                 <Square>
                                   <Text color="gray.600" fontSize="14px">
                                     Giá mới :{" "}

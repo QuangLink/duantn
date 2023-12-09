@@ -37,8 +37,9 @@ import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
 import { AiFillCreditCard } from "react-icons/ai";
 import { RiProfileLine } from "react-icons/ri";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import uuid from "react-uuid";
 
-const Checkout = () => {
+const Address = () => {
   const username = Cookies.get("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
@@ -47,7 +48,7 @@ const Checkout = () => {
 
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
-    const apiUrl = `https://duantn-backend.onrender.com/users/address/${username}`;
+    const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`;
     axios
       .delete(apiUrl)
       .then((response) => {
@@ -78,7 +79,7 @@ const Checkout = () => {
       mobile: address.current.setmobile.value,
     };
 
-    const apiUrl = "https://duantn-backend.onrender.com/users/address";
+    const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address`;
 
     if (
       !addressData ||
@@ -129,7 +130,9 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://duantn-backend.onrender.com/users/address/${username}`)
+      .get(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`,
+      )
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -191,17 +194,22 @@ const Checkout = () => {
       addressData.length === 0
     ) {
       return (
-
-        <Flex w="70%">
-          <Text mt="5" fontSize="15px" fontWeight="500" fontStyle="italic">
+        <Box w="66%">
+          <Text
+            mt="5"
+            fontSize="15px"
+            fontWeight="500"
+            fontStyle="italic"
+            width="100%"
+          >
             Bạn chưa có địa chỉ nhận hàng
           </Text>
-        </Flex>
+        </Box>
       );
     }
 
     return addressData.map((address, index) => (
-      <Flex key={index} w="100%">
+      <Flex key={uuid()} w="90%">
         <Text mt="5" fontSize="15px" fontWeight="700">
           {address.firstname} {address.lastname}
         </Text>
@@ -217,7 +225,13 @@ const Checkout = () => {
   };
 
   return (
-    <Center className="cartPage">
+    <Center
+      border={"1px solid rgb(224, 224, 225)"}
+      width="100%"
+      display="flex"
+      flexWrap="wrap"
+      padding="16px"
+    >
       <div>
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
@@ -254,7 +268,7 @@ const Checkout = () => {
                       >
                         <option value="">Chọn tỉnh / thành phố</option>
                         {provinces.map((province) => (
-                          <option key={province.code} value={province.name}>
+                          <option key={uuid()} value={province.name}>
                             {province.name}
                           </option>
                         ))}
@@ -269,7 +283,7 @@ const Checkout = () => {
                         <option value="">Chọn quận / huyện</option>
                         {districts.map((district) => (
                           <option
-                            key={district.code}
+                            key={uuid()}
                             value={district.name}
                             data-code={district.code} // Lưu trữ code trong một thuộc tính tùy chỉnh
                           >
@@ -308,8 +322,7 @@ const Checkout = () => {
         </Accordion>
       </div>
 
-      <Box className="BgImg"></Box>
-      <Center display="flex" justifyContent="space-between" w="88%" mt="5" >
+      <Center display="flex" justifyContent="space-between" w="100%" mt="7">
         <Text fontSize="25px" fontWeight="700">
           <Icon
             as={FaMapMarkerAlt}
@@ -367,4 +380,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Address;

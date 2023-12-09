@@ -27,7 +27,7 @@ const Success = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://duantn-backend.onrender.com/orders/vnpay_return${location.search}`,
+          `${process.env.REACT_APP_DATABASE_API_URL}/orders/vnpay_return${location.search}`,
         );
 
         console.log("Response from backend:", response.data);
@@ -36,7 +36,7 @@ const Success = () => {
         // Gọi axios.post ở đây, sau khi đã có dữ liệu từ axios.get
         if (response.data) {
           const email = Cookies.get("email");
-          await axios.post("https://duantn-backend.onrender.com/mail/", {
+          await axios.post(`${process.env.REACT_APP_DATABASE_API_URL}/mail/`, {
             email: email,
             code: response.data.code,
             vnp_Amount: response.data.vnp_Amount,

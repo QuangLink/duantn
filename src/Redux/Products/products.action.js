@@ -12,7 +12,7 @@ export const getProducts =
     dispatch({ type: GET_PRODUCTS_LOADING });
     try {
       let responce = await axios.get(
-        `https://duantn-backend.onrender.com/category/${typeOfProduct}`,
+        `${process.env.REACT_APP_DATABASE_API_URL}/category/${typeOfProduct}`,
       );
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: responce.data });
