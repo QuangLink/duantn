@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { v4 as uuid } from "uuid";
-import { Autoplay, Grid, Pagination } from "swiper/modules";
+import { Autoplay, Grid } from "swiper/modules";
 import {
   Flex,
   Text,
@@ -20,16 +20,20 @@ import {
   Stack,
   Button,
 } from "@chakra-ui/react";
-import Heading from "./Heading";
 import { Link } from "react-router-dom";
 import "./stylehome.css";
 
 const DynamicSlider = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
+      <Center
+        mb="2"
+        w={{ lg: "80%", base: "90%" }}
+        display="flex"
+        flexWrap="wrap"
+      >
         <Box
-          display={{ lg: 'none', sm: 'block' }}
+          display={{ lg: "none", sm: "block" }}
           w="100%"
           h="auto"
           position="relative"
@@ -41,7 +45,6 @@ const DynamicSlider = ({ type, heading }) => {
             src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
             alt="Smart Watch"
             height="100%"
-
             loading="lazy"
             borderRadius="15px"
             zIndex={1}
@@ -49,7 +52,6 @@ const DynamicSlider = ({ type, heading }) => {
             _hover={{ transform: "scale(1.1)" }}
           />
           <Stack
-
             ml="35px"
             mb="125%"
             position="absolute"
@@ -83,8 +85,7 @@ const DynamicSlider = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            display={{ lg: 'block', base: 'none' }}
-
+            display={{ lg: "block", base: "none" }}
             w="30%"
             h="auto"
             position="relative"
@@ -97,7 +98,6 @@ const DynamicSlider = ({ type, heading }) => {
               src="//isotech-demo.myshopify.com/cdn/shop/files/Watch_Banner_7b3ae013-75a3-479c-a76f-7c2eea9d4a9e_1500x.png?v=1696738786"
               alt="Smart Watch"
               height="100%"
-
               loading="lazy"
               borderRadius="15px"
               zIndex={1}
@@ -136,7 +136,7 @@ const DynamicSlider = ({ type, heading }) => {
 
           {/* Swiper Slider */}
           <Box
-            w={{ lg: '70%', base: '100%' }} // Adjust the width of the Swiper slider as needed
+            w={{ lg: "70%", base: "100%" }} // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
@@ -210,7 +210,7 @@ const DynamicSlider = ({ type, heading }) => {
                               color="#424245"
                               noOfLines={2}
                               textAlign="center"
-                              fontSize="17px"
+                              fontSize={{ lg: "17px", base: "15px" }}
                               _hover={{ color: "blue" }}
                               fontWeight="700"
                             >
@@ -219,14 +219,17 @@ const DynamicSlider = ({ type, heading }) => {
                             <Box mt="3" m="10px 0 30px 0px">
                               <Flex justifyContent="center">
                                 <Square>
-                                  <Text color="gray.600" fontSize="14px">
+                                  <Text
+                                    color="gray.600"
+                                    fontSize={{ lg: "14px", base: "12px" }}
+                                  >
                                     Giá mới :{" "}
                                   </Text>
                                 </Square>
                                 <Square>
                                   <Text
                                     fontWeight="600"
-                                    fontSize="18px"
+                                    fontSize={{ lg: "18px", base: "14px" }}
                                     ml="1"
                                     color="red"
                                     _hover={{ color: "red" }}

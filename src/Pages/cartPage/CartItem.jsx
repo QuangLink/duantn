@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Box,
@@ -9,6 +10,7 @@ import {
   Icon,
   Text,
   Center,
+  Input,
 } from "@chakra-ui/react";
 import { FcPlus } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
@@ -34,6 +36,14 @@ const CartItem = ({
   QTY,
   DeleteRequest,
 }) => {
+  const breakpoints = {
+    base: "320px", // 0px
+    sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
+    md: "600px", // ~768px
+    lg: "800px", // ~992px
+    xl: "768px", // ~1280px
+    "2xl": "1024px", // ~1536px
+  };
   const singleData = {
     userID,
     id,
@@ -166,20 +176,19 @@ const CartItem = ({
   return (
     <Flex
       key={id}
-      className=""
+      className="cartItem"
       border={"1px solid rgb(224, 224, 225)"}
       flexDirection="column"
       width={"100%"}
-     
       boxShadow={"rgb(0 0 0 / 6%) 0px 2px 2px"}
       borderRadius="4px"
     >
       <Flex
         m="1"
-        p={"16px"}
+        p={{ "2xl": "16px", base: "2px" }}
         flexDirection={{
-          base: "column",
-          sm: "column",
+          base: "row",
+          sm: "row",
           md: "row",
           lg: "row",
           xl: "row",
@@ -203,16 +212,22 @@ const CartItem = ({
           alignItems={"center"}
           gap="2"
         >
-          <Box>
-            <Image src={img} alt={name} width="150px" />
+          <Box width={{ "2xl": "150px", base: "60px" }}>
+            <Image
+              src={img}
+              alt={name}
+              width={{ "2xl": "150px", base: "60px" }}
+            />
           </Box>
         </Flex>
         {/* //part2-line 46 to 71 */}
         <Flex
+          w={{ "2xl": "50%", base: "70%" }}
+          marginTop={{ "2xl": "0", base: "18px" }}
           flexDirection={"column"}
           border={"0px solid green"}
           textAlign={{
-            sm: "center",
+            base: "left",
             md: "left",
             lg: "left",
             xl: "left",
@@ -229,7 +244,7 @@ const CartItem = ({
             {name} {color} {storage}
           </Heading>
 
-          <Flex>
+          <Flex display={{ "2xl": "flex", base: "none" }}>
             <FcPlus />
             <Heading fontSize="12px" color={"gray"} fontStyle="italic">
               Dịch vụ/Gói bảo hành thiết bị điện tử được áp dụng cho sản phẩm
@@ -239,19 +254,20 @@ const CartItem = ({
         </Flex>
         {/* //part3- line 71 to 99*/}
         <Flex
+          marginTop={{ "2xl": "0", base: "18px" }}
           flexDirection={"column"}
           textAlign={{
-            sm: "center",
+            base: "right",
             md: "right",
             lg: "right",
             xl: "right",
             "2xl": "right",
           }}
-          width="20%"
+          width={{ base: "20%", "2xl": "20%" }}
           gap={1}
           fontWeight="500"
         >
-          <Heading fontSize="18px" color={"red"}>
+          <Heading fontSize={{ "2xl": "18px", base: "12px" }} color={"red"}>
             {price &&
               price.toLocaleString("vi-VN", {
                 style: "currency",
@@ -259,7 +275,7 @@ const CartItem = ({
               })}
           </Heading>
           <Heading
-            fontSize="17px"
+            fontSize={{ "2xl": "18px", base: "11px" }}
             color={"gray"}
             textDecoration={"line-through"}
           >
@@ -271,40 +287,71 @@ const CartItem = ({
           </Heading>
         </Flex>
 
-        <Center flexWrap="wrap" display="flex" height="100px" mt="-3">
+        <Center
+          flexWrap="wrap"
+          display="flex"
+          height="100px"
+          marginTop={{ "2xl": "0", base: "3px" }}
+        >
           <Box display={"flex"}>
-            <Button onClick={handleDec}>-</Button>
-            <input
+            <Button
+              onClick={handleDec}
+              size={{ "2xl": "sm", base: "xs" }}
+              color="gray"
+            >
+              -
+            </Button>
+            <Input
               type="number"
               value={count}
-              onChange={(e) => handleChange(e, userID, id, colorID, storageID)}
-              style={{ width: "30px", height: "40px", textAlign: "center" }}
+              onChange={handleChange}
+              size={{ "2xl": "sm", base: "xs" }}
+              width={{ "2xl": "40px", base: "30px" }}
+              textAlign="center"
+              marginX={2}
             />
-
-            <Button onClick={handleInc}>+</Button>
+            <Button
+              onClick={handleInc}
+              size={{ "2xl": "sm", base: "xs" }}
+              color="blue"
+            >
+              +
+            </Button>
           </Box>
-          <Center width="100%">
+          <Center
+            width="100%"
+            fontSize={{ "2xl": "sm", base: "xs" }}
+            h={{ "2xl": "auto", base: "0" }}
+          >
             <Text>Trong kho:</Text>
             <Text color="red" marginLeft="4px">
               {QTY}
             </Text>
           </Center>
-          <Box justifyContent="center" display="flex" width="90%">
-            <Button
-              h="auto"
-              m="0"
-              width="100%"
-              textAlign="center"
-              border="none"
-              backgroundColor={"white"}
-              color="rgb(23, 116, 239)"
-              _hover={{ color: "red" }}
-              onClick={() => {
-                DeleteRequest(userID, id, colorID, storageID);
-              }}
-            >
-              xóa
-            </Button>
+          <Box
+            justifyContent="center"
+            display="flex"
+            width="90%"
+            marginTop={{ "2xl": "0", base: "-20px" }}
+          >
+            <Box>
+              <Button
+                width="100%"
+                h="auto"
+                fontSize="12px"
+                m="auto"
+                border="none"
+                backgroundColor={"white"}
+                color="gray"
+                _hover={{ color: "red" }}
+                onClick={() => {
+                  DeleteRequest(userID, id, colorID, storageID);
+                }}
+              >
+                <DeleteIcon />
+                xóa
+              </Button>
+            </Box>
           </Box>
         </Center>
       </Flex>

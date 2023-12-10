@@ -16,8 +16,7 @@ const SlideProuct = ({ type }) => {
         borderRadius="12px"
         css={{ "@media (max-width: 768px)": { display: "none" } }}
       >
-        <Box w="100%" fontSize="25px" fontWeight="600">
-        </Box>
+        <Box w="100%" fontSize="25px" fontWeight="600"></Box>
         <Box width="100%" display="block">
           <img
             src="https://cdn.tgdd.vn/2023/09/banner/1200x150-tgdd-1200x150-1.png"

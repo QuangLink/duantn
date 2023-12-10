@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserInfo({address}) {
+export default function UserInfo({ address }) {
   return (
     <div
       class="border text-card-foreground w-full md:w-[100%] bg-white shadow-lg rounded-lg overflow-hidden"

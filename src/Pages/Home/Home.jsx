@@ -31,13 +31,13 @@ import {
 import BannerHome from "./BannerHomePage/BannerHome";
 import Danhmuc from "./DanhMuc/Danhmuc";
 
-import ItemCardTest2 from "./SmartWatchSlider";
+import SmartWatchSlider from "./SmartWatchSlider";
 import Loader from "./Loader";
 import BlogHome from "./Blog";
 const ItemList = lazy(() => import("./ItemList"));
-const ItemCard6 = lazy(() => import("./ItemCard6"));
+const Services = lazy(() => import("./Services"));
 const TimeDeal = lazy(() => import("./TimeDeal"));
-const ItemCardTest = lazy(() => import("./DynamicSlider"));
+const DynamicSlider = lazy(() => import("./DynamicSlider"));
 const Home = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
@@ -102,7 +102,6 @@ const Home = () => {
 
   return (
     <Box bg={"#F1F3F7"}>
-
       <Suspense fallback={<div>Loading</div>}>
         {error ? (
           <div>
@@ -140,10 +139,15 @@ const Home = () => {
               </div>
             </Box>
             {RenderCategoryPhone()}
-            <ItemCardTest type={PrSmartWatch} />
-            <Box width={{ lg: "80%", base: '90%' }} margin="auto">
+            <DynamicSlider type={PrSmartWatch} />
+            <Box width={{ lg: "80%", base: "90%" }} margin="auto">
               <div className="option-select">
-                <Text className="heading" fontSize={{ lg: '2x1', base: '22px' }}>CÁC PHỤ KIỆN KHÁC</Text>
+                <Text
+                  className="heading"
+                  fontSize={{ lg: "2x1", base: "22px" }}
+                >
+                  CÁC PHỤ KIỆN KHÁC
+                </Text>
                 <div className="options">
                   <button
                     className={
@@ -197,12 +201,12 @@ const Home = () => {
               </div>
             </Box>
             {RenderCategoryAssessories()}
-            <ItemCardTest2
+            <SmartWatchSlider
               type={PrApplePhone}
               linked={"/apple/phone"}
               heading="IPHONE"
             />
-            <ItemCard6 type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
+            <Services type={ItemDetails9} heading="DỊCH VỤ CỦA CHÚNG TÔI" />
             <BlogHome heading="TIN TỨC CÔNG NGHỆ" type={CateFeatures} />
           </>
         ) : (

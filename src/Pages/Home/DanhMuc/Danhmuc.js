@@ -25,13 +25,16 @@ import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 const Danhmuc = ({ type, heading }) => {
   return (
     <Center>
-      <Box w={{ lg: '80%', base: '90%' }} mt={{ lg: 10, base: 5 }} mb={{ lg: 10, base: 0 }}>
+      <Box
+        w={{ lg: "80%", base: "90%" }}
+        mt={{ lg: 10, base: 5 }}
+        mb={{ lg: 10, base: 0 }}
+      >
         <Flex justifyContent={"space-between"} mb={5}>
-          <Box >
+          <Box>
             <Text className="heading">DANH MỤC</Text>
           </Box>
           <Box pt={7}>
-
             <Button
               border="1px"
               mr={2}
@@ -43,7 +46,6 @@ const Danhmuc = ({ type, heading }) => {
             <Button border="1px" borderRadius={20} className="custom-next">
               <ArrowForwardIcon fontSize={30} />
             </Button>
-
           </Box>
         </Flex>
 

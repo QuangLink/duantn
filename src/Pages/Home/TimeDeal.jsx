@@ -322,7 +322,10 @@ const TimeDeal = ({ type, heading }) => {
                                 mt=""
                                 textAlign="center"
                               >
-                                <Text fontSize="13px" fontWeight="500">
+                                <Text
+                                  fontSize={{ lg: "13px", base: "12px" }}
+                                  fontWeight="500"
+                                >
                                   GIẢM GIÁ SỐC -{i.prodSale}%
                                 </Text>
                               </Box>

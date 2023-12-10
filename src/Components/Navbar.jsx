@@ -299,9 +299,9 @@ function Navbar() {
                     <Flex
                       key={id}
                       direction="row"
-                      align="flex-start"
+                      justifyContent={"flex-start"}
+                      alignItems={"center"}
                       borderBottom={"1px solid #555"}
-                      justify="center"
                       _hover={{ bg: "#9ecdf2" }}
                     >
                       <Box mb={6} margin={5} marginRight={10}>
@@ -318,12 +318,20 @@ function Navbar() {
                         </Text>
                         <Text fontSize="lg" color="gray.500">
                           <span className="prodPrice">
-                            {results.prodPrice} <sup>đ</sup>
+                            {results.prodPrice &&
+                              results.prodPrice.toLocaleString("vi-VN", {})}
+                            đ
                           </span>
-                          <span className="prodPriceSale">
-                            {results.prodPriceSale}
-                            <sup>đ</sup>{" "}
-                          </span>
+
+                          {results.prodPriceSale !== 0 && (
+                            <span className="prodPriceSale">
+                              {results.prodPriceSale &&
+                                results.prodPriceSale.toLocaleString(
+                                  "vi-VN",
+                                  {},
+                                )}
+                            </span>
+                          )}
                         </Text>
                       </Box>
                     </Flex>
@@ -344,6 +352,7 @@ function Navbar() {
         <>
           {isSearchVisible && isBoxVisible && (
             <Box
+              zIndex={2}
               bg={"#fff"}
               width="95%"
               height="auto"
@@ -366,7 +375,7 @@ function Navbar() {
                     <Flex
                       key={id}
                       direction="row"
-                      align="flex-start"
+                      alignItems={"center"}
                       borderBottom={"1px solid #555"}
                       justifyContent={"flex-start"}
                       _hover={{ bg: "#9ecdf2" }}
@@ -379,18 +388,26 @@ function Navbar() {
                           alt="Memory Card"
                         />
                       </Box>
-                      <Box mb={6}>
+                      <Box mt={6}>
                         <Text fontSize="l" fontWeight="600">
                           {results.prodName}
                         </Text>
-                        <Text fontSize="l" color="gray.500">
-                          <span className="prodPrice">
-                            {results.prodPrice} <sup>đ</sup>
+                        <Text fontSize="lg" color="gray.600" fontWeight={400}>
+                          Giá mới:
+                          <span className="prodPrice" fontWeight="900">
+                            {results.prodPrice &&
+                              results.prodPrice.toLocaleString("vi-VN", {})}
+                            đ
                           </span>
-                          <span className="prodPriceSale">
-                            {results.prodPriceSale}
-                            <sup>đ</sup>{" "}
-                          </span>
+                          {results.prodPriceSale !== 0 && (
+                            <span className="prodPriceSale" fontWeight="600">
+                              {results.prodPriceSale &&
+                                results.prodPriceSale.toLocaleString(
+                                  "vi-VN",
+                                  {},
+                                )}
+                            </span>
+                          )}
                         </Text>
                       </Box>
                     </Flex>
@@ -887,7 +904,8 @@ function Navbar() {
     return (
       <Flex
         zIndex={2}
-        className="flex-container"
+        // className="flex-container"
+        alignItems={"center"}
         px="5%"
         bg="#4a90e2"
         justifyContent="space-between"
@@ -1085,18 +1103,21 @@ function Navbar() {
   } else if (islesserThan740px) {
     return (
       <Flex
-        className="flex-container"
+        // className="flex-container"
+        w="100%"
         gap={0}
         px="0%"
         bg="#4a90e2"
-        justifyContent="center"
+        justifyContent="space-between"
+        alignItems={"center"}
         h={20}
         zIndex={2}
-        style={direction === "up" ? navbar.active : navbar.hidden}
+        // position={'absolute'}
+        // style={direction === "up" ? navbar.active : navbar.hidden}
       >
-        <Link to="/" className={`header-bar ${isFocused ? "focused" : ""}`}>
+        <Link to="/">
           <Box marginLeft={0}>
-            <Image src={require("./Images/logo.png")} alt="logo" w="120px" />
+            <Image src={require("./Images/logo.png")} alt="logo" w="100px" />
           </Box>
         </Link>
         <Box paddingLeft={2}>
@@ -1108,7 +1129,7 @@ function Navbar() {
             p="5px"
             m="auto"
             textAlign={"center"}
-            className={`input-bar-mobie ${isFocused ? "focused" : ""}`}
+            // className={`input-bar-mobie ${isFocused ? "focused" : ""}`}
           >
             <Input
               border={"none"}
@@ -1125,7 +1146,7 @@ function Navbar() {
           </Flex>
         </Box>
         <Closesearch2 />
-        <Box mx="20px" className={`header-bar ${isFocused ? "focused" : ""}`}>
+        <Box mx="20px">
           <Box ref={btnRef} color="white" colorScheme="teal" onClick={onOpen}>
             <GiHamburgerMenu fontSize={"50px"} />
           </Box>

@@ -2,13 +2,18 @@ import React from "react";
 import { Box, Grid, Flex, Text, Image, Center } from "@chakra-ui/react";
 import uuid from "react-uuid";
 
-const ItemCard6 = ({ type, heading }) => {
+const Services = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
+      <Center
+        mb="2"
+        w={{ lg: "80%", base: "90%" }}
+        display="flex"
+        flexWrap="wrap"
+      >
         <Center>
           <Text
-            fontSize={{ lg: '2x1', base: '22px' }}
+            fontSize={{ lg: "2x1", base: "22px" }}
             width=""
             fontWeight="700"
             textColor="black"
@@ -69,4 +74,4 @@ const ItemCard6 = ({ type, heading }) => {
   );
 };
 
-export default React.memo(ItemCard6);
+export default React.memo(Services);
