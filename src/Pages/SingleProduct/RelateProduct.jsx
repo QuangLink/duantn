@@ -53,7 +53,6 @@ const RelateProduct = ({ type, heading }) => {
     <Box
       justifyContent="center"
       w={["100%", "100%", "80%"]}
-      display={["none", "block", "block"]}
       m="auto"
       mt="20"
       cursor="pointer"
@@ -63,7 +62,7 @@ const RelateProduct = ({ type, heading }) => {
       <Box>
         <a href="">
           <Text
-            fontSize="2xl"
+            fontSize="22px"
             width=""
             fontWeight="700"
             textColor="black"
@@ -81,15 +80,15 @@ const RelateProduct = ({ type, heading }) => {
           // autoplay={{ delay:  }}
           breakpoints={{
             0: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 10,
             },
-            7: {
-              slidesPerView: 3,
+            740: {
+              slidesPerView: 2,
               spaceBetween: 15,
             },
             1024: {
@@ -97,7 +96,7 @@ const RelateProduct = ({ type, heading }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 5,
             },
           }}
@@ -114,25 +113,28 @@ const RelateProduct = ({ type, heading }) => {
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
-                    <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
+                    <Square m="auto">
                       <Image
                         src={`${i.img}`}
                         alt={i.name}
                         boxSize="160px"
                         marginBottom="10px"
+                        transition="transform 0.3s ease-in-out"
+                        _hover={{ transform: "translateY(-10px)" }}
                       />
                     </Square>
                     <Text
                       color="#424245"
                       noOfLines={2}
-                      textAlign="left"
+                      textAlign="center "
                       fontSize="15px"
                       fontWeight="bold"
+                      height={["50px","30px","30px"]}
                       _hover={{ color: "#fd8002" }}
                     >
                       {i.name}
                     </Text>
-                    <Box mt="2.5" m="20px 0 30px 0">
+                    <Box>
                       <Flex>
                         <Square>
                           <Text color="gray.600" fontSize="14px">
@@ -157,7 +159,7 @@ const RelateProduct = ({ type, heading }) => {
                       </Flex>
                       {i.original !== 0 && (
                         <>
-                          <Flex>
+                          <Flex mt="-3">
                             <Text color="gray.600" fontSize="14px">
                               Giá gốc:{" "}
                             </Text>
@@ -176,15 +178,16 @@ const RelateProduct = ({ type, heading }) => {
                             </Text>
                           </Flex>
                           <Box
-                            padding="3px"
+                          h="auto"
+                           
                             borderRadius="5px"
                             w="50%"
                             color="#EC4C0A"
                             bg="#FEB373"
-                            mt="2"
+                          
                             textAlign="center"
                           >
-                            <Text fontSize="10px" fontWeight="500">
+                            <Text fontSize="10px"   padding="2px" fontWeight="500">
                               GIẢM GIÁ SỐC
                             </Text>
                           </Box>

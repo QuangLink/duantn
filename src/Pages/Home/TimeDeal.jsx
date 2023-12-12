@@ -245,7 +245,7 @@ const TimeDeal = ({ type, heading }) => {
                       </Square>
 
                       <Text
-                        display={{ lg: "none", base: "block" }}
+                       
                         mt="2"
                         height="70px"
                         fontFamily={"Arial"}

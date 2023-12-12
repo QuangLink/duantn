@@ -21,7 +21,8 @@ import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action
 import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
-import { ColorFilter, StorageValueFilter } from "./Filter";
+import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
+
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 
@@ -33,6 +34,7 @@ const postSingleData = async (data) => {
     const prodID = data.prodID;
     const colorID = data.colorID;
     const storageID = data.storageID;
+    const ramID = data.ramID;
     //cartID tự tăng giá trị
     const cartID = Math.floor(Math.random() * 1000000000);
     const productData = {
@@ -41,19 +43,21 @@ const postSingleData = async (data) => {
       prodID,
       colorID,
       storageID,
+      ramID,
       quantity: 1,
     };
     const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
     if (!cartData[userID]) {
       cartData[userID] = [];
     }
-    const existingProductIndex = cartData[userID].findIndex(
+    const existingProduct = cartData[userID].find(
       (product) =>
         product.prodID === prodID &&
         product.colorID === colorID &&
-        product.storageID === storageID,
+        product.storageID === storageID &&
+        product.ramID === ramID,
     );
-    if (existingProductIndex !== -1) {
+    if (existingProduct) {
       throw new Error("Product already exists in the cart");
     } else {
       cartData[userID].push(productData);
@@ -83,11 +87,10 @@ export const postSingleDataWish = async (data) => {
         `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
         postData,
       );
-      
+
       return response.data;
     } catch (error) {
       console.log(error);
- 
     }
   }
 };
@@ -98,6 +101,7 @@ const SingleProduct = (props) => {
   const [filters, setFilters] = useState({
     color: "",
     storage_value: "",
+    ram: "",
   });
 
   const applyFilters = () => {
@@ -116,6 +120,12 @@ const SingleProduct = (props) => {
         (product) => product.storage_value === filters.storage_value,
       );
     }
+    // Apply ram filter
+    if (filters.ram) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.ram === filters.ram,
+      );
+    }
 
     return filteredProducts;
   };
@@ -132,8 +142,8 @@ const SingleProduct = (props) => {
   const error = useSelector((store) => store.singleProduct.error);
 
   const dispatch = useDispatch();
-  const handlePost = (prodID, colorID, storageID) => {
-    postSingleData({ prodID, colorID, storageID })
+  const handlePost = (prodID, colorID, storageID, ramID) => {
+    postSingleData({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
           title: "Đã thêm vào giỏ",
@@ -180,6 +190,9 @@ const SingleProduct = (props) => {
   const applyStorageValueFilter = (selectedValue) => {
     setFilters({ ...filters, storage_value: selectedValue });
   };
+  const applyRamFilter = (selectedRam) => {
+    setFilters({ ...filters, ram: selectedRam });
+  };
   const colors =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.color))]
@@ -188,6 +201,10 @@ const SingleProduct = (props) => {
   const storageValues =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
+      : [];
+  const rams =
+    singleDatas && Array.isArray(singleDatas)
+      ? [...new Set(singleDatas.map((product) => product.ram))]
       : [];
   const handleWish = (prodID, colorID, storageID) => {
     postSingleDataWish({ prodID, colorID, storageID })
@@ -249,7 +266,7 @@ const SingleProduct = (props) => {
           {Array.isArray(singleDatas) && (
             <Box>
               <Box
-                width="100%"
+                width="90%"
                 m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
@@ -269,12 +286,12 @@ const SingleProduct = (props) => {
                   h={["auto", "auto", "auto"]}
                   templateColumns={[
                     "repeat(1, 1fr)",
-                    "repeat(2, 1fr)",
+                    "repeat(1, 1fr)",
                     "repeat(10,1fr)",
                   ]}
                 >
                   <GridItem
-                    rowSpan={[1, 2, 7]}
+                    rowSpan={[1, 1, 7]}
                     colSpan={[6, 6, 5]}
                     m="0 0 0 18%"
                     p=" 2% 8% "
@@ -408,7 +425,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        width="91%"
+                        width={["100%", "91%", "91%"]}
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -465,13 +482,16 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
-
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
                             applyFilter={applyStorageValueFilter}
                           />
                         )}
+                        {applyFilters()[0].ram != null && (
+                          <RamFilter rams={rams} applyFilter={applyRamFilter} />
+                        )}
+
                         <Text
                           fontSize="sm"
                           style={{ fontWeight: "bold" }}
@@ -480,7 +500,6 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
-
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -488,7 +507,6 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
-
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -503,6 +521,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
                                 userID,
                               )
                             }
@@ -522,6 +541,7 @@ const SingleProduct = (props) => {
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
+                                applyFilters()[0].ramID,
                                 userID,
                               )
                             }
@@ -574,7 +594,11 @@ const SingleProduct = (props) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box className="box-table" mt={5}>
+                    <Box
+                      className="box-table"
+                      mt={5}
+                      display={["none", "block", "block"]}
+                    >
                       <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>
