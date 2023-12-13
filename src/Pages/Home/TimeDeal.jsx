@@ -80,7 +80,7 @@ const TimeDeal = ({ type, heading }) => {
       if (responce.data) {
         setFilteredProducts(responce.data || []);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   const listDataSale = filteredProducts.filter(
     (product) => product.prodSale > 0,
@@ -104,21 +104,23 @@ const TimeDeal = ({ type, heading }) => {
         w="100%"
         borderRadius="15px"
       >
-        <Box width="100%">
+        <Box width="100%" h={{ lg: 'auto', base: 10 }}>
           <Image
             borderRadius="15px"
             src="https://cdn.tgdd.vn/2023/11/campaign/GIF-BF-DESK-1200x120.gif"
             width="100%"
+            h={{ lg: 'auto', base: 50 }}
           />
         </Box>
         <Box
-          mt="6"
-          display="flex"
+          mt={{ lg: 6, base: 1 }}
+          display="flex "
           mb="1"
-          ml="6"
+          ml={{ lg: 6, base: 2 }}
+
           style={{ position: "absolute" }}
         >
-          <Box mr="4" borderRadius="20px">
+          <Box mr="4" borderRadius="20px" display={{ lg: 'block', base: 'none' }}>
             {" "}
             <img
               width="40px"
@@ -128,11 +130,11 @@ const TimeDeal = ({ type, heading }) => {
           </Box>
 
           <Text>
-            <Text fontSize={{ lg: 40, base: 25 }} color="#ffd559">
+            <Text fontSize={{ lg: 40, base: 13 }} color="#ffd559" mb={{ base: 0 }}>
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
-            <Text fontFamily="-moz-initial" fontSize="2xl" color="#fff" mt="3">
+            <Text fontFamily="-moz-initial" fontSize={{ lg: '2x1', base: 8 }} color="#fff" mt="3" display={{ lg: 'block', base: 'block' }} >
               <Text>
                 {" "}
                 <i>Kết thúc trong</i>{" "}
@@ -245,7 +247,7 @@ const TimeDeal = ({ type, heading }) => {
                       </Square>
 
                       <Text
-                       
+
                         mt="2"
                         height="70px"
                         fontFamily={"Arial"}
@@ -359,7 +361,7 @@ const TimeDeal = ({ type, heading }) => {
                         >
                           <Box ml="3%">
                             <img
-                              width="22px"
+                              width="20px"
                               height="auto"
                               src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png"
                             />

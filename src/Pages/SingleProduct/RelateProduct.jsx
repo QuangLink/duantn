@@ -53,6 +53,7 @@ const RelateProduct = ({ type, heading }) => {
     <Box
       justifyContent="center"
       w={["100%", "100%", "80%"]}
+      display={["none", "block", "block"]}
       m="auto"
       mt="20"
       cursor="pointer"
@@ -80,15 +81,15 @@ const RelateProduct = ({ type, heading }) => {
           // autoplay={{ delay:  }}
           breakpoints={{
             0: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             480: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 10,
             },
-            740: {
-              slidesPerView: 2,
+            7: {
+              slidesPerView: 3,
               spaceBetween: 15,
             },
             1024: {
@@ -113,23 +114,20 @@ const RelateProduct = ({ type, heading }) => {
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset"
                   >
-                    <Square m="auto">
+                    <Square m="auto" _hover={{ transform: "scale(1.1)" }}>
                       <Image
                         src={`${i.img}`}
                         alt={i.name}
                         boxSize="160px"
                         marginBottom="10px"
-                        transition="transform 0.3s ease-in-out"
-                        _hover={{ transform: "translateY(-10px)" }}
                       />
                     </Square>
                     <Text
                       color="#424245"
                       noOfLines={2}
-                      textAlign="center "
+                      textAlign="left"
                       fontSize="15px"
                       fontWeight="bold"
-                      height={["50px","30px","30px"]}
                       _hover={{ color: "#fd8002" }}
                     >
                       {i.name}
