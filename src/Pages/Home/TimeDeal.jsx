@@ -134,7 +134,7 @@ const TimeDeal = ({ type, heading }) => {
               {" "}
               GIỜ VÀNG DEAL SỐC
             </Text>
-            <Text fontFamily="-moz-initial" fontSize={{ lg: '2x1', base: 8 }} color="#fff" mt="3" display={{ lg: 'block', base: 'block' }} >
+            <Text fontFamily="-moz-initial" fontSize={{ lg: 24, base: 8 }} color="#fff" mt="3" display={{ lg: 'block', base: 'block' }} >
               <Text>
                 {" "}
                 <i>Kết thúc trong</i>{" "}

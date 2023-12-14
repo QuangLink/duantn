@@ -210,16 +210,21 @@ function Navbar() {
               ref={searchRef}
               borderRadius={10}
               boxShadow="0 4px 6px #555"
-
             >
-              <Box bgColor={'#f5f5f5'} p={1}>
-                <Text marginBottom={0} ml={2} color={'#666'} fontWeight={400} fontSize={16}>
+              <Box bgColor={"#f5f5f5"} p={1}>
+                <Text
+                  marginBottom={0}
+                  ml={2}
+                  color={"#666"}
+                  fontWeight={400}
+                  fontSize={16}
+                >
                   Sản phẩm gợi ý
                 </Text>
               </Box>
 
-
-              <Box overflowY={'scroll'}
+              <Box
+                overflowY={"scroll"}
                 sx={{
                   "&::-webkit-scrollbar": {
                     width: "2px",
@@ -228,8 +233,8 @@ function Navbar() {
                     backgroundColor: "lightgray",
                   },
                 }}
-                h={450}>
-
+                h={450}
+              >
                 {results.slice(0, 10).map((results, id) => {
                   return (
                     <Link
@@ -245,40 +250,30 @@ function Navbar() {
                         borderBottom={"1px solid #F5F5F5"}
                         justifyContent={"flex-start"}
                         _hover={{ bg: "#F5F5F5" }}
-                        alignItems={'center'}
+                        alignItems={"center"}
                         borderRadius={10}
 
-                      // pt={2}
+                        // pt={2}
                       >
-                        {results.prodType === 'Phone' ? <Box
-                          maxW={70}
-                          maxH={70}
-                          marginRight={3}
-                          ml={5}
-                        >
+                        <Box maxW={70} maxH={70} marginRight={3} ml={5}>
                           <Image
                             src={results.prodImg}
-                            w='100%'
+                            w="100%"
                             alt="Memory Card"
                           />
-                        </Box> :
-                          <Box
-                            maxW={110}
-                            maxH={70}
-                            marginRight={3}
-                            ml={5}
-                          >
-                            <Image
-                              src={results.prodImg}
-                              w='100%'
-                              alt="Memory Card"
-                            />
-                          </Box>
-                        }
+                        </Box>
 
-                        <Box >
-                          <Text fontSize="18px" fontWeight="600" color="gray.900" marginBottom={1}>
-                            {results.prodName.substring(0, results.prodName.length / 0.5)}
+                        <Box>
+                          <Text
+                            fontSize="18px"
+                            fontWeight="600"
+                            color="gray.900"
+                            marginBottom={1}
+                          >
+                            {results.prodName.substring(
+                              0,
+                              results.prodName.length / 0.5,
+                            )}
                           </Text>
                           <Flex>
                             <Text
@@ -305,13 +300,16 @@ function Navbar() {
                                     ml="2"
                                   >
                                     {results.prodPriceSale &&
-                                      results.prodPriceSale.toLocaleString("vi-VN", {
-                                        style: "currency",
-                                        currency: "VND",
-                                      })}
+                                      results.prodPriceSale.toLocaleString(
+                                        "vi-VN",
+                                        {
+                                          style: "currency",
+                                          currency: "VND",
+                                        },
+                                      )}
                                   </Text>
                                 </Flex>
-                                {results.prodSale > 0 &&
+                                {results.prodSale > 0 && (
                                   <Flex>
                                     <Text
                                       color="#333"
@@ -323,20 +321,18 @@ function Navbar() {
                                       -{results.prodSale}%
                                     </Text>
                                   </Flex>
-                                }
+                                )}
                               </>
                             )}
                           </Flex>
-
                         </Box>
                       </Flex>
                     </Link>
                   );
                 })}
               </Box>
-            </Box >
-          )
-          }
+            </Box>
+          )}
         </>
       );
     }
@@ -423,32 +419,33 @@ function Navbar() {
       return (
         <>
           {isSearchVisible && isBoxVisible && (
-
             <Box
               zIndex={2}
               bg={"#fff"}
               ml={3}
-
               width="95%"
               height="auto"
               position={"fixed"}
               marginTop={520}
               borderRadius={15}
-
               isOpen={isOpen}
               onClose={onClose}
               finalFocusRef={btnRef}
               ref={searchRef}
               boxShadow="0 4px 6px #555"
-
             >
-              <Box bgColor={'#f5f5f5'} p={1}>
-                <Text marginBottom={0} ml={2} color={'#666'} fontWeight={400} fontSize={16}>
+              <Box bgColor={"#f5f5f5"} p={1}>
+                <Text
+                  marginBottom={0}
+                  ml={2}
+                  color={"#666"}
+                  fontWeight={400}
+                  fontSize={16}
+                >
                   Sản phẩm gợi ý
                 </Text>
               </Box>
-              <Box overflowY={"scroll"}
-                h={400}>
+              <Box overflowY={"scroll"} h={400}>
                 {results.slice(0, 5).map((results, id) => {
                   return (
                     <Link
@@ -464,38 +461,38 @@ function Navbar() {
                         borderBottom={"1px solid #F5F5F5"}
                         justifyContent={"flex-start"}
                         _hover={{ bg: "#F5F5F5" }}
-                        alignItems={'center'}
-                      // pt={2}
+                        alignItems={"center"}
+                        // pt={2}
                       >
-                        {results.prodType === 'Phone' ? <Box
-                          maxW={50}
-                          maxH={50}
-                          marginRight={3}
-                          ml={5}
-                        >
-                          <Image
-                            src={results.prodImg}
-                            w='100%'
-                            alt="Memory Card"
-                          />
-                        </Box> :
-                          <Box
-                            maxW={70}
-                            maxH={50}
-                            marginRight={3}
-                            ml={5}
-                          >
+                        {results.prodType === "Phone" ? (
+                          <Box maxW={50} maxH={50} marginRight={3} ml={5}>
                             <Image
                               src={results.prodImg}
-                              w='100%'
+                              w="100%"
                               alt="Memory Card"
                             />
                           </Box>
-                        }
+                        ) : (
+                          <Box maxW={70} maxH={50} marginRight={3} ml={5}>
+                            <Image
+                              src={results.prodImg}
+                              w="100%"
+                              alt="Memory Card"
+                            />
+                          </Box>
+                        )}
 
-                        <Box >
-                          <Text fontSize="16px" fontWeight="600" color="gray.900" marginBottom={1}>
-                            {results.prodName.substring(0, results.prodName.length / 0.5)}
+                        <Box>
+                          <Text
+                            fontSize="16px"
+                            fontWeight="600"
+                            color="gray.900"
+                            marginBottom={1}
+                          >
+                            {results.prodName.substring(
+                              0,
+                              results.prodName.length / 0.5,
+                            )}
                           </Text>
                           <Flex>
                             <Text
@@ -522,13 +519,16 @@ function Navbar() {
                                     ml="2"
                                   >
                                     {results.prodPriceSale &&
-                                      results.prodPriceSale.toLocaleString("vi-VN", {
-                                        style: "currency",
-                                        currency: "VND",
-                                      })}
+                                      results.prodPriceSale.toLocaleString(
+                                        "vi-VN",
+                                        {
+                                          style: "currency",
+                                          currency: "VND",
+                                        },
+                                      )}
                                   </Text>
                                 </Flex>
-                                {results.prodSale > 0 &&
+                                {results.prodSale > 0 && (
                                   <Flex>
                                     <Text
                                       color="#333"
@@ -540,19 +540,16 @@ function Navbar() {
                                       -{results.prodSale}%
                                     </Text>
                                   </Flex>
-                                }
+                                )}
                               </>
                             )}
                           </Flex>
-
                         </Box>
                       </Flex>
                     </Link>
                   );
                 })}
               </Box>
-
-
             </Box>
           )}
         </>
@@ -563,11 +560,7 @@ function Navbar() {
   // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box
-        w={"100%"}
-        backgroundColor="#FFFFFF"
-        zIndex={2}
-      >
+      <Box w={"100%"} backgroundColor="#FFFFFF" zIndex={2}>
         <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
           <Box></Box>
         </Flex>
@@ -607,7 +600,7 @@ function Navbar() {
                       fontSize={"18px"}
                       color="#555"
                       flexDirection={"row"}
-                    // className={`header-bar ${isFocused ? "focused" : ""}`}
+                      // className={`header-bar ${isFocused ? "focused" : ""}`}
                     >
                       Admin
                     </Heading>
@@ -616,7 +609,7 @@ function Navbar() {
               )}
             </Flex>
           </Box>
-          <Box w="40%" position={'relative'}>
+          <Box w="40%" position={"relative"}>
             <Flex
               bg="#F5F5F5"
               borderRadius={"15px"}
@@ -637,15 +630,10 @@ function Navbar() {
                 onChange={handleChange}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
-
               />
               <BiSearch color="#555" fontSize={"28px"} />
-
-
-
             </Flex>
             <Closesearch ref={searchRef} />
-
           </Box>
           <Box w="29%">
             <Flex justifyContent={"flex-end"} alignItems={"center"}>
@@ -1222,8 +1210,8 @@ function Navbar() {
         alignItems={"center"}
         h={20}
         zIndex={2}
-      // position={'absolute'}
-      // style={direction === "up" ? navbar.active : navbar.hidden}
+        // position={'absolute'}
+        // style={direction === "up" ? navbar.active : navbar.hidden}
       >
         <Link to="/">
           <Box marginLeft={0}>
@@ -1239,7 +1227,7 @@ function Navbar() {
             p="5px"
             m="auto"
             textAlign={"center"}
-          // className={`input-bar-mobie ${isFocused ? "focused" : ""}`}
+            // className={`input-bar-mobie ${isFocused ? "focused" : ""}`}
           >
             <Input
               border={"none"}
@@ -1407,4 +1395,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
