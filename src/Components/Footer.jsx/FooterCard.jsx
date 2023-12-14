@@ -79,7 +79,7 @@ export const FooterCard4 = ({ type, heading }) => {
 
 export const FooterCard5 = ({ type, heading }) => {
   return (
-    <Box ml={115} cursor="pointer">
+    <Box ml={115} cursor="pointer" display={{ lg: 'block', base: 'none' }}>
       <Text fontSize={18} fontWeight="700">
         {heading}
       </Text>

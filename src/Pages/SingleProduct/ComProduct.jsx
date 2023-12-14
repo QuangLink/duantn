@@ -93,7 +93,7 @@ const ComProduct = ({ prodID }) => {
   return (
     <Box
       justifyContent="center"
-      w="80%"
+      w={["100%","80%","80%"]}
       m="auto"
       mt="6"
       cursor="pointer"
@@ -168,7 +168,6 @@ const ComProduct = ({ prodID }) => {
           {comments.map((comment, index) => (
             <li key={index}>
               <Box
-                m={5}
                 p={2}
                 borderRadius="5px"
                 fontWeight="bold.800"
@@ -191,6 +190,7 @@ const ComProduct = ({ prodID }) => {
                   <RatingBar rating={comment.prodRate || 0.5} />
                 </Text>
                 <Text
+                  m="none"
                   padding={2}
                   display="flex"
                   fontSize="20px"

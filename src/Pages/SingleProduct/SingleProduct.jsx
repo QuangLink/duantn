@@ -22,6 +22,7 @@ import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
+
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 
@@ -73,25 +74,23 @@ export const postSingleDataWish = async (data) => {
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
-      const ramID = data.ramID;
       // Tạo dữ liệu gửi đi kết hợp với userID và prodID
       const postData = {
         prodID,
         colorID,
         storageID,
-        ramID,
         userID,
       };
+      //get wishlist and check if the product is already in the wishlist
 
       let response = await axios.post(
         `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
         postData,
       );
-      window.location.href = "/wishlist";
+
       return response.data;
     } catch (error) {
       console.log(error);
-      throw error;
     }
   }
 };
@@ -138,7 +137,6 @@ const SingleProduct = (props) => {
   var navigate = useNavigate();
 
   const singleDatas = useSelector((store) => store.singleProduct.data);
-  console.log("filters", singleDatas);
   // console.log("in the singleProductPage and the singleData is :-",singleData);
   const loading = useSelector((store) => store.singleProduct.loading);
   const error = useSelector((store) => store.singleProduct.error);
@@ -208,12 +206,11 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.ram))]
       : [];
-
   const handleWish = (prodID, colorID, storageID) => {
     postSingleDataWish({ prodID, colorID, storageID })
       .then((res) => {
         toast({
-          title: "Đã thêm vào giỏ",
+          title: "Đã thêm vào yêu thích",
           status: "success",
           duration: 9000,
           isClosable: true,
@@ -269,7 +266,7 @@ const SingleProduct = (props) => {
           {Array.isArray(singleDatas) && (
             <Box>
               <Box
-                width="100%"
+                width="90%"
                 m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
@@ -289,12 +286,12 @@ const SingleProduct = (props) => {
                   h={["auto", "auto", "auto"]}
                   templateColumns={[
                     "repeat(1, 1fr)",
-                    "repeat(2, 1fr)",
+                    "repeat(1, 1fr)",
                     "repeat(10,1fr)",
                   ]}
                 >
                   <GridItem
-                    rowSpan={[1, 2, 7]}
+                    rowSpan={[1, 1, 7]}
                     colSpan={[6, 6, 5]}
                     m="0 0 0 18%"
                     p=" 2% 8% "
@@ -428,7 +425,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        width="91%"
+                        width={["100%", "91%", "91%"]}
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -597,7 +594,11 @@ const SingleProduct = (props) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box className="box-table" mt={5}>
+                    <Box
+                      className="box-table"
+                      mt={5}
+                      display={["none", "block", "block"]}
+                    >
                       <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>

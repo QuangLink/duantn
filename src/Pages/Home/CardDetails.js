@@ -282,6 +282,6 @@ export const ItemDetails9 = [
     img: "https://baobihuuco.com/wp-content/uploads/2019/04/icon-dam-bao-chat-luong-1.jpg",
     caption: "Slide 4",
     title: "Cam kết chất lượng",
-    desc: "Chất lượng hoàng toàn đúng như trong mô tả",
+    desc: "Chất lượng hoàn toàn đúng như trong mô tả",
   },
 ];

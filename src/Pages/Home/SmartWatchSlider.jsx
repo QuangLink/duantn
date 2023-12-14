@@ -24,13 +24,17 @@ import Heading from "./Heading";
 import { Link } from "react-router-dom";
 import "./stylehome.css";
 
-const ItemCardTest = ({ type, heading }) => {
+const SmartWatchSlider = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
+      <Center
+        mb="2"
+        w={{ lg: "80%", base: "90%" }}
+        display="flex"
+        flexWrap="wrap"
+      >
         <Box
-          display={{ lg: 'none', base: 'block' }}
-
+          display={{ lg: "none", base: "block" }}
           w="100%"
           h="auto"
           position="relative"
@@ -88,7 +92,7 @@ const ItemCardTest = ({ type, heading }) => {
           textAlign="center"
         >
           <Box
-            display={{ lg: 'block', base: 'none' }}
+            display={{ lg: "block", base: "none" }}
             w="29%"
             h="auto"
             position="relative"
@@ -145,7 +149,7 @@ const ItemCardTest = ({ type, heading }) => {
 
           {/* Swiper Slider */}
           <Box
-            w={{ lg: '70%', base: '100%' }}  // Adjust the width of the Swiper slider as needed
+            w={{ lg: "70%", base: "100%" }} // Adjust the width of the Swiper slider as needed
             m="auto"
             mt="1"
           >
@@ -218,7 +222,7 @@ const ItemCardTest = ({ type, heading }) => {
                               color="#424245"
                               noOfLines={2}
                               textAlign="center"
-                              fontSize="17px"
+                              fontSize={{ lg: "17px", base: "15px" }}
                               _hover={{ color: "blue" }}
                               fontWeight="700"
                             >
@@ -227,14 +231,17 @@ const ItemCardTest = ({ type, heading }) => {
                             <Box mt="3" m="10px 0 30px 0px">
                               <Flex justifyContent="center">
                                 <Square>
-                                  <Text color="gray.600" fontSize="14px">
+                                  <Text
+                                    color="gray.600"
+                                    fontSize={{ lg: "14px", base: "12px" }}
+                                  >
                                     Giá mới :{" "}
                                   </Text>
                                 </Square>
                                 <Square>
                                   <Text
                                     fontWeight="600"
-                                    fontSize="18px"
+                                    fontSize={{ lg: "18px", base: "14px" }}
                                     ml="1"
                                     color="red"
                                     _hover={{ color: "red" }}
@@ -263,4 +270,4 @@ const ItemCardTest = ({ type, heading }) => {
   );
 };
 
-export default ItemCardTest;
+export default SmartWatchSlider;

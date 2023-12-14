@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useDispatch } from "react-redux";
-import { DeleteIcon } from '@chakra-ui/icons'
+import { DeleteIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
@@ -30,6 +30,14 @@ const OrderItem = ({
   QTY,
   DeleteRequest,
 }) => {
+  const breakpoints = {
+    base: "320px", // 0px
+    sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
+    md: "600px", // ~768px
+    lg: "800px", // ~992px
+    xl: "768px", // ~1280px
+    "2xl": "1024px", // ~1536px
+  };
   const singleData = {
     userID,
     id,
@@ -173,8 +181,8 @@ const OrderItem = ({
         m="1"
         p="1"
         flexDirection={{
-          base: "column",
-          sm: "column",
+          base: "row",
+          sm: "row",
           md: "row",
           lg: "row",
           xl: "row",
@@ -182,7 +190,7 @@ const OrderItem = ({
         }}
         justifyContent={{ sm: "center", base: "center" }}
         alignItems={{
-          sm: "center",
+          base: "normal",
           md: "normal",
           lg: "normal",
           xl: "normal",
@@ -192,7 +200,11 @@ const OrderItem = ({
       >
         <Flex border={"0px solid blue"} flexWrap="wrap">
           <Box>
-            <Image src={img} alt={name} width="60px" />
+            <Image
+              src={img}
+              alt={name}
+              width={{ "2xl": "60px", base: "60px" }}
+            />
             <Box>
               <Button
                 width="100%"
@@ -220,13 +232,13 @@ const OrderItem = ({
           flexDirection={"column"}
           border={"0px solid green"}
           textAlign={{
-            sm: "center",
+            base: "left",
             md: "left",
             lg: "left",
             xl: "left",
             "2xl": "left",
           }}
-          width="50%"
+          width={{ "2xl": "50%", base: "70%" }}
           gap={2}
         >
           <Heading
@@ -249,13 +261,13 @@ const OrderItem = ({
         <Flex
           flexDirection={"column"}
           textAlign={{
-            sm: "center",
+            base: "center",
             md: "right",
             lg: "right",
             xl: "right",
             "2xl": "right",
           }}
-          width="25%"
+          width={{ "2xl": "25%", base: "35%" }}
           gap={1}
           fontWeight="500"
         >
@@ -278,7 +290,11 @@ const OrderItem = ({
                 currency: "VND",
               })}
           </Heading>
-          <Box display={"flex"} justifyContent="end" fontSize="15px">
+          <Box
+            display={"flex"}
+            justifyContent={{ "2xl": "end", base: "center" }}
+            fontSize="15px"
+          >
             <Button onClick={handleDec} size="xs" color="gray">
               -
             </Button>

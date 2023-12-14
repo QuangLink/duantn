@@ -24,6 +24,14 @@ export const GetData = async () => {
   }
 };
 const CheckoutPage = () => {
+  const breakpoints = {
+    base: "320px", // 0px
+    sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
+    md: "600px", // ~768px
+    lg: "800px", // ~992px
+    xl: "768px", // ~1280px
+    "2xl": "1024px", // ~1536px
+  };
   const dispatch = useDispatch();
   const { loading, data, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
@@ -67,16 +75,16 @@ const CheckoutPage = () => {
     dispatch(getData());
   }, [change]);
   return (
-    <div>
+    <div w="100%">
       <Flex
         border={"0px solid #4a90e2"}
         margin="auto"
         width={"100%"}
-        paddingX="20px"
+        padding={{ "2xl": "0", base: "0 1% 0 1%" }}
         flexDirection={{
-          base: "column",
-          sm: "column",
-          md: "column",
+          base: "row",
+          sm: "row",
+          md: "row",
           lg: "row",
           xl: "row",
           "2xl": "row",
@@ -98,7 +106,11 @@ const CheckoutPage = () => {
             </div>
           </Center>
         ) : (
-          <Box className="cartPage" padding="0 0 2% 2%">
+          <Box
+            className="cartPage"
+            w={{ "2xl": "80%", base: "98%" }}
+            marginTop={{ "2xl": "0", base: "80px" }}
+          >
             {/* Box Tổng */}
 
             {/* Header  */}
@@ -118,9 +130,14 @@ const CheckoutPage = () => {
             </Heading>
             {/* Header  */}
 
-            <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              justifyContent={{ base: "center", "2xl": "space-between" }}
+              width="100%"
+              flexWrap={{ base: "wrap" }}
+            >
               <Flex
-                padding="0 15px 0 0"
+                padding={{ "2xl": "0 15px 0 0", base: "0" }}
                 flexDirection={"column"}
                 border={"0px solid blue"}
                 width={{
@@ -134,6 +151,7 @@ const CheckoutPage = () => {
                 gap={"1"}
               >
                 <Address />
+
                 <MyCartLength item={dataLength} />
                 {loading && (
                   <Center>
@@ -166,7 +184,8 @@ const CheckoutPage = () => {
               {/* Phân tách 2 box */}
 
               <Flex
-                width="30%"
+                mt={{ "2xl": "0", base: "1" }}
+                width={{ base: "100%", "2xl": "30%" }}
                 border={"1px solid rgb(224, 224, 225)"}
                 padding="0 0 10px"
               >

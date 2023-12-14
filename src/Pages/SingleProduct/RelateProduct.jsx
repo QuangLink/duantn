@@ -63,7 +63,7 @@ const RelateProduct = ({ type, heading }) => {
       <Box>
         <a href="">
           <Text
-            fontSize="2xl"
+            fontSize="22px"
             width=""
             fontWeight="700"
             textColor="black"
@@ -97,7 +97,7 @@ const RelateProduct = ({ type, heading }) => {
               spaceBetween: 15,
             },
             1280: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 5,
             },
           }}
@@ -132,7 +132,7 @@ const RelateProduct = ({ type, heading }) => {
                     >
                       {i.name}
                     </Text>
-                    <Box mt="2.5" m="20px 0 30px 0">
+                    <Box>
                       <Flex>
                         <Square>
                           <Text color="gray.600" fontSize="14px">
@@ -157,7 +157,7 @@ const RelateProduct = ({ type, heading }) => {
                       </Flex>
                       {i.original !== 0 && (
                         <>
-                          <Flex>
+                          <Flex mt="-3">
                             <Text color="gray.600" fontSize="14px">
                               Giá gốc:{" "}
                             </Text>
@@ -176,15 +176,16 @@ const RelateProduct = ({ type, heading }) => {
                             </Text>
                           </Flex>
                           <Box
-                            padding="3px"
+                          h="auto"
+                           
                             borderRadius="5px"
                             w="50%"
                             color="#EC4C0A"
                             bg="#FEB373"
-                            mt="2"
+                          
                             textAlign="center"
                           >
-                            <Text fontSize="10px" fontWeight="500">
+                            <Text fontSize="10px"   padding="2px" fontWeight="500">
                               GIẢM GIÁ SỐC
                             </Text>
                           </Box>

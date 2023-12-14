@@ -21,3 +21,10 @@
   .comment-outline{
     white-space: normal;   width: 90%;     overflow: hidden;  
   }
+  @media (max-width: 767px) {
+    /* CSS cho thiết bị di động ở đây */
+    .tableproduct {
+      width: 100%;
+    }
+    /* Các thuộc tính khác */
+  }

@@ -66,7 +66,7 @@ const RamFilter = ({ rams, applyFilter }) => {
       ))}
     </div>
   );
-}
+};
 const StorageValueFilter = ({ storageValues, applyFilter }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -101,4 +101,4 @@ const StorageValueFilter = ({ storageValues, applyFilter }) => {
   );
 };
 
-export { ColorFilter, StorageValueFilter,RamFilter };
+export { ColorFilter, StorageValueFilter, RamFilter };

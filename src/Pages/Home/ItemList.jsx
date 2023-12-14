@@ -25,7 +25,12 @@ import { Link } from "react-router-dom";
 const ItemList = ({ type, heading }) => {
   return (
     <Center>
-      <Center mb="2" w={{ lg: '80%', base: '90%' }} display="flex" flexWrap="wrap">
+      <Center
+        mb="2"
+        w={{ lg: "80%", base: "90%" }}
+        display="flex"
+        flexWrap="wrap"
+      >
         <Flex
           justifyContent="center"
           w="100%"
@@ -45,7 +50,7 @@ const ItemList = ({ type, heading }) => {
                   spaceBetween: 5,
                 },
                 768: {
-                  slidesPerView: 2,
+                  slidesPerView: 3,
                   spaceBetween: 5,
                 },
                 1024: {
@@ -95,7 +100,6 @@ const ItemList = ({ type, heading }) => {
                             >
                               <Image
                                 src={`${i.img}`}
-
                                 maxW={{ lg: 200, base: 150 }}
                                 maxH={{ lg: 150, base: 100 }}
                                 objectFit={"fill"}
@@ -104,12 +108,12 @@ const ItemList = ({ type, heading }) => {
 
                             <Text
                               mt="2"
-                              height="30px"
+                              height={["70px", "65px", "30px"]}
                               fontFamily={"Arial"}
                               color="#424245"
                               noOfLines={2}
                               textAlign="center"
-                              fontSize="17px"
+                              fontSize={{ lg: "17px", base: "15px" }}
                               _hover={{ color: "blue" }}
                               fontWeight="700"
                             >
@@ -118,14 +122,17 @@ const ItemList = ({ type, heading }) => {
                             <Box mt="3" m="10px 0 30px 0px">
                               <Flex justifyContent="center">
                                 <Square>
-                                  <Text color="gray.600" fontSize="14px">
+                                  <Text
+                                    color="gray.600"
+                                    fontSize={{ lg: "14px", base: "12px" }}
+                                  >
                                     Giá mới :{" "}
                                   </Text>
                                 </Square>
                                 <Square>
                                   <Text
                                     fontWeight="600"
-                                    fontSize="18px"
+                                    fontSize={{ lg: "18px", base: "14px" }}
                                     ml="1"
                                     color="red"
                                     _hover={{ color: "red" }}

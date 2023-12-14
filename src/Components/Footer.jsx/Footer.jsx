@@ -20,14 +20,14 @@ import {
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Footer = () => {
- 
+
   return (
     <Center>
       <Box
         bg="#FFFFFF"
         color="#55555"
         justifyContent="space-around"
-        mt={20}
+        mt={{ lg: 20, base: 10 }}
         mb={20}
         w={"100%"}
       // alignItems={"center"}

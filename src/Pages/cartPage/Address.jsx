@@ -40,6 +40,32 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import uuid from "react-uuid";
 
 const Address = () => {
+  const breakpoints = {
+    base: "320px", // 0px
+    sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
+    md: "600px", // ~768px
+    lg: "800px", // ~992px
+    xl: "768px", // ~1280px
+    "2xl": "1024px", // ~1536px
+  };
+
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
+
+    if (value.trim() === "") {
+      setError("Dữ liệu không được bỏ trống");
+    } else if (/[^a-zA-Z0-9]/.test(value)) {
+      setError("Dữ liệu không được chứa ký tự đặc biệt");
+    } else {
+      setError("");
+    }
+    setInputValue(value);
+  };
+
   const username = Cookies.get("username");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const address = useRef({});
@@ -194,9 +220,9 @@ const Address = () => {
       addressData.length === 0
     ) {
       return (
-        <Box w="66%">
+        <Box w={{ "2xl": "66%", base: "80%" }}>
           <Text
-            mt="5"
+            mt={{ "2xl": "5", base: "0" }}
             fontSize="15px"
             fontWeight="500"
             fontStyle="italic"
@@ -209,14 +235,26 @@ const Address = () => {
     }
 
     return addressData.map((address, index) => (
-      <Flex key={uuid()} w="90%">
-        <Text mt="5" fontSize="15px" fontWeight="700">
-          {address.firstname} {address.lastname}
-        </Text>
-        <Text mt="5" fontSize="15px" fontWeight="700" ml="2">
-          (+84) {address.mobile} |
-        </Text>
-        <Text mt="5" fontSize="15px" ml="2">
+      <Flex
+        key={uuid()}
+        w={{ "2xl": "90%", base: "100%" }}
+        justifyContent={{ "2xl": "left", base: "left" }}
+        flexWrap={{ base: "wrap" }}
+      >
+        <Flex display={"flex"} width={{ "2xl": "auto", base: "100%" }}>
+          <Text mt="5" fontSize="15px" fontWeight="700">
+            {address.firstname} {address.lastname}
+          </Text>
+          <Text mt="5" fontSize="15px" fontWeight="700" ml="2">
+            (+84) {address.mobile}
+          </Text>
+        </Flex>
+
+        <Text
+          mt={{ "2xl": "5", base: "-2" }}
+          fontSize={{ "2xl": "15px", base: "13px" }}
+          ml="2"
+        >
           Địa chỉ: {address.flat}, {address.street} - {address.state} -{" "}
           {address.city}
         </Text>
@@ -245,8 +283,11 @@ const Address = () => {
                     <Flex flexDirection="column" gap="1rem">
                       <Input
                         placeholder="Họ*"
+                        value={inputValue}
+                        onChange={handleInputChange}
                         ref={(e) => (address.current["setfirstname"] = e)}
                       />
+                      {error && <div style={{ color: "red" }}>{error}</div>}
                       <Input
                         placeholder="Tên*"
                         ref={(e) => (address.current["setlastname"] = e)}
@@ -322,12 +363,17 @@ const Address = () => {
         </Accordion>
       </div>
 
-      <Center display="flex" justifyContent="space-between" w="100%" mt="7">
-        <Text fontSize="25px" fontWeight="700">
+      <Center
+        display="flex"
+        justifyContent={"space-between"}
+        w="100%"
+        mt={{ "2xl": "7" }}
+      >
+        <Text fontSize={{ "2xl": "25px", base: "20px" }} fontWeight="700">
           <Icon
             as={FaMapMarkerAlt}
-            w={8}
-            h={8}
+            w={{ "2xl": "8", base: "4" }}
+            h={{ "2xl": "8", base: "4" }}
             color="black"
             marginRight="5px"
           />
@@ -336,26 +382,44 @@ const Address = () => {
         {!addressData ||
         !Array.isArray(addressData) ||
         addressData.length === 0 ? (
-          <Button onClick={onOpen} colorScheme="blue" variant="outline">
+          <Button
+            onClick={onOpen}
+            colorScheme="blue"
+            variant="outline"
+            h={{ "2xl": "30px", base: "20px" }}
+            color="#4a90e2"
+            border="1px solid #3788FA"
+            borderRadius="5px"
+            marginRight="5px"
+            fontSize={{ "2xl": "18px", base: "10px" }}
+            textAlign={"center"}
+            justifyContent={"center"}
+          >
             Nhập địa chỉ giao hàng mới
           </Button>
         ) : (
           <Box
+            padding={{ "2xl": "0", base: "0" }}
             display="flex"
             justifyContent="space-between"
-            w="30%"
-            h="auto"
-            mt="2"
+            w={{ "2xl": "30%", base: "40%" }}
+            h={{ "2xl": "auto", base: "auto" }}
           >
             <Button
+              h={{ "2xl": "30px", base: "20px" }}
               color="#ff2323"
               border="1px solid red"
               borderRadius="5px"
               marginRight="5px"
+              fontSize={{ "2xl": "18px", base: "10px" }}
+              textAlign={"center"}
+              justifyContent={"center"}
             >
               Mặc định
             </Button>
             <Button
+              fontSize={{ "2xl": "18px", base: "10px" }}
+              h={{ "2xl": "30px", base: "20px" }}
               color="#4a90e2"
               border="1px solid #3788FA"
               borderRadius="5px"
@@ -365,6 +429,8 @@ const Address = () => {
               Thay đổi
             </Button>
             <Button
+              h={{ "2xl": "30px", base: "20px" }}
+              fontSize={{ "2xl": "18px", base: "10px" }}
               color="#4a90e2"
               border="1px solid #3788FA"
               borderRadius="5px"

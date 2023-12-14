@@ -40,7 +40,7 @@ const BannerHome = ({ type }) => {
       <Center>
         <Grid
           mt={{ lg: 4, base: 4 }}
-          w={{ lg: "80%", base: '90%' }}
+          w={{ lg: "80%", base: "90%" }}
           h="auto"
           // display={'none'}
           templateRows={{ base: "repeat(3, 2fr)", base: "repeat(1, 1fr)" }}
@@ -60,22 +60,35 @@ const BannerHome = ({ type }) => {
                     <Image
                       src={i.image}
                       width="100%"
-                      height={{ lg: "520px", base: '200px' }}
+                      height={{ lg: "520px", base: "200px" }}
                       objectFit="cover"
                       borderRadius="15px"
                       overflow="hidden"
                     />
-                    <Box position="absolute" top={{ lg: 150, base: 10 }} left="40px" w={{ lg: 600, base: 400 }}>
-                      <Text color="white" fontSize={{ lg: 46, base: 24 }} className="amin">
+                    <Box
+                      position="absolute"
+                      top={{ lg: 150, base: 10 }}
+                      left="40px"
+                      w={{ lg: 600, base: 400 }}
+                    >
+                      <Text
+                        color="white"
+                        fontSize={{ lg: 46, base: 24 }}
+                        className="amin"
+                      >
                         {i.name}
                       </Text>
-                      <Text display={{ lg: 'block', base: 'none' }} fontSize={14} color="white" className="amin">
+                      <Text
+                        display={{ lg: "block", base: "none" }}
+                        fontSize={14}
+                        color="white"
+                        className="amin"
+                      >
                         {i.title}
                       </Text>
                       <Link to={`/${i.prodType}`}>
                         <Button
                           mt={5}
-
                           h={{ lg: 50, base: 30 }}
                           w={{ lg: 130, base: 40 }}
                           fontSize="18px"
@@ -105,14 +118,17 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={{ lg: 3, base: 12 }} display={{ lg: 'block', base: 'none' }} >
+          <GridItem
+            colSpan={{ lg: 3, base: 12 }}
+            display={{ lg: "block", base: "none" }}
+          >
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/Frame_14.png?v=1695797658&width=1500"
                 alt="Slide 3"
                 style={{
                   width: "100%",
-                  height: '250px',
+                  height: "250px",
                   objectFit: "cover",
                   borderRadius: "15px",
                   overflow: "hidden",
@@ -137,15 +153,17 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={{ lg: 3, base: 12 }} display={{ lg: 'block', base: 'none' }}>
+          <GridItem
+            colSpan={{ lg: 3, base: 12 }}
+            display={{ lg: "block", base: "none" }}
+          >
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/Frame_15.png?v=1695797682&width=1500"
                 alt="Slide 3"
                 style={{
-
                   width: "100%",
-                  height: '250px',
+                  height: "250px",
                   objectFit: "cover",
                   borderRadius: "15px",
                   overflow: "hidden",
@@ -170,7 +188,7 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={4} display={{ lg: 'block', base: 'none' }}>
+          <GridItem colSpan={4} display={{ lg: "block", base: "none" }}>
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/3_Banner_4.png?v=1695813715&width=550"
@@ -203,7 +221,7 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={4} display={{ lg: 'block', base: 'none' }}>
+          <GridItem colSpan={4} display={{ lg: "block", base: "none" }}>
             <Box position="relative">
               <Image
                 src="https://isotech-demo.myshopify.com/cdn/shop/files/3_Banner_5.png?v=1695813736&width=550"
@@ -235,7 +253,7 @@ const BannerHome = ({ type }) => {
               </Box>
             </Box>
           </GridItem>
-          <GridItem colSpan={4} display={{ lg: 'block', base: 'none' }}>
+          <GridItem colSpan={4} display={{ lg: "block", base: "none" }}>
             <Box position="relative">
               <Image
                 src="https://cdn.vectorstock.com/i/preview-1x/35/83/software-development-programming-vector-24033583.jpg"
@@ -268,7 +286,7 @@ const BannerHome = ({ type }) => {
             </Box>
           </GridItem>
         </Grid>
-      </Center >
+      </Center>
     </>
   );
 };
