@@ -41,10 +41,9 @@ const Dashboard = () => {
     });
   }, []);
   // Gọi hàm fetchProducts khi component được render
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange1 = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
     pageNumbers.push(i);
@@ -311,8 +310,10 @@ const Dashboard = () => {
                       href="/admin/quanlydonhang"
                       style={{ fontSize: "25px", fontWeight: "700" }}
                     >
-                      Tình trạng đơn hàng
+                      Tình trạng đơn hàng 
+                      <i className="fa fa-arrow-right"></i>
                     </a>
+                
                   </h3>
                   <div>
                     <table className="table table-bordered">
@@ -330,7 +331,7 @@ const Dashboard = () => {
                       {pageNumbers.map((number) => (
                         <li key={number} className="page-item">
                           <a
-                            onClick={() => handlePageChange(number)}
+                            onClick={() => handlePageChange1(number)}
                             href="#"
                             className="page-link"
                           >
@@ -350,6 +351,7 @@ const Dashboard = () => {
                       style={{ fontSize: "25px", fontWeight: "700" }}
                     >
                       Khách hàng mới
+                      <i className="fa fa-arrow-right"></i>
                     </a>
                   </h3>
                   <div>
@@ -398,36 +400,14 @@ const Dashboard = () => {
                     </tr>
                   </table>
 
-                  <ul className="pagination text-center">
-                    {pageNumbers.map((number) => (
-                      <li key={number} className="page-item">
-                        <a
-                          onClick={() => handlePageChange(number)}
-                          href="#"
-                          className="page-link"
-                        >
-                          {number}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+               
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="text-center" style={{ fontSize: "13px" }}>
-          <p>
-            <b>
-              Copyright
-              <script type="text/javascript">
-                document.write(new Date().getFullYear());
-              </script>{" "}
-              Phần mềm quản lý bán hàng | Dev By Hoài
-            </b>
-          </p>
-        </div>
+    
       </main>
       <script src="js/jquery-3.2.1.min.js"></script>
       {/* <!--===============================================================================================--> */}

@@ -25,7 +25,7 @@ export const getData = () => async (dispatch) => {
       let url = `${process.env.REACT_APP_DATABASE_API_URL}/products/${cart[i].prodID}`;
 
       if (cart[i].colorID !== null) {
-        url += `/${cart[i].colorID}`;
+        url += `/${cart[i].colorID}`; 
       }
 
       if (cart[i].storageID !== null) {

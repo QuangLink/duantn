@@ -58,7 +58,7 @@ const CheckoutPage = () => {
         status: "success",
         duration: 9000,
         isClosable: true,
-        position: "top",
+        position: "bottom",
       });
     } else {
       toast({
@@ -67,7 +67,7 @@ const CheckoutPage = () => {
         status: "warning",
         duration: 9000,
         isClosable: true,
-        position: "top",
+        position: "bottom",
       });
     }
   };
