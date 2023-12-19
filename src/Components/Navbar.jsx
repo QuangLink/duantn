@@ -17,7 +17,6 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Square,
   Text,
   VStack,
   useDisclosure,
@@ -32,10 +31,8 @@ import {
   BsFillPersonFill,
   BsPhone,
   BsSmartwatch,
-  BsLaptop,
 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
@@ -172,8 +169,8 @@ function Navbar() {
       dispatch(logout());
       navigate("/login");
       toast({
-        title: "Logout  success.",
-        description: "We will miss you 😭",
+        title: "Đăng xuất thành công.",
+
         status: "success",
         duration: 9000,
         isClosable: true,
@@ -181,8 +178,7 @@ function Navbar() {
     } catch (error) {
       console.error(error);
       toast({
-        title: "Logout failed.",
-        description: "Please try again later.",
+        title: "Lỗi.",
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -689,17 +685,13 @@ function Navbar() {
                     </MenuButton>
                     <MenuList>
                       <Link to="/myprofile">
-                        <MenuItem>My Profile</MenuItem>
+                        <MenuItem>Cá nhân</MenuItem>
                       </Link>
-                      <Link to="/myorder">
-                        <MenuItem>My Order</MenuItem>
-                      </Link>
-                      <MenuItem>My Address</MenuItem>
                       <Link to="/wishlist">
                         {" "}
-                        <MenuItem>My Wishlist</MenuItem>
+                        <MenuItem>Yêu thích</MenuItem>
                       </Link>
-                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                     </MenuList>
                   </Menu>
                 </Box>
@@ -776,6 +768,7 @@ function Navbar() {
             position: isMenuFixed ? "fixed" : "static",
             top: "0px",
             width: "100%",
+            zIndex: 999,
           }}
         >
           <Menu>
@@ -1088,17 +1081,13 @@ function Navbar() {
             </MenuButton>
             <MenuList>
               <Link to="/myprofile">
-                <MenuItem>My Profile</MenuItem>
+                <MenuItem>Cá nhân</MenuItem>
               </Link>
-              <Link to="/myorder">
-                <MenuItem>My Order</MenuItem>
-              </Link>
-              <MenuItem>My Address</MenuItem>
               <Link to="whishlist">
                 {" "}
-                <MenuItem>My Wishlist</MenuItem>
+                <MenuItem>Yêu thích</MenuItem>
               </Link>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
             </MenuList>
           </Menu>
         )}

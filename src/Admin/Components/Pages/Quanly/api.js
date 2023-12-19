@@ -13,7 +13,6 @@ export const fetchTotalProducts = async () => {
     throw error;
   }
 };
-
 export const fetchProducts = async () => {
   try {
     const response = await axios.get(
@@ -25,7 +24,17 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
-
+export const fetchProductQuantity = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_DATABASE_API_URL}/products`,
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product quantity:", error);
+    throw error;
+  }
+};
 export const fetchUsers = async () => {
   try {
     const response = await axios.get(

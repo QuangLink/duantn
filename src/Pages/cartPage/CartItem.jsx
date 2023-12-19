@@ -157,7 +157,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "top",
+          position: "bottom",
         });
       })
       .catch((err) => {
@@ -168,7 +168,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "top",
+          position: "bottom",
         });
       });
   };

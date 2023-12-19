@@ -49,21 +49,85 @@ const Address = () => {
     "2xl": "1024px", // ~1536px
   };
 
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState("");
+  const [inputValueHo, setInputValueHo] = useState("");
+  const [inputValueTen, setInputValueTen] = useState("");
+  const [inputValueDiachi, setInputValueDiachi] = useState("");
+  const [inputValueDuong, setInputValueDuong] = useState("");
+  const [inputValueSdt, setInputValueSdt] = useState("");
 
-  const handleInputChange = (e) => {
+  const [error, setError] = useState("");
+  const [errorTen, setErrorTen] = useState("");
+  const [errorDiachi, setErrorDiachi] = useState("");
+  const [errorDuong, setErrorDuong] = useState("");
+  const [errorSdt, setErrorSdt] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [isValid, setIsValid] = useState(true);
+  const [isValidQH, setIsValidQH] = useState(true);
+
+  const handleInputChangeHo = (e) => {
     const value = e.target.value;
     // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
 
     if (value.trim() === "") {
-      setError("Dữ liệu không được bỏ trống");
-    } else if (/[^a-zA-Z0-9]/.test(value)) {
-      setError("Dữ liệu không được chứa ký tự đặc biệt");
+      setError("Họ không được bỏ trống");
+    } else if (/[!@#$%^&*(),.?":{}|<>0-9]/.test(value)) {
+      setError("Họ không được chứa ký tự đặc biệt");
     } else {
       setError("");
     }
-    setInputValue(value);
+    setInputValueHo(value);
+  };
+  const handleInputChangeTen = (e) => {
+    const value = e.target.value;
+    // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
+
+    if (value.trim() === "") {
+      setErrorTen("Tên không được bỏ trống");
+    } else if (/[!@#$%^&*(),.?":{}|<>0-9]/.test(value)) {
+      setErrorTen("Tên không được chứa ký tự đặc biệt");
+    } else {
+      setErrorTen("");
+    }
+    setInputValueTen(value);
+  };
+  const handleInputChangeDiachi = (e) => {
+    const value = e.target.value;
+    // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
+
+    if (value.trim() === "") {
+      setErrorDiachi("Địa chỉ không được bỏ trống");
+    } else if (/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      setErrorDiachi("Địa chỉ không được chứa ký tự đặc biệt");
+    } else {
+      setErrorDiachi("");
+    }
+    setInputValueDiachi(value);
+  };
+  const handleInputChangeDuong = (e) => {
+    const value = e.target.value;
+    // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
+
+    if (value.trim() === "") {
+      setErrorDuong("Đường không được bỏ trống");
+    } else if (/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      setErrorDuong("Đường không được chứa ký tự đặc biệt");
+    } else {
+      setErrorDuong("");
+    }
+    setInputValueDuong(value);
+  };
+  const handleInputChangeSdt = (e) => {
+    const value = e.target.value;
+    // Cập nhật state error về giá trị rỗng khi người dùng thay đổi dữ liệu
+
+    if (value.trim() === "") {
+      setErrorSdt("Số điện thoại không được bỏ trống");
+    } else if (/^\d{10,11}$/.test(value)) {
+      setErrorSdt("");
+    } else {
+      setErrorSdt("Số điện thoại không đúng định dạng");
+    }
+    setInputValueSdt(value);
   };
 
   const username = Cookies.get("username");
@@ -104,7 +168,25 @@ const Address = () => {
       city: address.current.setcity.value,
       mobile: address.current.setmobile.value,
     };
+    if (
+      !newAddress.firstname ||
+      !newAddress.lastname ||
+      !newAddress.flat ||
+      !newAddress.street ||
+      !newAddress.city ||
+      !newAddress.state ||
+      !newAddress.mobile
+    ) {
+      toast({
+        title: "Vui lòng nhập đầy đủ thông tin",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "bottom",
+      });
 
+      return;
+    }
     const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address`;
 
     if (
@@ -190,6 +272,16 @@ const Address = () => {
   };
 
   const handleProvinceChange = (e) => {
+    const value = e.target.value;
+    setSelectedOption(value);
+
+    // Kiểm tra xem giá trị đã được chọn hay chưa
+    if (value !== "") {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+
     const provinceName = e.target.value; // Giữ value là name
     setSelectedProvince(provinceName);
 
@@ -206,6 +298,16 @@ const Address = () => {
   };
 
   const handleDistrictChange = (e) => {
+    const value = e.target.value;
+    setSelectedOption(value);
+
+    // Kiểm tra xem giá trị đã được chọn hay chưa
+    if (value !== "") {
+      setIsValidQH(true);
+    } else {
+      setIsValidQH(false);
+    }
+
     const districtName = e.target.value;
     const selectedDistrictData = districts.find(
       (district) => district.name === districtName,
@@ -283,26 +385,46 @@ const Address = () => {
                     <Flex flexDirection="column" gap="1rem">
                       <Input
                         placeholder="Họ*"
-                        value={inputValue}
-                        onChange={handleInputChange}
+                        value={inputValueHo}
+                        onChange={handleInputChangeHo}
+                        isRequired
                         ref={(e) => (address.current["setfirstname"] = e)}
                       />
                       {error && <div style={{ color: "red" }}>{error}</div>}
                       <Input
                         placeholder="Tên*"
+                        value={inputValueTen}
+                        onChange={handleInputChangeTen}
+                        isRequired
                         ref={(e) => (address.current["setlastname"] = e)}
                       />
+                      {errorTen && (
+                        <div style={{ color: "red" }}>{errorTen}</div>
+                      )}
                       <Input
                         placeholder="Địa chỉ cụ thể (Tòa nhà)*"
+                        value={inputValueDiachi}
+                        onChange={handleInputChangeDiachi}
+                        isRequired
                         ref={(e) => (address.current["setflat"] = e)}
                       />
+                      {errorDiachi && (
+                        <div style={{ color: "red" }}>{errorDiachi}</div>
+                      )}
                       <Input
                         placeholder="Đường*"
+                        value={inputValueDuong}
+                        onChange={handleInputChangeDuong}
+                        isRequired
                         ref={(e) => (address.current["setstreet"] = e)}
                       />
+                      {errorDuong && (
+                        <div style={{ color: "red" }}>{errorDuong}</div>
+                      )}
 
                       <Select
                         id="provinces"
+                        isRequired
                         onChange={handleProvinceChange}
                         value={selectedProvince || ""}
                         ref={(e) => (address.current["setcity"] = e)}
@@ -314,6 +436,11 @@ const Address = () => {
                           </option>
                         ))}
                       </Select>
+                      {!isValid && (
+                        <p style={{ color: "red" }}>
+                          Vui lòng chọn tỉnh/thành phố
+                        </p>
+                      )}
 
                       <Select
                         id="districts"
@@ -332,11 +459,20 @@ const Address = () => {
                           </option>
                         ))}
                       </Select>
+                      {!isValidQH && (
+                        <p style={{ color: "red" }}>Vui lòng chọn quận/huyện</p>
+                      )}
                       <Input
                         type="number"
+                        value={inputValueSdt}
+                        onChange={handleInputChangeSdt}
+                        isRequired
                         placeholder="Số điện thoại*"
                         ref={(e) => (address.current["setmobile"] = e)}
                       />
+                      {errorSdt && (
+                        <div style={{ color: "red" }}>{errorSdt}</div>
+                      )}
                       <Button
                         colorScheme="blue"
                         mr={3}
