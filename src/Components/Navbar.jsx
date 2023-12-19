@@ -768,6 +768,7 @@ function Navbar() {
             position: isMenuFixed ? "fixed" : "static",
             top: "0px",
             width: "100%",
+            zIndex: 999,
           }}
         >
           <Menu>
