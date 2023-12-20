@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { Box, Button, FormControl, FormLabel, Heading, Icon, Input, Link } from "@chakra-ui/react";
 import axios from "axios";
-import { Box, Icon, Heading, Input, Button, Link } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { FormControl, FormLabel } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Resetpass = () => {

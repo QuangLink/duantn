@@ -1,29 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
 import {
-  Input,
-  FormLabel,
-  Avatar,
-  Stack,
-  Radio,
-  RadioGroup,
-  Alert,
-  AlertIcon,
-  Textarea,
-  Text,
   Box,
-  ButtonGroup,
   Button,
-  Heading,
-  Flex,
-  FormControl,
+  ButtonGroup,
+  Flex
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 import "react-slideshow-image/dist/styles.css";
 
-import MyOrder from "./MyOrder";
-import ChangePass from "./ChangePass";
 import { useToast } from "@chakra-ui/react";
+import ChangePass from "./ChangePass";
+import MyOrder from "./MyOrder";
 
 export default function MyProfile() {
   const toast = useToast();

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -7,6 +6,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");

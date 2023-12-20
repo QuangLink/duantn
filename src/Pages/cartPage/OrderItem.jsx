@@ -1,22 +1,21 @@
-import React, { useState } from "react";
 import {
-  Flex,
   Box,
-  Image,
   Button,
+  Flex,
   Heading,
-  useToast,
+  Image,
   Input,
+  useToast,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
 const OrderItem = ({
   userID,
-
   quantity,
   colorID,
   storageID,

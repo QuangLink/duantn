@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
-  Flex,
   Box,
-  Image,
   Button,
-  Heading,
-  useToast,
-  Icon,
-  Text,
   Center,
+  Flex,
+  Heading,
+  Image,
   Input,
+  Text,
+  useToast
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { FcPlus } from "react-icons/fc";
-import { MdDeleteForever } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../../Redux/Cart/cart.action";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 

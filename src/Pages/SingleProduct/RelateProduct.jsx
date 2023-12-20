@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
+import { Box, Flex, Image, Square, Text } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
-import axios from "axios";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Badge,
   Box,
@@ -9,14 +8,15 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import Cookies from "js-cookie";
+import React from "react";
 import { BsSuitHeart } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import RatingBar from "./RatingBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
-import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
   try {
     const userID = Cookies.get("userID");

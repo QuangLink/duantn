@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 import {
   Box,
+  Button,
   Center,
   Heading,
-  Text,
-  Button,
   Table,
   Tbody,
-  Tr,
   Td,
+  Tr
 } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Icon } from "@chakra-ui/react";
-import { FaCheckCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Success = () => {
   const location = useLocation();

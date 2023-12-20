@@ -23,12 +23,13 @@ import {
   useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineLaptop, AiOutlineTablet } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import {
   BsCart2,
   BsFillPersonFill,
+  BsPersonCircle,
   BsPhone,
   BsSmartwatch,
 } from "react-icons/bs";
@@ -36,10 +37,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
+import { UserAuth } from "../context/AuthContext";
 import "./Navbar.css";
 import useScrollListener from "./useScroll";
-import { UserAuth } from "../context/AuthContext";
-import { BsPersonCircle } from "react-icons/bs";
 function Navbar() {
   const { user, logOut } = UserAuth();
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");

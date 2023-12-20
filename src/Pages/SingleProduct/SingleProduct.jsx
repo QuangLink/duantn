@@ -1,30 +1,29 @@
 import {
-  Center,
   Box,
   Button,
+  Center,
   Flex,
   Grid,
   GridItem,
   Heading,
   Image,
-  Input,
   ListItem,
   Text,
   UnorderedList,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
 import { RotatingLines } from "react-loader-spinner";
-import RelateProduct from "./RelateProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
 import ComProduct from "./ComProduct";
-import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
+import { ColorFilter, RamFilter, StorageValueFilter } from "./Filter";
+import RelateProduct from "./RelateProduct";
 
-import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
+import ProductTable from "./ProductTable";
 
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");

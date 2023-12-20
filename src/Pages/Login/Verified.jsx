@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { Box, Heading, Icon } from "@chakra-ui/react";
 import axios from "axios";
-import { Box, Icon, Heading } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Verified = () => {
   const [message, setMessage] = useState("");

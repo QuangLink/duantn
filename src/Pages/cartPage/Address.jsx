@@ -1,42 +1,34 @@
 import "./cartstyle.css";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Cookies from "js-cookie";
 import {
-  useDisclosure,
   Accordion,
-  AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
   Button,
+  Center,
+  Flex,
+  Input,
   Modal,
-  ModalOverlay,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  Text,
-  ModalFooter,
-  Input,
-  Flex,
-  Center,
-  Heading,
+  ModalOverlay,
   Select,
-  useToast,
+  Text,
+  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-import "react-slideshow-image/dist/styles.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Icon } from "@chakra-ui/react";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
-import { RiProfileLine } from "react-icons/ri";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import "react-slideshow-image/dist/styles.css";
 import uuid from "react-uuid";
 
 const Address = () => {

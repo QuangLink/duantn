@@ -1,47 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
+import { SearchIcon } from "@chakra-ui/icons";
 import {
-  Box,
-  Heading,
-  Text,
-  Divider,
-  Image,
-  Center,
-  Flex,
-  Button,
-  Badge,
-  VStack,
-  useDisclosure,
-  useToast,
-  Input,
   Accordion,
   AccordionItem,
   AccordionPanel,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Select,
+  Badge,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Input,
   InputGroup,
   InputLeftElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Text,
+  VStack,
+  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
-import "react-slideshow-image/dist/styles.css";
-import { useNavigate } from "react-router-dom";
-import { Icon } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
-import "react-slideshow-image/dist/styles.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import UserInfo from "./UserInfo";
-import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
-import { AiFillCreditCard } from "react-icons/ai";
-import { RiProfileLine } from "react-icons/ri";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import Cookies from "js-cookie";
 import axios from "axios";
+import Cookies from "js-cookie";
+import React, { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import "react-slideshow-image/dist/styles.css";
+import UserInfo from "./UserInfo";
 const MyOrder = () => {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);

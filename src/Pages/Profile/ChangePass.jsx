@@ -1,17 +1,16 @@
-import React, { useState } from "react";
 import {
-  Input,
-  FormLabel,
   Box,
   Button,
-  Heading,
   FormControl,
+  FormLabel,
+  Heading,
+  Input,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 import Cookies from "js-cookie";
 //import chakraUI toast
 import { useToast } from "@chakra-ui/react";
-import { Toast } from "bootstrap";
 const ChangePass = () => {
   const userID = Cookies.get("userID");
   const toast = useToast();
