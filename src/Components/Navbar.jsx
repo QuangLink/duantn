@@ -31,10 +31,8 @@ import {
   BsFillPersonFill,
   BsPhone,
   BsSmartwatch,
-  BsLaptop,
 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Auth/auth.action";
@@ -132,7 +130,7 @@ function Navbar() {
     setIsFocused(false);
   };
   const fetchData = (value) => {
-    fetch(`${process.env.REACT_APP_DATABASE_API_URL}/products/search`)
+    fetch(`${process.env.REACT_APP_DATABASE_API_URL}/products`)
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
@@ -171,8 +169,8 @@ function Navbar() {
       dispatch(logout());
       navigate("/login");
       toast({
-        title: "Logout  success.",
-        description: "We will miss you 😭",
+        title: "Đăng xuất thành công.",
+
         status: "success",
         duration: 9000,
         isClosable: true,
@@ -180,8 +178,7 @@ function Navbar() {
     } catch (error) {
       console.error(error);
       toast({
-        title: "Logout failed.",
-        description: "Please try again later.",
+        title: "Lỗi.",
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -197,18 +194,43 @@ function Navbar() {
         <>
           {isSearchVisible && isBoxVisible && (
             <Box
+              boxSizing="border-box"
               bg={"#fff"}
-              width="744px"
+              width="100%"
               height="auto"
               position={"absolute"}
-              marginTop={5}
-              borderRadius={15}
+              zIndex={11}
               isOpen={isOpen}
               onClose={onClose}
               finalFocusRef={btnRef}
               ref={searchRef}
+              borderRadius={10}
+              boxShadow="0 4px 6px #555"
             >
-              <Box overflowY={"scroll"} h={450}>
+              <Box bgColor={"#f5f5f5"} p={1}>
+                <Text
+                  marginBottom={0}
+                  ml={2}
+                  color={"#666"}
+                  fontWeight={400}
+                  fontSize={16}
+                >
+                  Sản phẩm gợi ý
+                </Text>
+              </Box>
+
+              <Box
+                overflowY={"scroll"}
+                sx={{
+                  "&::-webkit-scrollbar": {
+                    width: "2px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "lightgray",
+                  },
+                }}
+                h={450}
+              >
                 {results.slice(0, 10).map((results, id) => {
                   return (
                     <Link
@@ -216,47 +238,89 @@ function Navbar() {
                       onClick={handleProductClick}
                     >
                       <Flex
+                        // p={2}
+                        h={100}
                         key={id}
                         direction="row"
                         align="flex-start"
-                        borderBottom={"1px solid #555"}
+                        borderBottom={"1px solid #F5F5F5"}
                         justifyContent={"flex-start"}
-                        _hover={{ bg: "#9ecdf2" }}
+                        _hover={{ bg: "#F5F5F5" }}
+                        alignItems={"center"}
+                        borderRadius={10}
+
+                        // pt={2}
                       >
-                        <Box
-                          mb={6}
-                          margin={5}
-                          paddingLeft={20}
-                          marginRight={10}
-                        >
+                        <Box maxW={70} maxH={70} marginRight={3} ml={5}>
                           <Image
                             src={results.prodImg}
-                            w={70}
-                            h={50}
+                            w="100%"
                             alt="Memory Card"
                           />
                         </Box>
-                        <Box mb={6}>
-                          <Text fontSize="xl" fontWeight="600">
-                            {results.prodName}
-                          </Text>
-                          <Text fontSize="lg" color="gray.500">
-                            <span className="prodPrice">
-                              {results.prodPrice &&
-                                results.prodPrice.toLocaleString("vi-VN", {})}
-                              đ
-                            </span>
 
-                            {results.prodPriceSale !== 0 && (
-                              <span className="prodPriceSale">
-                                {results.prodPriceSale &&
-                                  results.prodPriceSale.toLocaleString(
-                                    "vi-VN",
-                                    {},
-                                  )}
-                              </span>
+                        <Box>
+                          <Text
+                            fontSize="18px"
+                            fontWeight="600"
+                            color="gray.900"
+                            marginBottom={1}
+                          >
+                            {results.prodName.substring(
+                              0,
+                              results.prodName.length / 0.5,
                             )}
                           </Text>
+                          <Flex>
+                            <Text
+                              // textAlign="center"
+                              fontWeight="500"
+                              fontSize={{ lg: "16px", base: "14px" }}
+                              ml="1"
+                              color="red"
+                              _hover={{ color: "red" }}
+                            >
+                              {results.prodPrice &&
+                                results.prodPrice.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
+                            </Text>
+                            {results.prodSale !== 0 && (
+                              <>
+                                <Flex>
+                                  <Text
+                                    as="s"
+                                    color="#333"
+                                    fontSize={{ lg: "16px", base: "12px" }}
+                                    ml="2"
+                                  >
+                                    {results.prodPriceSale &&
+                                      results.prodPriceSale.toLocaleString(
+                                        "vi-VN",
+                                        {
+                                          style: "currency",
+                                          currency: "VND",
+                                        },
+                                      )}
+                                  </Text>
+                                </Flex>
+                                {results.prodSale > 0 && (
+                                  <Flex>
+                                    <Text
+                                      color="#333"
+                                      fontSize={{ lg: "16px", base: "12px" }}
+                                      fontWeight="5 00"
+                                      borderRadius="5px"
+                                      ml="1"
+                                    >
+                                      -{results.prodSale}%
+                                    </Text>
+                                  </Flex>
+                                )}
+                              </>
+                            )}
+                          </Flex>
                         </Box>
                       </Flex>
                     </Link>
@@ -354,66 +418,134 @@ function Navbar() {
             <Box
               zIndex={2}
               bg={"#fff"}
+              ml={3}
               width="95%"
               height="auto"
               position={"fixed"}
-              marginTop={500}
+              marginTop={520}
               borderRadius={15}
-              overflowY={"scroll"}
-              h={400}
               isOpen={isOpen}
               onClose={onClose}
               finalFocusRef={btnRef}
               ref={searchRef}
+              boxShadow="0 4px 6px #555"
             >
-              {results.slice(0, 5).map((results, id) => {
-                return (
-                  <Link
-                    to={`/${results.prodType}/${results.prodID}`}
-                    onClick={handleProductClick}
-                  >
-                    <Flex
-                      key={id}
-                      direction="row"
-                      alignItems={"center"}
-                      borderBottom={"1px solid #555"}
-                      justifyContent={"flex-start"}
-                      _hover={{ bg: "#9ecdf2" }}
+              <Box bgColor={"#f5f5f5"} p={1}>
+                <Text
+                  marginBottom={0}
+                  ml={2}
+                  color={"#666"}
+                  fontWeight={400}
+                  fontSize={16}
+                >
+                  Sản phẩm gợi ý
+                </Text>
+              </Box>
+              <Box overflowY={"scroll"} h={400}>
+                {results.slice(0, 5).map((results, id) => {
+                  return (
+                    <Link
+                      to={`/${results.prodType}/${results.prodID}`}
+                      onClick={handleProductClick}
                     >
-                      <Box mb={6} margin={5} marginRight={10}>
-                        <Image
-                          src={results.prodImg}
-                          w={70}
-                          h={50}
-                          alt="Memory Card"
-                        />
-                      </Box>
-                      <Box mt={6}>
-                        <Text fontSize="l" fontWeight="600">
-                          {results.prodName}
-                        </Text>
-                        <Text fontSize="lg" color="gray.600" fontWeight={400}>
-                          Giá mới:
-                          <span className="prodPrice" fontWeight="900">
-                            {results.prodPrice &&
-                              results.prodPrice.toLocaleString("vi-VN", {})}
-                            đ
-                          </span>
-                          {results.prodPriceSale !== 0 && (
-                            <span className="prodPriceSale" fontWeight="600">
-                              {results.prodPriceSale &&
-                                results.prodPriceSale.toLocaleString(
-                                  "vi-VN",
-                                  {},
+                      <Flex
+                        // p={2}
+                        h={100}
+                        key={id}
+                        direction="row"
+                        align="flex-start"
+                        borderBottom={"1px solid #F5F5F5"}
+                        justifyContent={"flex-start"}
+                        _hover={{ bg: "#F5F5F5" }}
+                        alignItems={"center"}
+                        // pt={2}
+                      >
+                        {results.prodType === "Phone" ? (
+                          <Box maxW={50} maxH={50} marginRight={3} ml={5}>
+                            <Image
+                              src={results.prodImg}
+                              w="100%"
+                              alt="Memory Card"
+                            />
+                          </Box>
+                        ) : (
+                          <Box maxW={70} maxH={50} marginRight={3} ml={5}>
+                            <Image
+                              src={results.prodImg}
+                              w="100%"
+                              alt="Memory Card"
+                            />
+                          </Box>
+                        )}
+
+                        <Box>
+                          <Text
+                            fontSize="16px"
+                            fontWeight="600"
+                            color="gray.900"
+                            marginBottom={1}
+                          >
+                            {results.prodName.substring(
+                              0,
+                              results.prodName.length / 0.5,
+                            )}
+                          </Text>
+                          <Flex>
+                            <Text
+                              // textAlign="center"
+                              fontWeight="500"
+                              fontSize={"14px"}
+                              ml="1"
+                              color="red"
+                              _hover={{ color: "red" }}
+                            >
+                              {results.prodPrice &&
+                                results.prodPrice.toLocaleString("vi-VN", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}
+                            </Text>
+                            {results.prodSale !== 0 && (
+                              <>
+                                <Flex>
+                                  <Text
+                                    as="s"
+                                    color="#333"
+                                    fontSize={"14px"}
+                                    ml="2"
+                                  >
+                                    {results.prodPriceSale &&
+                                      results.prodPriceSale.toLocaleString(
+                                        "vi-VN",
+                                        {
+                                          style: "currency",
+                                          currency: "VND",
+                                        },
+                                      )}
+                                  </Text>
+                                </Flex>
+                                {results.prodSale > 0 && (
+                                  <Flex>
+                                    <Text
+                                      color="#333"
+                                      fontSize={"14px"}
+                                      fontWeight="500"
+                                      borderRadius="5px"
+                                      ml="1"
+                                    >
+                                      -{results.prodSale}%
+                                    </Text>
+                                  </Flex>
                                 )}
-                            </span>
-                          )}
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Link>
-                );
-              })}
+                              </>
+                            )}
+                          </Flex>
+                        </Box>
+                      </Flex>
+                    </Link>
+                  );
+                })}
+              </Box>
             </Box>
           )}
         </>
@@ -424,12 +556,7 @@ function Navbar() {
   // console.log(name);
   if (isLargerThan1100) {
     return (
-      <Box
-        w={"100%"}
-        backgroundColor="#FFFFFF"
-        position={"relative"}
-        zIndex={2}
-      >
+      <Box w={"100%"} backgroundColor="#FFFFFF" zIndex={2}>
         <Flex w="100%" alignItems="center" m="auto" justifyContent="center">
           <Box></Box>
         </Flex>
@@ -478,40 +605,7 @@ function Navbar() {
               )}
             </Flex>
           </Box>
-
-          {/* {admin === 1 && (
-            <Link to="/admin/dashboard">
-              <Flex
-                cursor={"pointer"}
-                textAlign={"center"}
-                borderRadius={5}
-                _hover={{
-                  bg: "#0077ff",
-                }}
-              >
-                {" "}
-                <Icon
-                  as={BsPersonCircle}
-                  w={5}
-                  h={5}
-                  color={"#fff"}
-                  margin={2}
-                />
-                <Heading
-                  fontWeight={400}
-                  m="2"
-                  cursor={"pointer"}
-                  fontSize={"18px"}
-                  color="#fff"
-                  flexDirection={"row"}
-                // className={`header-bar ${isFocused ? "focused" : ""}`}
-                >
-                  Admin
-                </Heading>
-              </Flex>
-            </Link>
-          )} */}
-          <Box w="40%">
+          <Box w="40%" position={"relative"}>
             <Flex
               bg="#F5F5F5"
               borderRadius={"15px"}
@@ -591,17 +685,13 @@ function Navbar() {
                     </MenuButton>
                     <MenuList>
                       <Link to="/myprofile">
-                        <MenuItem>My Profile</MenuItem>
+                        <MenuItem>Cá nhân</MenuItem>
                       </Link>
-                      <Link to="/myorder">
-                        <MenuItem>My Order</MenuItem>
-                      </Link>
-                      <MenuItem>My Address</MenuItem>
                       <Link to="/wishlist">
                         {" "}
-                        <MenuItem>My Wishlist</MenuItem>
+                        <MenuItem>Yêu thích</MenuItem>
                       </Link>
-                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                     </MenuList>
                   </Menu>
                 </Box>
@@ -678,6 +768,7 @@ function Navbar() {
             position: isMenuFixed ? "fixed" : "static",
             top: "0px",
             width: "100%",
+            zIndex: 999,
           }}
         >
           <Menu>
@@ -990,17 +1081,13 @@ function Navbar() {
             </MenuButton>
             <MenuList>
               <Link to="/myprofile">
-                <MenuItem>My Profile</MenuItem>
+                <MenuItem>Cá nhân</MenuItem>
               </Link>
-              <Link to="/myorder">
-                <MenuItem>My Order</MenuItem>
-              </Link>
-              <MenuItem>My Address</MenuItem>
               <Link to="whishlist">
                 {" "}
-                <MenuItem>My Wishlist</MenuItem>
+                <MenuItem>Yêu thích</MenuItem>
               </Link>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
             </MenuList>
           </Menu>
         )}

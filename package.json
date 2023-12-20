@@ -78,7 +78,6 @@
     ]
   },
   "devDependencies": {
-    "@wixc3/react-board": "^2.3.0",
     "autoprefixer": "^10.4.16",
     "dotenv": "^16.3.1",
     "gh-pages": "^6.0.0",

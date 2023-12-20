@@ -73,7 +73,7 @@ const Product = (props, rating) => {
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[300, 340, 430]}>
+        <Box h={[300, 340, 420]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -82,7 +82,8 @@ const Product = (props, rating) => {
               src={prodImg}
               alt={prodName}
               w={["auto", "auto", "auto"]}
-              h={["120px", "140px", "200px"]}
+              h={["120px", "140px", "175px"]}
+              // h={{base:"120px",md:"140px",lg:"160px",xl:"180px","2xl":"200px"}}
               objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}

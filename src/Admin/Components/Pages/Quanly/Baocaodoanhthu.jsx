@@ -6,13 +6,14 @@ import {
   fetchProducts,
   fetchUsers,
   fetchOrders,
+  fetchProductQuantity,
 } from "../Quanly/api";
 const Baocaodoanhthu = () => {
-  const [products, setProducts] = React.useState([]);
-  const [totalproducts, setTotalProducts] = React.useState([]);
-  const [users, setUsers] = React.useState([]);
-  const [orders, setOrders] = React.useState([]);
-
+  const [products, setProducts] = useState([]);
+  const [totalproducts, setTotalProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [allProduct, setallProduct] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,6 +21,7 @@ const Baocaodoanhthu = () => {
         setProducts(await fetchProducts());
         setUsers(await fetchUsers());
         setOrders(await fetchOrders());
+        setallProduct(await fetchProductQuantity());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -31,10 +33,16 @@ const Baocaodoanhthu = () => {
 
   // Đếm số phần tử trong mảng products
   const productCount = totalproducts.length;
-  const userCount = users.length;
   const orderCount = orders.length;
   // Đếm số lượng sản phẩm còn lại trong kho
-  const lowStock = products.filter((product) => product.QTY < 10).length;
+  const lowStock = allProduct.filter((product) => product.QTY < 10).length;
+  const offStock = allProduct.filter((product) => product.QTY === 0);
+  console.log(offStock);
+  const orderCanceled = orders.filter(
+    (order) => order.orderStatus === "Đã hủy",
+  ).length;
+  const totalRevenue = orders.reduce((sum, order) => sum + order.totalPay, 0);
+
   return (
     <body onload="time()" class="app sidebar-mini rtl">
       {/* <!-- Navbar--> */}
@@ -83,7 +91,12 @@ const Baocaodoanhthu = () => {
               <div class="info">
                 <h4>Tổng thu nhập</h4>
                 <p>
-                  <b>104.890.000 đ</b>
+                  <b>
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(totalRevenue)}
+                  </b>
                 </p>
               </div>
             </div>
@@ -96,7 +109,7 @@ const Baocaodoanhthu = () => {
               <div class="info">
                 <h4>Hết hàng</h4>
                 <p>
-                  <b>1 sản phẩm</b>
+                  <b>{lowStock} sản phẩm</b>
                 </p>
               </div>
             </div>
@@ -107,7 +120,7 @@ const Baocaodoanhthu = () => {
               <div class="info">
                 <h4>Đơn hàng hủy</h4>
                 <p>
-                  <b>2 đơn hàng</b>
+                  <b>{orderCanceled} đơn hàng</b>
                 </p>
               </div>
             </div>
@@ -129,36 +142,48 @@ const Baocaodoanhthu = () => {
                     <tr>
                       <th>ID đơn hàng</th>
                       <th>Khách hàng</th>
-                      <th>Đơn hàng</th>
-                      <th>Số lượng</th>
+                      <th>Tình trạng</th>
+                      <th>Phương thức</th>
                       <th>Tổng tiền</th>
                     </tr>
                   </thead>
                   <tbody>
+                    {orders.map((order) => (
+                      <tr key={order.orderID}>
+                        <td>{order.orderID}</td>
+                        <td>{order.username}</td>
+                        <td>
+                          {order.orderStatus === "Đã hủy" ? (
+                            <span className="badge bg-danger">
+                              {order.orderStatus}
+                            </span>
+                          ) : order.orderStatus === "Đợi xác nhận" ?(
+                            <span className="badge bg-warning">
+                              {order.orderStatus}
+                            </span>
+                          ):<span className="badge bg-success">
+                              {order.orderStatus}
+                            </span> }
+                        </td>
+                        <td>{order.payment}</td>
+                        <td>
+                          {order.totalPay.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </td>
+                      </tr>
+                    ))}
+          
+               
                     <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
-                      <td>Bàn ăn mở rộng Gepa</td>
-                      <td>1 sản phẩm</td>
-                      <td>16.770.000 đ</td>
-                    </tr>
-                    <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
-                      <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                      <td>2 sản phẩm</td>
-                      <td>19.770.000 đ</td>
-                    </tr>
-                    <tr>
-                      <td>QY8723</td>
-                      <td>Ngô Thái An</td>
-                      <td>Giường ngủ Kara 1.6x2m</td>
-                      <td>1 sản phẩm</td>
-                      <td>14.500.000 đ</td>
-                    </tr>
-                    <tr>
-                      <th colspan="4">Tổng cộng:</th>
-                      <td>104.890.000 đ</td>
+                      <th colspan="4">Tổng thu nhập:</th>
+                      <td><b>
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(totalRevenue)}
+                  </b></td>
                     </tr>
                   </tbody>
                 </table>
@@ -179,65 +204,68 @@ const Baocaodoanhthu = () => {
                 >
                   <thead>
                     <tr>
-                      <th>Mã sản phẩm</th>
+                      <th>ID</th>
                       <th>Tên sản phẩm</th>
                       <th>Ảnh</th>
-                      <th>Số lượng</th>
                       <th>Tình trạng</th>
-                      <th>Giá tiền</th>
+                      <th>Giảm</th>
+                      <th>Giá giảm</th>
+                      <th>Giá gốc</th>
                       <th>Danh mục</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>83826226</td>
-                      <td>Tủ ly - tủ bát</td>
-                      <td>
-                        <img src="/img-sanpham/tu.jpg" alt="" width="100px;" />
-                      </td>
-                      <td>0</td>
-                      <td>
-                        <span class="badge bg-danger">Hết hàng</span>
-                      </td>
-                      <td>2.450.000 đ</td>
-                      <td>Tủ</td>
-                    </tr>
+                    {offStock.map((product) => (
+                      <tr key={product.prodID}>
+                        <td>{product.prodID}</td>
+                        <td>{product.prodName}</td>
+                        <td>
+                          {" "}
+                          {product.prodImg && (
+                            <img
+                              src={product.prodImg}
+                              alt="Product"
+                              style={{
+                                width: "100px",
+                                height: "auto",
+                                marginLeft: "10px",
+                              }}
+                            />
+                          )}
+                        </td>
+
+                        <td>
+                          {product.QTY > 10 ? (
+                            <span className="badge bg-success">Còn hàng</span>
+                          ) : product.QTY === 0 ? (
+                            <span className="badge bg-danger">Hết hàng</span>
+                          ) : (
+                            <span className="badge bg-warning">
+                              Sắp hết hàng
+                            </span>
+                          )}
+                        </td>
+                        <td>{product.prodSale}%</td>
+                        <td>
+                          {product.prodPrice.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </td>
+                        <td>
+                          {product.prodPriceSale.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </td>
+                        <td>{product.catName}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="tile">
-              <h3 class="tile-title">DỮ LIỆU HÀNG THÁNG</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas
-                  class="embed-responsive-item"
-                  id="lineChartDemo"
-                ></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="tile">
-              <h3 class="tile-title">THỐNG KÊ DOANH SỐ</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas
-                  class="embed-responsive-item"
-                  id="barChartDemo"
-                ></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-right" style={{ fontSize: "12px" }}>
-          <p>
-            <b>Hệ thống quản lý V2.0 | Code by Hoài</b>
-          </p>
         </div>
       </main>
     </body>

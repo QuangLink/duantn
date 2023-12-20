@@ -142,6 +142,7 @@ const Products = ({ typeOfProduct }) => {
           }}
         >
           {DataFilter()
+            .filter((elem) => elem.QTY > 0)
             .slice(0, visibleProducts)
             .map((elem, i) => {
               return (

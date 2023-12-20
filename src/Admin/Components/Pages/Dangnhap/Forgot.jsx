@@ -102,18 +102,7 @@ const Forgot = () => {
                   </a>
                 </div>
               </form>
-              <div className="text-center p-t-70 txt2">
-                Phần mềm quản lý bán hàng{" "}
-                <i className="far fa-copyright" aria-hidden="true"></i>
-                {/* <script type="text/javascript">document.write(new Date().getFullYear());</script> */}
-                <a
-                  className="txt2"
-                  href="https://www.facebook.com/nguyenvuduyhoai.2003/"
-                >
-                  {" "}
-                  Code bởi Hoài{" "}
-                </a>
-              </div>
+           
             </form>
           </div>
         </div>

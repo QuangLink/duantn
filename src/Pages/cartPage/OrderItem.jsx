@@ -151,7 +151,7 @@ const OrderItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "top",
+          position: "bottom",
         });
       })
       .catch((err) => {
@@ -162,7 +162,7 @@ const OrderItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "top",
+          position: "bottom",
         });
       });
   };

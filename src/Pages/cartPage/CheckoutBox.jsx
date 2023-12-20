@@ -67,7 +67,7 @@ const CheckoutBox = ({
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: "bottom",
       });
       setTimeout(() => {
         navigate("/login");
@@ -98,7 +98,7 @@ const CheckoutBox = ({
               status: "success",
               duration: 3000,
               isClosable: true,
-              position: "top",
+              position: "bottom",
             });
           }
         } catch (error) {
@@ -109,7 +109,7 @@ const CheckoutBox = ({
             status: "error",
             duration: 3000,
             isClosable: true,
-            position: "top",
+            position: "bottom",
           });
         }
         navigate("/");
@@ -121,7 +121,7 @@ const CheckoutBox = ({
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: "bottom",
       });
       setTimeout(async () => {
         try {
@@ -435,7 +435,7 @@ const CheckoutBox = ({
                 status: "error",
                 duration: 3000,
                 isClosable: true,
-                position: "top",
+                position: "bottom",
               });
             } else if (selectedOption === null) {
               toast({
@@ -444,7 +444,7 @@ const CheckoutBox = ({
                 status: "error",
                 duration: 3000,
                 isClosable: true,
-                position: "top",
+                position: "bottom",
               });
             } else {
               handleCheckout();

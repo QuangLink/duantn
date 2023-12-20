@@ -32,7 +32,7 @@ const MyCartLength = ({ item }) => {
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "top",
+          position: "bottom",
         });
       });
   }, []);

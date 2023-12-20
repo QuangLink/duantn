@@ -1,4 +1,5 @@
 import React from "react";
+import "./product.css";
 
 const ProductTable = ({ product }) => {
   if (!product) {
