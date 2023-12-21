@@ -28,6 +28,8 @@ const WishProduct = (props) => {
     prodPrice,
     prodPriceSale,
     colorID,
+    ramID,
+    ram,
     color,
     storage_value,
     storageID,
@@ -58,6 +60,7 @@ const WishProduct = (props) => {
             prodID: prodID,
             colorID: colorID,
             storageID: storageID,
+            ramID: ramID,
           };
           axios
             .post(`${process.env.REACT_APP_DATABASE_API_URL}/cart`, newData)
@@ -148,7 +151,7 @@ const WishProduct = (props) => {
           color="gray"
           bg="white"
           _hover={{ color: "red", fontWeight: "bold" }}
-          onClick={() => handleDelete(userID, prodID, colorID, storageID)}
+          onClick={() => handleDelete(userID, prodID, colorID, storageID,ramID)}
         >
           <FaHeartBroken fontSize="25px" />
         </Button>

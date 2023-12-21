@@ -22,7 +22,6 @@ import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
-
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 
@@ -50,14 +49,14 @@ const postSingleData = async (data) => {
     if (!cartData[userID]) {
       cartData[userID] = [];
     }
-    const existingProduct = cartData[userID].find(
+    const existingProductIndex = cartData[userID].findIndex(
       (product) =>
         product.prodID === prodID &&
         product.colorID === colorID &&
         product.storageID === storageID &&
         product.ramID === ramID,
     );
-    if (existingProduct) {
+    if (existingProductIndex !== -1) {
       throw new Error("Product already exists in the cart");
     } else {
       cartData[userID].push(productData);
@@ -74,12 +73,14 @@ export const postSingleDataWish = async (data) => {
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
+      const ramID = data.ramID;
       // Tạo dữ liệu gửi đi kết hợp với userID và prodID
       const postData = {
         prodID,
         colorID,
         storageID,
         userID,
+        ramID,
       };
       //get wishlist and check if the product is already in the wishlist
 
@@ -126,7 +127,6 @@ const SingleProduct = (props) => {
         (product) => product.ram === filters.ram,
       );
     }
-
     return filteredProducts;
   };
 
@@ -187,11 +187,11 @@ const SingleProduct = (props) => {
   const applyColorFilter = (selectedColor) => {
     setFilters({ ...filters, color: selectedColor });
   };
-  const applyStorageValueFilter = (selectedValue) => {
-    setFilters({ ...filters, storage_value: selectedValue });
-  };
   const applyRamFilter = (selectedRam) => {
     setFilters({ ...filters, ram: selectedRam });
+  };
+  const applyStorageValueFilter = (selectedValue) => {
+    setFilters({ ...filters, storage_value: selectedValue });
   };
   const colors =
     singleDatas && Array.isArray(singleDatas)
@@ -202,12 +202,13 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
+      
   const rams =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.ram))]
       : [];
-  const handleWish = (prodID, colorID, storageID) => {
-    postSingleDataWish({ prodID, colorID, storageID })
+  const handleWish = (prodID, colorID, storageID,ramID) => {
+    postSingleDataWish({ prodID, colorID, storageID,ramID })
       .then((res) => {
         toast({
           title: "Đã thêm vào yêu thích",
@@ -266,7 +267,7 @@ const SingleProduct = (props) => {
           {Array.isArray(singleDatas) && (
             <Box>
               <Box
-                width="90%"
+                width="100%"
                 m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
@@ -286,12 +287,12 @@ const SingleProduct = (props) => {
                   h={["auto", "auto", "auto"]}
                   templateColumns={[
                     "repeat(1, 1fr)",
-                    "repeat(1, 1fr)",
+                    "repeat(2, 1fr)",
                     "repeat(10,1fr)",
                   ]}
                 >
                   <GridItem
-                    rowSpan={[1, 1, 7]}
+                    rowSpan={[1, 2, 7]}
                     colSpan={[6, 6, 5]}
                     m="0 0 0 18%"
                     p=" 2% 8% "
@@ -425,7 +426,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        width={["100%", "91%", "91%"]}
+                        width="91%"
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -482,6 +483,7 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
+
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
@@ -500,6 +502,7 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
+
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -507,6 +510,7 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
+
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -594,11 +598,7 @@ const SingleProduct = (props) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box
-                      className="box-table"
-                      mt={5}
-                      display={["none", "block", "block"]}
-                    >
+                    <Box className="box-table" mt={5}>
                       <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>

@@ -18,14 +18,19 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
 const postSingleDataWish = async (data) => {
-  try {
-    const userID = Cookies.get("userID");
+  const userID = Cookies.get("userID");
 
+  if (userID === undefined) {
+    throw new Error("userID is undefined");
+  }
+
+  try {
     const postData = {
       userID,
       prodID: data.prodID,
       colorID: data.colorID,
       storageID: data.storageID,
+      ramID: data.ramID,
     };
     let response = await axios.post(
       `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
@@ -39,7 +44,6 @@ const postSingleDataWish = async (data) => {
     console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
   }
 };
-
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
@@ -56,24 +60,43 @@ const Product = (props, rating) => {
 
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = (data) => {
-    console.log(data);
-
-    postSingleDataWish(data).then((res) => {
+  const handleWish = () => {
+    try {
+      postSingleDataWish(data)
+        .then((res) => {
+          toast({
+            title: "Đã thêm vào yêu thích",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.error("Error handling post:", error);
+          toast({
+            title: "Vui lòng đăng nhập trước",
+            description: "Bạn cần đăng nhập để thực hiện chức năng này",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+    } catch (error) {
+      console.error("Error handling wish:", error);
       toast({
-        title: "Added Item Successfully to WishList",
-        status: "success",
-        duration: 3000,
+        title: "Error handling wish",
+        description: error.message,
+        status: "error",
+        duration: 9000,
         isClosable: true,
-        position: "bottom",
       });
-    });
+    }
   };
 
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[300, 340, 420]}>
+        <Box h={[280, 360, 450]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -81,19 +104,11 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["auto", "auto", "auto"]}
-              h={["120px", "140px", "175px"]}
-              // h={{base:"120px",md:"140px",lg:"160px",xl:"180px","2xl":"200px"}}
+              w={["65%", "80%", "auto"]}
+              h={["65%", "80%", "200px"]}
               objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
-              css={{
-                "@media (max-width: 425px)": {
-                  width: "auto",
-                  height: "120px",
-                  objectFit: "cover",
-                },
-              }}
             />
           </Center>
           {prodSale !== 0 && (
@@ -102,12 +117,13 @@ const Product = (props, rating) => {
               css={{
                 "@media (max-width: 430px)": {
                   width: "100%",
+                  textAlign: "center",
                 },
               }}
             >
               <Box
                 className="box_1"
-                fontSize={{ base: "20px", md: "20px", lg: "18px" }}
+                fontSize={{ base: "15px", md: "20px", lg: "18px" }}
                 h={["20px", "40px", "70px"]}
               >
                 {prodName}
@@ -116,7 +132,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -128,7 +144,7 @@ const Product = (props, rating) => {
                     })}
                 </Heading>
                 <Text
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   m="auto"
                   mt={2}
                   fontWeight="bold"
@@ -149,7 +165,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                 ml="5%"
               >
                 Giá ưu đãi
@@ -169,7 +185,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -187,7 +203,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                 ml="5%"
               >
                 Giá tốt
@@ -196,7 +212,7 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(data)}>
+      <Button onClick={() => handleWish(prodID)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

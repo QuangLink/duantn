@@ -31,6 +31,9 @@ export const getData = () => async (dispatch) => {
       if (cart[i].storageID !== null) {
         url += `/${cart[i].storageID}`;
       }
+      if (cart[i].ramID!== null) {    
+        url += `/ram/${cart[i].ramID}`;
+      }
 
       const res = await axios.get(url, {});
 

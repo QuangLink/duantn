@@ -33,10 +33,10 @@ function Wishlist({ typeOfProduct }) {
     dispatch(getProducts(typeOfProduct));
   }, [typeOfProduct, dispatch]);
 
-  const handleDelete = (userID, prodID, storageID, colorID) => {
+  const handleDelete = (userID, prodID, storageID, colorID,ramID) => {
     axios
       .delete(`${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`, {
-        data: { userID, prodID, colorID, storageID },
+        data: { userID, prodID, colorID, storageID, ramID },
       })
       .then((res) => {
         console.log(res);

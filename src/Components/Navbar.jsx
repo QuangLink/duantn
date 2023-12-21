@@ -134,15 +134,16 @@ function Navbar() {
       .then((response) => response.json())
       .then((json) => {
         // console.log('check data', json);
-        const filteredResults = json.filter((search) => {
-          return (
-            search &&
-            search.prodName &&
-            search.prodName.toLowerCase().includes(input.toLowerCase())
-          );
-        });
-        setResults(filteredResults);
-        console.log(filteredResults);
+        if (input.length > 2) {
+          const filteredResults = json.filter((search) => {
+            return (
+              search &&
+              search.prodName &&
+              search.prodName.toLowerCase().includes(input.toLowerCase())
+            );
+          });
+          setResults(filteredResults);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -187,7 +188,9 @@ function Navbar() {
   };
 
   const Closesearch = () => {
-    if (results.length === 0) {
+    if (input.length < 2) {
+      return <Box></Box>;
+    } else if (results.length === 0) {
       return <Box></Box>;
     } else {
       return (
@@ -679,7 +682,8 @@ function Navbar() {
                           as={BsFillPersonFill}
                         />
                         <Box pt={1}>
-                          Xin chào ,<Text fontSize={16}> {username}</Text>
+                          Xin chào ,
+                          <Text fontSize={16}> {username.slice(0, 10)}</Text>
                         </Box>
                       </Flex>
                     </MenuButton>
