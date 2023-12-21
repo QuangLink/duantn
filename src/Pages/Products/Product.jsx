@@ -1,3 +1,6 @@
+
+import React, { useCallback } from "react";
+
 import {
   Badge,
   Box,
@@ -17,29 +20,57 @@ import { BsSuitHeart } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import RatingBar from "./RatingBar";
 import "./product.css";
-const postSingleDataWish = async (data) => {
-  try {
-    const userID = Cookies.get("userID");
 
+import Cookies from "js-cookie";
+import { getProducts } from "../../Redux/Wishlist/products.action";
+import debounce from "lodash.debounce";
+const postSingleDataWish = async (data) => {
+  const userID = Cookies.get("userID");
+
+  if (userID === undefined) {
+    throw new Error("userID is undefined");
+  }
+
+  try {
     const postData = {
-      userID,
       prodID: data.prodID,
       colorID: data.colorID,
       storageID: data.storageID,
+      userID: userID,
+      ramID: data.ramID,
     };
-    let response = await axios.post(
-      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
-      postData,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
+    const responseGet = await axios.get(
+      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`,
     );
-    return response.data;
+    const wishlist = responseGet.data;
+
+    const productExists = wishlist.some(
+      (product) =>
+        product.prodID === data.prodID &&
+        product.colorID === data.colorID &&
+        product.storageID === data.storageID &&
+        product.ramID === data.ramID,
+    );
+
+    if (productExists) {
+      throw new Error("Product already exists in the wishlist");
+    } else {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
+          postData,
+        );
+        return response.data;
+      } catch (error) {
+        console.log("An error occurred while posting data: ", error);
+        throw error;
+      }
+    }
   } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+    console.log("An error occurred while getting wishlist data: ", error);
+    throw error;
   }
 };
-
 // const singleData = useSelector((store) => store.singleProduct.data);
 
 const Product = (props, rating) => {
@@ -53,27 +84,50 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-
+  const userID = Cookies.get("userID");
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = (data) => {
-    console.log(data);
-
-    postSingleDataWish(data).then((res) => {
+  const handleWish = async () => {
+    try {
+      await postSingleDataWish(data);
       toast({
-        title: "Added Item Successfully to WishList",
+        position: "top",
+        title: "Đã thêm vào yêu thích",
         status: "success",
-        duration: 3000,
+        duration: 500,
         isClosable: true,
-        position: "bottom",
       });
-    });
+    } catch (error) {
+      if (error.message === "Product already exists in the wishlist") {
+        toast({
+          position: "top",
+          title: "Sản phẩm đã tồn tại trong yêu thích",
+          status: "error",
+          duration: 500,
+          isClosable: true,
+        });
+      } else if (error.message === "userID is undefined") {
+        toast({
+          position: "top",
+          title: "Vui lòng đăng nhập trước",
+          description: "Bạn cần đăng nhập để thực hiện chức năng này",
+          status: "error",
+          duration: 500,
+          isClosable: true,
+        });
+      } else {
+        console.log("no error: ", error);
+      }
+    }
   };
-
+  const debouncedHandleWish = useCallback(
+    debounce((prodID) => handleWish(prodID), 500),
+    [],
+  );
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
-        <Box h={[300, 340, 420]}>
+        <Box h={[280, 360, 450]}>
           <Box padding="10px">
             <FontAwesomeIcon icon={faEye} /> Xem
           </Box>
@@ -81,32 +135,29 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["auto", "auto", "auto"]}
-              h={["120px", "140px", "175px"]}
-              // h={{base:"120px",md:"140px",lg:"160px",xl:"180px","2xl":"200px"}}
+              w={["65%", "80%", "auto"]}
+              h={["65%", "80%", "200px"]}
               objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
-              css={{
-                "@media (max-width: 425px)": {
-                  width: "auto",
-                  height: "120px",
-                  objectFit: "cover",
-                },
-              }}
             />
           </Center>
           {prodSale !== 0 && (
             <Box
-           
-              // css={{
-              //   "@media (max-width: 430px)": {
-              //     width: "100%",
-              //   },
-              // }}
+
+              className="div_2"
+              css={{
+                "@media (max-width: 430px)": {
+                  width: "100%",
+                  textAlign: "center",
+                },
+              }}
+
             >
                <Box
                 className="box_1"
+                fontSize={{ base: "15px", md: "20px", lg: "18px" }}
+
                 h={["20px", "40px", "70px"]}
                 fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
@@ -116,7 +167,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -128,7 +179,7 @@ const Product = (props, rating) => {
                     })}
                 </Heading>
                 <Text
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   m="auto"
                   mt={2}
                   fontWeight="bold"
@@ -149,7 +200,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                 ml="5%"
               >
                 Giá ưu đãi
@@ -169,7 +220,7 @@ const Product = (props, rating) => {
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"
-                  fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                  fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                   color="red"
                   fontWeight="black"
                 >
@@ -187,7 +238,7 @@ const Product = (props, rating) => {
                 px="2"
                 backgroundColor="#fff0e9"
                 color="#eb5757"
-                fontSize={{ base: "12px", md: "15px", lg: "12px" }}
+                fontSize={{ base: "10px", md: "15px", lg: "13px" }}
                 ml="5%"
               >
                 Giá tốt
@@ -196,7 +247,7 @@ const Product = (props, rating) => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(data)}>
+      <Button onClick={() => debouncedHandleWish(prodID)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

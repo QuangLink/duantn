@@ -46,6 +46,7 @@ function SignInForm() {
     if (isAuth) {
       navigate("/");
       toast({
+        position: "top",
         title: "Đăng nhập thành công",
         description: `Welcome ${username}`,
         status: "success",

@@ -327,10 +327,11 @@ const MyOrder = () => {
       .delete(apiUrl)
       .then((response) => {
         toast({
+          position: "top",
           title: "Địa chỉ được xóa thành công.",
           description: "Hãy thêm địa chỉ giao hàng mới.",
           status: "success",
-          duration: 9000,
+          duration: 500,
           isClosable: true,
         });
         window.location.reload();
@@ -363,10 +364,11 @@ const MyOrder = () => {
         .post(apiUrl, newAddress)
         .then((response) => {
           toast({
+            position: "top",
             title: "Địa chỉ được thêm thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
           window.location.reload();
@@ -380,10 +382,11 @@ const MyOrder = () => {
         .put(apiUrl, newAddress)
         .then((response) => {
           toast({
+            position: "top",
             title: "Địa chỉ được cập nhật thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
           window.location.reload();

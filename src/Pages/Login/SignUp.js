@@ -64,10 +64,11 @@ function SignUpForm() {
     e.preventDefault();
     if (!username || !email || !password) {
       toast({
+        position: "top",
         title: "Hãy điền đầy đủ thông tin",
         description: "Hãy kiểm tra lại",
         status: "error",
-        duration: 2000,
+        duration: 500,
         isClosable: true,
       });
       return;
@@ -91,15 +92,17 @@ function SignUpForm() {
             title: "Lỗi đăng ký",
             description: response.data.error,
             status: "error",
-            duration: 2000,
+            duration: 500,
+            position: "top",
             isClosable: true,
           });
         } else {
           toast({
+            position: "top",
             title: "Tạo tài khoản thành công",
             description: "Hãy kiểm tra email của bạn để xác thực tài khoản.",
             status: "success",
-            duration: 2000,
+            duration: 500,
             isClosable: true,
           });
 
@@ -114,15 +117,17 @@ function SignUpForm() {
       } catch (error) {
         console.error("Error: ", error);
         toast({
+          position: "top",
           title: "Lỗi đăng ký",
           description: "Có lỗi xảy ra khi đăng ký tài khoản.",
           status: "error",
-          duration: 2000,
+          duration: 500,
           isClosable: true,
         });
       }
     } else {
       toast({
+        position: "top",
         title: "Email không hợp lệ",
         description: "Vui lòng nhập đúng định dạng email",
         status: "error",
@@ -139,6 +144,7 @@ function SignUpForm() {
     if (isAuth) {
       navigate("/");
       toast({
+        position: "top",
         title: "Login Success",
         description: `Welcome ${username}`,
         status: "success",
@@ -158,10 +164,11 @@ function SignUpForm() {
       if (usernamesFromApi.includes(value)) {
         setIsUsernameDuplicate(true);
         toast({
+          position: "top",
           title: "Username đã tồn tại",
           description: "Hãy sử dụng username khác",
           status: "error",
-          duration: 2000,
+          duration: 500,
           isClosable: true,
         });
       } else {
@@ -174,10 +181,11 @@ function SignUpForm() {
       if (emailsFromApi.includes(value)) {
         setIsEmailDuplicate(true);
         toast({
+          position: "top",
           title: "Email đã tồn tại",
           description: "Hãy sử dụng email khác",
           status: "error",
-          duration: 2000,
+          duration: 500,
           isClosable: true,
         });
       } else {

@@ -139,7 +139,8 @@ const Address = () => {
           title: "Địa chỉ được xóa thành công.",
           description: "Hãy thêm địa chỉ giao hàng mới.",
           status: "success",
-          duration: 9000,
+          duration: 500,
+          position: "top",
           isClosable: true,
         });
         window.location.reload();
@@ -172,9 +173,9 @@ const Address = () => {
       toast({
         title: "Vui lòng nhập đầy đủ thông tin",
         status: "error",
-        duration: 9000,
+        duration: 500,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
 
       return;
@@ -196,7 +197,8 @@ const Address = () => {
             title: "Địa chỉ được thêm thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
             status: "success",
-            duration: 9000,
+            duration: 500,
+            position: "top",
             isClosable: true,
           });
           window.location.reload();
@@ -215,8 +217,9 @@ const Address = () => {
             title: "Địa chỉ được cập nhật thành công.",
             description: "Chúng tôi sẽ sử dụng thông tin để liên hệ.",
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
+            position: "top",
           });
           window.location.reload();
         })

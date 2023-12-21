@@ -23,6 +23,7 @@ const ChangePass = () => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
       toast({
+        position: "top",
         title: "Mật khẩu mới và xác nhận mật khẩu không khớp",
         status: "error",
         duration: 5000,
@@ -55,6 +56,7 @@ const ChangePass = () => {
       setNewPassword("");
       setConfirmPassword("");
       toast({
+        position: "top",
         title: "Đổi mật khẩu thành công",
         status: "success",
         duration: 5000,
@@ -62,6 +64,7 @@ const ChangePass = () => {
       });
     } else {
       toast({
+        position: "top",
         title: data.error || "Có lỗi xảy ra khi đổi mật khẩu",
         status: "error",
         duration: 5000,
