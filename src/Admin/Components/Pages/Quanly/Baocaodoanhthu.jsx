@@ -42,7 +42,19 @@ const Baocaodoanhthu = () => {
     (order) => order.orderStatus === "Đã hủy",
   ).length;
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalPay, 0);
+  const totalByDay = {};
 
+  // Lặp qua mảng orders và tính tổng tiền theo ngày chỉ cho các đơn hàng đã thanh toán và đã giao hàng
+  orders.forEach((order) => {
+    if (order.orderStatus === "Đã thanh toán" || order.orderStatus === "Đã giao hàng") {
+      const date = new Date(order.orderDate).toLocaleDateString("vi-VN");
+      if (totalByDay[date]) {
+        totalByDay[date] += order.totalPay;
+      } else {
+        totalByDay[date] = order.totalPay;
+      }
+    }
+  });
   return (
     <body onload="time()" class="app sidebar-mini rtl">
       {/* <!-- Navbar--> */}
@@ -140,50 +152,33 @@ const Baocaodoanhthu = () => {
                 >
                   <thead>
                     <tr>
-                      <th>ID đơn hàng</th>
-                      <th>Khách hàng</th>
-                      <th>Tình trạng</th>
-                      <th>Phương thức</th>
+                      <th>Ngày</th>
                       <th>Tổng tiền</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.slice(0.10).map((order) => (
-                      <tr key={order.orderID}>
-                        <td>{order.orderID}</td>
-                        <td>{order.username}</td>
+                    {Object.entries(totalByDay).map(([date, total]) => (
+                      <tr key={date}>
+                        <td>{date}</td>
                         <td>
-                          {order.orderStatus === "Đã hủy" ? (
-                            <span className="badge bg-danger">
-                              {order.orderStatus}
-                            </span>
-                          ) : order.orderStatus === "Đợi xác nhận" ?(
-                            <span className="badge bg-warning">
-                              {order.orderStatus}
-                            </span>
-                          ):<span className="badge bg-success">
-                              {order.orderStatus}
-                            </span> }
-                        </td>
-                        <td>{order.payment}</td>
-                        <td>
-                          {order.totalPay.toLocaleString("vi-VN", {
+                          {total.toLocaleString("vi-VN", {
                             style: "currency",
                             currency: "VND",
                           })}
                         </td>
                       </tr>
                     ))}
-          
-               
+
                     <tr>
-                      <th colspan="4">Tổng thu nhập:</th>
-                      <td><b>
-                    {new Intl.NumberFormat("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    }).format(totalRevenue)}
-                  </b></td>
+                      <th>Tổng thu nhập:</th>
+                      <td>
+                        <b>
+                          {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          }).format(totalRevenue)}
+                        </b>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

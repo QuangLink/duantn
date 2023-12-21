@@ -133,23 +133,15 @@ const Product = (props, rating) => {
             <Image
               src={prodImg}
               alt={prodName}
-              w={["65%", "80%", "auto"]}
-              h={["65%", "80%", "200px"]}
+              w={["auto", "80%", "auto"]}
+              h={["100px", "80%", "200px"]}
               objectFit="cover"
               transition="transform 0.3s ease-in-out"
               _hover={{ transform: "translateY(-10px)" }}
             />
           </Center>
           {prodSale !== 0 && (
-            <Box
-              className="div_2"
-              css={{
-                "@media (max-width: 430px)": {
-                  width: "100%",
-                  textAlign: "center",
-                },
-              }}
-            >
+            <Box className="div_2">
               <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
@@ -157,7 +149,7 @@ const Product = (props, rating) => {
               >
                 {prodName}
               </Box>
-              <Box className="box_2">
+              <Box w="100%" marginBottom="2" marginLeft={5}>
                 <RatingBar rating={prodRateAvg || 0.5} />
                 <Heading
                   as="h3"

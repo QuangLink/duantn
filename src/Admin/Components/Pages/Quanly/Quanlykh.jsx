@@ -69,16 +69,7 @@ const Quanlynv = () => {
           >
             <i class="fas fa-trash-alt"></i>
           </button>
-          <button
-            class="btn btn-primary btn-sm edit"
-            type="button"
-            title="Sửa"
-            id="show-emp"
-            data-toggle="modal"
-            data-target="#ModalUP"
-          >
-            <i class="fas fa-edit"></i>
-          </button>
+         
         </td>
       </tr>
     ));

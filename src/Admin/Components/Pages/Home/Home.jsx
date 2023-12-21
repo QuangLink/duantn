@@ -15,7 +15,7 @@ const Dashboard = () => {
   const [users, setUsers] = React.useState([]);
   const [orders, setOrders] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const toast = useToast();
   useEffect(() => {
     const fetchData = async () => {
@@ -117,6 +117,14 @@ const Dashboard = () => {
   orders.forEach((order) => {
     totalPayAll += order.totalPay;
   });
+  let startPage = Math.max(1, currentPage - 4);
+  let endPage = Math.min(startPage + 9, pageNumbers.length);
+
+  // Adjust the starting index if the endPage is at the maximum limit
+  startPage = Math.max(1, endPage - 9);
+
+  // Get the limited set of page numbers to display
+  const limitedPageNumbers = pageNumbers.slice(startPage - 1, endPage);
 
   //render danh sách user từ api
   const renderUsers = () => {
@@ -310,10 +318,8 @@ const Dashboard = () => {
                       href="/admin/quanlydonhang"
                       style={{ fontSize: "25px", fontWeight: "700" }}
                     >
-                      Tình trạng đơn hàng 
-                      <i className="fa fa-arrow-right"></i>
+                      Tình trạng đơn hàng
                     </a>
-                
                   </h3>
                   <div>
                     <table className="table table-bordered">
@@ -328,7 +334,7 @@ const Dashboard = () => {
                       {renderProducts()}
                     </table>
                     <ul className="pagination text-center">
-                      {pageNumbers.map((number) => (
+                      {limitedPageNumbers.map((number) => (
                         <li key={number} className="page-item">
                           <a
                             onClick={() => handlePageChange1(number)}
@@ -351,7 +357,6 @@ const Dashboard = () => {
                       style={{ fontSize: "25px", fontWeight: "700" }}
                     >
                       Khách hàng mới
-                      <i className="fa fa-arrow-right"></i>
                     </a>
                   </h3>
                   <div>
@@ -399,15 +404,11 @@ const Dashboard = () => {
                       </td>
                     </tr>
                   </table>
-
-               
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-    
       </main>
       <script src="js/jquery-3.2.1.min.js"></script>
       {/* <!--===============================================================================================--> */}

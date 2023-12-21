@@ -273,7 +273,7 @@ const CartItem = ({
                 xl: "right",
                 "2xl": "right",
               }}
-              width={{ base: "20%", "2xl": "20%" }}
+              width={{ base: "20%", "2xl": "30%" }}
               gap={1}
               fontWeight="500"
             >
