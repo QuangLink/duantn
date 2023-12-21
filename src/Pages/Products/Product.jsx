@@ -1,4 +1,3 @@
-
 import React, { useCallback } from "react";
 
 import {
@@ -121,6 +120,7 @@ const Product = (props, rating) => {
     debounce((prodID) => handleWish(prodID), 500),
     [],
   );
+  console.log(data, "logdata");
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
@@ -141,7 +141,6 @@ const Product = (props, rating) => {
           </Center>
           {prodSale !== 0 && (
             <Box
-
               className="div_2"
               css={{
                 "@media (max-width: 430px)": {
@@ -149,12 +148,10 @@ const Product = (props, rating) => {
                   textAlign: "center",
                 },
               }}
-
             >
-               <Box
+              <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
-
                 h={["20px", "40px", "70px"]}
               >
                 {prodName}

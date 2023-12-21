@@ -13,7 +13,7 @@ import {
   Select,
   VStack,
   useDisclosure,
-  useMediaQuery
+  useMediaQuery,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -261,6 +261,17 @@ const ProductFilter = ({
               onClick={onTypeChangeStore}
             >
               32GB
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              fontWeight="450"
+              bg="white"
+              className="text-btn1"
+              value="64gb"
+              onClick={onTypeChangeStore}
+            >
+              64GB
             </Button>
           </Box>
           <Box>

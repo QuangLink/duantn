@@ -78,6 +78,19 @@ const Products = ({ typeOfProduct }) => {
         default:
           return listData();
       }
+    } else if (typeOfProduct === "laptop") {
+      switch (typeStorePhone) {
+        case "6gb":
+          return listData().filter((el) => el?.ram === "8GB");
+        case "16gb":
+          return listData().filter((el) => el?.ram === "16GB");
+        case "32gb":
+          return listData().filter((el) => el?.ram === "32GB");
+        case "64gb":
+          return listData().filter((el) => el?.ram === "64GB");
+        default:
+          return listData();
+      }
     } else {
       return listData();
     }
