@@ -83,8 +83,8 @@ const WishProduct = (props) => {
           alt={prodName}
           p="5"
           justifyItems="center"
-          w={["65%", "80%", "auto"]}
-          h={["65%", "80%", "180px"]}
+          w={["150px", "80%", "auto"]}
+          h={["150px", "80%", "180px"]}
           objectFit="cover"
           transition="transform 0.3s ease-in-out"
           _hover={{ transform: "translateY(-10px)" }}

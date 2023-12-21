@@ -46,6 +46,7 @@ function Navbar() {
   const [isLargerThan750px] = useMediaQuery("(min-width: 750px)");
   const [islesserThan740px] = useMediaQuery("(max-width: 750px)");
   const [input, setInput] = useState("");
+  const [hanldeDrawerUser1, setHanldeDrawerUser1] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const { isAuth } = useSelector((store) => store.AuthManager);
@@ -184,6 +185,60 @@ function Navbar() {
         isClosable: true,
       });
     }
+  };
+
+  const DrawerUser = () => {
+    return (
+      <>
+        {" "}
+        <Box borderBottom={"1px solid #555"}>
+          <Link to="myprofile">
+            <Text
+              w={"200px"}
+              marginBottom={5}
+              cursor={"myprofile"}
+              fontSize={"15px"}
+              color="#55555"
+              ml={2}
+              fontWeight={600}
+            >
+              Cá nhân
+            </Text>
+          </Link>
+        </Box>
+        <Box borderBottom={"1px solid #555"}>
+          <Link to="wishlist">
+            <Text
+              w={"200px"}
+              marginBottom={5}
+              cursor={"pointer"}
+              fontSize={"15px"}
+              color="#55555"
+              ml={2}
+              fontWeight={600}
+            >
+              Yêu thích
+            </Text>
+          </Link>
+        </Box>
+        <Box borderBottom={"1px solid #555"}>
+          <Link to="wishlist">
+            <Text
+              w={"200px"}
+              marginBottom={5}
+              cursor={"pointer"}
+              fontSize={"15px"}
+              color="#55555"
+              ml={2}
+              fontWeight={600}
+              onClick={handleLogout}
+            >
+              Đăng xuất
+            </Text>
+          </Link>
+        </Box>
+      </>
+    );
   };
 
   const Closesearch = () => {
@@ -1261,21 +1316,27 @@ function Navbar() {
                   paddingTop={10}
                 >
                   {isAuth ? (
-                    <Box borderBottom={"1px solid #555"}>
-                      <Link to="profile">
-                        <Heading
-                          w={"200px"}
-                          marginBottom={5}
-                          cursor={"pointer"}
-                          fontSize={"17px"}
-                          fontWeight="bold"
-                          color="#55555"
-                          mt="35px"
-                        >
-                          Hi {username}
-                        </Heading>
-                      </Link>
-                    </Box>
+                    <>
+                      <Box borderBottom={"1px solid #555"}>
+                        <Link>
+                          <Heading
+                            w={"200px"}
+                            onClick={() =>
+                              setHanldeDrawerUser1(!hanldeDrawerUser1)
+                            }
+                            marginBottom={5}
+                            cursor={"pointer"}
+                            fontSize={"17px"}
+                            fontWeight="bold"
+                            color="#55555"
+                            mt="35px"
+                          >
+                            Hi {username}
+                          </Heading>
+                        </Link>
+                      </Box>
+                      {hanldeDrawerUser1 === true && <DrawerUser />}
+                    </>
                   ) : (
                     <Box borderBottom={"1px solid #555"}>
                       <Link to="login">
@@ -1344,19 +1405,6 @@ function Navbar() {
                         color="#55555"
                       >
                         Tablet
-                      </Heading>
-                    </Link>
-                  </Box>
-                  <Box borderBottom={"1px solid #555"}>
-                    <Link to="headphones">
-                      <Heading
-                        w={"200px"}
-                        marginBottom={5}
-                        cursor={"pointer"}
-                        fontSize={"17px"}
-                        color="#55555"
-                      >
-                        Phụ kiện
                       </Heading>
                     </Link>
                   </Box>

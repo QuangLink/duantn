@@ -631,7 +631,7 @@ const ProductFilter = ({
         <Box
           alignItems="center"
           margin="auto"
-          m="20% 0% 3% 0%"
+          m="0% 0% 3% 0%"
           gap={0}
           px="0%"
           bg="#ccc"

@@ -107,7 +107,7 @@ const CheckoutPage = () => {
           <Box
             className="cartPage"
             w={{ "2xl": "80%", base: "98%" }}
-            marginTop={{ "2xl": "0", base: "80px" }}
+            marginTop={{ "2xl": "0", base: "0px" }}
           >
             {/* Box Tổng */}
 

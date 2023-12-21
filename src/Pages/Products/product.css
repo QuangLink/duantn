@@ -13,16 +13,6 @@
 .box_1:hover {
   color: blue;
 }
-.box_2 {
-  width: 100%;
-  margin-bottom: 2%;
-  margin-left: 5%;
-}
-.box_2_heading {
-  font-size: 0.1rem;
-  color: red;
-  font-weight: black;
-}
 
 .div_1 Button {
   width: 100%;

@@ -1,17 +1,29 @@
 "use client";
 
+import React, { useState, useEffect, useRef } from "react";
 import {
+  Input,
+  FormLabel,
+  Avatar,
+  Stack,
+  Radio,
+  RadioGroup,
+  Alert,
+  AlertIcon,
+  Textarea,
+  Text,
   Box,
-  Button,
   ButtonGroup,
-  Flex
+  Button,
+  Heading,
+  Flex,
+  FormControl,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
 import "react-slideshow-image/dist/styles.css";
 
-import { useToast } from "@chakra-ui/react";
-import ChangePass from "./ChangePass";
 import MyOrder from "./MyOrder";
+import ChangePass from "./ChangePass";
+import { useToast } from "@chakra-ui/react";
 
 export default function MyProfile() {
   const toast = useToast();
@@ -25,10 +37,10 @@ export default function MyProfile() {
 
   return (
     <>
-      <Box width="80%" p={6} m="5px auto" as="form">
+      <Box width={["100%", "90%", "80%"]} p={6} m="5px auto" as="form">
         <ButtonGroup w="100%">
           <Flex w="100%" justifyContent="center">
-            <Flex>
+            <Box w={["100%", "300px", "50%"]} display={["block","flex","flex"]}>
               <Button
                 onClick={() => handleFormChange(1)}
                 isDisabled={step === 1}
@@ -36,7 +48,7 @@ export default function MyProfile() {
                 color="white"
                 variant="solid"
                 fontSize="20px"
-                w="300px"
+                w={["100%", "300px", "300px"]}
                 height="50px"
                 mr="5%"
               >
@@ -49,13 +61,13 @@ export default function MyProfile() {
                 color="white"
                 variant="solid"
                 fontSize="20px"
-                w="300px"
+                w={["100%", "300px", "300px"]}
                 height="50px"
                 mr="5%"
               >
                 Đổi mật khẩu
               </Button>
-            </Flex>
+            </Box>
           </Flex>
         </ButtonGroup>
         {step === 1 ? <MyOrder /> : <ChangePass />}

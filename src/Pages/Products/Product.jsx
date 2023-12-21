@@ -98,17 +98,17 @@ const Product = (props, rating) => {
           </Center>
           {prodSale !== 0 && (
             <Box
-              className="div_2"
-              css={{
-                "@media (max-width: 430px)": {
-                  width: "100%",
-                },
-              }}
+           
+              // css={{
+              //   "@media (max-width: 430px)": {
+              //     width: "100%",
+              //   },
+              // }}
             >
-              <Box
+               <Box
                 className="box_1"
-                fontSize={{ base: "20px", md: "20px", lg: "18px" }}
                 h={["20px", "40px", "70px"]}
+                fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
                 {prodName}
               </Box>

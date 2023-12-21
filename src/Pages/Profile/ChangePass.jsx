@@ -1,16 +1,17 @@
+import React, { useState } from "react";
 import {
+  Input,
+  FormLabel,
   Box,
   Button,
-  FormControl,
-  FormLabel,
   Heading,
-  Input,
+  FormControl,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
 
 import Cookies from "js-cookie";
 //import chakraUI toast
 import { useToast } from "@chakra-ui/react";
+import { Toast } from "bootstrap";
 const ChangePass = () => {
   const userID = Cookies.get("userID");
   const toast = useToast();
@@ -72,7 +73,7 @@ const ChangePass = () => {
   return (
     <Box
       id="chang-pwd"
-      maxW="30%"
+      maxW={["100%", "30%"]}
       mx="auto"
       mt="40px"
       p="20px"

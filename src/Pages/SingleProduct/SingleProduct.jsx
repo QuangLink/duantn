@@ -10,7 +10,7 @@ import {
   ListItem,
   Text,
   UnorderedList,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -604,7 +604,7 @@ const SingleProduct = (props) => {
                 </Grid>
               </div>
               <Box className="box-slide">
-                <RelateProduct type={singleDatas[0].catName} />
+                <RelateProduct type={singleDatas[0].prodType} />
                 <ComProduct prodID={singleDatas[0].prodID} />
               </Box>
             </Box>

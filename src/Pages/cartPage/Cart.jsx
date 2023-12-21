@@ -155,7 +155,7 @@ const Cart = () => {
                     lg: "32px",
                     "2xl": "32px",
                   }}
-                  marginTop={{ base: "80px", "2xl": "0" }}
+                  marginTop={{ base: "0px", "2xl": "0" }}
                   fontWeight="700"
                   color="black"
                   className="textHeadingCart"

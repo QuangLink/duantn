@@ -1,46 +1,59 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect, useRef } from "react";
 import {
+  Box,
+  Heading,
+  Text,
+  Divider,
+  Image,
+  Center,
+  Flex,
+  Button,
+  Badge,
+  VStack,
+  useDisclosure,
+  useToast,
+  Input,
   Accordion,
   AccordionItem,
   AccordionPanel,
-  Badge,
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  Icon,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Modal,
-  ModalBody,
-  ModalCloseButton,
+  ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalOverlay,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
   Select,
-  Text,
-  VStack,
-  useDisclosure,
-  useToast
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
-import axios from "axios";
+import "react-slideshow-image/dist/styles.css";
+import { useNavigate } from "react-router-dom";
+import { Icon } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import "react-slideshow-image/dist/styles.css";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import UserInfo from "./UserInfo";
+import { BsFillCartCheckFill, BsFillTrashFill } from "react-icons/bs";
+import { AiFillCreditCard } from "react-icons/ai";
+import { RiProfileLine } from "react-icons/ri";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
-import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "react-slideshow-image/dist/styles.css";
-import UserInfo from "./UserInfo";
 const MyOrder = () => {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);
   const username = Cookies.get("username");
   const address = useRef({});
   const toast = useToast();
+  const isMobile = window.innerWidth <= 768;
   const [selectedOrderCode, setSelectedOrderCode] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -102,17 +115,25 @@ const MyOrder = () => {
     return (
       <Box>
         <React.Fragment>
-          {Object.entries(productsByOrderCode).map(
-            ([orderCode, productList]) => (
+          {Object.entries(productsByOrderCode)
+            .slice(currentPage * 5, (currentPage + 1) * 5)
+            .map(([orderCode, productList]) => (
               <Box borderWidth="1px" margin="10px" padding="10px">
                 <React.Fragment key={orderCode}>
-                  <tr>
+                  <tr style={{ display: isMobile ? "block" : "table-row" }}>
                     <td
                       colSpan="8"
-                      style={{ fontWeight: "bold", cursor: "pointer" }}
+                      style={{
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        whiteSpace: isMobile ? "nowrap" : "normal",
+                        overflow: isMobile ? "hidden" : "visible",
+                        textOverflow: isMobile ? "ellipsis" : "clip",
+                      }}
                       onClick={() => handleOrderCodeClick(orderCode)}
                     >
-                      Mã giao dịch: {orderCode}{" "}
+                      Mã giao dịch:{" "}
+                      {isMobile ? orderCode.substring(0, 10) : orderCode}{" "}
                       {selectedOrderCode === orderCode ? (
                         <Icon as={FaChevronUp} />
                       ) : (
@@ -124,7 +145,7 @@ const MyOrder = () => {
                         <Badge
                           colorScheme="green"
                           fontWeight="600"
-                          fontSize="18px"
+                          fontSize={["10px", "15px", "18px"]}
                           ml="1"
                           color="black"
                         >
@@ -134,7 +155,7 @@ const MyOrder = () => {
                         <Badge
                           colorScheme="yellow"
                           fontWeight="600"
-                          fontSize="18px"
+                          fontSize={["10px", "15px", "18px"]}
                           ml="1"
                           color="black"
                         >
@@ -155,7 +176,7 @@ const MyOrder = () => {
                         <Badge
                           colorScheme="red"
                           fontWeight="600"
-                          fontSize="18px"
+                          fontSize={["10px", "15px", "18px"]}
                           ml="1"
                           color="black"
                         >
@@ -165,7 +186,7 @@ const MyOrder = () => {
                         <Badge
                           colorScheme="yellow"
                           fontWeight="600"
-                          fontSize="18px"
+                          fontSize={["10px", "15px", "18px"]}
                           ml="1"
                           color="black"
                         >
@@ -181,15 +202,22 @@ const MyOrder = () => {
                         <hr />
                         <Box
                           mt="5"
-                          display="flex"
+                          display={["block", "block", "flex"]}
                           justifyContent="space-evenly"
                         >
-                          <Box key={product.id} p={4} borderRadius="md" mb={4}>
-                            <Image src={product.prodImg} w={100} />
-                          </Box>
-                          <Box width="60%" padding="10px">
+                          <Center
+                            key={product.id}
+                            p={4}
+                            borderRadius="md"
+                            mb={4}
+                          >
+                            <Image
+                              src={product.prodImg}
+                              w={["80%", "100%", "100px"]}
+                            />
+                          </Center>
+                          <Box width={["100%", "100%", "60%"]} padding="10px">
                             <Text
-                              height="60px"
                               color="#424245"
                               noOfLines={2}
                               fontSize="20px"
@@ -266,8 +294,23 @@ const MyOrder = () => {
                   </Button>
                 ) : null}
               </Box>
-            ),
-          )}
+            ))}
+          <div>
+            {[
+              ...Array(
+                Math.ceil(Object.entries(productsByOrderCode).length / 10),
+              ),
+            ].map((e, i) => (
+              <Button
+                mr={2}
+                type="button"
+                key={i}
+                onClick={() => handlePageChange(i)}
+              >
+                {i + 1}
+              </Button>
+            ))}
+          </div>
           <Box m="4">
             <Text fontWeight="700" fontSize="20px" ml="1" color="green">
               Tổng chi tiêu: {formatCurrency(totalExpenditure)}
@@ -450,7 +493,7 @@ const MyOrder = () => {
   };
   return (
     <Box
-      display="flex"
+      display={["block", "block", "flex"]}
       maxW="30̀%"
       mt="20px"
       p="10px"
@@ -549,12 +592,16 @@ const MyOrder = () => {
           </Accordion>
         </div>
       </Center>
-      <Box w="30%">{renderAddressData()}</Box>
-      <Box w={"80%"} padding={"5px"}>
+      <Box w={["100%", "100%", "30%"]}>{renderAddressData()}</Box>
+      <Box w={["100%", "100%", "80%"]} padding={"5px"}>
         <Heading as="h2" size="lg" m={"0 7px 12px 12px"}>
           Đơn mua
         </Heading>
-        <InputGroup margin={"10px"} w={"98%"} bg="#eaeaea">
+        <InputGroup
+          margin={["0 7px 12px 12px", "0 7px 12px 12px", "10px"]}
+          w={["94%", "100%", "98%"]}
+          bg="#eaeaea"
+        >
           <InputLeftElement
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
