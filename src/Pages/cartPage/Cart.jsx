@@ -56,6 +56,7 @@ const Cart = () => {
         description: "",
         status: "success",
         duration: 5000,
+        position: "top",
         isClosable: true,
       });
     } else {
@@ -66,6 +67,7 @@ const Cart = () => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top",
       });
     }
   };

@@ -28,6 +28,8 @@ const WishProduct = (props) => {
     prodPrice,
     prodPriceSale,
     colorID,
+    ramID,
+    ram,
     color,
     storage_value,
     storageID,
@@ -46,10 +48,11 @@ const WishProduct = (props) => {
         });
         if (flag) {
           toast({
+            position: "top",
             title: "Sản phẩm đang trong giỏ hàng",
             description: `${prodName} hiện đã trong giỏ hàng`,
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else {
@@ -58,16 +61,18 @@ const WishProduct = (props) => {
             prodID: prodID,
             colorID: colorID,
             storageID: storageID,
+            ramID: ramID,
           };
           axios
             .post(`${process.env.REACT_APP_DATABASE_API_URL}/cart`, newData)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
           toast({
+            position: "top",
             title: "Đơn hàng đã được thêm vào giỏ hàng",
             description: `${prodName} thêm vào giỏ hàng thành công`,
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         }
@@ -148,7 +153,7 @@ const WishProduct = (props) => {
           color="gray"
           bg="white"
           _hover={{ color: "red", fontWeight: "bold" }}
-          onClick={() => handleDelete(userID, prodID, colorID, storageID)}
+          onClick={() => handleDelete(userID, prodID, colorID, storageID,ramID)}
         >
           <FaHeartBroken fontSize="25px" />
         </Button>

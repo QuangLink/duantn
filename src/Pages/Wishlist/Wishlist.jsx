@@ -33,10 +33,10 @@ function Wishlist({ typeOfProduct }) {
     dispatch(getProducts(typeOfProduct));
   }, [typeOfProduct, dispatch]);
 
-  const handleDelete = (userID, prodID, storageID, colorID) => {
+  const handleDelete = (userID, prodID, storageID, colorID,ramID) => {
     axios
       .delete(`${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`, {
-        data: { userID, prodID, colorID, storageID },
+        data: { userID, prodID, colorID, storageID, ramID },
       })
       .then((res) => {
         console.log(res);
@@ -44,10 +44,11 @@ function Wishlist({ typeOfProduct }) {
       })
       .catch((err) => console.log(err));
     toast({
+      position: "top",
       title: "Product Deleted.",
       description: `Delete from wishlist`,
       status: "success",
-      duration: 9000,
+      duration: 500,
       isClosable: true,
     });
     navigate("/wishlist");

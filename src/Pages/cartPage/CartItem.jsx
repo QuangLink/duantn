@@ -18,7 +18,7 @@ import { postSingleDataWish } from "../SingleProduct/SingleProduct";
 
 const CartItem = ({
   userID,
-
+  ramID,
   quantity,
   colorID,
   storageID,
@@ -45,6 +45,7 @@ const CartItem = ({
     id,
     colorID,
     storageID,
+    ramID,
     quantity,
     color,
     storage,
@@ -59,7 +60,7 @@ const CartItem = ({
   const [count, setCount] = useState(quantity);
   //handle change for this  onChange={(e) => setCount(e.target.value)}
 
-  const handleChange = (e, userID, id, colorID, storageID) => {
+  const handleChange = (e, userID, id, colorID, storageID,ramID) => {
     let newCount = parseInt(e.target.value, 10);
     if (!isNaN(newCount) && newCount >= 1) {
       setCount(newCount);
@@ -77,7 +78,8 @@ const CartItem = ({
         (item) =>
           item.prodID === id &&
           (colorID === null || item.colorID === colorID) &&
-          (storageID === null || item.storageID === storageID),
+          (storageID === null || item.storageID === storageID) &&
+          (ramID === null || item.ramID === ramID)  
       );
 
       // If the item is found, change it quantity from the cart
@@ -96,6 +98,7 @@ const CartItem = ({
           status: "error",
           duration: 3000,
           isClosable: true,
+          position: "top",
         });
         newCount = quantity;
         setCount(quantity);
@@ -116,6 +119,7 @@ const CartItem = ({
       id,
       colorID,
       storageID,
+      ramID
     );
   };
 
@@ -130,6 +134,7 @@ const CartItem = ({
         id,
         colorID,
         storageID,
+        ramID
       );
     }
   };
@@ -153,7 +158,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       })
       .catch((err) => {
@@ -164,7 +169,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       });
   };
@@ -341,7 +346,7 @@ const CartItem = ({
                 color="gray"
                 _hover={{ color: "red" }}
                 onClick={() => {
-                  DeleteRequest(userID, id, colorID, storageID);
+                  DeleteRequest(userID, id, colorID, storageID,ramID);
                 }}
               >
                 <DeleteIcon />

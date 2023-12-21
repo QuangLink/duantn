@@ -66,14 +66,27 @@ const CheckoutBox = ({
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
       setTimeout(() => {
         navigate("/login");
       }, 1500);
     } else if (selectedOption === "cash") {
       setTimeout(async () => {
+        // Remove the cart data for the specific userID
+        delete cartData[userID];
+        // Update the cartData in sessionStorage
+        sessionStorage.setItem("cart", JSON.stringify(cartData));
         try {
+          toast({
+            title: "Thanh toán khi nhận hàng",
+            description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+          navigate("/");
           const response = await axios.post(
             `${process.env.REACT_APP_DATABASE_API_URL}/orders/cod`,
             {
@@ -85,21 +98,6 @@ const CheckoutBox = ({
               withCredentials: true,
             },
           );
-
-          if (response.status === 200) {
-            // Remove the cart data for the specific userID
-            delete cartData[userID];
-            // Update the cartData in sessionStorage
-            sessionStorage.setItem("cart", JSON.stringify(cartData));
-            toast({
-              title: "Thanh toán khi nhận hàng",
-              description: "Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng",
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-              position: "bottom",
-            });
-          }
         } catch (error) {
           console.error(error);
           toast({
@@ -108,10 +106,9 @@ const CheckoutBox = ({
             status: "error",
             duration: 3000,
             isClosable: true,
-            position: "bottom",
+            position: "top",
           });
         }
-        navigate("/");
       });
     } else {
       toast({
@@ -120,9 +117,11 @@ const CheckoutBox = ({
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
       setTimeout(async () => {
+        //clear session storage for cart by userID
+
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_DATABASE_API_URL}/orders/create_payment_url`,
@@ -434,7 +433,7 @@ const CheckoutBox = ({
                 status: "error",
                 duration: 3000,
                 isClosable: true,
-                position: "bottom",
+                position: "top",
               });
             } else if (selectedOption === null) {
               toast({
@@ -443,7 +442,7 @@ const CheckoutBox = ({
                 status: "error",
                 duration: 3000,
                 isClosable: true,
-                position: "bottom",
+                position: "top",
               });
             } else {
               handleCheckout();
