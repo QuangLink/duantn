@@ -33,9 +33,11 @@ const Forgot = () => {
           status: "error",
           duration: 3000,
           isClosable: true,
+          position: "top",
         });
       } else if (response.status === 500) {
         toast({
+          position: "top",
           title: "Lỗi server",
           status: "error",
           duration: 3000,
@@ -43,6 +45,7 @@ const Forgot = () => {
         });
       } else {
         toast({
+          position: "top",
           title: "Email đã được gửi, hãy kiểm tra email của bạn",
           status: "success",
           duration: 3000,

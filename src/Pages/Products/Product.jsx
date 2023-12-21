@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
+import { getProducts } from "../../Redux/Wishlist/products.action";
 const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
 
@@ -24,25 +25,41 @@ const postSingleDataWish = async (data) => {
     throw new Error("userID is undefined");
   }
 
-  try {
-    const postData = {
-      userID,
-      prodID: data.prodID,
-      colorID: data.colorID,
-      storageID: data.storageID,
-      ramID: data.ramID,
-    };
-    let response = await axios.post(
-      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
-      postData,
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.log("Trong hàm postSingleData xảy ra lỗi: ", error.response.data);
+try {
+  const postData = {
+    prodID: data.prodID,
+    colorID: data.colorID,
+    storageID: data.storageID,
+    userID: userID,
+    ramID: data.ramID,
   }
+  const responseGet = await axios.get(`${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`);
+  const wishlist = responseGet.data;
+
+  const productExists = wishlist.some(
+    (product) =>
+      product.prodID === data.prodID &&
+      product.colorID === data.colorID &&
+      product.storageID === data.storageID &&
+      product.ramID === data.ramID
+  );
+
+  if (productExists) {
+    throw new Error("Product already exists in the wishlist");
+  } else {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
+        postData
+      );
+      return response.data;
+    } catch (error) {
+      console.log("An error occurred while posting data: ", error);
+    }
+  }
+} catch (error) {
+  console.log("An error occurred while getting wishlist data: ", error);
+}
 };
 // const singleData = useSelector((store) => store.singleProduct.data);
 
@@ -57,41 +74,44 @@ const Product = (props, rating) => {
     prodSale,
     prodRateAvg,
   } = data;
-
+  const userID = Cookies.get("userID");
   var navigate = useNavigate();
   const toast = useToast();
-  const handleWish = () => {
-    try {
-      postSingleDataWish(data)
-        .then((res) => {
-          toast({
-            title: "Đã thêm vào yêu thích",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-        })
-        .catch((error) => {
-          console.error("Error handling post:", error);
-          toast({
-            title: "Vui lòng đăng nhập trước",
-            description: "Bạn cần đăng nhập để thực hiện chức năng này",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        });
-    } catch (error) {
-      console.error("Error handling wish:", error);
+const handleWish = async () => {
+  try {
+    await postSingleDataWish(data);
+  } catch (error) {
+    if (!error) {
       toast({
-        title: "Error handling wish",
-        description: error.message,
+        position: "top",
+        title: "Đã thêm vào yêu thích",
+        status: "success",
+        duration: 500,
+        isClosable: true,
+      });
+    } else if (error.message === "Product already exists in the wishlist") {
+      toast({
+        position: "top",
+        title: "Sản phẩm đã tồn tại trong yêu thích",
         status: "error",
-        duration: 9000,
+        duration: 500,
+        isClosable: true,
+      });
+    } else if (error.message === "userID is undefined") {
+      toast({
+        position: "top",
+        title: "Vui lòng đăng nhập trước",
+        description: "Bạn cần đăng nhập để thực hiện chức năng này",
+        status: "error",
+        duration: 500,
         isClosable: true,
       });
     }
-  };
+
+
+
+  }
+};
 
   return (
     <div className="div_1">

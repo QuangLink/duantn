@@ -56,18 +56,18 @@ const CheckoutPage = () => {
         title: "Successful",
         description: "Mã giảm giá đã áp dụng thành công",
         status: "success",
-        duration: 9000,
+        duration: 500,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
     } else {
       toast({
         title: "Error",
         description: "Mã giảm giá sai",
         status: "warning",
-        duration: 9000,
+        duration: 500,
         isClosable: true,
-        position: "bottom",
+        position: "top",
       });
     }
   };

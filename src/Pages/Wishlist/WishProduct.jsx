@@ -48,10 +48,11 @@ const WishProduct = (props) => {
         });
         if (flag) {
           toast({
+            position: "top",
             title: "Sản phẩm đang trong giỏ hàng",
             description: `${prodName} hiện đã trong giỏ hàng`,
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else {
@@ -67,10 +68,11 @@ const WishProduct = (props) => {
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
           toast({
+            position: "top",
             title: "Đơn hàng đã được thêm vào giỏ hàng",
             description: `${prodName} thêm vào giỏ hàng thành công`,
             status: "success",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         }

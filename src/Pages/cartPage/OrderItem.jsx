@@ -96,6 +96,7 @@ const OrderItem = ({
           status: "error",
           duration: 3000,
           isClosable: true,
+          position: "top",
         });
         newCount = quantity;
         setCount(quantity);
@@ -155,7 +156,7 @@ const OrderItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       })
       .catch((err) => {
@@ -166,7 +167,7 @@ const OrderItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       });
   };

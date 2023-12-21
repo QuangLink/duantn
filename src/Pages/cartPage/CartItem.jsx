@@ -102,6 +102,7 @@ const CartItem = ({
           status: "error",
           duration: 3000,
           isClosable: true,
+          position: "top",
         });
         newCount = quantity;
         setCount(quantity);
@@ -161,7 +162,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       })
       .catch((err) => {
@@ -172,7 +173,7 @@ const CartItem = ({
           duration: 3000,
           isClosable: true,
           variant: "top-accent",
-          position: "bottom",
+          position: "top",
         });
       });
   };

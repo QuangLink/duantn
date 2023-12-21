@@ -146,9 +146,10 @@ const SingleProduct = (props) => {
     postSingleData({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
+          position: "top",
           title: "Đã thêm vào giỏ",
           status: "success",
-          duration: 9000,
+          duration: 500,
           isClosable: true,
         });
       })
@@ -159,25 +160,28 @@ const SingleProduct = (props) => {
         if (error.message === "Product already exists in the cart") {
           // Handle it appropriately, e.g., display a different toast
           toast({
+            position: "top",
             title: "Sản phẩm đã tồn tại trong giỏ",
             status: "warning",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else if (error.message === "Chưa đăng nhập") {
           toast({
+            position: "top",
             title: "Vui lòng đăng nhập trước",
             description: "Bạn cần đăng nhập để thực hiện chức năng này",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else {
           // Handle other errors
           toast({
+            position: "top",
             title: "Lỗi",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         }
@@ -211,9 +215,10 @@ const SingleProduct = (props) => {
     postSingleDataWish({ prodID, colorID, storageID,ramID })
       .then((res) => {
         toast({
+          position: "top",
           title: "Đã thêm vào yêu thích",
           status: "success",
-          duration: 9000,
+          duration: 500,
           isClosable: true,
         });
       })
@@ -222,9 +227,10 @@ const SingleProduct = (props) => {
         // Handle the error as needed, e.g., display an error toast
         if ((error.message = "Chưa đăng nhập")) {
           toast({
+            position: "top",
             title: "Vui lòng đăng nhập trước",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
           navigate("/login");

@@ -44,10 +44,11 @@ function Wishlist({ typeOfProduct }) {
       })
       .catch((err) => console.log(err));
     toast({
+      position: "top",
       title: "Product Deleted.",
       description: `Delete from wishlist`,
       status: "success",
-      duration: 9000,
+      duration: 500,
       isClosable: true,
     });
     navigate("/wishlist");
