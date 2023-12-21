@@ -175,6 +175,7 @@ const SingleProduct = (props) => {
             duration: 500,
             isClosable: true,
           });
+          navigate("/login");
         } else {
           // Handle other errors
           toast({
@@ -287,7 +288,7 @@ const SingleProduct = (props) => {
           {Array.isArray(singleDatas) && (
             <Box>
               <Box
-                width="100%"
+                width="90%"
                 m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
@@ -307,12 +308,12 @@ const SingleProduct = (props) => {
                   h={["auto", "auto", "auto"]}
                   templateColumns={[
                     "repeat(1, 1fr)",
-                    "repeat(2, 1fr)",
+                    "repeat(1, 1fr)",
                     "repeat(10,1fr)",
                   ]}
                 >
                   <GridItem
-                    rowSpan={[1, 2, 7]}
+                    rowSpan={[1, 1, 7]}
                     colSpan={[6, 6, 5]}
                     m="0 0 0 18%"
                     p=" 2% 8% "
@@ -446,7 +447,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        width="91%"
+                        width={["100%", "91%", "91%"]}
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -503,7 +504,6 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
-
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
@@ -522,7 +522,6 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
-
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -530,7 +529,6 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
-
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -541,7 +539,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ bg: "blue.800" }}
                             onClick={() =>
-                              debouncedHandlePost(
+                              handlePost(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
@@ -561,7 +559,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
                             onClick={() =>
-                              debouncedHandleWish(
+                              handleWish(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
@@ -618,7 +616,11 @@ const SingleProduct = (props) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box className="box-table" mt={5}>
+                    <Box
+                      className="box-table"
+                      mt={5}
+                      display={["none", "block", "block"]}
+                    >
                       <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>

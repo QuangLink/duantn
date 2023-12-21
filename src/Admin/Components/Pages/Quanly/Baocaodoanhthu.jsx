@@ -148,7 +148,7 @@ const Baocaodoanhthu = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((order) => (
+                    {orders.slice(0.10).map((order) => (
                       <tr key={order.orderID}>
                         <td>{order.orderID}</td>
                         <td>{order.username}</td>
