@@ -1,34 +1,23 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Product from "./Product";
 import {
   Box,
-  Link,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Input,
-  Menu,
-  MenuButton,
-  MenuList,
-  Text,
-  MenuItem,
   Button,
-  Select,
-  useMediaQuery,
-  useDisclosure,
   Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  Heading,
+  Link,
+  Menu,
+  Select,
   VStack,
+  useDisclosure,
+  useMediaQuery
 } from "@chakra-ui/react";
-import { PrApplePhone } from "../Home/CardDetails";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Productbox.css";
-import { Route } from "react-router-dom";
 
 const ProductFilter = ({
   typeOfProduct,
@@ -642,7 +631,7 @@ const ProductFilter = ({
         <Box
           alignItems="center"
           margin="auto"
-          m="20% 0% 3% 0%"
+          m="0% 0% 3% 0%"
           gap={0}
           px="0%"
           bg="#ccc"

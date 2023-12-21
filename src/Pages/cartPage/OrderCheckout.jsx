@@ -1,17 +1,15 @@
-import React from "react";
+import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import "react-slideshow-image/dist/styles.css";
+import { getData } from "../../Redux/Cart/cart.action";
+import Address from "./Address";
+import CheckoutBox from "./CheckoutBox";
 import MyCartLength from "./MyCartLength";
 import OrderItem from "./OrderItem";
-import CheckoutBox from "./CheckoutBox";
-import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import { useSelector, useDispatch } from "react-redux";
-import { getData } from "../../Redux/Cart/cart.action";
 import "./cartstyle.css";
-import { Box, Center, Flex, Heading, Text, useToast } from "@chakra-ui/react";
-import "react-slideshow-image/dist/styles.css";
-import Address from "./Address";
 export const GetData = async () => {
   try {
     let response = await axios.get(
@@ -109,7 +107,7 @@ const CheckoutPage = () => {
           <Box
             className="cartPage"
             w={{ "2xl": "80%", base: "98%" }}
-            marginTop={{ "2xl": "0", base: "80px" }}
+            marginTop={{ "2xl": "0", base: "0px" }}
           >
             {/* Box Tổng */}
 

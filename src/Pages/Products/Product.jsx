@@ -1,4 +1,6 @@
+
 import React, { useCallback } from "react";
+
 import {
   Badge,
   Box,
@@ -9,18 +11,19 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import Cookies from "js-cookie";
+import React from "react";
 import { BsSuitHeart } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import RatingBar from "./RatingBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
+
 import Cookies from "js-cookie";
 import { getProducts } from "../../Redux/Wishlist/products.action";
 import debounce from "lodash.debounce";
-
-
 const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
 
@@ -141,6 +144,7 @@ const Product = (props, rating) => {
           </Center>
           {prodSale !== 0 && (
             <Box
+
               className="div_2"
               css={{
                 "@media (max-width: 430px)": {
@@ -148,11 +152,14 @@ const Product = (props, rating) => {
                   textAlign: "center",
                 },
               }}
+
             >
-              <Box
+               <Box
                 className="box_1"
                 fontSize={{ base: "15px", md: "20px", lg: "18px" }}
+
                 h={["20px", "40px", "70px"]}
+                fontSize={{ base: "15px", md: "15px", lg: "18px" }}
               >
                 {prodName}
               </Box>

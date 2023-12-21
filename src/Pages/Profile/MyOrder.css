@@ -29,3 +29,10 @@ header h1 {
   font-size: 12px;
   cursor: pointer;
 }
+
+/* Responsive cho trang MyOrder */
+@media (max-width: 768px) {
+  .phuongthuc {
+    display: block;
+  }
+}

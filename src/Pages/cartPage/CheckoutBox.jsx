@@ -1,26 +1,25 @@
 import {
+  Box,
   Button,
+  Center,
   Flex,
+  Heading,
+  Icon,
   Input,
   InputGroup,
-  InputRightElement,
-  Box,
-  Heading,
   Text,
-  useToast,
-  Center,
-  Icon,
+  useToast
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { TbTruckDelivery } from "react-icons/tb";
 import { FaWallet } from "react-icons/fa";
 import { FcHome } from "react-icons/fc";
+import { TbTruckDelivery } from "react-icons/tb";
 const CheckoutBox = ({
   items,
   totalPrice,

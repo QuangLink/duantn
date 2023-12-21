@@ -1,25 +1,23 @@
-import React from "react";
-import MyCartLength from "./MyCartLength";
-import CartItem from "./CartItem";
-import { useEffect } from "react";
-import { useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import { useSelector, useDispatch } from "react-redux";
-import { getData } from "../../Redux/Cart/cart.action";
-import "./cartstyle.css";
-import Cookies from "js-cookie";
+import { WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Center,
   Flex,
   Heading,
   Text,
-  Button,
   useToast,
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "react-slideshow-image/dist/styles.css";
-import { WarningTwoIcon } from "@chakra-ui/icons";
+import { getData } from "../../Redux/Cart/cart.action";
+import CartItem from "./CartItem";
+import MyCartLength from "./MyCartLength";
+import "./cartstyle.css";
 const Cart = () => {
   const userID = Cookies.get("userID");
   const navigate = useNavigate();
@@ -159,7 +157,7 @@ const Cart = () => {
                     lg: "32px",
                     "2xl": "32px",
                   }}
-                  marginTop={{ base: "80px", "2xl": "0" }}
+                  marginTop={{ base: "0px", "2xl": "0" }}
                   fontWeight="700"
                   color="black"
                   className="textHeadingCart"

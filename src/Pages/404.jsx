@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, Image, Text } from '@chakra-ui/react';
 
 /**
  * NotFoundPage: A React component representing the 404 error page.

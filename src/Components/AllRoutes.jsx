@@ -13,7 +13,6 @@ import AdminRoute from "./PrivateRoute/AdminRoutes";
 import Checkout from "../Pages/cartPage/Address";
 import MyOrder from "../Pages/Profile/MyOrder";
 import MyProfile from "../Pages/Profile/MyProfile";
-import Vnpay from "../Pages/cartPage/vnpay";
 import Cart from "../Pages/cartPage/Cart";
 import Success from "../Pages/checkout/success";
 import Dashboard from "../Admin/Components/Pages/Home/Home";
@@ -66,7 +65,6 @@ const AllRoutes = () => {
         <Route path="/forgot" element={<Forgot />}></Route>
         <Route path="/verify" element={<Verified />}></Route>
         <Route path="/reset" element={<ChangePass />}></Route>
-        <Route path="/vnpay" element={<Vnpay />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route
               path={`/apple/phone`}

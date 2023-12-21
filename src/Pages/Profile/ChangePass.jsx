@@ -76,7 +76,7 @@ const ChangePass = () => {
   return (
     <Box
       id="chang-pwd"
-      maxW="30%"
+      maxW={["100%", "30%"]}
       mx="auto"
       mt="40px"
       p="20px"

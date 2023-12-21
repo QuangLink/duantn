@@ -1,8 +1,6 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
-import { Box, Image, Center, Flex } from "@chakra-ui/react";
-import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import uuid from "react-uuid";
 
 const SlideProuct = ({ type }) => {
   return (

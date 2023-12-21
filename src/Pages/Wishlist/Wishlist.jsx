@@ -68,7 +68,7 @@ function Wishlist({ typeOfProduct }) {
     );
   }
   return (
-    <Center w="80%" m="auto">
+    <Center w={["90%", "100%", "80%"]} m="auto">
       <Box w="100%" m="auto" p="3px">
         <Box>
           <Box>

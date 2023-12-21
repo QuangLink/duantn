@@ -1,24 +1,20 @@
-import React from "react";
 import {
   Box,
   Flex,
-  Text,
   Image,
   Square,
-  Button,
-  background,
-  Badge,
-  Center,
+  Text
 } from "@chakra-ui/react";
+import React from "react";
 
-import RatingBar from "./RatingBar";
-import { Navigation, Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import RatingBar from "./RatingBar";
 
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";

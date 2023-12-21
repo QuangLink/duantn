@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Text, Textarea } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import RatingBar from "../Products/RatingBar";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import RatingBar from "../Products/RatingBar";
 
 const ComProduct = ({ prodID }) => {
   const [comments, setComments] = useState([]);

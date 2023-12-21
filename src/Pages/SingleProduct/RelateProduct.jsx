@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Box, Text, Image, Square, Flex } from "@chakra-ui/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
+import { Box, Flex, Image, Square, Text } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import uuid from "react-uuid";
-import axios from "axios";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "./product.css";
 
 const RelateProduct = ({ type, heading }) => {
@@ -22,6 +22,7 @@ const RelateProduct = ({ type, heading }) => {
       const response = await axios.get(categoryUrl[category]);
       return response.data.map((product) => ({
         name: product.prodName,
+        type: product.prodType,
         img: product.prodImg,
         price: product.prodPrice,
         id: product.prodID,
@@ -35,7 +36,7 @@ const RelateProduct = ({ type, heading }) => {
   };
 
   const [relatedProducts, setRelatedProducts] = useState([]);
-
+  console.log(relatedProducts);
   useEffect(() => {
     const loadRelated = async () => {
       try {
@@ -105,7 +106,7 @@ const RelateProduct = ({ type, heading }) => {
           {relatedProducts.map((i) => (
             <Box key={uuid()}>
               <SwiperSlide>
-                <Link to="/">
+                <Link to={`/${i.type}/${i.id}`}>
                   <Box
                     p="5"
                     m={["0%", "0%", "1%"]}
@@ -176,16 +177,18 @@ const RelateProduct = ({ type, heading }) => {
                             </Text>
                           </Flex>
                           <Box
-                          h="auto"
-                           
+                            h="auto"
                             borderRadius="5px"
                             w="50%"
                             color="#EC4C0A"
                             bg="#FEB373"
-                          
                             textAlign="center"
                           >
-                            <Text fontSize="10px"   padding="2px" fontWeight="500">
+                            <Text
+                              fontSize="10px"
+                              padding="2px"
+                              fontWeight="500"
+                            >
                               GIẢM GIÁ SỐC
                             </Text>
                           </Box>

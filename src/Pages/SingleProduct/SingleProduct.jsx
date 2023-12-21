@@ -1,30 +1,32 @@
 import {
-  Center,
   Box,
   Button,
+  Center,
   Flex,
   Grid,
   GridItem,
   Heading,
   Image,
-  Input,
   ListItem,
   Text,
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
-import { RotatingLines } from "react-loader-spinner";
-import RelateProduct from "./RelateProduct";
 import ComProduct from "./ComProduct";
+
 import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
 import debounce from "lodash.debounce";
+
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
@@ -625,7 +627,7 @@ const SingleProduct = (props) => {
                 </Grid>
               </div>
               <Box className="box-slide">
-                <RelateProduct type={singleDatas[0].catName} />
+                <RelateProduct type={singleDatas[0].prodType} />
                 <ComProduct prodID={singleDatas[0].prodID} />
               </Box>
             </Box>
