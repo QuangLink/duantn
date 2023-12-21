@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Badge,
   Box,
@@ -18,6 +18,9 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "./product.css";
 import Cookies from "js-cookie";
 import { getProducts } from "../../Redux/Wishlist/products.action";
+import debounce from "lodash.debounce";
+
+
 const postSingleDataWish = async (data) => {
   const userID = Cookies.get("userID");
 
@@ -25,41 +28,45 @@ const postSingleDataWish = async (data) => {
     throw new Error("userID is undefined");
   }
 
-try {
-  const postData = {
-    prodID: data.prodID,
-    colorID: data.colorID,
-    storageID: data.storageID,
-    userID: userID,
-    ramID: data.ramID,
-  }
-  const responseGet = await axios.get(`${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`);
-  const wishlist = responseGet.data;
+  try {
+    const postData = {
+      prodID: data.prodID,
+      colorID: data.colorID,
+      storageID: data.storageID,
+      userID: userID,
+      ramID: data.ramID,
+    };
+    const responseGet = await axios.get(
+      `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`,
+    );
+    const wishlist = responseGet.data;
 
-  const productExists = wishlist.some(
-    (product) =>
-      product.prodID === data.prodID &&
-      product.colorID === data.colorID &&
-      product.storageID === data.storageID &&
-      product.ramID === data.ramID
-  );
+    const productExists = wishlist.some(
+      (product) =>
+        product.prodID === data.prodID &&
+        product.colorID === data.colorID &&
+        product.storageID === data.storageID &&
+        product.ramID === data.ramID,
+    );
 
-  if (productExists) {
-    throw new Error("Product already exists in the wishlist");
-  } else {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
-        postData
-      );
-      return response.data;
-    } catch (error) {
-      console.log("An error occurred while posting data: ", error);
+    if (productExists) {
+      throw new Error("Product already exists in the wishlist");
+    } else {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_DATABASE_API_URL}/wishlist/`,
+          postData,
+        );
+        return response.data;
+      } catch (error) {
+        console.log("An error occurred while posting data: ", error);
+        throw error;
+      }
     }
+  } catch (error) {
+    console.log("An error occurred while getting wishlist data: ", error);
+    throw error;
   }
-} catch (error) {
-  console.log("An error occurred while getting wishlist data: ", error);
-}
 };
 // const singleData = useSelector((store) => store.singleProduct.data);
 
@@ -77,11 +84,9 @@ const Product = (props, rating) => {
   const userID = Cookies.get("userID");
   var navigate = useNavigate();
   const toast = useToast();
-const handleWish = async () => {
-  try {
-    await postSingleDataWish(data);
-  } catch (error) {
-    if (!error) {
+  const handleWish = async () => {
+    try {
+      await postSingleDataWish(data);
       toast({
         position: "top",
         title: "Đã thêm vào yêu thích",
@@ -89,30 +94,33 @@ const handleWish = async () => {
         duration: 500,
         isClosable: true,
       });
-    } else if (error.message === "Product already exists in the wishlist") {
-      toast({
-        position: "top",
-        title: "Sản phẩm đã tồn tại trong yêu thích",
-        status: "error",
-        duration: 500,
-        isClosable: true,
-      });
-    } else if (error.message === "userID is undefined") {
-      toast({
-        position: "top",
-        title: "Vui lòng đăng nhập trước",
-        description: "Bạn cần đăng nhập để thực hiện chức năng này",
-        status: "error",
-        duration: 500,
-        isClosable: true,
-      });
+    } catch (error) {
+      if (error.message === "Product already exists in the wishlist") {
+        toast({
+          position: "top",
+          title: "Sản phẩm đã tồn tại trong yêu thích",
+          status: "error",
+          duration: 500,
+          isClosable: true,
+        });
+      } else if (error.message === "userID is undefined") {
+        toast({
+          position: "top",
+          title: "Vui lòng đăng nhập trước",
+          description: "Bạn cần đăng nhập để thực hiện chức năng này",
+          status: "error",
+          duration: 500,
+          isClosable: true,
+        });
+      } else {
+        console.log("no error: ", error);
+      }
     }
-
-
-
-  }
-};
-
+  };
+  const debouncedHandleWish = useCallback(
+    debounce((prodID) => handleWish(prodID), 500),
+    [],
+  );
   return (
     <div className="div_1">
       <Link to={`${prodID}`}>
@@ -232,7 +240,7 @@ const handleWish = async () => {
           )}
         </Box>
       </Link>
-      <Button onClick={() => handleWish(prodID)}>
+      <Button onClick={() => debouncedHandleWish(prodID)}>
         <BsSuitHeart /> Yêu Thích
       </Button>
     </div>

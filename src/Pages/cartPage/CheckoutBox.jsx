@@ -73,12 +73,11 @@ const CheckoutBox = ({
         navigate("/login");
       }, 1500);
     } else if (selectedOption === "cash") {
- 
       setTimeout(async () => {
-         // Remove the cart data for the specific userID
- delete cartData[userID];
- // Update the cartData in sessionStorage
- sessionStorage.setItem("cart", JSON.stringify(cartData));
+        // Remove the cart data for the specific userID
+        delete cartData[userID];
+        // Update the cartData in sessionStorage
+        sessionStorage.setItem("cart", JSON.stringify(cartData));
         try {
           toast({
             title: "Thanh toán khi nhận hàng",
@@ -100,8 +99,6 @@ const CheckoutBox = ({
               withCredentials: true,
             },
           );
-           
-        
         } catch (error) {
           console.error(error);
           toast({
@@ -113,7 +110,6 @@ const CheckoutBox = ({
             position: "top",
           });
         }
-       
       });
     } else {
       toast({
@@ -126,7 +122,7 @@ const CheckoutBox = ({
       });
       setTimeout(async () => {
         //clear session storage for cart by userID
-        
+
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_DATABASE_API_URL}/orders/create_payment_url`,

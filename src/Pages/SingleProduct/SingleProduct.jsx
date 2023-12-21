@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
@@ -24,7 +24,7 @@ import ComProduct from "./ComProduct";
 import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
 import ProductTable from "./ProductTable";
 import Cookies from "js-cookie";
-
+import debounce from "lodash.debounce";
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
@@ -187,7 +187,14 @@ const SingleProduct = (props) => {
         }
       });
   };
-
+  const debouncedHandlePost = useCallback(
+    debounce(
+      (prodID, colorID, storageID, ramID, userID) =>
+        handlePost(prodID, colorID, storageID, ramID, userID),
+      500,
+    ),
+    [],
+  );
   const applyColorFilter = (selectedColor) => {
     setFilters({ ...filters, color: selectedColor });
   };
@@ -206,13 +213,13 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
-      
+
   const rams =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.ram))]
       : [];
-  const handleWish = (prodID, colorID, storageID,ramID) => {
-    postSingleDataWish({ prodID, colorID, storageID,ramID })
+  const handleWish = (prodID, colorID, storageID, ramID) => {
+    postSingleDataWish({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
           position: "top",
@@ -237,7 +244,14 @@ const SingleProduct = (props) => {
         }
       });
   };
-
+  const debouncedHandleWish = useCallback(
+    debounce(
+      (prodID, colorID, storageID, ramID, userID) =>
+        handleWish(prodID, colorID, storageID, ramID, userID),
+      500,
+    ),
+    [],
+  );
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
   }, [dispatch, typeOfProduct, params.id]);
@@ -527,7 +541,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ bg: "blue.800" }}
                             onClick={() =>
-                              handlePost(
+                              debouncedHandlePost(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
@@ -547,7 +561,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
                             onClick={() =>
-                              handleWish(
+                              debouncedHandleWish(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
