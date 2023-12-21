@@ -195,9 +195,11 @@ const Cart = () => {
 
                 {data.map((product) => (
                   <CartItem
+                    displayType="Cart"
                     userID={userID}
                     colorID={product.cart[0].colorID}
                     storageID={product.cart[0].storageID}
+                    ramID={product.cart[0].ramID}
                     color={product.cart[0].color}
                     storage={product.cart[0].storage_value}
                     key={product.cart[0].prodID}
@@ -206,6 +208,7 @@ const Cart = () => {
                     price={product.cart[0].prodPrice}
                     priceSale={product.cart[0].prodPriceSale}
                     id={product.cart[0].prodID}
+                    ram={product.cart[0].ram}
                     QTY={product.cart[0].QTY}
                     cartID={product.cart[0].cartID}
                     quantity={product.quantity}

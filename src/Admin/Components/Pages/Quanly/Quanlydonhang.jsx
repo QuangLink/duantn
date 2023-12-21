@@ -125,89 +125,29 @@ const Quanlydonhang = () => {
 
     return (
       <>
-        {Object.entries(productsByOrderCode).map(([orderCode, productList]) => (
-          <React.Fragment key={orderCode}>
-            <tbody>
-              <tr
-                style={{ fontWeight: "bold", cursor: "pointer" }}
-                onClick={() => handleOrderCodeClick(orderCode)}
-              >
-                <th>
-                  <Text>{productList[0].infoID}</Text>
-                </th>
-                <th>{orderCode} </th>
-                <th>{productList[0].username}</th>
-                <th>{productList[0].payment}</th>
-                <td style={{ padding: "5px" }}>
-                  {new Date(productList[0].orderDate).toLocaleString()}
-                </td>
-                <th>
-                  <Box
-                    fontWeight="600"
-                    fontSize="15px"
-                    ml="1"
-                    color="red"
-                    _hover={{ color: "red" }}
-                  >
-                    {formatCurrency(productList[0].totalPay)}
-                  </Box>
-                </th>
-
-                <th>
-                  {productList[0].orderStatus === "Đã xác nhận" ? (
-                    <p
-                      style={{
-                        color: "green",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {productList[0].orderStatus}
-                    </p>
-                  ) : productList[0].orderStatus === "Đang giao hàng" ? (
-                    <p
-                      style={{
-                        color: "#3268e3",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {productList[0].orderStatus}
-                    </p>
-                  ) : productList[0].orderStatus === "Đợi xác nhận" ? (
-                    <p
-                      style={{
-                        color: "orange",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {productList[0].orderStatus}
-                    </p>
-                  ) : productList[0].orderStatus === "Đã hủy" ? (
-                    <p
-                      style={{
-                        color: "red",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {productList[0].orderStatus}
-                    </p>
-                  ) : (
-                    <p
-                      style={{
-                        color: "green",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {productList[0].orderStatus}
-                    </p>
-                  )}
-                </th>
-                <th>
-                  {productList[0].orderStatus === "Đợi xác nhận" ? (
+        {Object.entries(productsByOrderCode)
+          .sort(
+            ([, productListA], [, productListB]) =>
+              new Date(productListB[0].orderDate) -
+              new Date(productListA[0].orderDate),
+          )
+          .map(([orderCode, productList]) => (
+            <React.Fragment key={orderCode}>
+              <tbody>
+                <tr
+                  style={{ fontWeight: "bold", cursor: "pointer" }}
+                  onClick={() => handleOrderCodeClick(orderCode)}
+                >
+                  <th>
+                    <Text>{productList[0].infoID}</Text>
+                  </th>
+                  <th>{orderCode} </th>
+                  <th>{productList[0].username}</th>
+                  <th>{productList[0].payment}</th>
+                  <td style={{ padding: "5px" }}>
+                    {new Date(productList[0].orderDate).toLocaleString()}
+                  </td>
+                  <th>
                     <Box
                       fontWeight="600"
                       fontSize="15px"
@@ -215,153 +155,221 @@ const Quanlydonhang = () => {
                       color="red"
                       _hover={{ color: "red" }}
                     >
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-primary confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(
-                            productList[0].infoID,
-                            "Đã xác nhận",
-                          );
-                        }}
-                      >
-                        Xác nhận
-                      </button>
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-danger confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(productList[0].infoID, "Đã hủy");
-                        }}
-                      >
-                        Hủy
-                      </button>
+                      {formatCurrency(productList[0].totalPay)}
                     </Box>
-                  ) : productList[0].orderStatus === "Đã xác nhận" ? (
-                    <Box
-                      fontWeight="600"
-                      fontSize="15px"
-                      ml="1"
-                      color="#e64510"
-                    >
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-success confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(
-                            productList[0].infoID,
-                            "Đang giao hàng",
-                          );
-                        }}
-                      >
-                        Giao hàng
-                      </button>
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-danger confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(productList[0].infoID, "Đã hủy");
-                        }}
-                      >
-                        Hủy
-                      </button>
-                    </Box>
-                  ) : productList[0].orderStatus === "Đang giao hàng" ? (
-                    <Box
-                      fontWeight="600"
-                      fontSize="15px"
-                      ml="1"
-                      color="#247bc6"
-                    >
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-success confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(
-                            productList[0].infoID,
-                            "Đã giao hàng",
-                          );
-                        }}
-                      >
-                        Đã giao
-                      </button>
-                      <button
-                        style={{ width: "47%", marginRight: "5px" }}
-                        type="button"
-                        className="btn btn-danger confirm-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateOrderStatus(productList[0].infoID, "Đã hủy");
-                        }}
-                      >
-                        Hủy
-                      </button>
-                    </Box>
-                  ) : null}
-                </th>
-              </tr>
-            </tbody>
-            {selectedOrderCode === orderCode && (
-              <thead>
-                <tr style={{ backgroundColor: "#43e5a0", color: "black" }}>
-                  <th>ID SP</th>
-                  <th colSpan={2} style={{ textAlign: "center" }}>
-                    Tên sản phẩm
                   </th>
-                  <th style={{ textAlign: "center", width: "150px" }}>
-                    {" "}
-                    Ảnh SP
+
+                  <th>
+                    {productList[0].orderStatus === "Đã xác nhận" ? (
+                      <p
+                        style={{
+                          color: "green",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {productList[0].orderStatus}
+                      </p>
+                    ) : productList[0].orderStatus === "Đang giao hàng" ? (
+                      <p
+                        style={{
+                          color: "#3268e3",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {productList[0].orderStatus}
+                      </p>
+                    ) : productList[0].orderStatus === "Đợi xác nhận" ? (
+                      <p
+                        style={{
+                          color: "orange",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {productList[0].orderStatus}
+                      </p>
+                    ) : productList[0].orderStatus === "Đã hủy" ? (
+                      <p
+                        style={{
+                          color: "red",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {productList[0].orderStatus}
+                      </p>
+                    ) : (
+                      <p
+                        style={{
+                          color: "green",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {productList[0].orderStatus}
+                      </p>
+                    )}
                   </th>
-                  <th style={{ textAlign: "center" }}>Số lượng</th>
-                  <th style={{ textAlign: "center" }}>Đơn giá</th>
-                </tr>
-              </thead>
-            )}
-            {selectedOrderCode === orderCode &&
-              productList.map((product) => (
-                <tbody>
-                  <tr
-                    key={product.prodID}
-                    style={{ backgroundColor: "#dfedfa" }}
-                  >
-                    <td style={{ textAlign: "center" }}>{product.prodID}</td>
-                    <td colSpan={2} style={{ textAlign: "center" }}>
-                      {product.prodName}
-                    </td>
-                    <td width="100px">
-                      {product.prodImg && (
-                        <img
-                          src={product.prodImg}
-                          alt="Product"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
+                  <th>
+                    {productList[0].orderStatus === "Đợi xác nhận" ? (
+                      <Box
+                        fontWeight="600"
+                        fontSize="15px"
+                        ml="1"
+                        color="red"
+                        _hover={{ color: "red" }}
+                      >
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-primary confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(
+                              productList[0].infoID,
+                              "Đã xác nhận",
+                            );
                           }}
-                        />
-                      )}
-                    </td>
-                    <td style={{ textAlign: "center" }}>{product.quantity}</td>
-                    <td style={{ textAlign: "center" }}>
-                      {formatCurrency(product.prodPrice)}
-                    </td>
+                        >
+                          Xác nhận
+                        </button>
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-danger confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(productList[0].infoID, "Đã hủy");
+                          }}
+                        >
+                          Hủy
+                        </button>
+                      </Box>
+                    ) : productList[0].orderStatus === "Đã xác nhận" ? (
+                      <Box
+                        fontWeight="600"
+                        fontSize="15px"
+                        ml="1"
+                        color="#e64510"
+                      >
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-success confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(
+                              productList[0].infoID,
+                              "Đang giao hàng",
+                            );
+                          }}
+                        >
+                          Giao hàng
+                        </button>
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-danger confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(productList[0].infoID, "Đã hủy");
+                          }}
+                        >
+                          Hủy
+                        </button>
+                      </Box>
+                    ) : productList[0].orderStatus === "Đang giao hàng" ? (
+                      <Box
+                        fontWeight="600"
+                        fontSize="15px"
+                        ml="1"
+                        color="#247bc6"
+                      >
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-success confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(
+                              productList[0].infoID,
+                              "Đã giao hàng",
+                            );
+                          }}
+                        >
+                          Đã giao
+                        </button>
+                        <button
+                          style={{ width: "47%", marginRight: "5px" }}
+                          type="button"
+                          className="btn btn-danger confirm-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateOrderStatus(productList[0].infoID, "Đã hủy");
+                          }}
+                        >
+                          Hủy
+                        </button>
+                      </Box>
+                    ) : null}
+                  </th>
+                </tr>
+              </tbody>
+              {selectedOrderCode === orderCode && (
+                <thead>
+                  <tr style={{ backgroundColor: "#43e5a0", color: "black" }}>
+                    <th>ID SP</th>
+                    <th colSpan={2} style={{ textAlign: "center" }}>
+                      Tên sản phẩm
+                    </th>
+                    <th style={{ textAlign: "center", width: "150px" }}>
+                      {" "}
+                      Ảnh SP
+                    </th>
+                    <th style={{ textAlign: "center" }}>Số lượng</th>
+                    <th style={{ textAlign: "center" }}>Đơn giá</th>
                   </tr>
-                </tbody>
-              ))}
-            <td></td>
-            <tr></tr>
-          </React.Fragment>
-        ))}
+                </thead>
+              )}
+              {selectedOrderCode === orderCode &&
+                productList.map((product) => (
+                  <tbody>
+                    <tr
+                      key={product.prodID}
+                      style={{ backgroundColor: "#dfedfa" }}
+                    >
+                      <td style={{ textAlign: "center" }}>{product.prodID}</td>
+                      <td colSpan={2} style={{ textAlign: "center" }}>
+                        {product.prodName}
+                      </td>
+                      <td width="100px">
+                        {product.prodImg && (
+                          <img
+                            src={product.prodImg}
+                            alt="Product"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        )}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {product.quantity}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {formatCurrency(product.prodPrice)}
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
+              <td></td>
+              <tr></tr>
+            </React.Fragment>
+          ))}
         <tr>
           <td colSpan="10">
             <Text fontWeight="600" fontSize="18px" ml="1" color="green">

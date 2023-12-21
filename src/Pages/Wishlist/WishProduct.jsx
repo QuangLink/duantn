@@ -34,50 +34,78 @@ const WishProduct = (props) => {
     storage_value,
     storageID,
   } = data;
-
-  const handleAdd = () => {
-    let flag = false;
+  const postSingleData = async (data) => {
     const userID = Cookies.get("userID");
-    axios
-      .get(`${process.env.REACT_APP_DATABASE_API_URL}/wishlist/${userID}`)
-      .then((res) => {
-        res.data.map((i) => {
-          if (i.prodID === data.prodID) {
-            flag = true;
-          }
+    if (!userID) {
+      throw new Error("Chưa đăng nhập");
+    } else {
+      const prodID = data.prodID;
+      const colorID = data.colorID;
+      const storageID = data.storageID;
+      const ramID = data.ramID;
+      //cartID tự tăng giá trị
+      const cartID = Math.floor(Math.random() * 1000000000);
+      const productData = {
+        cartID,
+        userID,
+        prodID,
+        colorID,
+        storageID,
+        ramID,
+        quantity: 1,
+      };
+      const cartData = JSON.parse(sessionStorage.getItem("cart")) || {};
+      if (!cartData[userID]) {
+        cartData[userID] = [];
+      }
+      const existingProductIndex = cartData[userID].findIndex(
+        (product) =>
+          product.prodID === prodID &&
+          product.colorID === colorID &&
+          product.storageID === storageID &&
+          product.ramID === ramID,
+      );
+      if (existingProductIndex !== -1) {
+        throw new Error("Product already exists in the cart");
+      } else {
+        cartData[userID].push(productData);
+      }
+      sessionStorage.setItem("cart", JSON.stringify(cartData));
+    }
+  };
+  const handleAdd = async () => {
+    const userID = Cookies.get("userID");
+    const productData = {
+      prodID: data.prodID,
+      colorID: colorID,
+      storageID: storageID,
+      ramID: ramID,
+    };
+
+    try {
+      await postSingleData(productData);
+      toast({
+        position: "top",
+        title: "Đơn hàng đã được thêm vào giỏ hàng",
+        description: `${prodName} thêm vào giỏ hàng thành công`,
+        status: "success",
+        duration: 500,
+        isClosable: true,
+      });
+    } catch (error) {
+      if (error.message === "Product already exists in the cart") {
+        toast({
+          position: "top",
+          title: "Sản phẩm đang trong giỏ hàng",
+          description: `${prodName} hiện đã trong giỏ hàng`,
+          status: "error",
+          duration: 500,
+          isClosable: true,
         });
-        if (flag) {
-          toast({
-            position: "top",
-            title: "Sản phẩm đang trong giỏ hàng",
-            description: `${prodName} hiện đã trong giỏ hàng`,
-            status: "success",
-            duration: 500,
-            isClosable: true,
-          });
-        } else {
-          const newData = {
-            userID: userID,
-            prodID: prodID,
-            colorID: colorID,
-            storageID: storageID,
-            ramID: ramID,
-          };
-          axios
-            .post(`${process.env.REACT_APP_DATABASE_API_URL}/cart`, newData)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-          toast({
-            position: "top",
-            title: "Đơn hàng đã được thêm vào giỏ hàng",
-            description: `${prodName} thêm vào giỏ hàng thành công`,
-            status: "success",
-            duration: 500,
-            isClosable: true,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
+      } else {
+        console.error(error);
+      }
+    }
   };
 
   return (

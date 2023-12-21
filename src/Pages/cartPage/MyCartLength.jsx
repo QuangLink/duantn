@@ -18,23 +18,8 @@ const MyCartLength = ({ item }) => {
 
   useEffect(() => {
     setLoading(true);
-    GetData()
-      .then((res) => {
-        setData(res);
 
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast({
-          title: "Something Went Wrong",
-          description: `${err.message}`,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-          variant: "top-accent",
-          position: "top",
-        });
-      });
+
   }, []);
   return (
     <div width={{ "2xl": "" }}>

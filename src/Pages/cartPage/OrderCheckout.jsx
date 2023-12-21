@@ -8,20 +8,13 @@ import { getData } from "../../Redux/Cart/cart.action";
 import Address from "./Address";
 import CheckoutBox from "./CheckoutBox";
 import MyCartLength from "./MyCartLength";
-import OrderItem from "./OrderItem";
+import CartItem from "./CartItem";
 import "./cartstyle.css";
-export const GetData = async () => {
-  try {
-    let response = await axios.get(
-      `${process.env.REACT_APP_DATABASE_API_URL}/cart`,
-    );
+import Cookies from "js-cookie";
 
-    return await response.data;
-  } catch (err) {
-    return err;
-  }
-};
 const CheckoutPage = () => {
+  const userID = Cookies.get("userID");
+
   const breakpoints = {
     base: "320px", // 0px
     sm: "480px", // ~480px. em is a relative unit and is dependant on the font-size.
@@ -33,19 +26,11 @@ const CheckoutPage = () => {
   const dispatch = useDispatch();
   const { loading, data, dataLength, totalPrice, paybalPrice, coupon } =
     useSelector((store) => store.cart);
+//reoad
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
-  const DeleteRequest = async (cartID) => {
-    try {
-      let response = await axios.delete(
-        `${process.env.REACT_APP_DATABASE_API_URL}/cart/${cartID}`,
-      );
-      setChange(!change);
-    } catch (err) {
-      return err;
-    }
-  };
+
   const handleApply = () => {
     if (val === "DUANTN" || val === "JAGUARS") {
       dispatch({ type: "code", payload: val });
@@ -69,9 +54,11 @@ const CheckoutPage = () => {
       });
     }
   };
+
   useEffect(() => {
-    dispatch(getData());
-  }, [change]);
+    dispatch(getData())
+  }, []); 
+
   return (
     <div w="100%">
       <Flex
@@ -162,9 +149,16 @@ const CheckoutPage = () => {
                     />
                   </Center>
                 )}
+           
 
                 {data.map((product) => (
-                  <OrderItem
+                  
+                  <CartItem
+                    displayType="Order"
+                    userID={userID}
+                    colorID={product.cart[0].colorID}
+                    storageID={product.cart[0].storageID}
+                    ramID={product.cart[0].ramID}
                     color={product.cart[0].color}
                     storage={product.cart[0].storage_value}
                     key={product.cart[0].prodID}
@@ -173,9 +167,10 @@ const CheckoutPage = () => {
                     price={product.cart[0].prodPrice}
                     priceSale={product.cart[0].prodPriceSale}
                     id={product.cart[0].prodID}
+                    ram={product.cart[0].ram}
                     QTY={product.cart[0].QTY}
+                    cartID={product.cart[0].cartID}
                     quantity={product.quantity}
-                    DeleteRequest={DeleteRequest}
                   />
                 ))}
               </Flex>

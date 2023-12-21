@@ -111,6 +111,7 @@ const Product = (props, rating) => {
           duration: 500,
           isClosable: true,
         });
+        navigate("/login");
       } else {
         console.log("no error: ", error);
       }

@@ -142,8 +142,8 @@ const CheckoutBox = ({
             delete cartData[userID];
             // Update the cartData in sessionStorage
             sessionStorage.setItem("cart", JSON.stringify(cartData));
-            // Open the payment url on a new tab
-            window.open(response.data);
+
+            window.location.href = response.data;
           } else {
             console.error("No vnpUrl found in response data");
           }

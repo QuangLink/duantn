@@ -68,8 +68,10 @@ const MyOrder = () => {
       console.error("Error fetching products:", error);
     }
   };
+
   const renderProducts = () => {
-    const productsByOrderCode = products.reduce((acc, product) => {
+    
+    let productsByOrderCode = products.reduce((acc, product) => {
       if (!acc[product.orderCode]) {
         acc[product.orderCode] = [product];
       } else {
@@ -77,7 +79,7 @@ const MyOrder = () => {
       }
       return acc;
     }, {});
-
+    
     const handleOrderCodeClick = (orderCode) => {
       setSelectedOrderCode((prevOrderCode) =>
         prevOrderCode === orderCode ? null : orderCode,
@@ -105,13 +107,17 @@ const MyOrder = () => {
         return total;
       }, 0);
     const handleCancelOrder = (infoID) => {
-      axios.put(
-        `${process.env.REACT_APP_DATABASE_API_URL}/orders/update-order/${infoID}`,
-        {
-          status: "Đã hủy",
-        },
-      );
+      if (window.confirm("Bạn có thật sự muốn hủy đơn")) {
+        axios.put(
+          `${process.env.REACT_APP_DATABASE_API_URL}/orders/update-order/${infoID}`,
+          {
+            status: "Đã hủy",
+          },
+        );
+        window.location.reload();
+      }
     };
+   
     return (
       <Box>
         <React.Fragment>
@@ -195,7 +201,10 @@ const MyOrder = () => {
                       )}
                     </Box>
                   </tr>
-
+                  <Text fontWeight="500" fontSize="15px" ml="1" color="#000c">
+                    Ngày đặt hàng:{" "}
+                    {new Date(productList[0].orderDate).toLocaleString()}
+                  </Text>
                   {selectedOrderCode === orderCode &&
                     productList.map((product) => (
                       <Box padding="10px">
@@ -242,16 +251,6 @@ const MyOrder = () => {
                               color="red"
                             >
                               Giá: {product.prodPrice}VNĐ
-                            </Text>
-
-                            <Text
-                              fontWeight="500"
-                              fontSize="15px"
-                              ml="1"
-                              color="#000c"
-                            >
-                              Ngày đặt hàng:{" "}
-                              {new Date(product.orderDate).toLocaleString()}
                             </Text>
                           </Box>
                           <Box width="23%">
@@ -320,6 +319,7 @@ const MyOrder = () => {
       </Box>
     );
   };
+
   const clearAddress = () => {
     //function get username call to this router using axios to delete user: router.delete('/address/:username'
     const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`;
@@ -609,7 +609,6 @@ const MyOrder = () => {
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
           />
-          <Input type="text" placeholder="Tìm kiếm đơn hàng ..." />
         </InputGroup>
         {renderProducts()}
         <br />

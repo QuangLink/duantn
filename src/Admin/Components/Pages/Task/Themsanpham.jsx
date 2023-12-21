@@ -174,24 +174,7 @@ const Themsanpham = () => {
                         className="btn btn-add btn-sm"
                         data-toggle="modal"
                         data-target="#adddanhmuc"
-                      >
-                        <i className="fas fa-folder-plus"></i> Thêm danh mục
-                      </a>
-                    </div>
-                    <div className="col-sm-2">
-                      <a
-                        className="btn btn-add btn-sm"
-                        data-toggle="modal"
-                        data-target="#addtinhtrang"
-                      >
-                        <i className="fas fa-folder-plus"></i> Thêm tình trạng
-                      </a>
-                    </div>
-                    <div className="col-sm-2">
-                      <a
-                        className="btn btn-add btn-sm"
-                        data-toggle="modal"
-                        data-target="#adddanhmuc"
+                        href="/admin/thembienthe"
                       >
                         <i className="fas fa-folder-plus"></i> Thêm biến thể
                       </a>
