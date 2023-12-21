@@ -1,30 +1,30 @@
 import {
+  Center,
   Box,
   Button,
-  Center,
   Flex,
   Grid,
   GridItem,
   Heading,
   Image,
+  Input,
   ListItem,
   Text,
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../../Redux/SingleProduct/SingleProduct.action";
-import ComProduct from "./ComProduct";
-import { ColorFilter, RamFilter, StorageValueFilter } from "./Filter";
+import { RotatingLines } from "react-loader-spinner";
 import RelateProduct from "./RelateProduct";
-
-import Cookies from "js-cookie";
+import ComProduct from "./ComProduct";
+import { ColorFilter, StorageValueFilter, RamFilter } from "./Filter";
 import ProductTable from "./ProductTable";
-
+import Cookies from "js-cookie";
+import debounce from "lodash.debounce";
 const postSingleData = async (data) => {
   const userID = Cookies.get("userID");
   if (!userID) {
@@ -49,14 +49,14 @@ const postSingleData = async (data) => {
     if (!cartData[userID]) {
       cartData[userID] = [];
     }
-    const existingProduct = cartData[userID].find(
+    const existingProductIndex = cartData[userID].findIndex(
       (product) =>
         product.prodID === prodID &&
         product.colorID === colorID &&
         product.storageID === storageID &&
         product.ramID === ramID,
     );
-    if (existingProduct) {
+    if (existingProductIndex !== -1) {
       throw new Error("Product already exists in the cart");
     } else {
       cartData[userID].push(productData);
@@ -73,12 +73,14 @@ export const postSingleDataWish = async (data) => {
       const prodID = data.prodID;
       const colorID = data.colorID;
       const storageID = data.storageID;
+      const ramID = data.ramID;
       // Tạo dữ liệu gửi đi kết hợp với userID và prodID
       const postData = {
         prodID,
         colorID,
         storageID,
         userID,
+        ramID,
       };
       //get wishlist and check if the product is already in the wishlist
 
@@ -125,7 +127,6 @@ const SingleProduct = (props) => {
         (product) => product.ram === filters.ram,
       );
     }
-
     return filteredProducts;
   };
 
@@ -145,9 +146,10 @@ const SingleProduct = (props) => {
     postSingleData({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
+          position: "top",
           title: "Đã thêm vào giỏ",
           status: "success",
-          duration: 9000,
+          duration: 500,
           isClosable: true,
         });
       })
@@ -158,39 +160,49 @@ const SingleProduct = (props) => {
         if (error.message === "Product already exists in the cart") {
           // Handle it appropriately, e.g., display a different toast
           toast({
+            position: "top",
             title: "Sản phẩm đã tồn tại trong giỏ",
             status: "warning",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else if (error.message === "Chưa đăng nhập") {
           toast({
+            position: "top",
             title: "Vui lòng đăng nhập trước",
             description: "Bạn cần đăng nhập để thực hiện chức năng này",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         } else {
           // Handle other errors
           toast({
+            position: "top",
             title: "Lỗi",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
         }
       });
   };
-
+  const debouncedHandlePost = useCallback(
+    debounce(
+      (prodID, colorID, storageID, ramID, userID) =>
+        handlePost(prodID, colorID, storageID, ramID, userID),
+      500,
+    ),
+    [],
+  );
   const applyColorFilter = (selectedColor) => {
     setFilters({ ...filters, color: selectedColor });
   };
-  const applyStorageValueFilter = (selectedValue) => {
-    setFilters({ ...filters, storage_value: selectedValue });
-  };
   const applyRamFilter = (selectedRam) => {
     setFilters({ ...filters, ram: selectedRam });
+  };
+  const applyStorageValueFilter = (selectedValue) => {
+    setFilters({ ...filters, storage_value: selectedValue });
   };
   const colors =
     singleDatas && Array.isArray(singleDatas)
@@ -201,17 +213,19 @@ const SingleProduct = (props) => {
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.storage_value))]
       : [];
+
   const rams =
     singleDatas && Array.isArray(singleDatas)
       ? [...new Set(singleDatas.map((product) => product.ram))]
       : [];
-  const handleWish = (prodID, colorID, storageID) => {
-    postSingleDataWish({ prodID, colorID, storageID })
+  const handleWish = (prodID, colorID, storageID, ramID) => {
+    postSingleDataWish({ prodID, colorID, storageID, ramID })
       .then((res) => {
         toast({
+          position: "top",
           title: "Đã thêm vào yêu thích",
           status: "success",
-          duration: 9000,
+          duration: 500,
           isClosable: true,
         });
       })
@@ -220,16 +234,24 @@ const SingleProduct = (props) => {
         // Handle the error as needed, e.g., display an error toast
         if ((error.message = "Chưa đăng nhập")) {
           toast({
+            position: "top",
             title: "Vui lòng đăng nhập trước",
             status: "error",
-            duration: 9000,
+            duration: 500,
             isClosable: true,
           });
           navigate("/login");
         }
       });
   };
-
+  const debouncedHandleWish = useCallback(
+    debounce(
+      (prodID, colorID, storageID, ramID, userID) =>
+        handleWish(prodID, colorID, storageID, ramID, userID),
+      500,
+    ),
+    [],
+  );
   useEffect(() => {
     dispatch(getSingleProduct(typeOfProduct, params.id));
   }, [dispatch, typeOfProduct, params.id]);
@@ -265,7 +287,7 @@ const SingleProduct = (props) => {
           {Array.isArray(singleDatas) && (
             <Box>
               <Box
-                width="90%"
+                width="100%"
                 m="0 0 0 4%"
                 p=" 1% 8% "
                 justifyContent="center"
@@ -285,12 +307,12 @@ const SingleProduct = (props) => {
                   h={["auto", "auto", "auto"]}
                   templateColumns={[
                     "repeat(1, 1fr)",
-                    "repeat(1, 1fr)",
+                    "repeat(2, 1fr)",
                     "repeat(10,1fr)",
                   ]}
                 >
                   <GridItem
-                    rowSpan={[1, 1, 7]}
+                    rowSpan={[1, 2, 7]}
                     colSpan={[6, 6, 5]}
                     m="0 0 0 18%"
                     p=" 2% 8% "
@@ -424,7 +446,7 @@ const SingleProduct = (props) => {
                     <Box>
                       <Box
                         p={7}
-                        width={["100%", "91%", "91%"]}
+                        width="91%"
                         borderRadius="10px"
                         style={{
                           boxShadow:
@@ -481,6 +503,7 @@ const SingleProduct = (props) => {
                             applyFilter={applyColorFilter}
                           />
                         )}
+
                         {applyFilters()[0].storage_value != null && (
                           <StorageValueFilter
                             storageValues={storageValues}
@@ -499,6 +522,7 @@ const SingleProduct = (props) => {
                           Hỗ trợ trả góp lãi xuất lên đến 0%/tháng |{" "}
                           <span style={{ color: "#2871c4" }}>Xem thêm</span>
                         </Text>
+
                         <Text
                           fontSize="lg"
                           style={{ fontWeight: "bold" }}
@@ -506,6 +530,7 @@ const SingleProduct = (props) => {
                         >
                           Miễn phí vận chuyển!
                         </Text>
+
                         <Flex w="full" justifyContent="space-between">
                           <Button
                             w="49%"
@@ -516,7 +541,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ bg: "blue.800" }}
                             onClick={() =>
-                              handlePost(
+                              debouncedHandlePost(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
@@ -536,7 +561,7 @@ const SingleProduct = (props) => {
                             p={6}
                             _hover={{ backgroundColor: "orangered" }}
                             onClick={() =>
-                              handleWish(
+                              debouncedHandleWish(
                                 applyFilters()[0].prodID,
                                 applyFilters()[0].colorID,
                                 applyFilters()[0].storageID,
@@ -593,11 +618,7 @@ const SingleProduct = (props) => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box
-                      className="box-table"
-                      mt={5}
-                      display={["none", "block", "block"]}
-                    >
+                    <Box className="box-table" mt={5}>
                       <ProductTable product={applyFilters()[0]} />
                     </Box>
                   </GridItem>
